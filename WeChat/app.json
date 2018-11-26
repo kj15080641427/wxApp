@@ -1,0 +1,39 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/advisory/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#1ec88c",
+    "navigationBarTitleText": "绿豆圈",
+    "navigationBarTextStyle":"white",
+    "onReachBottom":true
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "selectedIconPath":"image/homeicon_max/home page_15_max.png",
+        "iconPath":"image/homeicon_max/home page_16_max.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "找律师",
+        "selectedIconPath":"image/homeicon_max/home page_17_max.png",
+        "iconPath":"image/homeicon_max/home page_18_max.png"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "我的",
+        "selectedIconPath":"image/homeicon_max/home page_19_max.png",
+        "iconPath":"image/homeicon_max/home page_20_max.png"
+      }
+    ],
+    "color": "#b5b5b6",
+    "selectedColor": "#1eecbc",
+    "borderStyle": "white"
+  }
+}
