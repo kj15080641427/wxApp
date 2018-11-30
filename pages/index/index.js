@@ -27,7 +27,18 @@ Page({
     articleIndex:0,
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    winHeight: "",//窗口高度
+    scrollLeft: 0, //tab标题的滚动条位置
+    tabList: [
+      { "tabname": "测试1", "id": "id1" },
+      { "tabname": "测试2", "id": "id2" },
+      { "tabname": "测试3", "id": "id3" },
+      { "tabname": "测试4", "id": "id4" },
+      { "tabname": "测试5", "id": "id5" },
+      { "tabname": "测试6", "id": "id6" },
+      { "tabname": "测试7", "id": "id7" }
+    ]
   },
   onLoad: function () {
     var that = this
@@ -76,6 +87,36 @@ Page({
     // 消息
     this.judgeTips()
   },
+  // 切换
+  // swichNav: function (e) {
+  //   var that = this
+  //   that.setData({
+  //     articleIndex: e.articleIndex.id
+  //   })
+  //   this.checkCor();
+  // },
+  // 滚动样式
+  switchTab: function (e) {
+    var that = this
+    that.setData({
+      articleIndex: e.detail.current
+    })
+    this.checkCor();
+    console.log(123)
+    console.log(that.data.articleIndex)
+  },
+  //判断当前滚动超过一屏时，设置tab标题滚动条。
+  checkCor: function () {
+    if (this.data.articleIndex >=4) {
+      this.setData({
+        scrollLeft: this.data.scrollLeft+100
+      })
+    } else {
+      this.setData({
+        scrollLeft: 0
+      })
+    }
+  },
   // 登录
   getUserInfo: function (e) {
     var that = this
@@ -99,6 +140,7 @@ Page({
     that.setData({
       articleIndex: e.currentTarget.id
     })
+    this.checkCor();
     var articleID = that.data.popular[that.data.articleIndex].id
 
     var listUrl = api.getArticleListUrl()
@@ -119,13 +161,26 @@ Page({
     }
     wxrequest.requestPost(listUrl,listData, message, successList,failList)
    
-    // console.log(this.data.popular[this.data.articleIndex].id)
-    // console.log(e.currentTarget.id)
+    var that = this;
+    //  高度自适应
+    wx.getSystemInfo({
+      success: function (res) {
+        var clientHeight = res.windowHeight,
+          clientWidth = res.windowWidth,
+          rpxR = 750 / clientWidth;
+        var calc = clientHeight * rpxR - 180;
+        console.log(calc)
+        that.setData({
+          winHeight: calc
+        });
+      }
+    });
   },
   // 页面跳转
   gotoConstultation:function(){
+    var problemType = this.data.popular
     wx.navigateTo({
-      url:'../consultation/index?id=1'
+      url:'../consultation/index?problemType=problemType'
     })
   },
   onReady: function () {
@@ -169,39 +224,6 @@ Page({
       more:!that.data.more
     })
   },
-  // onReachBottom: function () {
-    // wx.showLoading({
-    //   title: '加载中',
-    // }),
-    // setTimeout(function () {
-    //   wx.hideLoading()
-    // }, 2000)
-    // 页数+1
-    // page = page + 1;
-    // wx.request({
-    //   url: 'https://xxx/?page=' + page,
-    //   method: "GET",
-    //   // 请求头部
-    //   header: {
-    //     'content-type': 'application/text'
-    //   },
-    //   success: function (res) {
-    //     // 回调函数
-    //     var moment_list = that.data.moment;
- 
-    //     for (var i = 0; i < res.data.data.length; i++) {
-    //       moment_list.push(res.data.data[i]);
-    //     }
-    //     // 设置数据
-    //     that.setData({
-    //       moment: that.data.moment
-    //     })
-    //     // 隐藏加载框
-    //     wx.hideLoading();
-    //   }
-    // })
-    // console.log("加载更多")
-  // },
   showModal: function () {
     // 显示遮罩层
     wx.hideTabBar({}) 

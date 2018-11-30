@@ -4,7 +4,5 @@
     <text class="log-item">{{index + 1}}. {{log}}</text>
   </block>
 </view> -->
-<import src="../../components/wheel/wheel.wxml"/>
-<import src="../../component/test.wxml"/>
 <view>123123</view>
 <template></template>

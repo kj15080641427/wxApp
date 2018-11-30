@@ -1,2 +1,31 @@
 <!--pages/logs/test/test.wxml-->
-<text>pages/logs/test/test.wxml</text>
+<view >
+    <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+       <view class="tab-item {{currentTab==index?'active':''}}" wx:for="{{tabList}}" data-current="{{item.id}}"bindtap="swichNav" id="{{index}}">{{item.tabname}}</view>
+        <!-- <view class="tab-item {{currentTab==0?'active':''}}"  data-current="0" bindtap="swichNav">健康</view>
+</view> -->
+    </scroll-view>
+    
+    <swiper class="tab-content" current="{{currentTab}}" duration="300" bindchange="switchTab"
+     style="height:{{winHeight}}rpx">
+        <swiper-item wx:for="{{tabList}}">
+            <scroll-view scroll-y="true" class="scoll-h" >
+            <!-- 竖向滑动 -->
+                <block wx:for="{{tabList}}" wx:key="*this">
+                    <view class="item-ans">
+                        <view class="avatar">
+                            <image class="img" src=""></image>
+                        </view>
+                        <view class="expertInfo">
+                            <view class="name">文章标题</view>
+                            <view style='height:10rpx;margin-top:30rpx'></view>
+                            <view class="answerHistory">已帮助10人 </view>
+                        </view>
+                        <navigator url="/pages/askExpert/expertDetail" class="askBtn">问TA</navigator> 
+                    </view>
+                </block>
+            </scroll-view>
+        </swiper-item>
+    </swiper>
+</view>
+

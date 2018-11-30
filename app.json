@@ -1,15 +1,17 @@
 {
   "pages":[
-    "pages/logs/logs",
     "pages/index/index",
     "pages/userlogin/index",
     "pages/consultation-details/index",
     "pages/consultation-reply/index",
     "pages/consultation/index",
-    "pages/advisory/index"
+    "pages/advisory/index",
+    "pages/logs/test/test",
+    "pages/logs/logs"
   ],
   "window":{
     "navigationBarBackgroundColor": "#1ec88c",
+    "enablePullDownRefresh":true,
     "navigationBarTitleText": "绿豆圈",
     "navigationBarTextStyle":"white",
     "onReachBottom":true,
