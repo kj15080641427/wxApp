@@ -1,0 +1,43 @@
+{
+  "pages":[
+    "pages/logs/logs",
+    "pages/index/index",
+    "pages/userlogin/index",
+    "pages/consultation-details/index",
+    "pages/consultation-reply/index",
+    "pages/consultation/index",
+    "pages/advisory/index"
+  ],
+  "window":{
+    "navigationBarBackgroundColor": "#1ec88c",
+    "navigationBarTitleText": "绿豆圈",
+    "navigationBarTextStyle":"white",
+    "onReachBottom":true,
+    "font-family":"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "selectedIconPath":"image/homeicon_max/homepage_15_max.png",
+        "iconPath":"image/homeicon_max/homepage_16_max.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "找律师",
+        "selectedIconPath":"image/homeicon_max/homepage_17_max.png",
+        "iconPath":"image/homeicon_max/homepage_18_max.png"
+      },
+      {
+        "pagePath": "pages/userlogin/index",
+        "text": "我的",
+        "selectedIconPath":"image/homeicon_max/homepage_19_max.png",
+        "iconPath":"image/homeicon_max/homepage_20_max.png"
+      }
+    ],
+    "color": "#b5b5b6",
+    "selectedColor": "#1eecbc",
+    "borderStyle": "white"
+  }
+}

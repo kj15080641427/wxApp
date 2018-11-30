@@ -1,0 +1,67 @@
+.consul-page{
+    margin-left: 35rpx;
+    margin-right: 35rpx;
+    background-color: #f4f4f4;
+}
+.consul-picker{
+    height: 120rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.consul-page-flex{
+    display: flex;
+    align-items: center;
+}
+.consul-picker-text{
+    font-size: 32rpx;
+    color: #323232;
+}
+.consul-picker-text-glass{
+    font-size: 28rpx;
+    color: #b5b5b5
+}
+.consul-page-textarea{
+    font-size: 32rpx;
+    color: #323232;
+    height: 500rpx;
+    width: 100%;
+    margin-top: 35rpx;
+    padding-top: 35rpx;
+}
+.consul-page-anonymous{
+  border: 1rpx solid #b5b5b5;
+  border-radius: 50%;
+  width: 25rpx;
+  height: 25rpx
+}
+.consul-page-publist{
+  margin-left: 20rpx;
+  font-size: 24rpx;
+  color: #717171;
+  position:relative;
+}
+.consul-page-line{
+    height: 1rpx;
+    width: 100%;
+    background-color: red;
+    position: absolute;
+    bottom: 10%;
+    /* margin-top: 230rpx; */
+}
+.consul-oage-button-view{
+    line-height: 120rpx;
+    height: 120rpx;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.consul-page-button{
+    line-height: 70rpx;
+    height: 70rpx;
+    width: 360rpx;
+    background-color: #1ec88c;
+    color: #ffffff;
+    font-size: 32rpx;
+    border-radius: 35rpx;
+}

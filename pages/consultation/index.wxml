@@ -1,0 +1,40 @@
+
+<view class="consul-page">
+<!-- 选择问题类型 -->
+ <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+    <view class="consul-picker">
+      <view class="consul-picker-text">问题类型</view>
+      <view class="consul-page-flex">
+        <view class='consul-picker-text' style="margin-right:20rpx">{{array[index]}}</view>
+        <view class="consul-picker-text-glass" wx:if="{{hasSelect}}">请选择问题类型</view>
+        <image src='../../image/homeicon_3x/homepage_09_3x.png'style="width:20rpx;height:20rpx;" />
+      </view>
+    </view>
+  </picker>
+  <!-- 选择地区 -->
+<picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+    <view class="consul-picker">
+      <view class="consul-picker-text">选择地区</view>
+      <view class='consul-page-flex'>
+        <view class='consul-picker-text' wx:if="{{!hasSelectAddress}}" style="margin-right:20rpx">{{region[0]}}-{{region[1]}}-{{region[2]}}</view>
+        <view class="consul-picker-text-glass" wx:if="{{hasSelectAddress}}">选择你所在的地区</view>
+      <image src='../../image/homeicon_3x/homepage_09_3x.png'style="width:20rpx;height:20rpx;" />
+      </view>
+    </view>
+  </picker>
+
+
+<textarea placeholder="请简单描述你遇到的问题(限10-300字)" placeholder-style="font-size:28rpx;color:#b5b5b5" maxlength="300" class="consul-page-textarea"></textarea>
+<view class='consul-page-flex'>
+    <radio checked="{{checked}}"bindtap="radioChange"/>{{item.value}}
+    <!-- <view class='consul-page-anonymous' wx:if="{{!anonymous}}"></view> -->
+
+  <view class="consul-page-publist">匿名发布  (隐藏我的头像,用户名等信息)</view>
+</view>
+</view>
+  <view class="consul-page-line"></view>
+  <view style='position: absolute;bottom: 0;left: 20%;right: 20%;'>
+    <view class="consul-oage-button-view">
+    <button class="consul-page-button">提交</button>
+  </view>
+</view>

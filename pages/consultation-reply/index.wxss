@@ -1,0 +1,90 @@
+.reply-page{
+  margin-left: 35rpx;
+  margin-right:35rpx;
+}
+.reply-page-flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 35rpx;
+  /* background-color: #f0fff2 */
+}
+.reply-page-top{
+  display: flex;
+  align-items: center;
+}
+.reply-page-icon{
+  border-radius: 50%;
+  background-color: red;
+  width: 40rpx;
+  height: 40rpx;
+}
+.reply-page-nikename{
+  font-size: 24rpx;
+  color: #b7b7b7;
+  margin-left: 20rpx;
+}
+.reply-page-line{
+  width: 2rpx;
+  height: 30rpx;
+  background-color: #b7b7b7;
+  margin-left: 20rpx;
+}
+.reply-page-lawyer-icon{
+  width: 65rpx;
+  height: 65rpx;
+  background-color: red;
+  border-radius: 50%
+}
+.reply-page-lawyer-nikename{
+  font-size:28rpx;
+  color: #323232;
+  margin-left: 25rpx;
+}
+.reply-page-lawyer-lawfirm{
+  font-size: 24rpx;
+  color: #717171;
+  margin-left: 20rpx;
+}
+.reply-page-answer{
+  margin-top: 35rpx;
+  font-size: 28rpx;
+  color: #323232;
+}
+.reply-page-reply{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24rpx;
+  color: #717171;
+  margin-top: 40rpx;
+}
+.reply-page-reply-left{
+  display: flex;
+}
+.reply-page-reply-margin{
+  margin-left: 10rpx;
+}
+.reply-page-reply-dot{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: black;
+  width: 5rpx;
+  height: 5rpx;
+}
+.reply-lower-line{
+    height: 1rpx;
+    width: 100%;
+    background-color: red;
+    position: absolute;
+    bottom: 7%;
+}
+.reply-lower-input{
+    height: 80rpx;
+    width: 100%;
+    /* background-color: red; */
+    position: absolute;
+    bottom: 0;
+}
