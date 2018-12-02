@@ -30,15 +30,6 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     winHeight: "",//窗口高度
     scrollLeft: 0, //tab标题的滚动条位置
-    tabList: [
-      { "tabname": "测试1", "id": "id1" },
-      { "tabname": "测试2", "id": "id2" },
-      { "tabname": "测试3", "id": "id3" },
-      { "tabname": "测试4", "id": "id4" },
-      { "tabname": "测试5", "id": "id5" },
-      { "tabname": "测试6", "id": "id6" },
-      { "tabname": "测试7", "id": "id7" }
-    ]
   },
   onLoad: function () {
     var that = this
@@ -57,7 +48,6 @@ Page({
       })  
       that.setData({
           popular: categoryName,
-          articleId: articleTypeId
         })
     }
     var failType = function (e){
@@ -65,12 +55,54 @@ Page({
     }
     wxrequest.requestGet(typeUrl, message, successType, failType)
 
-    // // 文章列表
+    // 文章列表
+    var listUrl = api.getArticleListUrl()
+    var message = "加载中"
+    var listData = { "categoryId": 12}
+    var successList = function (data){
+      console.log("list",data)
+      data.data.list.map(function (item) {
+        articleList.push({"articleName":item.articleTitle,"articleImageSrc":item.image})
+      })
+      console.log(articleList)
+      that.setData({
+        article:articleList
+      })
+    }
+    var failList = function (e){
+      console.log("list",e)
+    }
+    wxrequest.requestPost(listUrl,listData, message, successList,failList)
+
+    // 消息
+    this.judgeTips()
+  },
+  // 滚动样式
+  switchTab: function (e) {
+    var that = this
+    this.setData({
+      articleIndex: e.detail.current
+    });
+    this.checkCor();
+  },
+
+  // 选择文章
+  selsectArticle:function(e){
+    var that = this
+    var articleTypeId = []
+    var categoryName = []
+    var articleList = []
+    that.setData({
+      articleIndex: e.currentTarget.id
+    })
+    this.checkCor();
+
+    // var articleID = that.data.popular[that.data.articleIndex].id
     // var listUrl = api.getArticleListUrl()
     // var message = "加载中"
-    // var listData = { "categoryId": 12}
+    // var listData = { "categoryId": articleID}
     // var successList = function (data){
-    //   console.log("list",data)
+    //   console.log("选择list",data)
     //   data.data.list.map(function (item) {
     //     articleList.push({"articleName":item.articleTitle,"articleImageSrc":item.image})
     //   })
@@ -83,37 +115,39 @@ Page({
     //   console.log("list",e)
     // }
     // wxrequest.requestPost(listUrl,listData, message, successList,failList)
-
-    // 消息
-    this.judgeTips()
-  },
-  // 切换
-  // swichNav: function (e) {
-  //   var that = this
-  //   that.setData({
-  //     articleIndex: e.articleIndex.id
-  //   })
-  //   this.checkCor();
-  // },
-  // 滚动样式
-  switchTab: function (e) {
-    var that = this
-    that.setData({
-      articleIndex: e.detail.current
-    })
-    this.checkCor();
-    console.log(123)
-    console.log(that.data.articleIndex)
+   
+    var that = this;
+    //  高度自适应
+    wx.getSystemInfo({
+      success: function (res) {
+        var clientHeight = res.windowHeight,
+          clientWidth = res.windowWidth,
+          rpxR = 750 / clientWidth;
+        var calc = clientHeight * rpxR - 180;
+        // console.log(calc)
+        that.setData({
+          winHeight: calc
+        });
+      }
+    });
   },
   //判断当前滚动超过一屏时，设置tab标题滚动条。
   checkCor: function () {
-    if (this.data.articleIndex >=4) {
-      this.setData({
-        scrollLeft: this.data.scrollLeft+100
-      })
-    } else {
+    if (this.data.articleIndex <= 3) {
       this.setData({
         scrollLeft: 0
+      })
+    } else if (this.data.articleIndex > 3 && this.data.articleIndex <= 7) {
+      this.setData({
+        scrollLeft: "750rpx"
+      })
+    } else if (this.data.articleIndex > 7 && this.data.articleIndex <= 11) {
+      this.setData({
+        scrollLeft: "1500rpx"
+      })
+    } else if (this.data.articleIndex > 11 && this.data.articleIndex < 15) {
+      this.setData({
+        scrollLeft: "2250rpx"
       })
     }
   },
@@ -130,51 +164,6 @@ Page({
     wx.request({
       url: 'https://api-test.lex-mung.com/passport/app/login',
     })
-  },
-  // 选择文章
-  selsectArticle:function(e){
-    var that = this
-    var articleTypeId = []
-    var categoryName = []
-    var articleList = []
-    that.setData({
-      articleIndex: e.currentTarget.id
-    })
-    this.checkCor();
-    var articleID = that.data.popular[that.data.articleIndex].id
-
-    var listUrl = api.getArticleListUrl()
-    var message = "加载中"
-    var listData = { "categoryId": articleID}
-    var successList = function (data){
-      console.log("选择list",data)
-      data.data.list.map(function (item) {
-        articleList.push({"articleName":item.articleTitle,"articleImageSrc":item.image})
-      })
-      console.log(articleList)
-      that.setData({
-        article:articleList
-      })
-    }
-    var failList = function (e){
-      console.log("list",e)
-    }
-    wxrequest.requestPost(listUrl,listData, message, successList,failList)
-   
-    var that = this;
-    //  高度自适应
-    wx.getSystemInfo({
-      success: function (res) {
-        var clientHeight = res.windowHeight,
-          clientWidth = res.windowWidth,
-          rpxR = 750 / clientWidth;
-        var calc = clientHeight * rpxR - 180;
-        console.log(calc)
-        that.setData({
-          winHeight: calc
-        });
-      }
-    });
   },
   // 页面跳转
   gotoConstultation:function(){
