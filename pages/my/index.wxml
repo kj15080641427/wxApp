@@ -3,12 +3,16 @@
   <view class=''>
     <view style='display:flex;justify-content:center'>
       <view class='my-page-avatar' ></view>
+      <view class='my-page-editinfo-flex' bindtap='gotoEditInfo'>
+        <view class='my-page-editinfo'>编辑信息</view>
+        <image src='../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;'/>
+      </view>
     </view>
     <view class='my-page-textgenter'>
       <view class='my-page-text' style='font-weight:bold'>北燕南飞</view>
       <view class='my-page-gender'>18岁</view>
     </view>
-    <view class='my-page-text' style='font-size:24rpx'>湖南常德</view>
+    <view class='my-page-text' style='font-size:30rpx'>湖南常德</view>
     <view class='my-page-unions'>
       <view class='my-page-unions-detail'>中国浙商会湖南分会</view>
       <view class='my-page-unions-detail'>中国浙商会湖南分会</view>
@@ -36,7 +40,8 @@
 <view class='my-page-lower'bindtap="gotoAbout">
   <view>关于绿豆圈</view>
   <image src='../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx'/>
-</view><view class='my-page-lower'>
+</view>
+<view class='my-page-lower'>
   <view>联系客服</view>
   <image src='../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx'/>
 </view>

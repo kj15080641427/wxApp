@@ -17,6 +17,17 @@
   justify-content: center;
   align-items: center
 }
+.my-page-editinfo-flex{
+  display: flex;
+  height: 40rpx;
+  align-items: center;
+  position: absolute;
+  right: 5%
+}
+.my-page-editinfo{
+  font-size: 30rpx;
+  color: #ffffff
+}
 .my-page-textgenter{
   display: flex;
   justify-content: center;

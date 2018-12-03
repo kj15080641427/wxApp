@@ -1,30 +1,32 @@
-// pages/my/index.js
+// pages/my/edit-info/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    info:[{"nikeName":'北雁南飞',"gender":'女',"birth":'1976-01-01',"address":'湖南 常德'}],
+    region:['湖南省','长沙市','芙蓉区'],
+    date:['1980-01-01'],
+    gender:['女','男'],
+    index:'0'
   },
-  gotoGuide:function(){
-    wx.navigateTo({
-      url: '../my/guide/index?id=2',
+  // 性别
+  bindChange:function(e){
+    this.setData({
+      index:e.detail.value
     })
   },
-  gotoAbout:function(){
-    wx.navigateTo({
-      url: '../my/about/index?id=3',
+  // 选择地区
+  bindRegionChange:function(e){
+    this.setData({
+      region: e.detail.value
     })
   },
-  gotoWatchlist:function(){
-    wx.navigateTo({
-      url: '../my/watchlist/index?id=4',
-    })
-  },
-  gotoEditInfo:function(){
-    wx.navigateTo({
-      url: '../my/edit-info/index?id=5',
+  // 选择时间
+  bindDateChange: function (e) {
+    this.setData({
+      date: e.detail.value
     })
   },
   /**

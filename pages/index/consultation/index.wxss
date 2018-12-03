@@ -1,7 +1,7 @@
 .consul-page{
     margin-left: 35rpx;
     margin-right: 35rpx;
-    background-color: #f4f4f4;
+    /* background-color: #f4f4f4; */
 }
 .consul-picker{
     height: 120rpx;

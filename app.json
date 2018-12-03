@@ -10,8 +10,8 @@
     "pages/index/advisory/index",
     "pages/logs/logs",
     "pages/my/guide/index",
-    "pages/my/about/index"
-
+    "pages/my/about/index",
+    "pages/my/edit-info/index"
   ],
   "window":{
     "navigationBarBackgroundColor": "#1ec88c",

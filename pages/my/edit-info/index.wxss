@@ -1,0 +1,40 @@
+/* pages/my/edit-info/index.wxss */
+.info-page{
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+  margin-top: 35rpx
+}
+.info-page-flex{
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+.info-page-avatar{
+  height: 110rpx;
+  width: 110rpx;
+  background-color: red;
+  border-radius: 50%
+}
+.info-page-text{
+  font-size: 28rpx;
+  color: #b5b5b5
+}
+.info-page-list{
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  margin-top: 35rpx;
+}
+.info-page-input{
+  width: 500rpx;
+  margin-left: 50rpx;
+  font-size: 28rpx;
+  color: #323232
+}
+.info-page-label{
+  display: flex;
+  justify-content: space-between;
+  font-size: 28rpx;
+  color: #b5b5b5;
+  width: 150rpx
+}
