@@ -1,0 +1,65 @@
+/* pages/my/watchlist/index.wxss */
+.watchlist-page{
+  margin-left: 35rpx;
+  margin-right:35rpx;
+  margin-top: 35rpx;
+}
+.watchlist-page-flex{
+  display: flex;
+  justify-content: space-between
+}
+.watchlist-page-avatar{
+  width: 120rpx;
+  height: 120rpx;
+  background-color: red;
+  border-radius: 50%;
+}
+.watchlist-page-practice{
+  display: flex;
+  justify-content: center;
+  /* width: 90rpx; */
+  height: 30rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid #f8b65d;
+  color: #f8b65d;
+  font-size: 20rpx;
+  margin-top: 20rpx;
+}
+.watchlist-page-label{
+  height: 60rpx;
+  margin-top: 25rpx;
+  display: flex;
+  justify-content: center;
+  line-height: 60rpx;
+  font-size: 27rpx;
+  color: #b5b5b5
+}
+.watchlist-page-left{
+  margin-top: 35rpx;
+}
+.watchlist-page-right{
+  margin-left: 25rpx;
+  margin-top: 35rpx;
+  height: 285rpx;
+}
+.watchlist-page-name{
+  font-size: 16px;
+  color: #323232;
+  font-weight: bold
+}
+.watchlist-page-firm{
+  margin-left: 20rpx;
+  font-size: 24rpx;
+  color:#323232;
+  font-weight: normal
+}
+.watchlist-page-address{
+  margin-top: 25rpx;
+  font-size: 24rpx;
+  color: #717171
+}
+.watchlist-page-adept{
+  margin-top: 25rpx;
+  color: #b5b5b5;
+  font-size: 24rpx;
+}

@@ -1,13 +1,17 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/my/index",
+    "pages/my/watchlist/index",
+    "pages/index/consultation/index",
     "pages/userlogin/index",
-    "pages/consultation-details/index",
-    "pages/consultation-reply/index",
-    "pages/consultation/index",
-    "pages/advisory/index",
-    "pages/logs/test/test",
-    "pages/logs/logs"
+    "pages/index/consultation-details/index",
+    "pages/index/consultation-reply/index",
+    "pages/index/advisory/index",
+    "pages/logs/logs",
+    "pages/my/guide/index",
+    "pages/my/about/index"
+
   ],
   "window":{
     "navigationBarBackgroundColor": "#1ec88c",
@@ -26,13 +30,13 @@
         "iconPath":"image/homeicon_max/homepage_16_max.png"
       },
       {
-        "pagePath": "pages/logs/test/test",
+        "pagePath": "pages/logs/logs",
         "text": "找律师",
         "selectedIconPath":"image/homeicon_max/homepage_17_max.png",
         "iconPath":"image/homeicon_max/homepage_18_max.png"
       },
       {
-        "pagePath": "pages/userlogin/index",
+        "pagePath": "pages/my/index",
         "text": "我的",
         "selectedIconPath":"image/homeicon_max/homepage_19_max.png",
         "iconPath":"image/homeicon_max/homepage_20_max.png"

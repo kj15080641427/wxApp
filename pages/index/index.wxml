@@ -101,19 +101,19 @@
   <view class="index-lawyer-remark">本周人气冠军</view>
 </view> -->
 <!-- 文章 -->
-    <swiper class="tab-content" current="{{articleIndex}}" duration="300" bindchange="switchTab"
-     style="height:{{winHeight}}rpx">
-        <swiper-item wx:for="{{popular}}"  id = "{{index}}">
-       <view class="index-article" wx:key="index" wx:for="{{article}}" >
-      <view class="" >
-        <view class="index-article-text">{{item["articleName"]}}</view>
-        <view class="index-article-text-lower">已帮助<label style="color:#1ec88c">{{helpNumber}}</label>人</view>
-      </view>
+<swiper class="tab-content" current="{{articleIndex}}" duration="300" bindchange="switchTab"
+  style="height:{{winHeight}}rpx">
+    <swiper-item wx:key="{{index}}" wx:for="{{popular}}"  id = "{{index}}">
+      <view class="index-article" wx:key="index" wx:for="{{article}}">
+        <view class="" >
+          <view class="index-article-text">{{item["articleName"]}}</view>
+          <view class="index-article-text-lower">已帮助<label style="color:#1ec88c">{{helpNumber}}</label>人</view>
+        </view>
         <image src="{{item['articleImageSrc']}}" style='width:223rpx;height:145rpx;'></image>
-      <view class="index-article-line"></view>
-  </view> 
-        </swiper-item>
-    </swiper>
+        <view class="index-article-line"></view>
+      </view> 
+    </swiper-item>
+</swiper>
 
 
 

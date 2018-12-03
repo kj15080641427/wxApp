@@ -1,0 +1,87 @@
+/* pages/my/index.wxss */
+.my-page-background{
+  background-color: #1ec88c;
+  height: 320rpx;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+.my-page-avatar{
+  background-color: red;
+  width: 100rpx;
+  height: 100rpx;
+  border: 10rpx solid white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+.my-page-textgenter{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  /* margin-top: 20rpx; */
+}
+.my-page-text{
+  margin-top: 20rpx;
+  font-size: 36rpx;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.my-page-gender{
+  margin-top: 25rpx;
+  border-radius: 10rpx;
+  height: 30rpx;
+  width: 100rpx;
+  margin-left: 150rpx;
+  background-color: #f9c0e7;
+  font-size: 20rpx;
+  color: white;
+  position: absolute
+}
+.my-page-unions{
+  display: flex;
+  font-size: 20rpx;
+  color: white;
+  margin-top: 15rpx
+}
+.my-page-unions-detail{
+  border: 1rpx solid white;
+  border-radius: 20rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  margin-left: 15rpx;
+  margin-right: 15rpx
+}
+.my-page-icon{
+  background-color: red;
+  width: 100rpx;
+  height: 100rpx
+}
+.my-page-flex{
+  height: 180rpx;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  margin-top: 30rpx;
+}
+.my-page-center-text{
+  display: flex;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #323232
+}
+.my-page-lower{
+  height: 120rpx;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  margin-top: 30rpx;
+  font-size: 32rpx;
+  color: #323232
+}

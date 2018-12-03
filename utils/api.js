@@ -14,6 +14,8 @@ var ArticleType = '/client/article/category'
 // 文章列表地址
 var ArticleList = '/client/article'
 
+// 文字咨询地址
+var Commit = '/client/freeText/post' 
 
 
 // 获取验证码
@@ -35,9 +37,15 @@ function getArticleTypeUrl(){
 function getArticleListUrl(){
   return HOST_URL+ArticleList
 }
+
+// 文字咨询
+function getCommitUrl(){
+  return HOST_URL+Commit
+}
 module.exports={
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
   getArticleTypeUrl: getArticleTypeUrl,
   getArticleListUrl: getArticleListUrl,
+  getCommitUrl:getCommitUrl
 }

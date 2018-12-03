@@ -1,0 +1,15 @@
+<!--pages/my/watchlist/index.wxml-->
+<view class='watchlist-page'>
+  <view class='watchlist-page-flex'>
+    <view class='watchlist-page-left'>
+      <image class='watchlist-page-avatar'></image>
+      <view class='watchlist-page-practice'>执业17年</view>
+      <view class='watchlist-page-label'>认证标签</view>
+    </view>
+    <view class='watchlist-page-right'>
+      <view class='watchlist-page-name'>董小燕<label class='watchlist-page-firm'>(律所合伙人)</label></view>
+      <view class='watchlist-page-address'>湖南长沙 | 湖南湘君律师事务所</view>
+      <view class='watchlist-page-adept'>擅长领域: 涉外婚姻, 离婚/夫妻财产/抚养权, 海外信托</view>
+    </view>
+  </view>
+</view>

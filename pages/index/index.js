@@ -1,9 +1,5 @@
 var wxrequest = require('../../utils/request.js')
 var api = require('../../utils/api.js')
-var that 
-var articleTypeId 
-var categoryName 
-var articleList 
 Page({
   data: {
     imgUrls: [
@@ -58,11 +54,11 @@ Page({
     // 文章列表
     var listUrl = api.getArticleListUrl()
     var message = "加载中"
-    var listData = { "categoryId": 12}
+    var listData = { }
     var successList = function (data){
       console.log("list",data)
       data.data.list.map(function (item) {
-        articleList.push({"articleName":item.articleTitle,"articleImageSrc":item.image})
+        articleList.push({ "articleName": item.articleTitle, "articleImageSrc": item.image, "id": item.categoryId})
       })
       console.log(articleList)
       that.setData({
@@ -168,8 +164,11 @@ Page({
   // 页面跳转
   gotoConstultation:function(){
     var problemType = this.data.popular
+    // 缓存到本地
+    wx.setStorageSync('typeName', problemType)
+    // 
     wx.navigateTo({
-      url:'../consultation/index?problemType=problemType'
+      url:'../index/consultation/index?id=1'
     })
   },
   onReady: function () {

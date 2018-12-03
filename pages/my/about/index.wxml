@@ -1,0 +1,16 @@
+<!--pages/my/about/index.wxml-->
+<view class='about-page-top'>
+  <image class='about-page-image'></image>
+</view>
+<view class='about-page-lower'style="margin-top:35rpx" bindtap='gotoGuide'>
+  <view>关于我们</view>
+  <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx'/>
+</view>
+<view class='about-page-lower'style="margin-top:35rpx" bindtap='gotoGuide'>
+  <view>问题与建议</view>
+  <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx'/>
+</view>
+<view class='about-page-lower'style="margin-top:35rpx" bindtap='gotoGuide'>
+  <view>商务合作</view>
+  <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx'/>
+</view>

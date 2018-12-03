@@ -43,6 +43,13 @@ Page({
     var logindata = { "phone": `${this.data.inputPhone}`, "verifyCode": `${this.data.inputCode}`,"code":"654321"}
     var success = function (data){
       console.log(data)
+      if(data.code == 0){
+        console.log("注册成功")
+      }else{
+        console.log("注册失败")
+      }
+      var loginToken = wx.setStorage({"token":data.data.token})
+      console.log(loginToken)
     }
     var fail = function (data){
       console.log(data)

@@ -1,0 +1,23 @@
+/* pages/my/about/index.wxss */
+.about-page-top{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  height: 300rpx
+}
+.about-page-image{
+  width:150rpx;
+  height: 150rpx;
+  background-color: red;
+  margin-top: 85rpx
+}
+.about-page-lower{
+  height: 120rpx;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  margin-top: 30rpx;
+  font-size: 32rpx;
+  color: #323232
+}

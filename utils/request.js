@@ -1,14 +1,16 @@
 var device = {
-   "device_type": 5,
-    "app_version": "1.0",
-     "app_version_code": 1,
-     "channel": "weixin" 
+  "device_type": 5,
+  "app_version": "1.0",
+  "app_version_code": 1,
+  "channel": "weixin" 
 }
+var token = "apf363e040137547939bfd1d472f53a91bap"
+
 function request(url, params, success, fail) {
   this.requestLoading(url, params, "", success, fail)
 }
 function requestLoading(url, params, message, success, fail) {
-  console.log(params)
+  // console.log(params)
   wx.showNavigationBarLoading()
   if (message != "") {
     wx.showLoading({
@@ -20,7 +22,8 @@ function requestLoading(url, params, message, success, fail) {
     data: params,
     header: {
       'Content-Type': 'application/json',
-      'device':JSON.stringify(device)
+      'device':JSON.stringify(device),
+      'X-Token':token
       // 'content-type': 'application/x-www-form-urlencoded'
     },
     method: 'POST',
