@@ -1,29 +1,32 @@
 /* pages/my/edit-info/index.wxss */
 .info-page{
-  margin-left: 35rpx;
-  margin-right: 35rpx;
-  margin-top: 35rpx
+  /* margin-top: 35rpx */
 }
 .info-page-flex{
+  height: 140rpx;
   display: flex;
   align-items: center;
-  justify-content: space-between
+  justify-content: space-between;
+  background-color: white;
 }
 .info-page-avatar{
   height: 110rpx;
   width: 110rpx;
-  background-color: red;
-  border-radius: 50%
+  border-radius: 50%;
+  margin-left: 35rpx
 }
 .info-page-text{
   font-size: 28rpx;
-  color: #b5b5b5
+  color: #b5b5b5;
 }
 .info-page-list{
   display: flex;
   align-items: center;
+  height: 80rpx;
   /* justify-content: space-between; */
-  margin-top: 35rpx;
+  /* margin-top: 35rpx; */
+  margin-left: 35rpx;
+  margin-right: 35rpx;
 }
 .info-page-input{
   width: 500rpx;

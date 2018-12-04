@@ -1,16 +1,22 @@
 <!--pages/my/about/index.wxml-->
 <view class='about-page-top'>
-  <image class='about-page-image'></image>
+  <image class='about-page-image'src='../../../image/my_icon@3x/mine_icon_12_3x.png'></image>
 </view>
-<view class='about-page-lower'style="margin-top:35rpx" bindtap='gotoGuide'>
-  <view>关于我们</view>
-  <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx'/>
+<view class='about-page-lower'style="margin-top:100rpx">
+  <view class='about-page-left'>关于我们</view>
+  <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'/>
 </view>
-<view class='about-page-lower'style="margin-top:35rpx" bindtap='gotoGuide'>
-  <view>问题与建议</view>
-  <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx'/>
+<view style='background-color:white;width:100%'>
+  <view class='about-page-line'></view>
 </view>
-<view class='about-page-lower'style="margin-top:35rpx" bindtap='gotoGuide'>
-  <view>商务合作</view>
-  <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx'/>
+<view class='about-page-lower' >
+  <view class='about-page-left'>问题与建议</view>
+  <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'/>
+</view>
+<view style='background-color:white;width:100%;'>
+  <view class='about-page-line'></view>
+</view>
+<view class='about-page-lower' >
+  <view class='about-page-left'>商务合作</view>
+  <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'/>
 </view>

@@ -5,10 +5,7 @@
   align-content: center;
 }
 .guide-page-image{
-  width: 360rpx;
-  height: 360rpx;
   margin-top: 60rpx;
-  background-color: red
 }
 .guide-page-lower{
   line-height: 100rpx;

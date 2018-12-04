@@ -1,6 +1,6 @@
 <!--pages/my/guide/index.wxml-->
 <view class='guide-page-top'>
-  <image class='guide-page-image'></image>
+  <image class='guide-page-image'src="../../../image/my_icon@3x/mine_icon_11_3x.png"></image>
 </view>
 <view class='guide-page-lower'>
   <view>绿豆圈是什么</view>

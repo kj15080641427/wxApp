@@ -27,8 +27,8 @@
         <label class='index-text-style-gray'>排忧解难</label>
       </view>
     </view>
-    <view>
-      <view class="index-text-style">
+    <view bindtap="gotoQuick">
+      <view class="index-text-style" >
         <image src='../../image/homeicon_3x/homepage_04_3x.png' style='width:100rpx;height:100rpx;' ></image>
       </view>
       <label class='index-text-style'>快速咨询</label>
@@ -102,7 +102,7 @@
 </view> -->
 <!-- 文章 -->
 <swiper class="tab-content" current="{{articleIndex}}" duration="300" bindchange="switchTab"
-  style="height:{{winHeight}}rpx">
+  >
     <swiper-item wx:key="{{index}}" wx:for="{{popular}}"  id = "{{index}}">
       <view class="index-article" wx:key="index" wx:for="{{article}}">
         <view class="" >
@@ -127,7 +127,7 @@
   <!--弹出框  -->
 <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
   <!-- 热线咨询 -->
-  <view class="modal-dialog" style="margin-top:30rpx" open-type="getUserInfo"  bindgetuserinfo='getUserInfo'>
+  <view class="modal-dialog" style="margin-top:30rpx" >
     <image src="../../image/homeicon_3x/home_page_07_3x.png"style="width:110rpx;height:100rpx;margin-left:40rpx" />
     <view class="index-consult">
       <view class="index-consult-text">热线咨询</view>

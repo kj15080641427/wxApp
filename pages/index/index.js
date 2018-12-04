@@ -141,25 +141,15 @@ Page({
       this.setData({
         scrollLeft: "1500rpx"
       })
-    } else if (this.data.articleIndex > 11 && this.data.articleIndex < 15) {
+    } else if (this.data.articleIndex > 11 && this.data.articleIndex <= 15) {
       this.setData({
         scrollLeft: "2250rpx"
       })
+    } else if (this.data.articleIndex > 15 && this.data.articleIndex < 19) {
+      this.setData({
+        scrollLeft: "3000rpx"
+      })
     }
-  },
-  // 登录
-  getUserInfo: function (e) {
-    var that = this
-    console.log(e)
-    console.log("获取用户信息")
-    app.globalData.userInfo = e.detail.userInfo
-    that.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-    wx.request({
-      url: 'https://api-test.lex-mung.com/passport/app/login',
-    })
   },
   // 页面跳转
   gotoConstultation:function(){
@@ -169,6 +159,11 @@ Page({
     // 
     wx.navigateTo({
       url:'../index/consultation/index?id=1'
+    })
+  },
+  gotoQuick:function(){
+    wx.navigateTo({
+      url: '../index/quick-consultation/index?id=2',
     })
   },
   onReady: function () {

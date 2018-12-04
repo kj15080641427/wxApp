@@ -1,0 +1,60 @@
+<!--pages/index/quick-consultation/index.wxml-->
+<view class='qucik-page-top'>
+  <view style='margin-left:40rpx'>填写信息</view>
+  <view>完成支付</view>
+  <view style='margin-right:40rpx'>律师回电</view>
+</view>
+ <view class='quick-page-height'>
+    <view class='quick-page-line-short'></view>
+    <view class='quick-page-round'>1</view>
+    <view class='quick-page-line'></view>
+    <view class='quick-page-round'>2</view>
+    <view class='quick-page-line'></view>
+    <view class='quick-page-round'>3</view>
+    <view class='quick-page-line-short'></view>
+ </view>
+ <!-- 问题类型 联系手机 -->
+<view class='quick-page-font'>
+
+  <view class='quick-page-flex quick-center'>
+    <view style='margin-left:35rpx'>问题类型</view>
+    <picker value='{{index}}' range='{{typeName}}' bindchange='changeType' class='quick-page-right'>{{typeName[index]}}<label wx:if="{{selectType}}">点击选择问题类型</label></picker>
+  </view>
+
+  <view class='quick-page-flex quick-center'>
+    <view style='margin-left:35rpx'>联系手机</view>
+    <input class='quick-page-right quick-phone' value='15080641427'></input>
+    <view style='font-size:27rpx;margin-right:35rpx'>更换手机</view>
+  </view>
+</view>
+<!-- 支付方式 -->
+<view class='quick-pay-type'>
+  <view class='quick-select-type'>选择支付方式</view>
+  <radio-group>
+    <view wx:for="{{payList}}" index="{{index}}" >
+      <view class='quick-page-flex-between'>
+        <view class='quick-page-flex'>
+          <image src='{{item.icon}}' class='quick-pay-icon'></image>
+          <view class='quick-pay-margin'>{{item.name}}</view>
+        </view>
+        <radio bindtap='payType' value='{{item.name}}' checked="{{item.checked}}"/>
+      </view>
+    </view>
+  </radio-group>
+</view>
+<!-- 温馨提示 -->
+<view class='quick-page-tips'>
+  <view>温馨提示</view>
+  <view>1.订单支付成功后,律师最快将在15分钟内联系你,请保持电话畅通</view>
+  <view>2.为不影响您的体验,请尽量在工作时间发布咨询 (9:00-20:00) 发布咨询</view>
+  <view>3.咨询时间为首次咨询的两小时内,请您提前准备好咨询内容</view>
+  <view>4.详情流程请查看<a class="quick-page-link">《绿豆圈快速咨询交易流程及服务规范》</a></view>
+  <view>5.如有疑问,请联系绿豆圈客服 <a class="quick-page-link">400-811-3060</a></view>
+</view>
+<!-- 支付 -->
+<view>
+  <view class='quick-page-lower'>
+    <view class='quick-page-order'>订单金额<label style='color:#f8b62d;font-weight:bold;margin-left:10rpx'>¥0</label></view>
+    <button class='quick-page-button' bindtap='gotofinish'>支付订单</button>
+  </view>
+</view>

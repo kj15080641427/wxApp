@@ -3,21 +3,32 @@
   display: flex;
   justify-content: center;
   align-content: center;
-  height: 300rpx
+  height: 400rpx;
+  background-color: white;
 }
 .about-page-image{
-  width:150rpx;
-  height: 150rpx;
-  background-color: red;
-  margin-top: 85rpx
+  /* background-color: white; */
+  width: 160px;
+  height: 120px;
+  margin-top: 85rpx;
+  z-index: 99;
 }
 .about-page-lower{
   height: 120rpx;
   display: flex;
   justify-content: space-between;
-  margin-left: 20rpx;
-  margin-right: 20rpx;
-  margin-top: 30rpx;
+  align-items: center;
   font-size: 32rpx;
-  color: #323232
+  color: #323232;
+  background-color: white;
+}
+.about-page-left{
+  margin-left: 35rpx
+}
+.about-page-line{
+  height: 1rpx;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  background-color: #f2f2f2;
 }

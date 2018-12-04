@@ -1,8 +1,9 @@
 /* pages/my/watchlist/index.wxss */
 .watchlist-page{
-  margin-left: 35rpx;
-  margin-right:35rpx;
+  margin-left: 25rpx;
+  margin-right:25rpx;
   margin-top: 35rpx;
+  background-color: white
 }
 .watchlist-page-flex{
   display: flex;
@@ -11,7 +12,7 @@
 .watchlist-page-avatar{
   width: 120rpx;
   height: 120rpx;
-  background-color: red;
+  /* background-color: red; */
   border-radius: 50%;
 }
 .watchlist-page-practice{
@@ -26,21 +27,21 @@
   margin-top: 20rpx;
 }
 .watchlist-page-label{
-  height: 60rpx;
-  margin-top: 25rpx;
-  display: flex;
-  justify-content: center;
-  line-height: 60rpx;
+  margin-left:20rpx;
+  width:120rpx;
   font-size: 27rpx;
   color: #b5b5b5
 }
 .watchlist-page-left{
   margin-top: 35rpx;
+  margin-left:20rpx
 }
 .watchlist-page-right{
   margin-left: 25rpx;
   margin-top: 35rpx;
-  height: 285rpx;
+  margin-right: 20rpx;
+  /* margin-right:20rpx */
+  /* height: 285rpx; */
 }
 .watchlist-page-name{
   font-size: 16px;

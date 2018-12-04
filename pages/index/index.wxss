@@ -336,7 +336,7 @@ border-bottom: 1px solid #F2F2F2;}
   }
 
 .tab-content{
-  margin-top: 80rpx;
+  margin-top: 30rpx;
   }
 .scoll-h{
   height: 100%;

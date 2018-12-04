@@ -1,0 +1,114 @@
+/* pages/index/quick-consultation/index.wxss */
+.qucik-page-top{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 60rpx;
+  font-size: 32rpx;
+  color: #323232
+}
+.quick-page-height{
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+  height: 120rpx;
+  display:flex;
+  align-items: center;
+}
+.quick-page-line{
+  width: 180rpx;
+  height: 6rpx;
+  background-color: #1ec88c;
+  /* position: absolute */
+}
+.quick-page-line-short{
+  width: 100rpx;
+  height: 6rpx;
+  background-color: #1ec88c;
+}
+.quick-page-round{
+  border-radius: 50%;
+  background-color: #1ec88c;
+  height: 50rpx;
+  width: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 24rpx;
+  font-weight: bold;
+  /* position: relative */
+}
+.quick-page-flex{
+  display: flex
+}
+.quick-center{
+  align-items: center;
+  height: 100rpx
+}
+.quick-page-font{
+  font-size: 37rpx;
+  color: #b5b5b5;
+  background-color: white
+}
+.quick-page-right{
+  margin-left: 35rpx;
+  font-size: 27rpx;
+}
+.quick-phone{
+  font-size: 35rpx;
+  color: #323232
+}
+.quick-pay-type{
+  background-color: white;
+}
+.quick-select-type{
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  font-size: 37rpx;
+  color: #b5b5b5;
+  margin-left: 35rpx
+}
+.quick-pay-icon{
+  width:52rpx;
+  height: 45rpx 
+}
+.quick-pay-margin{
+  margin-left: 27rpx;
+}
+.quick-page-flex-between{
+  display: flex;
+  justify-content: space-between;
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+  height: 120rpx
+}
+.quick-page-tips{
+  font-size: 27rpx;
+  color: #b5b5b5;
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+  margin-top: 35rpx
+}
+.quick-page-link{
+  color: #1ec88c
+}
+.quick-page-lower{
+  display: flex;
+  align-items: center;
+  height: 120rpx;
+}
+.quick-page-order{
+  font-size: 37rpx;
+  color: #323232;
+  margin-left: 50rpx
+}
+.quick-page-button{
+  width: 280rpx;
+  height: 70rpx;
+  border-radius: 40rpx;
+  background-color: #1ec88c;
+  font-size: 37rpx;
+  color: white;
+  line-height: 70rpx;
+  margin-right: 50rpx
+}

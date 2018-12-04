@@ -1,16 +1,23 @@
 <!--pages/my/index.wxml-->
+<image  src='../../image/my_icon@3x/mine_icon_01_3x.png' style='width:100%;height:320rpx;position: absolute'>
+  
+</image>
+
 <view class='my-page-background'>
   <view class=''>
     <view style='display:flex;justify-content:center'>
-      <view class='my-page-avatar' ></view>
+      <image class='my-page-avatar' src='../../image/my_icon@3x/mine_icon_02_3x.png' ></image>
       <view class='my-page-editinfo-flex' bindtap='gotoEditInfo'>
         <view class='my-page-editinfo'>编辑信息</view>
-        <image src='../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;'/>
+        <image src='../../image/homeicon_3x/homepage_09_3x.png' style='width:25rpx;height:25rpx;'/>
       </view>
     </view>
     <view class='my-page-textgenter'>
       <view class='my-page-text' style='font-weight:bold'>北燕南飞</view>
-      <view class='my-page-gender'>18岁</view>
+      <view class='my-page-gender'>
+        <image src='../../image/my_icon@3x/mine_icon_04_3x.png' style='width:20rpx;height:20rpx'></image>
+        <text>18岁</text>
+      </view>
     </view>
     <view class='my-page-text' style='font-size:30rpx'>湖南常德</view>
     <view class='my-page-unions'>
@@ -18,30 +25,51 @@
       <view class='my-page-unions-detail'>中国浙商会湖南分会</view>
     </view>
   </view>
-</view>
+  </view>
+
+
 <view class='my-page-flex'>
-  <view>
-  <image class='my-page-icon'></image>
-  <view class='my-page-center-text'>我的订单</view>
+  <view style='display:flex;align-items:center' >
+    <view >
+      <view class='my-page-icon-center'>
+         <image class='my-page-icon' src='../../image/my_icon@3x/mine_icon_05_3x.png'></image>
+       </view>
+      <view class='my-page-center-text'>我的订单</view>
+    </view>
+  </view>
+
+<view style='display:flex;align-items:center'>
+    <view>
+      <view class='my-page-icon-center'>
+        <image class='my-page-icon' src='../../image/my_icon@3x/mine_icon_06_3x.png'></image>
+      </view>
+      <view class='my-page-center-text'>我的账户</view>
+    </view>
+  </view>
+
+<view bindtap='gotoWatchlist' style='display:flex;align-items:center' >
+    <view>
+      <view class='my-page-icon-center'>
+        <image class='my-page-icon' src='../../image/my_icon@3x/mine_icon_07_3x.png'></image>
+      </view>
+      <view class='my-page-center-text'>我的关注</view>
+    </view>
+  </view>
+
 </view>
-<view>
-  <image class='my-page-icon'></image>
-  <view class='my-page-center-text'>我的账户</view>
-</view>
-<view bindtap='gotoWatchlist'>
-  <image class='my-page-icon'></image>
-  <view class='my-page-center-text'>我的关注</view>
-</view>
-</view>
+
 <view class='my-page-lower'style="margin-top:35rpx" bindtap='gotoGuide'>
-  <view>新手引导</view>
-  <image src='../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx'/>
+  <view class='my-page-lower-left'>新手引导</view>
+  <image src='../../image/homeicon_3x/homepage_09_3x.png' class='my-page-lower-right'/>
+</view>
+<view style='background-color:white'>
+<view class='my-page-line'></view>
 </view>
 <view class='my-page-lower'bindtap="gotoAbout">
-  <view>关于绿豆圈</view>
-  <image src='../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx'/>
+  <view  class='my-page-lower-left'>关于绿豆圈</view>
+  <image src='../../image/homeicon_3x/homepage_09_3x.png' class='my-page-lower-right'/>
 </view>
-<view class='my-page-lower'>
-  <view>联系客服</view>
-  <image src='../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx'/>
+<view class='my-page-lower' style='margin-top:35rpx'>
+  <view  class='my-page-lower-left'>联系客服</view>
+  <image src='../../image/homeicon_3x/homepage_09_3x.png' class='my-page-lower-right'/>
 </view>

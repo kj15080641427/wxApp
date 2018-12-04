@@ -1,0 +1,14 @@
+<!--pages/index/quick-consultation-finish/index.wxml-->
+<view class='finish-page-top'>
+  <image src='../../../image/my_icon@3x/Rapidconsultation_icon_03_3x.png' class='finish-page-image'></image>
+</view>
+  <view class='finish-page-tips'>支付成功!</view>
+  <view class='finish-page-text'>15分钟内会有律师和你联系,</view>
+  <view class='finish-page-text'>请保持手机畅通!</view>
+<view wx:for="{{tipList}}" class='finish-page-lower'>
+  <view style='width:500rpx'>
+    <view><text class='finish-left'>{{item.key}} : </text><text class='{{item.key == "订单金额"?"finish-page-loan" :""}}'>{{item.value}}</text></view>
+  </view>
+</view>
+<view class='finish-page-line'></view>
+<button class='finish-page-button'bindtap="goHome">返回首页</button>
