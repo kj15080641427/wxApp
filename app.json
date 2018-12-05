@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/my/order-chat/index",
+    "pages/my/order/index",
     "pages/index/quick-consultation-finish/index",
     "pages/index/quick-consultation/index",
     "pages/my/index",
@@ -12,11 +14,11 @@
     "pages/logs/logs",
     "pages/my/guide/index",
     "pages/my/about/index",
-    "pages/my/edit-info/index"
+    "pages/my/edit-info/index",
+    "pages/my/order-detail/index"
   ],
   "window":{
     "navigationBarBackgroundColor": "#1ec88c",
-    "enablePullDownRefresh":true,
     "navigationBarTitleText": "绿豆圈",
     "navigationBarTextStyle":"white",
     "onReachBottom":true

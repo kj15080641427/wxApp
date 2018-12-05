@@ -1,4 +1,4 @@
-// pages/my/index.js
+// pages/order-chat/index.js
 Page({
 
   /**
@@ -7,31 +7,7 @@ Page({
   data: {
 
   },
-  gotoGuide:function(){
-    wx.navigateTo({
-      url: '../my/guide/index',
-    })
-  },
-  gotoAbout:function(){
-    wx.navigateTo({
-      url: '../my/about/index',
-    })
-  },
-  gotoWatchlist:function(){
-    wx.navigateTo({
-      url: '../my/watchlist/index',
-    })
-  },
-  gotoEditInfo:function(){
-    wx.navigateTo({
-      url: '../my/edit-info/index',
-    })
-  },
-  gotoOrder:function(){
-    wx.navigateTo({
-      url: '../my/order/index',
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

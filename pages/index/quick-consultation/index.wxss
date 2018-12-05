@@ -54,6 +54,7 @@
   font-size: 27rpx;
 }
 .quick-phone{
+  width: 350rpx;
   font-size: 35rpx;
   color: #323232
 }
@@ -78,6 +79,7 @@
 .quick-page-flex-between{
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-left: 35rpx;
   margin-right: 35rpx;
   height: 120rpx

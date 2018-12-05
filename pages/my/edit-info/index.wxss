@@ -24,15 +24,15 @@
   align-items: center;
   height: 80rpx;
   /* justify-content: space-between; */
-  /* margin-top: 35rpx; */
+  margin-top: 15rpx;
   margin-left: 35rpx;
   margin-right: 35rpx;
 }
 .info-page-input{
-  width: 500rpx;
+  width: 100%;
   margin-left: 50rpx;
   font-size: 28rpx;
-  color: #323232
+  color: #323232;
 }
 .info-page-label{
   display: flex;
@@ -40,4 +40,35 @@
   font-size: 28rpx;
   color: #b5b5b5;
   width: 150rpx
+}
+.info-page-center-line{
+  height: 1rpx;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  background-color: #f2f2f2;
+}
+.info-page-line{
+  height: 1rpx;
+  width: 100%;
+  /* margin-left: 5%;
+  margin-right: 5%; */
+  background-color: red;
+  margin-top: 60rpx
+}
+.info-page-button-view{
+  height: 100rpx;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.info-page-button{
+  width: 325rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+  background-color: #1ec88c;
+  color: white;
+  line-height: 80rpx;
+
 }

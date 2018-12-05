@@ -2,7 +2,7 @@
 <view class='info-page'>
   <view class='info-page-flex'>
     <image class='info-page-avatar' src='../../../image/my_icon@3x/mine_icon_02_3x.png'></image>
-    <view style='display:flex;height:40rpx;align-items:center'>
+    <view style='display:flex;height:40rpx;align-items:center' bindtap='replaceAvatar'>
       <view class='info-page-text'>更换头像</view>
       <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'></image>
     </view>
@@ -26,28 +26,21 @@
   </view>
  </view>
 <view style='background-color:white;margin-top:35rpx'>
-  <view class='info-page-list'>
-    <view class='info-page-label'>您的行业</view>
+<view wx:key="{{index}}" wx:for="{{infoList}}">
+  <view class='info-page-list' >
+    <view class='info-page-label'>{{item}}</view>
     <input class="info-page-input"></input>
   </view>
-
-
-  <view class='info-page-list'>
-    <view class='info-page-label'>您的企业</view>
-    <input class="info-page-input"></input>
-  </view>
-    <view class='info-page-list'>
-    <view class='info-page-label'>您的职务</view>
-    <input class="info-page-input"></input>
-  </view>
-    <view class='info-page-list'>
-    <view class='info-page-label'>您的邮箱</view>
-    <input class="info-page-input"></input>
-  </view>
+  <view class='info-page-center-line'></view>
+</view>
     <view class='info-page-list'>
     <view class='info-page-label'>商会组织</view>
     <input class="info-page-input"></input>
   </view>
-
 </view>
+
+  <view class='info-page-line'></view>
+  <view class='info-page-button-view'> 
+    <button class='info-page-button'>保存</button>
+  </view>
 </view>

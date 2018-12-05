@@ -5,7 +5,7 @@
   <view class='finish-page-tips'>支付成功!</view>
   <view class='finish-page-text'>15分钟内会有律师和你联系,</view>
   <view class='finish-page-text'>请保持手机畅通!</view>
-<view wx:for="{{tipList}}" class='finish-page-lower'>
+<view wx:key="{{index}}" wx:for="{{tipList}}" class='finish-page-lower'>
   <view style='width:500rpx'>
     <view><text class='finish-left'>{{item.key}} : </text><text class='{{item.key == "订单金额"?"finish-page-loan" :""}}'>{{item.value}}</text></view>
   </view>

@@ -10,8 +10,7 @@ Page({
     interval: 3000,
     duration: 1000,
     popular: [{ "categoryName": "婚姻家庭","id":"1"}],//文章分类
-    article: [],//文章列表
-    articleId:1,//文章类型 分类ID
+    article: [{ "articleName":'文章名称', "articleImageSrc": '图片地址', "id": '文章分类ID' } ],//文章列表
     helpNumber:10,
     more:false,
     choose:false,
@@ -70,6 +69,8 @@ Page({
     }
     wxrequest.requestPost(listUrl,listData, message, successList,failList)
 
+    // 消息
+    var tipsList = 
     // 消息
     this.judgeTips()
   },

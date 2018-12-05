@@ -1,37 +1,19 @@
-// pages/my/index.js
+// pages/my/order-chat/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    chatList:[
+      { "name":' 所在地区', "text": '湖南常德'},
+      { "name": '事务分类', "text": '个人及家事类' },
+      { "name": '服务类型', "text": '诉讼/仲裁' },
+      { "name": '承受价格', "text": '10000' },
+      { "name": '描述内容', "text": '男方有家暴,我想离婚对方又不给结婚证,不愿意协议离婚' },
+      ]
+  },
 
-  },
-  gotoGuide:function(){
-    wx.navigateTo({
-      url: '../my/guide/index',
-    })
-  },
-  gotoAbout:function(){
-    wx.navigateTo({
-      url: '../my/about/index',
-    })
-  },
-  gotoWatchlist:function(){
-    wx.navigateTo({
-      url: '../my/watchlist/index',
-    })
-  },
-  gotoEditInfo:function(){
-    wx.navigateTo({
-      url: '../my/edit-info/index',
-    })
-  },
-  gotoOrder:function(){
-    wx.navigateTo({
-      url: '../my/order/index',
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */

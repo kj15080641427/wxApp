@@ -1,37 +1,20 @@
-// pages/my/index.js
+// pages/my/order/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    orderList:[
+      {"time":'2018-01-01 01:01',"consulType":'快速咨询',"problemType":'婚姻家事',"statu":'待接单',"lawyer":''},
+      { "time": '2017-01-01 01:01', "consulType": '发布需求', "problemType": '知识产权', "statu": '待接单', "lawyer": '刘岩' },
+      {"time":'2017-01-01 01:01',"consulType":'免费文字咨询',"problemType":'知识产权',"statu":'已完成',"lawyer":'' },
+      { "time": '2017-01-01 01:01', "consulType": '专家咨询', "problemType": '知识产权', "statu": '已关闭', "lawyer": '陈宇龙' },
+      { "time": '2017-01-01 01:01', "consulType": '免费电话咨询', "problemType": '知识产权', "statu": '进行中', "lawyer": '' },
+      
+      ]
+  },
 
-  },
-  gotoGuide:function(){
-    wx.navigateTo({
-      url: '../my/guide/index',
-    })
-  },
-  gotoAbout:function(){
-    wx.navigateTo({
-      url: '../my/about/index',
-    })
-  },
-  gotoWatchlist:function(){
-    wx.navigateTo({
-      url: '../my/watchlist/index',
-    })
-  },
-  gotoEditInfo:function(){
-    wx.navigateTo({
-      url: '../my/edit-info/index',
-    })
-  },
-  gotoOrder:function(){
-    wx.navigateTo({
-      url: '../my/order/index',
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */

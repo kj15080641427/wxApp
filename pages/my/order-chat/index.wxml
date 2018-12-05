@@ -1,0 +1,14 @@
+<!--pages/my/order-chat/index.wxml-->
+<view class='chat-page-time'>
+  <view class='chat-page-time-tetx'>11:42</view>
+</view>
+<view class='chat-page-news'>
+  <view>律师你好,我发布了一个关于【婚姻家事】的需求!</view>
+</view>
+<image src='../../../image/my_icon@3x/mine_icon_02_3x.png' class='chat-page-avatar'></image>
+<view class='chat-page-background'>
+<view wx:for="{{chatList}}" class='chat-page-list' >
+  <view class='chat-page-left'>{{item['name']}}</view>
+  <view class='chat-page-right'>{{item['text']}}</view>
+</view>
+</view>

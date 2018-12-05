@@ -1,0 +1,79 @@
+/* pages/my/order-detail/index.wxss */
+.detail-page-time{
+  display: flex;
+  align-items: center;
+  background-color: white;
+  height: 50rpx;
+  font-size: 24rpx;
+  color: #ea5514;
+  padding-left: 35rpx;
+}
+.detail-page-background{
+  background-color: white;
+  margin-top: 35rpx;
+}
+.detail-page-flex{
+  display: flex;
+  align-items: center;
+  margin-left: 35rpx;
+  padding-top: 30rpx;
+  font-size: 28rpx;
+  color: #323232
+}
+.detail-page-flex-once{
+  display: flex;
+  margin-left: 35rpx;
+  padding-top: 45rpx;
+  font-size: 28rpx;
+  color: #323232
+}
+.detail-page-right{
+  margin-left: 30rpx
+}
+.detail-page-color{
+  color: #f8b62d;
+  margin-left: 30rpx;
+}
+.detail-page-line{
+  width: 750rpx;
+  background-color: red;
+  height: 2rpx;
+  /* margin-left: 35rpx;
+  margin-right: 35rpx; */
+}
+.detail-page-head-tips{
+  font-size: 25rpx;
+  color: #b5b5b5;
+  margin-left: 35rpx;
+  line-height: 30rpx;
+  margin-top: 35rpx;
+}
+.detail-page-tips{
+  font-size: 25rpx;
+  color: #b5b5b5;
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+  line-height: 30rpx;
+  margin-top: 20rpx;
+}
+.detail-page-button-view{
+  height: 140rpx;
+  width: 750rpx;
+  display: flex;
+  align-items: center;
+}
+.detail-page-button{
+  background-color: #1ec88c;
+  border-radius: 50rpx;
+  width: 50%;
+  height: 94rpx;
+  color: white
+}
+.detail-page-bottom{
+  position: absolute;
+  bottom: 1rpx
+}
+.detail-page-bottom-line{
+  position: absolute;
+  bottom: 140rpx
+}

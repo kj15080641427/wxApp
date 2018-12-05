@@ -9,7 +9,8 @@ Page({
     region:['湖南省','长沙市','芙蓉区'],
     date:['1980-01-01'],
     gender:['女','男'],
-    index:'0'
+    index:'0',
+    infoList:['您的行业','您的企业','您的职务','您的邮箱']
   },
   // 性别
   bindChange:function(e){
@@ -27,6 +28,15 @@ Page({
   bindDateChange: function (e) {
     this.setData({
       date: e.detail.value
+    })
+  },
+  // 更换头像
+  replaceAvatar:function(){
+    wx.chooseImage({
+      sourceType: ['album', 'camera'],
+      success: function(res) {
+        console.log(res)
+      },
     })
   },
   /**

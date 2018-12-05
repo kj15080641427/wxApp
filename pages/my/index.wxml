@@ -9,7 +9,7 @@
       <image class='my-page-avatar' src='../../image/my_icon@3x/mine_icon_02_3x.png' ></image>
       <view class='my-page-editinfo-flex' bindtap='gotoEditInfo'>
         <view class='my-page-editinfo'>编辑信息</view>
-        <image src='../../image/homeicon_3x/homepage_09_3x.png' style='width:25rpx;height:25rpx;'/>
+        <image src='../../image/homeicon_3x/homepage_09_3x.png' style='width:40rpx;height:40rpx;'/>
       </view>
     </view>
     <view class='my-page-textgenter'>
@@ -29,7 +29,7 @@
 
 
 <view class='my-page-flex'>
-  <view style='display:flex;align-items:center' >
+  <view style='display:flex;align-items:center'bindtap="gotoOrder" >
     <view >
       <view class='my-page-icon-center'>
          <image class='my-page-icon' src='../../image/my_icon@3x/mine_icon_05_3x.png'></image>

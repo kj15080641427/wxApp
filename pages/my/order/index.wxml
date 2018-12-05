@@ -1,0 +1,22 @@
+<!--pages/my/order/index.wxml-->
+<view class='order-page' wx:key="{{index}}" wx:for="{{orderList}}">
+  <view class='order-page-top'>
+    <view>{{item["time"]}}</view>
+    <view class="{{item['statu'] == '待接单' ? 'order-statu': ''}}">{{item["statu"]}}</view>
+  </view>
+  <view class='order-page-line'></view>
+  <view class='order-page-type'>
+    <view class='order-page-left'>
+      <view class='order-page-font'>{{item["consulType"]}}</view>
+      <view class='order-page-consultype'>
+        <view wx:if="{{item['consulType'] == '免费电话咨询'}}">通话时长:12:01</view>
+        <view wx:else="item['consulType'] =='免费电话咨询'">
+          <label wx:if="{{item['consulType'] == '发布需求'}}">咨询律师:{{item["lawyer"]}} </label>
+          <label wx:if="{{item['consulType'] =='专家咨询'}}">咨询律师:{{item["lawyer"]}}</label>
+          <label wx:else>咨询类型:{{item["problemType"]}}</label>
+        </view>
+      </view>
+    </view>
+    <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'/>
+  </view>
+</view>

@@ -1,46 +1,32 @@
-// pages/index/quick-consultation/index.js
+// pages/my/order-detail/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    typeName:['婚姻家庭'],
-    selectType:true,
-    payList: [
-      { "icon":'../../../image/my_icon@3x/Rapidconsultation_icon_01_3x.png',"name":'微信支付',checked:true},
-      { "icon": '../../../image/my_icon@3x/Rapidconsultation_icon_02_3x.png', "name": '余额支付' }
+    time:60,
+    detailList:[
+      { "name": '订单编号', "text": 'KS201812121212'},
+      { "name": '订单日期', "text": '2018-12-12 14:03' },
+      { "name": '商品名称', "text": '快速咨询' },
+      { "name": '咨询类型', "text": '婚姻家庭' },
+      { "name": '联系手机', "text": '13333333333' },
+      { "name": '订单金额', "text": '¥99' },
+      { "name": '订单状态', "text": '进行中' },
       ]
   },
-  // picker
-  changeType:function(e){
-    this.setData({
-      index:e.detail.value,
-      selectType:false
-    })
+  setTime:function(){
+    
   },
-// 单选
-  payType:function(e){
-    // console.log(e)
-  },
-  // 跳转
-  gotofinish:function(){
-    wx.navigateTo({
-      url: '../quick-consultation-finish/index',
-    })
+  timeRest:function(){
+   
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var typeNameList = []
-    var typeNameT = wx.getStorageSync('typeName') 
-    typeNameT.map(function(item){
-      typeNameList.push(item.categoryName)
-    })
-    this.setData({
-      typeName: typeNameList
-    })
+
   },
 
   /**

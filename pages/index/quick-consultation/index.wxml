@@ -18,20 +18,20 @@
 
   <view class='quick-page-flex quick-center'>
     <view style='margin-left:35rpx'>问题类型</view>
-    <picker value='{{index}}' range='{{typeName}}' bindchange='changeType' class='quick-page-right'>{{typeName[index]}}<label wx:if="{{selectType}}">点击选择问题类型</label></picker>
+    <picker value='{{index}}' range='{{typeName}}' bindchange='changeType' class='quick-page-right'>    {{typeName[index]}}<label wx:if="{{selectType}}">点击选择问题类型</label></picker>
   </view>
 
   <view class='quick-page-flex quick-center'>
     <view style='margin-left:35rpx'>联系手机</view>
     <input class='quick-page-right quick-phone' value='15080641427'></input>
-    <view style='font-size:27rpx;margin-right:35rpx'>更换手机</view>
+    <view style='font-size:27rpx;margin-right:35rpx;margin-left:35rpx'>更换手机</view>
   </view>
 </view>
 <!-- 支付方式 -->
 <view class='quick-pay-type'>
   <view class='quick-select-type'>选择支付方式</view>
   <radio-group>
-    <view wx:for="{{payList}}" index="{{index}}" >
+    <view wx:key="{{index}}" wx:for="{{payList}}" index="{{index}}" >
       <view class='quick-page-flex-between'>
         <view class='quick-page-flex'>
           <image src='{{item.icon}}' class='quick-pay-icon'></image>

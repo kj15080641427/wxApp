@@ -1,9 +1,4 @@
 /**index.wxss**/
-/* .index{
-  width: 100%;
-  margin-left: 35rpx;
-  margin-right: 35rpx;
-} */
 .index-layout{
   display: flex;
   justify-content: space-between;
@@ -104,36 +99,16 @@
 .index-text-style-gray{
   color: #b5b5b6;
 }
-.index-image{
-  width: 650rpx;
-  height: 200rpx;
-  margin-top: 65rpx;
-  /* margin-left: 50rpx; */
-  /* display: flex;
-  justify-content: center;  */
-}
 .index-service{
   display: flex;
   justify-content: space-between;
   margin-left: 35rpx;
   margin-right: 35rpx;
 }
-.index-service-left{
-  width:90rpx;
-  height:90rpx;
-  background-color:#1ec88c;
-  margin-top:30rpx
-}
 .index-service-right{
   font-size:24rpx;
   color:#b5b5b6;
   margin-top:30rpx
-}
-.index-tab{
-  display: flex;
-  justify-content: space-between;
-  font-size: 28rpx;
-  color: #b5b5b6;
 }
 .index-tab-margin{
   margin-top: 40rpx;
@@ -145,20 +120,12 @@
   font-size: 28rpx;
   color: #b5b5b6;
 }
-@font-face {
-    font-family: 'PingFang SC';
-    src: url('PingFangSCRegular.eot');
-    font-weight: normal;
-    font-style: normal;
-}
 .index-lawyer-icon{
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
   background-color: red;
   margin-top: 6rpx;
-  /* display: flex;
-  justify-content: space-around; */
 }
 .index-lawyer-remark{
   display: flex;
@@ -167,8 +134,6 @@
   color: #b5b5b6;
 }
 .index-lawyer-name{
-  /* display: flex;
-  justify-content: space-between; */
   font-size: 28rpx;
   color: #323232
 }
@@ -177,46 +142,34 @@
   height:80rpx;
   white-space:nowrap;
   display:flex;
-  /* margin-left: 20rpx;
-  margin-right:2000rpx; */
 }
-/* 隐藏scrollbar */
-/* ::-webkit-scrollbar{
-  width: 0;
-  height: 0;
-} */
+
 .view-parent{
   display:inline-block;
 }
 .view-item{
   margin-top:30rpx;
   width:120rpx;
-  /* height:50px; */
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:28rpx;
-  /* font-color:#222; */
-  /* background:#80CBC4; */
   margin-left:35rpx;
   margin-right:35rpx;
 }
 .view-item-color{
   margin-top:30rpx;
   width:120rpx;
-  /* height:50px; */
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:28rpx;
-  /* font-color:#222; */
-  /* background:#80CBC4; */
   margin-left:35rpx;
   margin-right:35rpx;
   color: #1ec88c
 }
 .view-item-green-line{
-  margin-left: 40rpx;
+  margin-left: 70rpx;
   background-color: #1ec88c;
   width: 50rpx;
   height: 5rpx;
@@ -234,11 +187,6 @@
   font-size: 32rpx;
   width: 457rpx;
 }
-.index-article-icon{
-  width: 223rpx;
-  height: 145rpx;
-  background-color: red;
-}
 .index-article-text-lower{
   font-size: 24rpx;
   color: #b5b5b6;
@@ -248,12 +196,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* width: 550rpx; */
   height: 180rpx;
   margin-left: 75rpx;
   margin-right: 75rpx;
   margin-top: 55rpx;
-  /* border: outset; */
   border-width: 2rpx;
   border-radius: 10rpx;
   -moz-box-shadow:2px 2px 10px #323232;
@@ -298,50 +244,9 @@
   color: #b5b5b5;
   margin-top: 28rpx;
 }
-
-.tab-h{
-  height: 80rpx;
-  width: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
-  line-height: 80rpx;
-  background: #F7F7F7; 
-  font-size: 16px; 
-  white-space: nowrap;
-  }
-
-
-
-.item-ans{ width: 100%;
-display: flex; 
-flex-grow: row no-wrap;
-justify-content: space-between; 
-padding: 30rpx;
-box-sizing: border-box; 
-height: 180rpx;
-align-items: center;
-border-bottom: 1px solid #F2F2F2;}
-
-.avatar .img{width: 100%;height: 100%;}
-
-.expertInfo{
-  font-size: 12px;
-  flex-grow: 2;
-  color: #B0B0B0;
-  line-height: 1.5em;}
-.expertInfo .name{
-  font-size: 16px;
-  color:#000;
-  margin-bottom: 6px;
-  }
-
 .tab-content{
   margin-top: 30rpx;
   }
-.scoll-h{
-  height: 100%;
-}
-
 ::-webkit-scrollbar {
   width: 0;
   height: 0;

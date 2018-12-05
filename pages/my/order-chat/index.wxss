@@ -1,0 +1,47 @@
+/* pages/my/order-chat/index.wxss */
+.chat-page-background{
+  background-color: #dcdcdc;
+  border-radius: 10rpx;
+  margin-left: 115rpx;
+  margin-top: 20rpx;
+  margin-right: 115rpx;
+  /* padding: 20rpx; */
+  font-size: 24rpx;
+  color: #323232;
+}
+.chat-page-avatar{
+  width: 110rpx;
+  height: 110rpx;
+
+}
+.chat-page-list{
+  display: flex;
+}
+.chat-page-left{
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  width: 120rpx;
+}
+.chat-page-right{
+  margin-top: 20rpx;
+  margin-left: 20rpx;
+  width: 400rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+}
+.chat-page-time{
+  display: flex;
+  justify-content: center;
+}
+.chat-page-time-tetx{
+  background-color: #dcdcdc;
+  color: #ffffff;
+  font-size: 20rpx;
+  margin-top: 20rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  border-radius: 10rpx
+}
+.chat-page-news{
+  
+}
