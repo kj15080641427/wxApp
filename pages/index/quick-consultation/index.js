@@ -9,33 +9,40 @@ Page({
     selectType:true,
     payList: [
       { "icon":'../../../image/my_icon@3x/Rapidconsultation_icon_01_3x.png',"name":'微信支付',checked:true},
-      { "icon": '../../../image/my_icon@3x/Rapidconsultation_icon_02_3x.png', "name": '余额支付' }
-      ]
+      { "icon": '../../../image/my_icon@3x/Rapidconsultation_icon_02_3x.png', "name": '账户余额' }
+      ],
+    selectProblem:'请选择问题类型',
+    money:0,
+    balance:10.5
   },
   // picker
   changeType:function(e){
     this.setData({
       index:e.detail.value,
-      selectType:false
+      selectType:false,
+      money: Number(e.detail.value)+100
     })
-  },
-// 单选
-  payType:function(e){
-    // console.log(e)
   },
   // 跳转
-  gotofinish:function(){
-    wx.navigateTo({
-      url: '../quick-consultation-finish/index',
-    })
+  gotofinish: function () {
+    if (this.data.index) {
+      wx.navigateTo({
+        url: '../quick-consultation-finish/index',
+      })
+    } else {
+      wx.showToast({
+        title: '请选择问题类型',
+        icon: 'none'
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     var typeNameList = []
-    var typeNameT = wx.getStorageSync('typeName') 
-    typeNameT.map(function(item){
+    var typeName = wx.getStorageSync('typeName') 
+    typeName.map(function(item){
       typeNameList.push(item.categoryName)
     })
     this.setData({

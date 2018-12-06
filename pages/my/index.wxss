@@ -70,18 +70,18 @@
   margin-left: 15rpx;
   margin-right: 15rpx;
   padding-top: 5rpx;
-  padding-bottom: 5rpx
+  /* padding-bottom: 5rpx */
 }
 .my-page-icon{
   width: 80rpx;
-  height: 80rpx
+  height: 70rpx
 }
 .my-page-flex{
   background-color: white;
   height: 180rpx;
   display: flex;
   justify-content: space-around;
-  margin-top: 30rpx;
+  /* margin-top: 30rpx; */
 }
 .my-page-center-text{
   display: flex;
@@ -118,4 +118,9 @@
   width: 90%;
   margin-left:5%;
   margin-right: 5%;
+}
+.my-page-line-top{
+  background-color: red;
+  width: 1rpx;
+  height: 60rpx;
 }

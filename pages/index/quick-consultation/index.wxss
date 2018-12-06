@@ -13,6 +13,12 @@
   display:flex;
   align-items: center;
 }
+.quick-page-line-center{
+  background-color: #f4f4f4;
+  height: 1rpx;
+  width: 680rpx;
+  margin-left: 35rpx;
+}
 .quick-page-line{
   width: 180rpx;
   height: 6rpx;
@@ -45,27 +51,29 @@
   height: 100rpx
 }
 .quick-page-font{
-  font-size: 37rpx;
+  font-size: 28rpx;
   color: #b5b5b5;
   background-color: white
 }
 .quick-page-right{
+  width: 500rpx;
   margin-left: 35rpx;
   font-size: 27rpx;
 }
 .quick-phone{
   width: 350rpx;
-  font-size: 35rpx;
+  font-size: 28rpx;
   color: #323232
 }
 .quick-pay-type{
+  margin-top: 35rpx;
   background-color: white;
 }
 .quick-select-type{
   height: 80rpx;
   display: flex;
   align-items: center;
-  font-size: 37rpx;
+  font-size: 28rpx;
   color: #b5b5b5;
   margin-left: 35rpx
 }
@@ -98,9 +106,15 @@
   display: flex;
   align-items: center;
   height: 120rpx;
+  background-color: white;
+}
+.quick-page-line-lower{
+  background-color: #b5b5b5;
+  height: 1rpx;
+  width: 750rpx;
 }
 .quick-page-order{
-  font-size: 37rpx;
+  font-size: 28rpx;
   color: #323232;
   margin-left: 50rpx
 }
@@ -109,8 +123,12 @@
   height: 70rpx;
   border-radius: 40rpx;
   background-color: #1ec88c;
-  font-size: 37rpx;
+  font-size: 28rpx;
   color: white;
   line-height: 70rpx;
   margin-right: 50rpx
+}
+.consul-balance{
+  color: #b5b5b5;
+  font-size: 24rpx;
 }

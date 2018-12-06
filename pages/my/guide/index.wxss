@@ -9,8 +9,14 @@
 }
 .guide-page-lower{
   line-height: 100rpx;
-  height: 100rpx;
+  height: 500rpx;
   font-size: 28rpx;
   color: #323232;
-  margin-left: 35rpx
+  padding-left: 35rpx;
+  background-color: white
+}
+.guide-page-line{
+  background-color: #f4f4f4;
+  height:1rpx;
+  padding-right: 35rpx
 }

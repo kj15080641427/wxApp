@@ -4,8 +4,12 @@
 </view>
 <view class='guide-page-lower'>
   <view>绿豆圈是什么</view>
+  <view class='guide-page-line'></view>
   <view>绿豆圈的优势</view>
+  <view class='guide-page-line'></view>
   <view>使用步骤说明</view>
+  <view class='guide-page-line'></view>
   <view>发布法律咨询时,最高可承受费用是什么</view>
+  <view class='guide-page-line'></view>
   <view>如何使用我的账户</view>
 </view>

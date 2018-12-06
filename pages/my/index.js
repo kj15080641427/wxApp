@@ -7,26 +7,37 @@ Page({
   data: {
 
   },
+  // 登陆
+  login:function(){
+    wx.navigateTo({
+      url: '../userlogin/index',
+    })
+  },
+  // 新手引导
   gotoGuide:function(){
     wx.navigateTo({
       url: '../my/guide/index',
     })
   },
+  // 关于我们
   gotoAbout:function(){
     wx.navigateTo({
       url: '../my/about/index',
     })
   },
+  // 我的关注
   gotoWatchlist:function(){
     wx.navigateTo({
       url: '../my/watchlist/index',
     })
   },
+  // 编辑个人信息
   gotoEditInfo:function(){
     wx.navigateTo({
       url: '../my/edit-info/index',
     })
   },
+  // 订单
   gotoOrder:function(){
     wx.navigateTo({
       url: '../my/order/index',

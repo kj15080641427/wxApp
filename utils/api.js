@@ -12,7 +12,7 @@ var Login = '/passport/app/login';
 var ArticleType = '/client/article/category'
 
 // 文章列表地址
-var ArticleList = '/client/article'
+var ArticleList = '/client/solution/list'
 
 // 文字咨询地址
 var Commit = '/client/freeText/post' 

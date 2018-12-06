@@ -1,13 +1,21 @@
 .consul-page{
-    margin-left: 35rpx;
-    margin-right: 35rpx;
     /* background-color: #f4f4f4; */
 }
 .consul-picker{
+    padding-left: 35rpx;
+    padding-right: 35rpx;
     height: 120rpx;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: white;
+}
+.consul-page-line-center{
+  background-color: #f4f4f4;
+  height: 1rpx;
+  width: 680rpx;
+  margin-left: 35rpx;
+  margin-right: 35rpx;
 }
 .consul-page-flex{
     display: flex;
@@ -22,12 +30,19 @@
     color: #b5b5b5
 }
 .consul-page-textarea{
+    background-color: white;
+    padding-left: 35rpx;
+    padding-right: 35rpx;
     font-size: 32rpx;
     color: #323232;
     height: 500rpx;
-    width: 100%;
+    width: 680rpx;
     margin-top: 35rpx;
     padding-top: 35rpx;
+}
+.consul-page-anonymous-view{
+  margin-top: 35rpx;
+  margin-left: 35rpx;
 }
 .consul-page-anonymous{
   border: 1rpx solid #b5b5b5;
@@ -37,14 +52,14 @@
 }
 .consul-page-publist{
   margin-left: 20rpx;
-  font-size: 24rpx;
+  font-size: 30rpx;
   color: #717171;
   position:relative;
 }
 .consul-page-line{
     height: 1rpx;
     width: 100%;
-    background-color: red;
+    background-color: #b5b5b5;
     position: absolute;
     bottom: 10%;
     /* margin-top: 230rpx; */
@@ -55,6 +70,10 @@
     width: 100%;
     display: flex;
     align-items: center;
+}
+.consul-page-button-view{
+  width: 100%;
+  background-color: white
 }
 .consul-page-button{
     line-height: 70rpx;

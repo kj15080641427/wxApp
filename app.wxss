@@ -9,5 +9,5 @@
   box-sizing: border-box;
 } 
 page {
-  background-color:	#F2F2F2;
+  background-color:	#F4F4F4;
 }

@@ -11,7 +11,6 @@ Page({
     duration: 1000,
     popular: [{ "categoryName": "婚姻家庭","id":"1"}],//文章分类
     article: [{ "articleName":'文章名称', "articleImageSrc": '图片地址', "id": '文章分类ID' } ],//文章列表
-    helpNumber:10,
     more:false,
     choose:false,
     chooseSize:false,
@@ -36,7 +35,7 @@ Page({
     var typeUrl = api.getArticleTypeUrl()
     var message = "加载中"
     var successType = function(data){
-      console.log("列表", data.data)
+      // console.log("列表", data.data)
       data.data.map(function (item) {
         categoryName.push({ "categoryName": item.categoryName, "id":item.id})
         // articleTypeId.push(item.id)
@@ -44,20 +43,29 @@ Page({
       that.setData({
           popular: categoryName,
         })
+      // var a = wx.getStorageSync('typeName')
+      // if(a){
+      //   console.log("已缓存")
+      // }else{
+        wx.setStorageSync('typeName', categoryName)
+        console.log(wx.getStorageSync('typeName'))
+
+
     }
     var failType = function (e){
       console.log("错误",e)
     }
     wxrequest.requestGet(typeUrl, message, successType, failType)
 
-    // 文章列表
+
+    // //解决方案
     var listUrl = api.getArticleListUrl()
     var message = "加载中"
-    var listData = { }
+    var listData = { "typeId": 1, "pageNum": 1,"	pageSize":10 }
     var successList = function (data){
-      console.log("list",data)
+      console.log("list",data.data.list)
       data.data.list.map(function (item) {
-        articleList.push({ "articleName": item.articleTitle, "articleImageSrc": item.image, "id": item.categoryId})
+        articleList.push({ "articleName": item.title, "articleImageSrc": item.image, "id": item.typeId, "helpNumber": item.helpNumber})
       })
       console.log(articleList)
       that.setData({
@@ -68,11 +76,14 @@ Page({
       console.log("list",e)
     }
     wxrequest.requestPost(listUrl,listData, message, successList,failList)
-
-    // 消息
-    var tipsList = 
     // 消息
     this.judgeTips()
+  },
+  onReady:function(){
+
+  },
+  onShow:function(){
+    
   },
   // 滚动样式
   switchTab: function (e) {
@@ -154,10 +165,9 @@ Page({
   },
   // 页面跳转
   gotoConstultation:function(){
-    var problemType = this.data.popular
-    // 缓存到本地
-    wx.setStorageSync('typeName', problemType)
     // 
+    // 
+    // // 缓存到本地
     wx.navigateTo({
       url:'../index/consultation/index?id=1'
     })
@@ -178,11 +188,11 @@ Page({
       })
     } else if (this.data.tipsNumber >= 10 && this.data.tipsNumber < 100) {
       this.setData({
-        tipsTwo: true
+        tipsOne: true
       })
     } else {
       this.setData({
-        tipsNumber: "99＋",
+        tipsNumber: "...",
         tipsTwo: true
       })
     }

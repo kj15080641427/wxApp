@@ -2,6 +2,7 @@
 .detail-page-time{
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: white;
   height: 50rpx;
   font-size: 24rpx;
@@ -11,6 +12,7 @@
 .detail-page-background{
   background-color: white;
   margin-top: 35rpx;
+  padding-bottom: 35rpx;
 }
 .detail-page-flex{
   display: flex;
@@ -36,7 +38,7 @@
 }
 .detail-page-line{
   width: 750rpx;
-  background-color: red;
+  background-color: #b5b5b5;
   height: 2rpx;
   /* margin-left: 35rpx;
   margin-right: 35rpx; */
@@ -61,6 +63,7 @@
   width: 750rpx;
   display: flex;
   align-items: center;
+  background-color: white;
 }
 .detail-page-button{
   background-color: #1ec88c;

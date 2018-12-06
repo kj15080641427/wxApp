@@ -6,10 +6,10 @@
 <view class='my-page-background'>
   <view class=''>
     <view style='display:flex;justify-content:center'>
-      <image class='my-page-avatar' src='../../image/my_icon@3x/mine_icon_02_3x.png' ></image>
+      <image class='my-page-avatar' src='../../image/my_icon@3x/mine_icon_02_3x.png' bindtap='login'></image>
       <view class='my-page-editinfo-flex' bindtap='gotoEditInfo'>
         <view class='my-page-editinfo'>编辑信息</view>
-        <image src='../../image/homeicon_3x/homepage_09_3x.png' style='width:40rpx;height:40rpx;'/>
+        <image src='../../image/homeicon_3x/homepage_09_3x.png' style='width:25rpx;height:25rpx;padding-top:5rpx' />
       </view>
     </view>
     <view class='my-page-textgenter'>
@@ -37,7 +37,9 @@
       <view class='my-page-center-text'>我的订单</view>
     </view>
   </view>
-
+<view style='display:flex;align-items:center'>
+  <view class='my-page-line-top'></view>
+</view>
 <view style='display:flex;align-items:center'>
     <view>
       <view class='my-page-icon-center'>
@@ -46,7 +48,9 @@
       <view class='my-page-center-text'>我的账户</view>
     </view>
   </view>
-
+<view style='display:flex;align-items:center'>
+  <view class='my-page-line-top'></view>
+</view>
 <view bindtap='gotoWatchlist' style='display:flex;align-items:center' >
     <view>
       <view class='my-page-icon-center'>

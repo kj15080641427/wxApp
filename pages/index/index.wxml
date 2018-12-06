@@ -11,12 +11,12 @@
      <view class='index-tips-text'>{{tipsNumber}}</view>
     </view>
     <!-- 消息大于两位数 -->
-    <view class='index-tips99' bindtap='clearTips' wx:if="{{tipsTwo}}">
+    <view class='index-tips' bindtap='clearTips' wx:if="{{tipsTwo}}">
      <view class='index-tips-text'>{{tipsNumber}}</view>
     </view>
   </view>
   <!-- 图标 -->
-  <view class='index-layout'>
+  <view class='index-layout index-background'>
     <view class='index-ml'  bindtap="showModal">
       <view class="index-text-style">
         <image src='../../image/homeicon_3x/homepage_03_3x.png' style='width:100rpx;height:100rpx'></image>
@@ -52,7 +52,7 @@
   <!-- 中部轮播图片 -->
   <swiper indicator-dots="{{indicatorDots}}"
   autoplay="true" interval="{{interval}}" duration="{{duration}}" 
-  previous-margin="20px" next-margin='20px' circular="true"  style="height:260rpx;display:flex;justify-content: center;margin-top:65rpx">
+  previous-margin="20px" next-margin='20px' circular="true"  style="height:260rpx;display:flex;justify-content: center;margin-top:35rpx">
     <block wx:for="{{imgUrls}}" wx:key="index">
       <swiper-item>
         <image src="{{item}}" class="slide-image" width="750" height="200"/>
@@ -68,7 +68,7 @@
         <view>王宏兵律师完成了一次房产土地方面的咨询</view>
         <view style='font-size:20rpx;margin-left:45rpx'>3分钟前</view>
       </view>
-      <view class='index-layout' style='margin-top:30rpx'>
+      <view class='index-layout' style='margin-top:25rpx'>
         <view>刘妍律师完成了一次婚姻家事方面的咨询</view>
         <view style='font-size:20rpx;margin-left:45rpx'>刚刚</view>
       </view>
@@ -86,7 +86,9 @@
     </view>
   </view>
 <!-- 横向滑动列表 -->
-
+<view class='index-page-line-view'>
+  <view class='index-page-line'></view>
+</view>
 <scroll-view scroll-x class="scroll-x" scroll-left="{{scrollLeft}}">
   <view wx:for="{{popular}}"  wx:key="index" class="view-parent" >
     <view class="{{articleIndex==index ? 'view-item-color' : 'view-item'}}" bindtap="selsectArticle" id="{{index}}" data-current="{{item.id}}" >{{item.categoryName}}</view>
@@ -101,20 +103,28 @@
   <view class="index-lawyer-remark">本周人气冠军</view>
 </view> -->
 <!-- 文章 -->
+<!-- <view class='index-page-line-view'>
+  <view class='index-page-line'></view>
+</view> -->
 <swiper class="tab-content" current="{{articleIndex}}" duration="300" bindchange="switchTab"
   >
-    <swiper-item wx:key="{{index}}" wx:for="{{popular}}"  id = "{{index}}">
-      <view class="index-article" wx:key="index" wx:for="{{article}}" wx:if="{{index == item['id']}}">
+    <swiper-item wx:key="{{index}}" wx:for="{{popular}}"  id = "{{index}}" >
+        <scroll-view scroll-y style="height: 100%;"  scroll-into-view="{{toView}}" scroll-top="0">
+      <view wx:key="index" wx:for="{{article}}">
+    <view class='index-page-line-view'>
+      <view class='index-page-line'></view>
+    </view>
+    <view class='index-article'>
         <view class="" >
           <view class="index-article-text">{{item["articleName"]}}</view>
-          <view class="index-article-text-lower">已帮助<label style="color:#1ec88c">{{helpNumber}}</label>人</view>
+          <view class="index-article-text-lower">已帮助<label style="color:#1ec88c">{{item['helpNumber']}}</label>人</view>
         </view>
-        <image src="{{item['articleImageSrc']}}" style='width:223rpx;height:145rpx;'></image>
-        <!-- <view class="index-article-line"></view> -->
+        <!-- <image src="{{item['articleImageSrc']}}" style='width:223rpx;height:145rpx;'></image> -->
+        </view>
       </view> 
+                </scroll-view>
     </swiper-item>
 </swiper>
-
 
 
   <!-- 加载更多 -->

@@ -27,16 +27,36 @@ Page({
     var verifyCodeUrl = api.getVerifyCodeUrl()
     var verifydata = { "phone": `${this.data.inputPhone}`,"code":"654321"}
     var success = function (data){
-      console.log(data)
+      wx.showToast({
+        title: '短信发送成功',
+      })
     }
     var fail = function (e){
+      wx.showToast({
+        title: '短信发送失败',
+        icon: 'none'
+      })
       console.log(e)
     }
     // 
+    if (!(/^1[34578]\d{9}$/.test(this.data.inputPhone))) {
+      wx.showModal({
+        title: '手机号码输入错误',
+        showCancel:false,
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
+      })
+    } else{
     wxrequest.request(verifyCodeUrl,verifydata,success,fail)
+    }
   },
 
-  // 用户注册登录
+  // 注册
   userLogin:function(){
     var message = "1"
     var loginUrl = api.getLoginUrl()
@@ -44,8 +64,15 @@ Page({
     var success = function (data){
       console.log(data)
       if(data.code == 0){
+        wx.showToast({
+          title: '注册成功',
+        })
         console.log("注册成功")
       }else{
+        wx.showToast({
+          title: '注册失败',
+          icon: 'none'
+        })
         console.log("注册失败")
       }
       var loginToken = wx.setStorage({"token":data.data.token})
@@ -55,7 +82,14 @@ Page({
       console.log(data)
     }
     // 
-    wxrequest.request(loginUrl, logindata,success,fail)
+    if (this.data.inputPhone !== '' && this.data.inputCode !== '' ){
+      wxrequest.request(loginUrl, logindata, success, fail)
+    }else{
+      wx.showToast({
+        title: '不能为空',
+        icon:'none'
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载

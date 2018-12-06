@@ -3,15 +3,15 @@
   /* margin-top: 35rpx */
 }
 .info-page-flex{
-  height: 140rpx;
+  height: 160rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: white;
 }
 .info-page-avatar{
-  height: 110rpx;
-  width: 110rpx;
+  height: 100rpx;
+  width: 100rpx;
   border-radius: 50%;
   margin-left: 35rpx
 }
@@ -53,7 +53,7 @@
   width: 100%;
   /* margin-left: 5%;
   margin-right: 5%; */
-  background-color: red;
+  background-color: #b5b5b5;
   margin-top: 60rpx
 }
 .info-page-button-view{
@@ -62,6 +62,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: white;
+  position: absolute;
+  bottom: 0
 }
 .info-page-button{
   width: 325rpx;

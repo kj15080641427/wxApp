@@ -12,7 +12,7 @@
 .finish-page-tips{
   display: flex;
   justify-content: center;
-  font-size: 48rpx;
+  font-size: 36rpx;
   color: #1ec88c;
   font-weight: bold;
   margin-top: 55rpx;
@@ -20,37 +20,50 @@
 .finish-page-text{
   display: flex;
   justify-content: center;
-  font-size: 37rpx;
+  font-size: 28rpx;
   color: #1ec88c;
   margin-top: 25rpx;
 }
 .finish-page-lower{
   display: flex;
   justify-content: center;
-  margin-top: 30rpx
+  margin-top: 30rpx;
+
 }
 .finish-left{
-  font-size: 37rpx;
+  font-size: 28rpx;
   color:#323232;
+}
+.finish-right{
+  font-size: 28rpx;
+  color:#323232;
+  margin-left: 10rpx
 }
 .finish-page-loan{
   color: #f8b62d
 }
 .finish-page-button{
-  width: 375rpx;
+  width: 380rpx;
   height: 70rpx;
   background-color: #1ec88c;
   color: #ffffff;
-  font-size: 43rpx;
+  font-size: 32rpx;
   line-height: 70rpx;
   border-radius: 40rpx;
-  margin-top: 20rpx;
+  margin-top: 100rpx;
 }
-.finish-page-line{
+/* .finish-page-line{
   width: 90%;
   margin-left: 5%;
   margin-right: 5%;
   height: 1rpx;
   background-color: red;
-  margin-top: 80rpx
+
+} */
+.finish-page-line-center{
+  width: 500rpx;
+  margin-left: 5%;
+  margin-right: 5%;
+  height: 1rpx;
+  background-color: white;
 }

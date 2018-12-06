@@ -10,13 +10,41 @@
       <view class='watchlist-page-name'>董小燕<label class='watchlist-page-firm'>(律所合伙人)</label></view>
       <view class='watchlist-page-address'>湖南长沙 | 湖南湘君律师事务所</view>
       <view class='watchlist-page-adept'>擅长领域: 涉外婚姻, 离婚/夫妻财产/抚养权, 海外信托</view>
-      
     </view>
+
   </view>
-   <view style='display:flex;margin-top:25rpx;height:60rpx;'>
+</view>
+<view style='background-color:white;width:700rpx;margin-left:25rpx'>
+  <view class='watchlist-page-line'></view>
+</view>
+   <view class='watch-page-lower'>
     <view class='watchlist-page-label'>认证标签</view>
     <image src='../../../image/my_icon@3x/mine_icon_08_3x.png' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
     <image src='../../../image/my_icon@3x/mine_icon_09_3x.png' style='width:35rpx;height:35rpx;margin-left:20rpx'></image>
     <image src='../../../image/my_icon@3x/mine_icon_10_3x.png' style='width:35rpx;height:35rpx;margin-left:20rpx'></image>
    </view>
+
+   <view class='watchlist-page'>
+  <view class='watchlist-page-flex'>
+    <view class='watchlist-page-left'>
+      <image class='watchlist-page-avatar' src='../../../image/my_icon@3x/mine_icon_02_3x.png'></image>
+      <view class='watchlist-page-practice'>执业17年</view>
+
+    </view>
+    <view class='watchlist-page-right'>
+      <view class='watchlist-page-name'>董小燕<label class='watchlist-page-firm'>(律所合伙人)</label></view>
+      <view class='watchlist-page-address'>湖南长沙 | 湖南湘君律师事务所</view>
+      <view class='watchlist-page-adept'>擅长领域: 涉外婚姻, 离婚/夫妻财产/抚养权, 海外信托</view>
+    </view>
+
+  </view>
 </view>
+<view style='background-color:white;width:700rpx;margin-left:25rpx'>
+  <view class='watchlist-page-line'></view>
+</view>
+   <view class='watch-page-lower'>
+    <view class='watchlist-page-label'>认证标签</view>
+    <image src='../../../image/my_icon@3x/mine_icon_08_3x.png' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
+    <image src='../../../image/my_icon@3x/mine_icon_09_3x.png' style='width:35rpx;height:35rpx;margin-left:20rpx'></image>
+    <image src='../../../image/my_icon@3x/mine_icon_10_3x.png' style='width:35rpx;height:35rpx;margin-left:20rpx'></image>
+   </view>

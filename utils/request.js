@@ -54,7 +54,7 @@ function requestLoading(url, params, message, success, fail) {
 
 // POST
 function requestPost(url, params, message, success, fail) {
-  console.log(params)
+  // console.log(params)
   wx.showNavigationBarLoading()
   if (message != "") {
     wx.showLoading({

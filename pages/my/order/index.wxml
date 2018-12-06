@@ -5,7 +5,7 @@
     <view class="{{item['statu'] == '待接单' ? 'order-statu': ''}}">{{item["statu"]}}</view>
   </view>
   <view class='order-page-line'></view>
-  <view class='order-page-type'>
+  <view class='order-page-type' bindtap='gotoDetail'>
     <view class='order-page-left'>
       <view class='order-page-font'>{{item["consulType"]}}</view>
       <view class='order-page-consultype'>

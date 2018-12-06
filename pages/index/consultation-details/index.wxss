@@ -1,13 +1,21 @@
 .details-page{
-  margin-left: 35rpx;
-  margin-right: 35rpx;
+  padding-left: 35rpx;
+  padding-right: 35rpx;
 }
 .details-page-flex{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 35rpx;
+  /* margin-top: 35rpx; */
   /* background-color: #f0fff2 */
+}
+.details-page-flex-user{
+  height: 110rpx
+}
+.details-page-background{
+  /* background-color: white; */
+  padding-left: 35rpx;
+  padding-right: 35rpx
 }
 .details-page-top{
   display: flex;
@@ -30,6 +38,12 @@
   background-color: #b7b7b7;
   margin-left: 20rpx;
 }
+.details-page-line-center{
+  background-color: red;
+  height: 1rpx;
+  width: 750rpx;
+  padding-left: 0rpx;
+}
 .details-page-type{
   display: flex;
   align-items: center;
@@ -46,6 +60,7 @@
   color: #323232;
   font-weight: bold;
   margin-top: 35rpx;
+  line-height: 40rpx
 }
 .details-page-reply{
   display: flex;
@@ -54,6 +69,7 @@
   font-size: 24rpx;
   color: #717171;
   margin-top: 40rpx;
+  padding-bottom: 40rpx
 }
 .details-page-reply-left{
   display: flex;
@@ -69,6 +85,13 @@
   background-color: black;
   width: 5rpx;
   height: 5rpx;
+}
+.details-page-lawyer{
+  background-color:#f2f2f2;
+  height:90rpx;
+  border-radius:10rpx;
+  padding-left:15rpx;
+  margin-top: 30rpx;
 }
 .details-page-lawyer-icon{
   width: 65rpx;
@@ -92,10 +115,14 @@
   color: #323232;
 }
 .details-page-answer-info{
-  margin-top: 40rpx;
+  padding-top: 40rpx;
   display: flex;
   font-size:24rpx;
   color: #717171;
+  padding-bottom: 40rpx
+}
+page{
+  background-color: white
 }
 .details-page-reply-background{
   display: flex;

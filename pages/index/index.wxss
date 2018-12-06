@@ -4,7 +4,15 @@
   justify-content: space-between;
   align-content: center;
 }
+page{
+  /* background-color: white */
+}
+.index-background{
+  background-color: white;
+  padding-bottom: 30rpx;
+}
 .index-layout-center{
+  height: 80rpx;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,28 +24,29 @@
   height: 30rpx;
   width: 30rpx;
   border-radius: 50%;
-  background-color: red;
+  background-color: #ea5514;
   font-size: 18rpx;
   color: white;
   position: absolute;
   margin-left: 710rpx;
   margin-top: 20rpx;
 }
-.index-tips99{
+/* .index-tips99{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 30rpx;
   width: 40rpx;
   border-radius: 14rpx;
-  background-color: red;
+  background-color: #ea5514;
   font-size: 18rpx;
   color: white;
   position: absolute;
   margin-left: 700rpx;
   margin-top: 20rpx;
-}
+} */
 .index-tips-text{
+  padding-bottom: 50%;
   line-height: 30rpx;
 }
 .index-input-height{
@@ -80,6 +89,7 @@
   margin-right: 10rpx;
 }
 .index-text-style{
+
   /* height: 40rpx;
   line-height: 40rpx; */
   font-size: 36rpx;
@@ -100,10 +110,13 @@
   color: #b5b5b6;
 }
 .index-service{
+  height: 141rpx;
+  background-color: white;
   display: flex;
   justify-content: space-between;
-  margin-left: 35rpx;
-  margin-right: 35rpx;
+  margin-top: 35rpx;
+  padding-left: 35rpx;
+  padding-right: 35rpx;
 }
 .index-service-right{
   font-size:24rpx;
@@ -111,12 +124,23 @@
   margin-top:30rpx
 }
 .index-tab-margin{
+  height: 90rpx;
+  background-color: white;
   margin-top: 40rpx;
+  padding-left: 35rpx;
+  padding-right: 35rpx;
+}
+.index-page-line-view{
+  background-color: white
+}
+.index-page-line{
+  background-color: #f4f4f4;
+  height: 1rpx;
+  width: 680rpx;
   margin-left: 35rpx;
   margin-right: 35rpx;
 }
 .index-more{
-  margin-top: 30rpx;
   font-size: 28rpx;
   color: #b5b5b6;
 }
@@ -138,6 +162,7 @@
   color: #323232
 }
 .scroll-x{
+  background-color: white;
   width: 750rpx;
   height:80rpx;
   white-space:nowrap;
@@ -177,13 +202,15 @@
   margin-top: 10rpx
 }
 .index-article{
+  height: 200rpx;
   display: flex;
   justify-content: space-between;
-  margin-top: 30rpx;
+  /* margin-top: 30rpx; */
   margin-left: 30rpx;
   margin-right: 30rpx;
 }
 .index-article-text{
+  margin-top: 30rpx;
   font-size: 32rpx;
   width: 457rpx;
 }
@@ -245,13 +272,17 @@
   margin-top: 28rpx;
 }
 .tab-content{
-  margin-top: 30rpx;
+  /* height: 1000rpx; */
+  background-color: white;
+  padding-top: 30rpx;
   }
 ::-webkit-scrollbar {
   width: 0;
   height: 0;
   color: transparent;
 }
-
+.scoll-h{
+  height: 100%
+}
 
 

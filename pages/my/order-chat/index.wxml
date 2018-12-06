@@ -2,13 +2,20 @@
 <view class='chat-page-time'>
   <view class='chat-page-time-tetx'>11:42</view>
 </view>
-<view class='chat-page-news'>
-  <view>律师你好,我发布了一个关于【婚姻家事】的需求!</view>
+<view class='chat-flex'>
+  <image src='../../../image/my_icon@3x/mine_icon_02_3x.png' class='chat-page-avatar'></image>
+
+  <view class='chat-page-news'>
+    <view class='chat-page-text'>律师你好,我发布了一个关于【婚姻家事】的需求!</view>
+  </view>
 </view>
-<image src='../../../image/my_icon@3x/mine_icon_02_3x.png' class='chat-page-avatar'></image>
 <view class='chat-page-background'>
-<view wx:for="{{chatList}}" class='chat-page-list' >
+<view wx:key="{{index}}" wx:for="{{chatList}}" class='chat-page-list' >
   <view class='chat-page-left'>{{item['name']}}</view>
   <view class='chat-page-right'>{{item['text']}}</view>
 </view>
+</view>
+<view class='chat-page-time-tetx-lower'>正在等待律师接单, 若问题急需解决, j建议使用<label style='color:#1ec88c'>快速咨询>></label></view>
+<view class='chat-button-view'>
+  <button class='chat-button'>等待接单</button>
 </view>

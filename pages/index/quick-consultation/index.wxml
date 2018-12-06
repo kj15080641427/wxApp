@@ -18,9 +18,9 @@
 
   <view class='quick-page-flex quick-center'>
     <view style='margin-left:35rpx'>问题类型</view>
-    <picker value='{{index}}' range='{{typeName}}' bindchange='changeType' class='quick-page-right'>    {{typeName[index]}}<label wx:if="{{selectType}}">点击选择问题类型</label></picker>
+    <picker value='{{index}}' range='{{typeName}}' bindchange='changeType' class='quick-page-right'>    {{typeName[index]}}<label wx:if="{{selectType}}">{{selectProblem}}</label></picker>
   </view>
-
+<view class='quick-page-line-center'></view>
   <view class='quick-page-flex quick-center'>
     <view style='margin-left:35rpx'>联系手机</view>
     <input class='quick-page-right quick-phone' value='15080641427'></input>
@@ -35,10 +35,11 @@
       <view class='quick-page-flex-between'>
         <view class='quick-page-flex'>
           <image src='{{item.icon}}' class='quick-pay-icon'></image>
-          <view class='quick-pay-margin'>{{item.name}}</view>
+          <view class='quick-pay-margin'>{{item.name}}<label wx:if="{{item['name']=='账户余额'}}"class="consul-balance" >(¥{{balance}})</label></view>
         </view>
-        <radio bindtap='payType' value='{{item.name}}' checked="{{item.checked}}"/>
+        <radio  value='{{item.name}}' checked="{{item.checked}}"/>
       </view>
+      <view class='quick-page-line-center'></view>
     </view>
   </radio-group>
 </view>
@@ -52,9 +53,8 @@
   <view>5.如有疑问,请联系绿豆圈客服 <a class="quick-page-link">400-811-3060</a></view>
 </view>
 <!-- 支付 -->
-<view>
+<view class='quick-page-line-lower'></view>
   <view class='quick-page-lower'>
-    <view class='quick-page-order'>订单金额<label style='color:#f8b62d;font-weight:bold;margin-left:10rpx'>¥0</label></view>
+    <view class='quick-page-order'>订单金额<label style='color:#f8b62d;font-weight:bold;margin-left:10rpx'>¥{{money}}</label></view>
     <button class='quick-page-button' bindtap='gotofinish'>支付订单</button>
   </view>
-</view>
