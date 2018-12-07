@@ -56,6 +56,7 @@ Page({
     var userInfoUrl = api.getUserInfo()
     var message = ''
     var success = function(data){
+      // console.log("info",data)
       wx.setStorage({
         key: 'memberId',
         data: data.data.memberId,

@@ -26,6 +26,9 @@ var UserInfo = '/client/user/userinfo'
 // 用户详情地址
 var UserDetail = '/client/member/detail/'
 
+// 修改用户详情
+var EditDetail = '/client/member/detail/'
+
 // 获取验证码
 function getVerifyCodeUrl(){
   return HOST_URL + VerifyCode
@@ -64,6 +67,11 @@ function getUserInfo(){
 // 用户详情
 function getUserDetail(){
   return HOST_URL+UserDetail
+}
+
+//修改用户详情
+function getEditDetail(){
+  return HOST_URL + EditDetail
 }
 module.exports={
   getLoginUrl: getLoginUrl,

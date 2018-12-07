@@ -67,7 +67,8 @@ function requestPost(url, params, message, success, fail) {
     data: params,
     header: {
       'Content-Type': 'application/json',
-      'device': JSON.stringify(device)
+      'device': JSON.stringify(device),
+      'X-Token': wx.getStorageSync("token")
       // 'content-type': 'application/x-www-form-urlencoded'
     },
     method: 'POST',

@@ -1,7 +1,7 @@
 <!--pages/my/edit-info/index.wxml-->
 <view class='info-page'>
   <view class='info-page-flex'>
-    <image class='info-page-avatar' src='{{avatarUrl}}'></image>
+    <image class='info-page-avatar' src='{{iconImage}}'></image>
     <view style='display:flex;height:40rpx;align-items:center' bindtap='replaceAvatar'>
       <view class='info-page-text'>更换头像</view>
       <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'></image>
@@ -10,17 +10,17 @@
  <view style='background-color:white;margin-top:35rpx'>
    <view class='info-page-list'>
     <view class='info-page-label'>用户昵称</view>
-    <input value='{{info[0].nikeName}}'class="info-page-input"></input>
+    <input class="info-page-input" value="{{userInfo['member']}}"bindinput='member'></input>
   </view>
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
     <view class='info-page-label'>性别</view>
-    <picker class="info-page-input" value="{{index}}" range='{{gender}}' bindchange='bindChange'>{{gender[index]}}</picker>
+    <picker class="info-page-input" value="{{index}}" range='{{gender}}' bindchange='bindChange' value="{{sex}}" bindinput='sex'>{{userInfo['sex']}}</picker>
   </view>
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
     <view class='info-page-label'>出生日期</view>
-    <picker class="info-page-input" mode="date" value="{{date}}" start="1900-09-01" end="2018-09-01" bindchange="bindDateChange">{{date}}</picker>
+    <picker class="info-page-input" mode="date" value="{{date}}" start="1900-09-01" end="2018-09-01" bindchange="bindDateChange" >{{userInfo['birthday']}}</picker>
   </view>
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
@@ -30,18 +30,47 @@
  </view>
 
 <view style='background-color:white;margin-top:35rpx'>
-<view wx:key="{{index}}" wx:for="{{infoList}}">
-  <view class='info-page-list' >
-    <view class='info-page-label'>{{item}}</view>
-    <input class="info-page-input"></input>
+    <view class='info-page-list'>
+    <view class='info-page-label'>您的行业</view>
+    <input class="info-page-input" value="{{userInfo['insTypeName']}}"bindinput='insTypeName'></input>
   </view>
-  <view class='info-page-center-line'></view>
 </view>
+<view class='info-page-center-line'></view>
+<view style='background-color:white;'>
+    <view class='info-page-list'>
+    <view class='info-page-label'>您的企业</view>
+    <input class="info-page-input" value="{{userInfo['institutionTypeName']}}"bindinput='institutionTypeName'></input>
+  </view>
+</view>
+<view class='info-page-center-line'></view>
+<view style='background-color:white;'>
+    <view class='info-page-list'>
+    <view class='info-page-label'>您的职务</view>
+    <input class="info-page-input" value="{{userInfo['businessTypeName']}}"bindinput='businessTypeName'></input>
+  </view>
+</view>
+<view class='info-page-center-line'></view>
+<view style='background-color:white;'>
+    <view class='info-page-list'>
+    <view class='info-page-label'>您的邮箱</view>
+    <input class="info-page-input" value="{{userInfo['email']}}" bindinput='email'></input>
+  </view>
+</view>
+<view class='info-page-center-line'></view>
+<view style='background-color:white;'>
     <view class='info-page-list'>
     <view class='info-page-label'>商会组织</view>
-    <input class="info-page-input"></input>
+    <input class="info-page-input" value="{{userInfo['organizations']}}" bindinput='organizations'></input>
   </view>
 </view>
+
+<!-- <view wx:key="{{index}}" wx:for="{{infoList}}">
+  <view class='info-page-list' >
+    <view class='info-page-label'>{{item}}</view>
+    <input class="info-page-input" id = "{{index}}"></input>
+  </view>
+  <view class='info-page-center-line'></view>
+</view> -->
 
   <view class='info-page-line'></view>
   <view class='info-page-button-view'> 
