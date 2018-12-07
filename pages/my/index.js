@@ -79,34 +79,6 @@ Page({
         data: dataDetail,
       })
       console.log("userinfo",wx.getStorageSync("userInfo"))
-      // {
-      //   key:'iconImage',
-      //   data: dataDetail.data.iconImage
-      // },
-      // {
-      //   key:'sex',
-      //   data:dataDetail.data.sex
-      // },
-      // {
-      //   key:'birthday',
-      //   data: dataDetail.data.birthday1
-      // },
-      // {
-      //   key:'regionId',
-      //   data: dataDetail.data.regionId
-      // },
-      // {
-      //   key:'industryId',
-      //   data: dataDetail.data.industryId
-      // },
-      // {
-      //   key:'institutionId',
-      //   data: dataDetail.data.institutionId
-      // },
-      // {
-      //   key:'institutionName',
-      //   data: dataDetail.data.institutionName
-      // }
       
     }
     var failDetail = function(eDetail){
