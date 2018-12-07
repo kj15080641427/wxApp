@@ -15,7 +15,7 @@
   <view class='chat-page-right'>{{item['text']}}</view>
 </view>
 </view>
-<view class='chat-page-time-tetx-lower'>正在等待律师接单, 若问题急需解决, j建议使用<label style='color:#1ec88c'>快速咨询>></label></view>
+<view class='chat-page-time-tetx-lower'>正在等待律师接单,若问题急需解决,建议使用<label style='color:#1ec88c'>快速咨询>></label></view>
 <view class='chat-button-view'>
   <button class='chat-button'>等待接单</button>
 </view>

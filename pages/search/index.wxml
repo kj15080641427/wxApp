@@ -1,0 +1,39 @@
+<!--pages/search/index.wxml-->
+<view class='search-input-height'>
+  <view class='index-search '>
+    <image src='../../image/homeicon_3x/homepage_01_3x.png' style='width:40rpx;height:40rpx;margin-right:20rpx ' ></image>
+    <input placeholder='搜索律师姓名' placeholder-style='color:#ffffff;' confirm-type="search"  ></input>
+  </view>
+</view>
+
+<view class='search-tab-list'>
+  <view wx:for="{{searchTab}}" class='search-tab'>
+    <view class='search-tab-text'>{{item}}</view>
+    <image src='' style='width:20rpx;height:20rpx'></image>
+  </view>
+</view>
+
+<view class='watchlist-page'>
+  <view class='watchlist-page-flex'>
+    <view class='watchlist-page-left'>
+      <image class='watchlist-page-avatar' src='../../../image/my_icon@3x/mine_icon_02_3x.png'></image>
+      <view class='watchlist-page-practice'>执业17年</view>
+
+    </view>
+    <view class='watchlist-page-right'>
+      <view class='watchlist-page-name'>董小燕<label class='watchlist-page-firm'>(律所合伙人)</label></view>
+      <view class='watchlist-page-address'>湖南长沙 | 湖南湘君律师事务所</view>
+      <view class='watchlist-page-adept'>擅长领域: 涉外婚姻, 离婚/夫妻财产/抚养权, 海外信托</view>
+    </view>
+
+  </view>
+</view>
+<view style='background-color:white;width:700rpx;margin-left:25rpx'>
+  <view class='watchlist-page-line'></view>
+</view>
+   <view class='watch-page-lower'>
+    <view class='watchlist-page-label'>认证标签</view>
+    <image src='../../../image/my_icon@3x/mine_icon_08_3x.png' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
+    <image src='../../../image/my_icon@3x/mine_icon_09_3x.png' style='width:35rpx;height:35rpx;margin-left:20rpx'></image>
+    <image src='../../../image/my_icon@3x/mine_icon_10_3x.png' style='width:35rpx;height:35rpx;margin-left:20rpx'></image>
+   </view>

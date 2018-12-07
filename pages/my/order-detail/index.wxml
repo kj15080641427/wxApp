@@ -24,6 +24,6 @@
 
   <view class='detail-page-line detail-page-bottom-line'></view>
   <view class='detail-page-button-view detail-page-bottom'>
-    <button class='detail-page-button' bindtap='setTime'>联系律师</button>
+    <button class='detail-page-button' bindtap='gotoChat'>联系律师</button>
   </view>
 

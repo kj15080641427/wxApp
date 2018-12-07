@@ -109,7 +109,7 @@
 <swiper class="tab-content" current="{{articleIndex}}" duration="300" bindchange="switchTab"
   >
     <swiper-item wx:key="{{index}}" wx:for="{{popular}}"  id = "{{index}}" >
-        <scroll-view scroll-y style="height: 100%;"  scroll-into-view="{{toView}}" scroll-top="0">
+        <!-- <scroll-view scroll-y style="height: 100%;"  scroll-into-view="{{toView}}" scroll-top="0"> -->
       <view wx:key="index" wx:for="{{article}}">
     <view class='index-page-line-view'>
       <view class='index-page-line'></view>
@@ -122,7 +122,7 @@
         <!-- <image src="{{item['articleImageSrc']}}" style='width:223rpx;height:145rpx;'></image> -->
         </view>
       </view> 
-                </scroll-view>
+                <!-- </scroll-view> -->
     </swiper-item>
 </swiper>
 

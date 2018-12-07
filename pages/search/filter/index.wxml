@@ -1,0 +1,57 @@
+<!--pages/search/filter/index.wxml-->
+<!-- 年限 -->
+<view class='filter-page-top filter-background'>执业年限</view>
+<view style='background-color:white'>
+  <view class='filter-page-line'></view>
+</view>
+
+<view class='filter-page-frame-view filter-background'>
+  <view class='filter-page-frame'><text class='filter-page-frame-text'>不限</text></view>
+  <view class='filter-page-frame'><text class='filter-page-frame-text'>1年以下</text></view>
+  <view class='filter-page-frame'><text class='filter-page-frame-text'>1-3年</text></view>
+  <view class='filter-page-frame'><text class='filter-page-frame-text'>3-5年</text></view>
+  <view class='filter-page-frame'><text class='filter-page-frame-text'>5-10年</text></view>
+  <view class='filter-page-frame'><text class='filter-page-frame-text'>10年以上</text></view>
+</view>
+
+<!-- 性别 -->
+<view class='filter-page-gender-top filter-background'>律师性别</view>
+<view style='background-color:white'>
+  <view class='filter-page-line'></view>
+</view>
+<view class='filter-page-gender-view filter-background'>
+  <view class='filter-page-gender'><text class='filter-page-frame-text'>不限</text></view>
+  <view class='filter-page-gender'><text class='filter-page-frame-text'>男</text></view>
+  <view class='filter-page-gender'><text class='filter-page-frame-text'>女</text></view>
+</view>
+
+<!-- 行业 -->
+<view wx:key="{{index}}" wx:for="{{list}}">
+  <view class='filter-page-cneter filter-background' >
+    <view>{{item}}</view>
+    <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
+  </view>
+  <view style='background-color:white'>
+    <view class='filter-page-line'></view>
+  </view>
+</view>
+
+<view style='height:35rpx'></view>
+<!-- info -->
+<view wx:key="{{index}}" wx:for="{{list2}}">
+  <view class='filter-page-cneter filter-background' >
+    <view>{{item}}</view>
+    <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
+  </view>
+  <view style='background-color:white'>
+    <view class='filter-page-line'></view>
+  </view>
+</view>
+<!-- button -->
+<view style='background-color:white'>
+  <view class='filter-page-line'></view>
+</view>
+<view class='filter-page-button-view'>
+  <button>重置</button>
+  <button>确定</button>
+</view>

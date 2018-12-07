@@ -1,4 +1,6 @@
 // pages/my/edit-info/index.js
+var wxrequest = require('../../../utils/request.js')
+var api = require('../../../utils/api.js')
 Page({
 
   /**
@@ -10,7 +12,8 @@ Page({
     date:['1980-01-01'],
     gender:['女','男'],
     index:'0',
-    infoList:['您的行业','您的企业','您的职务','您的邮箱']
+    infoList:['您的行业','您的企业','您的职务','您的邮箱'],
+    avatarUrl:'../../../image/my_icon@3x/mine_icon_02_3x.png'
   },
   // 性别
   bindChange:function(e){
@@ -32,18 +35,50 @@ Page({
   },
   // 更换头像
   replaceAvatar:function(){
+    var that = this
     wx.chooseImage({
       sourceType: ['album', 'camera'],
       success: function(res) {
+
         console.log(res)
+        wx.uploadFile({
+          url: api.getImageUrl(),
+          filePath: res.tempFilePaths[0],
+          name: 'file',
+          formData: {
+            "type": '2'
+          },
+          success(data){
+            var imageUrl = JSON.parse(data.data)
+            imageUrl.data.weburl
+            that.setData({
+              avatarUrl: imageUrl.data.weburl
+            })
+          },
+          fail(e){
+            console.log(e)
+          }
+        })
       },
+    })
+  },
+  saveInfo:function(){
+    wx.setStorage({
+      key: 'avatar',
+      data: this.data.avatarUrl,
+    })
+    wx.showToast({
+      title: '保存成功',
+      icon:'none'
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      avatarUrl:wx.getStorageSync("avatar")
+    })
   },
 
   /**

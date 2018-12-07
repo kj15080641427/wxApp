@@ -1,7 +1,7 @@
 <!--pages/my/edit-info/index.wxml-->
 <view class='info-page'>
   <view class='info-page-flex'>
-    <image class='info-page-avatar' src='../../../image/my_icon@3x/mine_icon_02_3x.png'></image>
+    <image class='info-page-avatar' src='{{avatarUrl}}'></image>
     <view style='display:flex;height:40rpx;align-items:center' bindtap='replaceAvatar'>
       <view class='info-page-text'>更换头像</view>
       <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'></image>
@@ -45,6 +45,6 @@
 
   <view class='info-page-line'></view>
   <view class='info-page-button-view'> 
-    <button class='info-page-button'>保存</button>
+    <button class='info-page-button' bindtap='saveInfo'>保存</button>
   </view>
 </view>

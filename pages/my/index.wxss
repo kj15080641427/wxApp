@@ -70,7 +70,7 @@
   margin-left: 15rpx;
   margin-right: 15rpx;
   padding-top: 5rpx;
-  /* padding-bottom: 5rpx */
+  padding-bottom: 5rpx
 }
 .my-page-icon{
   width: 80rpx;
@@ -120,7 +120,7 @@
   margin-right: 5%;
 }
 .my-page-line-top{
-  background-color: red;
+  background-color: #f4f4f4;
   width: 1rpx;
   height: 60rpx;
 }

@@ -49,10 +49,9 @@
   width: 550rpx;
   background-color: #dcdcdc;
   color: #ffffff;
-  font-size: 20rpx;
+  font-size: 22rpx;
   margin-top: 20rpx;
-  padding-left: 10rpx;
-  padding-right: 10rpx;
+  padding: 10rpx;
   border-radius: 10rpx
 }
 .chat-page-news{

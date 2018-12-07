@@ -1,26 +1,13 @@
-// pages/my/order-detail/index.js
+// pages/search/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    time:'00:28:21',
-    detailList:[
-      { "name": '订单编号', "text": 'KS201812121212'},
-      { "name": '订单日期', "text": '2018-12-12 14:03' },
-      { "name": '商品名称', "text": '快速咨询' },
-      { "name": '咨询类型', "text": '婚姻家庭' },
-      { "name": '联系手机', "text": '13333333333' },
-      { "name": '订单金额', "text": '¥99' },
-      { "name": '订单状态', "text": '进行中' },
-      ]
+    searchTab:['综合排序','擅长领域','所在地区','筛选']
   },
-  gotoChat:function(){
-    wx.navigateTo({
-      url: '../order-chat/index',
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */

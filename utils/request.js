@@ -4,7 +4,6 @@ var device = {
   "app_version_code": 1,
   "channel": "weixin" 
 }
-var token = "apf363e040137547939bfd1d472f53a91bap"
 
 function request(url, params, success, fail) {
   this.requestLoading(url, params, "", success, fail)
@@ -23,7 +22,7 @@ function requestLoading(url, params, message, success, fail) {
     header: {
       'Content-Type': 'application/json',
       'device':JSON.stringify(device),
-      'X-Token':token
+      'X-Token':wx.getStorageSync("token")
       // 'content-type': 'application/x-www-form-urlencoded'
     },
     method: 'POST',
@@ -33,7 +32,8 @@ function requestLoading(url, params, message, success, fail) {
       if (message != "") {
         wx.hideLoading()
       }
-      if (res.statusCode == 200) {
+      console.log(res.data.code)
+      if (res.statusCode == 200 && res.data.code ==0) {
         success(res.data)
       } else {
         fail()
@@ -44,6 +44,7 @@ function requestLoading(url, params, message, success, fail) {
       if (message != "") {
         wx.hideLoading()
       }
+      console.log('request',e)
       fail()
     },
     complete: function (res) {
@@ -66,7 +67,7 @@ function requestPost(url, params, message, success, fail) {
     data: params,
     header: {
       'Content-Type': 'application/json',
-      // 'device': JSON.stringify(device)
+      'device': JSON.stringify(device)
       // 'content-type': 'application/x-www-form-urlencoded'
     },
     method: 'POST',
@@ -96,7 +97,7 @@ function requestPost(url, params, message, success, fail) {
 }
 
 // GET
-function requestGet(url, message, success, fail) {
+function requestGet(url,message, success, fail) {
   wx.showNavigationBarLoading()
   if (message != "") {
     wx.showLoading({
@@ -108,17 +109,17 @@ function requestGet(url, message, success, fail) {
     // data: params,
     header: {
       'Content-Type': 'application/json',
-      'device': JSON.stringify(device)
+      'device': JSON.stringify(device),
+      'X-Token': wx.getStorageSync("token")
       // 'content-type': 'application/x-www-form-urlencoded'
     },
     method: 'GET',
     success: function (res) {
-      //console.log(res.data)
       wx.hideNavigationBarLoading()
       if (message != "") {
         wx.hideLoading()
       }
-      if (res.statusCode == 200) {
+      if (res.statusCode == 200 ) {
         success(res.data)
       } else {
         fail()

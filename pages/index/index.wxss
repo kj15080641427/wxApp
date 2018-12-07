@@ -272,7 +272,7 @@ page{
   margin-top: 28rpx;
 }
 .tab-content{
-  /* height: 1000rpx; */
+  height: 1000rpx;
   background-color: white;
   padding-top: 30rpx;
   }

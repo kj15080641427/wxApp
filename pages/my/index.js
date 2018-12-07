@@ -1,11 +1,13 @@
 // pages/my/index.js
+var api = require('../../utils/api.js')
+var wxrequest = require('../../utils/request.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    avatar:'../../image/my_icon@3x/mine_icon_02_3x.png'
   },
   // 登陆
   login:function(){
@@ -46,8 +48,81 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
+  // 'apabfdc34cc00042c2991bd59b9e8a1ae8ap'
   onLoad: function (options) {
+    // console.log(wx.getStorageSync("token"))
 
+    // 获取用户信息
+    var userInfoUrl = api.getUserInfo()
+    var message = ''
+    var success = function(data){
+      wx.setStorage({
+        key: 'memberId',
+        data: data.data.memberId,
+      })
+      // console.log(data)
+      // console.log(wx.getStorageSync("memberId"))
+    } 
+    var fail = function(e){
+      console.log(e)
+    }
+    // wxrequest.requestGet(userInfoUrl, message,success,fail)
+
+    console.log(wx.getStorageSync("memberId"))
+    var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
+    var userData = wx.getStorageSync("memberId")
+    var message = ''
+    var successDetail = function(dataDetail){
+      console.log(dataDetail)
+      wx.setStorage({
+        key: 'userInfo',
+        data: dataDetail,
+      })
+      console.log("userinfo",wx.getStorageSync("userInfo"))
+      // {
+      //   key:'iconImage',
+      //   data: dataDetail.data.iconImage
+      // },
+      // {
+      //   key:'sex',
+      //   data:dataDetail.data.sex
+      // },
+      // {
+      //   key:'birthday',
+      //   data: dataDetail.data.birthday1
+      // },
+      // {
+      //   key:'regionId',
+      //   data: dataDetail.data.regionId
+      // },
+      // {
+      //   key:'industryId',
+      //   data: dataDetail.data.industryId
+      // },
+      // {
+      //   key:'institutionId',
+      //   data: dataDetail.data.institutionId
+      // },
+      // {
+      //   key:'institutionName',
+      //   data: dataDetail.data.institutionName
+      // }
+      
+    }
+    var failDetail = function(eDetail){
+      console.log("e",eDetail)
+    }
+    wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
+
+    // var infoUrl = api.getUserDetail()
+    // var infoData = {"memberId":"apf363e040137547939bfd1d472f53a91bap"}
+    // var success = function (data){
+    //   console.log(data)
+    // }
+    // var fail = function (e){
+    //   console.log(e)
+    // }
+    // wxrequest.request(infoUrl, infoData, success, fail)
   },
 
   /**
@@ -61,7 +136,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      avatar: wx.getStorageSync("avatar")
+    })
+    // console.log(wx.getStorageSync("avatar"))
+    // console.log(123)
   },
 
   /**

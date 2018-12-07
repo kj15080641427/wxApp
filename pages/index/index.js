@@ -33,7 +33,7 @@ Page({
 
     // 文章分类
     var typeUrl = api.getArticleTypeUrl()
-    var message = "加载中"
+    var message = ""
     var successType = function(data){
       // console.log("列表", data.data)
       data.data.map(function (item) {
@@ -48,9 +48,7 @@ Page({
       //   console.log("已缓存")
       // }else{
         wx.setStorageSync('typeName', categoryName)
-        console.log(wx.getStorageSync('typeName'))
-
-
+        console.log("hhhh",wx.getStorageSync('typeName'))
     }
     var failType = function (e){
       console.log("错误",e)
@@ -60,8 +58,8 @@ Page({
 
     // //解决方案
     var listUrl = api.getArticleListUrl()
-    var message = "加载中"
-    var listData = { "typeId": 1, "pageNum": 1,"	pageSize":10 }
+    var message = ""
+    var listData = { "typeId": 1, "pageNum": 1,"pageSize":10 }
     var successList = function (data){
       console.log("list",data.data.list)
       data.data.list.map(function (item) {
@@ -88,10 +86,30 @@ Page({
   // 滚动样式
   switchTab: function (e) {
     var that = this
+    var articleList = []
     this.setData({
       articleIndex: e.detail.current
     });
     this.checkCor();
+
+    console.log(e.detail.current)
+    var listUrl = api.getArticleListUrl()
+    var message = ""
+    var listData = { "typeId": e.detail.current+1, "pageNum": 1, "	pageSize": 10 }
+    var successList = function (data) {
+      console.log("list", data.data.list)
+      data.data.list.map(function (item) {
+        articleList.push({ "articleName": item.title, "articleImageSrc": item.image, "id": item.typeId, "helpNumber": item.helpNumber })
+      })
+      console.log(articleList)
+      that.setData({
+        article: articleList
+      })
+    }
+    var failList = function (e) {
+      console.log("list", e)
+    }
+    wxrequest.requestPost(listUrl, listData, message, successList, failList)
   },
 
   // 选择文章
@@ -104,25 +122,24 @@ Page({
       articleIndex: e.currentTarget.id
     })
     this.checkCor();
-
-    // var articleID = that.data.popular[that.data.articleIndex].id
-    // var listUrl = api.getArticleListUrl()
-    // var message = "加载中"
-    // var listData = { "categoryId": articleID}
-    // var successList = function (data){
-    //   console.log("选择list",data)
-    //   data.data.list.map(function (item) {
-    //     articleList.push({"articleName":item.articleTitle,"articleImageSrc":item.image})
-    //   })
-    //   console.log(articleList)
-    //   that.setData({
-    //     article:articleList
-    //   })
-    // }
-    // var failList = function (e){
-    //   console.log("list",e)
-    // }
-    // wxrequest.requestPost(listUrl,listData, message, successList,failList)
+    console.log(e.currentTarget.id)
+    var listUrl = api.getArticleListUrl()
+    var message = ""
+    var listData = { "typeId": e.currentTarget.id + 1, "pageNum": 1, "	pageSize": 10 }
+    var successList = function (data) {
+      console.log("list", data.data.list)
+      data.data.list.map(function (item) {
+        articleList.push({ "articleName": item.title, "articleImageSrc": item.image, "id": item.typeId, "helpNumber": item.helpNumber })
+      })
+      console.log(articleList)
+      that.setData({
+        article: articleList
+      })
+    }
+    var failList = function (e) {
+      console.log("list", e)
+    }
+    wxrequest.requestPost(listUrl, listData, message, successList, failList)
    
     var that = this;
     //  高度自适应

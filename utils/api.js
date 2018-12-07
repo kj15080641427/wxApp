@@ -17,6 +17,14 @@ var ArticleList = '/client/solution/list'
 // 文字咨询地址
 var Commit = '/client/freeText/post' 
 
+// 上传图片地址
+var Image = '/upload/file'
+
+// 获取用户信息地址
+var UserInfo = '/client/user/userinfo'
+
+// 用户详情地址
+var UserDetail = '/client/member/detail/'
 
 // 获取验证码
 function getVerifyCodeUrl(){
@@ -42,10 +50,28 @@ function getArticleListUrl(){
 function getCommitUrl(){
   return HOST_URL+Commit
 }
+
+//上传图片
+function getImageUrl(){
+  return HOST_URL+Image
+}
+
+// 用户信息
+function getUserInfo(){
+  return HOST_URL+UserInfo
+}
+
+// 用户详情
+function getUserDetail(){
+  return HOST_URL+UserDetail
+}
 module.exports={
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
   getArticleTypeUrl: getArticleTypeUrl,
   getArticleListUrl: getArticleListUrl,
-  getCommitUrl:getCommitUrl
+  getCommitUrl:getCommitUrl,
+  getImageUrl:getImageUrl,
+  getUserInfo:getUserInfo,
+  getUserDetail:getUserDetail,
 }

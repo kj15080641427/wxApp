@@ -28,18 +28,19 @@ Page({
     var verifydata = { "phone": `${this.data.inputPhone}`,"code":"654321"}
     var success = function (data){
       wx.showToast({
-        title: '短信发送成功',
+        title: data.message,
       })
+      console.log(data)
     }
     var fail = function (e){
       wx.showToast({
-        title: '短信发送失败',
+        title: '发送失败',
         icon: 'none'
       })
       console.log(e)
     }
     // 
-    if (!(/^1[34578]\d{9}$/.test(this.data.inputPhone))) {
+    if (!(/^1[345678]\d{9}$/.test(this.data.inputPhone))) {
       wx.showModal({
         title: '手机号码输入错误',
         showCancel:false,
@@ -67,16 +68,17 @@ Page({
         wx.showToast({
           title: '注册成功',
         })
-        console.log("注册成功")
+        wx.setStorageSync("token", data.data.token)
+        console.log("注册成功",data)
+        console.log("token111", wx.getStorageSync("token"))
       }else{
         wx.showToast({
           title: '注册失败',
           icon: 'none'
         })
-        console.log("注册失败")
       }
-      var loginToken = wx.setStorage({"token":data.data.token})
-      console.log(loginToken)
+      // var loginToken = wx.getStorage({"token":data.data.token})
+      // console.log("token2",loginToken)
     }
     var fail = function (data){
       console.log(data)

@@ -1,8 +1,11 @@
 {
   "pages":[
-    "pages/index/index",
-    "pages/my/order-chat/index",
     "pages/my/index",
+    "pages/search/filter/index",
+    "pages/search/index",
+    "pages/index/index",
+    "pages/my/edit-info/index",
+    "pages/my/order-chat/index",
     "pages/index/quick-consultation/index",
     "pages/index/consultation-details/index",
     "pages/my/order/index",
@@ -14,7 +17,6 @@
     "pages/logs/logs",
     "pages/my/guide/index",
     "pages/my/about/index",
-    "pages/my/edit-info/index",
     "pages/my/order-detail/index"
   ],
   "window":{
@@ -32,7 +34,7 @@
         "iconPath":"image/homeicon_max/homepage_16_max.png"
       },
       {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/search/filter/index",
         "text": "找律师",
         "selectedIconPath":"image/homeicon_max/homepage_17_max.png",
         "iconPath":"image/homeicon_max/homepage_18_max.png"
