@@ -7,7 +7,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    avatar:'../../image/my_icon@3x/mine_icon_02_3x.png'
+    avatar:'../../image/my_icon@3x/mine_icon_02_3x.png',
+    userInfo:""
   },
   // 登陆
   login:function(){
@@ -50,52 +51,38 @@ Page({
    */
   // 'apabfdc34cc00042c2991bd59b9e8a1ae8ap'
   onLoad: function (options) {
-    // console.log(wx.getStorageSync("token"))
+    var that = this
 
-    // 获取用户信息
+    // 获取用户memberID信息
     var userInfoUrl = api.getUserInfo()
     var message = ''
     var success = function(data){
-      // console.log("info",data)
       wx.setStorage({
         key: 'memberId',
         data: data.data.memberId,
       })
-      // console.log(data)
-      // console.log(wx.getStorageSync("memberId"))
     } 
     var fail = function(e){
       console.log(e)
     }
-    // wxrequest.requestGet(userInfoUrl, message,success,fail)
+    wxrequest.requestGet(userInfoUrl, message,success,fail)
 
-    console.log(wx.getStorageSync("memberId"))
+    // 获取用户详情
+    // console.log(wx.getStorageSync("memberId"))
     var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
     var userData = wx.getStorageSync("memberId")
     var message = ''
-    var successDetail = function(dataDetail){
-      console.log(dataDetail)
+    var successDetail = function (dataDetail) {
       wx.setStorage({
         key: 'userInfo',
-        data: dataDetail,
+        data: dataDetail.data,
       })
-      console.log("userinfo",wx.getStorageSync("userInfo"))
-      
+      console.log("userinfo", wx.getStorageSync("userInfo"))
     }
-    var failDetail = function(eDetail){
-      console.log("e",eDetail)
+    var failDetail = function (eDetail) {
+      console.log("e", eDetail)
     }
     wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
-
-    // var infoUrl = api.getUserDetail()
-    // var infoData = {"memberId":"apf363e040137547939bfd1d472f53a91bap"}
-    // var success = function (data){
-    //   console.log(data)
-    // }
-    // var fail = function (e){
-    //   console.log(e)
-    // }
-    // wxrequest.request(infoUrl, infoData, success, fail)
   },
 
   /**
@@ -110,10 +97,9 @@ Page({
    */
   onShow: function () {
     this.setData({
-      avatar: wx.getStorageSync("avatar")
+      // avatar: wx.getStorageSync("avatar"),
+      userInfo: wx.getStorageSync("userInfo")
     })
-    // console.log(wx.getStorageSync("avatar"))
-    // console.log(123)
   },
 
   /**

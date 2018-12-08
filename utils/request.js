@@ -32,7 +32,7 @@ function requestLoading(url, params, message, success, fail) {
       if (message != "") {
         wx.hideLoading()
       }
-      console.log(res.data.code)
+      // console.log(res.data.code)
       if (res.statusCode == 200 && res.data.code ==0) {
         success(res.data)
       } else {

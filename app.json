@@ -1,10 +1,10 @@
 {
   "pages":[
     "pages/my/index",
+    "pages/my/edit-info/index",
     "pages/search/filter/index",
     "pages/search/index",
     "pages/index/index",
-    "pages/my/edit-info/index",
     "pages/my/order-chat/index",
     "pages/index/quick-consultation/index",
     "pages/index/consultation-details/index",

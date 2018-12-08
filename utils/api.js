@@ -26,8 +26,32 @@ var UserInfo = '/client/user/userinfo'
 // 用户详情地址
 var UserDetail = '/client/member/detail/'
 
-// 修改用户详情
-var EditDetail = '/client/member/detail/'
+// 修改用户详情地址
+var EditDetail = '/client/member/update'
+
+// 行业列表地址
+var Industry = '/common/industry'
+
+
+// 获取行业列表
+function getIndustryUrl(){
+  return HOST_URL+Industry
+}
+
+// 组织机构地址
+var Institution = '/common/institution/type'
+
+//获取组织机构列表
+function getInstitutionUrl(){
+  return HOST_URL+Institution
+}
+
+//职务列表地址
+var Position = '/common/member/position'
+//获取职务列表
+function getPositionUrl(){
+  return HOST_URL+Position
+}
 
 // 获取验证码
 function getVerifyCodeUrl(){
@@ -82,4 +106,8 @@ module.exports={
   getImageUrl:getImageUrl,
   getUserInfo:getUserInfo,
   getUserDetail:getUserDetail,
+  getEditDetail: getEditDetail,
+  getIndustryUrl: getIndustryUrl,
+  getInstitutionUrl: getInstitutionUrl,
+  getPositionUrl: getPositionUrl
 }
