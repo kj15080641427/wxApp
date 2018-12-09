@@ -36,6 +36,41 @@ Page({
   },
   // 编辑个人信息
   gotoEditInfo:function(){
+    // // 行业列表
+    var that = this
+    var industryUrl = api.getIndustryUrl()
+    var industryData = { "parentId": '0' }
+    var insSuccess = function (data) {
+      // var industryList = []
+      // console.log("行业", data.data)
+      // wx.setStorage({
+      //   key: 'industry',
+      //   data: data.data
+      // })
+      // console.log('eeeeeeeeeeeeee', wx.getStorageSync('industry'))
+    }
+    var insFail = function (e) {
+      console.log(e)
+    }
+    wxrequest.request(industryUrl, industryData, insSuccess, insFail)
+
+    // 企业列表
+    var instituUrl = api.getInstitutionUrl()
+    var instituData = { "parentId": "0" }
+    var instituSuccess = function (data) {
+      wx.setStorage({
+        key: 'institu',
+        data: data.data,
+      })
+      // console.log("企业", wx.getStorageSync('institu'))
+
+
+      // console.log('qyqyqy', that.data.institu)
+    }
+    var instituFail = function (e) {
+      console.log(e)
+    }
+    wxrequest.request(instituUrl, instituData, instituSuccess, instituFail)
     wx.navigateTo({
       url: '../my/edit-info/index',
     })
@@ -96,10 +131,27 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // 获取用户详情
+    // console.log(wx.getStorageSync("memberId"))
+    var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
+    var userData = wx.getStorageSync("memberId")
+    var message = ''
+    var successDetail = function (dataDetail) {
+      wx.setStorage({
+        key: 'userInfo',
+        data: dataDetail.data,
+      })
+      console.log("userinfo", wx.getStorageSync("userInfo"))
+    }
+    var failDetail = function (eDetail) {
+      console.log("e", eDetail)
+    }
+    wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
     this.setData({
       // avatar: wx.getStorageSync("avatar"),
       userInfo: wx.getStorageSync("userInfo")
     })
+    console.log('uuuuuuuuserinfo',this.data.userInfo)
   },
 
   /**

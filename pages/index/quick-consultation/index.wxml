@@ -18,12 +18,12 @@
 
   <view class='quick-page-flex quick-center'>
     <view style='margin-left:35rpx'>问题类型</view>
-    <picker value='{{index}}' range='{{typeName}}' bindchange='changeType' class='quick-page-right'>    {{typeName[index]}}<label wx:if="{{selectType}}">{{selectProblem}}</label></picker>
+    <picker value='{{index}}' range="{{typeName}}" range-key = "{{'categoryName'}}"bindchange='changeType' class='quick-page-right'>    {{typeName[index]['categoryName']}}<label wx:if="{{selectType}}">{{selectProblem}}</label></picker>
   </view>
 <view class='quick-page-line-center'></view>
   <view class='quick-page-flex quick-center'>
     <view style='margin-left:35rpx'>联系手机</view>
-    <input class='quick-page-right quick-phone' value='15080641427'></input>
+    <input class='quick-page-right quick-phone' bindinput='phoneInput'></input>
     <view style='font-size:27rpx;margin-right:35rpx;margin-left:35rpx'>更换手机</view>
   </view>
 </view>
@@ -37,7 +37,7 @@
           <image src='{{item.icon}}' class='quick-pay-icon'></image>
           <view class='quick-pay-margin'>{{item.name}}<label wx:if="{{item['name']=='账户余额'}}"class="consul-balance" >(¥{{balance}})</label></view>
         </view>
-        <radio  value='{{item.name}}' checked="{{item.checked}}"/>
+        <radio  value='{{item.name}}' checked="{{item.checked}}" style='width:120rpx;height:120rpx;line-height:80rpx;display:flex;  justify-content: center;align-items: center;'/>
       </view>
       <view class='quick-page-line-center'></view>
     </view>

@@ -5,6 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    phoneInput:'',
     typeName:['婚姻家庭'],
     selectType:true,
     payList: [
@@ -23,16 +24,27 @@ Page({
       money: Number(e.detail.value)+100
     })
   },
+  phoneInput:function(e){
+    this.setData({
+      phoneInput:e.detail.value
+    })
+    console.log(e.detail.value)
+  },
   // 跳转
   gotofinish: function () {
-    if (this.data.index) {
-      wx.navigateTo({
-        url: '../quick-consultation-finish/index',
-      })
-    } else {
+    if (!this.data.index) {
       wx.showToast({
         title: '请选择问题类型',
         icon: 'none'
+      })
+    } else if (!(/^1[345678]\d{9}$/.test(this.data.phoneInput))) {
+      wx.showToast({
+        title: '请输入正确的手机号码',
+        icon: 'none'
+      })
+    }else {
+      wx.navigateTo({
+        url: '../quick-consultation-finish/index',
       })
     }
   },
@@ -40,14 +52,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var typeNameList = []
-    var typeName = wx.getStorageSync('typeName') 
-    typeName.map(function(item){
-      typeNameList.push(item.categoryName)
-    })
     this.setData({
-      typeName: typeNameList
+      typeName: wx.getStorageSync('typeName') 
     })
+    console.log('qqqq',wx.getStorageSync('typeName') )
   },
 
   /**

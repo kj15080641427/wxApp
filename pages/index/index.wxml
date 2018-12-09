@@ -3,7 +3,7 @@
   <view class='index-layout index-input-height'>
   <view class='index-search'>
     <image src='../../image/homeicon_3x/homepage_01_3x.png' style='width:40rpx;height:40rpx;margin-right:20rpx ' ></image>
-    <input placeholder='搜索问题、律师、服务' placeholder-style='color:#ffffff;' confirm-type="search"  ></input>
+    <input placeholder='搜索问题、律师、服务' placeholder-style='color:#ffffff;' style='width:550rpx;height:60rpx;line-height:60rpx' confirm-type="search"  ></input>
   </view>
     <image src='../../image/homeicon_3x/homepage_02_3x.png' class='index-news'></image>
     <!-- 消息小于两位数 -->
@@ -116,10 +116,10 @@
     </view>
     <view class='index-article'>
         <view class="" >
-          <view class="index-article-text">{{item["articleName"]}}</view>
+          <view class="index-article-text">{{item["title"]}}</view>
           <view class="index-article-text-lower">已帮助<label style="color:#1ec88c">{{item['helpNumber']}}</label>人</view>
         </view>
-        <!-- <image src="{{item['articleImageSrc']}}" style='width:223rpx;height:145rpx;'></image> -->
+        <!-- <image src="{{item['image']}}" style='width:223rpx;height:145rpx;'></image> -->
         </view>
       </view> 
                 <!-- </scroll-view> -->

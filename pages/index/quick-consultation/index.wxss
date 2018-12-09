@@ -56,11 +56,15 @@
   background-color: white
 }
 .quick-page-right{
+  height: 100rpx;
+  line-height: 100rpx;
   width: 500rpx;
   margin-left: 35rpx;
   font-size: 27rpx;
 }
 .quick-phone{
+  line-height: 100rpx;
+  height: 10rpx;
   width: 350rpx;
   font-size: 28rpx;
   color: #323232

@@ -35,19 +35,14 @@ Page({
     var typeUrl = api.getArticleTypeUrl()
     var message = ""
     var successType = function(data){
-      // console.log("列表", data.data)
-      data.data.map(function (item) {
-        categoryName.push({ "categoryName": item.categoryName, "id":item.id})
-        // articleTypeId.push(item.id)
-      })  
       that.setData({
-          popular: categoryName,
+          popular: data.data,
         })
       // var a = wx.getStorageSync('typeName')
       // if(a){
       //   console.log("已缓存")
       // }else{
-        wx.setStorageSync('typeName', categoryName)
+      wx.setStorageSync('typeName', data.data)
         console.log("hhhh",wx.getStorageSync('typeName'))
     }
     var failType = function (e){
@@ -62,12 +57,9 @@ Page({
     var listData = { "typeId": 1, "pageNum": 1,"pageSize":10 }
     var successList = function (data){
       console.log("list",data.data.list)
-      data.data.list.map(function (item) {
-        articleList.push({ "articleName": item.title, "articleImageSrc": item.image, "id": item.typeId, "helpNumber": item.helpNumber})
-      })
       console.log(articleList)
       that.setData({
-        article:articleList
+        article:data.data.list
       })
     }
     var failList = function (e){
@@ -98,12 +90,12 @@ Page({
     var listData = { "typeId": e.detail.current+1, "pageNum": 1, "	pageSize": 10 }
     var successList = function (data) {
       console.log("list", data.data.list)
-      data.data.list.map(function (item) {
-        articleList.push({ "articleName": item.title, "articleImageSrc": item.image, "id": item.typeId, "helpNumber": item.helpNumber })
-      })
+      // data.data.list.map(function (item) {
+      //   articleList.push({ "articleName": item.title, "articleImageSrc": item.image, "id": item.typeId, "helpNumber": item.helpNumber })
+      // })
       console.log(articleList)
       that.setData({
-        article: articleList
+        article: data.data.list
       })
     }
     var failList = function (e) {
@@ -128,12 +120,12 @@ Page({
     var listData = { "typeId": e.currentTarget.id + 1, "pageNum": 1, "	pageSize": 10 }
     var successList = function (data) {
       console.log("list", data.data.list)
-      data.data.list.map(function (item) {
-        articleList.push({ "articleName": item.title, "articleImageSrc": item.image, "id": item.typeId, "helpNumber": item.helpNumber })
-      })
+      // data.data.list.map(function (item) {
+      //   articleList.push({ "articleName": item.title, "articleImageSrc": item.image, "id": item.typeId, "helpNumber": item.helpNumber })
+      // })
       console.log(articleList)
       that.setData({
-        article: articleList
+        article: data.data.list
       })
     }
     var failList = function (e) {

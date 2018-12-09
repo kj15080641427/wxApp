@@ -10,7 +10,7 @@ Page({
     array: ['婚姻家事', '房产土地', '债权债务', '公司工商'],
     hasSelect:true,
     hasSelectAddress:true,
-    region: ["湖南省","长沙市","芙蓉区"],
+    region: '',
 
     consultationTypeId:"",
     regionId:"",
@@ -62,28 +62,39 @@ Page({
      }
      console.log(data)
     var success = function(data){
-      console.log(data)
-      if(data.code == 0){
-        console.log("提交成功")
-        wx.showToast({
-          title: '提交成功',
-        })
-      }else{
-        console.log(data.message)
-      }
+    console.log(data)
+      wx.showToast({
+        title: '提交成功',
+      })
+    setTimeout(function(){
+      wx.navigateBack({
+        
+      })
+    },1000)
     }
     var fail = function(e){
-      console.log(e)
+      wx.showToast({
+        title: '提交失败',
+      })
     }
     var cdata = this.data
-    if (cdata.consultationTypeId != '' && cdata.region != '' && cdata.commitContent.length > 10){
-    wxrequest.request(commitURL,data,success,fail)
-    }else{
+    if (cdata.consultationTypeId == '') {
       wx.showToast({
-        title: '不能为空',
-        icon:'none'
+        title: '请选择问题类型',
+        icon: 'none'
       })
-      console.log("不能为空")
+    } else if (cdata.region == '') {
+      wx.showToast({
+        title: '请选择地区',
+        icon: 'none'
+      })
+    } else if (cdata.commitContent.length < 10) {
+      wx.showToast({
+        title: '问题描述需10字以上',
+        icon: 'none'
+      })
+    } else {
+      wxrequest.request(commitURL, data, success, fail)
     }
   },
   /**

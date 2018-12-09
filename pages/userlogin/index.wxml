@@ -2,7 +2,7 @@
 <view class='login-page'>
   <view>
     <view></view>
-    <input placeholder='请输入手机号' placeholder-class='login-page-input' bindinput="getPhoneInput" class='login-page-input-class'/>
+    <input placeholder='请输入手机号' placeholder-class='login-page-input' bindinput="getinputPhone" class='login-page-input-class'/>
   </view>
   <view class='login-page-code'>
     <input placeholder='请输入验证码' placeholder-class='login-page-input'class="login-input" bindinput='getCodeInput' cursor="10" selection-start="10" selection-end="30"/>

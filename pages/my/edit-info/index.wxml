@@ -10,7 +10,7 @@
  <view style='background-color:white;margin-top:35rpx'>
    <view class='info-page-list'>
     <view class='info-page-label'>用户昵称</view>
-    <input class="info-page-input" value="{{userInfo.memberName}}"bindinput='member'></input>
+    <input class="info-page-input" value="{{userInfo.memberName}}"bindinput='member' placeholder='输入您的昵称'></input>
   </view>
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
@@ -49,21 +49,21 @@
 <view style='background-color:white;'>
     <view class='info-page-list'>
     <view class='info-page-label'>您的职务</view>
-    <input class="info-page-input" value="{{editMemberPositionName}}"bindinput='businessTypeName'></input>
+    <input class="info-page-input" value="{{editMemberPositionName}}"   placeholder='输入您的职位'bindinput='businessTypeName'></input>
   </view>
 </view>
 <view class='info-page-center-line'></view>
 <view style='background-color:white;'>
     <view class='info-page-list'>
     <view class='info-page-label'>您的邮箱</view>
-    <input class="info-page-input" value="{{editEmail}}" bindinput='email'></input>
+    <input class="info-page-input" placeholder='输入您的邮箱' value="{{editEmail}}" bindinput='email'></input>
   </view>
 </view>
 <view class='info-page-center-line'></view>
 <view style='background-color:white;'>
     <view class='info-page-list'>
     <view class='info-page-label'>商会组织</view>
-    <input class="info-page-input" value="{{editOrganizationName}}" bindinput='organizations'></input>
+    <input class="info-page-input" value="{{editOrganizationName}}" placeholder='输入您的商会'bindinput='organizations'></input>
   </view>
 </view>
 
