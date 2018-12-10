@@ -9,7 +9,7 @@ Page({
    */
   data: {
     avatar:'../../image/my_icon@3x/mine_icon_02_3x.png',
-    userInfo:"",
+    userInfo:wx.getStorageSync("userInfo"),
     institu:'',
     industry:'',
   },
@@ -39,9 +39,15 @@ Page({
   },
   // 编辑个人信息
   gotoEditInfo:function(){
-    wx.navigateTo({
-      url: '../my/edit-info/index',
-    })
+    if(wx.getStorageSync("token")){
+      wx.navigateTo({
+        url: '../my/edit-info/index'
+      })
+    }else{
+      wx.navigateTo({
+        url: '../userlogin/index',
+      })
+    }
   },
   // 订单
   gotoOrder:function(){
@@ -70,23 +76,24 @@ Page({
     }
     wxrequest.requestGet(userInfoUrl, message,success,fail)
 
-    // 获取用户详情
-    // console.log(wx.getStorageSync("memberId"))
-    var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
-    var userData = wx.getStorageSync("memberId")
-    var message = ''
-    var successDetail = function (dataDetail) {
-      wx.setStorage({
-        key: 'userInfo',
-        data: dataDetail.data,
-      })
-      // console.log("userinfo", wx.getStorageSync("userInfo"))
+    if (wx.getStorageSync("token")){
+      // 获取用户详情
+      // console.log(wx.getStorageSync("memberId"))
+      var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
+      var userData = wx.getStorageSync("memberId")
+      var message = ''
+      var successDetail = function (dataDetail) {
+        wx.setStorage({
+          key: 'userInfo',
+          data: dataDetail.data,
+        })
+        console.log("userinfo", wx.getStorageSync("userInfo"))
+      }
+      var failDetail = function (eDetail) {
+        console.log("e", eDetail)
+      }
+      wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
     }
-    var failDetail = function (eDetail) {
-      console.log("e", eDetail)
-    }
-    wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
-
   },
 
   /**
@@ -100,27 +107,28 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // 获取用户详情
-    // console.log(wx.getStorageSync("memberId"))
-    var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
-    var userData = wx.getStorageSync("memberId")
-    var message = ''
-    var successDetail = function (dataDetail) {
-      wx.setStorage({
-        key: 'userInfo',
-        data: dataDetail.data,
-      })
-      // console.log("userinfo", wx.getStorageSync("userInfo"))
+    var that = this
+    if (wx.getStorageSync("token")) {
+      // 获取用户详情
+      console.log(wx.getStorageSync("memberId"))
+      var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
+      var userData = wx.getStorageSync("memberId")
+      var message = ''
+      var successDetail = function (dataDetail) {
+        wx.setStorage({
+          key: 'userInfo',
+          data: dataDetail.data,
+        })
+        that.setData({
+          userInfo: wx.getStorageSync("userInfo")
+        })
+        console.log("userinfo", wx.getStorageSync("userInfo"))
+      }
+      var failDetail = function (eDetail) {
+        console.log("e", eDetail)
+      }
+      wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
     }
-    var failDetail = function (eDetail) {
-      console.log("e", eDetail)
-    }
-    wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
-    this.setData({
-      // avatar: wx.getStorageSync("avatar"),
-      userInfo: wx.getStorageSync("userInfo")
-    })
-    console.log('uuuuuuuuserinfo',this.data.userInfo)
   },
 
   /**

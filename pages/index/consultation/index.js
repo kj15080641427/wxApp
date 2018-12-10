@@ -60,9 +60,8 @@ Page({
       "content": this.data.commitContent,
       "isHide": this.data.isHide == true ? '1':'0'
      }
-     console.log(data)
     var success = function(data){
-    console.log(data)
+    console.log('成功')
       wx.showToast({
         title: '提交成功',
       })
@@ -73,6 +72,7 @@ Page({
     },1000)
     }
     var fail = function(e){
+      console.log(12312312312)
       wx.showToast({
         title: '提交失败',
       })
@@ -101,14 +101,31 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var typelist = []
-    var type = wx.getStorageSync('typeName') 
-    type.map(function(item){
-      typelist.push(item.categoryName)
-    })
-    this.setData({
-      array:typelist
-    })
+    //问题类型
+    var that = this
+    var typeUrl = api.getArticleTypeUrl()
+    var message = ""
+    var successType = function (data) {
+      console.log(data.data)
+      that.setData({
+        array: data.data,
+      })
+      wx.showToast({
+        title: '成功',
+      })
+    }
+    var failType = function (e) {
+      console.log("错误", e)
+    }
+    wxrequest.requestGet(typeUrl, message, successType, failType)
+    // var typelist = []
+    // var type = wx.getStorageSync('typeName') 
+    // type.map(function(item){
+    //   typelist.push(item.categoryName)
+    // })
+    // this.setData({
+    //   array:typelist
+    // })
     // console.log(this.data.array)
   },
 
@@ -159,5 +176,21 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+  getType:function(){
+    //问题类型
+    var that = this
+    var typeUrl = api.getArticleTypeUrl()
+    var message = ""
+    var successType = function (data) {
+      console.log(data.data)
+      that.setData({
+        array: data.data,
+      })
+    }
+    var failType = function (e) {
+      console.log("错误", e)
+    }
+    wxrequest.requestGet(typeUrl, message, successType, failType)
   }
 })

@@ -9,23 +9,23 @@
   </view>
  <view style='background-color:white;margin-top:35rpx'>
    <view class='info-page-list'>
-    <view class='info-page-label'>用户昵称</view>
-    <input class="info-page-input" value='{{userInfo.memberName}}' bindinput='member' placeholder='输入您的昵称'>{{userInfo.memberName}}</input>
+    <view class='info-page-label'>用户名称</view>
+    <input class="info-page-input" value='{{userInfo.memberName}}' bindinput='member' placeholder='输入用户名称'>{{userInfo.memberName}}</input>
   </view>
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
     <view class='info-page-label'>性别</view>
-    <picker class="info-page-input" value="{{index}}" range='{{gender}}' range-key='gender' bindchange='bindChange'  >{{gender[index]['gender']}}</picker>
+    <picker class="info-page-input" value="{{index}}" range='{{gender}}' range-key='gender' bindchange='bindChangegender'  >{{gender[index]['gender']}}</picker>
   </view>
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
     <view class='info-page-label'>出生日期</view>
-    <picker class="info-page-input" mode="date" value="{{time}}" start="1900-09-01" end="2018-09-01" bindchange="bindDateChange" >       <text wx:if="{{selecttime}}">{{userInfo.birthday}}</text><text wx:if="{{systime}}">{{date}}</text></picker>
+    <picker class="info-page-input" mode="date" value="{{time}}" start="1900-09-01" end="2018-09-01" bindchange="bindDateChange" >       <text wx:if="{{selecttime}}">{{time}}</text><text wx:if="{{systime}}">{{date}}</text></picker>
   </view>
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
     <view class='info-page-label'>所在地区</view>
-    <view class="info-page-input" bindtap="showModal"><text bindtap='showid' wx:if="{{selectAddress}}">{{region}}</text>{{name}}</view>
+    <view class="info-page-input" bindtap="showModal"><text bindtap='showid' wx:if="{{hasaddress}}" >{{userInfo.addressExtend.province}}-{{userInfo.addressExtend.city}}-{{userInfo.addressExtend.area}}</text><text>{{name}}</text></view>
     <!-- <picker class="info-page-input" mode="multiSelector"value="{{indexarea}}"  range='{{regionJSON.region}}' range-key='name' bindchange='changearea'  >{{regionJSON}}</picker> -->
     <!-- <picker class="info-page-input" mode="region" bindchange='bindRegionChange' value='{{region}}'>{{region[0]}}-{{region[1]}}-{{region[2]}}</picker> -->
   </view>
@@ -57,7 +57,7 @@
 <view style='background-color:white;'>
     <view class='info-page-list'>
     <view class='info-page-label'>您的邮箱</view>
-    <input class="info-page-input" placeholder='输入您的邮箱' value="{{userInfo.email}}" bindinput='email'></input>
+    <input class="info-page-input" placeholder='输入您的邮箱' value="{{userInfo.email}}" bindinput='email'>{{userInfo.email}}</input>
   </view>
 </view>
 <view class='info-page-center-line'></view>
@@ -102,5 +102,3 @@
 
 <!-- <view class="box">{{name}}</view> -->
 </view>
-
-<button bindtap = "showid">ididid</button>>

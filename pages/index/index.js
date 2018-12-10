@@ -38,12 +38,6 @@ Page({
       that.setData({
           popular: data.data,
         })
-      // var a = wx.getStorageSync('typeName')
-      // if(a){
-      //   console.log("已缓存")
-      // }else{
-      wx.setStorageSync('typeName', data.data)
-        console.log("hhhh",wx.getStorageSync('typeName'))
     }
     var failType = function (e){
       console.log("错误",e)
@@ -174,12 +168,16 @@ Page({
   },
   // 页面跳转
   gotoConstultation:function(){
-    // 
-    // 
+    if(wx.getStorageSync("token")){
     // // 缓存到本地
     wx.navigateTo({
       url:'../index/consultation/index?id=1'
     })
+  }else{
+      wx.navigateTo({
+        url: '../userlogin/index'
+      })
+  }
   },
   gotoQuick:function(){
     wx.navigateTo({

@@ -69,6 +69,11 @@ Page({
         wx.showToast({
           title: '注册成功',
         })
+        setTimeout(function(){
+          wx.navigateBack({
+            delta:2
+          })
+        },1000)
         wx.setStorageSync("token", data.data.token)
         console.log("注册成功",data)
         console.log("token111", wx.getStorageSync("token"))

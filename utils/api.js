@@ -31,8 +31,6 @@ var EditDetail = '/client/member/update'
 
 // 行业列表地址
 var Industry = '/common/industry'
-
-
 // 获取行业列表
 function getIndustryUrl(){
   return HOST_URL+Industry

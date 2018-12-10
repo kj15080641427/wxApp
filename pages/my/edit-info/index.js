@@ -1,6 +1,4 @@
-// pages/my/edit-info/index.js
 var app = getApp();
-
 var cityData = require('../../../region.js');
 var wxrequest = require('../../../utils/request.js')
 var api = require('../../../utils/api.js')
@@ -14,12 +12,11 @@ Page({
   data: {
     region:'北京-北京市-东城区',
     regionJSON:[],
-    gender: [{ "gender": "男", "id": 1 }, { "gender": "女", "id": 2 }, { "gender": "未知", "id": 0 }],
-    index:'0', //性别index
-    index1: wx.getStorageSync('index1'), //行业index
-    index2: wx.getStorageSync('index2') ,//企业index
+    gender: [{ "gender": "男", "id": 1 }, { "gender": "女", "id": 2 }],
+    index: wx.getStorageSync('index1') || '0', //性别index
+    index1: wx.getStorageSync('index1') || '0', //行业index
+    index2: wx.getStorageSync('index2') || '0',//企业index
     indexarea:'0', //自定义地区
-    // infoList:['您的行业','您的企业','您的职务','您的邮箱'],
     industry:[], //行业列表
     institu:[], //企业列表
     userInfo:'', //用户信息
@@ -28,15 +25,18 @@ Page({
     selectAddress:true,
     selecttime:true,
     systime:false,
+    hasaddress:true,
 
     avatarUrl:userInfo.iconImage,
     editMember: userInfo.member,//昵称
     editSex: userInfo.sex,//性别
     editbrthday: userInfo.birthday,//生日
     editIndustryId: userInfo.industryId,//行业id
-    editEmail: userInfo.email,//邮箱
+    editEmail: userInfo.email1,//邮箱
     editinstitutionId: userInfo.institutionId,//企业id
-    time: userInfo.birthday,
+    editaddress: userInfo.areaId,
+    // editOrganizations: userInfo.editOrganizations,
+    time: userInfo.birthday.split(" ")[0],
     //地区
     citysData: cityData.citysData,
     provinces: [],
@@ -49,7 +49,7 @@ Page({
   },
   // 性别
  
-  // 保存
+ // 保存
   saveInfo:function(){
     var that = this
     var editUrl = api.getEditDetail()
@@ -62,30 +62,19 @@ Page({
       "email": this.data.editEmail, //邮箱
       "industryId": this.data.industry[this.data.index1].industryId, //行业id
       "institutionId": this.data.institu[this.data.index2].institutionTypeId, //企业id
-      // "institutionName": this.data.institu[this.data.index2].institutionName //企业名称
+      "regionId":this.data.editaddress
+      // "oids": this.data.editOrganizations,
       }
     console.log("上传参数", editDetailData, this.data.date)
-      // wx.showLoading({
-      //   title: '保存中',
-      // })
-    // wx.removeStorage({
-    //   key: 'index1',
-    //   success(res) {
-    //     console.log(res.data)
-    //   }
-    // })
-    // wx.removeStorage({
-    //   key: 'index2',
-    //   success(res) {
-    //     console.log(res.data)
-    //   }
-    // })
+
     var success = function(data){
+      wx.setStorageSync('index', that.data.index)
       wx.setStorageSync('index2', that.data.index2)
       wx.setStorageSync('index1',that.data.index1 )
       that.setData({
         index2: wx.getStorageSync('index2'),
-        index1:wx.getStorageSync('index1')
+        index1:wx.getStorageSync('index1'),
+        index: wx.getStorageSync('index'),
       })
       console.log("保存成功",data)
       // 获取用户详情
@@ -94,9 +83,15 @@ Page({
       var userData = wx.getStorageSync("memberId")
       var message = ''
       var successDetail = function (dataDetail) {
+        wx.showToast({
+          title: '保存成功',
+        })
         wx.setStorage({
           key: 'userInfo',
           data: dataDetail.data,
+        })
+        that.setData({
+          time:wx.getStorageSync("userInfo"),
         })
         console.log("userinfottt", wx.getStorageSync("userInfo"))
       }
@@ -106,9 +101,7 @@ Page({
       // 点击保存后更新用户详情
       wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
 
-      wx.showToast({
-        title: '保存成功',
-      })
+      
       setTimeout(function(){
         wx.navigateBack({
         delta: 2
@@ -122,7 +115,7 @@ Page({
     wxrequest.request(editUrl,editDetailData,success,fail)
     
   },
-  bindChange: function (e) {
+  bindChangegender: function (e) {
     this.setData({
       index: e.detail.value,
     })
@@ -173,6 +166,7 @@ Page({
   replaceAvatar: function () {
     var that = this
     wx.chooseImage({
+      count:1,
       sourceType: ['album', 'camera'],
       success: function (res) {
 
@@ -208,18 +202,7 @@ Page({
     })
     console.log('input值', !!e.detail.value)
   },
-  // 行业
-  // insTypeName:function(e){
-  //   this.setData({
-  //     editInsTypeName: e.detail.value
-  //   })
-  // },
-  // // 企业
-  // institutionTypeName:function(e){
-  //   this.setData({
-  //     editInstitutionName: e.detail.value
-  //   })
-  // },
+
   // 职务
   businessTypeName: function (e) {
     this.setData({
@@ -241,11 +224,11 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      regionJSON:region,
-      userInfo:userInfo,
       avatarUrl: wx.getStorageSync("avatar") ,//头像
     })
-    // console.log(this.data.regionJSON)
+
+  
+
 
     //职务列表
     // var positionUrl = api.getPositionUrl()
@@ -272,18 +255,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    if (!wx.getStorageSync('index2')) {
-      that.setData({
-        selectInstitu:true,
-        selectIndestry:true,
-      })
-    }
-    this.setData({
-      time: this.data.time.split(" ")[0]
-    })
-    console.log("time", this.data.time)
-    // // 行业列表
     var that = this
+    that.setData({
+      time: wx.getStorageSync("userInfo").birthday.split(" ")[0],
+    })
+    console.log(wx.getStorageInfoSync())
+    // // 行业列表
+
     var industryUrl = api.getIndustryUrl()
     var industryData = { "parentId": '0' }
     var insSuccess = function (data) {
@@ -303,21 +281,36 @@ Page({
     var instituData = { "parentId": "0" }
 
     var instituSuccess = function (data) {
+      console.log("企业",data.data)
       that.setData({
         institu: data.data
       })
-      // console.log('hangye', this.data.industry)
-      // console.log('qiye', that.data.institu)
     }
     var instituFail = function (e) {
       console.log(e)
     }
     wxrequest.request(instituUrl, instituData, instituSuccess, instituFail)
-    
+
+
+    if (!wx.getStorageSync('index2')) {
+      that.setData({
+        selectInstitu:true,
+        selectIndestry:true,
+      })
+    }
+
+    // wx.removeStorage({
+    //   key: 'institu',
+    //   success: function(res) {},
+    // })
+    // console.log("infoiiiii", wx.getStorageInfoSync())
+    console.log("time", this.data.time)
+  
     this.setData({
       userInfo :wx.getStorageSync("userInfo"),
       index2: wx.getStorageSync('index2'),
-      index1: wx.getStorageSync('index1')
+      index1: wx.getStorageSync('index1'),
+      index: wx.getStorageSync('index')
     })
     console.log("showUserInfo",this.data.userInfo)
   },
@@ -386,7 +379,8 @@ Page({
     var cityObj = {};
 
     this.setData({
-      indexadd: e.detail.value
+      indexadd: e.detail.value,
+      hasaddress:false
     })
     
     provinceObj = citysData[current_value[0]];
@@ -481,8 +475,10 @@ Page({
       })
     }.bind(this), 200)
     wx.showTabBar({})
-  },
-  showid: function (e) {
+    this.setData({
+      editaddress: this.data.areas[this.data.value[2]].regionId
+    })
     console.log(this.data.areas[this.data.value[2]].regionId)
-  }
+  },
+
 })
