@@ -1,7 +1,7 @@
 <!--pages/my/edit-info/index.wxml-->
 <view class='info-page'>
   <view class='info-page-flex'>
-    <image class='info-page-avatar' src='{{avatarUrl}}'></image>
+    <image class='info-page-avatar' src="{{avatarUrl}}"></image>
     <view style='display:flex;height:40rpx;align-items:center' bindtap='replaceAvatar'>
       <view class='info-page-text'>更换头像</view>
       <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'></image>
@@ -10,7 +10,7 @@
  <view style='background-color:white;margin-top:35rpx'>
    <view class='info-page-list'>
     <view class='info-page-label'>用户昵称</view>
-    <input class="info-page-input" value="{{userInfo.memberName}}"bindinput='member' placeholder='输入您的昵称'></input>
+    <input class="info-page-input" value='{{userInfo.memberName}}' bindinput='member' placeholder='输入您的昵称'>{{userInfo.memberName}}</input>
   </view>
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
@@ -20,13 +20,14 @@
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
     <view class='info-page-label'>出生日期</view>
-    <picker class="info-page-input" mode="date" value="{{date}}" start="1900-09-01" end="2018-09-01" bindchange="bindDateChange" >{{editbBrthday}}</picker>
+    <picker class="info-page-input" mode="date" value="{{time}}" start="1900-09-01" end="2018-09-01" bindchange="bindDateChange" >       <text wx:if="{{selecttime}}">{{userInfo.birthday}}</text><text wx:if="{{systime}}">{{date}}</text></picker>
   </view>
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
     <view class='info-page-label'>所在地区</view>
+    <view class="info-page-input" bindtap="showModal"><text bindtap='showid' wx:if="{{selectAddress}}">{{region}}</text>{{name}}</view>
     <!-- <picker class="info-page-input" mode="multiSelector"value="{{indexarea}}"  range='{{regionJSON.region}}' range-key='name' bindchange='changearea'  >{{regionJSON}}</picker> -->
-    <picker class="info-page-input" mode="region" bindchange='bindRegionChange' value='{{region}}'>{{region[0]}}-{{region[1]}}-{{region[2]}}</picker>
+    <!-- <picker class="info-page-input" mode="region" bindchange='bindRegionChange' value='{{region}}'>{{region[0]}}-{{region[1]}}-{{region[2]}}</picker> -->
   </view>
  </view>
 
@@ -34,7 +35,7 @@
     <view class='info-page-list'>
     <view class='info-page-label'>您的行业</view>
     <!-- <input class="info-page-input" value="{{editInsTypeName}}"bindinput='insTypeName'></input> -->
-     <picker class="info-page-input" value="{{index1}}" range="{{industry}}" range-key="industryName" bindchange='changeindustry' >{{industry[index1]['industryName']}}</picker>
+     <picker class="info-page-input" value="{{index1}}" range="{{industry}}" range-key="industryName" bindchange='changeindustry' >{{industry[index1]['industryName']}}<text wx:if="{{selectIndestry}}">选择行业</text></picker>
   </view>
 </view>
 <view class='info-page-center-line'></view>
@@ -42,7 +43,7 @@
     <view class='info-page-list'>
     <view class='info-page-label'>您的企业</view>
     <!-- <input class="info-page-input" value="{{editInstitutionName}}"bindinput='institutionTypeName'></input> -->
-    <picker class="info-page-input" value="{{index2}}" range="{{institu}}" range-key="institutionTypeName" bindchange='changeinstitu' >{{institu[index2]['institutionTypeName']}}</picker>
+    <picker class="info-page-input"  range="{{institu}}" range-key="institutionTypeName" bindchange='changeinstitu' >{{institu[index2]['institutionTypeName']}}<text wx:if="{{selectInstitu}}">选择企业</text></picker>
   </view>
 </view>
 <view class='info-page-center-line'></view>
@@ -56,7 +57,7 @@
 <view style='background-color:white;'>
     <view class='info-page-list'>
     <view class='info-page-label'>您的邮箱</view>
-    <input class="info-page-input" placeholder='输入您的邮箱' value="{{editEmail}}" bindinput='email'></input>
+    <input class="info-page-input" placeholder='输入您的邮箱' value="{{userInfo.email}}" bindinput='email'></input>
   </view>
 </view>
 <view class='info-page-center-line'></view>
@@ -80,3 +81,26 @@
     <button class='info-page-button' bindtap='saveInfo'>保存</button>
   </view>
 </view>
+<!-- 蒙层 -->
+<view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+  <!--弹出框  -->
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+  <!-- 热线咨询 -->
+<view class="box">
+    <picker-view indicator-style="height: 50px;" style="width: 100%; height: 150px;" value="{{value}}" bindchange="bindChange">
+        <picker-view-column>
+            <view wx:key="{{index}}"wx:for="{{provinces}}">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+            <view wx:key="{{index}}" wx:for="{{citys}}">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+            <view wx:key="{{index}}" wx:for="{{areas}}">{{item.name}}</view>
+        </picker-view-column>
+    </picker-view>
+</view>
+
+<!-- <view class="box">{{name}}</view> -->
+</view>
+
+<button bindtap = "showid">ididid</button>>

@@ -6,7 +6,7 @@
 <view class='my-page-background'>
   <view class=''>
     <view style='display:flex;justify-content:center'>
-      <image class='my-page-avatar' src='{{userInfo.iconImage}}' bindtap='login'></image>
+      <image class='my-page-avatar' src="{{userInfo.iconImage}}"bindtap='login'></image>
       <view class='my-page-editinfo-flex' bindtap='gotoEditInfo'>
         <view class='my-page-editinfo'>编辑信息</view>
         <image src='../../image/homeicon_3x/homepage_09_3x.png' style='width:25rpx;height:25rpx;padding-top:5rpx' />
@@ -77,3 +77,4 @@
   <view  class='my-page-lower-left'>联系客服</view>
   <image src='../../image/homeicon_3x/homepage_09_3x.png' class='my-page-lower-right'/>
 </view>
+

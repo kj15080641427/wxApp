@@ -6,12 +6,12 @@
 </view>
 
 <view class='filter-page-frame-view filter-background'>
-  <view class='filter-page-frame'><text class='filter-page-frame-text'>不限</text></view>
-  <view class='filter-page-frame'><text class='filter-page-frame-text'>1年以下</text></view>
-  <view class='filter-page-frame'><text class='filter-page-frame-text'>1-3年</text></view>
-  <view class='filter-page-frame'><text class='filter-page-frame-text'>3-5年</text></view>
-  <view class='filter-page-frame'><text class='filter-page-frame-text'>5-10年</text></view>
-  <view class='filter-page-frame'><text class='filter-page-frame-text'>10年以上</text></view>
+  <view class="{{select == 1 ? 'filter-page-frame-color' :'filter-page-frame'}}"><text class='filter-page-frame-text'bindtap="changeColor1" >不限</text></view>
+  <view class="{{select == 2 ? 'filter-page-frame-color' :'filter-page-frame'}}"><text bindtap="changeColor2"class='filter-page-frame-text'>1年以下</text></view>
+  <view class="{{select == 3 ? 'filter-page-frame-color' :'filter-page-frame'}}"><text bindtap="changeColor3" class='filter-page-frame-text'>1-3年</text></view>
+  <view class="{{select == 4 ? 'filter-page-frame-color' :'filter-page-frame'}}"><text bindtap="changeColor4"class='filter-page-frame-text'>3-5年</text></view>
+  <view class="{{select == 5 ? 'filter-page-frame-color' :'filter-page-frame'}}"><text bindtap="changeColor5"class='filter-page-frame-text'>5-10年</text></view>
+  <view class="{{select == 6 ? 'filter-page-frame-color' :'filter-page-frame'}}"><text bindtap="changeColor6"class='filter-page-frame-text'>10年以上</text></view>
 </view>
 
 <!-- 性别 -->
@@ -20,15 +20,18 @@
   <view class='filter-page-line'></view>
 </view>
 <view class='filter-page-gender-view filter-background'>
-  <view class='filter-page-gender'><text class='filter-page-frame-text'>不限</text></view>
-  <view class='filter-page-gender'><text class='filter-page-frame-text'>男</text></view>
-  <view class='filter-page-gender'><text class='filter-page-frame-text'>女</text></view>
+  <view class="{{gender == '0' ? 'filter-page-gender-color' :'filter-page-gender'}}" bindtap='gender0'><text class='filter-page-frame-text'>不限</text></view>
+  <view  class="{{gender == '1' ? 'filter-page-gender-color' :'filter-page-gender'}}" bindtap='gender1'><text class='filter-page-frame-text'>男</text></view>
+  <view  class="{{gender == '2' ? 'filter-page-gender-color' :'filter-page-gender'}}" bindtap='gender2'><text class='filter-page-frame-text'>女</text></view>
 </view>
 
 <!-- 行业 -->
 <view wx:key="{{index}}" wx:for="{{list}}">
   <view class='filter-page-cneter filter-background' >
-    <view>{{item}}</view>
+    <view style='display:flex;'>
+      <view style='line-height:60rpx;'>{{index}}</view>
+      <picker style='margin-left:30rpx;width:400rpx;height:60rpx;line-height:60rpx'>123</picker>
+    </view>
     <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
   </view>
   <view style='background-color:white'>

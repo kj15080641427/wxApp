@@ -14,6 +14,7 @@ Page({
     this.setData({
       inputPhone:e.detail.value
     })
+    console.log('inputphone',this.data.inputPhone)
   },
   //获取验证码输入框值
   getCodeInput:function(e){
@@ -28,7 +29,7 @@ Page({
     var verifydata = { "phone": `${this.data.inputPhone}`,"code":"654321"}
     var success = function (data){
       wx.showToast({
-        title: data.message,
+        title: '发送成功',
       })
       console.log(data)
     }

@@ -7,7 +7,7 @@
   margin-left: 35rpx;
   margin-right: 35rpx;
   height: 1rpx;
-  background-color: red;
+  background-color: #f4f4f4;
 }
 .filter-page-top{
   height: 100rpx;
@@ -21,6 +21,15 @@
   height: 200rpx;
   display: flex;
   flex-wrap: wrap 
+}
+.filter-page-frame-color{
+  width: 140rpx;
+  height: 50rpx;
+  border-radius: 10rpx;
+  margin-right: 35rpx;
+  margin-top: 20rpx;
+  color: white;
+  background-color: #1ec88c
 }
 .filter-page-frame{
   width: 140rpx;
@@ -57,6 +66,14 @@
   height: 50rpx;
   width: 140rpx;
   color: #b5b5b5;
+  margin-right: 35rpx;
+}
+.filter-page-gender-color{
+  border-radius: 10rpx;
+  height: 50rpx;
+  width: 140rpx;
+  color: white;
+  background-color: #1ec88c;
   margin-right: 35rpx;
 }
 .filter-page-cneter{
