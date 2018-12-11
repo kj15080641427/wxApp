@@ -26,6 +26,7 @@ Page({
     scrollLeft: 0, //tab标题的滚动条位置
   },
   onLoad: function () {
+    console.log('12312312',wx.getStorageInfoSync())
     var that = this
     var articleTypeId=[]
     var categoryName = []
@@ -42,8 +43,8 @@ Page({
       // if(a){
       //   console.log("已缓存")
       // }else{
-      wx.setStorageSync('typeName', data.data)
-        console.log("hhhh",wx.getStorageSync('typeName'))
+      // wx.setStorageSync('typeName', data.data)
+      //   console.log("hhhh",wx.getStorageSync('typeName'))
     }
     var failType = function (e){
       console.log("错误",e)

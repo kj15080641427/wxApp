@@ -243,7 +243,7 @@ Page({
     this.setData({
       regionJSON:region,
       userInfo:userInfo,
-      avatarUrl: wx.getStorageSync("avatar") ,//头像
+      avatarUrl:userInfo.iconImage ,//头像
     })
     // console.log(this.data.regionJSON)
 
@@ -272,6 +272,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var that = this
     if (!wx.getStorageSync('index2')) {
       that.setData({
         selectInstitu:true,
@@ -283,7 +284,7 @@ Page({
     })
     console.log("time", this.data.time)
     // // 行业列表
-    var that = this
+
     var industryUrl = api.getIndustryUrl()
     var industryData = { "parentId": '0' }
     var insSuccess = function (data) {
