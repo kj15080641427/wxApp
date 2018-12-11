@@ -31,8 +31,6 @@ var EditDetail = '/client/member/update'
 
 // 行业列表地址
 var Industry = '/common/industry'
-
-
 // 获取行业列表
 function getIndustryUrl(){
   return HOST_URL+Industry
@@ -97,6 +95,17 @@ function getUserDetail(){
 function getEditDetail(){
   return HOST_URL + EditDetail
 }
+
+// 律师常去机构
+var InstituType = '/lawyer/member/institution/type/'
+function getInstitutype(){
+  return HOST_URL + InstituType
+}
+// 律师搜索页筛选条件
+var Search = '/lawyer/search/page'
+function getSearch(){
+  return HOST_URL + Search
+}
 module.exports={
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
@@ -109,5 +118,7 @@ module.exports={
   getEditDetail: getEditDetail,
   getIndustryUrl: getIndustryUrl,
   getInstitutionUrl: getInstitutionUrl,
-  getPositionUrl: getPositionUrl
+  getPositionUrl: getPositionUrl,
+  getInstitutype: getInstitutype,
+  getSearch: getSearch
 }

@@ -1,14 +1,18 @@
 // pages/search/filter/index.js
+var api = require('../../../utils/api.js')
+var wxrequest = require('../../../utils/request.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    list:['熟悉行业','基本技能','扩展技能','第二语言','常去法院','常去检察院'],
-    list2:['律师职位','所获荣誉','社会职务','增信担保','绿豆圈','商会组织'],
     select:'',
-    gender:''
+    gender:'',
+    search:'',
+    listIndex:'',
+    indexPicker:'',
+    click:false,
   },
   changeColor1:function(){
     this.setData({
@@ -55,12 +59,44 @@ Page({
       gender: '2'
     })
   },
+  getType:function(e){
+    this.setData({
+      listIndex: e.currentTarget.dataset.getindex
+    })
+    // var typeIndex = e.currentTarget.dataset.getindex;
+    console.log("listIndex", this.data.listIndex)
+  },
+  bindPickerChange:function(e){
+    var pickeridx = e.detail.value
+    // console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      indexPicker: e.detail.value,
+      // click: true
+    })
+    
+  },
+  getList:function(){
+
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+      var that = this
+      var searchUrl = api.getSearch()
+      var searchSuccess = function (data) {
+        that.setData({
+          search: data.data
+        })
+        console.log("成功", data.data)
+      }
+      var searchFail = function (e) {
+        console.log("失败", e)
+      }
+      wxrequest.requestGet(searchUrl, ' ', searchSuccess, searchFail)
+      // console.log("getInstitutype")
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -1,4 +1,6 @@
 // pages/index/quick-consultation/index.js
+var wxrequest = require('../../../utils/request.js')
+var api = require('../../../utils/api.js')
 Page({
 
   /**
@@ -52,10 +54,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      typeName: wx.getStorageSync('typeName') 
-    })
-    console.log('qqqq',wx.getStorageSync('typeName') )
+    var that = this
+    // 文章分类
+    var typeUrl = api.getArticleTypeUrl()
+    var message = ""
+    var successType = function (data) {
+      that.setData({
+        typeName: data.data,
+      })
+    }
+    var failType = function (e) {
+      console.log("错误", e)
+    }
+    wxrequest.requestGet(typeUrl, message, successType, failType)
+    console.log('qqqq',this.data.typeName)
   },
 
   /**

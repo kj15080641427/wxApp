@@ -9,23 +9,23 @@
   </view>
  <view style='background-color:white;margin-top:35rpx'>
    <view class='info-page-list'>
-    <view class='info-page-label'>用户昵称</view>
-    <input class="info-page-input" value='{{userInfo.memberName}}' bindinput='member' placeholder='输入您的昵称'>{{userInfo.memberName}}</input>
+    <view class='info-page-label'>用户名称</view>
+    <input class="info-page-input" value='{{userInfo.memberName}}' bindinput='member' placeholder='输入用户名称'>{{editMember}}</input>
   </view>
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
     <view class='info-page-label'>性别</view>
-    <picker class="info-page-input" value="{{index}}" range='{{gender}}' range-key='gender' bindchange='bindChange'  >{{gender[index]['gender']}}</picker>
+    <picker class="info-page-input" value="{{index}}" range='{{gender}}' range-key='gender' bindchange='bindChangegender'  >{{gender[index]['gender']}}</picker>
   </view>
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
     <view class='info-page-label'>出生日期</view>
-    <picker class="info-page-input" mode="date" value="{{time}}" start="1900-09-01" end="2018-09-01" bindchange="bindDateChange" >       <text wx:if="{{selecttime}}">{{userInfo.birthday}}</text><text wx:if="{{systime}}">{{date}}</text></picker>
+    <picker class="info-page-input" mode="date" value="{{time}}" start="1900-09-01" end="2018-09-01" bindchange="bindDateChange" >       <text wx:if="{{selecttime}}">{{time}}</text><text wx:if="{{systime}}">{{date}}</text></picker>
   </view>
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
     <view class='info-page-label'>所在地区</view>
-    <view class="info-page-input" bindtap="showModal"><text bindtap='showid' wx:if="{{selectAddress}}">{{region}}</text>{{name}}</view>
+    <view class="info-page-input" bindtap="showModal"><text bindtap='showid' wx:if="{{hasaddress}}" >{{userInfo.addressExtend.province}}-{{userInfo.addressExtend.city}}-{{userInfo.addressExtend.area}}</text><text>{{name}}</text></view>
     <!-- <picker class="info-page-input" mode="multiSelector"value="{{indexarea}}"  range='{{regionJSON.region}}' range-key='name' bindchange='changearea'  >{{regionJSON}}</picker> -->
     <!-- <picker class="info-page-input" mode="region" bindchange='bindRegionChange' value='{{region}}'>{{region[0]}}-{{region[1]}}-{{region[2]}}</picker> -->
   </view>
@@ -35,29 +35,29 @@
     <view class='info-page-list'>
     <view class='info-page-label'>您的行业</view>
     <!-- <input class="info-page-input" value="{{editInsTypeName}}"bindinput='insTypeName'></input> -->
-     <picker class="info-page-input" value="{{index1}}" range="{{industry}}" range-key="industryName" bindchange='changeindustry' >{{industry[index1]['industryName']}}<text wx:if="{{selectIndestry}}">选择行业</text></picker>
+     <picker class="info-page-input" style='white-space:nowrap;' value="{{index1}}" range="{{industry}}" range-key="industryName" bindchange='changeindustry' >{{industry[index1]['industryName']}}<text wx:if="{{selectIndestry}}">选择行业</text></picker>
   </view>
 </view>
 <view class='info-page-center-line'></view>
 <view style='background-color:white;'>
     <view class='info-page-list'>
     <view class='info-page-label'>您的企业</view>
-    <!-- <input class="info-page-input" value="{{editInstitutionName}}"bindinput='institutionTypeName'></input> -->
-    <picker class="info-page-input"  range="{{institu}}" range-key="institutionTypeName" bindchange='changeinstitu' >{{institu[index2]['institutionTypeName']}}<text wx:if="{{selectInstitu}}">选择企业</text></picker>
+    <input class="info-page-input" value="{{institutionName}}"bindinput='institutionTypeName'  placeholder="输入您的职位"></input>
+    <!-- <picker class="info-page-input"  range="{{institu}}" range-key="institutionTypeName" bindchange='changeinstitu' >{{institu[index2]['institutionTypeName']}}<text wx:if="{{selectInstitu}}">选择企业</text></picker> -->
   </view>
 </view>
 <view class='info-page-center-line'></view>
 <view style='background-color:white;'>
     <view class='info-page-list'>
     <view class='info-page-label'>您的职务</view>
-    <input class="info-page-input" value="{{editMemberPositionName}}"   placeholder='输入您的职位'bindinput='businessTypeName'></input>
+    <input class="info-page-input" value="{{memberPositionName}}" value = "{{memberPositionName}}"  placeholder='输入您的职位'bindinput='businessTypeName'></input>
   </view>
 </view>
 <view class='info-page-center-line'></view>
 <view style='background-color:white;'>
     <view class='info-page-list'>
     <view class='info-page-label'>您的邮箱</view>
-    <input class="info-page-input" placeholder='输入您的邮箱' value="{{userInfo.email}}" bindinput='email'></input>
+    <input class="info-page-input" placeholder='输入您的邮箱' value="{{editEmail}}" bindinput='email'></input>
   </view>
 </view>
 <view class='info-page-center-line'></view>
@@ -102,5 +102,3 @@
 
 <!-- <view class="box">{{name}}</view> -->
 </view>
-
-<button bindtap = "showid">ididid</button>>

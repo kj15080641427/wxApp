@@ -35,7 +35,7 @@ Page({
     }
     var fail = function (e){
       wx.showToast({
-        title: '发送失败',
+        title: e.message,
         icon: 'none'
       })
       console.log(e)
@@ -65,23 +65,49 @@ Page({
     var logindata = { "phone": `${this.data.inputPhone}`, "verifyCode": `${this.data.inputCode}`,"code":"654321"}
     var success = function (data){
       console.log(data)
-      if(data.code == 0){
+      // if(data.code == 0){
         wx.showToast({
           title: '注册成功',
         })
+        setTimeout(function(){
+          wx.navigateBack({
+            delta:2
+          })
+        },1000)
+
+      var that = this
+      // 获取用户memberID信息
+      var userInfoUrl = api.getUserInfo()
+      var message = ''
+      var idData = wx.getStorageSync("token")
+      var success = function (data) {
+        wx.setStorage({
+          key: 'memberId',
+          data: data.data.memberId,
+        })
+      }
+      var fail = function (e) {
+        console.log(e)
+      }
+      wxrequest.requestGet(userInfoUrl, message, success, fail)
+
         wx.setStorageSync("token", data.data.token)
         console.log("注册成功",data)
         console.log("token111", wx.getStorageSync("token"))
-      }else{
-        wx.showToast({
-          title: '注册失败',
-          icon: 'none'
-        })
-      }
+      // }else{
+      //   wx.showToast({
+      //     title: '注册失败',
+      //     icon: 'none'
+      //   })
+      // }
       // var loginToken = wx.getStorage({"token":data.data.token})
       // console.log("token2",loginToken)
     }
     var fail = function (data){
+      wx.showToast({
+        title: data ? data : '注册失败',
+        icon:'none'
+      })
       console.log(data)
     }
     // 

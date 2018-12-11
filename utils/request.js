@@ -36,7 +36,7 @@ function requestLoading(url, params, message, success, fail) {
       if (res.statusCode == 200 && res.data.code ==0) {
         success(res.data)
       } else {
-        fail()
+        fail(res.data)
       }
     },
     fail: function (res) {
@@ -45,7 +45,7 @@ function requestLoading(url, params, message, success, fail) {
         wx.hideLoading()
       }
       console.log('request',e)
-      fail()
+      fail(res)
     },
     complete: function (res) {
 
@@ -78,10 +78,10 @@ function requestPost(url, params, message, success, fail) {
       if (message != "") {
         wx.hideLoading()
       }
-      if (res.statusCode == 200) {
+      if (res.statusCode == 200 && res.data.code == 0) {
         success(res.data)
       } else {
-        fail()
+        fail(res)
       }
     },
     fail: function (res) {
@@ -89,7 +89,7 @@ function requestPost(url, params, message, success, fail) {
       if (message != "") {
         wx.hideLoading()
       }
-      fail()
+      fail(res)
     },
     complete: function (res) {
 
@@ -120,10 +120,10 @@ function requestGet(url,message, success, fail) {
       if (message != "") {
         wx.hideLoading()
       }
-      if (res.statusCode == 200 ) {
+      if (res.statusCode == 200 && res.data.code==0) {
         success(res.data)
       } else {
-        fail()
+        fail(res)
       }
     },
     fail: function (res) {
@@ -131,7 +131,7 @@ function requestGet(url,message, success, fail) {
       if (message != "") {
         wx.hideLoading()
       }
-      fail()
+      fail(res)
     },
     complete: function (res) {
 
