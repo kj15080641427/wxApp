@@ -89,9 +89,11 @@
 .filter-page-icon{
   width: 30rpx;
   height: 30rpx;
-  margin-right: 35rpx;
+  margin-right: 60rpx;
 }
 .filter-page-button-view{
+  position:fixed;
+  bottom: 0;
   background-color: white;
   margin-top: 35rpx;
   height: 140rpx;
@@ -109,3 +111,19 @@ button{
   color: white;
   line-height: 94rpx;
 }
+.filter-page-picker{
+  width:600rpx;
+  height:60rpx;
+  line-height:60rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.filter-page-picker-text{
+  margin-left:35rpx;
+  color:black;
+}
+/* picker{
+  display: flex;
+  justify-content: space-between;
+} */

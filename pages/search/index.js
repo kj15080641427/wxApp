@@ -1,18 +1,43 @@
 // pages/search/index.js
+var api = require('../../utils/api.js')
+var wxrequest = require('../../utils/request.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    searchTab:['综合排序','擅长领域','所在地区','筛选']
-  },
 
+  },
+  gotoFilter:function(){
+    wx.navigateTo({
+      url: '../search/filter/index',
+    })
+  },
+  // confirm(e)
+  pc:function() {
+    var searchLawyerUrl = api.getSearchLawyer() + "1/10"
+    var searchlawyerData = this.data.dataJSON ? this.data.dataJSON : ''
+    console.log("上传参数")
+    var success = function (data) {
+      console.log("搜索成功", data)
+      wx.setStorageSync("lawyerList", data.data)
+      wx.navigateTo({
+        url: 'lawyer-list/index',
+      })
+    }
+    var fail = function (e) {
+      console.log(e)
+    }
+    console.log("筛选参数", searchlawyerData)
+    wxrequest.request(searchLawyerUrl, searchlawyerData, success, fail)
+    console.log(123456)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+   
   },
 
   /**
@@ -26,7 +51,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log("筛选参数", this.data.dataJSON ? this.data.dataJSON : '无')
   },
 
   /**

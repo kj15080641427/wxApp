@@ -1,0 +1,128 @@
+<!--pages/search/lawyer-detail/index.wxml-->
+<view>
+  <image class='law-page-background'></image>
+</view>
+<view style='background-color:white;padding-right:35rpx;'>
+  <image class='law-page-avatar'></image>
+  <view class='law-page-name'>
+    <view class='law-flex law-page-name-right'>
+      <view>{{lawyerCache[index].memberName}} <text class='law-page-min-size'> ({{lawyerCache[index].memberPositionName}})</text></view>
+      <view class='law-page-gender-view'>
+        <image src='../../../image/my_icon@3x/mine_icon_04_3x.png' class='law-gender-icon'></image>
+        <view>34岁</view>
+      </view>
+    </view>
+    <view class='law-page-min-size law-page-martop'> {{lawyerCache[index].institutionName}}<text style='color:#b5b5b5'>|</text> 执业七年</view>
+  </view>
+
+  <view class='law-info-flex'>
+      <view class='law-page-address'>
+        <image src='../../../image/search_icon@3x/Personalhomepage-20@3x.png' class='law-address-icon'></image>
+        湖南长沙
+      </view>
+      <view class='law-page-LEX'>
+        <image src='../../../image/search_icon@3x/Personalhomepage-05@3x.png' class='law-address-icon'></image>
+        <text style='margin-left:10rpx;'>LEX提供最高100,000元服务担保</text>
+      </view>
+  </view>
+
+  <view class='law-honor-flex'>
+    <view class='law-page-honor'>长沙市女律师协会理事</view>
+    <view  class='law-page-honor'>律师协会理事</view>
+  </view>
+
+</view>
+
+<view class='law-page-attest'>
+  <view >认证标签</view>
+  <image class='law-page-attest-icon'></image>
+</view>
+
+<!-- 简介 -->
+<view class='law-page-Introduction-view'>
+  <view class='law-page-Introduction'> 
+    <image src='../../../image/search_icon@3x/Personalhomepage-06@3x.png' class='law-address-icon law-icon-center'></image>
+  </view>
+</view>
+
+<!-- 律师名片 -->
+<view class='law-page-tab'>
+  <view>服务信息</view>
+  <view>案例展示</view>
+  <view>案例扩展</view>
+</view>
+
+<!-- 擅长领域 -->
+
+<view class='law-flex' style='background-color:white'>
+  <view class='law-long-text'>擅长领域</view>
+
+  <view class='law-center-icon'>
+<!-- 1 -->
+    <view class='law-space-flex'>
+      <view class='law-flex'>
+        <image src='../../../image/search_icon@3x/Personalhomepage-10@3x.png' class='law-num-icon'></image> 
+        <view class='law-margin-left'>sdasdasdsa</view>
+      </view>
+      <view class='law-center-icon-text'>100%</view>
+    </view>
+    <view class='law-page-line'></view>
+<!-- 2 -->
+      <view class='law-space-flex'>
+      <view class='law-flex'>
+        <image src='../../../image/search_icon@3x/Personalhomepage-11@3x.png' class='law-num-icon'></image> 
+        <view class='law-margin-left'>sdasdasdsa</view>
+      </view>
+      <view class='law-center-icon-text'>100%</view>
+    </view>
+    <view class='law-page-line'></view>
+<!-- 3 -->
+      <view class='law-space-flex'>
+      <view class='law-flex'>
+        <image src='../../../image/search_icon@3x/Personalhomepage-12@3x.png' class='law-num-icon'></image> 
+        <view class='law-margin-left'>sdasdasdsa</view>
+      </view>
+      <view class='law-center-icon-text'>100%</view>
+    </view>
+    <view class='law-page-line'></view>
+
+  </view>
+</view>
+
+
+<!-- 专业技能 -->
+<view style='margin-top:35rpx;'>
+  <view class='law-flex' style='background-color:white'>
+    <view class='law-long-text'>擅长领域</view>
+    <image class='law-page-skill' src='' style='margin-left:35rpx;'></image>
+    <image class='law-page-skill' src=''></image>
+    <image class='law-page-skill' src=''></image>
+    <image class='law-page-skill' src=''></image>
+  </view>
+</view>
+
+<!-- 熟悉行业 -->
+<view style='margin-top:35rpx;'>
+  <view class='law-flex' style='background-color:white'>
+    <view class='law-long-text'>熟悉行业</view>
+
+  </view>
+</view>
+
+<!-- 语言能力 -->
+<view style='margin-top:35rpx;'>
+  <view class='law-flex' style='background-color:white'>
+    <view class='law-long-text'>语言能力</view>
+
+  </view>
+</view>
+
+<!-- 其他技能 -->
+<view style='margin-top:35rpx;'>
+  <view class='law-flex' style='background-color:white'>
+    <view class='law-long-text'>其他技能</view>
+
+  </view>
+</view>
+
+<!--  -->

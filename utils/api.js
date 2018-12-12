@@ -106,6 +106,16 @@ var Search = '/lawyer/search/page'
 function getSearch(){
   return HOST_URL + Search
 }
+//搜索律师
+var SearchLawyer = '/lawyer/search/'
+function getSearchLawyer(){
+  return HOST_URL + SearchLawyer
+}
+// 获取律师信息
+var LawyerInfo = '/lawyer/member/homepage/card/'
+function getlawyerInfo(){
+  return HOST_URL + LawyerInfo
+}
 module.exports={
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
@@ -120,5 +130,7 @@ module.exports={
   getInstitutionUrl: getInstitutionUrl,
   getPositionUrl: getPositionUrl,
   getInstitutype: getInstitutype,
-  getSearch: getSearch
+  getSearch: getSearch,
+  getSearchLawyer: getSearchLawyer,
+  getlawyerInfo: getlawyerInfo,
 }

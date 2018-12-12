@@ -2,13 +2,25 @@
 <view class='search-input-height'>
   <view class='index-search '>
     <image src='../../image/homeicon_3x/homepage_01_3x.png' style='width:40rpx;height:40rpx;margin-right:20rpx ' ></image>
-    <input placeholder='搜索律师姓名' placeholder-style='color:#ffffff;' confirm-type="search"  ></input>
+    <input placeholder='搜索律师姓名' placeholder-style='color:#ffffff;' confirm-type="search" bindconfirm="confirm" ></input>
   </view>
 </view>
 
 <view class='search-tab-list'>
-  <view wx:for="{{searchTab}}" class='search-tab'>
-    <view class='search-tab-text'>{{item}}</view>
+  <view  class='search-tab'>
+    <view class='search-tab-text'>综合排序</view>
+    <image src='' style='width:20rpx;height:20rpx'></image>
+  </view>
+  <view  class='search-tab'>
+    <view class='search-tab-text'>擅长领域</view>
+    <image src='' style='width:20rpx;height:20rpx'></image>
+  </view>
+  <view  class='search-tab'>
+    <view class='search-tab-text'>所在地区</view>
+    <image src='' style='width:20rpx;height:20rpx'></image>
+  </view>
+  <view  class='search-tab' bindtap='gotoFilter'>
+    <view class='search-tab-text'>筛选</view>
     <image src='' style='width:20rpx;height:20rpx'></image>
   </view>
 </view>
@@ -34,6 +46,6 @@
    <view class='watch-page-lower'>
     <view class='watchlist-page-label'>认证标签</view>
     <image src='../../../image/my_icon@3x/mine_icon_08_3x.png' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
-    <image src='../../../image/my_icon@3x/mine_icon_09_3x.png' style='width:35rpx;height:35rpx;margin-left:20rpx'></image>
-    <image src='../../../image/my_icon@3x/mine_icon_10_3x.png' style='width:35rpx;height:35rpx;margin-left:20rpx'></image>
    </view>
+
+   <button bindtap='pc'>pc搜索</button>
