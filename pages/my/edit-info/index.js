@@ -36,7 +36,7 @@ Page({
     editinstitutionId: userInfo.institutionId,//企业id
     editaddress: userInfo.areaId,
     // editOrganizations: userInfo.editOrganizations,
-    time: userInfo.birthday.split(" ")[0],
+    time: userInfo.birthday,
     //地区
     citysData: cityData.citysData,
     provinces: [],
@@ -257,7 +257,7 @@ Page({
   onShow: function () {
     var that = this
     that.setData({
-      time: wx.getStorageSync("userInfo").birthday.split(" ")[0],
+      time: wx.getStorageSync("userInfo").birthday,
     })
     console.log(wx.getStorageInfoSync())
     // // 行业列表

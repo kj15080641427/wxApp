@@ -169,7 +169,6 @@ Page({
   // 页面跳转
   gotoConstultation:function(){
     if(wx.getStorageSync("token")){
-    // // 缓存到本地
     wx.navigateTo({
       url:'../index/consultation/index?id=1'
     })
