@@ -1,7 +1,7 @@
 // pages/my/index.js
 var api = require('../../utils/api.js')
 var wxrequest = require('../../utils/request.js')
-var region = require('../../region.js')
+var time = require('../../utils/util.js');
 Page({
 
   /**
@@ -10,8 +10,7 @@ Page({
   data: {
     avatar:'../../image/my_icon@3x/mine_icon_02_3x.png',
     userInfo:wx.getStorageSync("userInfo"),
-    institu:'',
-    industry:'',
+    age:''
   },
   // 登陆
   login:function(){
@@ -60,11 +59,26 @@ Page({
    */
   // 'apabfdc34cc00042c2991bd59b9e8a1ae8ap'
   onLoad: function (options) {
-    console.log(region)
     var that = this
+    if (that.data.userInfo && that.data.userInfo.birthday) {
+      var now = time.formatTime(new Date()).split("/")[0]
+      // var nowyear = now.split("/")[0]
+      // console.log(nowyear)
+      var old = that.data.userInfo.birthday.split("-")[0]
+      var year = Number(now) - Number(old)
+      that.setData({
+        age: year
+      })
+    }
+    if(wx.getStorageInfoSync().keys.length<=1){
+      wx.clearStorage()
+      // console.log(new Date().toLocaleString())
+    }
+
     // 获取用户memberID信息
     var userInfoUrl = api.getUserInfo()
     var message = ''
+    var idData = wx.getStorageSync("token")
     var success = function(data){
       wx.setStorage({
         key: 'memberId',
@@ -74,26 +88,36 @@ Page({
     var fail = function(e){
       console.log(e)
     }
+    if(wx.getStorageSync("token")){
     wxrequest.requestGet(userInfoUrl, message,success,fail)
-
-    if (wx.getStorageSync("token")){
+    }
       // 获取用户详情
       // console.log(wx.getStorageSync("memberId"))
       var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
       var userData = wx.getStorageSync("memberId")
       var message = ''
       var successDetail = function (dataDetail) {
-        wx.setStorage({
-          key: 'userInfo',
-          data: dataDetail.data,
-        })
+       that.setData({
+         userInfo:dataDetail.data
+       })
         console.log("userinfo", wx.getStorageSync("userInfo"))
       }
       var failDetail = function (eDetail) {
-        console.log("e", eDetail)
+        if(eDetail.code == 10002){
+          wx.showToast({
+            title: '请重新登陆'+eDetail.message,
+          })
+          wx.clearStorage()
+        }
+        // wx.showToast({
+        //   title: '请重新登陆' + eDetail.message,
+        // })
+        console.log("e", eDetail.code)
       }
+      if(wx.getStorageSync("token")){
       wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
-    }
+      }
+
   },
 
   /**
@@ -107,26 +131,60 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    // console.log(wx.getStorageInfoSync())
     var that = this
+    if(that.data.userInfo && that.data.userInfo.birthday){
+      var now = time.formatTime(new Date()).split("/")[0]
+      // var nowyear = now.split("/")[0]
+      // console.log(nowyear)
+      var old = that.data.userInfo.birthday.split("-")[0]
+      var year = Number(now) - Number(old)
+      that.setData({
+        age: year
+      })
+    }
+    // 获取用户memberID信息
+    var userInfoUrl = api.getUserInfo()
+    var message = ''
+    var idData = wx.getStorageSync("token")
+    var success = function (data) {
+      wx.setStorage({
+        key: 'memberId',
+        data: data.data.memberId,
+      })
+    }
+    var fail = function (e) {
+      if (eDetail.code == 10002) {
+        // wx.showToast({
+        //   title: '请重新登陆show' + eDetail.message,
+        // })
+        wx.clearStorage()
+      }
+      console.log(e)
+    }
     if (wx.getStorageSync("token")) {
+    wxrequest.requestGet(userInfoUrl, message, success, fail)
+    }
+    // if (wx.getStorageSync("token")) {
       // 获取用户详情
       console.log(wx.getStorageSync("memberId"))
       var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
       var userData = wx.getStorageSync("memberId")
       var message = ''
       var successDetail = function (dataDetail) {
+        that.setData({
+          userInfo: dataDetail.data
+        })
         wx.setStorage({
           key: 'userInfo',
           data: dataDetail.data,
         })
-        that.setData({
-          userInfo: wx.getStorageSync("userInfo")
-        })
-        console.log("userinfo", wx.getStorageSync("userInfo"))
+        console.log("userinfo", that.data.userInfo)
       }
       var failDetail = function (eDetail) {
         console.log("e", eDetail)
       }
+    if (wx.getStorageSync("token")) {
       wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
     }
   },

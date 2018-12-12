@@ -95,6 +95,27 @@ function getUserDetail(){
 function getEditDetail(){
   return HOST_URL + EditDetail
 }
+
+// 律师常去机构
+var InstituType = '/lawyer/member/institution/type/'
+function getInstitutype(){
+  return HOST_URL + InstituType
+}
+// 律师搜索页筛选条件
+var Search = '/lawyer/search/page'
+function getSearch(){
+  return HOST_URL + Search
+}
+//搜索律师
+var SearchLawyer = '/lawyer/search/'
+function getSearchLawyer(){
+  return HOST_URL + SearchLawyer
+}
+// 获取律师信息
+var LawyerInfo = '/lawyer/member/homepage/card/'
+function getlawyerInfo(){
+  return HOST_URL + LawyerInfo
+}
 module.exports={
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
@@ -107,5 +128,9 @@ module.exports={
   getEditDetail: getEditDetail,
   getIndustryUrl: getIndustryUrl,
   getInstitutionUrl: getInstitutionUrl,
-  getPositionUrl: getPositionUrl
+  getPositionUrl: getPositionUrl,
+  getInstitutype: getInstitutype,
+  getSearch: getSearch,
+  getSearchLawyer: getSearchLawyer,
+  getlawyerInfo: getlawyerInfo,
 }

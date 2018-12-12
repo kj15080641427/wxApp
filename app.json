@@ -1,11 +1,11 @@
 {
   "pages":[
     "pages/my/index",
-    "pages/my/edit-info/index",
-    "pages/test2/test2",
-    "pages/test/test",
-    "pages/search/filter/index",
+    "pages/search/lawyer-list/index",
     "pages/search/index",
+    "pages/search/lawyer-detail/index",
+    "pages/search/filter/index",
+    "pages/my/edit-info/index",
     "pages/index/index",
     "pages/my/order-chat/index",
     "pages/index/quick-consultation/index",
@@ -36,7 +36,7 @@
         "iconPath":"image/homeicon_max/homepage_16_max.png"
       },
       {
-        "pagePath": "pages/search/filter/index",
+        "pagePath": "pages/search/index",
         "text": "找律师",
         "selectedIconPath":"image/homeicon_max/homepage_17_max.png",
         "iconPath":"image/homeicon_max/homepage_18_max.png"

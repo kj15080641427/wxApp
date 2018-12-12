@@ -26,6 +26,7 @@ Page({
     scrollLeft: 0, //tab标题的滚动条位置
   },
   onLoad: function () {
+    console.log('12312312',wx.getStorageInfoSync())
     var that = this
     var articleTypeId=[]
     var categoryName = []
@@ -35,12 +36,21 @@ Page({
     var typeUrl = api.getArticleTypeUrl()
     var message = ""
     var successType = function(data){
+
       that.setData({
           popular: data.data,
         })
+
+      // var a = wx.getStorageSync('typeName')
+      // if(a){
+      //   console.log("已缓存")
+      // }else{
+      // wx.setStorageSync('typeName', data.data)
+      //   console.log("hhhh",wx.getStorageSync('typeName'))
+
     }
     var failType = function (e){
-      console.log("错误",e)
+      console.log("文章分类错误",e)
     }
     wxrequest.requestGet(typeUrl, message, successType, failType)
 
@@ -57,7 +67,7 @@ Page({
       })
     }
     var failList = function (e){
-      console.log("list",e)
+      console.log("解决方案错误",e)
     }
     wxrequest.requestPost(listUrl,listData, message, successList,failList)
     // 消息

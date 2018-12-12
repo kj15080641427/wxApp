@@ -43,7 +43,7 @@
   justify-content: center;
   position: relative;
 }
-.my-page-gender{
+.my-page-gender-girl{
   display: flex;
   align-items: center;
   margin-top: 35rpx;
@@ -52,6 +52,19 @@
   padding-right: 15rpx;
   margin-left: 150rpx;
   background-color: #f9c0e7;
+  font-size: 20rpx;
+  color: white;
+  position: absolute
+}
+.my-page-gender-boy{
+  display: flex;
+  align-items: center;
+  margin-top: 35rpx;
+  border-radius: 10rpx;
+  padding-left:15rpx;
+  padding-right: 15rpx;
+  margin-left: 150rpx;
+  background-color: #76cbbf;
   font-size: 20rpx;
   color: white;
   position: absolute

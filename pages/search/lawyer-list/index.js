@@ -1,18 +1,19 @@
-// pages/search/index.js
-var api = require('../../utils/api.js')
-var wxrequest = require('../../utils/request.js')
-var formatTime = require('../../utils/util.js')
+// pages/search/lawyerList/index.js
+var formatTime = require('../../../utils/util.js')
+var api = require('../../../utils/api.js')
+var wxrequest = require('../../../utils/request.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    lawyerList: '',
-    year: '',
+    lawyerList:'',
+    year:'',
+    // index:''
   },
-  // 获取index
-  getIndex: function (e) {
+// 获取index
+  getIndex:function(e){
     // this.setData({    "pages/search/lawyer-list/index",
     //   index: e.currentTarget.dataset
     // })
@@ -22,12 +23,10 @@ Page({
     var lawyerInfoUrl = api.getlawyerInfo() + this.data.lawyerList[e.currentTarget.dataset.index].memberId
     var lawyerData = this.data.lawyerList[e.currentTarget.dataset.index].memberId
     var success = function (data) {
-      console.log("律师详细信息", data)
+      console.log("律师详细信息",data)
       wx.navigateTo({
-        url: 'lawyer-detail/index?lawyerInfo=' + data.data + '&listIndex=' + index,
+        url: '../lawyer-detail/index?lawyerInfo=' +JSON.stringify(data.data)+ '&listIndex=' + index ,
       })
-      console.log("JSONnnnnnnnnn", data.data)
-      console.log("indexxxxxxxxxxx",index)
     }
     var fail = function (e) {
       wx.showToast({
@@ -35,43 +34,18 @@ Page({
       })
       console.log(e)
     }
-    wxrequest.requestGetpar(lawyerInfoUrl, lawyerData, '', success, fail)
+    wxrequest.requestGetpar(lawyerInfoUrl, lawyerData,'', success, fail)
   },
-  // 
-  gotoFilter:function(){
-    wx.navigateTo({
-      url: '../search/filter/index',
-    })
-  },
-  // confirm(e)
-  pc:function() {
-    var that = this
-    var searchLawyerUrl = api.getSearchLawyer() + "1/10"
-    var searchlawyerData = this.data.dataJSON ? this.data.dataJSON : ''
-    console.log("上传参数")
-    var success = function (data) {
-      console.log("搜索成功", data)
-      that.setData({
-        lawyerList:data.data.list
-      })
-    wx.setStorageSync("lawyerList", data.data.list)
-      // wx.navigateTo({
-      //   url: 'lawyer-list/index',
-      // })
-    }
-    var fail = function (e) {
-      console.log(e)
-    }
-    console.log("筛选参数", searchlawyerData)
-    wxrequest.request(searchLawyerUrl, searchlawyerData, success, fail)
-    console.log(123456)
+// 律师详情
+  getLawyerInfo:function(){
+
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setData({
-      lawyerList: wx.getStorageSync("lawyerList").list ? wx.getStorageSync("lawyerList").list: ''
+      lawyerList:wx.getStorageSync("lawyerList").list
     })
     console.log("律师列表", this.data.lawyerList)
   },
@@ -90,14 +64,13 @@ Page({
     var yearList = []
     // console.log(this.data.lawyerList[1].beginPracticeDate.split("-")[0])
     // console.log(formatTime.formatTime(new Date()).split("/")[0] - this.data.lawyerList[1].beginPracticeDate.split("-")[0])
-    this.data.lawyerList.map? this.data.lawyerList.map(function (item) {
-      yearList.push(formatTime.formatTime(new Date()).split("/")[0] - item.beginPracticeDate.split("-")[0])
-    }) : ''
+    this.data.lawyerList.map(function(item){
+      yearList.push(formatTime.formatTime(new Date()).split("/")[0]-item.beginPracticeDate.split("-")[0])
+    })
     this.setData({
       year: yearList
     })
-    console.log("筛选参数", this.data.dataJSON ? this.data.dataJSON : '无')
-    console.log("huancun", wx.getStorageSync("lawyerList"))
+    console.log("lawyerList",this.data.lawyerList)
   },
 
   /**

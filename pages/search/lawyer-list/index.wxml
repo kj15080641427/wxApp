@@ -1,30 +1,30 @@
-<!--pages/search/index.wxml-->
-<view class='search-input-height'>
-  <view class='index-search '>
-    <image src='../../image/homeicon_3x/homepage_01_3x.png' style='width:40rpx;height:40rpx;margin-right:20rpx ' ></image>
-    <input placeholder='搜索律师姓名' placeholder-style='color:#ffffff;' confirm-type="search" bindconfirm="confirm" ></input>
+<!--pages/search/lawyerList/index.wxml-->
+<!-- <view style='background-color:white;margin-left:35rpx;margin-right:35rpx'>
+   <view class='watchlist-page'>
+  <view class='watchlist-page-flex'>
+    <view class='watchlist-page-left'>
+      <image class='watchlist-page-avatar' src="{{lawyerList[2].iconImage}}"></image>
+      <view class='watchlist-page-practice'>执业17年</view>
+
+    </view>
+    <view class='watchlist-page-right'>
+      <view class='watchlist-page-name'>{{lawyerList[2].memberName}}<label class='watchlist-page-firm'>({{lawyerList[2].memberPositionName}})</label></view>
+      <view class='watchlist-page-address'>{{lawyerList[2].region}} | {{lawyerList[2].institutionName}}</view>
+      <view class='watchlist-page-adept'>{{lawyerList[2].description}} </view>
+    </view>
+
   </view>
 </view>
-
-<view class='search-tab-list'>
-  <view  class='search-tab'>
-    <view class='search-tab-text'>综合排序</view>
-    <image src='' style='width:20rpx;height:20rpx'></image>
-  </view>
-  <view  class='search-tab'>
-    <view class='search-tab-text'>擅长领域</view>
-    <image src='' style='width:20rpx;height:20rpx'></image>
-  </view>
-  <view  class='search-tab'>
-    <view class='search-tab-text'>所在地区</view>
-    <image src='' style='width:20rpx;height:20rpx'></image>
-  </view>
-  <view  class='search-tab' bindtap='gotoFilter'>
-    <view class='search-tab-text'>筛选</view>
-    <image src='' style='width:20rpx;height:20rpx'></image>
-  </view>
+<view style='background-color:white;width:700rpx;margin-left:25rpx'>
+  <view class='watchlist-page-line'></view>
 </view>
-
+   <view class='watch-page-lower'>
+    <view class='watchlist-page-label'>认证标签</view>
+    <view wx:for="{{lawyerList[2].orgTags}}">
+      <image src='{{item.image}}' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
+    </view>
+   </view>
+</view> -->
 
 <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}" bindtap='getLawyerInfo' data-index="{{index}}" catchtap='getIndex'>
    <view class='watchlist-page'>
@@ -53,4 +53,3 @@
    </view>
 </view>
 
-   <button bindtap='pc'>pc搜索</button>

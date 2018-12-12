@@ -36,7 +36,7 @@ function requestLoading(url, params, message, success, fail) {
       if (res.statusCode == 200 && res.data.code ==0) {
         success(res.data)
       } else {
-        fail()
+        fail(res.data)
       }
     },
     fail: function (res) {
@@ -45,7 +45,7 @@ function requestLoading(url, params, message, success, fail) {
         wx.hideLoading()
       }
       console.log('request',e)
-      fail()
+      fail(res)
     },
     complete: function (res) {
 
@@ -78,10 +78,10 @@ function requestPost(url, params, message, success, fail) {
       if (message != "") {
         wx.hideLoading()
       }
-      if (res.statusCode == 200) {
+      if (res.statusCode == 200 && res.data.code == 0) {
         success(res.data)
       } else {
-        fail()
+        fail(res)
       }
     },
     fail: function (res) {
@@ -89,7 +89,7 @@ function requestPost(url, params, message, success, fail) {
       if (message != "") {
         wx.hideLoading()
       }
-      fail()
+      fail(res)
     },
     complete: function (res) {
 
@@ -120,10 +120,10 @@ function requestGet(url,message, success, fail) {
       if (message != "") {
         wx.hideLoading()
       }
-      if (res.statusCode == 200 ) {
+      if (res.statusCode == 200 && res.data.code==0) {
         success(res.data)
       } else {
-        fail()
+        fail(res)
       }
     },
     fail: function (res) {
@@ -131,7 +131,91 @@ function requestGet(url,message, success, fail) {
       if (message != "") {
         wx.hideLoading()
       }
-      fail()
+      fail(res)
+    },
+    complete: function (res) {
+
+    },
+  })
+}
+
+// GET 
+function requestGet(url, message, success, fail) {
+  wx.showNavigationBarLoading()
+  if (message != "") {
+    wx.showLoading({
+      title: message,
+    })
+  }
+  wx.request({
+    url: url,
+    // data: params,
+    header: {
+      'Content-Type': 'application/json',
+      'device': JSON.stringify(device),
+      'X-Token': wx.getStorageSync("token")
+      // 'content-type': 'application/x-www-form-urlencoded'
+    },
+    method: 'GET',
+    success: function (res) {
+      wx.hideNavigationBarLoading()
+      if (message != "") {
+        wx.hideLoading()
+      }
+      if (res.statusCode == 200 && res.data.code == 0) {
+        success(res.data)
+      } else {
+        fail(res)
+      }
+    },
+    fail: function (res) {
+      wx.hideNavigationBarLoading()
+      if (message != "") {
+        wx.hideLoading()
+      }
+      fail(res)
+    },
+    complete: function (res) {
+
+    },
+  })
+}
+
+// GET para
+function requestGetpar(url, params, message, success, fail) {
+  wx.showNavigationBarLoading()
+  if (message != "") {
+    wx.showLoading({
+      title: message,
+    })
+  }
+  wx.request({
+    url: url,
+    data: params,
+    header: {
+      'Content-Type': 'application/json',
+      'device': JSON.stringify(device),
+      'X-Token': wx.getStorageSync("token")
+      // 'content-type': 'application/x-www-form-urlencoded'
+    },
+    method: 'GET',
+    success: function (res) {
+      wx.hideNavigationBarLoading()
+      if (message != "") {
+        wx.hideLoading()
+      }
+      if (res.statusCode == 200 && res.data.code == 0) {
+        success(res.data)
+      } else {
+        fail(res)
+      }
+    },
+    fail: function (res) {
+      wx.hideNavigationBarLoading()
+      if (message != "") {
+        wx.hideLoading()
+      }
+      fail(res)
     },
     complete: function (res) {
 
@@ -143,4 +227,5 @@ module.exports = {
   requestLoading: requestLoading,
   requestGet: requestGet,
   requestPost:requestPost,
+  requestGetpar: requestGetpar,
 }

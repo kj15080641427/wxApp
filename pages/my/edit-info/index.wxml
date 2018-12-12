@@ -10,7 +10,7 @@
  <view style='background-color:white;margin-top:35rpx'>
    <view class='info-page-list'>
     <view class='info-page-label'>用户名称</view>
-    <input class="info-page-input" value='{{userInfo.memberName}}' bindinput='member' placeholder='输入用户名称'>{{userInfo.memberName}}</input>
+    <input class="info-page-input" value='{{userInfo.memberName}}' bindinput='member' placeholder='输入用户名称'>{{editMember}}</input>
   </view>
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
@@ -35,29 +35,29 @@
     <view class='info-page-list'>
     <view class='info-page-label'>您的行业</view>
     <!-- <input class="info-page-input" value="{{editInsTypeName}}"bindinput='insTypeName'></input> -->
-     <picker class="info-page-input" value="{{index1}}" range="{{industry}}" range-key="industryName" bindchange='changeindustry' >{{industry[index1]['industryName']}}<text wx:if="{{selectIndestry}}">选择行业</text></picker>
+     <picker class="info-page-input" style='white-space:nowrap;' value="{{index1}}" range="{{industry}}" range-key="industryName" bindchange='changeindustry' >{{industry[index1]['industryName']}}<text wx:if="{{selectIndestry}}">选择行业</text></picker>
   </view>
 </view>
 <view class='info-page-center-line'></view>
 <view style='background-color:white;'>
     <view class='info-page-list'>
     <view class='info-page-label'>您的企业</view>
-    <!-- <input class="info-page-input" value="{{editInstitutionName}}"bindinput='institutionTypeName'></input> -->
-    <picker class="info-page-input"  range="{{institu}}" range-key="institutionTypeName" bindchange='changeinstitu' >{{institu[index2]['institutionTypeName']}}<text wx:if="{{selectInstitu}}">选择企业</text></picker>
+    <input class="info-page-input" value="{{institutionName}}"bindinput='institutionTypeName'  placeholder="输入您的职位"></input>
+    <!-- <picker class="info-page-input"  range="{{institu}}" range-key="institutionTypeName" bindchange='changeinstitu' >{{institu[index2]['institutionTypeName']}}<text wx:if="{{selectInstitu}}">选择企业</text></picker> -->
   </view>
 </view>
 <view class='info-page-center-line'></view>
 <view style='background-color:white;'>
     <view class='info-page-list'>
     <view class='info-page-label'>您的职务</view>
-    <input class="info-page-input" value="{{editMemberPositionName}}"   placeholder='输入您的职位'bindinput='businessTypeName'></input>
+    <input class="info-page-input" value="{{memberPositionName}}" value = "{{memberPositionName}}"  placeholder='输入您的职位'bindinput='businessTypeName'></input>
   </view>
 </view>
 <view class='info-page-center-line'></view>
 <view style='background-color:white;'>
     <view class='info-page-list'>
     <view class='info-page-label'>您的邮箱</view>
-    <input class="info-page-input" placeholder='输入您的邮箱' value="{{userInfo.email}}" bindinput='email'>{{userInfo.email}}</input>
+    <input class="info-page-input" placeholder='输入您的邮箱' value="{{editEmail}}" bindinput='email'></input>
   </view>
 </view>
 <view class='info-page-center-line'></view>

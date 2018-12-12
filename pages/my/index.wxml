@@ -14,12 +14,12 @@
     </view>
     <view class='my-page-textgenter'>
       <view class='my-page-text' style='font-weight:bold'>{{userInfo.memberName}}</view>
-      <view class='my-page-gender'>
-        <image src='../../image/my_icon@3x/mine_icon_04_3x.png' style='width:20rpx;height:20rpx'></image>
-        <text>18岁</text>
+      <view class="{{userInfo.sex == 2 ? 'my-page-gender-girl' : 'my-page-gender-boy'}}">
+        <image src="{{userInfo.sex == 2 ? '../../image/my_icon@3x/mine_icon_04_3x.png' : '../../image/my_icon@3x/mine_icon_03_3x.png'}}" style='width:20rpx;height:20rpx'></image>
+        <text>{{age}}岁</text>
       </view>
     </view>
-    <view class='my-page-text' style='font-size:30rpx'>湖南常德</view>
+    <view class='my-page-text' style='font-size:30rpx'>{{userInfo.addressExtend['province']}}{{userInfo.addressExtend['city']}}</view>
     <view class='my-page-unions'>
       <view class='my-page-unions-detail'>中国浙商会湖南分会</view>
       <view class='my-page-unions-detail'>中国浙商会湖南分会</view>
