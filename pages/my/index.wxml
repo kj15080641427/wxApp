@@ -14,7 +14,7 @@
     </view>
     <view class='my-page-textgenter'>
       <view class='my-page-text' style='font-weight:bold'>{{userInfo.memberName}}</view>
-      <view class="{{userInfo.sex == 2 ? 'my-page-gender-girl' : 'my-page-gender-boy'}}">
+      <view wx:if="{{userInfo.memberName}}" class="{{userInfo.sex == 2 ? 'my-page-gender-girl' : 'my-page-gender-boy'}}">
         <image src="{{userInfo.sex == 2 ? '../../image/my_icon@3x/mine_icon_04_3x.png' : '../../image/my_icon@3x/mine_icon_03_3x.png'}}" style='width:20rpx;height:20rpx'></image>
         <text>{{age}}岁</text>
       </view>

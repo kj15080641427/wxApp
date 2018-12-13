@@ -116,6 +116,11 @@ var LawyerInfo = '/lawyer/member/homepage/card/'
 function getlawyerInfo(){
   return HOST_URL + LawyerInfo
 }
+//律师个人主页(背景图/所获荣誉/描述)
+var LawHomePage = '/lawyer/member/homepage/base/'
+function getLawHomePage(){
+  return HOST_URL + LawHomePage
+}
 module.exports={
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
@@ -133,4 +138,5 @@ module.exports={
   getSearch: getSearch,
   getSearchLawyer: getSearchLawyer,
   getlawyerInfo: getlawyerInfo,
+  getLawHomePage: getLawHomePage,
 }

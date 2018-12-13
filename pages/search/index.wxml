@@ -30,13 +30,13 @@
    <view class='watchlist-page'>
   <view class='watchlist-page-flex'>
     <view class='watchlist-page-left'>
-      <image class='watchlist-page-avatar' src="{{lawyerList[index].iconImage}}"></image>
+      <image class='watchlist-page-avatar' src="{{lawyerList[index].iconImage ? lawyerList[index].iconImage :'../../image/my_icon@3x/mine_icon_02_3x.png'}}"></image>
       <view class='watchlist-page-practice'>执业{{year[index]}}年</view>
 
     </view>
     <view class='watchlist-page-right'>
-      <view class='watchlist-page-name'>{{lawyerList[index].memberName}}<label class='watchlist-page-firm'>({{lawyerList[index].memberPositionName}})</label></view>
-      <view class='watchlist-page-address'>{{lawyerList[index].region}} | {{lawyerList[index].institutionName}}</view>
+      <view class='watchlist-page-name'>{{lawyerList[index].memberName}}<label wx:if="{{lawyerList[index].memberPositionName}}" class='watchlist-page-firm'>({{lawyerList[index].memberPositionName}})</label></view>
+      <view class='watchlist-page-address'>{{lawyerList[index].region}} <text wx:if="{{lawyerList[index].region&&lawyerList[index].institutionName}}">|</text> {{lawyerList[index].institutionName}}</view>
       <view class='watchlist-page-adept'>{{lawyerList[index].description}} </view>
     </view>
 

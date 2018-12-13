@@ -50,19 +50,37 @@ Page({
       "lexMungId": t.mungId,
       "orgId": t.organizationId
     }
-    var pages = getCurrentPages();
-    var currPage = pages[pages.length - 1];   //当前页面
-    var prevPage = pages[pages.length - 2];  //上一个页面
+    // var pages = getCurrentPages();
+    // var currPage = pages[pages.length - 1];   //当前页面
+    // var prevPage = pages[pages.length - 2];  //上一个页面
 
-    //直接调用上一个页面对象的setData()方法，把数据存到上一个页面中去
-    prevPage.setData({
-      dataJSON:dataJSON
-    })
+    // //直接调用上一个页面对象的setData()方法，把数据存到上一个页面中去
+    // prevPage.setData({
+    //   dataJSON:dataJSON
+    // })
 
-    wx.navigateBack({
-      delta:1
+    // wx.navigateBack({
+    //   delta:1
+    //   })
+
+    var that = this
+    var searchLawyerUrl = api.getSearchLawyer() + "1/10"
+    var searchlawyerData = dataJSON 
+    console.log("上传参数", dataJSON )
+    var success = function (data) {
+      console.log("搜索成功", data)
+      wx.navigateBack({
+        url: '../index',
       })
 
+
+      wx.setStorageSync("lawyerList", data.data.list)
+    }
+    var fail = function (e) {
+      console.log(e)
+    }
+    // console.log("筛选参数", searchlawyerData)
+    wxrequest.request(searchLawyerUrl, searchlawyerData, success, fail)
   },
   /**
    * 生命周期函数--监听页面加载

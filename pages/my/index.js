@@ -154,12 +154,12 @@ Page({
       })
     }
     var fail = function (e) {
-      if (eDetail.code == 10002) {
+      // if (eDetail.code == 10002) {
         // wx.showToast({
         //   title: '请重新登陆show' + eDetail.message,
         // })
         wx.clearStorage()
-      }
+      // }
       console.log(e)
     }
     if (wx.getStorageSync("token")) {
