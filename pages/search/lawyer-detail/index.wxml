@@ -45,13 +45,15 @@
   <view class='law-page-Introduction'> 
   <!-- {{lawyerCard.memberDescription}} -->
 
-  <view class='law-textarea'>{{lawyerCard.memberDescription}}</view>
-    <image src='../../../image/search_icon@3x/Personalhomepage-06@3x.png' class='law-address-icon law-icon-center'></image>
+
+  <view class="{{showMore ? 'law-textarea-more':'law-textarea'}}" bindtap='showMore' >{{lawyerCard.memberDescription}}</view>
+   <image src='../../../image/search_icon@3x/Personalhomepage-06@3x.png' class="{{showMore ? 'law-icon-center-more law-address-icon' :'law-icon-center law-address-icon'}}"bindtap='showMore' ></image>
   </view>
-</view>
+  </view>
+
 
 <!-- 律师名片 -->
-<view class='law-page-tab'>
+<view class='law-page-tab' style='margin-top:35rpx;'>
   <view>律师名片</view>
   <view>服务信息</view>
   <view>案例</view>
@@ -95,44 +97,42 @@
   </view>
 </view>
 
-
 <!-- 专业技能 -->
 <view style='margin-top:35rpx;'>
   <view class='law-flex' style='background-color:white'>
     <view class='law-long-text'>专业技能</view>
-    <view class='law-skill-right' style='display:flex;width:500rpx;margin-left:35rpx;'>
-      <view wx:key="{{index}}" wx:for="{{lawyerRequset.skill}}" >
-        <image class='law-page-skill' src="{{item.iconImage}}"></image>
-        <view>{{item.skillName}}</view>
+    <view class='law-skill-right' style='display:flex;flex-wrap: wrap'>
+      <view wx:key="{{index}}" wx:for="{{lawyerRequset.skill}}" wx:if="{{item.parentId ==1}}" style='word-wrap:break-word;' >
+          <view style='display: flex;justify-content: center;width:140rpx'>
+           <image wx:if="{{item.parentId ==1}}" class='law-page-skill' src="{{item.iconImage}}"></image>
+           </view>
+           <view style='display: flex;justify-content: center;width:140rpx'>
+          <view wx:if="{{item.iconImage}}" style='display: flex;justify-content: cneter;'>{{item.skillName}}</view>
+          </view>
       </view>
     </view>
-    
-    <image class='law-page-skill' src=''></image>
-    <image class='law-page-skill' src=''></image>
-    <image class='law-page-skill' src=''></image>
   </view>
 </view>
 
 <!-- 熟悉行业 -->
-<!-- <view > -->
-  <view class='law-flex' style='background-color:white'>
-    <view class='law-long-text'>熟悉行业</view>
-    <view class='law-page-industry'>
-      <view class='law-page-industry-text' wx:if="{{!lawyerRequset.industry[0]}}" style='margin-top:30rpx;'>暂无信息</view>
-      <view wx:key="{{index}}" wx:for="{{lawyerRequset.industry}}" class='law-page-induistry-view' style='margin-top:30rpx;'>
-        <view class='law-page-industry-text'>{{item}}</view>
-      </view>
-      <view class='law-page-line'></view>
+<view class='law-flex' style='background-color:white'>
+  <view class='law-long-text'>熟悉行业</view>
+  <view class='law-page-industry'>
+    <view class='law-page-industry-text' wx:if="{{!lawyerRequset.industry[0]}}" style='margin-top:30rpx;'>暂无信息</view>
+    <view wx:if="{{!lawyerRequset.industry[0]}}" class='law-page-line'></view>
+    <view wx:key="{{index}}" wx:for="{{lawyerRequset.industry}}" class='' style='margin-top:30rpx;'>
+      <view class='law-page-industry-text law-page-induistry-view'>{{item}}</view>
     </view>
+    
   </view>
-<!-- </view> -->
+</view>
 
 <!-- 语言能力 -->
 <view >
   <view class='law-flex' style='background-color:white'>
     <view class='law-long-text'>语言能力</view>
-    <view>
-        <view class='law-page-line'></view>
+    <view style=''>
+        <!-- <view class='law-page-line'></view> -->
     </view>
   </view>
 </view>
@@ -141,10 +141,12 @@
 <view >
   <view class='law-flex' style='background-color:white'>
     <view class='law-long-text'>其他技能</view>
-    <view class='law-skill-right'>
-      <view class='law-page-industry-text' wx:if="{{!lawyerRequset.skill[0]}}">暂无信息</view>
+    <view class='law-skill-right-other'>
+      <view class='law-page-industry-text' wx:if="{{!lawyerRequset.skill[index]}}" style='margin-top:10rpx;'>暂无信息</view>
+      <view wx:if="{{!lawyerRequset.skill[index]}}" class='law-page-line'></view>
       <view wx:key="{{index}}" wx:for="{{lawyerRequset.skill}}">
-        <view style='margin-bottom:35rpx;'>{{item.skillName}}</view>
+        <view style='margin-bottom:15rpx;margin-top:10rpx;' wx:if="{{!item.iconImage}}">{{item.skillName}}</view>
+        <view wx:if="{{!lawyerRequset.skill[index]}}" class='law-page-line'></view>
       </view>
     </view>
   </view>
@@ -156,8 +158,10 @@
     <view class='law-long-text'>资格证书</view>
     <view class='law-qualifi-right'>
       <view class='law-page-industry-text' wx:if="{{!lawyerRequset.qualifi[0]}}">暂无信息</view>
+        <view wx:if="{{!lawyerRequset.qualifi[0]}}" class='law-page-line'></view>
       <view wx:key="{{index}}" wx:for="{{lawyerRequset.qualifi}}">
         <view class='law-page-industry-text'>{{item}}</view>
+        <view class='law-page-line'></view>
       </view>
     </view>
   </view>
@@ -169,8 +173,10 @@
     <view class='law-long-text'>常去机构</view>
     <view class='law-page-industry'>
       <view class='law-page-industry-text' wx:if="{{!lawyerRequset.institution[0]}}" style='margin-top:30rpx;'>暂无信息</view>
+        <view wx:if="{{!lawyerRequset.institution[0]}}" class='law-page-line'></view>
       <view wx:key="{{index}}" wx:for="{{lawyerRequset.institution}}" style='margin-top:30rpx;'>
         <view class='law-page-industry-text'>{{item}}</view>
+        <view class='law-page-line'></view>
       </view>
     </view>
   </view>
@@ -184,6 +190,7 @@
     <view class='law-educcation-right'>
     <!-- 工作经验 -->
         <view wx:if='{{!lawyerRequset.workExp[0]}}'  style='font-size:28rpx;margin-top:30rpx;'>暂无信息</view>
+        <view wx:if="{{!lawyerRequset.workExp[0]}}" class='law-page-line' style='margin-top:10rpx'></view>
       <view wx:key="{{index}}" wx:for="{{work}}"> 
         <view class='law-educ-date'>
           <!-- 圆环 -->

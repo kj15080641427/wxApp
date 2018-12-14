@@ -1,3 +1,5 @@
 {
-
+  "navigationBarTitleText":"找律师",
+  "onReachBottomDistance":"50rpx",
+  "onReachBottom":true
 }

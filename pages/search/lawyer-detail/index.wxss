@@ -116,15 +116,17 @@ margin-left: 35rpx;
 .law-page-Introduction-view{
   margin-top: 30rpx;
   background-color: white;
-  height: 400rpx;
+  /* height: 400rpx; */
   width: 750rpx;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .law-page-Introduction{
+  margin-top: 35rpx;
+  margin-bottom: 35rpx;
   background-color: #f4f4f4;
-  height: 230rpx;
+  /* height: 275rpx; */
   width: 680rpx;
   /* margin-left: 35rpx;
   margin-right: 35rpx; */
@@ -142,9 +144,24 @@ margin-left: 35rpx;
   -webkit-line-clamp: 3;
   overflow: hidden;
 }
+.law-textarea-more{
+  margin-top: 35rpx;
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+  font-size: 24rpx;
+  line-height: 60rpx;
+  color: #717171;
+}
 .law-icon-center{
-  margin-left: 340rpx;
-  margin-top: 285rpx;
+  margin-left: 305rpx;
+  margin-top: 30rpx;
+}
+.law-icon-center-more{
+  margin-left: 305rpx;
+  margin-top: 30rpx;
+  transform:rotate(180deg);
+  -ms-transform:rotate(180deg); /* IE 9 */
+  -webkit-transform:rotate(180deg); /* Safari and Chrome */
 }
 .law-page-tab{
   display: flex;
@@ -186,18 +203,22 @@ margin-left: 35rpx;
   font-size: 28rpx;
 }
 .law-page-line{
+  margin-top: 10rpx;
+  width: 500rpx;
   background-color: #efefef;
   height: 1rpx;
 }
 .law-page-skill{
+  display: flex;
+  justify-content: cneter;
   width: 100rpx;
   height: 100rpx;
   /* margin-top: 35rpx; */
   /* margin-left: 20rpx; */
-  margin-right: 35rpx;
+  /* margin-right: 35rpx; */
 }
 .law-page-industry{
-  width: 500rpx;
+  /* width: 500rpx; */
   font-size: 28rpx;
   margin-left: 35rpx;
 }
@@ -255,11 +276,12 @@ margin-left: 35rpx;
   border-radius: 50%;
 }
 .law-educ-green{
+  margin-top: 10rpx;
   margin-left: 18rpx;
   margin-right: 20rpx;
   margin-bottom: 30rpx;
   width: 1rpx;
-  height: 120rpx;
+  height: 110rpx;
   background-color: #1ec88c;
 }
 .law-qualifi-right{
@@ -271,4 +293,14 @@ margin-left: 35rpx;
   margin-top: 30rpx;
   margin-left: 35rpx;
   font-size: 28rpx;
+}
+.law-skill-right-other{
+  margin-top: 20rpx;
+  margin-left: 35rpx;
+  font-size: 28rpx;
+}
+.law-skill-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

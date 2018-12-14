@@ -31,6 +31,7 @@ Page({
 
   // getList:function(){
   // },
+  // 确定按钮
   getSearchLawyer:function(){
     var that = this
     var t = that.data
@@ -50,38 +51,73 @@ Page({
       "lexMungId": t.mungId,
       "orgId": t.organizationId
     }
-    // var pages = getCurrentPages();
-    // var currPage = pages[pages.length - 1];   //当前页面
-    // var prevPage = pages[pages.length - 2];  //上一个页面
-
-    // //直接调用上一个页面对象的setData()方法，把数据存到上一个页面中去
-    // prevPage.setData({
-    //   dataJSON:dataJSON
-    // })
-
-    // wx.navigateBack({
-    //   delta:1
-    //   })
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1];   //当前页面
+    var prevPage = pages[pages.length - 2];  //上一个页面
 
     var that = this
     var searchLawyerUrl = api.getSearchLawyer() + "1/10"
     var searchlawyerData = dataJSON 
     console.log("上传参数", dataJSON )
+    wx.showLoading({
+      title: '搜索中',
+    })
     var success = function (data) {
       console.log("搜索成功", data)
+      wx.hideLoading()
+      // that.changeParentData()
+      // wx.setStorageSync("lawyerList", data.data.list)
       wx.navigateBack({
         url: '../index',
       })
-
-
-      wx.setStorageSync("lawyerList", data.data.list)
+      prevPage.setData({
+        getPage: 10,
+        lawyerList:data.data.list,
+        dataJSON: dataJSON,
+        topNum:0
+      })
     }
     var fail = function (e) {
+      wx.hideLoading()
+      wx.showToast({
+        title: '加载数据失败',
+        icon:'neno'
+      })
       console.log(e)
     }
     // console.log("筛选参数", searchlawyerData)
     wxrequest.request(searchLawyerUrl, searchlawyerData, success, fail)
+
+    //直接调用上一个页面对象的setData()方法，把数据存到上一个页面中去
+    prevPage.setData({
+      getPage: 10
+    })
   },
+  // 重置按钮
+  reset:function(){
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1];   //当前页面
+    var prevPage = pages[pages.length - 2];  //上一个页面
+
+    //直接调用上一个页面对象的setData()方法，把数据存到上一个页面中去
+    prevPage.setData({
+      lawyerList: {"practiceYearId":''}
+    })
+  },
+  // changeParentData: function () {
+
+  //   var pages = getCurrentPages();//当前页面栈
+
+  //   if (pages.length > 1) {
+
+  //     var beforePage = pages[pages.length - 2];//获取上一个页面实例对象
+
+  //     beforePage.changeData();//触发父页面中的方法
+
+  //   }
+
+  // },
+
   /**
    * 生命周期函数--监听页面加载
    */

@@ -192,6 +192,6 @@
 </view>
 <view style='height:200rpx;'></view>
 <view class='filter-page-button-view'>
-  <button>重置</button>
+  <button bindtap='reset'>重置</button>
   <button bindtap='getSearchLawyer'>确定</button>
 </view>

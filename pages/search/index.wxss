@@ -63,6 +63,7 @@
   color: #f8b65d;
   font-size: 24rpx;
   margin-top: 20rpx;
+  margin-bottom: 20rpx;
 }
 .watchlist-page-label{
   margin-left:20rpx;
@@ -125,4 +126,15 @@
   background-color:white;
   width:700rpx;
   margin-left:25rpx
+}
+.search-more{
+  margin-top: 35rpx;
+  margin-bottom: 35rpx;
+  height: 30rpx;
+  width: 750rp;
+  background-color: #b5b5b5;
+  display: flex;
+  justify-content: center;
+  color: black;
+  font-size: 28rpx;
 }
