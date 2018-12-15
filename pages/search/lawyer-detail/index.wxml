@@ -33,42 +33,39 @@
 
 </view>
 
-<view class='law-page-attest'>
+<view class='law-page-attest'wx:if="{{lawyerCard.orgTags[0]}}">
   <view >认证标签</view>
-  <view wx:key="{{index}}" wx:for="{{lawyerCache[index].orgTags}}">
+  <view wx:key="{{index}}" wx:for="{{lawyerCard.orgTags}}">
     <image class='law-page-attest-icon' src='{{item.image}}'></image>
   </view>
 </view>
 
 <!-- 简介 -->
-<view class='law-page-Introduction-view'>
+<view class='law-page-Introduction-view' wx:if="{{lawyerCard.memberDescription}}" >
   <view class='law-page-Introduction'> 
   <!-- {{lawyerCard.memberDescription}} -->
-
-
   <view class="{{showMore ? 'law-textarea-more':'law-textarea'}}" bindtap='showMore' >{{lawyerCard.memberDescription}}</view>
    <image src='../../../image/search_icon@3x/Personalhomepage-06@3x.png' class="{{showMore ? 'law-icon-center-more law-address-icon' :'law-icon-center law-address-icon'}}"bindtap='showMore' ></image>
   </view>
-  </view>
-
-
-<!-- 律师名片 -->
-<view class='law-page-tab' style='margin-top:35rpx;'>
-  <view>律师名片</view>
-  <view>服务信息</view>
-  <view>案例</view>
 </view>
 
-<!-- 擅长领域 -->
 
-<view class='law-flex' style='background-color:white'>
+<view class='law-page-tab' style='margin-top:35rpx;'>
+  <view>律师名片</view>
+  <view>案例展示</view>
+</view>
+
+<!-- 律师名片 -->
+<!-- 擅长领域 -->
+<view wx:if="{{false}}">
+<view class='law-flex' style='background-color:white;height:300rpx;'>
   <view class='law-long-text'>擅长领域</view>
 
   <view class='law-center-icon'>
 <!-- 1 -->
 <view wx:key="{{index}}" wx:for="{{lawyerRequset.businessType}}">
     <view class='law-space-flex'>
-      <view class='law-flex'>
+      <view class='law-flex' style=' align-items: center;'>
         <image src="{{index==0? '../../../image/search_icon@3x/Personalhomepage-10@3x.png': index == 1 ? '../../../image/search_icon@3x/Personalhomepage-11@3x.png' :'../../../image/search_icon@3x/Personalhomepage-12@3x.png'}}" class='law-num-icon'></image> 
         <view class='law-margin-left'>{{item.businessTypeName}}</view>
       </view>
@@ -174,9 +171,10 @@
     <view class='law-page-industry'>
       <view class='law-page-industry-text' wx:if="{{!lawyerRequset.institution[0]}}" style='margin-top:30rpx;'>暂无信息</view>
         <view wx:if="{{!lawyerRequset.institution[0]}}" class='law-page-line'></view>
-      <view wx:key="{{index}}" wx:for="{{lawyerRequset.institution}}" style='margin-top:30rpx;'>
+        <view style='margin-top:30rpx;'></view>
+      <view wx:key="{{index}}" wx:for="{{lawyerRequset.institution}}"style="margin-top:20rpx;">
         <view class='law-page-industry-text'>{{item}}</view>
-        <view class='law-page-line'></view>
+        <!-- <view class='law-page-line'></view> -->
       </view>
     </view>
   </view>
@@ -249,3 +247,17 @@
     </view>
   </view>
 </view>
+</view>
+<!-- 案例展示 -->
+<view class="detail-case-show">
+  <view class="detail-case-show-list">
+    <view class="detail-case-show-title-view">
+      <view class="detail-case-show-title">标题哈哈哈哈哈哈哈哈哈哈或或或或或或或或</view>
+      <view class='detail-case-show-number' >12a3sad搜索</view>
+      <view class='detail-case-show-text'>文章内容哈哈哈哈哈哈哈哈哈哈或或或或或或或或或或</view>
+      <view class='detail-case-show-line'></view>
+    </view>
+  </view>
+</view>
+
+

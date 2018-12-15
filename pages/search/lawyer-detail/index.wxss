@@ -189,7 +189,7 @@ margin-left: 35rpx;
 }
 .law-space-flex{
   width: 500rpx;
-  height: 100rpx;
+  height: 80rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -303,4 +303,33 @@ margin-left: 35rpx;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.detail-case-show-list{
+  margin-top: 35rpx;
+  background-color: white;
+  height: 300rpx;
+}
+.detail-case-show-title-view{
+  padding: 35rpx;
+}
+.detail-case-show-title{
+  width: 680rpx;
+  font-size: 32rpx;
+  color: #323232;
+}
+.detail-case-show-number{
+  width: 200rpx;
+  margin-top: 25rpx;
+  background: #f4f4f4;
+  color: #717171;
+  font-size: 24rpx;
+}
+.detail-case-show-text{
+  font-size: 28rpx;
+  color: #323232;
+  margin-top: 25rpx;
+}
+.detail-case-show-line{
+  height: 1rpx;
+  background-color: #f4f4f4;
 }

@@ -9,10 +9,11 @@ var VerifyCode = '/passport/verifycode';
 var Login = '/passport/app/login';
 
 // 文章分类地址
-var ArticleType = '/client/article/category'
+var ArticleType = '/admin/solutiontype/list'
 
-// 文章列表地址
-var ArticleList = '/client/solution/list'
+// 文章列表地址 解决方案
+// var ArticleList = '/client/solution/list'
+var ArticleList = '/admin/solution/list'
 
 // 文字咨询地址
 var Commit = '/client/freeText/post' 
@@ -121,6 +122,16 @@ var LawHomePage = '/lawyer/member/homepage/base/'
 function getLawHomePage(){
   return HOST_URL + LawHomePage
 }
+//需求服务分类/事务分类
+var Demand = '/client/requirement/types'
+function getDemand(){
+  return HOST_URL +Demand
+}
+//擅长领域
+var Expert = '/lawyer/member/businesstype'
+function getExpert(){
+  return HOST_URL + Expert
+}
 module.exports={
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
@@ -139,4 +150,6 @@ module.exports={
   getSearchLawyer: getSearchLawyer,
   getlawyerInfo: getlawyerInfo,
   getLawHomePage: getLawHomePage,
+  getDemand: getDemand,
+  getExpert: getExpert
 }

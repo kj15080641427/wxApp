@@ -76,6 +76,7 @@ Page({
         dataJSON: dataJSON,
         topNum:0
       })
+      prevPage.gotop()
     }
     var fail = function (e) {
       wx.hideLoading()

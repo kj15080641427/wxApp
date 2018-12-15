@@ -1,0 +1,17 @@
+<!--pages/search/demand/index.wxml-->
+<view class='demand-page-top-background'>
+<image src='../../../image/demand_icon@3x/requirement_icon_01_3x.png' class='demand-page-top-icon'>
+</image>
+ <view class='demand-icon-number'>1</view>
+</view>
+<!-- <image src='../../../image/demand_icon@3x/requirement1.png'></image> -->
+<!--  -->
+<view class='demand-page-center'>
+  <view class='demand-page-tips'>选择您需要的服务类型</view>
+  <view wx:for="{{image}}">
+    <image src='{{item}}' class='demand-page-center-icon'>{{item}}</image>
+    <view class=''></view>
+  </view>
+</view>
+
+

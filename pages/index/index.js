@@ -33,34 +33,41 @@ Page({
     var articleList = []
 
     // 文章分类
-    var typeUrl = api.getArticleTypeUrl()
-    var message = ""
-    var successType = function(data){
+    // var typeUrl = api.getArticleTypeUrl()
+    // var message = ""
+    // var successType = function(data){
+    //   console.log("文章分类",data)
+    //   that.setData({
+    //       popular: data.data,
+    //     })
+    // }
+    // var failType = function (e){
+    //   console.log("文章分类错误",e)
+    // }
+    // wxrequest.requestGet(typeUrl, message, successType, failType)
 
+    var listUrltype = api.getArticleTypeUrl()
+    var messagetype = ""
+    var listDatatype = { "pageNum": 1, "pageSize": 100 }
+    var successListtype = function (data) {
+      console.log("解决方案分类list", data.data.list)
+      console.log(articleList)
       that.setData({
-          popular: data.data,
-        })
-
-      // var a = wx.getStorageSync('typeName')
-      // if(a){
-      //   console.log("已缓存")
-      // }else{
-      // wx.setStorageSync('typeName', data.data)
-      //   console.log("hhhh",wx.getStorageSync('typeName'))
-
+        popular: data.data.list
+      })
     }
-    var failType = function (e){
-      console.log("文章分类错误",e)
+    var failListtype = function (e) {
+      console.log("解决方案错误", e)
     }
-    wxrequest.requestGet(typeUrl, message, successType, failType)
+    wxrequest.requestPost(listUrltype, listDatatype, messagetype, successListtype, failListtype)
 
 
-    // //解决方案
+    //解决方案
     var listUrl = api.getArticleListUrl()
     var message = ""
-    var listData = { "typeId": 1, "pageNum": 1,"pageSize":10 }
+    var listData = {"typeId":1,"pageNum": 1,"pageSize":100 }
     var successList = function (data){
-      console.log("list",data.data.list)
+      console.log("解决方案list",data)
       console.log(articleList)
       that.setData({
         article:data.data.list

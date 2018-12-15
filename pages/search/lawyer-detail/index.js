@@ -25,14 +25,16 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-
+    wx.showLoading({
+      title: '',
+    })
     this.setData({
       lawyerRequset: JSON.parse(options.lawyerInfo),
       lawyerCache: JSON.parse(options.lawyerCache),
       index:options.listIndex,
       year:options.year.split(","),
     })
-
+    wx.hideLoading()
     console.log("lawyerCache", this.data.lawyerCache)
     // console.log("year", options )
 
@@ -50,31 +52,6 @@ Page({
       console.log(e)
     }
     wxrequest.requestGetpar(homeUrl, homeData, '', homeSuccess, homeFail) //主页
-
-
-    // var that = this
-    // var lawyerData = that.data.lawyerCache[that.data.index]
-    // // var index = e.currentTarget.dataset.index
-    // var year = that.data.year
-    // // 律师名片
-    // var lawyerInfoUrl = api.getlawyerInfo() + this.data.lawyerCache[that.data.index].memberId
-    // var lawyerData = this.data.lawyerCache[that.data.index].memberId
-    // var success = function (data) {
-    //   console.log("律师详情页.名片", data)
-    //   that.setData({
-    //     lawyerRequset: data.data
-    //   })
-    //   console.log("lawyerRequset", this.data.lawyerRequset)
-    // }
-    // var fail = function (e) {
-    //   wx.showToast({
-    //     title: '获取律师信息失败',
-    //     icon: 'none'
-    //   })
-    //   console.log(e)
-    // }
-    // wxrequest.requestGetpar(lawyerInfoUrl, lawyerData, '', success, fail)
-
   },
 
   // 加载简介
@@ -95,19 +72,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
-
-
     var that = this
     var educationList = []
-    that.data.lawyerRequset.education ? that.data.lawyerRequset.education.map(function(item){
+    that.data.lawyerRequset.education[0] ? that.data.lawyerRequset.education.map(function(item){
       educationList.push({ "startDate": item.startDate.split(" ")[0].split('-', 2).join("/"), "endDate": item.endDate.split(" ")[0].split('-', 2).join("/")})
     }) : console.log("无教育信息")
 
     var workList = []
-    !that.data.lawyerRequset.workExp.endDate ? that.data.lawyerRequset.workExp.map(function (item) {
+    that.data.lawyerRequset.workExp[0] ? that.data.lawyerRequset.workExp.map(function (item) {
       work.push({ "startDate": item.startDate.split(" ")[0], "endDate": item.endDate.split(" ")[0] })
-    }) : ''
+    }) : console.log('无经验')
     var now = formatTime.formatTime(new Date()).split('/')[0]
     var age = that.data.lawyerCache[that.data.index].birthday.split("-")[0]
     // var educationList = {"startDate": that.data.lawyerRequset.education[this.data.index].startDate.split(" ")[0], "endDate": that.data.lawyerRequset.education[this.data.index].endDate.split(" ")[0]}

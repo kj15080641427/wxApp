@@ -22,6 +22,17 @@
 .search-tab{
   display: flex;
 }
+.search-tab-icon{
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+}
+.search-page-icon{
+  margin-left: 10rpx;
+  /* margin-top: 10rpx; */
+  width:20rpx;
+  height:20rpx
+}
 .search-tab-list{
   display: flex;
   justify-content: space-between;
@@ -137,4 +148,44 @@
   justify-content: center;
   color: black;
   font-size: 28rpx;
+}
+.search-select-view{
+  background-color: white;
+  /* display: flex; */
+  /* height: 1500rpx; */
+}
+.search-select-flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.search-select-province{
+  height: 100rpx;
+  /* line-height: 100rpx; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4
+}
+.serach-select-city{
+  margin-left: 35rpx;
+  height: 100rpx;
+  width: 360rpx;
+  line-height: 100rpx;
+}
+.search-select-line{
+  background-color: #f4f4f4;
+  height: 1rpx;
+  margin-left: 35rpx;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+.select-image{
+  margin-left: 100rpx;
+  /* margin-top: 20rpx; */
+  width: 50rpx;
+  height: 50rpx;
 }

@@ -1,12 +1,13 @@
 {
   "pages":[
     "pages/search/index",
+    "pages/index/index",
+    "pages/search/demand/index",
     "pages/my/index",
     "pages/search/lawyer-list/index",
     "pages/search/lawyer-detail/index",
     "pages/search/filter/index",
     "pages/my/edit-info/index",
-    "pages/index/index",
     "pages/my/order-chat/index",
     "pages/index/quick-consultation/index",
     "pages/index/consultation-details/index",

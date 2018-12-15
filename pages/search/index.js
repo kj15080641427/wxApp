@@ -3,7 +3,9 @@ var api = require('../../utils/api.js')
 var wxrequest = require('../../utils/request.js')
 var formatTime = require('../../utils/util.js')
 var throttle = require('../../utils/throttle.js')
+var region = require('../../region.js')
 var noFilter = {
+  "regionId":'',
   "lawyerName":'',
   "practiceYearId": '',
   "sex": '',
@@ -31,23 +33,60 @@ Page({
     year: '',
     getPage:10,
     dataJSON:'',
+    address:'',
+    region:'',
+    regionindex:0,//地区index
+    cityindex:0,
+    clickOhter:0,
+    selectRegion:false
   },
 
+  // 选择地区
+  selectRegion:function(){
+    this.setData({
+      selectRegion: !this.data.selectRegion
+    })
+    noFilter.regionId = this.data.region[this.data.regionindex].child[this.data.cityindex].regionId || ''
+    // dataJSON.regionId = 1
+  },
   // 关键字搜索
   searchInput:function(e){
     noFilter.lawyerName = e.detail.value
     console.log(e.detail.value)
   },
-  // 获取index
-  getIndex: function (e) {
-    // this.setData({    "pages/search/lawyer-list/index",
-    //   index: e.currentTarget.dataset
-    // })
-    wx.showLoading({
-      title: '加载中',
+  //省index
+  getRegionIndex(e){
+    console.log("省index", e.currentTarget.dataset.regionindex)
+    this.setData({
+      regionindex: e.currentTarget.dataset.regionindex,
+      isSelect:!this.data.isSelect,
+      clickOhter:false
     })
+  },
+  //市index
+  getCityIndex:function(e){
+    this.setData({
+      cityindex: e.currentTarget.dataset.cityindex,
+      clickOhter:true,
+    })
+    // noFilter.regionId = this.data.region[this.data.regionindex].child[this.data.cityindex].regionId || ''
+    // console.log('市index',e.currentTarget.dataset.cityindex)
+    console.log("已选地区id", this.data.region[this.data.regionindex].child[this.data.cityindex].regionId)
+  },
+  //获取擅长领域列表
+  getExpert:function(){
+    var expertUrl = api.getExpert()
+    var success = function(data){
+      console.log("擅长列表获取成功",data)
+    }
+    var fail = function(e){
+      console.log("获取擅长列表失败",e)
+    }
+    wxrequest.requestGet(expertUrl,'',success,fail)
+  },
+  // 获取律师列表index并根据index搜索律师信息
+  getIndex: function (e) {
     var that = this
-    // var lawyerData = that.data.lawyerList[e.currentTarget.dataset.index] //律师信息
     var index = e.currentTarget.dataset.index //index
     var year = that.data.year //执业年限
     var lawyerCache = that.data.lawyerList
@@ -73,6 +112,13 @@ Page({
 
 
 
+  },
+  //回到顶部
+  gotop:function(){
+    wx.pageScrollTo({
+      scrollTop: 0,
+    })
+    console.log(1234567)
   },
   // 
   gotoFilter:function(){
@@ -107,6 +153,11 @@ Page({
     }
     // console.log("筛选参数", searchlawyerData)
     wxrequest.request(searchLawyerUrl, searchlawyerData, success, fail)
+    wx.showLoading({
+      title: '正在加载',
+    })
+  },
+  selectField:function(){
 
   },
   // changeData: function () {
@@ -125,9 +176,7 @@ Page({
       title: '加载中',
     })
     this.pc()
-    // this.setData({
-    //   lawyerList: wx.getStorageSync("lawyerList").list ? wx.getStorageSync("lawyerList").list: ''
-    // })
+    this.getExpert()
   },
 
   /**
@@ -142,15 +191,21 @@ Page({
    */
   onShow: function () {
     var yearList = []
+    var addressList = []
+    var that = this
     this.data.lawyerList.map? this.data.lawyerList.map(function (item) {
       yearList.push(formatTime.formatTime(new Date()).split("/")[0] - item.beginPracticeDate.split("-")[0])
     }) : ''
+    that.data.lawyerList ? that.data.lawyerList.map(function(item){
+      addressList.push(item.region.split('-',2))
+    }) : ''
     this.setData({
       year: yearList,
-      // lawyerList:wx.getStorageSync("lawyerList")
+      address: addressList,
+      region: region.citysData
     })
     // console.log("筛选参数", this.data.dataJSON ? this.data.dataJSON : '无')
-    // console.log("huancun", wx.getStorageSync("lawyerList"))
+    // console.log("region", that.data.region)
   },
 
   /**
@@ -173,9 +228,6 @@ Page({
   onPullDownRefresh: function () {
 
   },
-  // test: throttle.throttle(function(){
-  //   console.log(9876)
-  // },1230),
   /**
    * 页面上拉触底事件的处理函数
    */

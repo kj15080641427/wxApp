@@ -1,0 +1,30 @@
+/* pages/search/demand/index.wxss */
+.demand-page-top-background{
+  display: flex;
+  height: 200rpx;
+}
+.demand-page-top-icon{
+  height: 50rpx;
+  width:187rpx;
+  z-index: -1;
+}
+.demand-icon-number{
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+  background-color: #1ec88c;
+}
+.demand-page-center{
+  /* background-color: white; */
+
+}
+.demand-page-tips{
+  color: #b5b5b5;
+  font-size: 28rpx;
+  padding-top: 35rpx;
+  padding-bottom: 35rpx;
+}
+.demand-page-center-icon{
+  width: 150rpx;
+  height: 150rpx;
+}

@@ -89,7 +89,7 @@
 .filter-page-icon{
   width: 30rpx;
   height: 30rpx;
-  margin-right: 60rpx;
+  margin-right: 30rpx;
 }
 .filter-page-button-view{
   position:fixed;
@@ -112,7 +112,7 @@ button{
   line-height: 94rpx;
 }
 .filter-page-picker{
-  width:600rpx;
+  width:660rpx;
   height:60rpx;
   line-height:60rpx;
   overflow: hidden;

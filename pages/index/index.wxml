@@ -91,7 +91,7 @@
 </view>
 <scroll-view scroll-x class="scroll-x" scroll-left="{{scrollLeft}}">
   <view wx:for="{{popular}}"  wx:key="index" class="view-parent" >
-    <view class="{{articleIndex==index ? 'view-item-color' : 'view-item'}}" bindtap="selsectArticle" id="{{index}}" data-current="{{item.id}}" >{{item.categoryName}}</view>
+    <view class="{{articleIndex==index ? 'view-item-color' : 'view-item'}}" bindtap="selsectArticle" id="{{index}}" data-current="{{item.id}}" >{{item.typeName}}</view>
     <view class="{{articleIndex==index ? 'view-item-green-line' : ''}}"></view>
   </view>
 </scroll-view>
@@ -119,7 +119,7 @@
           <view class="index-article-text">{{item["title"]}}</view>
           <view class="index-article-text-lower">已帮助<label style="color:#1ec88c">{{item['helpNumber']}}</label>人</view>
         </view>
-        <!-- <image src="{{item['image']}}" style='width:223rpx;height:145rpx;'></image> -->
+        <!-- <image src="https://api-test.lex-mung.com{{item['image']}}" style='width:223rpx;height:145rpx;'></image> -->
         </view>
       </view> 
                 <!-- </scroll-view> -->
