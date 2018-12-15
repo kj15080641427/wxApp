@@ -38,14 +38,16 @@ Page({
     regionindex:0,//地区index
     cityindex:0,
     clickOhter:0,
-    selectRegion:false
+    showRegion:false,
+    hide:true
   },
 
   // 选择地区
   selectRegion:function(){
     this.setData({
-      selectRegion: !this.data.selectRegion
+      showRegion: !this.data.showRegion,
     })
+    console.log(this.data.showRegion)
     noFilter.regionId = this.data.region[this.data.regionindex].child[this.data.cityindex].regionId || ''
     // dataJSON.regionId = 1
   },
@@ -68,10 +70,11 @@ Page({
     this.setData({
       cityindex: e.currentTarget.dataset.cityindex,
       clickOhter:true,
+      showRegion: !this.data.showRegion
     })
     // noFilter.regionId = this.data.region[this.data.regionindex].child[this.data.cityindex].regionId || ''
     // console.log('市index',e.currentTarget.dataset.cityindex)
-    console.log("已选地区id", this.data.region[this.data.regionindex].child[this.data.cityindex].regionId)
+    // console.log("已选地区id", this.data.region[this.data.regionindex].child[this.data.cityindex].regionId)
   },
   //获取擅长领域列表
   getExpert:function(){

@@ -1,5 +1,5 @@
 <!--pages/search/index.wxml-->
-<view style='position:fixed; top:0;width: 750rpx;z-index:99'>
+<view style='position:fixed; top:0;width: 750rpx;z-index:999'>
 <view class='search-input-height'>
   <view class='index-search '>
     <image src='../../image/homeicon_3x/homepage_01_3x.png' style='width:40rpx;height:40rpx;margin-right:20rpx ' ></image>
@@ -29,57 +29,70 @@
 
 
 <view style='margin-top:180rpx;'></view>
-<view class='search-select-view' style='display:flex' wx:if="{{selectRegion}}">
 
-<view>
-  <scroll-view scroll-y style='height:920rpx;'>
-    <view wx:key="{{index}}" wx:for="{{region}}"  wx:for-item="childItem" data-regionIndex="{{index}}" catchtap='getRegionIndex' bindtap="isSelect"class='search-select-province' style="{{ index == regionindex ? 'background-color:white' :''}}">{{childItem.name}}</view>
-  </scroll-view>
-</view>
-
-  <view>
-  <scroll-view scroll-y style='height:920rpx;width:430rpx;'>
-    <view class='search-select-flex'>
-      <view><view wx:key="{{index}}" wx:for="{{region[regionindex].child}}" class='serach-select-city' data-cityIndex="{{index}}" catchtap='getCityIndex' style="{{index==cityindex && clickOhter ? 'color:#1ec88c':''}}">{{item.name}}
-      <image src='../../image/search_icon@3x/selectcity.png' wx:if="{{index==cityindex && clickOhter}}" class='select-image'></image>
-      </view></view>
-      
-    </view>
-    <view class='search-select-line'></view>
-    </scroll-view>
-  </view>
-
-</view>
       
 
 <!-- <view style='margin-top:200rpx;'></view> -->
-<view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}" bindtap='getLawyerInfo' data-index="{{index}}" catchtap='getIndex'>
-   <view class='watchlist-page'>
-  <view class='watchlist-page-flex'>
-    <view class='watchlist-page-left'>
-      <image class='watchlist-page-avatar' src="{{lawyerList[index].iconImage ? lawyerList[index].iconImage :'../../image/my_icon@3x/mine_icon_02_3x.png'}}"></image>
-      <view class='watchlist-page-practice'>执业{{year[index]}}年</view>
+<view>
 
-    </view>
-    <view class='watchlist-page-right'>
-      <view class='watchlist-page-name'>{{lawyerList[index].memberName}}<label wx:if="{{lawyerList[index].memberPositionName}}" class='watchlist-page-firm'>({{lawyerList[index].memberPositionName}})</label></view>
-      <view class='watchlist-page-address'>{{address[index]}} <text wx:if="{{lawyerList[index].region&&lawyerList[index].institutionName}}">|</text> {{lawyerList[index].institutionName}}</view>
-      <view class='watchlist-page-adept'>{{lawyerList[index].description}} </view>
+
+<view class='search-select-view' style='display:flex;z-index:111;position:absolute' wx:if="{{showRegion}}" >
+  <view>
+    <scroll-view scroll-y style='height:920rpx;'>
+      <view wx:key="{{index}}" wx:for="{{region}}"  wx:for-item="childItem" data-regionIndex="{{index}}" catchtap='getRegionIndex' bindtap="isSelect"class='search-select-province' style="{{ index == regionindex ? 'background-color:white' :''}}">{{childItem.name}}</view>
+    </scroll-view>
+  </view>
+
+  <view style="width:500rpx;background-color:white">
+  <scroll-view scroll-y style='height:920rpx;width:430rpx;'>
+    <view class='search-select-flex'>
+      <view bindtap='selectRegion'>
+      <view wx:key="{{index}}" wx:for="{{region[regionindex].child}}" class='serach-select-city' data-cityIndex="{{index}}" catchtap='getCityIndex' style="{{index==cityindex && clickOhter ? 'color:#1ec88c':''}}" >{{item.name}}
+       <image src='../../image/search_icon@3x/selectcity.png' wx:if="{{index==cityindex && clickOhter}}" class='select-image'></image>
+       <view class='search-select-line'></view>
+      </view>
+      </view>
+      
     </view>
 
+    </scroll-view>
   </view>
 </view>
-<view style='background-color:white;width:700rpx;margin-left:25rpx'>
-  <view class='watchlist-page-line'></view>
-</view>
-   <view class='watch-page-lower' wx:if="{{lawyerList[index].orgTags[0]}}">
-    <view class='watchlist-page-label' >认证标签</view>
-    <view wx:key="{{index}}" wx:for="{{lawyerList[index].orgTags}}">
-      <image src='{{item.image}}' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
+<!-- <view style="z-index:55">123123</view> -->
+
+<view >
+  <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}" bindtap='getLawyerInfo' data-index="{{index}}" catchtap='getIndex'>
+    <view class='watchlist-page'>
+      <view class='watchlist-page-flex'>
+        <view class='watchlist-page-left' style="z-index:55;">
+          <image class='watchlist-page-avatar' src="{{lawyerList[index].iconImage ? lawyerList[index].iconImage :'../../image/my_icon@3x/mine_icon_02_3x.png'}}"  style="z-index:55;"></image>
+          <view class='watchlist-page-practice' style="z-index:55;">执业{{year[index]}}年</view>
+
+        </view>
+        <view class='watchlist-page-right'>
+          <view class='watchlist-page-name'>{{lawyerList[index].memberName}}<label wx:if="{{lawyerList[index].memberPositionName}}" class='watchlist-page-firm'>({{lawyerList[index].memberPositionName}})</label></view>
+          <view class='watchlist-page-address'>{{address[index]}} <text wx:if="{{lawyerList[index].region&&lawyerList[index].institutionName}}">|</text> {{lawyerList[index].institutionName}}</view>
+          <view class='watchlist-page-adept'>{{lawyerList[index].description}} </view>
+        </view>
+
+      </view>
+  </view>
+  <view style='background-color:white;width:700rpx;margin-left:25rpx'>
+    <view class='watchlist-page-line'></view>
+  </view>
+    <view class='watch-page-lower' wx:if="{{lawyerList[index].orgTags[0]}}">
+      <view class='watchlist-page-label' >认证标签</view>
+      <view wx:key="{{index}}" wx:for="{{lawyerList[index].orgTags}}">
+        <image src='{{item.image}}' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
+      </view>
     </view>
-   </view>
+  </view>
 </view>
 
+
+
+
+</view>
 <!-- <view class='search-more'>
 <view>正在加载</view>
 </view> -->
