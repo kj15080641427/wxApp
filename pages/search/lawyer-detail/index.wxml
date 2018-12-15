@@ -57,7 +57,8 @@
 
 <!-- 律师名片 -->
 <!-- 擅长领域 -->
-<view wx:if="{{false}}">
+ <!-- wx:if="{{false}}" -->
+<view>
 <view class='law-flex' style='background-color:white;height:300rpx;'>
   <view class='law-long-text'>擅长领域</view>
 
@@ -249,7 +250,7 @@
 </view>
 </view>
 <!-- 案例展示 -->
-<view class="detail-case-show">
+<!-- <view class="detail-case-show">
   <view class="detail-case-show-list">
     <view class="detail-case-show-title-view">
       <view class="detail-case-show-title">标题哈哈哈哈哈哈哈哈哈哈或或或或或或或或</view>
@@ -258,6 +259,6 @@
       <view class='detail-case-show-line'></view>
     </view>
   </view>
-</view>
+</view> -->
 
 
