@@ -67,12 +67,16 @@ Page({
   },
   //市index
   getCityIndex:function(e){
+    var dataRegion = "dataJSON.regionId"
     this.setData({
       cityindex: e.currentTarget.dataset.cityindex,
       clickOhter:true,
-      showRegion: !this.data.showRegion
+      showRegion: !this.data.showRegion,
+      [dataRegion]: this.data.region[this.data.regionindex].child[this.data.cityindex].regionId || ''
     })
     // noFilter.regionId = this.data.region[this.data.regionindex].child[this.data.cityindex].regionId || ''
+    this.pc()
+    console.log("地区",this.data.dataJSON)
     // console.log('市index',e.currentTarget.dataset.cityindex)
     // console.log("已选地区id", this.data.region[this.data.regionindex].child[this.data.cityindex].regionId)
   },
@@ -138,6 +142,7 @@ Page({
     var searchlawyerData = this.data.dataJSON ? this.data.dataJSON : noFilter
     console.log("上传参数")
     var success = function (data) {
+      console.log("筛选参数", searchlawyerData)
       console.log("搜索成功", data)
       wx.hideLoading()
       that.setData({

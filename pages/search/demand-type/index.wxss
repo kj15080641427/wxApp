@@ -1,5 +1,6 @@
-/* pages/search/demand/index.wxss */
+/* pages/search/demand-type/index.wxss */
 .demand-page-top-background{
+  /* background-color: white; */
   display: flex;
   height: 200rpx;
   align-items: center;
@@ -53,53 +54,41 @@
   color: #1ec88c;
   /* top: 10rpx; */
 }
-.demand-icon-number{
-  width: 200rpx;
-  height: 200rpx;
-  border-radius: 50%;
-  background-color: #1ec88c;
-}
-.demand-page-center{
-  background-color: white;
-
-}
-.demand-page-tips{
-  color: #b5b5b5;
-  font-size: 28rpx;
+.select-type{
+  margin-left: 35rpx;
   padding-top: 35rpx;
   padding-bottom: 35rpx;
+  font-size: 28rpx;
+  color: #b5b5b5;
 }
-.demand-page-center-icon{
-  margin-top: 20rpx;
-  width: 130rpx;
-  height: 130rpx;
-}
-.demand-page-icon{
-  margin-left: 25rpx;
-  margin-right: 25rpx;
+.busi-image-view{
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  background-color: #1ec88c;
+  width: 680rpx;
+  height: 140rpx;
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+  margin-bottom: 35rpx;
+  align-items: center;
+  border-radius: 10rpx;
+  justify-content: space-between
+}
+.busi-image-flex{
+  display: flex;
   align-items: center;
 }
-.demand-page-background{
-  background-color: #1ec88c;
-  border-radius: 10rpx;
-  margin-top: 20rpx;
-  width: 230rpx;
-  height: 230rpx;
+.busi-image{
+  width: 90rpx;
+  height: 90rpx;
+  margin-left: 25rpx;
 }
-.demand-page-text{
-  width: 230rpx;
-  display: flex;
-  justify-content: center;
-  color: white;
+.busi-text{
   font-size: 36rpx;
-  margin-top: 10rpx;
-  /* margin-bottom: 25rpx; */
+  color: white;
+  margin-left: 25rpx;
 }
-.demand-page-tips{
-  color: #b5b5b5;
-  font-size: 24rpx;
-  margin-left: 35rpx;
+.busi-image-mini{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 25rpx;
 }

@@ -1,0 +1,63 @@
+<!--pages/search/demand-detail/index.wxml-->
+<!-- <text>pages/search/demand-detail/index.wxml</text> -->
+<view class='demand-page-top-background' >
+<view style='display:flex;'>
+<view class='demand-top-view' >
+<image src='../../../image/demand_icon@3x/requirement_icon_01_3x.png' class='demand-page-top-icon'>
+</image>
+<view class='demand-top-view-text'><text class='demand-top-text'>1</text><text style='margin-left:50rpx;'>服务类型</text></view>
+</view>
+
+<view class='demand-top-view' >
+<image src='../../../image/demand_icon@3x/requirement_icon_03_3x.png' class='demand-page-top-icon'>
+</image>
+<view class='demand-top-view-text'><text class='demand-top-text'>2</text><text style='margin-left:50rpx;'>事务分类</text></view>
+</view>
+
+<view class='demand-top-view' >
+<image src='../../../image/demand_icon@3x/requirement_icon_03_3x.png' class='demand-page-top-icon'>
+</image>
+<view class='demand-top-view-text'><text class='demand-top-text' >3</text><text style='margin-left:50rpx;'>完善信息</text></view>
+</view>
+</view>
+</view>
+
+<view class='detail-page-center'>
+  <picker class='detail-page-picker'>
+    <view style='display:flex;justify-content: space-between'>
+      <view  class='detail-page-text'>律师擅长领域</view>
+      <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
+    </view>
+  </picker>
+  <view class='detail-page-line'></view>
+
+  <picker class='detail-page-picker' mode="region"     bindchange="bindRegionChange" value="{{region}}"custom-item="{{customItem}}">
+    <view style='display:flex;justify-content: space-between'>
+      <picker class='detail-page-text'>律师所在区域<text style='margin-left:200rpx;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>{{region[0]}}，{{region[1]}}，{{region[2]}}</text></picker>
+      <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
+    </view>
+  </picker>
+    <view class='detail-page-line'></view>
+
+  <view class='detail-page-input'>
+    <view class='detail-page-text'><text style='color:red'>*</text>最高可承受费用</view>
+    <input style='color:black'></input>
+    <view style='margin-right:35rpx;'>元</view>
+  </view>
+</view>
+
+<view class='detail-page-problem'>
+<textarea placeholder='输入问题' maxlength='300'class="detail-textarea"></textarea>
+</view>
+
+<view class='select-mark-view'>
+  <view class='select-mark-text'>*请选择问题标签</view>
+  <view  class='select-mark-flex'>
+    <view class="{{selist[index].is ? 'selected-mark': 'select-mark'}}" wx:key="{{index}}" wx:for="{{markList}}" catchtap='isSelected' data-selectindex="{{index}}" >{{item.name}}</view>
+  </view>
+  <view style='height:20rpx'></view>
+</view>
+<view class='mark-page-line'></view>
+<view class='mark-button-view'>
+  <button class='mark-button'>提交并匹配律师</button>
+</view>

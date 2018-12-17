@@ -1,8 +1,11 @@
 {
   "pages":[
-    "pages/search/index",
     "pages/index/index",
+    "pages/search/demand-list/index",
+    "pages/search/demand-detail/index",
     "pages/search/demand/index",
+    "pages/search/demand-type/index",
+    "pages/search/index",
     "pages/my/index",
     "pages/search/lawyer-list/index",
     "pages/search/lawyer-detail/index",
@@ -20,7 +23,8 @@
     "pages/logs/logs",
     "pages/my/guide/index",
     "pages/my/about/index",
-    "pages/my/order-detail/index"
+    "pages/my/order-detail/index",
+    "pages/index/webView/index"
   ],
   "window":{
     "navigationBarBackgroundColor": "#1ec88c",

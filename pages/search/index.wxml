@@ -35,8 +35,8 @@
 <!-- <view style='margin-top:200rpx;'></view> -->
 <view>
 
-
-<view class='search-select-view' style='display:flex;z-index:111;position:absolute' wx:if="{{showRegion}}" >
+<!-- fixed  -->
+<view class='search-select-view' style='display:flex;z-index:998;position:fixed;top:180rpx;' wx:if="{{showRegion}}" >
   <view>
     <scroll-view scroll-y style='height:920rpx;'>
       <view wx:key="{{index}}" wx:for="{{region}}"  wx:for-item="childItem" data-regionIndex="{{index}}" catchtap='getRegionIndex' bindtap="isSelect"class='search-select-province' style="{{ index == regionindex ? 'background-color:white' :''}}">{{childItem.name}}</view>
@@ -52,7 +52,6 @@
        <view class='search-select-line'></view>
       </view>
       </view>
-      
     </view>
 
     </scroll-view>
@@ -60,7 +59,7 @@
 </view>
 <!-- <view style="z-index:55">123123</view> -->
 
-<view >
+<view class="" >
   <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}" bindtap='getLawyerInfo' data-index="{{index}}" catchtap='getIndex'>
     <view class='watchlist-page'>
       <view class='watchlist-page-flex'>

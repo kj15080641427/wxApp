@@ -13,7 +13,7 @@ var ArticleType = '/admin/solutiontype/list'
 
 // 文章列表地址 解决方案
 // var ArticleList = '/client/solution/list'
-var ArticleList = '/admin/solution/list'
+var ArticleList = '/solution/list'
 
 // 文字咨询地址
 var Commit = '/client/freeText/post' 
@@ -132,6 +132,21 @@ var Expert = '/lawyer/member/businesstype'
 function getExpert(){
   return HOST_URL + Expert
 }
+//发布需求
+var DemandType = '/client/requirement/types'
+function getDemandType(){
+  return HOST_URL + Demand
+}
+//标签
+var Mark = '/admin/solutionmark/list'
+function getMark(){
+  return HOST_URL + Mark
+}
+//发布需求
+var Publish = '/client/requirement/post'
+function getPublish(){
+  return HOST_URL + Publish
+}
 module.exports={
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
@@ -151,5 +166,8 @@ module.exports={
   getlawyerInfo: getlawyerInfo,
   getLawHomePage: getLawHomePage,
   getDemand: getDemand,
-  getExpert: getExpert
+  getExpert: getExpert,
+  getDemandType: getDemandType,
+  getMark:getMark,
+  getPublish: getPublish
 }

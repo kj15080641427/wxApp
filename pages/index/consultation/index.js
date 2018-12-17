@@ -101,32 +101,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      array: JSON.parse(options.type)
+    })
+    console.log("问题类型",this.data.array)
     //问题类型
-    var that = this
-    var typeUrl = api.getArticleTypeUrl()
-    var message = ""
-    var successType = function (data) {
-      console.log(data.data)
-      that.setData({
-        array: data.data,
-      })
-      wx.showToast({
-        title: '成功',
-      })
-    }
-    var failType = function (e) {
-      console.log("错误", e)
-    }
-    wxrequest.requestGet(typeUrl, message, successType, failType)
-    // var typelist = []
-    // var type = wx.getStorageSync('typeName') 
-    // type.map(function(item){
-    //   typelist.push(item.categoryName)
-    // })
-    // this.setData({
-    //   array:typelist
-    // })
-    // console.log(this.data.array)
+    // var that = this
+    // var typeUrl = api.getArticleTypeUrl()
+    // var message = ""
+    // var successType = function (data) {
+    //   console.log(data.data)
+    //   that.setData({
+    //     array: data.data,
+    //   })
+    //   wx.showToast({
+    //     title: '成功',
+    //   })
+    // }
+    // var failType = function (e) {
+    //   console.log("错误", e)
+    // }
+    // wxrequest.requestPost(typeUrl, message, successType, failType)
   },
 
   /**

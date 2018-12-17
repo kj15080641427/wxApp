@@ -1,3 +1,4 @@
+/* pages/search/demand-list/index.wxss */
 /* pages/search/index.wxss */
 .search-input-height{
   display: flex;
