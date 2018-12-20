@@ -1,5 +1,7 @@
 {
   "pages":[
+    "pages/message/index",
+    "pages/message/chart/index",
     "pages/search/index",
     "pages/index/index",
     "pages/search/demand/index",

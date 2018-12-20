@@ -32,6 +32,7 @@ var EditDetail = '/client/member/update'
 
 // 行业列表地址
 var Industry = '/common/industry'
+
 // 获取行业列表
 function getIndustryUrl(){
   return HOST_URL+Industry
@@ -132,6 +133,12 @@ var Expert = '/lawyer/member/businesstype'
 function getExpert(){
   return HOST_URL + Expert
 }
+
+//  获取极光IM相关配置信息
+var ImConfig = '/client/im/config'
+function getImConfig(){
+  return HOST_URL + ImConfig
+}
 module.exports={
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
@@ -151,5 +158,6 @@ module.exports={
   getlawyerInfo: getlawyerInfo,
   getLawHomePage: getLawHomePage,
   getDemand: getDemand,
-  getExpert: getExpert
+  getExpert: getExpert,
+  getImConfig: getImConfig
 }

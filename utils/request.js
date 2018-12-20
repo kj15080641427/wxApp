@@ -165,6 +165,14 @@ function requestGet(url, message, success, fail) {
       if (res.statusCode == 200 && res.data.code == 0) {
         success(res.data)
       } else {
+        if(res.statusCode == 401){
+          wx.navigateTo({
+            url: '../userlogin/index',
+            complete:function(res){
+                console.log(res)
+            }            
+          })
+        }
         fail(res)
       }
     },
@@ -174,6 +182,7 @@ function requestGet(url, message, success, fail) {
         wx.hideLoading()
       }
       fail(res)
+      
     },
     complete: function (res) {
 

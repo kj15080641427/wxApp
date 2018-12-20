@@ -1,0 +1,46 @@
+<view class="chart">
+    <scroll-view scroll-y="true" scroll-top="{{scrollTop}}" class="chart-content">
+        <view id="chart-content">
+            <block wx:for="{{messageList}}" wx:key="create_time">
+                <view wx:if="{{item.from_id == userName}}" class="msg-list lawyer-msg">
+                    <view class="avatar">
+                        <image class="avatar-img" src="{{lawyer_avatar}}" mode="scaleToFill" lazy-load="true" binderror="" bindload=""></image>
+                    </view>
+                    <view class="text-box">
+                        <view wx:if="{{item.msg_type == 'text'}}" class="text">
+                            {{item.msg_body.text}}
+                        </view>
+                    </view>
+                    <view class="hidden"></view>
+                </view>
+                <view wx:else class="msg-list my-msg">
+                    <view class="hidden"></view>
+                    <view class="text-box">
+                        <view class="text">
+                            {{item.msg_body.text}}
+                        </view>
+                    </view>
+                    <view class="avatar">
+                        <image class="avatar-img" src="{{my_avatar}}" mode="scaleToFill" lazy-load="true" binderror="" bindload=""></image>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="">
+            {{ vaule }}
+        </view>
+    </scroll-view>
+    <view class="input-box {{ inputType == 'record' ? 'isRecord' : ''}}">
+        <view class="audio" bindtap="changeInputType">
+            <image class="" src="{{ inputType == 'record' ? '../../../image/message/board.png' : '../../../image/message/record.png' }}" mode="scaleToFill" lazy-load="false" binderror="" bindload=""></image>
+        </view>
+        <view wx:if="{{ inputType == 'text' }}" class="input">
+            <form bindsubmit="confirmSendText">
+                <textarea name="textarea" auto-height fixed maxlength="-1" focus="{{focus}}" cursor-spacing="30rpx" show-confirm-bar="{{showBar}}" confirm-type="发送" value="{{inputValue}}" bindfocus="textareaOnFocus" placeholder-style="color:#b5b5b5;" placeholder="回复" />
+                <!-- <view class="more">发送</view>   -->
+                <button form-type="submit" class="more"> 发送 </button>
+            </form>      
+        </view>
+        <view wx:if="{{ inputType == 'record' }}" class="record-btn" hover-class="active" bindtouchstart="recordTouchStart" bindtouchmove="recordTouchMove" bindtouchend="recordTouchEnd">{{ recordBtnText }}</view>
+    </view>
+</view>

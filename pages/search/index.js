@@ -4,6 +4,7 @@ var wxrequest = require('../../utils/request.js')
 var formatTime = require('../../utils/util.js')
 var throttle = require('../../utils/throttle.js')
 var region = require('../../region.js')
+
 var noFilter = {
   "regionId":'',
   "lawyerName":'',
@@ -180,6 +181,7 @@ Page({
     })
     this.pc()
     this.getExpert()
+    //  加载极光im
   },
 
   /**
