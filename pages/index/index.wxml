@@ -59,7 +59,6 @@
       </swiper-item>
     </block>
   </swiper>
-
 <!-- 服务动态 -->
   <view class='index-service'>
     <image src='../../image/homeicon_3x/homepage_06_3x.png' style='width:90rpx;height:90rpx;margin-top:30rpx'></image>
@@ -106,11 +105,9 @@
 <!-- <view class='index-page-line-view'>
   <view class='index-page-line'></view>
 </view> -->
-<swiper class="tab-content" current="{{articleIndex}}" duration="300" bindchange="switchTab"
-  >
+<swiper class="tab-content" current="{{articleIndex}}" duration="300" bindchange="switchTab">
     <swiper-item wx:key="{{index}}" wx:for="{{popular}}"  id = "{{index}}" >
-        <!-- <scroll-view scroll-y style="height: 100%;"  scroll-into-view="{{toView}}" scroll-top="0"> -->
-      <view wx:key="index" wx:for="{{article}}">
+      <view wx:key="index" wx:for="{{article}}" bindtap="gotoweb" data-resolveIndex='{{index}}' >
     <view class='index-page-line-view'>
       <view class='index-page-line'></view>
     </view>
@@ -119,18 +116,18 @@
           <view class="index-article-text">{{item["title"]}}</view>
           <view class="index-article-text-lower">已帮助<label style="color:#1ec88c">{{item['helpNumber']}}</label>人</view>
         </view>
-        <!-- <image src="https://api-test.lex-mung.com{{item['image']}}" style='width:223rpx;height:145rpx;'></image> -->
+        <!-- <image src="{{item.image}}" style='width:223rpx;height:145rpx;'></image> -->
         </view>
       </view> 
-                <!-- </scroll-view> -->
     </swiper-item>
 </swiper>
-
+<!-- <web-view src="https://mp.weixin.qq.com/"></web-view> -->
 
   <!-- 加载更多 -->
-  <view class='index-layout-center' bindtap="test" >
+  <!-- <view class='index-layout-center' bindtap="test" >
     <view class='index-more' bindtap='loadMore'>加载更多</view>
-  </view>
+  </view> -->
+<button bindtap='gotoDemand'>发布需求</button>
 
 <!-- 蒙层 -->
 <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>

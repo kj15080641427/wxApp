@@ -36,6 +36,7 @@ Page({
     var that = this
     var t = that.data
     var dataJSON = {
+      "regionId":'',
       "practiceYearId": t.practiceYearId,
       "sex": t.sex,
       "industryId": t.industryId,

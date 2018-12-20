@@ -1,11 +1,11 @@
 
 <view class="consul-page">
 <!-- 选择问题类型 -->
- <picker bindtap='getType' bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="{{'categoryName'}}">
+ <picker bindtap='getType' bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="{{'typeName'}}">
     <view class="consul-picker">
       <view class="consul-picker-text">问题类型</view>
       <view class="consul-page-flex">
-        <view class='consul-picker-text' style="margin-right:20rpx">{{array[index]['categoryName']}}</view>
+        <view class='consul-picker-text' style="margin-right:20rpx">{{array[index].typeName}}</view>
         <view class="consul-picker-text-glass" wx:if="{{hasSelect}}">请选择问题类型</view>
         <image src='../../../image/homeicon_3x/homepage_09_3x.png'style="width:20rpx;height:20rpx;" />
       </view>

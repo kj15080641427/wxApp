@@ -1,25 +1,50 @@
 // pages/search/demand/index.js
+var wxrequest = require('../../../utils/request.js')
+var api = require('../../../utils/api.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    image: [
-      '../../../image/demand_icon@3x/requirement1.png',
-      '../../../image/demand_icon@3x/requirement2.png',
-      '../../../image/demand_icon@3x/requirement3.png',
-      '../../../image/demand_icon@3x/requirement4.png',
-      '../../../image/demand_icon@3x/requirement5.png',
-      '../../../image/demand_icon@3x/requirement6.png'
-      ]
+      demandType:'',
+      typeindex:''
   },
-
+  //分类
+  getDemandType:function(){
+    var that = this
+    var url = api.getDemandType()
+    var data = wx.getStorage({
+      key: 'token',
+      success: function(res) {},
+    })
+    var success = function(data){
+      that.setData({
+        demandType:data.data
+      })
+      console.log(data)
+    }
+    var fail = function(e){
+      console.log(e)
+    }
+    wxrequest.requestGetpar(url, data, '', success, fail)
+  },
+  //index
+  getTypeIndex:function(e){
+    this.setData({
+      typeindex:e.currentTarget.dataset.typeindex
+    })
+    wx.navigateTo({
+      url: '../demand-type/index?busiTypes=' + JSON.stringify(this.data.demandType) + '&index=' + e.currentTarget.dataset.typeindex,
+    })
+    console.log(e.currentTarget.dataset.typeindex)
+  },
+  //
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.getDemandType()
   },
 
   /**
