@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/my/index",
     "pages/message/index",
     "pages/message/chart/index",
     "pages/index/index",
@@ -8,7 +9,6 @@
     "pages/search/demand/index",
     "pages/search/demand-type/index",
     "pages/search/index",
-    "pages/my/index",
     "pages/search/lawyer-list/index",
     "pages/search/lawyer-detail/index",
     "pages/search/filter/index",

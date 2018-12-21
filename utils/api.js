@@ -154,6 +154,12 @@ var Publish = '/client/requirement/post'
 function getPublish(){
   return HOST_URL + Publish
 }
+
+// 获取微信支付信息
+var Pay = '/pay/recharge'
+function getPayInfo(){
+  return HOST_URL + Pay
+}
 module.exports={
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
@@ -174,8 +180,9 @@ module.exports={
   getLawHomePage: getLawHomePage,
   getDemand: getDemand,
   getExpert: getExpert,
-  getImConfig: getImConfig
+  getImConfig: getImConfig,
   getDemandType: getDemandType,
   getMark:getMark,
-  getPublish: getPublish
+  getPublish: getPublish,
+  getPayInfo: getPayInfo
 }

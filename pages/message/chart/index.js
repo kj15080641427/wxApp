@@ -4,6 +4,7 @@ var wxformatTime = require('../../../utils/util')
 var app = getApp()
 var jM = app.globalData.jMessage
 const recorderManager = wx.getRecorderManager()
+const innerAudioContext = wx.createInnerAudioContext()
 let timer = null
 Page({
     data: {
@@ -34,44 +35,53 @@ Page({
         let that = this
         that.getHistoryMessage(that.data.userName)
         jM.onMsgReceive(function(lRes) {
-            console.log('lRes')
+            console.log(lRes)
             let arr = that.data.messageList
-            arr.push(lRes.messages[0].content)
-            that.setData({
-                messageList: arr,
-                delayMessages: arr
-            },function(){
-                that.pageScroll(that)
-            })
-            // jM.addSingleReceiptReport({
-            //     'username' : lRes.messages[0].content.from_id,
-            //     'msg_ids' : [lRes.messages[0].msg_id]
-            // }).onSuccess(function(data,msg_ids){
-            //     jM.onSyncMsgReceipt()
-            //     // data.code 返回码
-            //     // data.appkey 目标 appkey
-            //     // data.username 目标 username
-            //     // msg_ids 消息数组
-            // }).onFail(function(){
-
+            // arr.push(lRes.messages[0].content)
+            // that.setData({
+            //     messageList: arr,
+            //     delayMessages: arr
+            // },function(){
+            //     that.pageScroll(that)
             // })
-            // jM.messageRequire(lRes.messages[0].content.from_id,[lRes.messages[0].msg_id]).then( mRes => {
-            //     jM.messageSyncReceipt()
-            // })
+            if(lRes.messages[0].content.msg_type == "voice"){
+                jM.getResource({
+                    'media_id': lRes.messages[0].content.msg_body.media_id
+                }).onSuccess(function (gRes) {
+                    arr.push({
+                        from_id: lRes.messages[0].content.from_id,
+                        msg_type: lRes.messages[0].content.msg_type,
+                        duration: lRes.messages[0].content.msg_body.duration,
+                        content: gRes.url
+                    })
+                    that.setData({
+                        messageList: arr
+                    },function(){
+                        that.pageScroll(that)
+                        // jM.resetConversationCount(userName)
+                    })
+                }).onFail(function (data) {
+                    console.log('error:' + JSON.stringify(data));
+                });
+            }else{
+                arr.push({
+                    from_id: lRes.messages[0].content.from_id,
+                    msg_type: lRes.messages[0].content.msg_type,
+                    content: lRes.messages[0].content.msg_body.text
+                })
+                that.setData({
+                    messageList: arr
+                },function(){
+                    that.pageScroll(that)
+                    // jM.resetConversationCount(userName)
+                })
+            }
         });
-        // jM.listenMessage().then( lRes => {
-        //     console.log(lRes)
-        //     let arr = that.data.messageList
-        //     arr.push(lRes.d.messages[0].content)
-        //     that.setData({
-        //         messageList: arr
-        //     },function(){
-        //         that.pageScroll(that)
-        //     })
-        //     jM.messageRequire(lRes.d.messages[0].content.from_id,[lRes.d.messages[0].msg_id]).then( mRes => {
-        //         jM.messageSyncReceipt()
-        //     })
-        // })
+    },
+    onUnload(){
+        //  页面关闭时停止播放语音
+        innerAudioContext.stop()
+        innerAudioContext.destroy()
     },
     getHistoryMessage(userName) {
         let that = this
@@ -81,54 +91,54 @@ Page({
         console.log(wxformatTime.fTime(now))
         console.log(wxformatTime.fTime(beginTime))
         wx.request({
-            url: encodeURI('https://report.im.jpush.cn/v2/messages?count=500&begin_time='+wxformatTime.fTime(beginTime)+'&end_time='+wxformatTime.fTime(now)),
+            url: encodeURI('https://report.im.jpush.cn/v2/users/lex'+wx.getStorageSync('memberId')+'/messages?count=500&begin_time='+wxformatTime.fTime(beginTime)+'&end_time='+wxformatTime.fTime(now)),
             header: { 'Authorization': 'Basic NTdlYzIzM2U0ODE1ZjExMjM1YjMyMzk1OmIyMWY2YzYzOGU3MzIwYjE0YTVhMTQ2OQ==' },
             method: 'get',
             success(res){
                 console.log(res.data.messages)
                 console.log(userName)
-                // let arr = []
-                // res.data.messages.foreach(item => {
-                //     if(item.from_id == userName || item.target_id == userName){
-                //         if(item.msg_type == "file"){
-                //             jM.getResource({
-                //                 'media_id': item.msg_body.media_id
-                //             }).onSuccess(function (res) {
-                //                 arr.push({
-                //                     from_id: item.from_id,
-                //                     msg_type: item.msg_type,
-                //                 })
-                //             }).onFail(function (data) {
-                //                 console.log('error:' + JSON.stringify(data));
-                //             });
-                //         }
-                //     }
-                // })
-                
-                let arr = res.data.messages.filter(item => {
-                    return item.from_id == userName || item.target_id == userName
-                })
-                // let ids = res.data.messages.filter(item => {
-                //     return item.from_id == userName || item.target_id == userName
-                // })
-                console.log(res.data.messages[res.data.messages.length-1].create_time)
-                // if(res.data.messages[res.data.messages.length-1].create_time != that.data.delayMessages[0].create_time){
-                //     that.data.delayMessages.forEach(v => {
-                //         arr.push(v)
-                //     });
-                // }
-                console.log(arr)
-                that.setData({
-                    messageList: arr
-                },function(){
-                    that.pageScroll(that)
-                    
-                    // jM.resetConversationCount(userName)
+                let arr = []
+                res.data.messages.forEach(item => {
+                    if(item.from_id == userName){
+                        if(item.msg_type == "voice"){
+                            jM.getResource({
+                                'media_id': item.msg_body.media_id
+                            }).onSuccess(function (gRes) {
+                                arr.push({
+                                    from_id: item.from_id,
+                                    msg_type: item.msg_type,
+                                    duration: item.msg_body.duration,
+                                    content: gRes.url
+                                })
+                                that.setData({
+                                    messageList: arr
+                                },function(){
+                                    console.log(that.data.messageList)
+                                    that.pageScroll(that)
+                                    // jM.resetConversationCount(userName)
+                                })
+                            }).onFail(function (data) {
+                                console.log('error:' + JSON.stringify(data));
+                            });
+                        }else{
+                            arr.push({
+                                from_id: item.from_id,
+                                msg_type: item.msg_type,
+                                content: item.msg_body.text
+                            })
+                            that.setData({
+                                messageList: arr
+                            },function(){
+                                console.log(that.data.messageList)
+                                that.pageScroll(that)
+                                // jM.resetConversationCount(userName)
+                            })
+                        }
+                    }
                 })
             }
         })
     },
-
     textareaOnFocus(e) {
         console.log(e.detail.height)
         wx.pageScrollTo({
@@ -200,18 +210,6 @@ Page({
             console.log(msg)
             let arr = that.data.messageList
             arr.push(msg.content)
-            // jM.addSingleReceiptReport({
-            //     'username' : lRes.messages[0].content.from_id,
-            //     'msg_ids' : [lRes.messages[0].msg_id]
-            // }).onSuccess(function(data,msg_ids){
-            //     jM.onSyncMsgReceipt()
-            //     // data.code 返回码
-            //     // data.appkey 目标 appkey
-            //     // data.username 目标 username
-            //     // msg_ids 消息数组
-            // }).onFail(function(){
-
-            // })
             that.setData({
                 inputValue: '',
                 messageList: arr,
@@ -284,5 +282,23 @@ Page({
             console.log('recorder stop', res)
             const { tempFilePath } = res
         })
+    },
+    //  播放语音
+    playAudio(e){
+        console.log(e)
+        innerAudioContext.autoplay = true
+        innerAudioContext.obeyMuteSwitch = false
+        innerAudioContext.play()
+        innerAudioContext.src = e.currentTarget.dataset.src
+        innerAudioContext.onPlay(() => {
+            console.log('开始播放')
+        })
+        innerAudioContext.onEnded(() => {
+            console.log('播放完毕')
+        })
+        innerAudioContext.onError((res) => {
+            console.log(res.errMsg)
+            console.log(res.errCode)
+        }) 
     }
 })

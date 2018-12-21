@@ -2,7 +2,7 @@
 import wxrequest from '../../utils/request.js'
 import api from '../../utils/api.js'
 import hex_md5 from '../../jM/md5.js'
-// import jM from '../../jM/index'
+import wxPay from '../../utils/wxPay.js'
 var app = getApp()
 var jM = app.globalData.jMessage
 Page({
@@ -18,7 +18,7 @@ Page({
         this.checkLogin() 
     },
     onReady() {
-            
+        // wxPay(1)
     },
     onShow() {
         if(!jM.isLogin()){

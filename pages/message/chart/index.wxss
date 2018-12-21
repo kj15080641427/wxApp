@@ -35,6 +35,14 @@
     padding: 20rpx 30rpx;
     word-break:break-word;
 }
+.chart .msg-list .text-box .audio{
+    width: 200rpx;
+    position: relative;
+}
+.chart .msg-list .text-box .audio .audio-img{
+    width: 40rpx;
+    height: 40rpx;
+}
 .chart .msg-list .avatar .avatar-img{
     width: 100%;
     height: 100%;
@@ -46,6 +54,11 @@
 .chart .my-msg .text-box .text{
     background: #83ffa0;
     float: right;
+}
+.chart .my-msg .text-box .audio .audio-duration{
+    position: absolute;
+    left: -30rpx;
+    top: 20rpx;
 }
 .chart .my-msg .avatar{
     margin-left: 25rpx;
@@ -74,6 +87,11 @@
 }
 .chart .lawyer-msg .text-box .text{
     background: #fff;
+}
+.chart .lawyer-msg .text-box .audio-duration{
+    position: absolute;
+    right: -30rpx;
+    top: 20rpx;
 }
 .chart .lawyer-msg .avatar{
     margin-right: 25rpx;

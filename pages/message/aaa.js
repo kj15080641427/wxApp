@@ -202,6 +202,7 @@ function setLayImLocal() {
         console.log(local);
     }, 3000);
 }
+
 //初始化极光聊天
 function init() {
     var random_str = randomString(20);
