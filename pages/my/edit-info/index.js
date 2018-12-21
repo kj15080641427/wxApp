@@ -2,19 +2,15 @@ var app = getApp();
 var cityData = require('../../../region.js');
 var wxrequest = require('../../../utils/request.js')
 var api = require('../../../utils/api.js')
-var region = require('../../../region.js')
 var userInfo = wx.getStorageSync("userInfo")
-// console.log(wx.getStorageInfoSync())
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    region:'北京-北京市-东城区',
     index: userInfo.sex ? userInfo.sex -1  :'0', //性别index
     index1: wx.getStorageSync("index1") ? wx.getStorageSync("index1") : '' , //行业index
-    // index2: '0',//企业index
     indexarea:'0', //自定义地区
     industry:[], //行业列表
     enidUserInfo:'', //用户信息
@@ -24,19 +20,18 @@ Page({
     selecttime:true,
     systime:false,
     hasaddress:true,
+    industryName:'', //行业
 
     avatarUrl: userInfo.iconImage ? userInfo.iconImage : '',
     editMember: userInfo.memberName ? userInfo.memberName :'',//昵称
     gender: [{ "gender": "男", "id": 1 }, { "gender": "女", "id": 2 }],//性别
     editIndustryId: userInfo.industryId ? userInfo.industryId : '',//行业id
     editEmail: userInfo.email ? userInfo.email : '',//邮箱
-    // editinstitutionId: userInfo.institutionId ? userInfo.institutionId : '',//企业id
     editaddress: userInfo.areaId ? userInfo.areaId:'',
-    // editOrganizations: userInfo.editOrganizations,
     time: userInfo.birthday ? userInfo.birthday :'选择出生日期',//出生日期
     memberPositionName: userInfo.memberPositionName ? userInfo.memberPositionName : '',
     institutionName: userInfo.institutionName ? userInfo.institutionName : '', //企业名称
-
+    orgName: userInfo.organizationId ? userInfo.organizationId :'',
     //地区
     citysData: cityData.citysData,
     provinces: [],
@@ -81,12 +76,42 @@ Page({
       that.setData({
         industry: data.data
       })
+      data.data.map(function(item){
+        if (item.industryId == userInfo.industryId){
+          that.setData({
+            industryName: item.industryName
+          })
+        }
+      })
     }
     var fail = function (e) {
       console.log(e)
       console.log("行业", data)
     }
     wxrequest.request(url, data, success, fail)
+  },
+  //获取商会组织
+  getOrganization:function (){
+    var that = this
+    var url = api.getOrganization()
+    var success=(data)=>{
+      console.log("商会组织",data)
+      this.setData({
+        org:data.data
+      })
+      data.data.map(function(item){
+      if (item.organizationId == userInfo.organizationId){
+        this.setData({
+          orgN: item.organizationName
+        })
+      }
+        console.log("哈哈哈哈哈哈哈哈", that.data.orgN)
+      })
+    }
+    var fail = (e)=>{
+      console.log(e)
+    }
+    wxrequest.requestGet(url,'',success,fail)
   },
  // 保存
   saveInfo:function(){
@@ -100,19 +125,16 @@ Page({
       "birthday": that.data.time ? that.data.time + ' 00:01:01' : '1970-01-01' + ' 00:01:01',//生日
       "email": that.data.editEmail ? that.data.editEmail : '', //邮箱
       "industryId": that.data.industry&&that.data.index1 ? that.data.industry[that.data.index1].industryId : '', //行业id
-      // "institutionId": that.data.institu[that.data.index2].institutionTypeId, //企业id
       "regionId":that.data.editaddress,
       "memberPositionName": that.data.memberPositionName ? that.data.memberPositionName : '',
-      "institutionName": that.data.institutionName ? that.data.institutionName : ''
-      // "oids": this.data.editOrganizations,
+      "institutionName": that.data.institutionName ? that.data.institutionName : '',
+      "organizationId": that.data.orgNama ? that.data.orgNama : ''
       }
     console.log("上传参数", editDetailData, this.data.date)
 
     var success = function(data){
-      // wx.setStorageSync('index2', that.data.index2)
       wx.setStorageSync('index1',that.data.index1 )
       that.setData({
-        // index2: wx.getStorageSync('index2'),
         index1:wx.getStorageSync('index1'),
       })
       wx.showToast({
@@ -138,11 +160,11 @@ Page({
     wxrequest.request(editUrl,editDetailData,success,fail)
     
   },
+  //性别picker
   bindChangegender: function (e) {
     this.setData({
       index: e.detail.value,
     })
-    // console.log("性别ID", this.data.gender[this.data.index].id)
   },
 
   // 选择行业
@@ -151,22 +173,20 @@ Page({
       index1: e.detail.value,
       selectIndestry:false
     })
-    // console.log("行业ID", this.data.industry[this.data.index1].industryId)
   },
-
-  //选择企业
-  institutionTypeName: function (e) {
+  //商会
+  changeorg:function(e){
     this.setData({
-      institutionName:e.detail.value
-    })
-
-  },
-  // 选择地区
-  bindRegionChange: function (e) {
-    this.setData({
-      region: e.detail.value
+      index2:e.detail.value
     })
   },
+  // //选择企业
+  // institutionTypeName: function (e) {
+  //   this.setData({
+  //     institutionName:e.detail.value
+  //   })
+
+  // },
   //自定义地区
   changearea: function (e) {
     this.setData({
@@ -238,9 +258,9 @@ Page({
     })
   },
   // 商会组织
-  organizations: function (e) {
-    editOrganizations: e.detail.value
-  },
+  // organizations: function (e) {
+  //   editOrganizations: e.detail.value
+  // },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -249,6 +269,7 @@ Page({
     var that = this
     // 行业列表
     this.getIndustry()
+    this.getOrganization()
   },
 
   /**
@@ -273,7 +294,8 @@ Page({
       editEmail: editInfo.email ? editInfo.email : '', //邮箱
       memberPositionName: editInfo.memberPositionName ? editInfo.memberPositionName: '', //职位名称
       institutionName: editInfo.institutionName ? editInfo.institutionName : '',//企业名称
-      editIndustryId: editInfo.industryId ? editInfo.industryId : ''
+      editIndustryId: editInfo.industryId ? editInfo.industryId : '',
+      orgName: editInfo.institutionId ? editInfo.institutionId : ''
     })
     // console.log("userinfottt", wx.getStorageInfoSync())
     // console.log("time", that.data.time)
@@ -310,12 +332,12 @@ Page({
     // 获取用户详情
     this.getUserDetail()
 
-    if ( !wx.getStorageSync('index1')) {
-      that.setData({
-        selectInstitu:true,
-        selectIndestry:true,
-      })
-    }
+    // if ( !wx.getStorageSync('index1')) {
+    //   that.setData({
+    //     selectInstitu:true,
+    //     selectIndestry:true,
+    //   })
+    // }
 
     // wx.removeStorage({
     //   key: 'institu',

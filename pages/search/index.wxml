@@ -22,7 +22,7 @@
     <image src='../../image/search_icon@3x/Personalhomepage-22@3x.png' class='search-page-icon'></image>
   </view>
   <view  class='search-tab-icon' bindtap='gotoFilter'>
-    <view class='search-tab-text'>筛选</view>
+    <view class='search-tab-text' style="{{filterColor ? 'color:#1ec88c' :''}}">筛选</view>
     <image src='../../image/search_icon@3x/Personalhomepage-21@3x.png' class='search-page-icon' style='width:35rpx;height:35rpx'></image>
   </view>
 </view>
@@ -90,11 +90,11 @@
 <!-- <view style="z-index:55">123123</view> -->
 
 <view class="" >
-  <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}" bindtap='getLawyerInfo' data-index="{{index}}" catchtap='getIndex'>
+  <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}"  data-index="{{index}}" catchtap='getIndex'>
     <view class='watchlist-page'>
       <view class='watchlist-page-flex'>
         <view class='watchlist-page-left' style="z-index:55;">
-          <image class='watchlist-page-avatar' src="{{lawyerList[index].iconImage ? lawyerList[index].iconImage :'../../image/my_icon@3x/mine_icon_02_3x.png'}}"  style="z-index:55;"></image>
+          <image lazy-load="true" class='watchlist-page-avatar' src="{{lawyerList[index].iconImage ? lawyerList[index].iconImage :'../../image/my_icon@3x/mine_icon_02_3x.png'}}"  style="z-index:55;"></image>
           <view class='watchlist-page-practice' style="z-index:55;">执业{{year[index]}}年</view>
 
         </view>
@@ -112,7 +112,7 @@
     <view class='watch-page-lower' wx:if="{{lawyerList[index].orgTags[0]}}">
       <view class='watchlist-page-label' >认证标签</view>
       <view wx:key="{{index}}" wx:for="{{lawyerList[index].orgTags}}">
-        <image src='{{item.image}}' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
+        <image lazy-load="true" src='{{item.image}}' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
       </view>
     </view>
   </view>

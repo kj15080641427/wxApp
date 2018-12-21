@@ -64,7 +64,7 @@
 <view class='select-mark-view'>
   <view class='select-mark-text'>*请选择问题标签</view>
   <view  class='select-mark-flex'>
-    <view class="{{selist[index].is ? 'selected-mark': 'select-mark'}}" wx:key="{{index}}" wx:for="{{markList}}" catchtap='isSelected' data-selectindex="{{index}}" >{{item.name}}</view>
+    <view class="{{selist[index].is ? 'selected-mark': 'select-mark'}}" wx:key="{{index}}" wx:for="{{markList}}" catchtap='isSelected' data-selectindex="{{index}}" >{{item.tagName}}</view>
   </view>
   <view style='height:20rpx'></view>
 </view>

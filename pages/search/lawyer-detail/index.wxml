@@ -105,12 +105,12 @@
   <view class='law-flex' style='background-color:white'>
     <view class='law-long-text'>专业技能</view>
     <view class='law-skill-right' style='display:flex;flex-wrap: wrap'>
-      <view wx:key="{{index}}" wx:for="{{lawyerInfo.skill}}" wx:if="{{item.parentId ==1}}" class='skill-background' >
+      <view wx:key="{{index}}" wx:for="{{lawyerInfo.skill[0].children}}"class='skill-background' >
           <view style='display: flex;justify-content: center;width:140rpx'>
-           <image wx:if="{{item.parentId ==1}}" class='law-page-skill' src="{{item.iconImage}}"></image>
+           <image  class='law-page-skill' src="{{item.iconImage}}"></image>
            </view>
            <view style='display: flex;justify-content: center;width:140rpx'>
-          <view wx:if="{{item.iconImage}}" >{{item.skillName}}</view>
+          <view>{{item.skillName}}</view>
           </view>
       </view>
     </view>
@@ -135,11 +135,11 @@
   <view class='law-flex' style='background-color:white'>
     <view class='law-long-text'>语言能力</view>
     <view class='law-skill-right-other'>
-      <view class='law-page-industry-text' wx:if="{{!language[index]}}" style='margin-top:10rpx;'>暂无信息</view>
-      <view wx:if="{{!language[index]}}" class='law-page-line'></view>
-      <view wx:key="{{index}}" wx:for="{{language}}">
-        <view style='margin-bottom:15rpx;margin-top:10rpx;' wx:if="{{!item.iconImage}}">{{item.language}}</view>
-        <view wx:if="{{!language[index]}}" class='law-page-line'></view>
+      <view class='law-page-industry-text' wx:if="{{!lawyerInfo.skill[2].children[0]}}" style='margin-top:10rpx;'>暂无信息</view>
+      <view  class='law-page-line'></view>
+      <view wx:key="{{index}}" wx:for="{{lawyerInfo.skill[2].children}}">
+        <view style='margin-bottom:15rpx;margin-top:10rpx;' wx:if="{{!item.iconImage}}">{{item.skillName}}</view>
+        <view class='law-page-line'></view>
       </view>
     </view>
   </view>
@@ -150,11 +150,11 @@
   <view class='law-flex' style='background-color:white'>
     <view class='law-long-text'>其他技能</view>
     <view class='law-skill-right-other'>
-      <view class='law-page-industry-text' wx:if="{{!ohterSkill[index]}}" style='margin-top:10rpx;'>暂无信息</view>
-      <view wx:if="{{!ohterSkill[index]}}" class='law-page-line'></view>
-      <view wx:key="{{index}}" wx:for="{{ohterSkill}}">
-        <view style='margin-bottom:15rpx;margin-top:10rpx;' wx:if="{{!item.iconImage}}">{{item.ohterSkill}}</view>
-        <view wx:if="{{!ohterSkill[index]}}" class='law-page-line'></view>
+      <view class='law-page-industry-text' wx:if="{{!lawyerInfo.skill[1].children[0]}}" style='margin-top:10rpx;'>暂无信息</view>
+      <view  class='law-page-line'></view>
+      <view wx:key="{{index}}" wx:for="{{lawyerInfo.skill[1].children}}">
+        <view style='margin-bottom:15rpx;margin-top:10rpx;' wx:if="{{!item.iconImage}}">{{item.skillName}}</view>
+        <view  class='law-page-line'></view>
       </view>
     </view>
   </view>

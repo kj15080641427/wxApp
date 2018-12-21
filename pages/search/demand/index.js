@@ -18,10 +18,11 @@ Page({
       success: function(res) {},
     })
     var success = function(data){
+      data.data.pop()
       that.setData({
         demandType:data.data
       })
-      console.log("服务分类",data)
+      console.log("服务分类",data.data)
     }
     var fail = function(e){
       console.log(e)

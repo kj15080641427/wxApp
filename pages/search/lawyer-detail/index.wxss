@@ -24,7 +24,6 @@
   color: #f8b62d;
   font-size: 24rpx;
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   box-sizing: border-box;
   border-top-left-radius: 30rpx;
@@ -77,12 +76,10 @@ font-weight:bold;
   color: #717171;
   border-radius: 15rpx;
   background-color: #f4f4f4;
-  /* width: 130rpx; */
   height: 30rpx;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* margin-top: 40rpx; */
 }
 .law-address-icon{
   width: 25rpx;
@@ -329,7 +326,7 @@ margin-left: 35rpx;
   justify-content: center;
   align-items: center;
 }
-.detail-case-show-list{
+/* .detail-case-show-list{
   margin-top: 35rpx;
   background-color: white;
   height: 300rpx;
@@ -357,4 +354,4 @@ margin-left: 35rpx;
 .detail-case-show-line{
   height: 1rpx;
   background-color: #f4f4f4;
-}
+} */

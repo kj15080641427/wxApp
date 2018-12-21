@@ -1,6 +1,7 @@
 // pages/search/filter/index.js
 var api = require('../../../utils/api.js')
 var wxrequest = require('../../../utils/request.js')
+var dataJSON
 Page({
   /**
    * 页面的初始数据
@@ -12,7 +13,7 @@ Page({
     listIndex:'',
     indexPicker:'',
     click:false,
-    practiceYearId:'', //执业年限
+    practiceYearId:1, //执业年限
     sex: '', //性别
     industryId:'', //行业
     skillId:'',//基本技能
@@ -25,7 +26,7 @@ Page({
     socialId:'', // 社会职务
     guaranteeId:'',//增信担保
     mungId:'',//绿豆圈
-    organizationId:'' //商会组织
+    organizationId:'', //商会组织
   },
 
   // getList:function(){
@@ -34,10 +35,12 @@ Page({
   getSearchLawyer:function(){
     var that = this
     var t = that.data
-    var dataJSON = {
+    dataJSON = {
       "pageNum":'1',
       "pageSize":'10',
-      "regionId":'',
+      "regionId": t.noFilter.regionId || '',
+      "businessTypeId": t.noFilter.businessTypeId || '',
+      "sort": t.noFilter.sort || '',
       "practiceYearId": t.practiceYearId,
       "sex": t.sex,
       "industryId": t.industryId,
@@ -56,75 +59,36 @@ Page({
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1];   //当前页面
     var prevPage = pages[pages.length - 2];  //上一个页面
-
-    var that = this
-    var searchLawyerUrl = api.getSearchLawyer() + "1/10"
-    var searchlawyerData = dataJSON 
-    console.log("上传参数", dataJSON )
-    wx.showLoading({
-      title: '搜索中',
-    })
-    var success = function (data) {
-      console.log("搜索成功", data)
-      wx.hideLoading()
-      // that.changeParentData()
-      // wx.setStorageSync("lawyerList", data.data.list)
-      wx.navigateBack({
-        url: '../index',
-      })
-      prevPage.setData({
-        getPage: 10,
-        lawyerList:data.data.list,
-        dataJSON: dataJSON,
-        topNum:0
-      })
-      // prevPage.gotop()
-    }
-    var fail = function (e) {
-      wx.hideLoading()
-      wx.showToast({
-        title: '加载数据失败',
-        icon:'neno'
-      })
-      console.log(e)
-    }
-    // console.log("筛选参数", searchlawyerData)
-    wxrequest.request(searchLawyerUrl, searchlawyerData, success, fail)
-
-    //直接调用上一个页面对象的setData()方法，把数据存到上一个页面中去
     prevPage.setData({
-      getPage: 10
+      getPage: 10,
+      noFilter:{ ...dataJSON }
     })
+    prevPage.pc()
+    wx.navigateBack({
+      url: '../index',
+    })
+   
   },
   // 重置按钮
   reset:function(){
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1];   //当前页面
     var prevPage = pages[pages.length - 2];  //上一个页面
-
-    //直接调用上一个页面对象的setData()方法，把数据存到上一个页面中去
+    dataJSON = { "pageNum": '1', "pageSize": '10' }
     prevPage.setData({
-      lawyerList: {"practiceYearId":''}
+      noFilter: { "pageNum": '1',"pageSize":'10'},
     })
   },
-  // changeParentData: function () {
-
-  //   var pages = getCurrentPages();//当前页面栈
-
-  //   if (pages.length > 1) {
-
-  //     var beforePage = pages[pages.length - 2];//获取上一个页面实例对象
-
-  //     beforePage.changeData();//触发父页面中的方法
-
-  //   }
-
-  // },
+ 
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      noFilter: JSON.parse(options.noFilter)
+    })
+    // console.log(options)
       var that = this
       var searchUrl = api.getSearch()
       var searchSuccess = function (data) {
@@ -134,6 +98,10 @@ Page({
         console.log("成功", data.data)
       }
       var searchFail = function (e) {
+        wx.showToast({
+          title: '获取筛选列表失败',
+          icon:'none'
+        })
         console.log("失败", e)
       }
       wxrequest.requestGet(searchUrl, ' ', searchSuccess, searchFail)
@@ -286,63 +254,18 @@ Page({
     })
     console.log('选中信息', this.data.organizationId)
   },
-  //选中效果
-  changeColor1: function () {
+  //选择执业年限
+  changeColor: function (e) {
     this.setData({
-      select: 1,
-      practiceYearId: this.data.search[0].items[0].id
+      practiceYearId: this.data.search[0].items[e.currentTarget.dataset.yearindex].id
     })
+    console.log("yearrrrrrrrrrrrr", this.data.search[0].items[e.currentTarget.dataset.yearindex])
   },
-  changeColor2: function () {
+  //选择性别
+  gender: function (e) {
     this.setData({
-      select: 2,
-      practiceYearId: this.data.search[0].items[1].id
+      sex: this.data.search[1].items[e.currentTarget.dataset.genderindex].id
     })
-  },
-  changeColor3: function () {
-    this.setData({
-      select: 3,
-      practiceYearId: this.data.search[0].items[2].id
-    })
-  },
-  changeColor4: function () {
-    this.setData({
-      select: 4,
-      practiceYearId: this.data.search[0].items[3].id
-    })
-  },
-  changeColor5: function () {
-    this.setData({
-      select: 5,
-      practiceYearId: this.data.search[0].items[4].id
-    })
-  },
-  changeColor6: function () {
-    this.setData({
-      select: 6,
-      practiceYearId: this.data.search[0].items[5].id
-    })
-  },
-  gender0: function () {
-    this.setData({
-      gender: '0',
-      sex: this.data.search[1].items[0].id
-    })
-    console.log(this.data.sex)
-  },
-  gender1: function () {
-    this.setData({
-      gender: '1',
-      sex: this.data.search[1].items[1].id
-    })
-    console.log(this.data.sex)
-  },
-  gender2: function () {
-    this.setData({
-      gender: '2',
-      sex: this.data.search[1].items[2].id
-    })
-    console.log(this.data.sex)
   },
   getType: function (e) {
     this.setData({

@@ -90,6 +90,7 @@ Page({
     var message = ''
     var idData = wx.getStorageSync("token")
     var success = function (data) {
+      that.getUserDetail()
       wx.setStorage({
         key: 'memberId',
         data: data.data.memberId,
@@ -155,7 +156,6 @@ Page({
    */
   // 'apabfdc34cc00042c2991bd59b9e8a1ae8ap'
   onLoad: function (options) {
-    console.debug()
     // if(wx.getStorageInfoSync().keys.length<=1){
     //   wx.clearStorage()
     // }
@@ -181,7 +181,6 @@ Page({
     //获取memberID
     this.getMemberId()
     // 获取用户详情
-    this.getUserDetail()
     //年龄
     this.getAge()
   },

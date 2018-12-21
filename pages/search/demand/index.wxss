@@ -71,8 +71,8 @@
 }
 .demand-page-center-icon{
   margin-top: 20rpx;
-  width: 130rpx;
-  height: 130rpx;
+  width: 100rpx;
+  height: 100rpx;
 }
 .demand-page-icon{
   margin-left: 25rpx;
@@ -86,11 +86,11 @@
   background-color: #1ec88c;
   border-radius: 10rpx;
   margin-top: 20rpx;
-  width: 230rpx;
-  height: 230rpx;
+  width: 200rpx;
+  height: 200rpx;
 }
 .demand-page-text{
-  width: 230rpx;
+  width: 200rpx;
   display: flex;
   justify-content: center;
   color: white;

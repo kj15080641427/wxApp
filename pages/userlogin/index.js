@@ -76,7 +76,7 @@ Page({
         },1000)
 
       var that = this
-      // 获取用户memberID信息
+      // 获取用户信息
       var userInfoUrl = api.getUserInfo()
       var message = ''
       var idData = wx.getStorageSync("token")

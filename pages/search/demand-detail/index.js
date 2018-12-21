@@ -39,8 +39,8 @@ Page({
   //标签列表
   getMark:function(){
     var that = this
-    var url = api.getMark()
-    var data = { "pageNum": 1, "pageSize": 100}
+    var url = api.getMark() + that.data.business[that.data.index].businessTypeId
+    var data = { "businessTypeId": that.data.business[that.data.index].businessTypeId}
     var success = function(data){
       data.data.list.map(function(item){
         that.data.selist.push({ "is": false })
@@ -48,12 +48,12 @@ Page({
       that.setData({
         markList:data.data.list
       })
-      console.log("问题标签",data)
+      console.log("问题标签", that.data.markList)
     }
     var fail = function(e){
       console.log(e)
     }
-    wxrequest.request(url,data,success,fail)
+    wxrequest.requestGetpar(url,data,'',success,fail)
   },
   //擅长领域
   getexpert:function(){
@@ -65,10 +65,10 @@ Page({
           that.setData({
             business: item.children
           })
-          console.log("对应index擅长领域列表",that.data.business)
         }
+        // console.log("对应index擅长领域列表", that.data.business)
       })
-      
+      console.log("对应index擅长领域列表", data)
     }
     var fail = function(e){
       console.log("擅长领域",e)
@@ -132,7 +132,8 @@ Page({
       ['postList.skillId']: String(this.data.business[e.detail.value].businessTypeId),
       ['postList.skillName']: this.data.business[e.detail.value].businessTypeName
     })
-    console.log("事务分类picker", this.data.business)
+    this.getMark()
+    // console.log("事务分类picker", this.data.business)
   },
   //发送需求
   gotoDemandList:function(){
@@ -201,7 +202,8 @@ Page({
     })
     console.log("leixing", JSON.parse(options.demandType))
     console.log("feilei", options.busiTypes ? 1:0)
-    // console.log("类型id", this.data.postList)
+    console.log("类型id", this.data.business)
+    
   },
 
   /**
@@ -215,8 +217,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    //问题标签
-    this.getMark()
     //擅长领域
     this.getexpert()
     // console.log("requirementId",requirementId)
