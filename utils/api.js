@@ -2,6 +2,12 @@
 // 地址
 var HOST_URL = 'https://api-test.lex-mung.com';
 
+//  获取openid
+var Openid = '/wechat/openid'
+function appLogin() { 
+  return HOST_URL+Openid
+}
+
 // 获取验证码地址
 var VerifyCode = '/passport/verifycode';
 
@@ -198,6 +204,7 @@ function getBalanceDetail(){
   return HOST_URL + BalanceDetail
 }
 module.exports={
+  appLogin: appLogin,
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
   getArticleTypeUrl: getArticleTypeUrl,

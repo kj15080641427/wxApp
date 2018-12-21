@@ -4,7 +4,7 @@ import hex_md5 from '../jM/md5.js'
 //  获取微信支付信息
 const getPayInfo = (money) =>{
     const res = wx.getSystemInfoSync()
-    let _ua = 'brand(' + res.brand + ') model(' + res.model + ') system(' + res.system + ') SDKVersion(' + res.SDKVersion
+    let _ua = 'wxapp:brand(' + res.brand + ') model(' + res.model + ') system(' + res.system + ') SDKVersion(' + res.SDKVersion +')'
     
     wx.request({
         url: api.getPayInfo(),
@@ -15,7 +15,8 @@ const getPayInfo = (money) =>{
             type: 1, // 1微信 2支付宝
             source: 1, //1小程序 2APP
             ua: _ua,
-            sign: hex_md5(_ua)
+            sign: hex_md5('money='+money+'&type=1&source=1&ua='+_ua),
+            openid: wx.getStorageSync('openid')
         },
         success(res) {
             console.log(res)
