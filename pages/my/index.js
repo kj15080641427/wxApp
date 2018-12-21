@@ -81,6 +81,9 @@ Page({
         title: '请登录',
         icon:'none'
       })
+      wx.navigateTo({
+        url: '../userlogin/index'
+      })
     }
   },
   getMemberId:function(){

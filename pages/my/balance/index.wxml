@@ -1,19 +1,32 @@
 <!--pages/my/balance/index.wxml-->
 <view class='balance-page-top'>
-  <view class='balance-text'>账户余额</view>
-  <view class='balance-number'>¥{{balance.balanceAmount || 0}}</view>
+    <view class='balance-text'>账户余额</view>
+    <view class='balance-number'>¥{{balance.balanceAmount || 0}}</view>
     <view class='balance-page-detail-view'>
-      <view class='balance-page-detail'>
-        <view bindtap='gotoDetail'>交易明细</view>
-        <view class='balance-line'>|</view>
-        <view bindtap='gotoCash'>提现</view>
+        <view class='balance-page-detail'>
+            <view bindtap='gotoDetail'>交易明细</view>
+            <view class='balance-line'>|</view>
+            <view bindtap='gotoCash'>提现</view>
+        </view>
     </view>
-  </view>
 </view>
 
 <view class='balance-fill'>
-  <view class='balance-fill-text'>选择充值金额</view>
+    <view class='balance-fill-text'>选择充值金额</view>
+    <view class="choose-money">
+        <view class="money" bindtap="charge" data-amt="50">50元</view>
+        <view class="money" bindtap="charge" data-amt="100">100元</view>
+        <view class="money" bindtap="charge" data-amt="200">200元</view>
+    </view>
+    <view class="choose-money">
+        <view class="money" bindtap="charge" data-amt="300">300元</view>
+        <view class="money" bindtap="charge" data-amt="500">500元</view>
+        <view class="money" bindtap="charge" data-amt="1000">1000元</view>
+    </view>
 </view>
-<view>
-  <view class='balance-fill-text'>温馨提示</view>
+<view class="balance-prompt">
+    <view class='balance-prompt-text'>温馨提示</view>
+    <view class='balance-prompt-text'>1.账户余额仅用于支付绿豆圈平台提供的法律服务。</view>
+    <view class='balance-prompt-text'>2.为避免因费用不足导致的咨询中断，建议账户余额不少于100元。</view>
+    <view class='balance-prompt-text'>3.如有疑问，请联系绿豆圈客服400-811-3060</view>
 </view>

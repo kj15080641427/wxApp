@@ -2,6 +2,12 @@
 // 地址
 var HOST_URL = 'https://api-test.lex-mung.com';
 
+//  获取openid
+var Openid = '/wechat/openid'
+function appLogin() { 
+  return HOST_URL+Openid
+}
+
 // 获取验证码地址
 var VerifyCode = '/passport/verifycode';
 
@@ -32,6 +38,7 @@ var EditDetail = '/client/member/update'
 
 // 行业列表地址
 var Industry = '/common/industry'
+
 // 获取行业列表
 function getIndustryUrl(){
   return HOST_URL+Industry
@@ -132,6 +139,13 @@ var Expert = '/common/businessType'
 function getExpert(){
   return HOST_URL + Expert
 }
+
+//  获取极光IM相关配置信息
+var ImConfig = '/client/im/config'
+function getImConfig(){
+  return HOST_URL + ImConfig
+}
+//发布需求
 //发布需求类型
 var DemandType = '/client/requirement/types'
 function getDemandType(){
@@ -146,6 +160,12 @@ function getMark(){
 var Publish = '/client/requirement/post'
 function getPublish(){
   return HOST_URL + Publish
+}
+
+// 获取微信支付信息
+var Pay = '/pay/recharge'
+function getPayInfo(){
+  return HOST_URL + Pay
 }
 //热线咨询
 var Phone = '/client/freecall/phone'
@@ -189,6 +209,7 @@ function getOrganization (){
   return HOST_URL + Organization
 }
 module.exports={
+  appLogin: appLogin,
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
   getArticleTypeUrl: getArticleTypeUrl,
@@ -208,9 +229,11 @@ module.exports={
   getLawHomePage: getLawHomePage,
   getDemand: getDemand,
   getExpert: getExpert,
+  getImConfig: getImConfig,
   getDemandType: getDemandType,
   getMark:getMark,
   getPublish: getPublish,
+  getPayInfo: getPayInfo,
   getPhone: getPhone,
   getFollow: getFollow,
   getMyFollow: getMyFollow,

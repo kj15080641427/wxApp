@@ -3,10 +3,18 @@ var wxrequest = require('../../utils/request.js')
 var formatTime = require('../../utils/util.js')
 var throttle = require('../../utils/throttle.js')
 var region = require('../../region.js')
+// <<<<<<< HEAD
 // var noFilter = {
 //   "pageNum": '1',
 //   "pageSize": '10',
   // "regionId": '',
+// =======
+
+// var noFilter = {
+//   "pageNum": '1',
+//   "pageSize": '10',
+//   "regionId": '',
+// >>>>>>> f968bbecbbec771d42961a12b89ebd46f0c61f9b
   // "sort":'0',
   // "lawyerName": '',
   // "practiceYearId": '',
@@ -252,6 +260,7 @@ Page({
     })
     this.pc()
     this.getExpert()
+    //  加载极光im
   },
 
   /**

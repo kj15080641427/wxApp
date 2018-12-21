@@ -1,0 +1,21 @@
+<view class="message">
+    <view class="msg-bar">
+        <view class="bar-item">订单消息</view>
+        <view class="bar-item">聊天列表 <view class="msg-count" wx:if="{{ messageCount > 0 }}">{{ messageCount }}</view></view>
+        <view class="bar-item">系统消息</view>
+    </view>
+
+    <view class="msg-list">
+        <view wx:for="{{conversationList}}" wx:key="name" class="list-item" hover-class="list-tap" data-avatar="{{item.avatar}}" data-name="{{ item.nickName }}" data-user="{{item.username}}" bindtap="goChart">
+            <view class="avatar">
+                <image class="avatar-img" src="{{item.avatar}}" mode="scaleToFill" lazy-load="true" binderror="" bindload=""></image>
+                <view wx:if="{{item.unread_msg_count>0}}" class="count">{{item.unread_msg_count}}</view>
+            </view>
+            <view class="body">
+                <view class="name">{{ item.nickName }}</view>
+                <view class="info">{{ info }}</view>
+            </view>
+        </view>
+    </view>
+    
+</view>
