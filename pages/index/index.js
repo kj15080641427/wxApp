@@ -1,5 +1,6 @@
 var wxrequest = require('../../utils/request.js')
 var api = require('../../utils/api.js')
+var initIndex=''
 Page({
   data: {
     imgUrls: [
@@ -24,7 +25,6 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     winHeight: "",//窗口高度
     scrollLeft: 0, //tab标题的滚动条位置
-    initIndex:''
   },
   //需求test
   gotoDemand:function(){
@@ -60,13 +60,12 @@ Page({
       console.log("解决方案分类list", data.data.list)
       that.setData({
         popular: data.data.list.reverse(),
-        initIndex:data.data.list[0].id
       })
-
+      // initIndex: data.data.list[0].id
       //解决方案
       var listUrl = api.getArticleListUrl()
       var message = ""
-      var listData = { "typeId":that.data.initIndex, "pageNum": 1, "pageSize": 10 }
+      var listData = { "typeId": data.data.list[0].id, "pageNum": 1, "pageSize": 10 }
       var successList = function (data) {
         console.log("解决方案list", data)
         that.setData({
@@ -170,7 +169,7 @@ Page({
       })
     }
   },
-  // 页面跳转
+  // 文字咨询
   gotoConstultation:function(){
     if(wx.getStorageSync("token")){
     // console.log('pop', this.data.popular)
@@ -182,6 +181,29 @@ Page({
         url: '../userlogin/index'
       })
   }
+  },
+  //热线咨询
+  phoneConstultation:function(){
+    var url = api.getPhone()
+    // var data = wx.getStorageSync("token")
+    var success = function(data){
+      console.log(data)
+      wx.makePhoneCall({
+        phoneNumber: data.data.phone,
+      })
+    }
+    var fail = function(e){
+      wx.showToast({
+        title: '无法获取电话号码',
+        icon:'none'
+      })
+      console.log(e)
+    }
+    wxrequest.requestGet(url,'', success,fail)
+  },
+  //专家咨询
+  gotoExpert:function(){
+    
   },
   gotoQuick:function(){
     wx.navigateTo({

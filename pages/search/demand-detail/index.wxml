@@ -22,32 +22,43 @@
 </view>
 </view>
 
-<view class='detail-page-center'>
-  <picker class='detail-page-picker'>
-    <view style='display:flex;justify-content: space-between'>
+<view class='detail-page-center' >
+  <picker class='detail-page-picker' range="{{business}}" range-key="{{'businessTypeName'}}" value="{{index}}" bindchange ="pickerLIst">
+    <view style='display:flex;justify-content: space-between;width:715rpx;'>
+     <!-- <view style='display:flex; justify-content: space-between'> -->
       <view  class='detail-page-text'>律师擅长领域</view>
-      <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
+      <view style='display:flex'>
+       <text class='hide-text'>{{business[index].businessTypeName}}</text>
+       <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
+      </view>
     </view>
   </picker>
   <view class='detail-page-line'></view>
 
   <picker class='detail-page-picker' mode="region"     bindchange="bindRegionChange" value="{{region}}"custom-item="{{customItem}}">
-    <view style='display:flex;justify-content: space-between'>
-      <picker class='detail-page-text'>律师所在区域<text style='margin-left:200rpx;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;'>{{region[0]}}，{{region[1]}}，{{region[2]}}</text></picker>
-      <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
+    <view style='display:flex;justify-content: space-between;width:715rpx;'>
+      <view class='detail-page-text'>律师所在区域</view>
+      <view style='display:flex;text-align : left'>
+        <view class='hide-text'>{{region[0]}}-{{region[1]}}</view>
+        <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
+      </view>
     </view>
   </picker>
     <view class='detail-page-line'></view>
 
-  <view class='detail-page-input'>
+  <view class='detail-page-picker'>
+   <view style='display:flex;justify-content: space-between;width:715rpx;align-items:center'>
     <view class='detail-page-text'><text style='color:red'>*</text>最高可承受费用</view>
-    <input style='color:black'></input>
-    <view style='margin-right:35rpx;'>元</view>
+    <view style='display:flex;align-items:center'>
+      <input style='color:black;width:400rpx;height:80rpx;text-align:right;padding:right:10rpx;'bindinput="getInput"></input>
+      <view style='margin-right:35rpx;'>元</view>
+    </view>
+    </view>
   </view>
 </view>
 
 <view class='detail-page-problem'>
-<textarea placeholder='输入问题' maxlength='300'class="detail-textarea"></textarea>
+<textarea placeholder='输入问题' maxlength='300'class="detail-textarea" bindinput='getTextarea'></textarea>
 </view>
 
 <view class='select-mark-view'>
@@ -59,5 +70,5 @@
 </view>
 <view class='mark-page-line'></view>
 <view class='mark-button-view'>
-  <button class='mark-button'>提交并匹配律师</button>
+  <button class='mark-button'bindtap="gotoDemandList">提交并匹配律师</button>
 </view>

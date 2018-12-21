@@ -24,7 +24,7 @@
       <label class='index-text-style'>免费咨询</label>
       <view class='index-text-style-mini'>
         <label class='index-text-style-green'>免费</label>
-        <label class='index-text-style-gray'>排忧解难</label>
+        <label class='index-text-style-gray'>答疑解惑</label>
       </view>
     </view>
     <view bindtap="gotoQuick">
@@ -33,19 +33,19 @@
       </view>
       <label class='index-text-style'>快速咨询</label>
       <view class='index-text-style-mini'>
-        <label class='index-text-style-green'>执业律师</label>
-        <label class='index-text-style-gray'>即时通话</label>
+        <label class='index-text-style-green'>10分钟</label>
+        <label class='index-text-style-gray'>精准匹配</label>
       </view>
     </view>
 
-    <view  class='index-mr'>
+    <view  class='index-mr' bindtap='gotoExpert'>
        <view class="index-text-style">
           <image src='../../image/homeicon_3x/homepage_05_3x.png' style='width:100rpx;height:100rpx'></image>
       </view>
       <label class='index-text-style'>专家服务</label>
       <view class='index-text-style-mini'>
-        <label class='index-text-style-gray'>知名顾问</label>
-        <label class='index-text-style-green '>一对一</label>
+        <label class='index-text-style-green'>1对1</label>
+        <label class='index-text-style-gray '>电话服务</label>
       </view>
     </view>
   </view>
@@ -134,7 +134,7 @@
   <!--弹出框  -->
 <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
   <!-- 热线咨询 -->
-  <view class="modal-dialog" style="margin-top:30rpx" >
+  <view class="modal-dialog" style="margin-top:30rpx" bindtap='phoneConstultation' >
     <image src="../../image/homeicon_3x/home_page_07_3x.png"style="width:110rpx;height:100rpx;margin-left:40rpx" />
     <view class="index-consult">
       <view class="index-consult-text">热线咨询</view>

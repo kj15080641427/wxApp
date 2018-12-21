@@ -1,32 +1,51 @@
-// pages/search/demand-type/index.js
+// pages/my/balance/index.js
+var api = require('../../../utils/api.js')
+var wxrequest = require('../../../utils/request.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    busiTypes:'',
-    typeindex:'',
-    demandType:''
+    balance:'',
+    memberId:''
   },
-  //
-  gotoDetail:function(e){
+  //交易明细
+  gotoDetail:function(){
     wx.navigateTo({
-      url: '../demand-detail/index?busiTypes=' + JSON.stringify(this.data.busiTypes[e.currentTarget.dataset.typeindex]) + '&demandType=' + JSON.stringify(this.data.demandType),
+      url: '../balance-detail/index?memberId='+this.data.memberId,
     })
-    // console.log(e)
+  },
+  //提现
+  gotoCash:function(){
+    wx.navigateTo({
+      url: '../cash/index?balance=' + JSON.stringify(this.data.balance),
+    })
+  },
+  //获取账户余额
+  getBalance:function(){
+    var url = api.getBalance() + this.data.memberId
+    var data = {"memberId":this.data.memberId}
+    var succeee = (data)=>{
+      console.log(data)
+      this.setData({
+        balance:data
+      })
+    }
+    var fail = (e)=>{
+      console.log(e)
+    }
+    wxrequest.requestGetpar(url,data,'',succeee,fail)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setData({
-      busiTypes: JSON.parse(options.demandType)[options.index].busiTypes,
-      demandType: JSON.parse(options.demandType)[options.index],
-      typeindex:options.index
+      memberId:options.memberId
     })
-    // console.log(JSON.parse(options.busiTypes))
-    // console.log("typeindex",options.index)
+    this.getBalance()
+    console.log()
   },
 
   /**

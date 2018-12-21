@@ -1,0 +1,29 @@
+<!--pages/my/cash/index.wxml-->
+<!-- <text>pages/my/cash/index.wxml</text> -->
+<view class='cash-page-view'>
+  <view class='cash-page-text'>提现金额<text style='font-size:20rpx;'>(可用余额:¥{{balance}})</text></view>
+  <view style='display:flex;margin-top:50rpx;justify-content:space-between'>
+    <label class='cash-page-number'>¥{{balance}}</label>
+    <view class='cash-page-color'>暂不支持修改提现金额</view>
+  </view>
+  <view class='cash-page-line'></view>
+</view>
+
+<view class='cash-detail-view'>
+  <view class='cash-detail-flex'>
+    <text><text style='color:red'>*</text>收款人姓名</text>
+    <input></input>
+  </view>
+  <view style='height:1rpx;background-color:#f4f4f4;margin-right:35rpx;'></view>
+  <view class='cash-detail-flex'>
+    <text><text style='color:red'>*</text>支付宝账号</text>
+    <input></input>
+  </view>
+</view>
+<view class='cash-tips'>
+  <view>温馨提示</view>
+  <view>1.仅限支付宝提现</view>
+  <view>2.提交申请后,我们将在3-7个工作日内转到您的支付宝账户,感谢您对品台的支持</view>
+  <view>3.如有疑问,请联系绿豆圈客服<text style='color:#1ec88c'>400-811-3060</text></view>
+</view>
+<button >申请提现</button>

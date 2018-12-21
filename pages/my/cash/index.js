@@ -1,32 +1,20 @@
-// pages/search/demand-type/index.js
+// pages/my/cash/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    busiTypes:'',
-    typeindex:'',
-    demandType:''
+    balance:''
   },
-  //
-  gotoDetail:function(e){
-    wx.navigateTo({
-      url: '../demand-detail/index?busiTypes=' + JSON.stringify(this.data.busiTypes[e.currentTarget.dataset.typeindex]) + '&demandType=' + JSON.stringify(this.data.demandType),
-    })
-    // console.log(e)
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setData({
-      busiTypes: JSON.parse(options.demandType)[options.index].busiTypes,
-      demandType: JSON.parse(options.demandType)[options.index],
-      typeindex:options.index
+      balance: JSON.parse(options.balance).data.balanceAmount
     })
-    // console.log(JSON.parse(options.busiTypes))
-    // console.log("typeindex",options.index)
   },
 
   /**

@@ -1,0 +1,53 @@
+/* pages/my/balance/index.wxss */
+.balance-page-top{
+  height: 330rpx;
+  width: 750rpx;
+  background-color: white;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+.balance-page-detail{
+  display: flex;
+  color: #1ec88c;
+  font-size: 28rpx;
+  margin-bottom: 55rpx;
+}
+.balance-line{
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+  color: #b5b5b5;
+}
+.balance-text{
+  width: 750rpx;
+  display: flex;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #b5b5b5;
+  padding-top: 70rpx;
+}
+.balance-number{
+  width: 750rpx;
+  display: flex;
+  justify-content: center;
+  font-weight: sold;
+  font-size:68rpx;
+  padding-top: 50rpx;
+}
+.balance-page-detail-view{
+  width: 750rpx;
+  display: flex;
+  justify-content: center;
+  padding-top: 20rpx;
+}
+.balance-fill{
+  margin-top: 35rpx;
+  background-color: white;
+  height: 300rpx;
+}
+.balance-fill-text{
+  color: #b5b5b5;
+  font-size: 28rpx;
+  padding-top: 35rpx;
+  padding-left: 35rpx;
+}

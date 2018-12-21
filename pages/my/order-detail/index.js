@@ -7,14 +7,15 @@ Page({
   data: {
     time:'00:28:21',
     detailList:[
-      { "name": '订单编号', "text": 'KS201812121212'},
+      { "name": '订单编号', "text": ''},
       { "name": '订单日期', "text": '2018-12-12 14:03' },
       { "name": '商品名称', "text": '快速咨询' },
       { "name": '咨询类型', "text": '婚姻家庭' },
       { "name": '联系手机', "text": '13333333333' },
       { "name": '订单金额', "text": '¥99' },
       { "name": '订单状态', "text": '进行中' },
-      ]
+      ],
+    // orderDetail:''
   },
   gotoChat:function(){
     wx.navigateTo({
@@ -25,7 +26,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var data = JSON.parse(options.orderDetail)
+    this.setData({
+      // orderDetail:data,
+      ['detailList[0].text']: data.orderNo,
+      ['detailList[1].text']: data.createDate,
+      ['detailList[2].text']: data.orderType,
+      ['detailList[3].text']: data.typeName,
+      ['detailList[4].text']: options.mobile,//手机号
+      ['detailList[5].text']: data.buyerPayAmount,
+      ['detailList[6].text']: data.statusValue
+    })
+    console.log(data.orderNo)
   },
 
   /**

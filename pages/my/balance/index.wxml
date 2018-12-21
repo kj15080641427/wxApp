@@ -1,0 +1,19 @@
+<!--pages/my/balance/index.wxml-->
+<view class='balance-page-top'>
+  <view class='balance-text'>账户余额</view>
+  <view class='balance-number'>¥{{balance.balanceAmount || 0}}</view>
+    <view class='balance-page-detail-view'>
+      <view class='balance-page-detail'>
+        <view bindtap='gotoDetail'>交易明细</view>
+        <view class='balance-line'>|</view>
+        <view bindtap='gotoCash'>提现</view>
+    </view>
+  </view>
+</view>
+
+<view class='balance-fill'>
+  <view class='balance-fill-text'>选择充值金额</view>
+</view>
+<view>
+  <view class='balance-fill-text'>温馨提示</view>
+</view>

@@ -8,16 +8,17 @@
 </view>
 
 <view class='search-tab-list'>
-  <view  class='search-tab-icon '>
-    <view class='search-tab-text' bindtap='test'>综合排序</view>
+
+  <view  class='search-tab-icon'bindtap='sort'>
+    <view class='search-tab-text' style='color:#1ec88c'>{{sort[sortIndex]}}</view>
     <image src='../../image/search_icon@3x/Personalhomepage-22@3x.png' class='search-page-icon'></image>
   </view>
-  <view  class='search-tab-icon' bindtap='selectField'>
-    <view class='search-tab-text'>擅长领域</view>
+  <view  class='search-tab-icon' bindtap='selectExpert'>
+    <view class='search-tab-text' style="{{expertColor ? 'color:#1ec88c':''}}">{{expert}}</view>
     <image src='../../image/search_icon@3x/Personalhomepage-22@3x.png' class='search-page-icon'></image>
   </view>
   <view  class='search-tab-icon' bindtap='selectRegion'>
-    <view class='search-tab-text'>所在地区</view>
+    <view class='search-tab-text' style="{{selectedCityColor ? 'color:#1ec88c' :''}}">{{selectedCity}}</view>
     <image src='../../image/search_icon@3x/Personalhomepage-22@3x.png' class='search-page-icon'></image>
   </view>
   <view  class='search-tab-icon' bindtap='gotoFilter'>
@@ -29,33 +30,62 @@
 
 
 <view style='margin-top:180rpx;'></view>
-
-      
-
 <!-- <view style='margin-top:200rpx;'></view> -->
-<view>
-
-<!-- fixed  -->
-<view class='search-select-view' style='display:flex;z-index:998;position:fixed;top:180rpx;' wx:if="{{showRegion}}" >
-  <view>
-    <scroll-view scroll-y style='height:920rpx;'>
-      <view wx:key="{{index}}" wx:for="{{region}}"  wx:for-item="childItem" data-regionIndex="{{index}}" catchtap='getRegionIndex' bindtap="isSelect"class='search-select-province' style="{{ index == regionindex ? 'background-color:white' :''}}">{{childItem.name}}</view>
-    </scroll-view>
-  </view>
-
-  <view style="width:500rpx;background-color:white">
-  <scroll-view scroll-y style='height:920rpx;width:430rpx;'>
-    <view class='search-select-flex'>
-      <view bindtap='selectRegion'>
-      <view wx:key="{{index}}" wx:for="{{region[regionindex].child}}" class='serach-select-city' data-cityIndex="{{index}}" catchtap='getCityIndex' style="{{index==cityindex && clickOhter ? 'color:#1ec88c':''}}" >{{item.name}}
-       <image src='../../image/search_icon@3x/selectcity.png' wx:if="{{index==cityindex && clickOhter}}" class='select-image'></image>
+<!-- 排序 -->
+    <view class='search-select-flex' style='z-index:998;position:fixed;top:180rpx;display:flex;' wx:if="{{showSort}}">
+      <view >
+      <!-- bindtap='selectRegion' -->
+      <view wx:key="{{index}}" wx:for="{{sort}}" class='serach-select-sort' data-sortIndex="{{index}}" catchtap='getSortIndex' style="{{index==sortIndex  ? 'color:#1ec88c;background-color:white':'background-color:#f4f4f4'}}" ><view  class='right-width'>{{item}}</view>
+       <image src='../../image/search_icon@3x/selectcity.png' wx:if="{{index==sortIndex }}" class='select-image-sort'></image>
        <view class='search-select-line'></view>
       </view>
       </view>
     </view>
 
+<!-- 选择擅长领域 -->
+<view class='search-select-view' style='z-index:998;position:fixed;top:180rpx;display:flex;'wx:if="{{showExpert}}">
+
+    <scroll-view scroll-y class="select-scroll-left">
+      <view wx:key="{{index}}" wx:for="{{business ?business:'无' }}"  wx:for-item="childItem" data-expertIndex="{{index}}" bindtap="getExpertIndex"class='search-select-province' style="{{ index == expertIndex ? 'background-color:white' :''}}">{{childItem.businessTypeName}}</view>
+    </scroll-view>
+
+
+  <scroll-view scroll-y style='height:920rpx;width:450rpx;'>
+    <view class='search-select-flex'>
+      <view >
+      <!-- bindtap='selectRegion' -->
+      <view wx:key="{{index}}" wx:for="{{business[expertIndex].children}}" class='serach-select-city' data-expertChildIndex="{{index}}" catchtap='getexpertChildIndex' style="{{index==expertChildIndex && clickOhterEx ? 'color:#1ec88c':''}}" ><view  class='right-width'>{{item.businessTypeName}}</view>
+       <image src='../../image/search_icon@3x/selectcity.png' wx:if="{{index==expertChildIndex && clickOhterEx}}" class='select-image'></image>
+       <view class='search-select-line'></view>
+      </view>
+      </view>
+    </view>
+    </scroll-view>
+
+</view>
+
+<!-- 选地区 -->
+<!-- fixed  -->
+<view class='search-select-view' style='display:flex;z-index:998;position:fixed;top:180rpx;' wx:if="{{showRegion}}" >
+  <view>
+    <scroll-view scroll-y class="select-scroll-left">
+      <view wx:key="{{index}}" wx:for="{{region}}"  wx:for-item="childItem" data-regionIndex="{{index}}" catchtap='getRegionIndex' class='search-select-province' style="{{ index == regionindex ? 'background-color:white' :''}}">{{childItem.name}}</view>
     </scroll-view>
   </view>
+
+
+  <scroll-view scroll-y style='height:920rpx;width:450rpx;'>
+    <view class='search-select-flex'>
+      <view >
+      <!-- bindtap='selectRegion' -->
+      <view wx:key="{{index}}" wx:for="{{region[regionindex].child}}" class='serach-select-city' data-cityIndex="{{index}}" catchtap='getCityIndex' style="{{index==cityindex && clickOhter ? 'color:#1ec88c':''}}" ><view class='right-width'>{{item.name}}</view>
+       <image src='../../image/search_icon@3x/selectcity.png' wx:if="{{index==cityindex && clickOhter}}" class='select-image'></image>
+       <view class='search-select-line'></view>
+      </view>
+      </view>
+    </view>
+    </scroll-view>
+
 </view>
 <!-- <view style="z-index:55">123123</view> -->
 
@@ -71,7 +101,7 @@
         <view class='watchlist-page-right'>
           <view class='watchlist-page-name'>{{lawyerList[index].memberName}}<label wx:if="{{lawyerList[index].memberPositionName}}" class='watchlist-page-firm'>({{lawyerList[index].memberPositionName}})</label></view>
           <view class='watchlist-page-address'>{{address[index]}} <text wx:if="{{lawyerList[index].region&&lawyerList[index].institutionName}}">|</text> {{lawyerList[index].institutionName}}</view>
-          <view class='watchlist-page-adept'>{{lawyerList[index].description}} </view>
+          <view class='watchlist-page-adept'>擅长领域: {{lawyerList[index].description}} </view>
         </view>
 
       </view>
@@ -91,7 +121,7 @@
 
 
 
-</view>
+
 <!-- <view class='search-more'>
 <view>正在加载</view>
 </view> -->

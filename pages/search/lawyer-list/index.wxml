@@ -25,7 +25,7 @@
     </view>
    </view>
 </view> -->
-
+<!-- 
 <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}" bindtap='getLawyerInfo' data-index="{{index}}" catchtap='getIndex'>
    <view class='watchlist-page'>
   <view class='watchlist-page-flex'>
@@ -52,4 +52,4 @@
     </view>
    </view>
 </view>
-
+ -->

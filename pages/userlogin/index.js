@@ -22,7 +22,6 @@ Page({
             inputCode: e.detail.value
         })
     },
-
     // 获取验证码
     getVerificationCode: function () {
         var verifyCodeUrl = api.getVerifyCodeUrl()
@@ -84,15 +83,15 @@ Page({
             wx.setStorageSync("token", data.data.token)
             console.log("注册成功", data)
             console.log("token111", wx.getStorageSync("token"))
-            
+
             var that = this
             // 获取用户memberID信息
             var userInfoUrl = api.getUserInfo()
             var message = ''
             var idData = wx.getStorageSync("token")
             var success = function (res) {
-                wx.setStorageSync("memberId",res.data.memberId)
-                wx.setStorageSync("mobile",res.data.mobile)
+                wx.setStorageSync("memberId", res.data.memberId)
+                wx.setStorageSync("mobile", res.data.mobile)
                 wx.navigateBack({
                     delta: 2
                 })
@@ -131,7 +130,7 @@ Page({
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad: function (options) { 
 
     },
 

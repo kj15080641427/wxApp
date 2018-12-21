@@ -1,50 +1,29 @@
-<!--pages/my/watchlist/index.wxml-->
-<view class='watchlist-page'>
-  <view class='watchlist-page-flex'>
-    <view class='watchlist-page-left'>
-      <image class='watchlist-page-avatar' src='../../../image/my_icon@3x/mine_icon_02_3x.png'></image>
-      <view class='watchlist-page-practice'>执业17年</view>
 
-    </view>
-    <view class='watchlist-page-right'>
-      <view class='watchlist-page-name'>董小燕<label class='watchlist-page-firm'>(律所合伙人)</label></view>
-      <view class='watchlist-page-address'>湖南长沙 | 湖南湘君律师事务所</view>
-      <view class='watchlist-page-adept'>擅长领域: 涉外婚姻, 离婚/夫妻财产/抚养权, 海外信托</view>
-    </view>
+<view class="" >
+  <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{myFollow}}" bindtap='getLawyerInfo' data-index="{{index}}" catchtap='getIndex'>
+    <view class='watchlist-page'>
+      <view class='watchlist-page-flex'>
+        <view class='watchlist-page-left' style="z-index:55;">
+          <image class='watchlist-page-avatar' src="{{myFollow[index].iconImage ? myFollow[index].iconImage :'../../../image/my_icon@3x/mine_icon_02_3x.png'}}"  style="z-index:55;"></image>
+          <view class='watchlist-page-practice' style="z-index:55;">执业{{year[index]}}年</view>
 
+        </view>
+        <view class='watchlist-page-right'>
+          <view class='watchlist-page-name'>{{myFollow[index].memberName}}<label wx:if="{{myFollow[index].memberPositionName}}" class='watchlist-page-firm'>({{myFollow[index].memberPositionName}})</label></view>
+          <view class='watchlist-page-address'>{{address[index]}} <text wx:if="{{myFollow[index].region&&myFollow[index].institutionName}}">|</text> {{myFollow[index].institutionName}}</view>
+          <view class='watchlist-page-adept'>{{myFollow[index].description}} </view>
+        </view>
+
+      </view>
+  </view>
+  <view style='background-color:white;width:700rpx;margin-left:25rpx'>
+    <view class='watchlist-page-line'></view>
+  </view>
+    <view class='watch-page-lower' wx:if="{{myFollow[index].orgTags[0]}}">
+      <view class='watchlist-page-label' >认证标签</view>
+      <view wx:key="{{index}}" wx:for="{{myFollow[index].orgTags}}">
+        <image src='{{item.image}}' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
+      </view>
+    </view>
   </view>
 </view>
-<view style='background-color:white;width:700rpx;margin-left:25rpx'>
-  <view class='watchlist-page-line'></view>
-</view>
-   <view class='watch-page-lower'>
-    <view class='watchlist-page-label'>认证标签</view>
-    <image src='../../../image/my_icon@3x/mine_icon_08_3x.png' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
-    <image src='../../../image/my_icon@3x/mine_icon_09_3x.png' style='width:35rpx;height:35rpx;margin-left:20rpx'></image>
-    <image src='../../../image/my_icon@3x/mine_icon_10_3x.png' style='width:35rpx;height:35rpx;margin-left:20rpx'></image>
-   </view>
-
-   <view class='watchlist-page'>
-  <view class='watchlist-page-flex'>
-    <view class='watchlist-page-left'>
-      <image class='watchlist-page-avatar' src='../../../image/my_icon@3x/mine_icon_02_3x.png'></image>
-      <view class='watchlist-page-practice'>执业17年</view>
-
-    </view>
-    <view class='watchlist-page-right'>
-      <view class='watchlist-page-name'>董小燕<label class='watchlist-page-firm'>(律所合伙人)</label></view>
-      <view class='watchlist-page-address'>湖南长沙 | 湖南湘君律师事务所</view>
-      <view class='watchlist-page-adept'>擅长领域: 涉外婚姻, 离婚/夫妻财产/抚养权, 海外信托</view>
-    </view>
-
-  </view>
-</view>
-<view style='background-color:white;width:700rpx;margin-left:25rpx'>
-  <view class='watchlist-page-line'></view>
-</view>
-   <view class='watch-page-lower'>
-    <view class='watchlist-page-label'>认证标签</view>
-    <image src='../../../image/my_icon@3x/mine_icon_08_3x.png' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
-    <image src='../../../image/my_icon@3x/mine_icon_09_3x.png' style='width:35rpx;height:35rpx;margin-left:20rpx'></image>
-    <image src='../../../image/my_icon@3x/mine_icon_10_3x.png' style='width:35rpx;height:35rpx;margin-left:20rpx'></image>
-   </view>

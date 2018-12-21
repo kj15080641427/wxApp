@@ -14,9 +14,11 @@ Page({
   },
   // 登陆
   login:function(){
-    wx.navigateTo({
-      url: '../userlogin/index',
-    })
+   if(!wx.getStorageSync("token")){
+     wx.navigateTo({
+       url: '../userlogin/index',
+     })
+   }
   },
   // 新手引导
   gotoGuide:function(){
@@ -32,9 +34,16 @@ Page({
   },
   // 我的关注
   gotoWatchlist:function(){
-    wx.navigateTo({
-      url: '../my/watchlist/index',
-    })
+    if(wx.getStorageSync("token")){
+      wx.navigateTo({
+        url: '../my/watchlist/index',
+      })
+    }else{
+      wx.showToast({
+        title: '请登录',
+        icon:'none'
+      })
+    }
   },
   // 编辑个人信息
   gotoEditInfo:function(){
@@ -50,74 +59,112 @@ Page({
   },
   // 订单
   gotoOrder:function(){
-    wx.navigateTo({
-      url: '../my/order/index',
-    })
+    if(wx.getStorageSync("token")){
+      wx.navigateTo({
+        url: '../my/order/index?memberId=' + this.data.userInfo.memberId + '&mobile=' + this.data.userInfo.mobile,
+      })
+    }else{
+      wx.showToast({
+        title: '请登录',
+        icon:'none'
+      })
+    }
+  },
+  //我的账户
+  gotoBalance:function(){
+    if(wx.getStorageSync("token")){
+      wx.navigateTo({
+        url: 'balance/index?memberId=' + this.data.userInfo.memberId,
+      })
+    }else{
+      wx.showToast({
+        title: '请登录',
+        icon:'none'
+      })
+    }
+  },
+  getMemberId:function(){
+    // 获取用户memberID信息
+    var that = this
+    var userInfoUrl = api.getUserInfo()
+    var message = ''
+    var idData = wx.getStorageSync("token")
+    var success = function (data) {
+      wx.setStorage({
+        key: 'memberId',
+        data: data.data.memberId,
+      })
+    }
+    var fail = function (e) {
+      console.log(e)
+    }
+    if (wx.getStorageSync("token")) {
+      wxrequest.requestGet(userInfoUrl, message, success, fail)
+    }
+  },
+  //获取用户详情
+  getUserDetail:function(){
+    var that = this
+    var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
+    var userData = wx.getStorageSync("memberId")
+    var message = ''
+    var successDetail = function (dataDetail) {
+      that.setData({
+        userInfo: dataDetail.data
+      })
+      wx.setStorageSync("userInfo", dataDetail.data)
+      var now = time.formatTime(new Date()).split("/")[0]
+      var old = that.data.userInfo.birthday.split("-")[0]
+      var year = Number(now) - Number(old)
+      that.setData({
+        age: year
+      })
+      console.log("userinfo", wx.getStorageSync("userInfo"))
+    }
+    var failDetail = function (eDetail) {
+      if (eDetail.code == 10002) {
+        wx.showToast({
+          title: '请重新登陆' + eDetail.message,
+        })
+        wx.clearStorage()
+      }
+      // wx.showToast({
+      //   title: '请重新登陆' + eDetail.message,
+      // })
+      console.log("e", eDetail.code)
+    }
+    if (wx.getStorageSync("token")) {
+      wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
+    }
+  },
+  //年龄
+  getAge:function(){
+    var that = this
+    if (that.data.userInfo.birthday) {
+      var now = time.formatTime(new Date()).split("/")[0]
+      var old = that.data.userInfo.birthday.split("-")[0]
+      var year = Number(now) - Number(old)
+      that.setData({
+        age: year
+      })
+      console.log("年龄",that.data.age)
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   // 'apabfdc34cc00042c2991bd59b9e8a1ae8ap'
   onLoad: function (options) {
-    var that = this
-    if (that.data.userInfo && that.data.userInfo.birthday) {
-      var now = time.formatTime(new Date()).split("/")[0]
-      // var nowyear = now.split("/")[0]
-      // console.log(nowyear)
-      var old = that.data.userInfo.birthday.split("-")[0]
-      var year = Number(now) - Number(old)
-      that.setData({
-        age: year
-      })
-    }
-    if(wx.getStorageInfoSync().keys.length<=1){
-      wx.clearStorage()
-      // console.log(new Date().toLocaleString())
-    }
-
-    // 获取用户memberID信息
-    var userInfoUrl = api.getUserInfo()
-    var message = ''
-    var idData = wx.getStorageSync("token")
-    var success = function(data){
-      wx.setStorage({
-        key: 'memberId',
-        data: data.data.memberId,
-      })
-    } 
-    var fail = function(e){
-      console.log(e)
-    }
-    if(wx.getStorageSync("token")){
-    wxrequest.requestGet(userInfoUrl, message,success,fail)
-    }
-      // 获取用户详情
-      // console.log(wx.getStorageSync("memberId"))
-      var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
-      var userData = wx.getStorageSync("memberId")
-      var message = ''
-      var successDetail = function (dataDetail) {
-       that.setData({
-         userInfo:dataDetail.data
-       })
-        console.log("userinfo", wx.getStorageSync("userInfo"))
-      }
-      var failDetail = function (eDetail) {
-        if(eDetail.code == 10002){
-          wx.showToast({
-            title: '请重新登陆'+eDetail.message,
-          })
-          wx.clearStorage()
-        }
-        // wx.showToast({
-        //   title: '请重新登陆' + eDetail.message,
-        // })
-        console.log("e", eDetail.code)
-      }
-      if(wx.getStorageSync("token")){
-      wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
-      }
-
+    console.debug()
+    // if(wx.getStorageInfoSync().keys.length<=1){
+    //   wx.clearStorage()
+    // }
+    //获取memberID
+    // this.getMemberId()
+    // // 获取用户详情
+    // this.getUserDetail()
+    // //年龄
+    // this.getAge()
   },
 
   /**
@@ -131,62 +178,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // console.log(wx.getStorageInfoSync())
-    var that = this
-    if(that.data.userInfo && that.data.userInfo.birthday){
-      var now = time.formatTime(new Date()).split("/")[0]
-      // var nowyear = now.split("/")[0]
-      // console.log(nowyear)
-      var old = that.data.userInfo.birthday.split("-")[0]
-      var year = Number(now) - Number(old)
-      that.setData({
-        age: year
-      })
-    }
-    // 获取用户memberID信息
-    var userInfoUrl = api.getUserInfo()
-    var message = ''
-    var idData = wx.getStorageSync("token")
-    var success = function (data) {
-      wx.setStorage({
-        key: 'memberId',
-        data: data.data.memberId,
-      })
-    }
-    var fail = function (e) {
-      // if (eDetail.code == 10002) {
-        // wx.showToast({
-        //   title: '请重新登陆show' + eDetail.message,
-        // })
-        wx.clearStorage()
-      // }
-      console.log(e)
-    }
-    if (wx.getStorageSync("token")) {
-    wxrequest.requestGet(userInfoUrl, message, success, fail)
-    }
-    // if (wx.getStorageSync("token")) {
-      // 获取用户详情
-      console.log(wx.getStorageSync("memberId"))
-      var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
-      var userData = wx.getStorageSync("memberId")
-      var message = ''
-      var successDetail = function (dataDetail) {
-        that.setData({
-          userInfo: dataDetail.data
-        })
-        wx.setStorage({
-          key: 'userInfo',
-          data: dataDetail.data,
-        })
-        console.log("userinfo", that.data.userInfo)
-      }
-      var failDetail = function (eDetail) {
-        console.log("e", eDetail)
-      }
-    if (wx.getStorageSync("token")) {
-      wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
-    }
+    //获取memberID
+    this.getMemberId()
+    // 获取用户详情
+    this.getUserDetail()
+    //年龄
+    this.getAge()
   },
 
   /**

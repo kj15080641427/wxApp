@@ -28,13 +28,11 @@ Page({
     avatarUrl: userInfo.iconImage ? userInfo.iconImage : '',
     editMember: userInfo.memberName ? userInfo.memberName :'',//昵称
     gender: [{ "gender": "男", "id": 1 }, { "gender": "女", "id": 2 }],//性别
-    // editbrthday: userInfo.birthday ? userInfo.birthday: '',//生日
     editIndustryId: userInfo.industryId ? userInfo.industryId : '',//行业id
     editEmail: userInfo.email ? userInfo.email : '',//邮箱
     // editinstitutionId: userInfo.institutionId ? userInfo.institutionId : '',//企业id
     editaddress: userInfo.areaId ? userInfo.areaId:'',
     // editOrganizations: userInfo.editOrganizations,
-
     time: userInfo.birthday ? userInfo.birthday :'选择出生日期',//出生日期
     memberPositionName: userInfo.memberPositionName ? userInfo.memberPositionName : '',
     institutionName: userInfo.institutionName ? userInfo.institutionName : '', //企业名称
@@ -49,8 +47,47 @@ Page({
     regionId: '',
     indexadd: ''
   },
-  // 性别
- 
+  //获取用户详情
+  getUserDetail:function(){
+    var that = this
+    // console.log(wx.getStorageSync("memberId"))
+    var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
+    var userData = wx.getStorageSync("memberId")
+    var message = ''
+    var successDetail = function (dataDetail) {
+      wx.hideLoading()
+      that.setData({
+        userInfo: dataDetail.data
+      })
+      wx.setStorage({
+        key: 'userInfo',
+        data: dataDetail.data,
+      })
+    }
+    var failDetail = function (eDetail) {
+      console.log("e", eDetail)
+    }
+    // 点击保存后更新用户详情
+    wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
+  },
+  //获取行业列表
+  getIndustry:function(){
+    // // 行业列表
+    var that = this
+    var url = api.getIndustryUrl()
+    var data = { "parentId": '0' }
+    var success = function (data) {
+      console.log("行业", data.data)
+      that.setData({
+        industry: data.data
+      })
+    }
+    var fail = function (e) {
+      console.log(e)
+      console.log("行业", data)
+    }
+    wxrequest.request(url, data, success, fail)
+  },
  // 保存
   saveInfo:function(){
     var that = this
@@ -78,27 +115,11 @@ Page({
         // index2: wx.getStorageSync('index2'),
         index1:wx.getStorageSync('index1'),
       })
-      console.log("保存成功",data)
+      wx.showToast({
+        title: '保存成功',
+      })
       // 获取用户详情
-      // console.log(wx.getStorageSync("memberId"))
-      var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
-      var userData = wx.getStorageSync("memberId")
-      var message = ''
-      var successDetail = function (dataDetail) {
-        wx.showToast({
-          title: '保存成功',
-        })
-        wx.setStorage({
-          key: 'userInfo',
-          data: dataDetail.data,
-        })
-      }
-      var failDetail = function (eDetail) {
-        console.log("e", eDetail)
-      }
-      // 点击保存后更新用户详情
-      wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
-
+      that.getUserDetail()
       
       setTimeout(function(){
         wx.navigateBack({
@@ -226,32 +247,8 @@ Page({
   onLoad: function (options) {
     this.initData();
     var that = this
-    // // 行业列表
-    var industryUrl = api.getIndustryUrl()
-    var industryData = { "parentId": '0' }
-    var insSuccess = function (data) {
-      console.log("行业", data.data)
-      that.setData({
-        industry: data.data
-      })
-    }
-    var insFail = function (e) {
-      console.log(e)
-      console.log("行业", data)
-    }
-    wxrequest.request(industryUrl, industryData, insSuccess, insFail)
-    //职务列表
-    // var positionUrl = api.getPositionUrl()
-    // var positionData = {"memberRoleId":5}
-    // var posiSuccess = function(data){
-    //   console.log('zzzzzzzzzzzz',data)
-    // }
-    // var posiFail = function(e){
-    //   console.log(e)
-    // }
-    // wxrequest.request(positionUrl,positionData,posiSuccess,posiFail)
-    //头像
-
+    // 行业列表
+    this.getIndustry()
   },
 
   /**
@@ -278,8 +275,8 @@ Page({
       institutionName: editInfo.institutionName ? editInfo.institutionName : '',//企业名称
       editIndustryId: editInfo.industryId ? editInfo.industryId : ''
     })
-    console.log("userinfottt", wx.getStorageInfoSync())
-    console.log("time", that.data.time)
+    // console.log("userinfottt", wx.getStorageInfoSync())
+    // console.log("time", that.data.time)
     // if (!wx.getStorageSync('index2') || !wx.getStorageSync('index1') || !wx.getStorageSync('index')) {
     //   that.setData({
     //     selectInstitu:true,
@@ -291,20 +288,7 @@ Page({
     // })
     console.log(wx.getStorageInfoSync())
 
-    // // 行业列表
-    var industryUrl = api.getIndustryUrl()
-    var industryData = { "parentId": '0' }
-    var insSuccess = function (data) {
-      console.log("行业", data.data)
-      that.setData({
-        industry: data.data
-      })
-    }
-    var insFail = function (e) {
-      console.log(e)
-      console.log("行业", data)
-    }
-    wxrequest.request(industryUrl, industryData, insSuccess, insFail)
+
 
     // // 企业列表
     // var instituUrl = api.getInstitutionUrl()
@@ -324,30 +308,7 @@ Page({
       title: '加载中',
     })
     // 获取用户详情
-    console.log(wx.getStorageSync("memberId"))
-    var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
-    var userData = wx.getStorageSync("memberId")
-    var message = ''
-    var successDetail = function (dataDetail) {
-      wx.hideLoading()
-
-      that.setData({
-        userInfo: dataDetail.data
-      })
-      wx.setStorage({
-        key: 'userInfo',
-        data: dataDetail.data,
-      })
-      // that.setData({
-      //   userInfo: wx.getStorageSync("userInfo")
-      // })
-      console.log("userinfo", that.data.userInfo)
-    }
-    var failDetail = function (eDetail) {
-      wx.hideLoading()
-      console.log("e", eDetail)
-    }
-    wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
+    this.getUserDetail()
 
     if ( !wx.getStorageSync('index1')) {
       that.setData({

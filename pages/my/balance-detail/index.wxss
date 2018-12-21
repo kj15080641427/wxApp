@@ -1,0 +1,31 @@
+/* pages/my/balance-detail/index.wxss */
+.ba-detail-view{
+  height: 150rpx;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 35rpx;
+}
+.ba-detail-ttext{
+  font-size: 32rpx;
+  font-weight:bold;
+  line-height: 35rpx;
+  margin-top: 20rpx;
+}
+.ba-detail-text{
+  line-height: 30rpx;
+  font-size: 24rpx;
+  color: #b5b5b5;
+  margin-top: 50rpx;
+}
+.ba-detail-number{
+  height: 150rpx;
+  display: flex;
+  align-items: center;
+  color: #1ec88c;
+  font-size: 38rpx;
+}
+.ba-detail-line{
+  background-color: red;
+  height: 1rpx;
+}
