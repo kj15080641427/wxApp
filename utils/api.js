@@ -128,11 +128,11 @@ function getDemand(){
   return HOST_URL +Demand
 }
 //擅长领域
-var Expert = '/lawyer/member/businesstype'
+var Expert = '/common/businessType'
 function getExpert(){
   return HOST_URL + Expert
 }
-//发布需求
+//发布需求类型
 var DemandType = '/client/requirement/types'
 function getDemandType(){
   return HOST_URL + Demand
@@ -146,6 +146,42 @@ function getMark(){
 var Publish = '/client/requirement/post'
 function getPublish(){
   return HOST_URL + Publish
+}
+//热线咨询
+var Phone = '/client/freecall/phone'
+function getPhone(){
+  return HOST_URL + Phone
+}
+//关注
+var Follow = '/lawyer/member/follow/'
+function getFollow(){
+  return HOST_URL + Follow
+}
+//取消关注
+var Unfollow = '/lawyer/member/unfollow/'
+function getUnfollow(){
+  return HOST_URL+Unfollow
+}
+
+//我的关注列表
+var Myfollow = '/lawyer/member/myfollow'
+function getMyFollow(){
+  return HOST_URL + Myfollow
+}
+//订单
+var Order = '/client/member/order'
+function getOrder(){
+  return HOST_URL + Order
+}
+// 账户余额
+var Balance = '/client/amount/balance/'
+function getBalance(){
+  return HOST_URL +Balance
+}
+// 交易明细
+var BalanceDetail = '/client/amount/detail'
+function getBalanceDetail(){
+  return HOST_URL + BalanceDetail
 }
 module.exports={
   getLoginUrl: getLoginUrl,
@@ -169,5 +205,12 @@ module.exports={
   getExpert: getExpert,
   getDemandType: getDemandType,
   getMark:getMark,
-  getPublish: getPublish
+  getPublish: getPublish,
+  getPhone: getPhone,
+  getFollow: getFollow,
+  getMyFollow: getMyFollow,
+  getUnfollow: getUnfollow,
+  getOrder: getOrder,
+  getBalance:getBalance,
+  getBalanceDetail: getBalanceDetail,
 }

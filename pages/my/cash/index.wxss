@@ -1,0 +1,66 @@
+/* pages/my/cash/index.wxss */
+.cash-page-line{
+  background-color: #f4f4f4;
+  height: 1rpx;
+  margin-top: 50rpx;
+  /* margin-left: 80rpx;
+  margin-right: 80rpx; */
+}
+.cash-page-view{
+  height: 300rpx;
+  background-color: white;
+  padding-left: 80rpx;
+  padding-right: 80rpx;
+  padding-top: 50rpx;
+}
+.cash-page-text{
+  font-size: 28rpx;
+  color: #b5b5b5;
+}
+.cash-page-number{
+  font-size: 68rpx;
+  font-weight: bold;
+
+}
+.cash-page-color{
+  color: #ea5514;
+  font-size: 20rpx;
+  display: flex;
+  align-items: center;
+}
+.cash-detail-view{
+  margin-top: 35rpx;
+  padding-left: 35rpx;
+  height: 200rpx;
+  background-color: white;
+  font-size: 28rpx;
+}
+.cash-detail-flex{
+  display: flex;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+input{
+  height: 100rpx;
+  width: 450rpx;
+  margin-left: 50rpx;
+}
+text{
+  color: #b5b5b5
+}
+.cash-tips{
+  font-size: 24rpx;
+  color: #b5b5b5;
+  padding-top: 40rpx;
+  padding-left: 35rpx;
+  line-height: 40rpx;
+}
+button{
+  height: 93rpx;
+  width: 380rpx;
+  background-color: #1ec88c;
+  color: white;
+  border-radius: 60rpx;
+  margin-top: 80rpx;
+  line-height: 93rpx;
+}

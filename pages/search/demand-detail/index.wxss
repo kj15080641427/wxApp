@@ -88,7 +88,7 @@
   background-color: #F4f4f4
 }
 .detail-page-text{
-  width:665rpx;
+  /* width:665rpx; */
 }
 .detail-page-problem{
   margin-top: 35rpx;
@@ -106,10 +106,10 @@
   /* height:  */
 }
 .select-mark{
-  width: 140rpx;
+  width: 160rpx;
   height: 60rpx;
   margin-top: 35rpx;
-  margin-left: 35rpx;
+  margin-left: 20rpx;
   border-radius: 10rpx;
   border:1rpx solid #b5b5b5;
   /* line-height: 60rpx; */
@@ -117,21 +117,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 28rpx;
+  font-size: 24rpx;
   box-sizing:border-box;
 }
 .selected-mark{
-  width: 140rpx;
+  width: 160rpx;
   height: 60rpx;
   margin-top: 35rpx;
-  margin-left: 35rpx;
+  margin-left: 20rpx;
   border-radius: 10rpx;
   background-color: #1ec88c;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 28rpx;
+  font-size: 24rpx;
 }
 .select-mark-flex{
   display: flex;
@@ -165,4 +165,12 @@
   background-color: #b5b5b5;
   height: 1rpx;
   margin-top: 35rpx;
+}
+.hide-text{
+  width: 300rpx;
+  color:black;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  text-align : right;
 }

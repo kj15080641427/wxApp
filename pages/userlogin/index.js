@@ -105,10 +105,10 @@ Page({
     }
     var fail = function (data){
       wx.showToast({
-        title: data ? data : '注册失败',
+        title: data.message,
         icon:'none'
       })
-      console.log(data)
+      console.log(data.message)
     }
     // 
     if (this.data.inputPhone !== '' && this.data.inputCode !== '' ){

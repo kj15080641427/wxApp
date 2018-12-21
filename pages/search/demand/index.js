@@ -2,7 +2,6 @@
 var wxrequest = require('../../../utils/request.js')
 var api = require('../../../utils/api.js')
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -10,7 +9,7 @@ Page({
       demandType:'',
       typeindex:''
   },
-  //分类
+  //服务分类
   getDemandType:function(){
     var that = this
     var url = api.getDemandType()
@@ -22,7 +21,7 @@ Page({
       that.setData({
         demandType:data.data
       })
-      console.log(data)
+      console.log("服务分类",data)
     }
     var fail = function(e){
       console.log(e)
@@ -34,10 +33,19 @@ Page({
     this.setData({
       typeindex:e.currentTarget.dataset.typeindex
     })
-    wx.navigateTo({
-      url: '../demand-type/index?busiTypes=' + JSON.stringify(this.data.demandType) + '&index=' + e.currentTarget.dataset.typeindex,
-    })
-    console.log(e.currentTarget.dataset.typeindex)
+    if (this.data.demandType[e.currentTarget.dataset.typeindex].busiTypes[0].businessTypeId !== null){
+      wx.navigateTo({
+        url: '../demand-type/index?demandType=' + JSON.stringify(this.data.demandType) + '&index=' + e.currentTarget.dataset.typeindex,
+      })
+    }else{
+      wx.showToast({
+        title: '无擅长领域',
+        icon: 'none'
+      })
+      wx.navigateTo({
+        url: '../demand-detail/index?demandType=' + JSON.stringify(this.data.demandType) + '&index=' + e.currentTarget.dataset.typeindex+'&id=1',
+      })
+    }
   },
   //
   /**

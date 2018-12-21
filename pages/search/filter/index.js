@@ -2,7 +2,6 @@
 var api = require('../../../utils/api.js')
 var wxrequest = require('../../../utils/request.js')
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -36,6 +35,8 @@ Page({
     var that = this
     var t = that.data
     var dataJSON = {
+      "pageNum":'1',
+      "pageSize":'10',
       "regionId":'',
       "practiceYearId": t.practiceYearId,
       "sex": t.sex,
@@ -77,7 +78,7 @@ Page({
         dataJSON: dataJSON,
         topNum:0
       })
-      prevPage.gotop()
+      // prevPage.gotop()
     }
     var fail = function (e) {
       wx.hideLoading()

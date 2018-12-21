@@ -1,3 +1,50 @@
+.search-input-height{
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+  background-color: #1ec88c;
+  border-top: 1rpx solid #32b987
+}
+.index-search{
+  display: flex;
+  align-items: center;
+  height: 70rpx;
+  width: 680rpx;
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+  background-color: #32b987;
+  /* margin-top: 15rpx; */
+  padding-left: 20rpx;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+}
+.search-tab{
+  display: flex;
+}
+.search-tab-icon{
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+}
+.search-page-icon{
+  margin-left: 10rpx;
+  /* margin-top: 10rpx; */
+  width:20rpx;
+  height:20rpx
+}
+.search-tab-list{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80rpx;
+  background-color: white;
+  padding-left: 35rpx;
+  padding-right: 35rpx;
+}
+.search-tab-text{
+  color: #b5b5b5;
+  font-size: 24rpx;
+}
 /* pages/my/watchlist/index.wxss */
 .watchlist-page{
   margin-left: 25rpx;
@@ -26,6 +73,7 @@
   color: #f8b65d;
   font-size: 24rpx;
   margin-top: 20rpx;
+  margin-bottom: 20rpx;
 }
 .watchlist-page-label{
   margin-left:20rpx;
@@ -41,8 +89,17 @@
   margin-left: 25rpx;
   margin-top: 35rpx;
   margin-right: 20rpx;
+  width: 750rpx;
   /* margin-right:20rpx */
   /* height: 285rpx; */
+}
+.watch-page-lower{
+  display:flex;
+  padding-top:25rpx;
+  height:60rpx;
+  margin-left:25rpx;
+  background-color:white;
+  margin-right: 25rpx;
 }
 .watchlist-page-name{
   font-size: 16px;
@@ -70,13 +127,4 @@
   height: 1rpx;
   margin-right: 25rpx;
   margin-left: 25rpx;
-}
-.watch-page-lower{
-  width: 700rpx;
-  display:flex;
-  padding-top:25rpx;
-  height:60rpx;
-  margin-left:25rpx;
-  /* margin-right: 25rpx; */
-  background-color:white
 }

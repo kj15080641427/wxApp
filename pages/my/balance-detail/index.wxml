@@ -1,0 +1,11 @@
+<!--pages/my/balance-detail/index.wxml-->
+<view wx:key="{{index}}" wx:for="{{detail}}" bindtap="gotoBalanceDetail" data-baindex="{{index}}">
+<view class='ba-detail-view' >
+  <view class=''>
+    <view class='ba-detail-ttext'>{{item.orderType}}</view>
+    <view class='ba-detail-text'>{{item.createDate}}</view>
+  </view>
+  <view class='ba-detail-number'>{{item.buyerPayAmount}}</view>
+</view>
+<view class='ba-detail-line'></view>
+</view>

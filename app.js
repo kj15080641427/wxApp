@@ -1,5 +1,4 @@
 //app.js
-
 App({
   device: { "device_type": 1, "app_version": "2.0", "app_version_code": 10, "channel": "xiaomi_2018" },
   onLaunch: function () {

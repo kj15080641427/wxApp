@@ -1,29 +1,46 @@
 // pages/my/order/index.js
+var api = require('../../../utils/api.js')
+var wxrequest = require('../../../utils/request.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    orderList:[
-      {"time":'2018-01-01 01:01',"consulType":'快速咨询',"problemType":'婚姻家事',"statu":'待接单',"lawyer":''},
-      { "time": '2017-01-01 01:01', "consulType": '发布需求', "problemType": '知识产权', "statu": '待接单', "lawyer": '刘岩' },
-      {"time":'2017-01-01 01:01',"consulType":'免费文字咨询',"problemType":'知识产权',"statu":'已完成',"lawyer":'' },
-      { "time": '2017-01-01 01:01', "consulType": '专家咨询', "problemType": '知识产权', "statu": '已关闭', "lawyer": '陈宇龙' },
-      { "time": '2017-01-01 01:01', "consulType": '免费电话咨询', "problemType": '知识产权', "statu": '进行中', "lawyer": '' },
-      
-      ]
+    order:'',//我的订单列表
+    mobile:'',//电话
   },
-  gotoDetail:function(){
+  getOrderIndex:function(e){
     wx.navigateTo({
-      url: '../order-detail/index',
+      url: '../order-detail/index?orderDetail=' + JSON.stringify(this.data.order[e.currentTarget.dataset.orderindex]) +'&mobile='+this.data.mobile,
     })
+    console.log("index",e)
+  },
+  //订单
+  getOrder:function(){
+    var url = api.getOrder()
+    var data = { "memberId": this.data.memberId,"pageNum":1,"pageSize":50}
+    var success = (data)=>{
+      this.setData({
+        order:data.data.list
+      })
+      console.log("订单",data)
+    }
+    var fail = (e)=>{
+      console.log(e)
+    }
+    wxrequest.request(url,data,success,fail)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      memberId:options.memberId,
+      mobile: options.mobile
+    })
+    this.getOrder()
+    console.log("??", options.memberId)
   },
 
   /**

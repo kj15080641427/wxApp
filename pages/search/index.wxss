@@ -23,9 +23,11 @@
   display: flex;
 }
 .search-tab-icon{
+  width: 150rpx;
   height: 100rpx;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .search-page-icon{
   margin-left: 10rpx;
@@ -45,6 +47,9 @@
 .search-tab-text{
   color: #b5b5b5;
   font-size: 24rpx;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
 }
 /* pages/my/watchlist/index.wxss */
 .watchlist-page{
@@ -60,7 +65,7 @@
 .watchlist-page-avatar{
   width: 120rpx;
   height: 120rpx;
-  /* background-color: red; */
+  background-color: white;
   border-radius: 50%;
 }
 .watchlist-page-practice{
@@ -90,6 +95,7 @@
   margin-left: 25rpx;
   margin-top: 35rpx;
   margin-right: 20rpx;
+  width: 750rpx;
   /* margin-right:20rpx */
   /* height: 285rpx; */
 }
@@ -113,6 +119,7 @@
   margin-top: 25rpx;
   color: #b5b5b5;
   font-size: 24rpx;
+  padding-bottom:15rpx;
 }
 .watchlist-page-line{
   background-color: #f4f4f4;
@@ -125,8 +132,8 @@
   padding-top:25rpx;
   height:60rpx;
   margin-left:25rpx;
-  /* margin-right: 25rpx; */
-  background-color:white
+  margin-right: 25rpx;
+  background-color:white;
 }
 .lawyerList-top{
   background-color:white;
@@ -167,8 +174,21 @@
   align-items: center;
   background-color: #f4f4f4;
   overflow: hidden;
-text-overflow:ellipsis;
-white-space: nowrap;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  font-size: 34rpx;
+}
+.search-select-sort{
+  height: 100rpx;
+  /* line-height: 100rpx; */
+  display: flex;
+  align-items: center;
+  background-color: #f4f4f4;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  font-size: 34rpx;
+  padding-left: 35rpx;
 }
 .serach-select-city{
   position: relative;
@@ -176,6 +196,30 @@ white-space: nowrap;
   height: 100rpx;
   width: 400rpx;
   line-height: 100rpx;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.serach-select-sort{
+  position: relative;
+  padding-left: 35rpx;
+  height: 100rpx;
+  width: 750rpx;
+  line-height: 100rpx;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
+.right-width{
+  position: relative;
+  margin-left: 35rpx;
+  height: 100rpx;
+  width: 280rpx;
+  line-height: 100rpx;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  font-size: 34rpx;
 }
 .search-select-line{
   background-color: #f4f4f4;
@@ -188,7 +232,7 @@ white-space: nowrap;
   color: transparent;
 }
 .select-image{
-  margin-left: 100rpx;
+  margin-left: 150rpx;
   /* margin-top: 20rpx; */
   width: 30rpx;
   height: 30rpx;
@@ -196,4 +240,33 @@ white-space: nowrap;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.select-image-sort{
+  /* margin-left: 150rpx; */
+  /* margin-top: 20rpx; */
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  top: 50%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+}
+.select-hidden{
+  width:500rpx;
+  background-color:white;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.select-scroll-left{
+  height: 920rpx;
+  width: 300rpx;
+  font-size: 34rpx;
+}
+.select-scroll-right{
+  height: 960rpx;
+  width: 10rpx;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
 }

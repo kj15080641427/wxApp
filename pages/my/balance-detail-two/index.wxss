@@ -1,0 +1,37 @@
+/* pages/my/balance-detail-two/index.wxss */
+.detail-page-background{
+  background-color: white;
+  /* margin-top: 35rpx; */
+  padding-bottom: 35rpx;
+}
+.detail-page-flex{
+  display: flex;
+  align-items: center;
+  margin-left: 35rpx;
+  padding-top: 30rpx;
+  font-size: 28rpx;
+  color: #323232
+}
+.detail-page-flex-once{
+  display: flex;
+  margin-left: 35rpx;
+  padding-top: 45rpx;
+  font-size: 28rpx;
+  color: #323232
+}
+.detail-page-right{
+  margin-left: 30rpx
+}
+.detail-page-color{
+  color: #f8b62d;
+  margin-left: 30rpx;
+}
+.detail-two-cash{
+  height: 150rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  padding-left: 35rpx;
+  padding-right: 35rpx;
+  font-size: 38rpx;
+}

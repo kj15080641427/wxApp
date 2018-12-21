@@ -10,7 +10,7 @@
 <view wx:key="{{index}}" wx:for="{{detailList}}">
   <view  class="{{index == 0 ? 'detail-page-flex-once':'detail-page-flex'}}">
     <view>{{item['name']}}</view>
-    <view class="{{item['name'] == '订单金额' ? 'detail-page-color': 'detail-page-right'}}">{{item['text']}}</view>
+    <view class="{{item['name'] == '订单金额' ? 'detail-page-color': 'detail-page-right'}}">{{item['text']}}¥</view>
   </view>
   <!-- <view class='detail-page-line'></view> -->
 </view>
