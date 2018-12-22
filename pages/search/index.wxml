@@ -3,7 +3,7 @@
 <view class='search-input-height'>
   <view class='index-search '>
     <image src='../../image/homeicon_3x/homepage_01_3x.png' style='width:40rpx;height:40rpx;margin-right:20rpx ' ></image>
-    <input placeholder='搜索律师姓名' placeholder-style='color:#ffffff;' confirm-type="search" bindconfirm="confirm" bindinput='searchInput' style='width:100%;'></input>
+    <input placeholder='搜索律师' placeholder-style='color:#ffffff;' confirm-type="search" bindconfirm="confirm" bindinput='searchInput' style='width:100%;'></input>
   </view>
 </view>
 
@@ -88,7 +88,7 @@
 
 </view>
 <!-- <view style="z-index:55">123123</view> -->
-
+<view style='height:750rpx;'>
 <view class="" >
   <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}"  data-index="{{index}}" catchtap='getIndex'>
     <view class='watchlist-page'>
@@ -118,8 +118,10 @@
   </view>
 </view>
 
-
-
+<view style='width:750rpx;height:100rpx;display:flex;justify-content:center;align-items:center;background-color:whitemargin-top:15rpx;'>
+  <image hidden="{{ishidden}}"  src="../../image/search_icon@3x/loading.gif" style='width:50rpx;height:50rpx;font-size:28rpx;'></image>
+</view>
+</view>
 
 
 <!-- <view class='search-more'>

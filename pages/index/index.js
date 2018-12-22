@@ -32,6 +32,12 @@ Page({
       url: '../search/demand/index',
     })
   },
+  //搜索律师
+  gotoSearch:function(){
+    wx.switchTab({
+      url:'../search/index',
+    })
+  },
   //h5
   gotoweb:function(e){
     this.setData({

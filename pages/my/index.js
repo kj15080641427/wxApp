@@ -39,10 +39,7 @@ Page({
         url: '../my/watchlist/index',
       })
     }else{
-      wx.showToast({
-        title: '请登录',
-        icon:'none'
-      })
+      this.goto()
     }
   },
   // 编辑个人信息
@@ -57,6 +54,12 @@ Page({
       })
     }
   },
+  //跳转
+  goto:function(url){
+    wx.navigateTo({
+      url: '../userlogin/index',
+    })
+  },
   // 订单
   gotoOrder:function(){
     if(wx.getStorageSync("token")){
@@ -64,10 +67,7 @@ Page({
         url: '../my/order/index?memberId=' + this.data.userInfo.memberId + '&mobile=' + this.data.userInfo.mobile,
       })
     }else{
-      wx.showToast({
-        title: '请登录',
-        icon:'none'
-      })
+      this.goto()
     }
   },
   //我的账户
@@ -77,13 +77,7 @@ Page({
         url: 'balance/index?memberId=' + this.data.userInfo.memberId,
       })
     }else{
-      wx.showToast({
-        title: '请登录',
-        icon:'none'
-      })
-      wx.navigateTo({
-        url: '../userlogin/index'
-      })
+      this.goto()
     }
   },
   getMemberId:function(){
@@ -151,7 +145,7 @@ Page({
       that.setData({
         age: year
       })
-      console.log("年龄",that.data.age)
+      // console.log("年龄",that.data.age)
     }
   },
   /**

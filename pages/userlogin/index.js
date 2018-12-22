@@ -5,36 +5,40 @@ Page({
     /**
      * 页面的初始数据
      */
-    data: {
-        inputPhone: '',
-        inputCode: ''
-    },
-    //获取手机号输入框值
-    getPhoneInput: function (e) {
-        this.setData({
-            inputPhone: e.detail.value
-        })
+  data: {
+      inputPhone: '',
+      inputCode: '',
+      isFocus:false, //
+      countdown:60,
+      startCountdown:false
+  },
+  //获取手机号输入框值
+  getPhoneInput: function (e) {
+      this.setData({
+          inputPhone: e.detail.value
+      })
+  },
 // <<<<<<< HEAD
-        setTimeout(function(){
-          wx.navigateBack({
-            delta:2
-          })
-        },1000)
+        // setTimeout(function(){
+        //   wx.navigateBack({
+        //     delta:2
+        //   })
+        // },1000)
 
-      var that = this
-      // 获取用户信息
-      var userInfoUrl = api.getUserInfo()
-      var message = ''
-      var idData = wx.getStorageSync("token")
-      var success = function (data) {
-        wx.setStorage({
-          key: 'memberId',
-          data: data.data.memberId,
-        })
+      // var that = this
+      // // 获取用户信息
+      // var userInfoUrl = api.getUserInfo()
+      // var message = ''
+      // var idData = wx.getStorageSync("token")
+      // var success = function (data) {
+      //   wx.setStorage({
+      //     key: 'memberId',
+      //     data: data.data.memberId,
+      //   })
 // =======}
-        console.log('inputphone', this.data.inputPhone)
-    }
-    },
+        // console.log('inputphone', this.data.inputPhone)
+    
+    
     //获取验证码输入框值
     getCodeInput: function (e) {
         this.setData({
@@ -44,6 +48,7 @@ Page({
     },
     // 获取验证码
     getVerificationCode: function () {
+        var that = this
         var verifyCodeUrl = api.getVerifyCodeUrl()
         var verifydata = {
             "phone": `${this.data.inputPhone}`,
@@ -53,6 +58,10 @@ Page({
             wx.showToast({
                 title: '发送成功',
             })
+          that.getCountdown()
+          that.setData({
+            isFocus: true
+          })
             console.log(data)
         }
         var fail = function (e) {
@@ -64,16 +73,9 @@ Page({
         }
         // 
         if (!(/^1[345678]\d{9}$/.test(this.data.inputPhone))) {
-            wx.showModal({
-                title: '手机号码输入错误',
-                showCancel: false,
-                success(res) {
-                    if (res.confirm) {
-                        console.log('用户点击确定')
-                    } else if (res.cancel) {
-                        console.log('用户点击取消')
-                    }
-                }
+            wx.showToast({
+              title: '手机号错误',
+              icon:'none'
             })
         } else {
             wxrequest.request(verifyCodeUrl, verifydata, success, fail)
@@ -95,11 +97,11 @@ Page({
             wx.showToast({
                 title: '注册成功',
             })
-            // setTimeout(function () {
-            //     wx.navigateBack({
-            //         delta: 2
-            //     })
-            // }, 1000)
+            setTimeout(function () {
+                wx.navigateBack({
+                    delta: 2
+                })
+            }, 1000)
             wx.setStorageSync("token", data.data.token)
             console.log("注册成功", data)
             console.log("token111", wx.getStorageSync("token"))
@@ -146,6 +148,24 @@ Page({
                 icon: 'none'
             })
         }
+    },
+    //倒计时
+    getCountdown:function(){
+      var that = this
+      var interval  = setInterval(function(){
+        that.setData({
+          countdown:that.data.countdown - 1,
+          startCountdown:true
+        })
+        if(that.data.countdown <= 0){
+          clearInterval(interval)
+          that.setData({
+            startCountdown:false,
+            countdown:60
+          })
+        }
+        console.log(that.data.countdown)
+      },1000)
     },
     /**
      * 生命周期函数--监听页面加载

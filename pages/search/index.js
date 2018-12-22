@@ -56,6 +56,7 @@ Page({
     hide: true,
     sort:["综合排序","最新入驻","活跃度最高"],
     showSort:false,
+    ishidden:true,
     // searchName:'',// 名字搜索
     expert:'擅长领域',//选择擅长领域
     selectedCity:'选择地区',//选择地区
@@ -91,7 +92,8 @@ Page({
   searchInput: function (e) {
     this.setData({
       ['noFilter.lawyerName']: e.detail.value,
-      getPage: 10
+      getPage: 10,
+      ishidden: true
     })
   },
   //排序Index
@@ -121,7 +123,8 @@ Page({
       selectedCity: this.data.region[this.data.regionindex].child[e.currentTarget.dataset.cityindex].name ,
       selectedCityColor: true,
       clickOhter: false,
-      getPage: 10
+      getPage: 10,
+      ishidden: true
     })
     this.pc()
   },
@@ -141,7 +144,8 @@ Page({
       expert:  this.data.business[this.data.expertIndex].children[e.currentTarget.dataset.expertchildindex].businessTypeName ,
       expertColor: true ,
       clickOhterEx: false,
-      getPage: 10
+      getPage: 10,
+      ishidden: true
     })
     this.pc()
   },
@@ -157,7 +161,7 @@ Page({
     }
     var fail = function (e) {
       wx.showToast({
-        title: '获取擅长领域失败',
+        title: '获取数据失败',
         icon:'none'
       })
     }
@@ -183,10 +187,14 @@ Page({
     var that = this
     var url = api.getSearchLawyer() + "1/" + that.data.getPage
     var datan = that.data.noFilter
+    that.setData({
+    })
     var success = function (data) {
       wx.hideLoading()
+
       that.setData({
-        lawyerList: data.data.list
+        lawyerList: data.data.list,
+        ishidden:true
       })
       that.getAge()
     }
@@ -199,9 +207,9 @@ Page({
       console.log(e)
     }
     wxrequest.request(url, datan, success, fail)
-    wx.showLoading({
-      title: '正在加载',
-    })
+    // wx.showLoading({
+    //   title: '正在加载',
+    // })
   },
   pc: function () {
     var that = this
@@ -213,7 +221,8 @@ Page({
     var success = function (data) {
       wx.hideLoading()
       that.setData({
-        lawyerList: data.data.list
+        lawyerList: data.data.list,
+        // ishidden: true
       })
       that.getAge()
     }
@@ -254,12 +263,16 @@ Page({
     // wx.showLoading({
     //   title: '加载中',
     // })
-    var a = region.citysData.unshift({ "regionId": '', name: "全国", child: [{"regionId":'',name:"全国"}]})
+    var a = region.citysData.unshift({ "regionId": '', name: "全国", child: [{"regionId":'',name:"全国",child:[{"regionId":'',"name":'全国'}]}]})
     this.setData({
-      region: region.citysData
+      region: region.citysData,
     })
+    console.log("地区",this.data.region)
     this.pc()
     this.getExpert()
+    this.setData({
+      ishidden: false
+    })
     //  加载极光im
   },
 
@@ -267,7 +280,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.setData({
+      ishidden:false
+    })
   },
 
   /**
@@ -303,11 +318,13 @@ Page({
    */
   onReachBottom: function () {
     var that = this
-    wx.showLoading({
-      title: '加载中',
-    })
+    // wx.showLoading({
+    //   title: '加载中',
+    // })
+
     that.setData({
-      getPage: that.data.getPage + 10
+      getPage: that.data.getPage + 10,
+      ishidden: false
     })
     var page = that.data.getPage
     that.confirm(page)

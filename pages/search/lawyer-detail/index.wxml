@@ -136,7 +136,7 @@
     <view class='law-long-text'>语言能力</view>
     <view class='law-skill-right-other'>
       <view class='law-page-industry-text' wx:if="{{!lawyerInfo.skill[2].children[0]}}" style='margin-top:10rpx;'>暂无信息</view>
-      <view  class='law-page-line'></view>
+      <view wx:if="{{!lawyerInfo.skill[2].children[0]}}"  class='law-page-line'></view>
       <view wx:key="{{index}}" wx:for="{{lawyerInfo.skill[2].children}}">
         <view style='margin-bottom:15rpx;margin-top:10rpx;' wx:if="{{!item.iconImage}}">{{item.skillName}}</view>
         <view class='law-page-line'></view>
@@ -151,7 +151,7 @@
     <view class='law-long-text'>其他技能</view>
     <view class='law-skill-right-other'>
       <view class='law-page-industry-text' wx:if="{{!lawyerInfo.skill[1].children[0]}}" style='margin-top:10rpx;'>暂无信息</view>
-      <view  class='law-page-line'></view>
+      <view wx:if="{{!lawyerInfo.skill[1].children[0]}}" class='law-page-line'></view>
       <view wx:key="{{index}}" wx:for="{{lawyerInfo.skill[1].children}}">
         <view style='margin-bottom:15rpx;margin-top:10rpx;' wx:if="{{!item.iconImage}}">{{item.skillName}}</view>
         <view  class='law-page-line'></view>
@@ -181,7 +181,7 @@
     <view class='law-long-text'>常去机构</view>
     <view class='law-page-industry'>
       <view class='law-page-industry-text' wx:if="{{!lawyerInfo.institution[0]}}" style='margin-top:30rpx;'>暂无信息</view>
-        <view wx:if="{{!lawyerInfo.institution[0]}}" class='law-page-line'></view>
+        <!-- <view wx:if="{{!lawyerInfo.institution[0]}}" class='law-page-line'></view> -->
         <view style='margin-top:30rpx;'></view>
       <view wx:key="{{index}}" wx:for="{{lawyerInfo.institution}}"style="margin-top:20rpx;">
         <view class='law-page-industry-text'>{{item}}</view>

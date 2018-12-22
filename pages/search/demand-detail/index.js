@@ -168,6 +168,11 @@ Page({
         title: '请填写最高可承受费用',
         icon:'none'
       })
+    } else if (!(/^[0-9]*$/.test(par.maxCost))  ){
+      wx.showToast({
+        title: '请填写正确的最高可承受费用',
+        icon:'none'
+      })
     } else if (par.requirementContent==''){
       wx.showToast({
         title: '请填写问题描述',

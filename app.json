@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/my/index",
+    "pages/userlogin/index",
     "pages/my/balance/index",
     "pages/message/index",
     "pages/message/chart/index",
@@ -24,7 +25,6 @@
     "pages/index/quick-consultation-finish/index",
     "pages/my/watchlist/index",
     "pages/index/consultation/index",
-    "pages/userlogin/index",
     "pages/index/consultation-reply/index",
     "pages/logs/logs",
     "pages/my/guide/index",

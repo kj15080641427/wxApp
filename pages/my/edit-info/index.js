@@ -21,7 +21,7 @@ Page({
     systime:false,
     hasaddress:true,
     industryName:'', //行业
-
+    orgN:'',
     avatarUrl: userInfo.iconImage ? userInfo.iconImage : '',
     editMember: userInfo.memberName ? userInfo.memberName :'',//昵称
     gender: [{ "gender": "男", "id": 1 }, { "gender": "女", "id": 2 }],//性别
@@ -31,7 +31,7 @@ Page({
     time: userInfo.birthday ? userInfo.birthday :'选择出生日期',//出生日期
     memberPositionName: userInfo.memberPositionName ? userInfo.memberPositionName : '',
     institutionName: userInfo.institutionName ? userInfo.institutionName : '', //企业名称
-    orgName: userInfo.organizationId ? userInfo.organizationId :'',
+    orgName: userInfo.organizationId ? userInfo.organizationId :[],
     //地区
     citysData: cityData.citysData,
     provinces: [],
@@ -72,7 +72,7 @@ Page({
     var url = api.getIndustryUrl()
     var data = { "parentId": '0' }
     var success = function (data) {
-      console.log("行业", data.data)
+      // console.log("行业", data.data)
       that.setData({
         industry: data.data
       })
@@ -86,7 +86,7 @@ Page({
     }
     var fail = function (e) {
       console.log(e)
-      console.log("行业", data)
+      // console.log("行业", data)
     }
     wxrequest.request(url, data, success, fail)
   },
@@ -95,17 +95,17 @@ Page({
     var that = this
     var url = api.getOrganization()
     var success=(data)=>{
-      console.log("商会组织",data)
+      // console.log("商会组织",data)
       this.setData({
         org:data.data
       })
-      data.data.map(function(item){
-      if (item.organizationId == userInfo.organizationId){
-        this.setData({
+      that.data.org.map(function(item){
+        if (item.organizationId == userInfo.organizations[0].organizationId){
+        that.setData({
           orgN: item.organizationName
         })
       }
-        console.log("哈哈哈哈哈哈哈哈", that.data.orgN)
+        // console.log("哈哈哈哈哈哈哈哈", item.organizationName, "=", userInfo)
       })
     }
     var fail = (e)=>{
@@ -128,9 +128,9 @@ Page({
       "regionId":that.data.editaddress,
       "memberPositionName": that.data.memberPositionName ? that.data.memberPositionName : '',
       "institutionName": that.data.institutionName ? that.data.institutionName : '',
-      "organizationId": that.data.orgNama ? that.data.orgNama : ''
+      "oids": that.data.org && that.data.index2 ? [that.data.org[that.data.index2].organizationId] : []
       }
-    console.log("上传参数", editDetailData, this.data.date)
+    // console.log("上传参数", this.data.org[that.data.index2].organizationId)
 
     var success = function(data){
       wx.setStorageSync('index1',that.data.index1 )
@@ -180,13 +180,12 @@ Page({
       index2:e.detail.value
     })
   },
-  // //选择企业
-  // institutionTypeName: function (e) {
-  //   this.setData({
-  //     institutionName:e.detail.value
-  //   })
-
-  // },
+  //选择企业
+  institutionTypeName: function (e) {
+    this.setData({
+      institutionName:e.detail.value
+    })
+  },
   //自定义地区
   changearea: function (e) {
     this.setData({
@@ -202,7 +201,7 @@ Page({
       selecttime:false,
       systime:true
     })
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
   },
   // 更换头像
   replaceAvatar: function () {
@@ -212,7 +211,7 @@ Page({
       sourceType: ['album', 'camera'],
       success: function (res) {
 
-        console.log(res)
+        // console.log(res)
         wx.uploadFile({
           url: api.getImageUrl(),
           filePath: res.tempFilePaths[0],
@@ -242,7 +241,7 @@ Page({
     this.setData({
       editMember: e.detail.value
     })
-    console.log('input值', !!e.detail.value)
+    // console.log('input值', !!e.detail.value)
   },
 
   // 职务
@@ -265,6 +264,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    userInfo = wx.getStorageSync("userInfo")
     this.initData();
     var that = this
     // 行业列表
@@ -308,7 +308,7 @@ Page({
     // this.setData({
     //   time: this.data.time
     // })
-    console.log(wx.getStorageInfoSync())
+    // console.log(wx.getStorageInfoSync())
 
 
 

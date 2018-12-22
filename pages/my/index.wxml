@@ -6,23 +6,28 @@
 <view class='my-page-background'>
   <view class=''>
     <view style='display:flex;justify-content:center'>
-      <image class='my-page-avatar' src="{{userInfo.iconImage ? userInfo.iconImage :'../../image/my_icon@3x/mine_icon_01_3x.png'}}"bindtap='login'></image>
-      <view class='my-page-editinfo-flex' bindtap='gotoEditInfo'>
+      <image class='my-page-avatar' src="{{userInfo.iconImage ? userInfo.iconImage :'../../image/my_icon@3x/mine_icon_02_3x.png'}}"bindtap='login'></image>
+      <view wx:if="{{userInfo.memberName}}" class='my-page-editinfo-flex' bindtap='gotoEditInfo'>
         <view class='my-page-editinfo'>编辑信息</view>
         <image src='../../image/homeicon_3x/homepage_09_3x.png' style='width:25rpx;height:25rpx;padding-top:5rpx' />
       </view>
     </view>
     <view class='my-page-textgenter'>
-      <view class='my-page-text' style='font-weight:bold'>{{userInfo.memberName}}</view>
-      <view wx:if="{{userInfo.memberName}}" class="{{userInfo.sex == 2 ? 'my-page-gender-girl' : 'my-page-gender-boy'}}">
+      <view class='my-page-text my-center' style='font-weight:bold'>{{userInfo.memberName}}</view>
+      <view wx:if="{{userInfo.birthday}}" class="{{userInfo.sex == 2 ? 'my-page-gender-girl' : 'my-page-gender-boy'}}">
         <image src="{{userInfo.sex == 2 ? '../../image/my_icon@3x/mine_icon_04_3x.png' : '../../image/my_icon@3x/mine_icon_03_3x.png'}}" style='width:20rpx;height:20rpx'></image>
         <text>{{age}}岁</text>
       </view>
     </view>
+
+    <view class='my-page-textgenter' bindtap='login'>
+      <view wx:if="{{!userInfo.memberName}}" class='my-page-text my-center' style='font-weight:bold'>登陆/注册</view>
+    </view>
+
     <view class='my-page-text' style='font-size:30rpx'>{{userInfo.addressExtend['province']}}{{userInfo.addressExtend['city']}}</view>
-    <view class='my-page-unions'>
-      <view class='my-page-unions-detail'>中国浙商会湖南分会</view>
-      <view class='my-page-unions-detail'>中国浙商会湖南分会</view>
+    <view class='my-page-unions' wx:if="{{userInfo.organizations[0]}}" wx:key="{{index}}" wx:for="{{userInfo.organizations}}">
+      <view class='my-page-unions-detail'>{{item.organizationName}}</view>
+      <!-- <view class='my-page-unions-detail'>中国浙商会湖南分会</view> -->
     </view>
   </view>
   </view>
