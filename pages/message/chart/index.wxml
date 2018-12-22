@@ -21,7 +21,7 @@
                     <view class="hidden"></view>
                     <view class="text-box">
                         <view class="text">
-                            {{item.msg_body.text}}
+                            {{item.content}}
                         </view>
                     </view>
                     <view class="avatar">
@@ -35,9 +35,9 @@
         </view>
     </scroll-view>
     <view class="input-box {{ inputType == 'record' ? 'isRecord' : ''}}">
-        <view class="audio" bindtap="changeInputType">
+        <!-- <view class="audio" bindtap="changeInputType">
             <image class="" src="{{ inputType == 'record' ? '../../../image/message/board.png' : '../../../image/message/record.png' }}" mode="scaleToFill" lazy-load="false" binderror="" bindload=""></image>
-        </view>
+        </view> -->
         <view wx:if="{{ inputType == 'text' }}" class="input">
             <form bindsubmit="confirmSendText">
                 <textarea name="textarea" auto-height fixed maxlength="-1" focus="{{focus}}" cursor-spacing="30rpx" show-confirm-bar="{{showBar}}" confirm-type="发送" value="{{inputValue}}" bindfocus="textareaOnFocus" placeholder-style="color:#b5b5b5;" placeholder="回复" />

@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/my/index",
     "pages/my/balance/index",
     "pages/message/index",
@@ -7,7 +8,6 @@
     "pages/my/cash/index",
     "pages/my/balance-detail/index",
     "pages/my/balance-detail-two/index",
-    "pages/index/index",
     "pages/search/demand-detail/index",
     "pages/search/demand/index",
     "pages/search/demand-list/index",

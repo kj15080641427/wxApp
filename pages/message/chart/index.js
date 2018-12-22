@@ -18,8 +18,8 @@ Page({
         vaule: '',
         messageList: [],
         delayMessages: [],
-        lawyer_avatar: null,
-        my_avatar: wx.getStorageInfoSync('userInfo').iconImage
+        lawyer_avatar: null || '../../../image/message/default_user.png',
+        my_avatar: wx.getStorageInfoSync('userInfo').iconImage || '../../../image/message/default_user.png'
     },
     onLoad(option) {
         wx.setNavigationBarTitle({
@@ -31,8 +31,9 @@ Page({
         })
     },
     onShow(){
-        jM.resetUnreadCount({'username' : this.data.userName});        
         let that = this
+        jM.resetUnreadCount({'username' : this.data.userName});      
+        that.addSingleReceiptReport()  
         that.getHistoryMessage(that.data.userName)
         jM.onMsgReceive(function(lRes) {
             console.log(lRes)
@@ -49,6 +50,7 @@ Page({
                     'media_id': lRes.messages[0].content.msg_body.media_id
                 }).onSuccess(function (gRes) {
                     arr.push({
+                        msg_id: lRes.messages[0].content.msgid,
                         from_id: lRes.messages[0].content.from_id,
                         msg_type: lRes.messages[0].content.msg_type,
                         duration: lRes.messages[0].content.msg_body.duration,
@@ -65,6 +67,7 @@ Page({
                 });
             }else{
                 arr.push({
+                    msg_id: lRes.messages[0].content.msgid,
                     from_id: lRes.messages[0].content.from_id,
                     msg_type: lRes.messages[0].content.msg_type,
                     content: lRes.messages[0].content.msg_body.text
@@ -97,47 +100,103 @@ Page({
             success(res){
                 console.log(res.data.messages)
                 console.log(userName)
-                let arr = []
-                res.data.messages.forEach(item => {
-                    if(item.from_id == userName){
-                        if(item.msg_type == "voice"){
-                            jM.getResource({
-                                'media_id': item.msg_body.media_id
-                            }).onSuccess(function (gRes) {
-                                arr.push({
-                                    from_id: item.from_id,
-                                    msg_type: item.msg_type,
-                                    duration: item.msg_body.duration,
-                                    content: gRes.url
-                                })
-                                that.setData({
-                                    messageList: arr
-                                },function(){
-                                    console.log(that.data.messageList)
-                                    that.pageScroll(that)
-                                    // jM.resetConversationCount(userName)
-                                })
-                            }).onFail(function (data) {
-                                console.log('error:' + JSON.stringify(data));
-                            });
-                        }else{
-                            arr.push({
-                                from_id: item.from_id,
-                                msg_type: item.msg_type,
-                                content: item.msg_body.text
-                            })
-                            that.setData({
-                                messageList: arr
-                            },function(){
-                                console.log(that.data.messageList)
-                                that.pageScroll(that)
-                                // jM.resetConversationCount(userName)
-                            })
-                        }
-                    }
-                })
+                let dArr = []
+                //  存在异步操作，只能用递归的形式加载数据
+                that.buildListData(userName, 0, res.data.messages, res.data.messages.length, dArr)
             }
         })
+    },
+    getUnReadMsg(targetArr) {
+        let that = this
+        if(wx.getStorageSync('unReadMsgList') != ''){
+            let msgList = wx.getStorageSync('unReadMsgList').filter(item=>{return item.from_id == that.data.userName}) || []
+            let arr = targetArr.concat(msgList)
+            return this.uniq(arr)
+        } else {
+            return targetArr
+        }
+    },
+    //  数组去重
+    uniq(array){
+        var temp = [];
+        var index = [];
+        var l = array.length;
+        for(var i = 0; i < l; i++) {
+            for(var j = i + 1; j < l; j++){
+                if (array[i].msg_id === array[j].msg_id){
+                    i++;
+                    j = i;
+                }
+            }
+            temp.push(array[i]);
+            index.push(i);
+        }
+        return temp;
+    },
+    //  拼装列表数据
+    buildListData(userName,i,arr,len,targetArr) {
+        let that = this
+        if (arr[i].from_id == userName){
+            if(arr[i].msg_type == "voice"){
+                jM.getResource({
+                    'media_id': arr[i].msg_body.media_id
+                }).onSuccess(function (gRes) {
+                    targetArr.push({
+                        from_id: arr[i].from_id,
+                        msg_type: arr[i].msg_type,
+                        duration: arr[i].msg_body.duration,
+                        msg_id: arr[i].msgid,
+                        content: gRes.url
+                    })
+                    if( ++i < len ){
+                        that.buildListData(userName,i,arr,len,targetArr)
+                    } else{
+                        that.setData({
+                            messageList: that.getUnReadMsg(targetArr)
+                        },function(){
+                            console.log(that.data.messageList)
+                            that.pageScroll(that)
+                        })
+                    }
+                }).onFail(function (data) {
+                    console.log('error:' + JSON.stringify(data));
+                });
+            }else{
+                targetArr.push({
+                    from_id: arr[i].from_id,
+                    msg_type: arr[i].msg_type,
+                    msg_id: arr[i].msgid,
+                    content: arr[i].msg_body.text
+                })
+                if( ++i < len ){
+                    that.buildListData(userName,i,arr,len,targetArr)
+                } else {
+                    that.setData({
+                        messageList: that.getUnReadMsg(targetArr)
+                    },function(){
+                        console.log(that.data.messageList)
+                        that.pageScroll(that)
+                    })
+                }
+            }
+        } else {
+            targetArr.push({
+                from_id: arr[i].from_id,
+                msg_type: arr[i].msg_type,
+                msg_id: arr[i].msgid,
+                content: arr[i].msg_body.text
+            })
+            if( ++i < len ){
+                that.buildListData(userName,i,arr,len,targetArr)
+            } else {
+                that.setData({
+                    messageList: that.getUnReadMsg(targetArr)
+                },function(){
+                    console.log(that.data.messageList)
+                    that.pageScroll(that)
+                })
+            }
+        }
     },
     textareaOnFocus(e) {
         console.log(e.detail.height)
@@ -161,19 +220,12 @@ Page({
             console.log(data)
             console.log(msg)
             let arr = that.data.messageList
-            arr.push(msg.content)
-            // jM.addSingleReceiptReport({
-            //     'username' : lRes.messages[0].content.from_id,
-            //     'msg_ids' : [lRes.messages[0].msg_id]
-            // }).onSuccess(function(data,msg_ids){
-            //     jM.onSyncMsgReceipt()
-            //     // data.code 返回码
-            //     // data.appkey 目标 appkey
-            //     // data.username 目标 username
-            //     // msg_ids 消息数组
-            // }).onFail(function(){
-
-            // })
+            arr.push({
+                msg_id: msg.content.msgid,
+                from_id: msg.content.from_id,
+                msg_type: msg.content.msg_type,
+                content: msg.content.msg_body.text
+            })
             that.setData({
                 inputValue: '',
                 messageList: arr,
@@ -226,6 +278,24 @@ Page({
         }).onFail(function(data) {
             //同发送单聊文本
         });
+    },
+
+    // 消息已读回执
+    addSingleReceiptReport() {
+        let that = this
+        if( wx.getStorageSync('unReadMsgList') != ''){
+            let userUnReadList = wx.getStorageSync('unReadMsgList').filter(item=>{return item.from_id == that.data.userName}) || []
+            jM.addSingleReceiptReport({
+                'username': that.data.userName,
+                'msg_ids': userUnReadList.map(item => {return item.msg_id})
+            }).onSuccess(function (data, msg_ids) {
+                //console.log(data);
+                // console.log(msg_ids);
+            }).onFail(function (data, msg_ids) {
+                // console.log(data);
+                //console.log(msg_ids);
+            })
+        }
     },
 
     //  页面滚动
