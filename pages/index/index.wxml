@@ -5,7 +5,7 @@
     <image src='../../image/homeicon_3x/homepage_01_3x.png' style='width:40rpx;height:40rpx;margin-right:20rpx ' ></image>
     <input placeholder='搜索律师' confirm-type="search"  placeholder-style='color:#ffffff;' style='width:550rpx;height:60rpx;line-height:60rpx' confirm-type="search" bindinput='search' ></input>
   </view>
-    <image src='../../image/homeicon_3x/homepage_02_3x.png' class='index-news'></image>
+    <image src='../../image/homeicon_3x/homepage_02_3x.png' bindtap='goToMessage' class='index-news'></image>
     <!-- 消息小于两位数 -->
     <view class='index-tips' bindtap='clearTips' wx:if="{{tipsOne}}">
      <view class='index-tips-text'>{{tipsNumber}}</view>

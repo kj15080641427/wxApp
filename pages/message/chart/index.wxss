@@ -124,7 +124,8 @@
     /* display: flex; */
     width: 100%;
     min-height: 100rpx;
-    padding: 15rpx 125rpx;
+    /* padding: 15rpx 125rpx; */
+    padding: 15rpx 125rpx 15rpx 35rpx;
     border-top: 1rpx solid #e7e7e7; 
     background: #F4F4F4;
     position: fixed;

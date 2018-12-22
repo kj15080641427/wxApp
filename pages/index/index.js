@@ -236,6 +236,11 @@ Page({
       })
     }
   },
+  goToMessage(){
+    wx.navigateTo({
+      url: '../message/index',
+    })
+  },
   // 清除消息
   clearTips:function(){
     this.setData({

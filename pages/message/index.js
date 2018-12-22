@@ -7,8 +7,11 @@ var app = getApp()
 var jM = app.globalData.jMessage
 Page({
     data: {
-        messageCount: 10,
-        conversationList: []
+        content: 'demand',
+        messageCount: 0,
+        conversationList: [],
+        orderList: [],
+        pageNum: 1
     },
 
     onLoad(options) {
@@ -21,8 +24,12 @@ Page({
         // wxPay(1)
     },
     onShow() {
+        // this.getOrderList(1)
         if(!jM.isLogin()){
             let that = this
+            wx.showLoading({
+                title: '加载中',
+            })
             function getImConfigSuccess (res) {
                 //  初始化jmessage
                 wx.setStorageSync('appkey', res.data.appkey)
@@ -42,7 +49,9 @@ Page({
                         jM.getConversation().onSuccess(function(data) {
                             that.setData({
                                 conversationList: data.conversations
-                            })
+                            },function () { 
+                                wx.hideLoading()
+                             })
                             //data.code 返回码
                             //data.message 描述
                             //data.conversations[] 会话列表，属性如下示例
@@ -61,7 +70,7 @@ Page({
                             //data.code 返回码
                             //data.message 描述
                         });
-                        jM.onMsgReceive(function(data) {
+                        jM.onMsgReceive(function(msgRes) {
                             jM.getConversation().onSuccess(function(data) {
                                 console.log(data)
                                 that.setData({
@@ -85,6 +94,7 @@ Page({
                                 //data.code 返回码
                                 //data.message 描述
                             });
+                            that.setMessage(msgRes)
                         });
                         wx.hideLoading()
                     }).onFail(function(data){
@@ -103,14 +113,32 @@ Page({
             wxrequest.requestGet(api.getImConfig(),'',getImConfigSuccess,getImConfigFail)
         } else {
             let that = this
+            wx.showLoading({
+                title: '加载中',
+            })
             jM.getConversation().onSuccess(function(data) {
+                console.log(data)
                 that.setData({
                     conversationList: data.conversations
+                },function(){
+                    wx.hideLoading()
                 })
             }).onFail(function(data) {
                 console.log(data)
             });
-            jM.onMsgReceive(function(data) {
+            jM.onMsgReceiptChange(function(data) {
+                console.log(data)
+                that.setData({
+                    messageCount: data.receipt_msgs[0].unread_count
+                })
+                // data.type
+                // data.gid
+                // data.appkey
+                // data.username
+                // data.receipt_msgs[].msg_id
+                // data.receipt_msgs[].unread_count
+            });
+            jM.onMsgReceive(function(msgRes) {
                 jM.getConversation().onSuccess(function(data) {
                     console.log(data)
                     that.setData({
@@ -134,7 +162,38 @@ Page({
                     //data.code 返回码
                     //data.message 描述
                 });
+                console.log(msgRes)
+                that.setMessage(msgRes)
             });
+        }
+    },
+    setMessage(v){
+        let unReadMsgList = wx.getStorageSync('unReadMsgList') || []
+        console.log(unReadMsgList)
+        let msg = v.messages[0]
+        if(msg.content.msg_type == 'voice'){
+            jM.getResource({
+                'media_id': msg.msg_body.media_id
+            }).onSuccess(function (gRes) {
+                unReadMsgList.push({
+                    msg_id: msg.msg_id,
+                    from_id: msg.content.from_id,
+                    msg_type: msg.content.msg_type,
+                    duration: msg.content.msg_body.duration,
+                    content: gRes.url
+                })
+                wx.setStorageSync('unReadMsgList', unReadMsgList)
+            }).onFail(function (data) {
+                console.log('error:' + JSON.stringify(data));
+            });
+        } else if(msg.content.msg_type == 'text'){
+            unReadMsgList.push({
+                from_id: msg.content.from_id,
+                msg_type: msg.content.msg_type,
+                content: msg.content.msg_body.text,
+                msg_id: msg.msg_id
+            })
+            wx.setStorageSync('unReadMsgList', unReadMsgList)
         }
     },
     checkLogin() {
@@ -147,46 +206,9 @@ Page({
             })
         }
     },
-    /**
-     * 初始化极光iM
-     * @param {c} appkey 极光IM appkey
-     * @param {*} random 随机数
-     * @param {*} signature 签名
-     * @param {*} timestamp 时间戳
-     */
-    jMInit(appkey,random,signature,timestamp) {
-        let that = this
-        jM.jmLogin().then(res => {
-            jM.getJMConversation().then(cRes => {
-                console.log(cRes)
-                that.setData({
-                    conversationList: cRes.conversations
-                })
-            })
-            jM.listenMessage().then(lRes => {
-                console.log(lRes)
-                console.log(lRes.noCount)
-                jM.getJMConversation().then(cRes => {
-                    console.log(cRes)
-                    that.setData({
-                        conversationList: cRes.conversations
-                    })
-                })
-                // jM.updateConversation(lRes.d.messages[0].from_appkey,lRes.d.messages[0].from_username,{})
-                // let arr = that.data.conversationList
-                // let checkArr = arr.filter(item => {
-                //     return item.username == lRes.messages[0].from_username
-                // })
-                // if( checkArr.length == 0){
-                //     arr.push({
-                //         username:lRes.messages[0].from_username,
-                //         unread_msg_count:lRes.messages[0].unread_msg_count
-                //     })
-                // }
-                // jM.getJMUserInfo(lRes.messages[0].from_username)
-                
-            })
-            wx.hideLoading()
+    switchTab(e) {
+        this.setData({
+            content: e.currentTarget.dataset.content
         })
     },
     goChart(e) {
@@ -196,5 +218,25 @@ Page({
                 console.log(res)
             }            
         })
+    },
+    getOrderList(pageNum){
+        let that = this
+        wx.showLoading({
+            title: '加载中',
+        })
+        let data = { memberId: wx.getStorageSync('memberId'), pageNum: pageNum, pageSize: 10}
+        wxrequest.superRequest(api.getOrder(), data, 'POST').then(res => {
+            console.log(123)
+            wx.hideLoading()
+        }).catch(res => {
+            console.log(456)
+        })
+    },
+    //  上拉加载
+    loadData(){
+        this.setData({
+            pageNum: this.data.pageNum + 1
+        })
+        this.getOrderList(this.data.pageNum + 1)
     }
 })
