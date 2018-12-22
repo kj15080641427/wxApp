@@ -25,7 +25,7 @@
   <view class='info-page-center-line'></view>
     <view class='info-page-list'>
     <view class='info-page-label'>所在地区</view>
-    <view class="info-page-input" bindtap="showModal"><text bindtap='showid' wx:if="{{hasaddress}}" >{{userInfo.addressExtend.province}}-{{userInfo.addressExtend.city}}-{{userInfo.addressExtend.area}}</text><text>{{name}}</text></view>
+    <view class="info-page-input" bindtap="showModal"><text wx:if="{{hasaddress}}" >{{userInfo.addressExtend.province}}-{{userInfo.addressExtend.city}}-{{userInfo.addressExtend.area}}</text><text>{{name}}</text></view>
     <!-- <picker class="info-page-input" mode="multiSelector"value="{{indexarea}}"  range='{{regionJSON.region}}' range-key='name' bindchange='changearea'  >{{regionJSON}}</picker> -->
     <!-- <picker class="info-page-input" mode="region" bindchange='bindRegionChange' value='{{region}}'>{{region[0]}}-{{region[1]}}-{{region[2]}}</picker> -->
   </view>
@@ -35,7 +35,7 @@
     <view class='info-page-list'>
     <view class='info-page-label'>您的行业</view>
     <!-- <input class="info-page-input" value="{{editInsTypeName}}"bindinput='insTypeName'></input> -->
-     <picker class="info-page-input" style='white-space:nowrap;' value="{{index1}}" range="{{industry}}" range-key="industryName" bindchange='changeindustry' >{{industry[index1]['industryName']}}<text wx:if="{{selectIndestry}}">选择行业</text></picker>
+     <picker class="info-page-input" style='white-space:nowrap;' value="{{index1}}" range="{{industry}}" range-key="industryName" bindchange='changeindustry' >{{industry[index1]['industryName']|| industryName || '选择行业' }}</picker>
   </view>
 </view>
 <view class='info-page-center-line'></view>
@@ -64,7 +64,8 @@
 <view style='background-color:white;'>
     <view class='info-page-list'>
     <view class='info-page-label'>商会组织</view>
-    <input class="info-page-input" value="{{editOrganizationName}}" placeholder='输入您的商会'bindinput='organizations'></input>
+    <!-- <input class="info-page-input" value="{{editOrganizationName}}" placeholder='输入您的商会'bindinput='organizations'></input> -->
+    <picker class="info-page-input" style='white-space:nowrap;' value="{{index2}}" range="{{org}}" range-key="organizationName" bindchange='changeorg' >{{org[index2].organizationName || orgN || "选择商会"}}</picker>
   </view>
 </view>
 

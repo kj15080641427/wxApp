@@ -29,9 +29,12 @@ Page({
       that.setData({
         isFollow:true
       })
-      // console.log("关注成功",data)
     }
     var fail = function(e){
+      wx.showToast({
+        title: '关注失败',
+        icon:'none'
+      })
       console.log(e)
     }
     wxrequest.requestGetpar(url,data,'',success,fail)
@@ -69,7 +72,6 @@ Page({
     var that = this
     var listIndex = that.data.index //index
     var year = that.data.year //执业年限
-    // var lawyerCache = that.data.lawyerList
     // 律师名片
     var lawyerInfoUrl = api.getlawyerInfo() + that.data.lawyerList[listIndex].memberId
     var lawyerData = that.data.lawyerList[listIndex].memberId
@@ -78,18 +80,14 @@ Page({
       that.setData({
         lawyerInfo:data.data
       })
-      console.log("lawyerInfo",data)
+      that.ageAddress()
     }
-    console.log("教育信息", that.data.lawyerInfo)
     var fail = function (e) {
       wx.hideLoading()
-      // wx.navigateTo({
-      //   url: 'lawyer-detail/index',
-      // })
-      // wx.showToast({
-      //   title: '获取律师信息失败',
-      //   icon:'none'
-      // })
+      wx.showToast({
+        title: '获取律师信息失败',
+        icon:'none'
+      })
       console.log(e)
     }
     wxrequest.requestGetpar(lawyerInfoUrl, lawyerData, '', success, fail)
@@ -105,7 +103,6 @@ Page({
     var homeUrl = api.getLawHomePage() + that.data.lawyerList[that.data.index].memberId
     var homeData = that.data.lawyerList[that.data.index].memberId
     var homeSuccess = function (data) {
-      console.log("背景图/简介", data)
       that.setData({
         lawyerCard: data.data
       })
@@ -114,7 +111,6 @@ Page({
     var homeFail = function (e) {
       console.log(e)
     }
-    console.log(that.data.lawyerList)
     wxrequest.requestGetpar(homeUrl, homeData, '', homeSuccess, homeFail) //主页
   },
   //我的关注
@@ -123,13 +119,11 @@ Page({
     var url = api.getMyFollow()
     var data = { "pageNum": '1', "pageSize": '50' }
     var success = (data) => {
-      console.log('我的关注',data)
       // that.setData({
       //   myFollow: data.data.list
       // })
       data.data.list.map(function(item){
         if (that.data.lawyerCard.memberId == item.memberId){
-          console.log("已经关注了")
           that.setData({
             isFollow:true,
           })
@@ -152,38 +146,24 @@ Page({
   ageAddress:function(){
     var that = this
     var td = that.data.lawyerInfo
-    console.log("教育信息", that.data.lawyerInfo)
-    // //教育信息
-    // var educationList = []
-    // td.education[0] ? td.education.map(function (item) {
-    //   educationList.push({ "startDate": item.startDate.split(" ")[0].split('-', 2).join("/"), "endDate": item.endDate.split(" ")[0].split('-', 2).join("/"), "educationTitle": item.educationTitle, "educationName": item.educationName })
-    // }) : ''
-    // //工作经历
-    // var workList = []
-    // td.workExp[0] ? td.workExp.map(function (item) {
-    //   workList.push({ "startDate": item.startDate.split(" ")[0].split('-', 2).join("/"), "endDate": item.endDate.split(" ")[0].split('-', 2).join("/"), "institutionName": item.institutionName, "positionName": item.positionName })
-    // }) : ''
-    // var now = formatTime.formatTime(new Date()).split('/')[0]
-    // var age = that.data.lawyerList[that.data.index].birthday.split("-")[0]
-    // //语言能力
-    // var languageList = []
-    // var ohterSkillList = []
-    // td.skill[0] ? td.skill.map(function(item){
-    //   if(item.parentId == 3){
-    //     languageList.push({ "language": item.skillName })
-    //   }else if(item.parentId == 2){
-    //     ohterSkillList.push({"ohterSkill":item.skillName})
-    //   }
-    // }) :''
-    // that.setData({
-    //   education: educationList,
-    //   work: workList,
-    //   language:languageList,
-    //   ohterSkill:ohterSkillList,
-    //   address: that.data.lawyerList[that.data.index].region.split('-', 2),
-    //   age: now - age
-    // })
-    // console.log("age", that.data.age)
+    //教育信息
+    var educationList = []
+    td.education[0] ? td.education.map(function (item) {
+      educationList.push({ "startDate": item.startDate.split(" ")[0].split('-', 2).join("/"), "endDate": item.endDate.split(" ")[0].split('-', 2).join("/"), "educationTitle": item.educationTitle, "educationName": item.educationName })
+    }) : ''
+    //工作经历
+    var workList = []
+    td.workExp[0] ? td.workExp.map(function (item) {
+      workList.push({ "startDate": item.startDate.split(" ")[0].split('-', 2).join("/"), "endDate": item.endDate.split(" ")[0].split('-', 2).join("/"), "institutionName": item.institutionName, "positionName": item.positionName })
+    }) : ''
+    var now = formatTime.formatTime(new Date()).split('/')[0]
+    var age = that.data.lawyerList[that.data.index].birthday.split("-")[0]
+    that.setData({
+      education: educationList,
+      work: workList,
+      address: that.data.lawyerList[that.data.index].region.split('-', 2),
+      age: now - age
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -194,7 +174,9 @@ Page({
       index: options.listIndex, //在list中的index
       year:options.year,
     })
-    console.log("lawyerList", JSON.parse(options.lawyerList))
+    wx.showLoading({
+      title: '获取律师信息',
+    })
     this.search()
     this.followList()
     this.getlawyer()
@@ -210,8 +192,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.ageAddress()
-    var query = wx.createSelectorQuery();
     //选择id
   },
   /**

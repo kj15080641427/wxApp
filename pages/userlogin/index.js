@@ -14,12 +14,32 @@ Page({
         this.setData({
             inputPhone: e.detail.value
         })
+// <<<<<<< HEAD
+        setTimeout(function(){
+          wx.navigateBack({
+            delta:2
+          })
+        },1000)
+
+      var that = this
+      // 获取用户信息
+      var userInfoUrl = api.getUserInfo()
+      var message = ''
+      var idData = wx.getStorageSync("token")
+      var success = function (data) {
+        wx.setStorage({
+          key: 'memberId',
+          data: data.data.memberId,
+        })
+// =======}
         console.log('inputphone', this.data.inputPhone)
+    }
     },
     //获取验证码输入框值
     getCodeInput: function (e) {
         this.setData({
             inputCode: e.detail.value
+// >>>>>>> f968bbecbbec771d42961a12b89ebd46f0c61f9b
         })
     },
     // 获取验证码

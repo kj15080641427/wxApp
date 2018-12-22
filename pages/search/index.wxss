@@ -45,11 +45,13 @@
   padding-right: 35rpx;
 }
 .search-tab-text{
+  width: 120rpx;
   color: #b5b5b5;
   font-size: 24rpx;
   overflow:hidden;
   white-space:nowrap;
   text-overflow:ellipsis;
+  text-align: center;
 }
 /* pages/my/watchlist/index.wxss */
 .watchlist-page{

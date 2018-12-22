@@ -4,14 +4,8 @@
 <view style='background-color:white'>
   <view class='filter-page-line'></view>
 </view>
-
 <view class='filter-page-frame-view filter-background'>
-  <view class="{{select == 1 ? 'filter-page-frame-color' :'filter-page-frame'}}"><text class='filter-page-frame-text'bindtap="changeColor1" >{{search[0].items[0].text}}</text></view>
-  <view class="{{select == 2 ? 'filter-page-frame-color' :'filter-page-frame'}}"><text bindtap="changeColor2"class='filter-page-frame-text'>{{search[0].items[1].text}}</text></view>
-  <view class="{{select == 3 ? 'filter-page-frame-color' :'filter-page-frame'}}"><text bindtap="changeColor3" class='filter-page-frame-text'>{{search[0].items[2].text}}</text></view>
-  <view class="{{select == 4 ? 'filter-page-frame-color' :'filter-page-frame'}}"><text bindtap="changeColor4"class='filter-page-frame-text'>{{search[0].items[3].text}}</text></view>
-  <view class="{{select == 5 ? 'filter-page-frame-color' :'filter-page-frame'}}"><text bindtap="changeColor5"class='filter-page-frame-text'>{{search[0].items[4].text}}</text></view>
-  <view class="{{select == 6 ? 'filter-page-frame-color' :'filter-page-frame'}}"><text bindtap="changeColor6"class='filter-page-frame-text'>{{search[0].items[5].text}}</text></view>
+  <view class="{{index== practiceYearId -1? 'filter-page-gender-color' :'filter-page-gender'}}"wx:key="{{index}}" data-yearindex="{{index}}" bindtap='changeColor'  wx:for="{{search[0].items}}"><text class='filter-page-frame-text'>{{item.text}}</text></view>
 </view>
 
 <!-- 性别 -->
@@ -20,9 +14,7 @@
   <view class='filter-page-line'></view>
 </view>
 <view class='filter-page-gender-view filter-background'>
-  <view class="{{gender == '0' ? 'filter-page-gender-color' :'filter-page-gender'}}" bindtap='gender0'><text class='filter-page-frame-text'>{{search[1].items[0].text}}</text></view>
-  <view  class="{{gender == '1' ? 'filter-page-gender-color' :'filter-page-gender'}}" bindtap='gender1'><text class='filter-page-frame-text'>{{search[1].items[1].text}}</text></view>
-  <view  class="{{gender == '2' ? 'filter-page-gender-color' :'filter-page-gender'}}" bindtap='gender2'><text class='filter-page-frame-text'>{{search[1].items[2].text}}</text></view>
+  <view class="{{index== sex? 'filter-page-gender-color' :'filter-page-gender'}}"wx:key="{{index}}" data-genderindex="{{index}}" bindtap='gender'  wx:for="{{search[1].items}}"><text class='filter-page-frame-text'>{{item.text}}</text></view>
 </view>
 
 <!-- 行业 -->

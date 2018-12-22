@@ -152,7 +152,7 @@ function getDemandType(){
   return HOST_URL + Demand
 }
 //标签
-var Mark = '/admin/solutionmark/list'
+var Mark = '/client/requirement/tags/'
 function getMark(){
   return HOST_URL + Mark
 }
@@ -203,6 +203,11 @@ var BalanceDetail = '/client/amount/detail'
 function getBalanceDetail(){
   return HOST_URL + BalanceDetail
 }
+//组织列表
+var Organization = '/client/organization'
+function getOrganization (){
+  return HOST_URL + Organization
+}
 module.exports={
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,
@@ -236,4 +241,5 @@ module.exports={
   getOrder: getOrder,
   getBalance:getBalance,
   getBalanceDetail: getBalanceDetail,
+  getOrganization: getOrganization,
 }
