@@ -1,12 +1,10 @@
-// pages/index/webView/index.js
+// pages/index/adWebView/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    sUrl:'',
-    index:'',
     adUrl:''
   },
 
@@ -15,11 +13,9 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      sUrl:wx.getStorageSync("web"),
       adUrl:options.adUrl
-      // index: options.resolveindex
     })
-    console.log(console.log(options.adUrl))
+  // console.log(options.adUrl)
   },
 
   /**
@@ -33,7 +29,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.onLoad()
+
   },
 
   /**

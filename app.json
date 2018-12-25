@@ -1,6 +1,8 @@
 {
   "pages":[
+    "pages/search/index",
     "pages/index/index",
+    "pages/index/expert-service/index",
     "pages/my/index",
     "pages/userlogin/index",
     "pages/my/balance/index",
@@ -13,8 +15,6 @@
     "pages/search/demand/index",
     "pages/search/demand-list/index",
     "pages/search/demand-type/index",
-    "pages/search/index",
-    "pages/search/lawyer-list/index",
     "pages/search/lawyer-detail/index",
     "pages/search/filter/index",
     "pages/my/edit-info/index",
@@ -30,7 +30,8 @@
     "pages/my/guide/index",
     "pages/my/about/index",
     "pages/my/order-detail/index",
-    "pages/index/webView/index"
+    "pages/index/webView/index",
+    "pages/index/adWebView/index"
   ],
   "window":{
     "navigationBarBackgroundColor": "#1ec88c",
@@ -43,20 +44,20 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "selectedIconPath":"image/homeicon_max/homepage_15_max.png",
-        "iconPath":"image/homeicon_max/homepage_16_max.png"
+        "selectedIconPath":"image/homeicon_3x/homepage_15_max.png",
+        "iconPath":"image/homeicon_3x/homepage_16_max.png"
       },
       {
         "pagePath": "pages/search/index",
         "text": "找律师",
-        "selectedIconPath":"image/homeicon_max/homepage_17_max.png",
-        "iconPath":"image/homeicon_max/homepage_18_max.png"
+        "selectedIconPath":"image/homeicon_3x/homepage_17_max.png",
+        "iconPath":"image/homeicon_3x/homepage_18_max.png"
       },
       {
         "pagePath": "pages/my/index",
         "text": "我的",
-        "selectedIconPath":"image/homeicon_max/homepage_19_max.png",
-        "iconPath":"image/homeicon_max/homepage_20_max.png"
+        "selectedIconPath":"image/homeicon_3x/homepage_19_max.png",
+        "iconPath":"image/homeicon_3x/homepage_20_max.png"
       }
     ],
     "color": "#b5b5b6",

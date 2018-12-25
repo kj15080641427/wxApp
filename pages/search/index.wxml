@@ -1,14 +1,14 @@
-<!--pages/search/index.wxml-->
 <view style='position:fixed; top:0;width: 750rpx;z-index:999'>
 <view class='search-input-height'>
   <view class='index-search '>
     <image src='../../image/homeicon_3x/homepage_01_3x.png' style='width:40rpx;height:40rpx;margin-right:20rpx ' ></image>
-    <input placeholder='搜索律师' placeholder-style='color:#ffffff;' confirm-type="search" bindconfirm="confirm" bindinput='searchInput' style='width:100%;'></input>
+    <input placeholder='搜索律师' placeholder-style='color:#ffffff;' confirm-type="search" bindconfirm="confirm" bindinput='searchInput' style='width:100%;color:white'></input>
   </view>
 </view>
 
-<view class='search-tab-list'>
+<view wx:if="{{hasList}}">
 
+<view class='search-tab-list'>
   <view  class='search-tab-icon'bindtap='sort'>
     <view class='search-tab-text' style='color:#1ec88c'>{{sort[sortIndex]}}</view>
     <image src='../../image/search_icon@3x/Personalhomepage-22@3x.png' class='search-page-icon'></image>
@@ -28,8 +28,6 @@
 </view>
 </view>
 
-
-<view style='margin-top:180rpx;'></view>
 <!-- <view style='margin-top:200rpx;'></view> -->
 <!-- 排序 -->
     <view class='search-select-flex' style='z-index:998;position:fixed;top:180rpx;display:flex;' wx:if="{{showSort}}">
@@ -87,8 +85,11 @@
     </scroll-view>
 
 </view>
-<!-- <view style="z-index:55">123123</view> -->
-<view style='height:750rpx;'>
+</view>
+
+
+<view style='height:750rpx;' wx:if="{{hasList}}">
+  <view style='margin-top:180rpx;'></view>
 <view class="" >
   <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}"  data-index="{{index}}" catchtap='getIndex'>
     <view class='watchlist-page'>
@@ -127,3 +128,12 @@
 <!-- <view class='search-more'>
 <view>正在加载</view>
 </view> -->
+<view class='no-message' wx:if="{{!hasList}}">
+  <view class='no-messge-image-view'>
+    <image src='../../image/search_icon@3x/Default page_04_max.png' class='no-message-imag'></image>
+  </view>
+  <view class='no-message-tips-view'>
+      <view class='no-message-tips'>没有找到您要搜索的结果</view>
+  </view>
+  <button class='no-message-button' bindtap='again'>重新搜索</button>
+</view>

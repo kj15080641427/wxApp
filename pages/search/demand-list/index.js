@@ -28,8 +28,35 @@ Page({
             "lexMungId": '',
             "orgId": '',
             "businessTypeId": ''
-        }
+        },
+      sort: ["综合排序", "最新入驻", "活跃度最高"],
+      sortIndex: 0,//排序index
     },
+      //排序Index
+  getSortIndex: function (e) {
+    this.setData({
+      sortIndex: e.currentTarget.dataset.sortindex,
+      showSort: !this.data.showSort,
+      ['noFilter.sort']: e.currentTarget.dataset.sortindex
+    })
+    this.searchLawyer()
+  },
+    //排序
+  sort: function () {
+    this.setData({
+      showSort: !this.data.showSort,
+      showRegion: false,
+      showExpert: false,
+    })
+  },
+  //关键字搜索
+  searchInput: function (e) {
+    this.setData({
+      ['noFilter.lawyerName']: e.detail.value,
+      getPage: 10,
+      ishidden: true
+    })
+  },
     //index
     getIndex: function (e) {
         this.setData({
@@ -38,6 +65,45 @@ Page({
         })
         console.log(this.data.parameter)
     },
+    //筛选
+  gotoFilter: function () {
+    wx.navigateTo({
+      url: '../../search/filter/index?noFilter=' + JSON.stringify(this.data.noFilter),
+    })
+  },
+    //
+  confirm(e) {
+    var that = this
+    var url = api.getSearchLawyer() + "1/" + that.data.getPage
+    var datan = that.data.noFilter
+    that.setData({
+    })
+    var success = function (data) {
+      wx.hideLoading()
+      if (!data.data.list[0]) {
+        that.setData({
+          hasList: false
+        })
+      }
+      that.setData({
+        lawyerList: data.data.list,
+        ishidden: true
+      })
+      // that.getAge()
+    }
+    var fail = function (e) {
+      wx.hideLoading()
+      wx.showToast({
+        title: '获取数据失败',
+        icon: 'none'
+      })
+      console.log(e)
+    }
+    wxrequest.request(url, datan, success, fail)
+    // wx.showLoading({
+    //   title: '正在加载',
+    // })
+  },
     //搜索律师
     searchLawyer: function () {
         var that = this

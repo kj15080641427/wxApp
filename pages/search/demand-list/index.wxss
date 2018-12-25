@@ -20,6 +20,16 @@
   font-size: 28rpx;
   border-radius: 10rpx;
 }
+.serach-select-sort{
+  position: relative;
+  padding-left: 35rpx;
+  height: 100rpx;
+  width: 750rpx;
+  line-height: 100rpx;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+}
 .search-tab{
   display: flex;
 }
@@ -144,9 +154,6 @@
   width:700rpx;
   margin-left:25rpx
 }
-
-
-
 .demand-button{
   width: 120rpx;
   height: 40rpx;

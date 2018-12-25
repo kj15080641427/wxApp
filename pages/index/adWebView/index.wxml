@@ -1,0 +1,2 @@
+<!--pages/index/adWebView/index.wxml-->
+<web-view src="{{adUrl}}"></web-view>

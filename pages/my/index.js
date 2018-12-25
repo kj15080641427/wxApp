@@ -153,6 +153,7 @@ Page({
    */
   // 'apabfdc34cc00042c2991bd59b9e8a1ae8ap'
   onLoad: function (options) {
+    wx.removeStorageSync("picIndexList")
     // if(wx.getStorageInfoSync().keys.length<=1){
     //   wx.clearStorage()
     // }

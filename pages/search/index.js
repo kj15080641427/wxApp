@@ -61,7 +61,17 @@ Page({
     expert:'擅长领域',//选择擅长领域
     selectedCity:'选择地区',//选择地区
     filterColor:false,
-    noFilter: {"pageNum": '1',"pageSize": '10',}
+    noFilter: {"pageNum": '1',"pageSize": '10'},
+    hasList:true
+  },
+  //重新搜索
+  again:function(){
+    var that = this
+    that.setData({
+      hasList:true,
+      noFilter: { "pageNum": '1', "pageSize": '10' }
+    })
+    wx.removeStorageSync("picIndexList")
   },
   //排序
   sort:function(){
@@ -126,6 +136,7 @@ Page({
       getPage: 10,
       ishidden: true
     })
+    console.log("市ID",this.data.region[this.data.regionindex].child[e.currentTarget.dataset.cityindex].regionId)
     this.pc()
   },
   //选择擅长领域1级
@@ -191,7 +202,11 @@ Page({
     })
     var success = function (data) {
       wx.hideLoading()
-
+      if(!data.data.list[0]){
+        that.setData({
+          hasList:false
+        })
+      }
       that.setData({
         lawyerList: data.data.list,
         ishidden:true
@@ -220,9 +235,14 @@ Page({
     var datan =  that.data.noFilter
     var success = function (data) {
       wx.hideLoading()
+      if (!data.data.list[0]) {
+        that.setData({
+          hasList: false
+        })
+      }
       that.setData({
         lawyerList: data.data.list,
-        // ishidden: true
+        ishidden: true
       })
       that.getAge()
     }
@@ -263,11 +283,11 @@ Page({
     // wx.showLoading({
     //   title: '加载中',
     // })
-    var a = region.citysData.unshift({ "regionId": '', name: "全国", child: [{"regionId":'',name:"全国",child:[{"regionId":'',"name":'全国'}]}]})
+    region.citysData.unshift({ "regionId": '', name: "全国", child: [{"regionId":'',name:"全国",child:[{"regionId":'',"name":'全国'}]}]})
     this.setData({
       region: region.citysData,
     })
-    console.log("地区",this.data.region)
+    // console.log("地区",this.data.region)
     this.pc()
     this.getExpert()
     this.setData({
@@ -304,7 +324,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
 
   /**

@@ -46,7 +46,7 @@
 }
 .login-center-input{
   height: 100rpx;
-  width: 500rpx;
+  width: 400rpx;
   margin-left: 20rpx;
   font-size: 28rpx;
 }

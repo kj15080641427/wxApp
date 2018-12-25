@@ -32,7 +32,7 @@
   width: 500rpx;
   height: 80rpx;
   line-height: 80rpx;
-  margin-left: 50rpx;
+  padding-left: 50rpx;
   font-size: 28rpx;
   color: #323232;
 }

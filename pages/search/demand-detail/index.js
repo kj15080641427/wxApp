@@ -25,7 +25,7 @@ Page({
       "requirementTypeName": '',
       "requirementBusiId": "",
       "requirementBusiName": '',
-      "lawyerRegionId": '440100',
+      "lawyerRegionId": '430100',
       "skillId": '',
       "skillName": '',
       "maxCost": '',

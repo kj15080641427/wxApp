@@ -1,3 +1,5 @@
+<!--pages/index/expert-service/index.wxml-->
+<!-- <text>pages/index/expert-service/index.wxml</text> -->
 <view style='position:fixed; top:0;width: 750rpx;z-index:999'>
 <view class='search-input-height'>
   <view class='index-search '>
@@ -22,12 +24,11 @@
       <view >
       <!-- bindtap='selectRegion' -->
       <view wx:key="{{index}}" wx:for="{{sort}}" class='serach-select-sort' data-sortIndex="{{index}}" catchtap='getSortIndex' style="{{index==sortIndex  ? 'color:#1ec88c;background-color:white':'background-color:#f4f4f4'}}" ><view  class='right-width'>{{item}}</view>
-       <image src='../../../image/search_icon@3x/selectcity.png' wx:if="{{index==sortIndex }}" class='select-image-sort'></image>
+       <image src='../../../image/search_icon@3x/Personalhomepage-22@3x.png' wx:if="{{index==sortIndex }}" class='select-image-sort'></image>
        <view class='search-select-line'></view>
       </view>
       </view>
     </view>
-
 
 <view style='margin-top:180rpx;'></view>
 
@@ -45,7 +46,7 @@
               <view>{{lawyerList[index].memberName}}</view>
               <label wx:if="{{lawyerList[index].memberPositionName}}" class='watchlist-page-firm'>({{lawyerList[index].memberPositionName}})</label>
             </view>
-            <view class='demand-button' data-index="{{index}}" catchtap='sendDemand'>发送需求</view>
+            <view class='demand-button' data-index="{{index}}" catchtap='sendDemand'>咨询</view>
           </view>
           <view class='watchlist-page-address'>{{address[index]}} <text wx:if="{{lawyerList[index].region&&lawyerList[index].institutionName}}">|</text> {{lawyerList[index].institutionName}}</view>
           <view class='watchlist-page-adept'>{{lawyerList[index].description}} </view>

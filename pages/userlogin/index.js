@@ -103,8 +103,8 @@ Page({
                 })
             }, 1000)
             wx.setStorageSync("token", data.data.token)
-            console.log("注册成功", data)
-            console.log("token111", wx.getStorageSync("token"))
+            // console.log("注册成功", data)
+            // console.log("token111", wx.getStorageSync("token"))
 
             var that = this
             // 获取用户memberID信息
@@ -164,7 +164,7 @@ Page({
             countdown:60
           })
         }
-        console.log(that.data.countdown)
+        // console.log(that.data.countdown)
       },1000)
     },
     /**

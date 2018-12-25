@@ -208,6 +208,16 @@ var Organization = '/client/organization'
 function getOrganization (){
   return HOST_URL + Organization
 }
+//广告
+var Adbanner = '/client/banner'
+function getAdbanner(){
+  return HOST_URL + Adbanner
+}
+//案例
+var Case = '/lawyer/case'
+function getCase(){
+  return HOST_URL + Case
+}
 module.exports={
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,
@@ -242,4 +252,6 @@ module.exports={
   getBalance:getBalance,
   getBalanceDetail: getBalanceDetail,
   getOrganization: getOrganization,
+  getAdbanner: getAdbanner,
+  getCase: getCase,
 }

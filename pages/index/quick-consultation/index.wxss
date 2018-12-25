@@ -64,10 +64,10 @@
 }
 .quick-phone{
   line-height: 100rpx;
-  height: 10rpx;
-  width: 350rpx;
+  height: 100rpx;
+  width: 400rpx;
   font-size: 28rpx;
-  color: #323232
+  color: #323232;
 }
 .quick-pay-type{
   margin-top: 35rpx;
@@ -107,12 +107,17 @@
   color: #1ec88c
 }
 .quick-page-lower{
+  position: fixed;
+  bottom:0;
+  width: 750rpx;
   display: flex;
   align-items: center;
   height: 120rpx;
   background-color: white;
 }
 .quick-page-line-lower{
+  position: fixed;
+  bottom: 120rpx;
   background-color: #b5b5b5;
   height: 1rpx;
   width: 750rpx;
