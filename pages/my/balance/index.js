@@ -42,8 +42,12 @@ Page({
         wxrequest.requestGetpar(url, data, '', succeee, fail)
     },
     charge(e){
-        //  调取微信支付
-        wxPay(1).then(res => {console.log(res)})
+      this.setData({
+        money:e.currentTarget.dataset.amt/10
+      })
+      //   //  调取微信支付
+      wxPay(1, 4).then(res => { this.getBalance()})
+      console.log("充值", e.currentTarget.dataset.amt)
     },
     /**
      * 生命周期函数--监听页面加载

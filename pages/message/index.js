@@ -49,9 +49,11 @@ Page({
                         jM.getConversation().onSuccess(function(data) {
                             that.setData({
                                 conversationList: data.conversations
-                            },function () { 
+                            },function () {
                                 wx.hideLoading()
                              })
+                          //缓存conversationList
+                          // wx.setStorageSybc("conversationList",data.conversations)
                             //data.code 返回码
                             //data.message 描述
                             //data.conversations[] 会话列表，属性如下示例

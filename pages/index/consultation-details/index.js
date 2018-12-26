@@ -1,5 +1,6 @@
+var api = require('../../../utils/api.js')
+var wxrequest = require('../../../utils/request.js')
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -21,6 +22,18 @@ Page({
       }
     })
   },
+  //文字咨询详情
+  getReply:function(){
+    var url = api.getFreeText()
+    var data = {}
+    var success = data =>{
+      console.log(data)
+    }
+    var fail = e =>{
+      console.log(e)
+    }
+    wxrequest.request(url,data,success,fail)
+  },
   // 回复
   gotoReply:function(){
     wx.navigateTo({
@@ -31,7 +44,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.getReply()
   },
 
   /**

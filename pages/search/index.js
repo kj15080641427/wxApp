@@ -39,7 +39,7 @@ Page({
    */
   data: {
     lawyerList: '', //律师信息
-    year: '', //执业年限
+    year1: '', //执业年限
     getPage: 10, //页数
     // dataJSON: '', //
     address: '', //地址
@@ -62,7 +62,8 @@ Page({
     selectedCity:'选择地区',//选择地区
     filterColor:false,
     noFilter: { "pageNum": '1', "pageSize": '10'},
-    hasList:true
+    hasList:true,
+    lawyerName:''
   },
   //重新搜索
   again:function(){
@@ -71,7 +72,7 @@ Page({
       hasList:true,
       noFilter: { "pageNum": '1', "pageSize": '10' }
     })
-    wx.removeStorageSync("picIndexList")
+    // wx.removeStorageSync("picIndexList")
   },
   //需求test
   gotoDemand: function () {
@@ -107,7 +108,7 @@ Page({
   // 关键字搜索
   searchInput: function (e) {
     this.setData({
-      ['noFilter.lawyerName']: e.detail.value,
+      lawyerName: e.detail.value,
       getPage: 10,
       ishidden: true
     })
@@ -318,7 +319,7 @@ Page({
       addressList.push(item.region.split('-', 2))
     }) : ''
     this.setData({
-      year: yearList,
+      year1: yearList,
       address: addressList,
     })
   },

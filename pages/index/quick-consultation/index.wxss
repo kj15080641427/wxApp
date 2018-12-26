@@ -65,7 +65,7 @@
 .quick-phone{
   line-height: 100rpx;
   height: 100rpx;
-  width: 400rpx;
+  width: 360rpx;
   font-size: 28rpx;
   color: #323232;
 }

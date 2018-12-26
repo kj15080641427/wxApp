@@ -37,7 +37,8 @@
       <view class='watchlist-page-flex'>
         <view class='watchlist-page-left' style="z-index:55;">
           <image class='watchlist-page-avatar' src="{{lawyerList[index].iconImage ? lawyerList[index].iconImage :'../../../image/my_icon@3x/mine_icon_02_3x.png'}}"  style="z-index:55;"></image>
-          <view class='watchlist-page-practice' style="z-index:55;">执业{{year[index]}}年</view>
+          <view class='watchlist-page-practice' style="z-index:55;">执业{{year[index]>=1 ?year[index]:1 }}年</view>
+
 
         </view>
         <view class='watchlist-page-right'>
@@ -46,7 +47,7 @@
               <view>{{lawyerList[index].memberName}}</view>
               <label wx:if="{{lawyerList[index].memberPositionName}}" class='watchlist-page-firm'>({{lawyerList[index].memberPositionName}})</label>
             </view>
-            <view class='demand-button' data-index="{{index}}" catchtap='sendDemand'>咨询</view>
+            <view class='demand-button' data-index="{{index}}" catchtap='getExpert'>咨询</view>
           </view>
           <view class='watchlist-page-address'>{{address[index]}} <text wx:if="{{lawyerList[index].region&&lawyerList[index].institutionName}}">|</text> {{lawyerList[index].institutionName}}</view>
           <view class='watchlist-page-adept'>{{lawyerList[index].description}} </view>

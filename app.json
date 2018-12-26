@@ -1,7 +1,8 @@
 {
   "pages":[
-    "pages/search/index",
     "pages/index/index",
+    "pages/index/expert-filter/index",
+    "pages/search/index",
     "pages/index/expert-service/index",
     "pages/search/case-web/index",
     "pages/my/index",

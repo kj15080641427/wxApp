@@ -13,7 +13,8 @@
         <view wx:else="item['orderType'] =='电话咨询'">
           <label wx:if="{{item['orderType'] == '发布需求'}}">咨询律师:{{item.lmemberName}} </label>
           <label wx:if="{{item['orderType'] =='专家咨询'}}">咨询律师:{{item.lmemberName}}</label>
-          <label wx:else>咨询类型:{{item.typeName}}</label>
+          <!-- <label wx:if="{{item.orderType=='免费文字咨询'}}">咨询类型:{{item.typeName}}</label>
+          <label wx:if="{{item.orderType=='快速电话需求'}}">咨询类型:{{item.typeName}}</label> -->
         </view>
       </view>
     </view>

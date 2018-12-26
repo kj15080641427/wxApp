@@ -89,7 +89,7 @@ Page({
     var that = this
     var url = api.getArticleTypeUrl()
     var messagetype = ""
-    var data = { "pageNum": 1, "pageSize": 100 }
+    var data = { "pageNum": 1, "pageSize": 100,"deviceInfoId":5 }
     var success = function (data) {
       console.log("解决方案分类list", data.data.list)
       that.setData({
@@ -113,7 +113,7 @@ Page({
       wx.hideLoading()
       console.log("解决方案list", data)
       that.setData({
-        article: data.data.list
+        article: data.data.list ? data.data.list :data.data
       })
     }
     var failList = function (e) {
@@ -164,10 +164,10 @@ Page({
     var message = ""
     var listData = { "typeId": that.data.popular[e.detail.current].id, "pageNum": 1, "pageSize": 10 }
     var successList = function (data) {
-      console.log("list", data.data.list.length)
+      // console.log("list", data.data.list.length)
       that.setData({
-        article: data.data.list,
-        listHeight:data.data.list.length*220+200+'rpx'
+        article: data.data.list ? data.data.list:data.data,
+        // listHeight: data.data.list.length ? data.data.list.length*220+200+'rpx' :''
       })
     }
     var failList = function (e) {

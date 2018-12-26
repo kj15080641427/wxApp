@@ -1,13 +1,15 @@
 // pages/index/quick-consultation/index.js
 var wxrequest = require('../../../utils/request.js')
 var api = require('../../../utils/api.js')
+import wxPay from '../../../utils/wxPay.js'
+var pay = require('../../../utils/wxPay.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    phoneInput:'',
+    // phoneInput:'',
     typeName:['婚姻家庭'],
     selectType:true,
     // payList: [
@@ -45,42 +47,63 @@ Page({
     this.setData({
       index:e.detail.value,
       selectType:false,
-      money: Number(e.detail.value)+100
+      money: Number(e.detail.value)+1
     })
   },
   phoneInput:function(e){
     this.setData({
-      phoneInput: e.detail.value 
+      phone: e.detail.value 
     })
     console.log(e.detail.value)
   },
   // 跳转
   gotofinish: function () {
-    if(this.data.phoneInput){
-      console.log("hasinput", this.data.phoneInput)
-    }else{
-      console.log("noinput")
-    }
     if (!this.data.index) {
       wx.showToast({
         title: '请选择问题类型',
         icon: 'none'
       })
-    } else if (this.data.phoneInput){
-     if (!(/^1[345678]\d{9}$/.test(this.data.phoneInput))) {
+    } else {
+    if (!(/^1[345678]\d{9}$/.test(this.data.phone))) {
       wx.showToast({
         title: '请输入正确的手机号码',
         icon: 'none'
       })
-    }
-    }else {
-      if (!(/^1[345678]\d{9}$/.test(wx.getStorageSync("mobile")))) {
-        wx.showToast({
-          title: '请输入正确的手机号码',
-          icon: 'none'
+    }else{
+      var t = { typeQuick: this.data.popular[this.data.index].id, money: this.data.money, type: 1, product: 3 }
+      if(this.data.checked1){
+        var that = this
+        var payMoney = that.data.money
+        console.log("money", that.data.money)
+        wxPay(t).then(res => {
+          console.log("微信支付", res.data.data.orderno)
+          that.getQuick(res.data.data.orderno)
         })
+      }else{
+        var that = this
+        var s = { typeQuick: this.data.popular[this.data.index].id, money: this.data.money, type: 3, product: 3 ,phone:this.data.phone}
+        wxPay(s).then(res => {
+          // this.getQuick.then(res.data.data.orderno)
+          console.log("余额支付", res.data.data.orderno)
+        },error => {console.log(error)})
+      }
     }
   }
+  },
+  // 快速咨询
+  getQuick: function (orderNo){
+    var url = api.getQuick()
+    var data = { "payOrderNo": orderNo, "payType": this.data.checked1 ?1:3, "payAmount": this.data.money, "typeId": this.data.popular[this.data.index].id}
+    var success = data => {
+      console.log("支付成功",data)
+      wx.navigateTo({
+        url: '../quick-consultation-finish/index?orderNo=' + data.data.orderNo + '&timeStamp=' + data.data.timeStamp + '&type=' + this.data.popular[this.data.index].typeName + '&phone=' + this.data.phone +'&money=' + this.data.money
+      })
+    }
+    var fail = e => {
+      console.log(e)
+    }
+    wxrequest.request(url, data, success,fail)
   },
   //查询余额
   getBalance:function(){
@@ -98,28 +121,45 @@ Page({
     wxrequest.requestGetpar(url,data,'',success,fail)
   },
   //解决方案类型
-  getArticleType: function () {
-    var that = this
-    var url = api.getArticleTypeUrl()
-    var messagetype = ""
-    var data = { "pageNum": 1, "pageSize": 100 }
-    var success = function (data) {
-      console.log("解决方案分类list", data.data.list)
-      that.setData({
-        popular: data.data.list.reverse(),
+  // getArticleType: function () {
+  //   var that = this
+  //   var url = api.getArticleTypeUrl()
+  //   var messagetype = ""
+  //   var data = { "pageNum": 1, "pageSize": 100 }
+  //   var success = function (data) {
+  //     console.log("解决方案分类list", data.data.list)
+  //     that.setData({
+  //       popular: data.data.list.reverse(),
+  //     })
+  //     // that.getArticleList()
+  //     // initIndex: data.data.list[0].id
+  //   }
+  //   var fail = function (e) {
+  //     console.log("解决方案错误", e)
+  //   }
+  //   wxrequest.requestPost(url, data, messagetype, success, fail)
+  // },
+  //快速咨询
+  getQuType:function(){
+    var url = api.getType()
+    var data = {'quick':1}
+    var success = data =>{
+      console.log("快速咨询",data)
+      this.setData({
+        popular: data.data,
       })
-      // that.getArticleList()
-      // initIndex: data.data.list[0].id
     }
-    var fail = function (e) {
-      console.log("解决方案错误", e)
+    var fail = data =>{
+      console.log("快速咨询",e)
     }
-    wxrequest.requestPost(url, data, messagetype, success, fail)
+    wxrequest.request(url,data,success,fail)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getQuType()
+    // this.getQuick()
     this.getBalance()
     var that = this
     that.setData({
@@ -138,7 +178,7 @@ Page({
     // }
     // wxrequest.requestGet(typeUrl, message, successType, failType)
     // console.log('qqqq',this.data.typeName)
-    this.getArticleType()
+    // this.getArticleType()
   },
 
   /**

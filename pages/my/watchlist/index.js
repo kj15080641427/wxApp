@@ -48,6 +48,12 @@ Page({
       // region: region.citysData
     })
   },
+  //律师主页
+  getIndex:function(e){
+    wx.navigateTo({
+      url: '../../search/lawyer-detail/index',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
