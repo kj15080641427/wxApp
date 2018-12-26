@@ -49,11 +49,13 @@
   align-items: center;
   justify-content: center;
   border: 2rpx solid #1ec88c;
-  width: 120rpx;
+  /* width: 120rpx; */
   height: 40rpx;
-  border-radius: 20rpx;
+  border-radius: 30rpx;
   font-size: 24rpx;
   color: #1ec88c;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
 }
 .details-page-title{
   font-size: 32rpx;

@@ -94,8 +94,13 @@
   display: flex;
   justify-content: center;
   color: white;
-  font-size: 36rpx;
+  font-size: 30rpx;
   margin-top: 10rpx;
+  /* margin-left: 10rpx;
+  margin-right: 10rpx; */
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
   /* margin-bottom: 25rpx; */
 }
 .demand-page-tips{

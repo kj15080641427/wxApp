@@ -4,17 +4,17 @@
     <view class='reply-page-flex' style='background-color:#f2f2f2;height:80rpx'>
     <view class='reply-page-top'>
       <view class='reply-page-lawyer-icon'></view>
-      <view class='reply-page-lawyer-nikename'>罗雅琴</view>
-      <view class='reply-page-lawyer-lawfirm'>律师事务所</view>
+      <view class='reply-page-lawyer-nikename'>{{freeTetxList.lawyerName}}</view>
+      <view class='reply-page-lawyer-lawfirm'>{{freeTetxList.lawyerFirm}}</view>
     </view>
     <image src='../../image/homeicon_3x/homepage_10_3x.png' style='width:20rpx;height:20rpx;margin-right:15rpx'></image>
   </view>
-    <view class='reply-page-answer'>{{answer}}</view>
+    <view class='reply-page-answer'>{{freeTetxList.content}}</view>
 
   <view class='reply-page-reply'>
     <view class='reply-page-reply-left'>
-      <view>5天前</view>
-      <view class='reply-page-reply-margin'>13:14</view>
+      <view>{{lawago}}{{lawagoText}}前</view>
+      <view class='reply-page-reply-margin'>{{lawtList}}</view>
       <view class='reply-page-top reply-page-reply-margin'>
         <!-- <view class='reply-page-reply-dot'></view> -->
       </view>
@@ -48,4 +48,4 @@
 
  </view>
  <view class='reply-lower-line'></view>
- <input class='reply-lower-input' placeholder='回复' placeholder-style="margin-left:40rpx"></input>
+ <input class='reply-lower-input' placeholder='回复' placeholder-style="margin-left:40rpx"bindinput="userreply" confirm-type="search" bindconfirm="confirm"></input>

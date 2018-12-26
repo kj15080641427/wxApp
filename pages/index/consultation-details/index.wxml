@@ -2,77 +2,56 @@
 
   <view class='details-page-flex details-page-flex-user'>
     <view class='details-page-top'>
-      <view class='details-page-icon'></view>
-      <view class='details-page-nikename'>北燕南飞</view>
+      <image class='details-page-icon' src="{{userInfo.iconImage}}"></image>
+      <view class='details-page-nikename'>{{userInfo.memberName}}</view>
       <view class='details-page-line'></view>
-      <view class='details-page-nikename'>湖南常德</view>
+      <view class='details-page-nikename'>{{userInfo.addressExtend.province}}{{userInfo.addressExtend.city}}</view>
     </view>
-    <view class='details-page-type'>婚姻家事</view>
+    <view class='details-page-type'>{{orderDetail.orderType}}</view>
   </view>
 
   <view class="details-page-title">
-    消息标题好好哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+   {{orderDetail.content}}
   </view>
 
   <view class='details-page-reply'>
     <view class='details-page-reply-left'>
-      <view>5天前</view>
-      <view class='details-page-reply-margin'>13:14</view>
+      <view>{{ago}}{{agoText}}前</view>
+      <view class='details-page-reply-margin'>{{time}}</view>
       <view class='details-page-top details-page-reply-margin'>
         <view class='details-page-reply-dot'></view>
       </view>
       <view class='details-page-reply-margin' bindtap='deleteInfo'>删除</view>
     </view>
-    <view><label style='color:#1ec88c'>5</label>条回复</view>
+    <view><label style='color:#1ec88c'></label>条回复</view>
   </view>
 </view>
 
+<view wx:key="{{index}}" wx:for="{{freeTextList}}">
 <view class='details-page-line-center'></view>
 <view class='details-page'>
   <view class='details-page-flex details-page-lawyer'>
     <view class='details-page-top'>
-      <view class='details-page-lawyer-icon'></view>
-      <view class='details-page-lawyer-nikename'>罗雅琴</view>
-      <view class='details-page-lawyer-lawfirm'>律师事务所</view>
+      <image class='details-page-lawyer-icon' src="{{freeTextList[index].lawyerIconImage}}"></image>
+      <view class='details-page-lawyer-nikename'>{{freeTextList[index].lawyerName}}</view>
+      <view class='details-page-lawyer-lawfirm'>{{freeTextList[index].lawyerFirm}}</view>
     </view>
     <image src='../../../image/homeicon_3x/homepage_10_3x.png' style='width:20rpx;height:20rpx;margin-right:15rpx'></image>
   </view>
 
   <view>
-    <view class='details-page-answer'>{{answer}}</view>
+    <view class='details-page-answer'>{{freeTextList[index].content}}</view>
   </view>
 
   <view class='details-page-answer-info'>
-    <view>5天前</view>
-    <view class='details-page-reply-margin'>12:56</view>
+    <view>{{lawago[index]}}{{lawagoText[index]}}前</view>
+    <view class='details-page-reply-margin'>{{lawtList[index]}}</view>
     <view class='details-page-reply-background details-page-reply-margin'>
-      <view bindtap='gotoReply'>2回复</view>
+      <view  data-freeindex="{{index}}" bindtap='gotoReply'>{{freeTextList[index].replyCount}}回复</view>
     </view>
   </view>
 </view>
-
-<view class='details-page-line-center'></view>
-<view class='details-page'>
-  <view class='details-page-flex details-page-lawyer'>
-    <view class='details-page-top'>
-      <view class='details-page-lawyer-icon'></view>
-      <view class='details-page-lawyer-nikename'>罗雅琴</view>
-      <view class='details-page-lawyer-lawfirm'>律师事务所</view>
-    </view>
-    <image src='../../../image/homeicon_3x/homepage_10_3x.png' style='width:20rpx;height:20rpx;margin-right:15rpx'></image>
-  </view>
-
-  <view>
-    <view class='details-page-answer'>{{answer}}</view>
-  </view>
-
-  <view class='details-page-answer-info'>
-    <view>5天前</view>
-    <view class='details-page-reply-margin'>12:56</view>
-    <view class='details-page-reply-background details-page-reply-margin'>
-      <view bindtap='gotoReply'>2回复</view>
-    </view>
-  </view>
 </view>
+
 
 

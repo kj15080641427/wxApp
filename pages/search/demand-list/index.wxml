@@ -7,8 +7,8 @@
 </view>
 
 <view class='search-tab-list'>
-  <view  class='search-tab-icon '>
-    <view class='search-tab-text' >综合排序</view>
+  <view  class='search-tab-icon'bindtap='sort'>
+    <view class='search-tab-text' style='color:#1ec88c'>{{sort[sortIndex]}}</view>
     <image src='../../../image/search_icon@3x/Personalhomepage-22@3x.png' class='search-page-icon'></image>
   </view>
   <view  class='search-tab-icon' bindtap='gotoFilter'>
@@ -18,6 +18,17 @@
 </view>
 </view>
 
+    <view class='search-select-flex' style='z-index:998;position:fixed;top:180rpx;display:flex;' wx:if="{{showSort}}">
+      <view >
+      <!-- bindtap='selectRegion' -->
+      <view wx:key="{{index}}" wx:for="{{sort}}" class='serach-select-sort' data-sortIndex="{{index}}" catchtap='getSortIndex' style="{{index==sortIndex  ? 'color:#1ec88c;background-color:white':'background-color:#f4f4f4'}}" ><view  class='right-width'>{{item}}</view>
+       <image src='../../../image/search_icon@3x/selectcity.png' wx:if="{{index==sortIndex }}" class='select-image-sort'></image>
+       <view class='search-select-line'></view>
+      </view>
+      </view>
+    </view>
+
+
 <view style='margin-top:180rpx;'></view>
 
   <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}"   >
@@ -25,7 +36,7 @@
       <view class='watchlist-page-flex'>
         <view class='watchlist-page-left' style="z-index:55;">
           <image class='watchlist-page-avatar' src="{{lawyerList[index].iconImage ? lawyerList[index].iconImage :'../../../image/my_icon@3x/mine_icon_02_3x.png'}}"  style="z-index:55;"></image>
-          <view class='watchlist-page-practice' style="z-index:55;">执业{{year[index]}}年</view>
+          <view class='watchlist-page-practice' style="z-index:55;">执业{{year[index]>=1 ?year[index]:1 }}年</view>
 
         </view>
         <view class='watchlist-page-right'>

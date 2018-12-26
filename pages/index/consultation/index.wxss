@@ -27,7 +27,8 @@
 }
 .consul-picker-text-glass{
     font-size: 28rpx;
-    color: #b5b5b5
+    color: #b5b5b5;
+    margin-right: 20rpx;
 }
 .consul-page-textarea{
     background-color: white;

@@ -39,7 +39,7 @@ Page({
    */
   data: {
     lawyerList: '', //律师信息
-    year: '', //执业年限
+    year1: '', //执业年限
     getPage: 10, //页数
     // dataJSON: '', //
     address: '', //地址
@@ -61,7 +61,24 @@ Page({
     expert:'擅长领域',//选择擅长领域
     selectedCity:'选择地区',//选择地区
     filterColor:false,
-    noFilter: {"pageNum": '1',"pageSize": '10',}
+    noFilter: { "pageNum": '1', "pageSize": '10'},
+    hasList:true,
+    lawyerName:''
+  },
+  //重新搜索
+  again:function(){
+    var that = this
+    that.setData({
+      hasList:true,
+      noFilter: { "pageNum": '1', "pageSize": '10' }
+    })
+    // wx.removeStorageSync("picIndexList")
+  },
+  //需求test
+  gotoDemand: function () {
+    wx.navigateTo({
+      url: '../search/demand/index',
+    })
   },
   //排序
   sort:function(){
@@ -91,7 +108,7 @@ Page({
   // 关键字搜索
   searchInput: function (e) {
     this.setData({
-      ['noFilter.lawyerName']: e.detail.value,
+      lawyerName: e.detail.value,
       getPage: 10,
       ishidden: true
     })
@@ -126,6 +143,7 @@ Page({
       getPage: 10,
       ishidden: true
     })
+    console.log("市ID",this.data.region[this.data.regionindex].child[e.currentTarget.dataset.cityindex].regionId)
     this.pc()
   },
   //选择擅长领域1级
@@ -180,18 +198,26 @@ Page({
   // 筛选
   gotoFilter: function () {
     wx.navigateTo({
-      url: '../search/filter/index?noFilter=' + JSON.stringify(this.data.noFilter),
+      url: '../search/filter/index?noFilter=' + JSON.stringify(this.data.noFilter) ,
     })
   },
+  //点击键盘搜索
   confirm(e) {
     var that = this
     var url = api.getSearchLawyer() + "1/" + that.data.getPage
     var datan = that.data.noFilter
-    that.setData({
+    this.setData({
+      ['noFilter.lawyerName']: e.detail.value,
+      getPage: 10,
+      ishidden: true
     })
     var success = function (data) {
       wx.hideLoading()
-
+      if(!data.data.list[0]){
+        that.setData({
+          hasList:false
+        })
+      }
       that.setData({
         lawyerList: data.data.list,
         ishidden:true
@@ -211,6 +237,43 @@ Page({
     //   title: '正在加载',
     // })
   },
+  //上拉搜索
+  topSearch:function() {
+    var that = this
+    var url = api.getSearchLawyer() + "1/" + that.data.getPage
+    var datan = that.data.noFilter
+    // this.setData({
+    //   ['noFilter.lawyerName']: e.detail.value,
+    //   getPage: 10,
+    //   ishidden: true
+    // })
+    var success = function (data) {
+      wx.hideLoading()
+      if (!data.data.list[0]) {
+        that.setData({
+          hasList: false
+        })
+      }
+      that.setData({
+        lawyerList: data.data.list,
+        ishidden: true
+      })
+      that.getAge()
+    }
+    var fail = function (e) {
+      wx.hideLoading()
+      wx.showToast({
+        title: '获取数据失败',
+        icon: 'none'
+      })
+      console.log(e)
+    }
+    wxrequest.request(url, datan, success, fail)
+    // wx.showLoading({
+    //   title: '正在加载',
+    // })
+  },
+  //搜索
   pc: function () {
     var that = this
     that.setData({
@@ -220,9 +283,14 @@ Page({
     var datan =  that.data.noFilter
     var success = function (data) {
       wx.hideLoading()
+      if (!data.data.list[0]) {
+        that.setData({
+          hasList: false
+        })
+      }
       that.setData({
         lawyerList: data.data.list,
-        // ishidden: true
+        ishidden: true
       })
       that.getAge()
     }
@@ -251,7 +319,7 @@ Page({
       addressList.push(item.region.split('-', 2))
     }) : ''
     this.setData({
-      year: yearList,
+      year1: yearList,
       address: addressList,
     })
   },
@@ -263,11 +331,11 @@ Page({
     // wx.showLoading({
     //   title: '加载中',
     // })
-    var a = region.citysData.unshift({ "regionId": '', name: "全国", child: [{"regionId":'',name:"全国",child:[{"regionId":'',"name":'全国'}]}]})
+    region.citysData.unshift({ "regionId": '', name: "全国", child: [{"regionId":'',name:"全国",child:[{"regionId":'',"name":'全国'}]}]})
     this.setData({
       region: region.citysData,
     })
-    console.log("地区",this.data.region)
+    // console.log("地区",this.data.region)
     this.pc()
     this.getExpert()
     this.setData({
@@ -304,7 +372,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
 
   /**
@@ -327,7 +395,7 @@ Page({
       ishidden: false
     })
     var page = that.data.getPage
-    that.confirm(page)
+    that.topSearch(page)
   },
   /**
    * 用户点击右上角分享

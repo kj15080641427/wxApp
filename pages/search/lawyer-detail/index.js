@@ -18,7 +18,10 @@ Page({
     lawyerCard:'',
     showMore:false,//展示更多简介
     isFollow:'',//是否已关注
-    myFollow:''//我的关注列表
+    myFollow:'',//我的关注列表
+    caseList:'',//案例
+    isshowCard: true,
+    isshowCase: false
   },
   //关注
   follow:function(){
@@ -80,6 +83,7 @@ Page({
       that.setData({
         lawyerInfo:data.data
       })
+      console.log("律师主页",data.data)
       that.ageAddress()
     }
     var fail = function (e) {
@@ -106,7 +110,7 @@ Page({
       that.setData({
         lawyerCard: data.data
       })
-
+      console.log("背景图/荣誉",data.data)
     }
     var homeFail = function (e) {
       console.log(e)
@@ -165,6 +169,41 @@ Page({
       age: now - age
     })
   },
+  //案例
+  getCase:function(){
+    var url = api.getCase()
+    var data = { "memberId": this.data.lawyerList[this.data.index].memberId,"pageNum":'1',"pageSize":'10'}
+    var success = (data)=>{
+      this.setData({
+        caseList:data.data.list
+      })
+      console.log("案例",data)
+    }
+    var fail = (e)=>{
+      console.log("案例错误",e)
+    }
+    wxrequest.request(url,data,success,fail)
+  },
+  //案件h5
+  gotoCase:function(e){
+    wx.navigateTo({
+      url: '../case-web/index?url=' + this.data.caseList[e.currentTarget.dataset.caseindex].url,
+    })
+  },
+  //显示名片
+  showCard:function(){
+    this.setData({
+      isshowCard:true,
+      isshowCase:false
+    })
+  },
+  //显示案件展示
+  showCase:function(){
+    this.setData({
+      isshowCard: false,
+      isshowCase: true
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -193,6 +232,7 @@ Page({
    */
   onShow: function () {
     //选择id
+    this.getCase()
   },
   /**
    * 生命周期函数--监听页面隐藏

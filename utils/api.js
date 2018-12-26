@@ -208,6 +208,46 @@ var Organization = '/client/organization'
 function getOrganization (){
   return HOST_URL + Organization
 }
+//广告
+var Adbanner = '/client/banner'
+function getAdbanner(){
+  return HOST_URL + Adbanner
+}
+//案例
+var Case = '/lawyer/case'
+function getCase(){
+  return HOST_URL + Case
+}
+//文字咨询
+var FreeText = '/lawyer/freeText/'
+function getFreeText(){
+  return HOST_URL + FreeText
+}
+//快速咨询 
+var Quick = '/client/quick/post'
+function getQuick(){
+  return HOST_URL + Quick
+}
+//客户端解决方案类型
+var Type = '/solution/type'
+function getType(){
+  return HOST_URL + Type
+}
+//专家服务
+var ExpertPhone = '/client/expert/call/'
+function getExpertPhone(){
+  return HOST_URL + ExpertPhone
+}
+//文字咨询列表
+var FreetextList = '/lawyer/freeText/'
+function getFreetextList(){
+  return HOST_URL + FreetextList
+}
+//用户回复文字咨询
+var UserReply = '/lawyer/freeText/'
+function getUserReply(){
+  return HOST_URL + UserReply
+}
 module.exports={
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,
@@ -242,4 +282,12 @@ module.exports={
   getBalance:getBalance,
   getBalanceDetail: getBalanceDetail,
   getOrganization: getOrganization,
+  getAdbanner: getAdbanner,
+  getCase: getCase,
+  getFreeText: getFreeText,
+  getQuick: getQuick,
+  getType:getType,
+  getExpertPhone: getExpertPhone,
+  getFreetextList: getFreetextList,
+  getUserReply: getUserReply
 }

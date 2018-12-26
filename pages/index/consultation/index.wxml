@@ -3,7 +3,7 @@
 <!-- 选择问题类型 -->
  <picker bindtap='getType' bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="{{'typeName'}}">
     <view class="consul-picker">
-      <view class="consul-picker-text">问题类型</view>
+      <view class="consul-picker-text"><text style='color:red'>*</text>问题类型</view>
       <view class="consul-page-flex">
         <view class='consul-picker-text' style="margin-right:20rpx">{{array[index].typeName}}</view>
         <view class="consul-picker-text-glass" wx:if="{{hasSelect}}">请选择问题类型</view>
@@ -17,7 +17,7 @@
   <!-- 选择地区 -->
 <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
     <view class="consul-picker">
-      <view class="consul-picker-text">选择地区</view>
+      <view class="consul-picker-text"><text style='color:red'>*</text>选择地区</view>
       <view class='consul-page-flex'>
         <view class='consul-picker-text' wx:if="{{!hasSelectAddress}}" style="margin-right:20rpx">{{region[0]}}-{{region[1]}}-{{region[2]}}</view>
         <view class="consul-picker-text-glass" wx:if="{{hasSelectAddress}}">选择你所在的地区</view>
@@ -27,7 +27,7 @@
   </picker>
 
 
-<textarea placeholder="请简单描述你遇到的问题 (限10-300字)" placeholder-style="font-size:28rpx;color:#b5b5b5" maxlength="300" class="consul-page-textarea" bindinput='getInput'></textarea>
+<textarea placeholder="*"  placeholder="请简单描述你遇到的问题 (限10-300字)" placeholder-style="font-size:28rpx;color:#b5b5b5" maxlength="300" class="consul-page-textarea" bindinput='getInput'></textarea>
 
 <view class='consul-page-flex consul-page-anonymous-view'>
     <radio checked="{{isHide}}"bindtap="radioChange"/>{{item.value}}

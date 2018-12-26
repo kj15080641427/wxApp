@@ -143,3 +143,6 @@
   width: 1rpx;
   height: 60rpx;
 }
+/* element.style{
+  border-radius: 50rpx;
+} */

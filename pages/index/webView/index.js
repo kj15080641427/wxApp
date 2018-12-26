@@ -6,7 +6,8 @@ Page({
    */
   data: {
     sUrl:'',
-    index:''
+    index:'',
+    adUrl:''
   },
 
   /**
@@ -14,10 +15,9 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      sUrl:wx.getStorageSync("web")
+      sUrl:wx.getStorageSync("web"),
       // index: options.resolveindex
     })
-    console.log(this.data.sUrl)
   },
 
   /**

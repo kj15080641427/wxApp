@@ -12,7 +12,7 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.0",
+	"libVersion": "2.4.3",
 	"appid": "wx6039aeee819d9d94",
 	"projectname": "WeChat",
 	"debugOptions": {

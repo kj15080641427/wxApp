@@ -27,7 +27,7 @@
     <view style='display:flex;justify-content: space-between;width:715rpx;'>
      <!-- <view style='display:flex; justify-content: space-between'> -->
       <view  class='detail-page-text'>律师擅长领域</view>
-      <view style='display:flex'>
+      <view style='display:flex;align-items:center'>
        <text class='hide-text'>{{business[index].businessTypeName}}</text>
        <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
       </view>
@@ -38,7 +38,7 @@
   <picker class='detail-page-picker' mode="region"     bindchange="bindRegionChange" value="{{region}}"custom-item="{{customItem}}">
     <view style='display:flex;justify-content: space-between;width:715rpx;'>
       <view class='detail-page-text'>律师所在区域</view>
-      <view style='display:flex;text-align : left'>
+      <view style='display:flex;align-items:center' >
         <view class='hide-text'>{{region[0]}}-{{region[1]}}</view>
         <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
       </view>

@@ -11,10 +11,21 @@ Page({
     mobile:'',//电话
   },
   getOrderIndex:function(e){
-    wx.navigateTo({
-      url: '../order-detail/index?orderDetail=' + JSON.stringify(this.data.order[e.currentTarget.dataset.orderindex]) +'&mobile='+this.data.mobile,
-    })
-    console.log("index",e)
+    var that = this
+    if (that.data.order[e.currentTarget.dataset.orderindex].orderType == '免费文字咨询'){
+      wx.navigateTo({
+        url: '../../index/consultation-details/index?orderDetail=' + JSON.stringify(this.data.order[e.currentTarget.dataset.orderindex]) + '&mobile=' + this.data.mobile,
+      })
+    } else if (that.data.order[e.currentTarget.dataset.orderindex].orderType == '需求'){
+      wx.navigateTo({
+        url: '../../message/index',
+      })
+    } else if (that.data.order[e.currentTarget.dataset.orderindex].orderType =='快速电话咨询'){
+      wx.navigateTo({
+        url: '../order-detail/index?orderDetail=' + JSON.stringify(that.data.order[e.currentTarget.dataset.orderindex]),
+      })
+    }
+    console.log("index", that.data.order[e.currentTarget.dataset.orderindex])
   },
   //订单
   getOrder:function(){

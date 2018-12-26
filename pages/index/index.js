@@ -3,13 +3,15 @@ var api = require('../../utils/api.js')
 var initIndex=''
 Page({
   data: {
-    imgUrls: [
-      'http://5b0988e595225.cdn.sohucs.com/images/20170906/58cdb24be3624488ad3e8d3d00b4585f.jpeg',
-      'http://pic28.photophoto.cn/20130818/0020033143720852_b.jpg',
-      'http://img.zcool.cn/community/014565554b3814000001bf7232251d.jpg@1280w_1l_2o_100sh.png'
-    ],
-    interval: 3000,
-    duration: 1000,
+    swiperH: '',//swiper高度
+    nowIdx: 0,//当前swiper索引
+    // imgList: [//图片列表
+    //   'http://img.zcool.cn/community/01ed345549046c0000019ae992d5e2.jpg@1280w_1l_2o_100sh.png',
+    //   'http://img.zcool.cn/community/01ed345549046c0000019ae992d5e2.jpg@1280w_1l_2o_100sh.png',
+    //   'http://img.zcool.cn/community/01ed345549046c0000019ae992d5e2.jpg@1280w_1l_2o_100sh.png',
+    // ],
+    // interval: 3000,
+    // duration: 1000,
     popular: [{ "categoryName": "婚姻家庭","id":"1"}],//文章分类
     article: [{ "articleName":'文章名称', "articleImageSrc": '图片地址', "id": '文章分类ID' } ],//文章列表
     more:false,
@@ -22,14 +24,26 @@ Page({
     articleIndex:0,
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    // canIUse: wx.canIUse('button.open-type.getUserInfo'),
     winHeight: "",//窗口高度
     scrollLeft: 0, //tab标题的滚动条位置
+    adBanner:'',
+    listHeight:''
   },
-  //需求test
-  gotoDemand:function(){
-    wx.navigateTo({
-      url: '../search/demand/index',
+  //获取swiper高度
+  // getHeight: function (e) {
+  //   var winWid = wx.getSystemInfoSync().windowWidth - 5 * 50;//获取当前屏幕的宽度
+  //   var imgh = e.detail.height;//图片高度
+  //   var imgw = e.detail.width;
+  //   var sH = winWid * imgh / imgw + "rpx"
+  //   this.setData({
+  //     swiperH: sH//设置高度
+  //   })
+  // },
+  //swiper滑动事件banner图
+  swiperChange: function (e) {
+    this.setData({
+      nowIdx: e.detail.current
     })
   },
   //搜索律师
@@ -49,6 +63,64 @@ Page({
       url: 'webView/index'
     })
   },
+  //广告
+  getAdbanner:function(){
+    var url = api.getAdbanner()
+    var success = (data)=>{
+      this.setData({
+        adBanner:data.data.list
+      })
+      console.log("广告", data.data.list)
+    }
+    var fail = (e) => {
+      console.log(e)
+    }
+    wxrequest.requestGet(url,'',success,fail)
+  },
+  //跳转至广告
+  gotoAd:function(e){
+    wx.navigateTo({
+      url: 'adWebView/index?adUrl=' + this.data.adBanner[e.currentTarget.dataset.adindex].linkValue,
+    })
+    // console.log(this.data.adBanner[e.currentTarget.dataset.adindex].linkValue)
+  },
+  //解决方案类型
+  getArticleType:function(){
+    var that = this
+    var url = api.getArticleTypeUrl()
+    var messagetype = ""
+    var data = { "pageNum": 1, "pageSize": 100,"deviceInfoId":5 }
+    var success = function (data) {
+      console.log("解决方案分类list", data.data.list)
+      that.setData({
+        popular: data.data.list.reverse(),
+      })
+      that.getArticleList()
+      // initIndex: data.data.list[0].id
+    }
+    var fail = function (e) {
+      console.log("解决方案错误", e)
+    }
+    wxrequest.requestPost(url, data, messagetype, success, fail)
+  },
+  //解决方案
+  getArticleList:function(){
+    var that = this
+    var listUrl = api.getArticleListUrl()
+    var message = ""
+    var listData = { "typeId": this.data.popular[0].id, "pageNum": 1, "pageSize": 10, "deviceInfoId": 5 }
+    var successList = function (data) {
+      wx.hideLoading()
+      console.log("解决方案list", data)
+      that.setData({
+        article: data.data.list ? data.data.list :data.data
+      })
+    }
+    var failList = function (e) {
+      console.log("解决方案错误", e)
+    }
+    wxrequest.requestPost(listUrl, listData, message, successList, failList)
+  },
   //解决方案列表index
   // getresIndex:function(e){
   //   this.setData({
@@ -57,38 +129,13 @@ Page({
   //   console.log('解决方案index',e)
   // },
   onLoad: function () {
+    wx.showLoading({
+      title: '数据加载中',
+    })
+    wx.removeStorageSync("picIndexList")
     console.log('12312312',wx.getStorageInfoSync())
-    var that = this
-    var listUrltype = api.getArticleTypeUrl()
-    var messagetype = ""
-    var listDatatype = {"pageNum": 1, "pageSize": 100 }
-    var successListtype = function (data) {
-      console.log("解决方案分类list", data.data.list)
-      that.setData({
-        popular: data.data.list.reverse(),
-      })
-      // initIndex: data.data.list[0].id
-      //解决方案
-      var listUrl = api.getArticleListUrl()
-      var message = ""
-      var listData = { "typeId": data.data.list[0].id, "pageNum": 1, "pageSize": 10 }
-      var successList = function (data) {
-        console.log("解决方案list", data)
-        that.setData({
-          article: data.data.list
-        })
-      }
-      var failList = function (e) {
-        console.log("解决方案错误", e)
-      }
-      wxrequest.requestPost(listUrl, listData, message, successList, failList)
-
-    }
-    var failListtype = function (e) {
-      console.log("解决方案错误", e)
-    }
-    wxrequest.requestPost(listUrltype, listDatatype, messagetype, successListtype, failListtype)
-
+    this.getArticleType()
+    this.getAdbanner()
 
     // 消息
     this.judgeTips()
@@ -115,11 +162,12 @@ Page({
 
     var listUrl = api.getArticleListUrl()
     var message = ""
-    var listData = { "typeId": that.data.popular[e.detail.current].id, "pageNum": 1, "pageSize": 10 }
+    var listData = { "typeId": that.data.popular[e.detail.current].id, "pageNum": 1, "pageSize": 10, "deviceInfoId": 5 }
     var successList = function (data) {
-      console.log("list", data.data.list)
+      // console.log("list", data.data.list.length)
       that.setData({
-        article: data.data.list
+        article: data.data.list ? data.data.list:data.data,
+        // listHeight: data.data.list.length ? data.data.list.length*220+200+'rpx' :''
       })
     }
     var failList = function (e) {
@@ -209,7 +257,9 @@ Page({
   },
   //专家咨询
   gotoExpert:function(){
-    
+    wx.navigateTo({
+      url: '../index/expert-service/index',
+    })
   },
   gotoQuick:function(){
     wx.navigateTo({

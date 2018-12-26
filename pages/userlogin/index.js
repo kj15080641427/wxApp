@@ -103,8 +103,8 @@ Page({
                 })
             }, 1000)
             wx.setStorageSync("token", data.data.token)
-            console.log("注册成功", data)
-            console.log("token111", wx.getStorageSync("token"))
+            // console.log("注册成功", data)
+            // console.log("token111", wx.getStorageSync("token"))
 
             var that = this
             // 获取用户memberID信息
@@ -115,11 +115,15 @@ Page({
                 wx.setStorageSync("memberId", res.data.memberId)
                 wx.setStorageSync("mobile", res.data.mobile)
                 wx.navigateBack({
-                    // delta: 2
+// <<<<<<< HEAD
+//                     // delta: 2
+// =======
+//                     delta: 1
+// >>>>>>> 30411490df748e5f9929d91dc621a36e317fb693
                 })
             }
             var fail = function (e) {
-                console.log(e)
+                console.log("memberId",e)
             }
             wxrequest.requestGet(userInfoUrl, message, success, fail)
 
@@ -134,7 +138,7 @@ Page({
         }
         var fail = function (data) {
             wx.showToast({
-                title: data ? data : '注册失败',
+                title: data.message,
                 icon: 'none'
             })
             console.log(data)
@@ -164,7 +168,7 @@ Page({
             countdown:60
           })
         }
-        console.log(that.data.countdown)
+        // console.log(that.data.countdown)
       },1000)
     },
     /**

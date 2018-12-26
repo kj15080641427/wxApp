@@ -8,8 +8,9 @@ page{
   /* background-color: white */
 }
 .index-background{
+  padding-top: 20rpx;
   background-color: white;
-  padding-bottom: 30rpx;
+  /* padding-bottom: 30rpx; */
 }
 .index-layout-center{
   height: 80rpx;
@@ -75,9 +76,11 @@ page{
   position:relative;
 }
 .index-ml{
+  padding-bottom: 30rpx;
   margin-left: 40rpx;
 }
 .index-mr{
+  height: 150rpx;
   margin-right: 40rpx;
 }
 .index-green-line{
@@ -101,7 +104,8 @@ page{
 }
 .index-text-style-mini{
   font-size: 24rpx;
-  margin-top: 30rpx;
+  margin-top: 20rpx;
+  /* padding-bottom: 20rpx; */
 }
 .index-text-style-green{
   color: #1ec88c;
@@ -139,6 +143,7 @@ page{
   width: 680rpx;
   margin-left: 35rpx;
   margin-right: 35rpx;
+  margin-top: 30rpx;
 }
 .index-more{
   font-size: 28rpx;
@@ -191,20 +196,22 @@ page{
   font-size:28rpx;
   margin-left:35rpx;
   margin-right:35rpx;
-  color: #1ec88c
+  color: #1ec88c;
+  font-weight: bold;
 }
 .view-item-green-line{
   margin-left: 70rpx;
   background-color: #1ec88c;
-  width: 50rpx;
-  height: 5rpx;
-  border-radius: 8rpx;
+  width: 40rpx;
+  height: 10rpx;
+  /* border-radius: 8rpx; */
   margin-top: 10rpx
 }
 .index-article{
   height: 200rpx;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   /* margin-top: 30rpx; */
   margin-left: 30rpx;
   margin-right: 30rpx;
@@ -218,6 +225,7 @@ page{
   font-size: 24rpx;
   color: #b5b5b6;
   margin-top: 40rpx;
+  /* margin-bottom: 20rpx; */
 }
 .modal-dialog{
   display: flex;
@@ -274,7 +282,9 @@ page{
 .tab-content{
   height: 1000rpx;
   background-color: white;
-  padding-top: 30rpx;
+  /* padding-top: 30rpx; */
+  /* padding-bottom: 30rpx; */
+/* height: auto */
   }
 ::-webkit-scrollbar {
   width: 0;
@@ -284,5 +294,18 @@ page{
 .scoll-h{
   height: 100%
 }
-
-
+.swiper {
+  padding-top: 30px;
+}
+.le-img {
+  /* width: 100%; */
+  display: block;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+  border-radius: 6px;
+}
+.le-img.le-active {
+  transform: scale(1);
+}
+page{height:1500rpx}
+swiper{height:800rpx}

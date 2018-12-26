@@ -5,8 +5,8 @@ App({
     device: {
         "device_type": 1,
         "app_version": "2.0",
-        "app_version_code": 10,
-        "channel": "xiaomi_2018"
+        "app_version_code": 2,
+        "channel": "wxapp"
     },
     onLaunch: function () {
         // 展示本地存储能力
@@ -14,14 +14,14 @@ App({
         logs.unshift(Date.now())
         wx.setStorageSync('logs', logs)
 
-        wx.checkSession({
-            success(data) {
-                console.log(data)
-              // session_key 未过期，并且在本生命周期一直有效
-            },
-            fail() {
-              // session_key 已经失效，需要重新执行登录流程
-              wx.login({
+        // wx.checkSession({
+        //     success(data) {
+        //         console.log(data)
+        //       // session_key 未过期，并且在本生命周期一直有效
+        //     },
+        //     fail() {
+        //       // session_key 已经失效，需要重新执行登录流程
+            wx.login({
                 success: res => {
                     console.log(res)
                     // 发送 res.code 到后台换取 openId, sessionKey, unionId
@@ -36,8 +36,8 @@ App({
                     })
                 }
             })
-            }
-        })
+        //     }
+        // })
         
         // 获取用户信息
         wx.getSetting({

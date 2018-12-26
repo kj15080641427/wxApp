@@ -155,6 +155,9 @@
   line-height: 94rpx;
 }
 .mark-button-view{
+  position: fixed;
+  bottom: 0;
+  width: 750rpx;
   height: 120rpx;
   background-color: white;
   display: flex;
@@ -162,6 +165,7 @@
   align-items: center;
 }
 .mark-page-line{
+  position: fixed;
   background-color: #b5b5b5;
   height: 1rpx;
   margin-top: 35rpx;
