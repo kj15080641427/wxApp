@@ -288,7 +288,7 @@ function superRequest(url, data, type) {
             fail: function(res) {
                 // fail
                 console.log(res)
-                reject(res)
+                reject(new Error(res.message))
             },
             complete: function() {
                 // complete

@@ -43,7 +43,7 @@ Page({
     },
     charge(e){
         //  调取微信支付
-        wxPay(e.currentTarget.dataset.amt * 100)
+        wxPay(1).then(res => {console.log(res)})
     },
     /**
      * 生命周期函数--监听页面加载
