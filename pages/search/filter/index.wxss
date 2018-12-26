@@ -20,7 +20,8 @@
   width: 100%;
   height: 200rpx;
   display: flex;
-  flex-wrap: wrap 
+  flex-wrap: wrap ;
+  padding-top:30rpx;
 }
 .filter-page-frame-color{
   width: 140rpx;

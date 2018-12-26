@@ -16,7 +16,7 @@ Page({
     //   ],
     selectProblem:'请选择问题类型',
     money:0,
-    balance:10.5,
+    balance:'',
     checked1:true,
     checked2:false,
     phone:''
@@ -56,21 +56,46 @@ Page({
   },
   // 跳转
   gotofinish: function () {
+    if(this.data.phoneInput){
+      console.log("hasinput", this.data.phoneInput)
+    }else{
+      console.log("noinput")
+    }
     if (!this.data.index) {
       wx.showToast({
         title: '请选择问题类型',
         icon: 'none'
       })
-    } else if (!(/^1[345678]\d{9}$/.test(this.data.phoneInput))) {
+    } else if (this.data.phoneInput){
+     if (!(/^1[345678]\d{9}$/.test(this.data.phoneInput))) {
       wx.showToast({
         title: '请输入正确的手机号码',
         icon: 'none'
       })
+    }
     }else {
-      wx.navigateTo({
-        url: '../quick-consultation-finish/index',
+      if (!(/^1[345678]\d{9}$/.test(wx.getStorageSync("mobile")))) {
+        wx.showToast({
+          title: '请输入正确的手机号码',
+          icon: 'none'
+        })
+    }
+  }
+  },
+  //查询余额
+  getBalance:function(){
+    var url = api.getBalance() + wx.getStorageSync("memberId")
+    var data = wx.getStorageSync("memberId")
+    var success = (data)=>{
+      console.log("余额",data)
+      this.setData({
+        balance: data.data.balanceAmount
       })
     }
+    var fail = (e) => {
+      console.log(e)
+    }
+    wxrequest.requestGetpar(url,data,'',success,fail)
   },
   //解决方案类型
   getArticleType: function () {
@@ -95,6 +120,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getBalance()
     var that = this
     that.setData({
       phone: wx.getStorageSync("mobile")

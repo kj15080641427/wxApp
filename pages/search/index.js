@@ -61,7 +61,7 @@ Page({
     expert:'擅长领域',//选择擅长领域
     selectedCity:'选择地区',//选择地区
     filterColor:false,
-    noFilter: {"pageNum": '1',"pageSize": '10'},
+    noFilter: { "pageNum": '1', "pageSize": '10'},
     hasList:true
   },
   //重新搜索
@@ -72,6 +72,12 @@ Page({
       noFilter: { "pageNum": '1', "pageSize": '10' }
     })
     wx.removeStorageSync("picIndexList")
+  },
+  //需求test
+  gotoDemand: function () {
+    wx.navigateTo({
+      url: '../search/demand/index',
+    })
   },
   //排序
   sort:function(){
@@ -191,14 +197,18 @@ Page({
   // 筛选
   gotoFilter: function () {
     wx.navigateTo({
-      url: '../search/filter/index?noFilter=' + JSON.stringify(this.data.noFilter),
+      url: '../search/filter/index?noFilter=' + JSON.stringify(this.data.noFilter) ,
     })
   },
+  //点击键盘搜索
   confirm(e) {
     var that = this
     var url = api.getSearchLawyer() + "1/" + that.data.getPage
     var datan = that.data.noFilter
-    that.setData({
+    this.setData({
+      ['noFilter.lawyerName']: e.detail.value,
+      getPage: 10,
+      ishidden: true
     })
     var success = function (data) {
       wx.hideLoading()
@@ -226,6 +236,43 @@ Page({
     //   title: '正在加载',
     // })
   },
+  //上拉搜索
+  topSearch:function() {
+    var that = this
+    var url = api.getSearchLawyer() + "1/" + that.data.getPage
+    var datan = that.data.noFilter
+    // this.setData({
+    //   ['noFilter.lawyerName']: e.detail.value,
+    //   getPage: 10,
+    //   ishidden: true
+    // })
+    var success = function (data) {
+      wx.hideLoading()
+      if (!data.data.list[0]) {
+        that.setData({
+          hasList: false
+        })
+      }
+      that.setData({
+        lawyerList: data.data.list,
+        ishidden: true
+      })
+      that.getAge()
+    }
+    var fail = function (e) {
+      wx.hideLoading()
+      wx.showToast({
+        title: '获取数据失败',
+        icon: 'none'
+      })
+      console.log(e)
+    }
+    wxrequest.request(url, datan, success, fail)
+    // wx.showLoading({
+    //   title: '正在加载',
+    // })
+  },
+  //搜索
   pc: function () {
     var that = this
     that.setData({
@@ -347,7 +394,7 @@ Page({
       ishidden: false
     })
     var page = that.data.getPage
-    that.confirm(page)
+    that.topSearch(page)
   },
   /**
    * 用户点击右上角分享

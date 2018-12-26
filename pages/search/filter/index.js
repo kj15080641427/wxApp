@@ -14,7 +14,7 @@ Page({
     listIndex:'',
     indexPicker:'',
     click:false,
-    practiceYearId:'', //执业年限
+    practiceYearId:1, //执业年限
     sex: '', //性别
     industryId:'', //行业
     skillId:'',//基本技能
@@ -42,10 +42,12 @@ Page({
       "pageNum":'1',
       "pageSize":'10',
       "regionId": t.noFilter.regionId || '',
-      // "businessTypeId": t.noFilter.businessTypeId || '',
+      "businessTypeId": t.noFilter.businessTypeId || '',
+      "regionId": t.noFilter.regionId || '',
+      "lawyerName": t.noFilter.lawyerName || '',
       "sort": t.noFilter.sort || '',
-      "practiceYearId": t.practiceYearId || gs.practiceYearId,
-      "sex": t.sex || gs.sex,
+      "practiceYearId": t.practiceYearId ? t.practiceYearId : gs.practiceYearId ? gs.practiceYearId: '',
+      "sex": t.sex ? t.sex : gs.sex ? gs.sex: '',
       "industryId": t.industryId ? t.industryId : gs.insIndex ? t.search[2].items[gs.insIndex].id :'',
       "baseSkillId": t.skillId ? t.skillId : gs.baseSkillIndex ? t.search[3].items[gs.baseSkillIndex].id :'',
       "otherSkillId": t.expandId ? t.expandId : gs.ohterSkillIndex ? t.search[4].items[gs.ohterSkillIndex].id : '',
@@ -78,12 +80,13 @@ Page({
   },
   // 重置按钮
   reset:function(){
+    var that = this
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1];   //当前页面
     var prevPage = pages[pages.length - 2];  //上一个页面
     dataJSON = { "pageNum": '1', "pageSize": '10' }
     prevPage.setData({
-      noFilter: { "pageNum": '1',"pageSize":'10'},
+      noFilter: { "pageNum": '1', "pageSize": '10', "lawyerName": that.data.name},
       ishidden:true
     })
     picIndexList={}
@@ -98,9 +101,10 @@ Page({
   onLoad: function (options) {
     var that = this
     that.setData({
-      noFilter: JSON.parse(options.noFilter)
+      noFilter: JSON.parse(options.noFilter),
+      name: JSON.parse(options.noFilter).lawyerName ? JSON.parse(options.noFilter).lawyerName:''
     })
-    // console.log(options)
+    console.log(JSON.parse(options.noFilter))
       var searchUrl = api.getSearch()
       var searchSuccess = function (data) {
         that.setData({
@@ -118,7 +122,6 @@ Page({
       wxrequest.requestGet(searchUrl, ' ', searchSuccess, searchFail)
   },
 
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -131,6 +134,7 @@ Page({
    */
   onShow: function () {
     var that = this
+
     var gs = wx.getStorageSync("picIndexList")
     that.setData({
       practiceYearId: gs.practiceYearId ? gs.practiceYearId :'' ,//执业年限
@@ -148,7 +152,7 @@ Page({
       lexMungIndex: gs.lexMungIndex ? gs.lexMungIndex : '',//绿豆圈
       organziationIndex: gs.organziationIndex ? gs.organziationIndex : '',//商会组织
     })
-    console.log(that.data.practiceIndex)
+    // console.log(that.data.practiceIndex)
   },
 
   /**

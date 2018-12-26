@@ -34,6 +34,7 @@ Page({
             this.setData({
                 balance: data
             })
+          console.log("余额", this.data.balance.data.balanceAmount)
         }
         var fail = (e) => {
             console.log(e)
@@ -52,7 +53,6 @@ Page({
             memberId: options.memberId
         })
         this.getBalance()
-        console.log()
     },
 
     /**

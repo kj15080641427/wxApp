@@ -5,8 +5,8 @@ App({
     device: {
         "device_type": 1,
         "app_version": "2.0",
-        "app_version_code": 10,
-        "channel": "xiaomi_2018"
+        "app_version_code": 2,
+        "channel": "wxapp"
     },
     onLaunch: function () {
         // 展示本地存储能力

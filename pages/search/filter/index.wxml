@@ -5,7 +5,7 @@
   <view class='filter-page-line'></view>
 </view>
 <view class='filter-page-frame-view filter-background'>
-  <view class="{{index== practiceYearId-1 ? 'filter-page-gender-color' :'filter-page-gender'}}"wx:key="{{index}}" data-yearindex="{{index}}" bindtap='changeColor'  wx:for="{{search[0].items}}"><text class='filter-page-frame-text'>{{item.text}}</text></view>
+  <view class="{{index == practiceYearId -1  ? 'filter-page-gender-color' :'filter-page-gender'}}"wx:key="{{index}}" data-yearindex="{{index}}" bindtap='changeColor'  wx:for="{{search[0].items}}"><text class='filter-page-frame-text'>{{item.text}}</text></view>
 </view>
 
 <!-- 性别 -->

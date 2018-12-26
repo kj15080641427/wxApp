@@ -121,7 +121,7 @@ Page({
   bindRegionChange(e) {
     this.setData({
       region: e.detail.value,
-      ['postList.lawyerRegionId']: e.detail.code[1]
+      ['postList.lawyerRegionId']: e.detail.code[2]
     })
     // console.log("diqu",e.detail.code[2])
   },

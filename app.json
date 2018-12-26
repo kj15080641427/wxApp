@@ -3,6 +3,7 @@
     "pages/search/index",
     "pages/index/index",
     "pages/index/expert-service/index",
+    "pages/search/case-web/index",
     "pages/my/index",
     "pages/userlogin/index",
     "pages/my/balance/index",

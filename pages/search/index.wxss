@@ -4,7 +4,7 @@
   align-items: center;
   height: 100rpx;
   background-color: #1ec88c;
-  border-top: 1rpx solid #32b987
+  /* border-top: 1rpx solid #32b987 */
 }
 .index-search{
   display: flex;
@@ -27,7 +27,7 @@
   height: 100rpx;
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 }
 .search-page-icon{
   margin-left: 10rpx;
@@ -140,7 +140,8 @@
 .lawyerList-top{
   background-color:white;
   margin-left:35rpx;
-  margin-right:35rpx
+  margin-right:35rpx;
+  border-radius: 20rpx;
 }
 .lawyerList-tab{
   background-color:white;

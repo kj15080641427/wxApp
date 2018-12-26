@@ -14,6 +14,7 @@ Page({
       { "name": '联系手机', "text": '13333333333' },
       { "name": '订单金额', "text": '¥99' },
       { "name": '订单状态', "text": '进行中' },
+      { "name": '订单详情', "text": '内容'}
       ],
     // orderDetail:''
   },
@@ -35,9 +36,10 @@ Page({
       ['detailList[3].text']: data.typeName,
       ['detailList[4].text']: options.mobile,//手机号
       ['detailList[5].text']: data.buyerPayAmount,
-      ['detailList[6].text']: data.statusValue
+      ['detailList[6].text']: data.statusValue,
+      ['detailList[7].text']:data.content
     })
-    console.log(data.orderNo)
+    console.log(data)
   },
 
   /**

@@ -1,7 +1,7 @@
 <!--pages/my/balance/index.wxml-->
 <view class='balance-page-top'>
     <view class='balance-text'>账户余额</view>
-    <view class='balance-number'>¥{{balance.balanceAmount || 0}}</view>
+    <view class='balance-number'>¥{{balance.data.balanceAmount}}</view>
     <view class='balance-page-detail-view'>
         <view class='balance-page-detail'>
             <view bindtap='gotoDetail'>交易明细</view>

@@ -28,6 +28,7 @@ Page({
     winHeight: "",//窗口高度
     scrollLeft: 0, //tab标题的滚动条位置
     adBanner:'',
+    listHeight:''
   },
   //获取swiper高度
   // getHeight: function (e) {
@@ -43,12 +44,6 @@ Page({
   swiperChange: function (e) {
     this.setData({
       nowIdx: e.detail.current
-    })
-  },
-  //需求test
-  gotoDemand:function(){
-    wx.navigateTo({
-      url: '../search/demand/index',
     })
   },
   //搜索律师
@@ -169,9 +164,10 @@ Page({
     var message = ""
     var listData = { "typeId": that.data.popular[e.detail.current].id, "pageNum": 1, "pageSize": 10 }
     var successList = function (data) {
-      console.log("list", data.data.list)
+      console.log("list", data.data.list.length)
       that.setData({
-        article: data.data.list
+        article: data.data.list,
+        listHeight:data.data.list.length*220+200+'rpx'
       })
     }
     var failList = function (e) {

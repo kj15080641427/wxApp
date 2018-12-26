@@ -27,7 +27,8 @@ Page({
       "depositAmountId": '',
       "lexMungId": '',
       "orgId": '',
-      "businessTypeId": ''
+      "businessTypeId": '',
+      "expert":1
     },
     sort: ["综合排序", "最新入驻", "活跃度最高"],
     sortIndex: 0,//排序index
