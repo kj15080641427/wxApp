@@ -70,7 +70,7 @@ Page({
   // 回复
   gotoReply:function(e){
     wx.navigateTo({
-      url: '../consultation-reply/index?lawtList=' + this.data.lawtList[e.currentTarget.dataset.freeindex] + '&lawago=' + this.data.lawago[e.currentTarget.dataset.freeindex] + '&lawagoText=' + this.data.lawagoText[e.currentTarget.dataset.freeindex] ,
+      url: '../consultation-reply/index?lawtList=' + this.data.lawtList[e.currentTarget.dataset.freeindex] + '&lawago=' + this.data.lawago[e.currentTarget.dataset.freeindex] + '&lawagoText=' + this.data.lawagoText[e.currentTarget.dataset.freeindex]  ,
     })
     wx.setStorageSync("freeTextList", this.data.freeTextList[e.currentTarget.dataset.freeindex])
     console.log(e)

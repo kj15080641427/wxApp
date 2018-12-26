@@ -17,7 +17,7 @@ Page({
   confirm(e){
     var that = this
     var url = api.getUserReply() + wx.getStorageSync("consultationId") +'/reply/post'
-    var data = { "consultationId": wx.getStorageSync("consultationId"), "type": 2, "content": that.data.replyInput}
+    var data = { "consultationId": wx.getStorageSync("consultationId"), "type": 2, "content": that.data.replyInput, "lawyerId": wx.getStorageSync("freeTextList").lawyerId}
     var success = data =>{
       this.setData({
         reply:data.data
