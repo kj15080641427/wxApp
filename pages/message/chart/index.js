@@ -18,7 +18,7 @@ Page({
         vaule: '',
         messageList: [],
         delayMessages: [],
-        lawyer_avatar: null || '../../../image/message/default_user.png',
+        lawyer_avatar: null,
         my_avatar: wx.getStorageInfoSync('userInfo').iconImage || '../../../image/message/default_user.png'
     },
     onLoad(option) {
@@ -27,7 +27,7 @@ Page({
         })
         this.setData({
             userName: option.userName,
-            lawyer_avatar: option.avatar
+            lawyer_avatar: option.avatar || '../../../image/message/default_user.png'
         })
     },
     onShow(){
@@ -65,12 +65,25 @@ Page({
                 }).onFail(function (data) {
                     console.log('error:' + JSON.stringify(data));
                 });
-            }else{
+            }else if(lRes.messages[0].content.msg_type == "text"){
                 arr.push({
                     msg_id: lRes.messages[0].content.msgid,
                     from_id: lRes.messages[0].content.from_id,
                     msg_type: lRes.messages[0].content.msg_type,
                     content: lRes.messages[0].content.msg_body.text
+                })
+                that.setData({
+                    messageList: arr
+                },function(){
+                    that.pageScroll(that)
+                    // jM.resetConversationCount(userName)
+                })
+            } else if(lRes.messages[0].content.msg_type == "custom"){
+                arr.push({
+                    msg_id: lRes.messages[0].content.msgid,
+                    from_id: lRes.messages[0].content.from_id,
+                    msg_type: lRes.messages[0].content.msg_type,
+                    content: lRes.messages[0].content.msg_body.content
                 })
                 that.setData({
                     messageList: arr
@@ -161,12 +174,29 @@ Page({
                 }).onFail(function (data) {
                     console.log('error:' + JSON.stringify(data));
                 });
-            }else{
+            }else if(arr[i].msg_type == "text"){
                 targetArr.push({
                     from_id: arr[i].from_id,
                     msg_type: arr[i].msg_type,
                     msg_id: arr[i].msgid,
                     content: arr[i].msg_body.text
+                })
+                if( ++i < len ){
+                    that.buildListData(userName,i,arr,len,targetArr)
+                } else {
+                    that.setData({
+                        messageList: that.getUnReadMsg(targetArr)
+                    },function(){
+                        console.log(that.data.messageList)
+                        that.pageScroll(that)
+                    })
+                }
+            } else if(arr[i].msg_type == "custom"){
+                targetArr.push({
+                    from_id: arr[i].from_id,
+                    msg_type: arr[i].msg_type,
+                    msg_id: arr[i].msgid,
+                    content: arr[i].msg_body.content
                 })
                 if( ++i < len ){
                     that.buildListData(userName,i,arr,len,targetArr)

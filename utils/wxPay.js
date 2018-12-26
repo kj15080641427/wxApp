@@ -3,7 +3,7 @@ import api from './api.js'
 import hex_md5 from '../jM/md5.js'
 //  获取微信支付信息
 const getPayInfo = (money,product) =>{
-    return new Promise(reslove => {
+    return new Promise((reslove,reject) => {
         const res = wx.getSystemInfoSync()
         let _ua = 'wxapp:brand(' + res.brand + ') model(' + res.model + ') system(' + res.system + ') SDKVersion(' + res.SDKVersion +')'
         
@@ -35,7 +35,10 @@ const getPayInfo = (money,product) =>{
                     },
                     complete:function(res){}
                 })
-            }
+            },
+            fail:function(res){
+                console.log(res)
+            },
         })
     })
 }

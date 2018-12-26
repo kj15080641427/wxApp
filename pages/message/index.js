@@ -2,7 +2,6 @@
 import wxrequest from '../../utils/request.js'
 import api from '../../utils/api.js'
 import hex_md5 from '../../jM/md5.js'
-import wxPay from '../../utils/wxPay.js'
 var app = getApp()
 var jM = app.globalData.jMessage
 Page({
@@ -21,10 +20,8 @@ Page({
         this.checkLogin() 
     },
     onReady() {
-        // wxPay(1)
     },
     onShow() {
-        // this.getOrderList(1)
         if(!jM.isLogin()){
             let that = this
             wx.showLoading({
@@ -33,8 +30,6 @@ Page({
             function getImConfigSuccess (res) {
                 //  初始化jmessage
                 wx.setStorageSync('appkey', res.data.appkey)
-                // jM.init(res.data.appkey, res.data.random, res.data.signature, res.data.timestamp)
-                // jM.init(res.data.appkey, res.data.random, res.data.signature, res.data.timestamp).then(iRes => {that.jMInit()})
                 jM.init({
                     "appkey"    : res.data.appkey,
                     "random_str": res.data.random,
@@ -45,7 +40,8 @@ Page({
                     jM.login({
                         'username' : 'lex' + wx.getStorageSync('memberId'),
                         'password' : hex_md5(wx.getStorageSync('mobile'))
-                    }).onSuccess(function(data) {
+                    }).onSuccess(function(lData) {
+                        console.log(lData)
                         jM.getConversation().onSuccess(function(data) {
                             that.setData({
                                 conversationList: data.conversations
@@ -131,38 +127,16 @@ Page({
                 that.setData({
                     messageCount: data.receipt_msgs[0].unread_count
                 })
-                // data.type
-                // data.gid
-                // data.appkey
-                // data.username
-                // data.receipt_msgs[].msg_id
-                // data.receipt_msgs[].unread_count
             });
             jM.onMsgReceive(function(msgRes) {
                 jM.getConversation().onSuccess(function(data) {
                     console.log(data)
                     that.setData({
                         conversationList: data.conversations
-                    },function () { console.log(that.data.conversationList) })
-                    //data.code 返回码
-                    //data.message 描述
-                    //data.conversations[] 会话列表，属性如下示例
-                    //data.conversations[0].extras 附加字段
-                    //data.conversations[0].unread_msg_count 消息未读数
-                    //data.conversations[0].name  会话名称
-                    //data.conversations[0].appkey  appkey(单聊)
-                    //data.conversations[0].username  用户名(单聊)
-                    //data.conversations[0].nickname  用户昵称(单聊)
-                    //data.conversations[0].avatar  头像 media_id 
-                    //data.conversations[0].mtime 会话最后的消息时间戳
-                    //data.conversations[0].gid 群 id(群聊)
-                    //data.conversations[0].type  会话类型(3 代表单聊会话类型，4 代表群聊会话类型)
+                    })
                 }).onFail(function(data) {
                     console.log(data)
-                    //data.code 返回码
-                    //data.message 描述
                 });
-                console.log(msgRes)
                 that.setMessage(msgRes)
             });
         }

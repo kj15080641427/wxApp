@@ -13,6 +13,17 @@
     display: flex;
     margin: 30rpx 0;
 }
+.chart .custom{
+    background: #b5b5b5;
+    color: #333;
+    padding: 6rpx 10rpx;
+    border-radius: 50%;
+    font-size: 24rpx;
+    margin: 16rpx 0;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,0);
+}
 .chart .msg-list .avatar{
     width: 90rpx;
     height: 90rpx;
@@ -21,7 +32,6 @@
 }
 .chart .msg-list .text-box{
     flex: 1;
-    /* min-height: 90rpx; */
     position: relative;
     z-index: 99;
 }
@@ -54,6 +64,8 @@
 .chart .my-msg .text-box .text{
     background: #83ffa0;
     float: right;
+    min-height: 90rpx;
+    box-sizing: border-box;
 }
 .chart .my-msg .text-box .audio .audio-duration{
     position: absolute;
@@ -87,6 +99,8 @@
 }
 .chart .lawyer-msg .text-box .text{
     background: #fff;
+    min-height: 60rpx;
+    box-sizing: border-box;
 }
 .chart .lawyer-msg .text-box .audio-duration{
     position: absolute;
