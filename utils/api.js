@@ -219,7 +219,7 @@ function getCase(){
   return HOST_URL + Case
 }
 //文字咨询
-var FreeText = '/lawyer/freeText'
+var FreeText = '/lawyer/freeText/'
 function getFreeText(){
   return HOST_URL + FreeText
 }
@@ -237,6 +237,11 @@ function getType(){
 var ExpertPhone = '/client/expert/call/'
 function getExpertPhone(){
   return HOST_URL + ExpertPhone
+}
+//文字咨询列表
+var FreetextList = '/lawyer/freeText/'
+function getFreetextList(){
+  return HOST_URL + FreetextList
 }
 module.exports={
   appLogin: appLogin,
@@ -277,5 +282,6 @@ module.exports={
   getFreeText: getFreeText,
   getQuick: getQuick,
   getType:getType,
-  getExpertPhone: getExpertPhone
+  getExpertPhone: getExpertPhone,
+  getFreetextList: getFreetextList
 }

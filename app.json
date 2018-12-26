@@ -1,11 +1,12 @@
 {
   "pages":[
+    "pages/my/index",
+    "pages/my/order/index",
     "pages/index/index",
     "pages/index/expert-filter/index",
     "pages/search/index",
     "pages/index/expert-service/index",
     "pages/search/case-web/index",
-    "pages/my/index",
     "pages/userlogin/index",
     "pages/my/balance/index",
     "pages/message/index",
@@ -23,7 +24,6 @@
     "pages/my/order-chat/index",
     "pages/index/quick-consultation/index",
     "pages/index/consultation-details/index",
-    "pages/my/order/index",
     "pages/index/quick-consultation-finish/index",
     "pages/my/watchlist/index",
     "pages/index/consultation/index",

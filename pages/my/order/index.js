@@ -22,10 +22,10 @@ Page({
       })
     } else if (that.data.order[e.currentTarget.dataset.orderindex].orderType =='快速电话咨询'){
       wx.navigateTo({
-        url: '../order-detail/index?orderno=' + that.data.order[e.currentTarget.dataset.orderindex].orderNo,
+        url: '../order-detail/index?orderDetail=' + JSON.stringify(that.data.order[e.currentTarget.dataset.orderindex]),
       })
     }
-    console.log("index",e)
+    console.log("index", that.data.order[e.currentTarget.dataset.orderindex])
   },
   //订单
   getOrder:function(){

@@ -1,27 +1,30 @@
 // pages/my/order-detail/index.js
+var formatTime = require('../../../utils/util.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    time:'00:28:21',
+    time:true,
     detailList:[
       { "name": '订单编号', "text": ''},
-      { "name": '订单日期', "text": '2018-12-12 14:03' },
-      { "name": '商品名称', "text": '快速咨询' },
-      { "name": '咨询类型', "text": '婚姻家庭' },
-      { "name": '联系手机', "text": '13333333333' },
-      { "name": '订单金额', "text": '¥99' },
-      { "name": '订单状态', "text": '进行中' },
-      { "name": '订单详情', "text": '内容'}
+      { "name": '订单日期', "text": '' },
+      { "name": '商品名称', "text": '' },
+      { "name": '咨询类型', "text": '' },
+      { "name": '联系手机', "text": '' },
+      { "name": '订单金额', "text": '' },
+      { "name": '订单状态', "text": '' },
       ],
+    minute:14,
+    second:59,
+    statusValue:false
     // orderDetail:''
   },
   gotoChat:function(){
-    wx.navigateTo({
-      url: '../order-chat/index',
-    })
+    // wx.navigateTo({
+    //   url: '../order-chat/index',
+    // })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -34,12 +37,82 @@ Page({
       ['detailList[1].text']: data.createDate,
       ['detailList[2].text']: data.orderType,
       ['detailList[3].text']: data.typeName,
-      ['detailList[4].text']: options.mobile,//手机号
+      ['detailList[4].text']: wx.getStorageSync("mobile"),//手机号
       ['detailList[5].text']: data.buyerPayAmount,
       ['detailList[6].text']: data.statusValue,
-      ['detailList[7].text']:data.content
+      // ['detailList[7].text']: data.beginTime
+      startTime:data.createDate
     })
-    console.log(data)
+    if( options.statusValue=='已接单'){
+      this.setData({
+        statusValue:true
+      })
+    }
+    this.data.startTime
+    var startDate = this.data.startTime.split(" ")[0]
+    var nowDate = formatTime.formatTime(new Date()).split(" ")[0]
+    var startTime = this.data.startTime.split(" ")[1]
+    var nowTime = formatTime.formatTime(new Date()).split(" ")[0]
+    console.log("订单开始时间",this.data.startTime.split(" "))
+    console.log("现在时间",formatTime.formatTime(new Date()).split(" "))
+    if (nowDate.split("/")[0]-startDate.split("-")[0]>0){
+      this.setData({
+        time: false
+      })
+      console.log('年', nowDate.split("/")[0] - startDate.split("-")[0])
+    } else if (nowDate.split("/")[1] - startDate.split("-")[1] > 0){
+      this.setData({
+        time: false
+      })
+      console.log('月')
+    } else if (nowDate.split("/")[2] - startDate.split("-")[2] > 0){
+      this.setData({
+        time: false
+      })
+      console.log('日')
+    } else if ((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]))>900){
+      this.setData({
+        time: false,
+      })
+    }else{
+      var hasTime = (nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]))
+      this.setData({
+        hasTime: 900-((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]))),
+        statusValue: true
+      })
+      console.log("剩余时间")
+      var that = this
+      var secondInt = that.data.hasTime
+      that.setData({
+        minute: parseInt(secondInt / 60),
+        second: secondInt % 60
+      })
+      this.setData({
+        timedown:setInterval(function () {
+          // var downTime = hasTime -- 
+          that.setData({
+            second: that.data.second - 1
+          })
+          if (that.data.second <= 0 && that.data.minute !=0) {
+            that.setData({
+              second: 60,
+              minute: that.data.minute - 1
+            })
+          }
+          if (that.data.minute <= 0 && that.data.second<=0) {
+            that.setData({
+              time:false,
+              statusValue:false
+            })
+            clearInterval(that.data.timedown)
+            console.log("清除计时器")
+          }
+          console.log('计时器', that.data.minute)
+        }, 1000)
+      })
+    }
+ 
+    console.log("??????", startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]) )
   },
 
   /**
@@ -67,7 +140,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    clearInterval(this.data.timedown)
   },
 
   /**

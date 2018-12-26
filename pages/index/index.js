@@ -108,7 +108,7 @@ Page({
     var that = this
     var listUrl = api.getArticleListUrl()
     var message = ""
-    var listData = { "typeId": this.data.popular[0].id, "pageNum": 1, "pageSize": 10 }
+    var listData = { "typeId": this.data.popular[0].id, "pageNum": 1, "pageSize": 10, "deviceInfoId": 5 }
     var successList = function (data) {
       wx.hideLoading()
       console.log("解决方案list", data)
@@ -162,7 +162,7 @@ Page({
 
     var listUrl = api.getArticleListUrl()
     var message = ""
-    var listData = { "typeId": that.data.popular[e.detail.current].id, "pageNum": 1, "pageSize": 10 }
+    var listData = { "typeId": that.data.popular[e.detail.current].id, "pageNum": 1, "pageSize": 10, "deviceInfoId": 5 }
     var successList = function (data) {
       // console.log("list", data.data.list.length)
       that.setData({

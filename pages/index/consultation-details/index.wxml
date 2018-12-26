@@ -3,20 +3,20 @@
   <view class='details-page-flex details-page-flex-user'>
     <view class='details-page-top'>
       <view class='details-page-icon'></view>
-      <view class='details-page-nikename'>北燕南飞</view>
+      <view class='details-page-nikename'>0</view>
       <view class='details-page-line'></view>
-      <view class='details-page-nikename'>湖南常德</view>
+      <view class='details-page-nikename'>0</view>
     </view>
-    <view class='details-page-type'>婚姻家事</view>
+    <view class='details-page-type'>0</view>
   </view>
 
   <view class="details-page-title">
-    消息标题好好哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+    00000000000000000000000
   </view>
 
   <view class='details-page-reply'>
     <view class='details-page-reply-left'>
-      <view>5天前</view>
+      <view>0</view>
       <view class='details-page-reply-margin'>13:14</view>
       <view class='details-page-top details-page-reply-margin'>
         <view class='details-page-reply-dot'></view>
@@ -27,6 +27,7 @@
   </view>
 </view>
 
+<view wx:for="{{}}" data-freeindex="{{}}" catchtap="{{}}">
 <view class='details-page-line-center'></view>
 <view class='details-page'>
   <view class='details-page-flex details-page-lawyer'>
@@ -50,29 +51,7 @@
     </view>
   </view>
 </view>
-
-<view class='details-page-line-center'></view>
-<view class='details-page'>
-  <view class='details-page-flex details-page-lawyer'>
-    <view class='details-page-top'>
-      <view class='details-page-lawyer-icon'></view>
-      <view class='details-page-lawyer-nikename'>罗雅琴</view>
-      <view class='details-page-lawyer-lawfirm'>律师事务所</view>
-    </view>
-    <image src='../../../image/homeicon_3x/homepage_10_3x.png' style='width:20rpx;height:20rpx;margin-right:15rpx'></image>
-  </view>
-
-  <view>
-    <view class='details-page-answer'>{{answer}}</view>
-  </view>
-
-  <view class='details-page-answer-info'>
-    <view>5天前</view>
-    <view class='details-page-reply-margin'>12:56</view>
-    <view class='details-page-reply-background details-page-reply-margin'>
-      <view bindtap='gotoReply'>2回复</view>
-    </view>
-  </view>
 </view>
+
 
 

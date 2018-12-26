@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    answer:"好好哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈和"
+    answer:""
   },
   // 删除已发布咨询
   deleteInfo:function(){
@@ -22,18 +22,49 @@ Page({
       }
     })
   },
-  //文字咨询详情
-  getReply:function(){
-    var url = api.getFreeText()
-    var data = {}
+  //文字咨询列表
+  getFreetextList:function(){
+    var url = api.getFreetextList() +this.data.id+'/reply/1/10'
+    var data = { "consultationId": this.data.id, "pageNum": '1',"pageSize":'10'}
     var success = data =>{
-      console.log(data)
+      this.setData({
+        freeTextList:data.data.list
+      })
+      console.log("文字咨询列表",data)
+      this.getFreeText()
     }
     var fail = e =>{
-      console.log(e)
+      console.log("文字咨询列表错误",e)
     }
-    wxrequest.request(url,data,success,fail)
+    wxrequest.requestGetpar(url,data,'',success,fail)
   },
+  //文字咨询回复详情
+  getFreeText:function(){
+    var url = api.getFreeText() + this.data.id + '/' + this.data.freeTextList[0].lawyerId +'/reply/detail/1/10'
+    var data = { "consultationId": this.data.id, "lawyerId": this.data.freeTextList[0].lawyerId, "pageNum": 1,"pageSize":10}
+    var success = data =>{
+      this.setData({
+        freeText:data.data
+      })
+      console.log("文字咨询回复详情",data)
+    }
+    var fail = e =>{
+      console.log("文字咨询回复详情", e)
+    }
+    wxrequest.requestGetpar(url,data,'',success,fail)
+  },
+  //文字咨询详情
+  // getReply:function(){
+  //   var url = api.getFreeText()
+  //   var data = {}
+  //   var success = data =>{
+  //     console.log(data)
+  //   }
+  //   var fail = e =>{
+  //     console.log(e)
+  //   }
+  //   wxrequest.request(url,data,success,fail)
+  // },
   // 回复
   gotoReply:function(){
     wx.navigateTo({
@@ -44,7 +75,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getReply()
+    this.setData({
+      id: JSON.parse(options.orderDetail).id
+    })
+    console.log(JSON.parse(options.orderDetail))
+    this.getFreetextList()
+    // this.getFreetextList()
+    // this.getReply()
   },
 
   /**
