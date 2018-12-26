@@ -115,7 +115,7 @@ Page({
                 wx.setStorageSync("memberId", res.data.memberId)
                 wx.setStorageSync("mobile", res.data.mobile)
                 wx.navigateBack({
-                    delta: 2
+                    // delta: 2
                 })
             }
             var fail = function (e) {
