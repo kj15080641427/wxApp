@@ -1,7 +1,7 @@
 <!--pages/my/balance-detail-two/index.wxml-->
 <view class='detail-page-background'>
 <view class='detail-two-cash'>
-  <view>支出金额</view>
+  <view>{{detailList[2].text}}金额</view>
   <view>{{detailList[5].text}}</view>
 </view>
 <view wx:key="{{index}}" wx:for="{{detailList}}">

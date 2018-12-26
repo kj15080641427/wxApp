@@ -8,91 +8,90 @@ Page({
    * 页面的初始数据
    */
   data: {
-    select:'',
-    gender:'',
-    search:'',//律师
-    listIndex:'',
-    indexPicker:'',
-    click:false,
-    practiceYearId:1, //执业年限
+    select: '',
+    gender: '',
+    search: '',//律师
+    listIndex: '',
+    indexPicker: '',
+    click: false,
+    practiceYearId: 1, //执业年限
     sex: '', //性别
-    industryId:'', //行业
-    skillId:'',//基本技能
-    expandId:'', // 扩展技能
-    languageId:'', //第二语言
-    courtId:'', //法院
-    procuratorateId:'',//检察院
-    positionId:'',//职位
-    honorId:'',//荣誉
-    socialId:'', // 社会职务
-    guaranteeId:'',//增信担保
-    mungId:'',//绿豆圈
-    organizationId:'', //商会组织
+    industryId: '', //行业
+    skillId: '',//基本技能
+    expandId: '', // 扩展技能
+    languageId: '', //第二语言
+    courtId: '', //法院
+    procuratorateId: '',//检察院
+    positionId: '',//职位
+    honorId: '',//荣誉
+    socialId: '', // 社会职务
+    guaranteeId: '',//增信担保
+    mungId: '',//绿豆圈
+    organizationId: '', //商会组织
   },
 
   // getList:function(){
   // },
   // 确定按钮
-  getSearchLawyer:function(){
+  getSearchLawyer: function () {
     var that = this
     var t = that.data
     wx.setStorageSync("picIndexList", picIndexList)
     var gs = wx.getStorageSync("picIndexList")
     dataJSON = {
-      "pageNum":'1',
-      "pageSize":'10',
-      "businessTypeId": t.noFilter.businessTypeId || '',
-      "regionId": t.noFilter.regionId || '',
-      "lawyerName": t.noFilter.lawyerName || '',
-      "sort": t.noFilter.sort || '',
-      "practiceYearId": t.practiceYearId ? t.practiceYearId : gs.practiceYearId ? gs.practiceYearId: '',
-      "sex": t.sex ? t.sex : gs.sex ? gs.sex: '',
-      "industryId": t.industryId ? t.industryId : gs.insIndex ? t.search[2].items[gs.insIndex].id :'',
-      "baseSkillId": t.skillId ? t.skillId : gs.baseSkillIndex ? t.search[3].items[gs.baseSkillIndex].id :'',
+      "pageNum": '1',
+      "pageSize": '10',
+      // "lawyerName": t.noFilter.lawyerName || '',
+      // "sort": t.noFilter.sort || '',
+      "practiceYearId": t.practiceYearId ? t.practiceYearId : gs.practiceYearId ? gs.practiceYearId : '',
+      "sex": t.sex ? t.sex : gs.sex ? gs.sex : '',
+      "industryId": t.industryId ? t.industryId : gs.insIndex ? t.search[2].items[gs.insIndex].id : '',
+      "baseSkillId": t.skillId ? t.skillId : gs.baseSkillIndex ? t.search[3].items[gs.baseSkillIndex].id : '',
       "otherSkillId": t.expandId ? t.expandId : gs.ohterSkillIndex ? t.search[4].items[gs.ohterSkillIndex].id : '',
       "langSkillId": t.languageId ? t.languageId : gs.langSkillIndex ? t.search[5].items[gs.langSkillIndex].id : '',
       "courtId": t.courtId ? t.courtId : gs.courtIndex && t.search[6].items[0] ? t.search[6].items[gs.courtIndex].id : '',
       "procuratorateId": t.procuratorateId ? t.procuratorateId : gs.procuratorateIndex && t.search[7].items[0] ? t.search[7].items[gs.procuratorateIndex].id : '',
       "positionId": t.positionId ? t.positionId : gs.positionIndex ? t.search[8].items[gs.positionIndex].id : '',
-      "honorId": t.honorId ? t.honorId : gs.honorIndex ? t.search[9].items[gs.honorIndex].id :'',
+      "honorId": t.honorId ? t.honorId : gs.honorIndex ? t.search[9].items[gs.honorIndex].id : '',
       "socialId": t.socialId ? t.socialId : gs.socialIndex ? t.search[10].items[gs.socialIndex].id : '',
       "depositAmountId": t.guaranteeId ? t.guaranteeId : gs.depositIndex ? t.search[11].items[gs.depositIndex].id : '',
-      "lexMungId": t.mungId ? t.mungId : gs.lexMungIndex ? t.search[12].items[gs.lexMungIndex].id :'',
-      "orgId": t.organizationId ? t.organizationId : gs.organziationIndex ? t.search[13].items[gs.organziationIndex].id :''
+      "lexMungId": t.mungId ? t.mungId : gs.lexMungIndex ? t.search[12].items[gs.lexMungIndex].id : '',
+      "orgId": t.organizationId ? t.organizationId : gs.organziationIndex ? t.search[13].items[gs.organziationIndex].id : '',
+      "expert": 1
     }
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1];   //当前页面
     var prevPage = pages[pages.length - 2];  //上一个页面
     prevPage.setData({
       getPage: 10,
-      noFilter:{ ...dataJSON }
+      noFilter: { ...dataJSON }
     })
-    prevPage.pc ? prevPage.pc(): prevPage.searchLawyer()
+    prevPage.searchLawyer()
     wx.navigateBack({
       url: '../index',
     })
-   //
-  //  if(picIndexList){
+    //
+    //  if(picIndexList){
 
-  //   console.log("为空")
-  //  }
+    //   console.log("为空")
+    //  }
   },
   // 重置按钮
-  reset:function(){
+  reset: function () {
     var that = this
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1];   //当前页面
     var prevPage = pages[pages.length - 2];  //上一个页面
     dataJSON = { "pageNum": '1', "pageSize": '10' }
     prevPage.setData({
-      noFilter: { "pageNum": '1', "pageSize": '10', "lawyerName": that.data.name},
-      ishidden:true
+      noFilter: { "pageNum": '1', "pageSize": '10', "lawyerName": that.data.name },
+      ishidden: true
     })
-    picIndexList={}
+    picIndexList = {}
     wx.removeStorageSync("picIndexList")
     this.onShow()
   },
- 
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -100,25 +99,25 @@ Page({
   onLoad: function (options) {
     var that = this
     that.setData({
-      noFilter: JSON.parse(options.noFilter),
-      name: JSON.parse(options.noFilter).lawyerName ? JSON.parse(options.noFilter).lawyerName:''
+      // noFilter: JSON.parse(options.noFilter),
+      name: JSON.parse(options.noFilter).lawyerName ? JSON.parse(options.noFilter).lawyerName : ''
     })
     console.log(JSON.parse(options.noFilter))
-      var searchUrl = api.getSearch()
-      var searchSuccess = function (data) {
-        that.setData({
-          search: data.data
-        })
-        console.log("成功", data.data)
-      }
-      var searchFail = function (e) {
-        wx.showToast({
-          title: '获取筛选列表失败',
-          icon:'none'
-        })
-        console.log("失败", e)
-      }
-      wxrequest.requestGet(searchUrl, ' ', searchSuccess, searchFail)
+    var searchUrl = api.getSearch()
+    var searchSuccess = function (data) {
+      that.setData({
+        search: data.data
+      })
+      console.log("成功", data.data)
+    }
+    var searchFail = function (e) {
+      wx.showToast({
+        title: '获取筛选列表失败',
+        icon: 'none'
+      })
+      console.log("失败", e)
+    }
+    wxrequest.requestGet(searchUrl, ' ', searchSuccess, searchFail)
   },
 
   /**
@@ -135,8 +134,8 @@ Page({
     var that = this
     var gs = wx.getStorageSync("picIndexList")
     that.setData({
-      practiceYearId: gs.practiceYearId ? gs.practiceYearId :1 ,//执业年限
-      sex:gs.sex ? gs.sex :'',
+      practiceYearId: gs.practiceYearId ? gs.practiceYearId : 1,//执业年限
+      sex: gs.sex ? gs.sex : '',
       insIndex: gs.insIndex ? gs.insIndex : '',//行业
       baseSkillIndex: gs.baseSkillIndex ? gs.baseSkillIndex : '',//基本技能
       ohterSkillIndex: gs.ohterSkillIndex ? gs.ohterSkillIndex : '',//扩展技能
@@ -201,7 +200,7 @@ Page({
   //基本技能
   changeSkill: function (e) {
     this.setData({
-      baseSkillIndex: e.detail.value ,
+      baseSkillIndex: e.detail.value,
       skillId: this.data.search[3].items[e.detail.value].id
     })
     picIndexList.baseSkillIndex = e.detail.value

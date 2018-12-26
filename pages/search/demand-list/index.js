@@ -162,7 +162,7 @@ Page({
         }
         var fail = function (e) {
             wx.showToast({
-                title: '发送请求失败,已有需求或总需求超过5条',
+                title: e.message,
                 icon: 'none'
             })
             console.log(e)

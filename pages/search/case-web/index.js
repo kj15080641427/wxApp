@@ -1,13 +1,11 @@
-// pages/index/webView/index.js
+// pages/search/case-web/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    sUrl:'',
-    index:'',
-    adUrl:''
+    url:''
   },
 
   /**
@@ -15,8 +13,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      sUrl:wx.getStorageSync("web"),
-      // index: options.resolveindex
+      url:options.url
     })
   },
 
@@ -31,7 +28,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.onLoad()
+
   },
 
   /**

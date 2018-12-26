@@ -37,6 +37,14 @@ function requestLoading(url, params, message, success, fail) {
             if (res.statusCode == 200 && res.data.code == 0) {
                 success(res.data)
             } else {
+              if (res.statusCode == 401) {
+                wx.navigateTo({
+                  url: '../userlogin/index',
+                  complete: function (res) {
+                    console.log(res)
+                  }
+                })
+              }
                 fail(res.data)
             }
         },
@@ -82,6 +90,14 @@ function requestPost(url, params, message, success, fail) {
             if (res.statusCode == 200 && res.data.code == 0) {
                 success(res.data)
             } else {
+              if (res.statusCode == 401) {
+                wx.navigateTo({
+                  url: '../userlogin/index',
+                  complete: function (res) {
+                    console.log(res)
+                  }
+                })
+              }
                 fail(res)
             }
         },
@@ -218,6 +234,14 @@ function requestGetpar(url, params, message, success, fail) {
             if (res.statusCode == 200 && res.data.code == 0) {
                 success(res.data)
             } else {
+              if (res.statusCode == 401) {
+                wx.navigateTo({
+                  url: '../userlogin/index',
+                  complete: function (res) {
+                    console.log(res)
+                  }
+                })
+              }
                 fail(res)
             }
         },

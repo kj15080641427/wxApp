@@ -28,6 +28,7 @@ Page({
     winHeight: "",//窗口高度
     scrollLeft: 0, //tab标题的滚动条位置
     adBanner:'',
+    listHeight:''
   },
   //获取swiper高度
   // getHeight: function (e) {
@@ -43,12 +44,6 @@ Page({
   swiperChange: function (e) {
     this.setData({
       nowIdx: e.detail.current
-    })
-  },
-  //需求test
-  gotoDemand:function(){
-    wx.navigateTo({
-      url: '../search/demand/index',
     })
   },
   //搜索律师
@@ -94,7 +89,7 @@ Page({
     var that = this
     var url = api.getArticleTypeUrl()
     var messagetype = ""
-    var data = { "pageNum": 1, "pageSize": 100 }
+    var data = { "pageNum": 1, "pageSize": 100,"deviceInfoId":5 }
     var success = function (data) {
       console.log("解决方案分类list", data.data.list)
       that.setData({
@@ -118,7 +113,7 @@ Page({
       wx.hideLoading()
       console.log("解决方案list", data)
       that.setData({
-        article: data.data.list
+        article: data.data.list ? data.data.list :data.data
       })
     }
     var failList = function (e) {
@@ -169,9 +164,10 @@ Page({
     var message = ""
     var listData = { "typeId": that.data.popular[e.detail.current].id, "pageNum": 1, "pageSize": 10 }
     var successList = function (data) {
-      console.log("list", data.data.list)
+      // console.log("list", data.data.list.length)
       that.setData({
-        article: data.data.list
+        article: data.data.list ? data.data.list:data.data,
+        // listHeight: data.data.list.length ? data.data.list.length*220+200+'rpx' :''
       })
     }
     var failList = function (e) {

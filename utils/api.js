@@ -218,6 +218,26 @@ var Case = '/lawyer/case'
 function getCase(){
   return HOST_URL + Case
 }
+//文字咨询
+var FreeText = '/lawyer/freeText'
+function getFreeText(){
+  return HOST_URL + FreeText
+}
+//快速咨询 
+var Quick = '/client/quick/post'
+function getQuick(){
+  return HOST_URL + Quick
+}
+//客户端解决方案类型
+var Type = '/solution/type'
+function getType(){
+  return HOST_URL + Type
+}
+//专家服务
+var ExpertPhone = '/client/expert/call/'
+function getExpertPhone(){
+  return HOST_URL + ExpertPhone
+}
 module.exports={
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,
@@ -254,4 +274,8 @@ module.exports={
   getOrganization: getOrganization,
   getAdbanner: getAdbanner,
   getCase: getCase,
+  getFreeText: getFreeText,
+  getQuick: getQuick,
+  getType:getType,
+  getExpertPhone: getExpertPhone
 }

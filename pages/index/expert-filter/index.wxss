@@ -1,4 +1,4 @@
-/* pages/search/filter/index.wxss */
+/* pages/index/expert-filter/index.wxss *//* pages/search/filter/index.wxss */
 .filter-background{
   background-color: white;
   padding-left: 35rpx;

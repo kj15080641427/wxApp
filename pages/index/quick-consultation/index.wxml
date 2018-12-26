@@ -17,14 +17,14 @@
 <view class='quick-page-font'>
 
   <view class='quick-page-flex quick-center'>
-    <view style='margin-left:35rpx'>问题类型</view>
+    <view style='margin-left:35rpx;width:120rpx;'>问题类型</view>
     <picker value='{{index}}' range="{{popular}}" range-key = "{{'typeName'}}"bindchange='changeType' class='quick-page-right'>    {{popular[index].typeName}}<label wx:if="{{selectType}}">{{selectProblem}}</label></picker>
   </view>
 <view class='quick-page-line-center'></view>
   <view class='quick-page-flex quick-center'>
-    <view style='margin-left:35rpx'>联系手机</view>
+    <view style='margin-left:35rpx;width:120rpx;'>联系手机</view>
     <input class='quick-page-right quick-phone' bindblur='phoneInput' value='{{phone}}'></input>
-    <view style='font-size:27rpx;margin-right:35rpx;margin-left:35rpx'>更换手机</view>
+    <view style='font-size:27rpx;margin-right:35rpx;margin-left:35rpx;width:120rpx;'>更换手机</view>
   </view>
 </view>
 <!-- 支付方式 -->

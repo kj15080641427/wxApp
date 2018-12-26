@@ -19,7 +19,9 @@ Page({
     showMore:false,//展示更多简介
     isFollow:'',//是否已关注
     myFollow:'',//我的关注列表
-    caseList:''//案例
+    caseList:'',//案例
+    isshowCard: true,
+    isshowCase: false
   },
   //关注
   follow:function(){
@@ -181,6 +183,26 @@ Page({
       console.log("案例错误",e)
     }
     wxrequest.request(url,data,success,fail)
+  },
+  //案件h5
+  gotoCase:function(e){
+    wx.navigateTo({
+      url: '../case-web/index?url=' + this.data.caseList[e.currentTarget.dataset.caseindex].url,
+    })
+  },
+  //显示名片
+  showCard:function(){
+    this.setData({
+      isshowCard:true,
+      isshowCase:false
+    })
+  },
+  //显示案件展示
+  showCase:function(){
+    this.setData({
+      isshowCard: false,
+      isshowCase: true
+    })
   },
   /**
    * 生命周期函数--监听页面加载

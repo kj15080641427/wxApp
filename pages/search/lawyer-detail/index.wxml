@@ -55,13 +55,13 @@
 </view>
 
 <view class='law-page-tab' style='margin-top:35rpx;'>
-  <view>律师名片</view>
-  <view>案例展示</view>
+  <view bindtap='showCard' style="{{isshowCard ? 'color:#1ec88c;':''}}">律师名片</view>
+  <view bindtap="showCase" style="{{isshowCase ? 'color:#1ec88c;':''}}">案例展示</view>
 </view>
 
 <!-- 律师名片 -->
 <!-- 擅长领域 -->
- <view wx:if="{{false}}">
+ <view wx:if="{{isshowCard}}">
 <view wx:if="{{lawyerInfo.businessType}}" >
 <view class='law-flex' style='background-color:white;height:300rpx;'>
   <view class='law-long-text'>擅长领域</view>
@@ -225,7 +225,7 @@
 
 </view>
 <!-- 案例展示 -->
-<view class="detail-case-show" wx:for="{{caseList}}">
+<view class="detail-case-show" wx:key="{{index}}" wx:for="{{caseList}}" data-caseindex="{{index}}" bindtap="gotoCase" wx:if="{{isshowCase}}">
   <view class="detail-case-show-list">
     <view class="detail-case-show-title-view">
       <view class="detail-case-show-title">{{item.title}}</view>

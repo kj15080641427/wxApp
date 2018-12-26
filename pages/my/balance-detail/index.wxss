@@ -26,6 +26,6 @@
   font-size: 38rpx;
 }
 .ba-detail-line{
-  background-color: red;
+  background-color: #b5b5b5;
   height: 1rpx;
 }

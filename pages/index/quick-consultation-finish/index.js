@@ -6,12 +6,12 @@ Page({
    */
   data: {
     tipList:[
-      { "key": '订单编号', "value": ' KS20180101'},
-      { "key": '订单日期', "value": ' 2018-01-01 12:12' },
+      { "key": '订单编号', "value": ' '},
+      { "key": '订单日期', "value": ' ' },
       { "key": '商品名称', "value": ' 快速咨询' },
-      { "key": '商品类型', "value": ' 婚姻家庭' },
-      { "key": '联系手机', "value": ' 13535353535' },
-      { "key": '订单金额', "value": ' ¥99' }
+      { "key": '商品类型', "value": ' ' },
+      { "key": '联系手机', "value": '' },
+      { "key": '订单金额', "value": '' }
     ]
   },
   goHome:function(){
@@ -24,7 +24,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+   this.setData({
+     ['tipList[0].value']: options.orderNo,
+     ['tipList[1].value']: options.timeStamp,
+     ['tipList[3].value']: options.type,
+     ['tipList[4].value']: options.phone,
+     ['tipList[5].value']: options.money,
+   })
   },
 
   /**

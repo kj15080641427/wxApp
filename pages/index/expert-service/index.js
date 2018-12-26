@@ -11,7 +11,7 @@ Page({
     getPage: 10,
     parameter: '',
     noFilter: {
-      "regionId": '430100',
+      "regionId": '',
       "lawyerName": '',
       "practiceYearId": '',
       "sex": '',
@@ -27,15 +27,20 @@ Page({
       "depositAmountId": '',
       "lexMungId": '',
       "orgId": '',
-      "businessTypeId": ''
+      "businessTypeId": '',
+      "expert":1
     },
     sort: ["综合排序", "最新入驻", "活跃度最高"],
     sortIndex: 0,//排序index
   },
+  //专家咨询
+  getExpert:function(){
+    var url = api
+  },
   //筛选
   gotoFilter: function () {
     wx.navigateTo({
-      url: '../../search/filter/index?noFilter=' + JSON.stringify(this.data.noFilter),
+      url: '../expert-filter/index?noFilter=' + JSON.stringify(this.data.noFilter),
     })
   },
   //排序
@@ -143,13 +148,6 @@ Page({
     var currPage = pages[pages.length - 1]; //当前页面
     var prevPage = pages[pages.length - 2]; //上一个页面
 
-    //直接调用上一个页面对象的setData()方法，把数据存到上一个页面中去
-    // prevPage.setData({
-    //   postList: JSON.parse(options.parameter)
-    // })
-    //筛选条件
-    // console.log(JSON.parse(options.parameter))
-    // noFilter.regionId = options.parameter.lawyerRegionId
     this.searchLawyer()
   },
 

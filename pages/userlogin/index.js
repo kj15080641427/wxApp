@@ -119,7 +119,7 @@ Page({
                 })
             }
             var fail = function (e) {
-                console.log(e)
+                console.log("memberId",e)
             }
             wxrequest.requestGet(userInfoUrl, message, success, fail)
 
@@ -134,7 +134,7 @@ Page({
         }
         var fail = function (data) {
             wx.showToast({
-                title: data ? data : '注册失败',
+                title: data.message,
                 icon: 'none'
             })
             console.log(data)

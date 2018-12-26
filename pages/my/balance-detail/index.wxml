@@ -1,5 +1,5 @@
 <!--pages/my/balance-detail/index.wxml-->
-<view wx:key="{{index}}" wx:for="{{detail}}" bindtap="gotoBalanceDetail" data-baindex="{{index}}">
+<view wx:key="{{index}}" wx:for="{{detail}}" bindtap="gotoBalanceDetail" data-baindex="{{index}}" class='balance-back'>
 <view class='ba-detail-view' >
   <view class=''>
     <view class='ba-detail-ttext'>{{item.orderType}}</view>

@@ -330,7 +330,7 @@ margin-left: 35rpx;
 .detail-case-show-list{
   margin-top: 35rpx;
   background-color: white;
-  height: 300rpx;
+  /* height: 300rpx; */
 }
 .detail-case-show-title-view{
   padding: 35rpx;
@@ -354,7 +354,7 @@ margin-left: 35rpx;
   overflow : hidden;
 text-overflow: ellipsis;
 display:-webkit-box;
--webkit-line-clamp:2;
+-webkit-line-clamp:5;
 -webkit-box-orient: vertical;
 }
 .detail-case-show-line{
