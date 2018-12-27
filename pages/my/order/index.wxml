@@ -3,6 +3,7 @@
   <view class='order-page-top'>
     <view>{{item.createDate}}</view>
     <view class="{{item.orderStatus == 0 ? 'order-statu': ''}}">{{item.statusValue}}</view>
+    <view wx:if="{{item.statusValue == '已支付,未接单'}}" style='color:red'>未接单</view>
   </view>
   <view class='order-page-line'></view>
   <view class='order-page-type' >
@@ -11,7 +12,7 @@
       <view class='order-page-consultype'>
         <view wx:if="{{item['orderType'] == '电话咨询'}}">通话时长:{{item.talkTime1h}}</view>
         <view wx:else="item['orderType'] =='电话咨询'">
-          <label wx:if="{{item.orderType == '发布需求'}}">咨询律师:{{item.lmemberName}} </label>
+          <label wx:if="{{item.orderType == '需求'}}">咨询律师:{{item.lmemberName}} 服务类型:{{item.typeName}}</label>
           <label wx:if="{{item.orderType =='专家咨询'}}">咨询律师:{{item.lmemberName}}</label>
           <label wx:if="{{item.orderType=='免费文字咨询'}}">咨询类型:{{item.typeName}}</label>
           <label wx:if="{{item.orderType=='快速电话咨询'}}">咨询类型:{{item.typeName}}</label>

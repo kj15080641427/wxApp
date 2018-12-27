@@ -64,13 +64,16 @@ Page({
         icon: 'none'
       })
     } else {
-    if (!(/^1[345678]\d{9}$/.test(this.data.phone))) {
-      wx.showToast({
-        title: '请输入正确的手机号码',
-        icon: 'none'
-      })
-    }else{
-      var t = { typeQuick: this.data.popular[this.data.index].id, money: this.data.money, type: 1, product: 3 }
+      // if (!(/^1[345678]\d{9}$/.test(this.data.phone))) {
+    // if 
+    // (this.data.phone) {
+    //   wx.showToast({
+    //     title: '请输入正确的手机号码',
+    //     icon: 'none'
+    //   })
+    // }else
+    // {
+      var t = { typeQuick: this.data.popular[this.data.index], money: this.data.money, type: 1, product: 2 }
       if(this.data.checked1){
         var that = this
         var payMoney = that.data.money
@@ -81,30 +84,31 @@ Page({
         })
       }else{
         var that = this
-        var s = { typeQuick: this.data.popular[this.data.index].id, money: this.data.money, type: 3, product: 3 ,phone:this.data.phone}
+        var s = { typeQuick: this.data.popular[this.data.index], money: this.data.money, type: 3, product: 2 ,phone:this.data.phone}
+        console.log(this.data.popular[this.data.index])
         wxPay(s).then(res => {
           // this.getQuick.then(res.data.data.orderno)
           console.log("余额支付", res.data.data.orderno)
         },error => {console.log(error)})
       }
-    }
+    // }
   }
   },
   // 快速咨询
-  getQuick: function (orderNo){
-    var url = api.getQuick()
-    var data = { "payOrderNo": orderNo, "payType": this.data.checked1 ?1:3, "payAmount": this.data.money, "typeId": this.data.popular[this.data.index].id}
-    var success = data => {
-      console.log("支付成功",data)
-      wx.navigateTo({
-        url: '../quick-consultation-finish/index?orderNo=' + data.data.orderNo + '&timeStamp=' + data.data.timeStamp + '&type=' + this.data.popular[this.data.index].typeName + '&phone=' + this.data.phone +'&money=' + this.data.money
-      })
-    }
-    var fail = e => {
-      console.log(e)
-    }
-    wxrequest.request(url, data, success,fail)
-  },
+  // getQuick: function (orderNo){
+  //   var url = api.getQuick()
+  //   var data = { "payOrderNo": orderNo, "payType": this.data.checked1 ?1:3, "payAmount": this.data.money, "typeId": this.data.popular[this.data.index].id}
+  //   var success = data => {
+  //     console.log("支付成功",data)
+  //     wx.navigateTo({
+  //       url: '../quick-consultation-finish/index?orderNo=' + data.data.orderNo + '&timeStamp=' + data.data.timeStamp + '&type=' + this.data.popular[this.data.index].typeName + '&phone=' + this.data.phone +'&money=' + this.data.money
+  //     })
+  //   }
+  //   var fail = e => {
+  //     console.log(e)
+  //   }
+  //   wxrequest.request(url, data, success,fail)
+  // },
   //查询余额
   getBalance:function(){
     var url = api.getBalance() + wx.getStorageSync("memberId")

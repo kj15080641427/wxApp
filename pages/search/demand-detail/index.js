@@ -20,7 +20,7 @@ Page({
     // markNext:'', //问题标签
     // industry:'',//向下传递熟悉行业
     postList: {
-      "requirementId": String(wx.getStorageSync("requirementId")) || '0',
+      "requirementId": '0',
       "requirementTypeId": '',
       "requirementTypeName": '',
       "requirementBusiId": "",
@@ -33,7 +33,7 @@ Page({
       "tagId": '',
       "tag": '',
       "targetLawyerId": '',
-      "isFirst":'1'
+      "isFirst": 1
     }
   },
   //标签列表
@@ -96,8 +96,8 @@ Page({
     this.setData({
       seindex: e.currentTarget.dataset.selectindex,
       [`selist[${e.currentTarget.dataset.selectindex}].is`]: !this.data.selist[e.currentTarget.dataset.selectindex].is,
-      // ['postList.tagId']: String(this.data.markList[e.currentTarget.dataset.selectindex].id),
-      // ['postList.tag']: this.data.markList[e.currentTarget.dataset.selectindex].name
+      ['postList.tagId']: String(this.data.markList[e.currentTarget.dataset.selectindex].tagId),
+      ['postList.tag']: this.data.markList[e.currentTarget.dataset.selectindex].tagName
     })
     // console.log("selist",this.data.seindex)
     // if(selist){
@@ -147,8 +147,8 @@ Page({
       }
     })
     tagIndexList.map(function(item){
-      tagIdList.push(that.data.markList[item].id)
-      tagNameList.push(that.data.markList[item].name)
+      tagIdList.push(that.data.markList[item].tagId)
+      tagNameList.push(that.data.markList[item].tagName)
     })
     var test= tagIdList
     // test
@@ -156,7 +156,7 @@ Page({
       ['postList.tagId']: tagIdList,
       ['postList.tag']: tagNameList
     })
-    console.log("标签", that.data.postList.tag)
+    console.log("标签", that.data.selist)
     var par = this.data.postList
     if (!that.data.id ? par.skillId=="" || par.skillName == '' :false){
       wx.showToast({

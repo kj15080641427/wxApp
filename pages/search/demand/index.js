@@ -9,6 +9,12 @@ Page({
       demandType:'',
       typeindex:''
   },
+  //文字咨询
+  gotoconsul:function(){
+    wx.navigateTo({
+      url: '../../index/consultation/index',
+    })
+  },
   //服务分类
   getDemandType:function(){
     var that = this

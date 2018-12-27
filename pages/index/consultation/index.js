@@ -7,7 +7,7 @@ Page({
    */
   data: {
     checked:1,
-    array: ['婚姻家事', '房产土地', '债权债务', '公司工商'],
+    array: [],
     hasSelect:true,
     hasSelectAddress:true,
     region: '',
@@ -30,9 +30,9 @@ Page({
       hasSelect:false,
     })
     this.setData({
-      consultationTypeId: Number(e.detail.value)+1
+      consultationTypeId: this.data.array[e.detail.value].id
     })
-    // console.log(e.detail.value)
+    console.log(this.data.consultationTypeId)
   },
   // 选择地区
   bindRegionChange: function (e) {
@@ -97,13 +97,35 @@ Page({
       wxrequest.request(commitURL, data, success, fail)
     }
   },
+  //解决方案类型  
+  getArticleType:function(){
+    var that = this
+    var url = api.getArticleTypeUrl()
+    var messagetype = ""
+    var data = { "pageNum": 1, "pageSize": 100,"deviceInfoId":5 }
+    var success = function (data) {
+      wx.hideLoading()
+      console.log("解决方案分类list", data.data)
+      that.setData({
+        array: data.data,
+      })
+      // that.getArticleList()
+      // initIndex: data.data.list[0].id
+    }
+    var fail = function (e) {
+      wx.hideLoading()
+      console.log("解决方案错误", e)
+    }
+    wxrequest.requestPost(url, data, messagetype, success, fail)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      array: JSON.parse(options.type)
-    })
+    this.getArticleType()
+    // this.setData({
+    //   array: JSON.parse(options.type)
+    // })
     console.log("问题类型",this.data.array)
     //问题类型
     // var that = this

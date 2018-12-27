@@ -361,3 +361,22 @@ display:-webkit-box;
   height: 1rpx;
   background-color: #f4f4f4;
 }
+.quick-button-view{
+  position: fixed;
+  bottom: 0;
+  height:100rpx;
+  width: 750rpx;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1rpx solid #b5b5b5
+}
+.quick-button{
+  background-color: #1ec88c;
+  height:80rpx;
+  width: 380rpx;
+  border-radius: 40rpx;
+  color: white;
+  line-height: 80rpx;
+}

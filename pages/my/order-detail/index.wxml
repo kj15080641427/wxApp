@@ -1,9 +1,9 @@
 <!--pages/my/order-detail/index.wxml-->
-<view class='detail-page-time'>
-  <view style='display:flex'>
+<view class='detail-page-time'wx:if="{{statusValue}}">
+  <view style='display:flex' >
      <image src='../../../image/my_icon@3x/My order_icon_01_3x.png' style='width:30rpx;height:30rpx'/>
      <view style='margin-left:15rpx' wx:if="{{time}}">剩余咨询时间 {{minute}}:<text wx:if="{{second<10}}">0</text>{{second}}</view>
-     <view style='margin-left:15rpx' wx:if="{{!time}}">已过期</view>
+     <view style='margin-left:15rpx' wx:if="{{!time}}">00:00</view>
   </view>
   <image src='../../../image/my_icon@3x/My order_icon_02_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'/>
 </view>
@@ -26,6 +26,6 @@
 <view class='detail-page-line detail-page-bottom-line'></view>
 <view class='detail-page-button-view detail-page-bottom'>
   <button class='detail-page-button' bindtap='gotoChat' wx:if="{{statusValue}}" >联系律师</button>
-  <button class='detail-page-button-no' wx:if="{{!statusValue}}" >联系律师</button>
+  <button class='detail-page-button-no' wx:if="{{!statusValue}}" >等待接单</button>
 </view>
 

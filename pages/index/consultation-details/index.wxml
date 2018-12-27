@@ -21,9 +21,9 @@
       <view class='details-page-top details-page-reply-margin'>
         <view class='details-page-reply-dot'></view>
       </view>
-      <view class='details-page-reply-margin' bindtap='deleteInfo'>删除</view>
+      <!-- <view class='details-page-reply-margin' bindtap='deleteInfo'>删除</view> -->
     </view>
-    <view><label style='color:#1ec88c'></label>条回复</view>
+    <view><label style='color:#1ec88c'></label>{{freeOne.total?freeOne.total:0}}条回复</view>
   </view>
 </view>
 

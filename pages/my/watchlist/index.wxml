@@ -1,11 +1,11 @@
 
 <view class="" >
-  <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{myFollow}}" bindtap='getLawyerInfo' data-index="{{index}}" catchtap='getIndex'>
+  <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{myFollow}}"  data-index="{{index}}" catchtap='getIndex'>
     <view class='watchlist-page'>
       <view class='watchlist-page-flex'>
         <view class='watchlist-page-left' style="z-index:55;">
           <image class='watchlist-page-avatar' src="{{myFollow[index].iconImage ? myFollow[index].iconImage :'../../../image/my_icon@3x/mine_icon_02_3x.png'}}"  style="z-index:55;"></image>
-          <view class='watchlist-page-practice' style="z-index:55;">执业{{year[index]}}年</view>
+          <view class='watchlist-page-practice' style="z-index:55;">执业{{year[index]>0?year[index]:1}}年</view>
 
         </view>
         <view class='watchlist-page-right'>

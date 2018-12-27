@@ -33,9 +33,12 @@ Page({
     sort: ["综合排序", "最新入驻", "活跃度最高"],
     sortIndex: 0,//排序index
   },
-  //专家咨询
-  getExpert:function(){
-    var url = api
+  // 跳转至专家咨询
+  gotoexpert:function(e){
+    wx.navigateTo({
+      url: '../../search/lawyer-detail/index?memberId='+this.data.lawyerList[e.currentTarget.dataset.lawindex].memberId+'&quick=true',
+    })
+    // console.log(',as',this.data.lawyerList[e.currentTarget.dataset.lawindex].memberId)
   },
   //筛选
   gotoFilter: function () {

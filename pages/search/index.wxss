@@ -10,7 +10,7 @@
   display: flex;
   align-items: center;
   height: 70rpx;
-  width: 680rpx;
+  width: 580rpx;
   margin-left: 35rpx;
   margin-right: 35rpx;
   background-color: #32b987;
@@ -65,8 +65,8 @@
   justify-content: space-between
 }
 .watchlist-page-avatar{
-  width: 120rpx;
-  height: 120rpx;
+  width: 140rpx;
+  height: 140rpx;
   background-color: white;
   border-radius: 50%;
 }

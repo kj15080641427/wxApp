@@ -31,6 +31,7 @@ Page({
         },
       sort: ["综合排序", "最新入驻", "活跃度最高"],
       sortIndex: 0,//排序index
+      getPage: 10
     },
       //排序Index
   getSortIndex: function (e) {
@@ -70,6 +71,42 @@ Page({
     wx.navigateTo({
       url: '../../search/filter/index?noFilter=' + JSON.stringify(this.data.noFilter),
     })
+  },
+  //上拉搜索
+  topSearch: function () {
+    var that = this
+    var url = api.getSearchLawyer() + "1/" + that.data.getPage
+    var datan = that.data.noFilter
+    // this.setData({
+    //   ['noFilter.lawyerName']: e.detail.value,
+    //   getPage: 10,
+    //   ishidden: true
+    // })
+    var success = function (data) {
+      wx.hideLoading()
+      if (!data.data.list[0]) {
+        that.setData({
+          hasList: false
+        })
+      }
+      that.setData({
+        lawyerList: data.data.list,
+        ishidden: true
+      })
+      // that.getAge()
+    }
+    var fail = function (e) {
+      wx.hideLoading()
+      wx.showToast({
+        title: '获取数据失败',
+        icon: 'none'
+      })
+      console.log(e)
+    }
+    wxrequest.request(url, datan, success, fail)
+    // wx.showLoading({
+    //   title: '正在加载',
+    // })
   },
     //
   confirm(e) {
@@ -148,10 +185,14 @@ Page({
                 title: '发送需求成功',
                 success() {
                     // wx.setStorageSync("requirementId", wx.getStorageSync("requirementId") + 1)
-                    wx.setStorageSync("requirementId", data.data.requirementId)
+                  // if (!wx.getStorageSync("requirementId")){
+                  //   wx.setStorageSync("requirementId", data.data.requirementId)
+                  // }
                     that.setData({
-                        ['parameter.requirementId']: wx.getStorageSync("requirementId")
-                    }, function () {
+                      ['parameter.requirementId']: data.data.requirementId,
+                      ['parameter.isFirst']:0,
+                    }, 
+                    function () {
                         wx.navigateTo({
                             url: '../../message/index'
                         })
@@ -234,7 +275,10 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+      wx.removeStorageSync("requirementId")
+      // this.setData({
+      //   parameter: '',
+      // })
     },
 
     /**
@@ -248,7 +292,13 @@ Page({
      * 页面上拉触底事件的处理函数
      */
     onReachBottom: function () {
-
+      var that = this
+      that.setData({
+        getPage: that.data.getPage + 10,
+        ishidden: false
+      })
+      var page = that.data.getPage
+      that.topSearch(page)
     },
 
     /**

@@ -138,7 +138,7 @@ Page({
         }
         var fail = function (data) {
             wx.showToast({
-                title: data.message,
+              title: data.message ? data.message:data,
                 icon: 'none'
             })
             console.log(data)

@@ -23,6 +23,21 @@ Page({
       }
     })
   },
+  //单条文字咨询详情
+  getFree:function(){
+    var url = api.getFreeText()+this.data.id
+    var data = {"consultationId":this.data.id}
+    var success = data =>{
+      console.log("单条文字咨询详情", data)
+      this.setData({
+        freeOne:data.data
+      })
+    }
+    var fail = e =>{
+      console.log(e)
+    }
+    wxrequest.requestGetpar(url,data,'',success,fail)
+  },
   //文字咨询列表
   getFreetextList:function(){
     var url = api.getFreetextList() +this.data.id+'/reply/1/10'
@@ -31,41 +46,32 @@ Page({
       this.setData({
         freeTextList:data.data.list
       })
+      // this.getFreeText()
       this.lawTime()
       console.log("文字咨询列表",data)
-      this.getFreeText()
+      // this.getFreeText()
     }
     var fail = e =>{
       console.log("文字咨询列表错误",e)
     }
     wxrequest.requestGetpar(url,data,'',success,fail)
   },
-  //文字咨询回复详情
-  getFreeText:function(){
-    var url = api.getFreeText() + this.data.id + '/' + this.data.freeTextList[1].lawyerId +'/reply/detail/1/10'
-    var data = { "consultationId": this.data.id, "lawyerId": this.data.freeTextList[1].lawyerId, "pageNum": 1,"pageSize":10}
-    var success = data =>{
-      this.setData({
-        freeText:data.data
-      })
-      console.log("文字咨询回复详情",data)
-    }
-    var fail = e =>{
-      console.log("文字咨询回复详情", e)
-    }
-    wxrequest.requestGetpar(url,data,'',success,fail)
-  },
-  //文字咨询详情
-  // getReply:function(){
-  //   var url = api.getFreeText()
-  //   var data = {}
-  //   var success = data =>{
-  //     console.log(data)
+  // //文字咨询回复详情
+  // getFreeText: function () {
+  //   var url = api.getFreeText() + this.data.freeTextList.consultationId + '/' + this.data.freeTextList.lawyerId + '/reply/detail/1/99'
+  //   var data = { "consultationId": this.data.freeTextList.consultationId, "lawyerId": this.data.freeTextList.lawyerId, "pageNum": 1, "pageSize": 99 }
+  //   var success = data => {
+  //     this.setData({
+  //       freeText: data.data.list
+  //     })
+  //     this.lawTime()
+  //     console.log("文字咨询回复详情list", data)
   //   }
-  //   var fail = e =>{
-  //     console.log(e)
+  //   var fail = e => {
+  //     console.log("文字咨询回复详情错误", e)
   //   }
-  //   wxrequest.request(url,data,success,fail)
+  //   // wxrequest.requestGetpar(url, data, '', success, fail)
+  //   console.log("文字咨询回复详情tttttttt", this.data.freeTextList[this.data.index])
   // },
   // 回复
   gotoReply:function(e){
@@ -117,15 +123,15 @@ Page({
         lawago: lawgaoList,
         lawagoText: lawagoTextList
       })
-    } else if (lawnowYearTime[0] - lawyearTime[0] > 0) {
-      lawgaoList.push(lawnowYearTime[0] - lawyearTime[0])
+    } else if (lawnowYearTime[0].split(":")[0] - lawyearTime[0].split(":")[0] > 0) {
+      lawgaoList.push(lawnowYearTime[0].split(":")[0] - lawyearTime[0].split(":")[0])
       lawagoTextList.push('小时')
       that.setData({
         lawago: lawgaoList,
         lawagoText: lawagoTextList
       })
-    } else if (lawnowYearTime[1] - lawyearTime[1] > 5) {
-      lawgaoList.push(lawnowYearTime[1] - lawyearTime[1])
+    } else if (lawnowYearTime[0].split(":")[1] - lawyearTime[0].split(":")[1] > 5) {
+      lawgaoList.push(lawnowYearTime[1].split(":")[0] - lawyearTime[1].split(":")[0])
       lawagoTextList.push('分钟')
       that.setData({
         lawago: lawgaoList,
@@ -189,6 +195,8 @@ Page({
       })
     }
     this.getFreetextList()
+    this.getFree()
+
     // this.getFreetextList()
     // this.getReply()
   },

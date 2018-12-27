@@ -89,6 +89,7 @@ Page({
                                 //data.conversations[0].type  会话类型(3 代表单聊会话类型，4 代表群聊会话类型)
                             }).onFail(function(data) {
                                 console.log(data)
+                                wx.hideLoading()  
                                 //data.code 返回码
                                 //data.message 描述
                             });
@@ -96,10 +97,12 @@ Page({
                         });
                         wx.hideLoading()
                     }).onFail(function(data){
+                      wx.hideLoading() 
                         console.log(data.message)
                         //同上
                     })
                 }).onFail(function(data) {
+                  wx.hideLoading() 
                     console.log(data)
                 }); 
                 console.log(app.globalData)
@@ -122,6 +125,7 @@ Page({
                     wx.hideLoading()
                 })
             }).onFail(function(data) {
+              wx.hideLoading() 
                 console.log(data)
             });
             jM.onMsgReceiptChange(function(data) {
@@ -137,6 +141,7 @@ Page({
                         conversationList: data.conversations
                     })
                 }).onFail(function(data) {
+                  wx.hideLoading() 
                     console.log(data)
                 });
                 that.setMessage(msgRes)
@@ -160,6 +165,7 @@ Page({
                 })
                 wx.setStorageSync('unReadMsgList', unReadMsgList)
             }).onFail(function (data) {
+              wx.hideLoading() 
                 console.log('error:' + JSON.stringify(data));
             });
         } else if(msg.content.msg_type == 'text'){

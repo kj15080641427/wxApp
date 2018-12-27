@@ -51,8 +51,9 @@ Page({
   //律师主页
   getIndex:function(e){
     wx.navigateTo({
-      url: '../../search/lawyer-detail/index',
+      url: '../../search/lawyer-detail/index?memberId='+this.data.myFollow[e.currentTarget.dataset.index].memberId,
     })
+    console.log(e)
   },
   /**
    * 生命周期函数--监听页面加载

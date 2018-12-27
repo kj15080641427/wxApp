@@ -41,7 +41,7 @@
         </view>
         <view class='watchlist-page-right'>
           <view class='watchlist-page-name' >
-            <view style='display:flex;width:350rpx;'>
+            <view style='display:flex;width:350rpx;align-items:center'>
               <view>{{lawyerList[index].memberName}}</view>
               <label wx:if="{{lawyerList[index].memberPositionName}}" class='watchlist-page-firm'>({{lawyerList[index].memberPositionName}})</label>
             </view>

@@ -15,7 +15,7 @@ var VerifyCode = '/passport/verifycode';
 var Login = '/passport/app/login';
 
 // 文章分类地址
-var ArticleType = '/admin/solutiontype/list'
+var ArticleType = '/solution/type'
 
 // 文章列表地址 解决方案
 // var ArticleList = '/client/solution/list'
@@ -209,7 +209,7 @@ function getOrganization (){
   return HOST_URL + Organization
 }
 //广告
-var Adbanner = '/client/banner'
+var Adbanner = '/banner'
 function getAdbanner(){
   return HOST_URL + Adbanner
 }
@@ -248,6 +248,7 @@ var UserReply = '/lawyer/freeText/'
 function getUserReply(){
   return HOST_URL + UserReply
 }
+//var 
 module.exports={
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,

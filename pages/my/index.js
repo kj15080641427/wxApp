@@ -156,7 +156,9 @@ Page({
    */
   // 'apabfdc34cc00042c2991bd59b9e8a1ae8ap'
   onLoad: function (options) {
-    wx.removeStorageSync("picIndexList")
+    this.setData({
+      token: wx.getStorageSync('token')
+    })
     // if(wx.getStorageInfoSync().keys.length<=1){
     //   wx.clearStorage()
     // }
@@ -252,6 +254,7 @@ Page({
     // 获取用户详情
     //年龄
     this.getAge()
+    wx.removeStorageSync("picIndexList")
   },
 
   /**

@@ -2,6 +2,7 @@
 var api = require('../../../utils/api.js')
 import wxPay from '../../../utils/wxPay.js'
 var wxrequest = require('../../../utils/request.js')
+var throttle =  require( '../../../utils/throttle.js')
 Page({
 
     /**
@@ -45,8 +46,9 @@ Page({
       this.setData({
         money:e.currentTarget.dataset.amt/10
       })
+      var v = { type: 1, product: 4, money: this.data.money}
       //   //  调取微信支付
-      wxPay(1, 4).then(res => { this.getBalance()})
+      wxPay(v).then(res => { this.getBalance()})
       console.log("充值", e.currentTarget.dataset.amt)
     },
     /**

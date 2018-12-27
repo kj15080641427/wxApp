@@ -67,6 +67,7 @@ Page({
   getAdbanner:function(){
     var url = api.getAdbanner()
     var success = (data)=>{
+      wx.hideLoading()
       this.setData({
         adBanner:data.data.list
       })
@@ -91,14 +92,16 @@ Page({
     var messagetype = ""
     var data = { "pageNum": 1, "pageSize": 100,"deviceInfoId":5 }
     var success = function (data) {
-      console.log("解决方案分类list", data.data.list)
+      wx.hideLoading()
+      console.log("解决方案分类list", data.data)
       that.setData({
-        popular: data.data.list.reverse(),
+        popular: data.data,
       })
       that.getArticleList()
       // initIndex: data.data.list[0].id
     }
     var fail = function (e) {
+      wx.hideLoading()
       console.log("解决方案错误", e)
     }
     wxrequest.requestPost(url, data, messagetype, success, fail)
@@ -110,10 +113,10 @@ Page({
     var message = ""
     var listData = { "typeId": this.data.popular[0].id, "pageNum": 1, "pageSize": 10, "deviceInfoId": 5 }
     var successList = function (data) {
-      wx.hideLoading()
       console.log("解决方案list", data)
       that.setData({
-        article: data.data.list ? data.data.list :data.data
+        article: data.data.list ? data.data.list :data.data,
+        listHeight: data.data.list.length ? data.data.list.length * 220 + 200 + 'rpx' : ''
       })
     }
     var failList = function (e) {
@@ -132,7 +135,6 @@ Page({
     wx.showLoading({
       title: '数据加载中',
     })
-    wx.removeStorageSync("picIndexList")
     console.log('12312312',wx.getStorageInfoSync())
     this.getArticleType()
     this.getAdbanner()
@@ -150,7 +152,7 @@ Page({
 
   },
   onShow:function(){
-    
+    wx.removeStorageSync("picIndexList")
   },
   // 滚动样式
   switchTab: function (e) {
@@ -164,14 +166,15 @@ Page({
     var message = ""
     var listData = { "typeId": that.data.popular[e.detail.current].id, "pageNum": 1, "pageSize": 10, "deviceInfoId": 5 }
     var successList = function (data) {
+      wx.hideLoading()
       // console.log("list", data.data.list.length)
       that.setData({
         article: data.data.list ? data.data.list:data.data,
-        // listHeight: data.data.list.length ? data.data.list.length*220+200+'rpx' :''
       })
     }
     var failList = function (e) {
       console.log("list", e)
+      wx.hideLoading()
     }
     wxrequest.requestPost(listUrl, listData, message, successList, failList)
   },
@@ -257,14 +260,26 @@ Page({
   },
   //专家咨询
   gotoExpert:function(){
+    if (wx.getStorageSync("token")) {
     wx.navigateTo({
       url: '../index/expert-service/index',
     })
+    }else{
+      wx.navigateTo({
+        url: '../../../../userlogin/index',
+      })
+    }
   },
   gotoQuick:function(){
-    wx.navigateTo({
-      url: '../index/quick-consultation/index?id=2',
-    })
+    if(wx.getStorageSync("token")){
+      wx.navigateTo({
+        url: '../index/quick-consultation/index?id=2',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../../../../userlogin/index',
+      })
+    }
   },
   onReady: function () {
 
@@ -287,9 +302,15 @@ Page({
     }
   },
   goToMessage(){
-    wx.navigateTo({
-      url: '../message/index',
-    })
+    if (wx.getStorageSync("token")) {
+      wx.navigateTo({
+        url: '../message/index',
+      })
+    } else {
+      wx.navigateTo({
+        url: '../../../../userlogin/index',
+      })
+    }
   },
   // 清除消息
   clearTips:function(){

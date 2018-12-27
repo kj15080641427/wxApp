@@ -50,7 +50,7 @@
    <view style='display:flex;justify-content: space-between;width:715rpx;align-items:center'>
     <view class='detail-page-text'><text style='color:red'>*</text>最高可承受费用</view>
     <view style='display:flex;align-items:center'>
-      <input style='color:black;width:400rpx;height:80rpx;text-align:right;padding:right:10rpx;'bindinput="getInput"></input>
+      <input style='color:black;width:400rpx;height:80rpx;text-align:right;padding:right:10rpx;'bindinput="getInput" type='number'></input>
       <view style='margin-right:35rpx;'>元</view>
     </view>
     </view>
