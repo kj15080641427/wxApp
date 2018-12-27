@@ -1,8 +1,5 @@
 var wxrequest = require('../../utils/request.js')
 var api = require('../../utils/api.js')
-import hex_md5 from '../../jM/md5.js'
-var app = getApp()
-var jM = app.globalData.jMessage
 var initIndex = ''
 Page({
     data: {
@@ -169,45 +166,7 @@ Page({
         
     },
     onShow: function () {
-        if(wx.getStorageSync('token') == '') {
-            wx.navigateTo({
-                url: '../userlogin/index'
-            })
-        }else{
-            console.log(jM.isLogin())
-            if(!jM.isLogin()){
-                wx.showLoading({
-                    title: '加载中',
-                })
-                wxrequest.superRequest(api.getImConfig(),{},'GET').then(res => {
-                    console.log('config:',res)
-                    //  初始化jmessage
-                    wx.setStorageSync('appkey', res.data.data.appkey)
-                    jM.init({
-                        "appkey"    : res.data.data.appkey,
-                        "random_str": res.data.data.random,
-                        "signature" : res.data.data.signature,
-                        "timestamp" : res.data.data.timestamp,
-                        "flag": 1
-                    }).onSuccess(function(data) {
-                        jM.login({
-                            'username' : 'lex' + wx.getStorageSync('memberId'),
-                            'password' : hex_md5(wx.getStorageSync('mobile'))
-                        }).onSuccess(function(lData) {
-                            console.log('jm-login:',lData)
-                            wx.hideLoading()
-                        }).onFail(function(data){
-                            console.log(data.message)
-                            wx.hideLoading()
-                            //同上
-                        })
-                    }).onFail(function(data) {
-                        console.log(data)
-                        wx.hideLoading()
-                    }); 
-                },error => {console.log(error);wx.hideLoading()})
-            }
-        }
+        
     },
     // 滚动样式
     switchTab: function (e) {
