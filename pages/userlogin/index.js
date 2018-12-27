@@ -1,6 +1,9 @@
 // pages/login/index.js
 var api = require('../../utils/api.js')
 var wxrequest = require('../../utils/request.js')
+import hex_md5 from '../../jM/md5.js'
+var app = getApp()
+var jM = app.globalData.jMessage
 Page({
     /**
      * 页面的初始数据
@@ -43,7 +46,6 @@ Page({
     getCodeInput: function (e) {
         this.setData({
             inputCode: e.detail.value
-// >>>>>>> f968bbecbbec771d42961a12b89ebd46f0c61f9b
         })
     },
     // 获取验证码
@@ -114,13 +116,38 @@ Page({
             var success = function (res) {
                 wx.setStorageSync("memberId", res.data.memberId)
                 wx.setStorageSync("mobile", res.data.mobile)
-                wx.navigateBack({
-// <<<<<<< HEAD
-//                     // delta: 2
-// =======
-//                     delta: 1
-// >>>>>>> 30411490df748e5f9929d91dc621a36e317fb693
-                })
+                if(!jM.isLogin()){
+                    wxrequest.superRequest(api.getImConfig(),{},'GET').then(res => {
+                        console.log('config:',res)
+                        //  初始化jmessage
+                        wx.setStorageSync('appkey', res.data.data.appkey)
+                        jM.init({
+                            "appkey"    : res.data.data.appkey,
+                            "random_str": res.data.data.random,
+                            "signature" : res.data.data.signature,
+                            "timestamp" : res.data.data.timestamp,
+                            "flag": 1
+                        }).onSuccess(function(data) {
+                            jM.login({
+                                'username' : 'lex' + wx.getStorageSync('memberId'),
+                                'password' : hex_md5(wx.getStorageSync('mobile'))
+                            }).onSuccess(function(lData) {
+                                console.log('jm-login:',lData)
+                                wx.hideLoading()
+                                wx.navigateBack({
+                                    delta:1
+                                })
+                            }).onFail(function(data){
+                                console.log(data.message)
+                                wx.hideLoading()
+                                //同上
+                            })
+                        }).onFail(function(data) {
+                            console.log(data)
+                            wx.hideLoading()
+                        }); 
+                    },error => {console.log(error);wx.hideLoading()})
+                }
             }
             var fail = function (e) {
                 console.log("memberId",e)
