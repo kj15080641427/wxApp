@@ -1,8 +1,8 @@
 {
   "pages":[
+    "pages/index/index",
     "pages/my/index",
     "pages/my/order/index",
-    "pages/index/index",
     "pages/index/expert-filter/index",
     "pages/search/index",
     "pages/index/expert-service/index",

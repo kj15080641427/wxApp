@@ -104,15 +104,13 @@ Page({
         let now = new Date()
         let date = new Date(now)
         let beginTime = date.setDate(date.getDate()-7)
-        console.log(wxformatTime.fTime(now))
-        console.log(wxformatTime.fTime(beginTime))
         wx.request({
             url: encodeURI('https://report.im.jpush.cn/v2/users/lex'+wx.getStorageSync('memberId')+'/messages?count=500&begin_time='+wxformatTime.fTime(beginTime)+'&end_time='+wxformatTime.fTime(now)),
             header: { 'Authorization': 'Basic NTdlYzIzM2U0ODE1ZjExMjM1YjMyMzk1OmIyMWY2YzYzOGU3MzIwYjE0YTVhMTQ2OQ==' },
             method: 'get',
             success(res){
-                console.log(res.data.messages)
-                console.log(userName)
+                // console.log(res.data.messages)
+                // console.log(userName)
                 let dArr = []
                 //  存在异步操作，只能用递归的形式加载数据
                 that.buildListData(userName, 0, res.data.messages, res.data.messages.length, dArr)
@@ -209,7 +207,7 @@ Page({
                     })
                 }
             }
-        } else {
+        } else if(arr[i].target_id == userName) {
             targetArr.push({
                 from_id: arr[i].from_id,
                 msg_type: arr[i].msg_type,

@@ -1,8 +1,8 @@
 <view class="message">
-    <view class="msg-bar">
+    <!-- <view class="msg-bar">
         <view class="bar-item {{content == 'demand' ? 'active' : ''}}" data-content="demand" bindtap="switchTab">我的需求 <view class="msg-count" wx:if="{{ messageCount > 0 }}">{{ messageCount }}</view></view>
         <view class="bar-item {{content == 'message' ? 'active' : ''}}" data-content="message" bindtap="switchTab">我的消息</view>
-    </view>
+    </view> -->
 
     <view wx:if="{{content == 'demand'}}" class="msg-list">
         <view wx:for="{{conversationList}}" wx:key="name" class="list-item" hover-class="list-tap" data-avatar="{{item.avatar}}" data-name="{{ item.nickName }}" data-user="{{item.username}}" bindtap="goChart">

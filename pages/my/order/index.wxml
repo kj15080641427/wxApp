@@ -1,23 +1,25 @@
 <!--pages/my/order/index.wxml-->
-<view class='order-page' wx:key="{{index}}" wx:for="{{order}}"data-orderindex="{{index}}"catchtap="getOrderIndex">
-  <view class='order-page-top'>
-    <view>{{item.createDate}}</view>
-    <view class="{{item.orderStatus == 0 ? 'order-statu': ''}}">{{item.statusValue}}</view>
-  </view>
-  <view class='order-page-line'></view>
-  <view class='order-page-type' >
-    <view class='order-page-left'>
-      <view class='order-page-font'>{{item.orderType}}</view>
-      <view class='order-page-consultype'>
-        <view wx:if="{{item['orderType'] == '电话咨询'}}">通话时长:{{item.talkTime1h}}</view>
-        <view wx:else="item['orderType'] =='电话咨询'">
-          <label wx:if="{{item.orderType == '发布需求'}}">咨询律师:{{item.lmemberName}} </label>
-          <label wx:if="{{item.orderType =='专家咨询'}}">咨询律师:{{item.lmemberName}}</label>
-          <label wx:if="{{item.orderType=='免费文字咨询'}}">咨询类型:{{item.typeName}}</label>
-          <label wx:if="{{item.orderType=='快速电话咨询'}}">咨询类型:{{item.typeName}}</label>
+<block wx:key="{{index}}" wx:for="{{order}}">
+    <view class='order-page' data-orderindex="{{index}}" data-lawyerId="{{item.lawyerMemberId}}" data-lawyerName="{{item.lmemberName}}" data-lawyerAvatar="{{item.iconImage}}" bindtap="getOrderIndex">
+        <view class='order-page-top'>
+            <view>{{item.createDate}}</view>
+            <view class="{{item.orderStatus == 0 ? 'order-statu': ''}}">{{item.statusValue}}</view>
         </view>
-      </view>
+        <view class='order-page-line'></view>
+        <view class='order-page-type'>
+            <view class='order-page-left'>
+                <view class='order-page-font'>{{item.orderType}}</view>
+                <view class='order-page-consultype'>
+                    <view wx:if="{{item['orderType'] == '电话咨询'}}">通话时长:{{item.talkTime1h}}</view>
+                    <view wx:else="item['orderType'] =='电话咨询'">
+                        <label wx:if="{{item.orderType == '发布需求'}}">咨询律师:{{item.lmemberName}} </label>
+                        <label wx:if="{{item.orderType =='专家咨询'}}">咨询律师:{{item.lmemberName}}</label>
+                        <label wx:if="{{item.orderType=='免费文字咨询'}}">咨询类型:{{item.typeName}}</label>
+                        <label wx:if="{{item.orderType=='快速电话咨询'}}">咨询类型:{{item.typeName}}</label>
+                    </view>
+                </view>
+            </view>
+            <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx' />
+        </view>
     </view>
-    <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'/>
-  </view>
-</view>
+</block>
