@@ -68,31 +68,37 @@ const getPayInfo = (v) =>{
                     }
                   })
                 } else if (v.type == 3 && v.product==3){
-                  wx:wx.request({
-                    url: api.getExpertPhone(),
-                    data: '',
-                    header: {
-                      'Content-Type': 'application/json',
-                      'device': JSON.stringify(device),
-                      'X-Token': wx.getStorageSync("token")
-                    },
-                    method: 'POST',
-                    dataType: 'json',
-                    responseType: 'text',
-                    success: function(res) {
-                      console.log(res)
-                    },
-                    fail: function(res) {
-                      console.log(res)
-                    },
-                    complete: function(res) {},
-                  })
+                  v.countDown = true
+                  v.downTime
+                  // v.countDown=true
+                  // wx.request({
+                  //   url: api.getExpertPhone(),
+                  //   data: '',
+                  //   header: {
+                  //     'Content-Type': 'application/json',
+                  //     'device': JSON.stringify(device),
+                  //     'X-Token': wx.getStorageSync("token")
+                  //   },
+                  //   method: 'POST',
+                  //   dataType: 'json',
+                  //   responseType: 'text',
+                  //   success: function(res) {
+                      
+                  //     console.log(res)
+                  //   },
+                  //   fail: function(res) {
+                  //     console.log(res)
+                  //   },
+                  //   complete: function(res) {},
+                  // })
                 }
               }else{
-                wx.showToast({
-                  title: res.data.message,
-                  icon:'none'
-                })
+                // wx.showToast({
+                //   title: res.data.message,
+                //   icon:'none'
+                // })
+                v.go=true
+                
                 // console.log("余额不足",res.data.message)
                 reject(res)
               }

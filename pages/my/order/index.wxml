@@ -9,7 +9,7 @@
   <view class='order-page-line'></view>
   <view class='order-page-type' >
     <view class='order-page-left'>
-      <view class='order-page-font'>{{item.orderType}}</view>
+      <view class='order-page-font'>{{item.orderType=='需求' ? '发布'+item.orderType:item.orderType}}</view>
       <view class='order-page-consultype'>
         <view wx:if="{{item['orderType'] == '电话咨询'}}">通话时长:{{item.talkTime1h}}</view>
         <view wx:else="item['orderType'] =='电话咨询'">

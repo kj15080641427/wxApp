@@ -23,7 +23,7 @@
 }
 .details-page-icon{
   border-radius: 50%;
-  background-color: red;
+  /* background-color: red; */
   width: 40rpx;
   height: 40rpx;
 }
@@ -39,7 +39,7 @@
   margin-left: 20rpx;
 }
 .details-page-line-center{
-  background-color: red;
+  background-color: #B5B5B5;
   height: 1rpx;
   width: 750rpx;
   padding-left: 0rpx;
@@ -98,7 +98,7 @@
 .details-page-lawyer-icon{
   width: 65rpx;
   height: 65rpx;
-  background-color: red;
+  /* background-color: red; */
   border-radius: 50%
 }
 .details-page-lawyer-nikename{

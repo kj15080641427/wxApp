@@ -1,5 +1,5 @@
 <!--pages/my/about/index.wxml-->
-<view class='about-page-top'>
+<!-- <view class='about-page-top'>
   <image class='about-page-image'src='../../../image/my_icon@3x/mine_icon_12_3x.png'></image>
 </view>
 <view class='about-page-lower'>
@@ -19,4 +19,5 @@
 <view class='about-page-lower' >
   <view class='about-page-left'>商务合作</view>
   <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'/>
-</view>
+</view> -->
+<web-view src="{{url}}"></web-view>

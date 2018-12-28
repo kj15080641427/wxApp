@@ -295,28 +295,28 @@ Page({
         // 消息
         this.judgeTips()
     },
-    getLowerIndex: function (e) {
-        this.setData({
+    // getLowerIndex: function (e) {
+    //     this.setData({
 
-        })
-        console.log("hhhh", e)
-    },
-    onReady: function () {
+    //     })
+    //     console.log("hhhh", e)
+    // },
+    // onReady: function () {
         
-    },
-    onShow: function () {
+    // },
+    // onShow: function () {
         
-    },
+    // },
     // 滚动样式
-    switchTab: function (e) {
-        var that = this
-        this.setData({
-            articleIndex: e.detail.current
-        });
-        this.checkCor();
+//     switchTab: function (e) {
+//         var that = this
+//         this.setData({
+//             articleIndex: e.detail.current
+//         });
+//         this.checkCor();
 
-// <<<<<<< HEAD
-  },
+// // <<<<<<< HEAD
+//   },
   onShow:function(){
     wx.removeStorageSync("picIndexList")
   },
@@ -388,25 +388,25 @@ Page({
 //     selsectArticle: function (e) {
 //         var that = this
 // >>>>>>> a2d0d1979aa6728e3d511ec5e8909adab27d43f9
-        that.setData({
-            articleIndex: e.currentTarget.id
-        })
-        this.checkCor();
+        // that.setData({
+        //     articleIndex: e.currentTarget.id
+        // })
+        // this.checkCor();
 
-        var that = this;
-        //  高度自适应
-        wx.getSystemInfo({
-            success: function (res) {
-                var clientHeight = res.windowHeight,
-                    clientWidth = res.windowWidth,
-                    rpxR = 750 / clientWidth;
-                var calc = clientHeight * rpxR - 180;
-                // console.log(calc)
-                that.setData({
-                    winHeight: calc
-                });
-            }
-        });
+        // var that = this;
+        // //  高度自适应
+        // wx.getSystemInfo({
+        //     success: function (res) {
+        //         var clientHeight = res.windowHeight,
+        //             clientWidth = res.windowWidth,
+        //             rpxR = 750 / clientWidth;
+        //         var calc = clientHeight * rpxR - 180;
+        //         // console.log(calc)
+        //         that.setData({
+        //             winHeight: calc
+        //         });
+        //     }
+        // });
 // <<<<<<< HEAD
       }
     });
@@ -432,6 +432,19 @@ Page({
     } else if (this.data.articleIndex > 15 && this.data.articleIndex < 19) {
       this.setData({
         scrollLeft: "3000rpx"
+      })
+    }
+  },
+  //to免费咨询
+  tologin:function(){
+    if(!wx.getStorageSync("token")){
+      wx.navigateTo({
+        url: '/pages/userlogin/index',
+      })
+    }else{
+      // this.showModal()
+      wx.navigateTo({
+        url: '/pages/index/consultation/index',
       })
     }
   },
@@ -475,10 +488,11 @@ Page({
     })
     }else{
       wx.navigateTo({
-        url: '../../../../userlogin/index',
+        url: '/pages/userlogin/index',
       })
     }
   },
+  //快速咨询
   gotoQuick:function(){
     if(wx.getStorageSync("token")){
       wx.navigateTo({
@@ -486,83 +500,11 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: '../../../../userlogin/index',
+        url: '/pages/userlogin/index',
       })
     }
   },
   onReady: function () {
-// =======
-//     },
-//     //判断当前滚动超过一屏时，设置tab标题滚动条。
-//     checkCor: function () {
-//         if (this.data.articleIndex <= 3) {
-//             this.setData({
-//                 scrollLeft: 0
-//             })
-//         } else if (this.data.articleIndex > 3 && this.data.articleIndex <= 7) {
-//             this.setData({
-//                 scrollLeft: "750rpx"
-//             })
-//         } else if (this.data.articleIndex > 7 && this.data.articleIndex <= 11) {
-//             this.setData({
-//                 scrollLeft: "1500rpx"
-//             })
-//         } else if (this.data.articleIndex > 11 && this.data.articleIndex <= 15) {
-//             this.setData({
-//                 scrollLeft: "2250rpx"
-//             })
-//         } else if (this.data.articleIndex > 15 && this.data.articleIndex < 19) {
-//             this.setData({
-//                 scrollLeft: "3000rpx"
-//             })
-//         }
-//     },
-//     // 文字咨询
-//     gotoConstultation: function () {
-//         if (wx.getStorageSync("token")) {
-//             // console.log('pop', this.data.popular)
-//             wx.navigateTo({
-//                 url: '../index/consultation/index?type=' + JSON.stringify(this.data.popular)
-//             })
-//         } else {
-//             wx.navigateTo({
-//                 url: '../userlogin/index'
-//             })
-//         }
-//     },
-//     //热线咨询
-//     phoneConstultation: function () {
-//         var url = api.getPhone()
-//         // var data = wx.getStorageSync("token")
-//         var success = function (data) {
-//             console.log(data)
-//             wx.makePhoneCall({
-//                 phoneNumber: data.data.phone,
-//             })
-//         }
-//         var fail = function (e) {
-//             wx.showToast({
-//                 title: '无法获取电话号码',
-//                 icon: 'none'
-//             })
-//             console.log(e)
-//         }
-//         wxrequest.requestGet(url, '', success, fail)
-//     },
-//     //专家咨询
-//     gotoExpert: function () {
-//         wx.navigateTo({
-//             url: '../index/expert-service/index',
-//         })
-//     },
-//     gotoQuick: function () {
-//         wx.navigateTo({
-//             url: '../index/quick-consultation/index?id=2',
-//         })
-//     },
-//     onReady: function () {
-// >>>>>>> a2d0d1979aa6728e3d511ec5e8909adab27d43f9
-
     },
     // 消息
     judgeTips: function () {
@@ -728,6 +670,3 @@ Page({
   //   wx.showTabBar({})
   // }
 })
-// =======
-// })
-// >>>>>>> a2d0d1979aa6728e3d511ec5e8909adab27d43f9

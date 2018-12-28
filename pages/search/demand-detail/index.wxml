@@ -23,7 +23,7 @@
 </view>
 
 <view class='detail-page-center' >
-  <picker class='detail-page-picker' range="{{business}}" range-key="{{'businessTypeName'}}" value="{{index}}" bindchange ="pickerLIst">
+  <picker class='detail-page-picker' range="{{business}}" range-key="{{'businessTypeName'}}" value="{{index}}" bindchange ="pickerLIst" wx:if="{{id}}">
     <view style='display:flex;justify-content: space-between;width:715rpx;'>
      <!-- <view style='display:flex; justify-content: space-between'> -->
       <view  class='detail-page-text'>律师擅长领域</view>
@@ -61,7 +61,7 @@
 <textarea placeholder='输入问题' maxlength='300'class="detail-textarea" bindinput='getTextarea'></textarea>
 </view>
 
-<view class='select-mark-view'>
+<view class='select-mark-view' wx:if="{{id}}">
   <view class='select-mark-text'>*请选择问题标签</view>
   <view  class='select-mark-flex'>
     <view class="{{selist[index].is ? 'selected-mark': 'select-mark'}}" wx:key="{{index}}" wx:for="{{markList}}" catchtap='isSelected' data-selectindex="{{index}}" >{{item.tagName}}</view>

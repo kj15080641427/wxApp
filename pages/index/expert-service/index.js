@@ -180,7 +180,7 @@ Page({
       // region: region.citysData
     })
 
-    console.log("indexxxxxx", this.data.lawyerList)
+    // console.log("indexxxxxx", this.data.lawyerList)
   },
 
   /**

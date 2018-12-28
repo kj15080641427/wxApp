@@ -39,7 +39,7 @@ function requestLoading(url, params, message, success, fail) {
             } else {
               if (res.statusCode == 401) {
                 wx.navigateTo({
-                  url: '../userlogin/index',
+                  url: '/pages/userlogin/index',
                   complete: function (res) {
                     console.log(res)
                   }
@@ -91,7 +91,7 @@ function requestToken(url, params, message, success, fail) {
       } else {
         if (res.statusCode == 401) {
           wx.navigateTo({
-            url: '../userlogin/index',
+            url: '/pages/userlogin/index',
             complete: function (res) {
               console.log(res)
             }
@@ -145,7 +145,7 @@ function requestPost(url, params, message, success, fail) {
             } else {
               if (res.statusCode == 401) {
                 wx.navigateTo({
-                  url: '../userlogin/index',
+                  url: '/pages/userlogin/index',
                   complete: function (res) {
                     console.log(res)
                   }
@@ -238,7 +238,7 @@ function requestGet(url, message, success, fail) {
             } else {
                 if (res.statusCode == 401) {
                     wx.navigateTo({
-                        url: '../userlogin/index',
+                        url: '/pages/userlogin/index',
                         complete: function (res) {
                             console.log(res)
                         }
@@ -289,7 +289,7 @@ function requestGetpar(url, params, message, success, fail) {
             } else {
               if (res.statusCode == 401) {
                 wx.navigateTo({
-                  url: '../userlogin/index',
+                  url: '/pages/userlogin/index',
                   complete: function (res) {
                     console.log(res)
                   }
@@ -333,7 +333,7 @@ function superRequest(url, data, type) {
                 if (res.statusCode == 200){
                     reslove(res)
                 } else if (res.statusCode == 401) {
-                    wx.navigateTo({url: '../userlogin/index', })
+                    wx.navigateTo({url: '/pages/userlogin/index', })
                 } else {
                     console.log(res.data.message)
                 }

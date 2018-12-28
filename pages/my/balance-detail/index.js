@@ -20,7 +20,7 @@ Page({
   //获取交易明细
   getBalanceDetail:function(){
     var url = api.getBalanceDetail()
-    var data = { "memberId": this.data.memberId, "pageNum": '1',"pageSize":'50'}
+    var data = { "memberId": this.data.memberId, "pageNum": '1',"pageSize":'500'}
     var success = (data)=>{
       this.setData({
         detail:data.data.list

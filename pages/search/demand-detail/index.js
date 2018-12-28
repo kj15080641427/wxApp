@@ -158,7 +158,7 @@ Page({
     })
     console.log("标签", that.data.selist)
     var par = this.data.postList
-    if (!that.data.id ? par.skillId=="" || par.skillName == '' :false){
+    if (that.data.id ? par.skillId=="" || par.skillName == '' :false){
       wx.showToast({
         title: '请选择擅长领域',
         icon:'none'
@@ -198,7 +198,7 @@ Page({
     this.setData({
       // markId: JSON.parse(options.busiType)
       busiType: options.busiTypes ? JSON.parse(options.busiTypes):'',//服务类型: 诉讼/仲裁 审查/起草合同....
-      id:options.id ? options.id:0,
+      id:options.id ? 0:1,
       // demandType:
       ['postList.requirementTypeId']: options.demandType ? JSON.parse(options.demandType).requireTypeId:'',
       ['postList.requirementTypeName']: options.demandType ? JSON.parse(options.demandType).requireTypeName:'',
@@ -207,7 +207,7 @@ Page({
     })
     console.log("leixing", JSON.parse(options.demandType))
     console.log("feilei", options.busiTypes ? 1:0)
-    console.log("类型id", this.data.business)
+    console.log("类型id", this.data.id)
     
   },
 

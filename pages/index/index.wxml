@@ -17,7 +17,7 @@
   </view>
   <!-- 图标 -->
   <view class='index-layout index-background'>
-    <view class='index-ml'  bindtap="showModal">
+    <view class='index-ml'   catchtap='tologin'>
       <view class="index-text-style">
         <image src='../../image/homeicon_3x/homepage_03_3x.png' style='width:120rpx;height:120rpx'></image>
       </view>

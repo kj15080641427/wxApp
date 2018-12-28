@@ -17,8 +17,11 @@
 
   <view class='reply-page-reply'>
     <view class='reply-page-reply-left'>
-      <view>{{lawago[index]}}{{lawagoText[index]}}</view>
-      <view class='reply-page-reply-margin'>{{lawtList[index]}}</view>
+      <!-- <view>{{lawago[index]}}{{lawagoText[index]}}</view>
+      <view class='reply-page-reply-margin'>{{timelaw[index]}}</view> -->
+      <!-- <view >{{lawago[index]}}{{lawagoText[index]}}</view> -->
+      <view class='reply-page-reply-margin' >{{timelaw[index]}}</view>
+
       <view class='reply-page-top reply-page-reply-margin'>
         <!-- <view class='reply-page-reply-dot'></view> -->
       </view>

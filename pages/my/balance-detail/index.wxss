@@ -19,9 +19,10 @@
   margin-top: 50rpx;
 }
 .ba-detail-number{
-  height: 150rpx;
+  height: 70rpx;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   color: #1ec88c;
   font-size: 38rpx;
 }

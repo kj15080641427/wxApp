@@ -22,7 +22,9 @@ Page({
     myFollow:'',//我的关注列表
     caseList:'',//案例
     isshowCard: true,
-    isshowCase: false
+    isshowCase: false,
+    time:60,
+    start:true
   },
   //关注
   follow:function(){
@@ -238,14 +240,127 @@ Page({
       year: formatTime.formatTime(new Date()).split("/")[0] - that.data.lawyerCard.beginPracticeDate.split("-")[0],
     })
   },
-  
+  //关闭弹窗
+  closemodal:function(){
+    console.log("??????????",this.data.time)
+    if(this.data.time>0){
+      // console.log("??????????")
+      this.setData({
+        close:true,
+        countDown:false
+      })
+    }else{
+      this.hideModal()
+    }
+  },
+  //充值
+  gotoCharge:function(){
+    wx.navigateTo({
+      url: '../../../../../../my/balance/index?memberId='+wx.getStorageSync("userInfo").memberId,
+    })
+  },
+  //返回
+  back:function(){
+    this.setData({
+      start: false,
+      countDown: true,
+      start:false,
+    })
+  },
+  //支付
+  goto:function(){
+    var t = {
+      money: 1, type: 3, product: 3, downTime: this.downTime(), countDown: this.setData({ start: false,countDown: true,start: false,})}
+    wxPay(t).then(res => { //支付成功
+       console.log('??>?>?>')
+    },(err=>{ //支付失败
+      console.log("余额不足...",err,t.go)
+      // this.setData({
+      //   // isgo:t.go,
+      //   start:false
+      // })
+    }))
+  },
+  //倒计时
+  downTime:function(){
+    this.setData({ settime :setInterval(() => {
+      this.setData({
+        time: this.data.time - 1
+      })
+      if (this.data.time < 1) {
+        clearInterval(this.data.settime)
+        this.setData({
+          time: 0
+        })
+      }
+    }, 1000)})
+  },
+  //是否登录
+  islogin:function(){
+    if(!wx.getStorageSync("token")){
+      wx.navigateTo({
+        url: '/pages/userlogin/index',
+      })
+    }
+  },
+  showModal: function () {
+    // 显示遮罩层
+    // wx.hideTabBar({})
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(200).step()
+    this.setData({
+      animationData: animation.export(),
+      showModalStatus: true
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export()
+      })
+    }.bind(this), 200)
+  },
+  //隐藏对话框
+  hideModal: function () {
+    this.setData({
+      countDown:false,
+      start:true,
+      isgo:false,
+      close:false,
+      time:60
+    })
+    clearInterval(this.data.settime)
+    // 隐藏遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false
+      })
+    }.bind(this), 200)
+    // wx.showTabBar({})
+  },
   //支付
   //快速咨询
   quickConsultation:function(){
     var t = { money: 100, type: 3, product:3}
-    wxPay(t).then(res=>{
-      console.log(res)
-    })
+    // wxPay(t).then(res=>{
+    //   console.log(res)
+    // })
     // PA18122702075861469
     // var url = api.getExpertPhone() +'/PA18122702075861469'
     // var success = data =>{
@@ -293,14 +408,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
+    this.hideModal()
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    
   },
 
   /**

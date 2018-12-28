@@ -48,77 +48,91 @@ Page({
     }
     wxrequest.requestGetpar(url, data, '', success, fail)
   },
-  //律师回复时间
+    //律师回复时间
   lawTime: function () {
     //律师回复时间
     var that = this
     var dateList = []
-    var lawTimeList = []
+    // var lawTimeList = []
     var lawgaoList = []
     var lawagoTextList = []
+    var showtimeList = []
     that.data.freeText.map(item => {
       dateList.push(item.dateAdded)
-      lawTimeList.push(item.dateAdded.split(" ")[1].split(":", 2).join(":"))
+      // lawTimeList.push(item.dateAdded.split(" ")[1].split(":", 2).join(":"))
     })
-    that.setData({
-      lawtList: lawTimeList
-    })
-    console.log("律师回复时间time", dateList)
-    dateList.map(item => {
+    // that.setData({
+    //   lawtList: lawTimeList
+    // })
+    // console.log("律师回复时间time", lawTimeList)
+    dateList.map((item, index) => {
+     
       var lawnowYear = formatTime.formatTime(new Date()).split(" ")[0].split("/")
       var lawyear = item.split(" ")[0].split("-")
-      var lawnowYearTime = formatTime.formatTime(new Date()).split(" ")[1].split(":")
-      console.log("分钟11",lawnowYearTime)
+      var lawnowYearTime = formatTime.formatTime(new Date()).split(" ")[1].split("/")
       var lawyearTime = item.split(" ")[1].split(":")
       if (lawnowYear[0] - lawyear[0] > 0) {
-        lawgaoList.push(lawnowYear[0] - lawyear[0])
-        lawagoTextList.push('年前')
+        showtimeList.push(this.data.freeText[index].dateAdded.split(" "))
         that.setData({
-          lawago: lawgaoList,
-          lawagoText: lawagoTextList
+          timelaw: showtimeList
         })
       } else if (lawnowYear[1] - lawyear[1] > 0) {
-        lawgaoList.push(lawnowYear[1] - lawyear[1])
-        lawagoTextList.push('月前')
+        showtimeList.push(this.data.freeText[index].dateAdded.split(" "))
         that.setData({
-          lawago: lawgaoList,
-          lawagoText: lawagoTextList
+          timelaw: showtimeList
         })
-      } else if (lawnowYear[2] - lawyear[2] > 0) {
-        lawgaoList.push(lawnowYear[2] - lawyear[2])
-        lawagoTextList.push('天前')
-        that.setData({
-          lawago: lawgaoList,
-          lawagoText: lawagoTextList
-        })
-      } else if (lawnowYearTime[0].split(":")[0] - lawyearTime[0].split(":")[0] > 0) {
-        lawgaoList.push(lawnowYearTime[0].split(":")[0] - lawyearTime[0].split(":")[0])
-        lawagoTextList.push('小时前')
-        that.setData({
-          lawago: lawgaoList,
-          lawagoText: lawagoTextList
-        })
-        // console.log("小时", lawnowYearTime[0].split(":")[0] - lawyearTime[0].split(":")[0])
-      } 
-      else if (lawnowYearTime[1].split(":")[0] - lawyearTime[1].split(":")[0] > 5 ) {
-        lawgaoList.push(lawnowYearTime[1].split(":")[0] - lawyearTime[1].split(":")[0])
-        lawagoTextList.push('分钟前',)
-        that.setData({
-          lawago: lawgaoList,
-          lawagoText: lawagoTextList
-        })
-      } 
-      else {
-        lawgaoList.push('刚')
-        lawagoTextList.push('刚')
-        that.setData({
-          lawago: lawgaoList,
-          lawagoText: lawagoTextList
-        })
-        console.log("qwe", lawnowYearTime[0] )
       }
+      else if (lawnowYear[2] - lawyear[2] > 7) {
+        showtimeList.push(this.data.freeText[index].dateAdded.split(" "))
+        this.setData({
+          timelaw: showtimeList
+        })
+      } else if (lawnowYear[2] - lawyear[2] > 2 && lawnowYear[2] - lawyear[2] <= 7) {
+        lawgaoList.push(lawnowYear[2] - lawyear[2])
+        showtimeList.push('天前'+this.data.freeText[index].dateAdded.split(" ")[1].split(":", 2).join(":"))
+        this.setData({
+          timelaw: showtimeList,
+        })
+      }
+      else if (lawnowYear[2] - lawyear[2] == 2) {
+        lawagoTextList.push()
+        showtimeList.push('前天'+this.data.freeText[index].dateAdded.split(" ")[1].split(":", 2).join(":"))
+        that.setData({
+
+          timelaw: showtimeList
+        })
+        console.log("<><<<<<<<<<<<", this.data.timelaw)
+      } else if (lawnowYear[2] - lawyear[2] == 1) {
+        lawagoTextList.push()
+        showtimeList.push('昨天'+this.data.freeText[index].dateAdded.split(" ")[1].split(":", 2).join(":"))
+        that.setData({
+
+          timelaw: showtimeList
+        })
+
+      }
+      else if (lawnowYear[2] - lawyear[2] == 0 && lawnowYearTime[0].split(":")[0] - lawyearTime[0] >= 1) {
+        showtimeList.push(this.data.freeText[index].dateAdded.split(" ")[1].split(":", 2).join(":"))
+        that.setData({
+          timelaw: showtimeList
+        })
+        console.log('律师回阿诗丹顿复时间', this.data.timelaw)
+      }
+      else if (lawnowYearTime[0].split(":")[1] - lawyearTime[1] > 5) {
+        showtimeList.push(lawnowYearTime[0].split(":")[1] - lawyearTime[1]+'分钟前')
+        that.setData({
+          timelaw: showtimeList
+        })
+        console.log(that.data.lawago,that.data.lawagoText)
+      } else {
+        showtimeList.push('刚刚')
+        that.setData({
+          timelaw: showtimeList
+        })
+      }
+      console.log('律师回复时间', lawnowYearTime[0].split(":")[1] - lawyearTime[1] > 5 )
     })
-    console.log('律师回复时间', dateList)
+   
   },
   /**
    * 生命周期函数--监听页面加载
@@ -182,5 +196,5 @@ Page({
    */
   onShareAppMessage: function () {
     
-  }
+  },
 })

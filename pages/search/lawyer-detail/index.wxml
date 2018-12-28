@@ -237,9 +237,45 @@
   </view>
 </view>
 
-<view wx:if="{{quick}}">
+<!-- <view wx:if="{{quick}}"> -->
 <view style='height:150rpx;'></view>
-<view class='quick-button-view' >
-  <button class='quick-button' bindtap='quickConsultation'>电话咨询</button>
+<view class='quick-button-view' bindtap='islogin' >
+  <button class='quick-button' bindtap='quickConsultation'catchtap="showModal" >电话咨询</button>
+  <button class='quick-button'>发送需求</button>
 </view>
+<!-- </view> -->
+
+<view class="commodity_screen" wx:if="{{showModalStatus}}"></view>
+  <!--弹出框  -->
+<view  class="commodity_attr_box" wx:if="{{showModalStatus}}">
+    <view wx:if="{{countDown}}">
+      <view style='width:680rpx;display:flex;justify-content:center;margin-left:35rpx;margin-right:35rpx;margin-top:100rpx;'>为保护您的个人权益,我们将先为您联系律师,请注意接听1的电话</view>
+      <view style='width:680rpx;text-align:center;margin-top:100rpx;'>联系倒计时:{{time<=9?'0'+time :time}}</view>
+      <view style='width:680rpx;text-align:center;margin-top:100rpx;'catchtap="closemodal">关闭</view>
+    </view>
+
+  <view wx:if="{{close}}">
+    <view style='width:680rpx;display:flex;justify-content:center;margin-left:35rpx;margin-right:35rpx;margin-top:100rpx;'>现在关闭无法联系律师,是否继续关闭!,</view>
+      <view style='width:680rpx;text-align:center;margin-top:100rpx;display:flex;justify-content:space-around'>
+        <view catchtap="hideModal" >继续关闭</view>
+        <view catchtap="back">再等一会</view>
+      </view>
+  </view>
+
+  <view wx:if="{{start}}">
+    <view style='width:680rpx;display:flex;justify-content:center;margin-left:35rpx;margin-right:35rpx;margin-top:100rpx;'>律师咨询价格为{{}}元/小时,我们将照秒为单位进行计费,前30秒免费</view>
+      <view style='width:680rpx;text-align:center;margin-top:100rpx;display:flex;justify-content:space-around'>
+        <view catchtap="hideModal" >关闭</view>
+        <view catchtap="goto">拨打电话</view>
+      </view>
+  </view>
+
+  <view wx:if="{{isgo}}">
+    <view style='width:680rpx;display:flex;justify-content:center;margin-left:35rpx;margin-right:35rpx;margin-top:100rpx;'>专家咨询为计时扣费,您的账户当前余额不足,请去充值</view>
+      <view style='width:680rpx;text-align:center;margin-top:100rpx;display:flex;justify-content:space-around'>
+        <view catchtap="hideModal" style='margin-top:50rpx;'>再看看</view>
+        <view catchtap="gotoCharge" style='margin-top:50rpx;'>去充值</view>
+      </view>
+  </view>
+
 </view>

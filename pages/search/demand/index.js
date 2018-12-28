@@ -50,7 +50,7 @@ Page({
         icon: 'none'
       })
       wx.navigateTo({
-        url: '../demand-detail/index?demandType=' + JSON.stringify(this.data.demandType) + '&index=' + e.currentTarget.dataset.typeindex+'&id=1',
+        url: '../demand-detail/index?demandType=' + JSON.stringify(this.data.demandType[e.currentTarget.dataset.typeindex]) + '&index=' + e.currentTarget.dataset.typeindex+'&id=1',
       })
     }
   },

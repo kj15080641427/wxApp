@@ -30,10 +30,10 @@
   </view>
 </view>
 
-<button class='login-button'  bindtap='userLogin'>登陆</button>
+<button class='login-button'  bindtap='userLogin'>登录</button>
 
 <view class='login-lower-center'>
-<view class='login-lower-tips'>成功登陆小程序即表示您同意<text>《用户协议》</text>和<text>《隐私政策》</text></view>
+<view class='login-lower-tips'>成功登录小程序即表示您同意<text>《用户协议》</text></view>
 </view>
 
 <image src='../../image/login/Register_04_max.png' class='login-top-backround-image'>

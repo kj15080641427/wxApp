@@ -53,23 +53,31 @@ Page({
   },
   // 提交
   commit:function(){
+    var that = this
     var commitURL = api.getCommitUrl()
     var data = {
-      "consultationTypeId": this.data.consultationTypeId,
-      "regionId": this.data.regionId, 
-      "content": this.data.commitContent,
-      "isHide": this.data.isHide == true ? '1':'0'
+      "consultationTypeId": that.data.consultationTypeId,
+      "regionId": that.data.regionId, 
+      "content": that.data.commitContent,
+      "isHide": that.data.isHide == true ? '1':'0'
      }
     var success = function(data){
+      that.setData({
+        consultation:data
+      })
     console.log('成功')
       wx.showToast({
         title: '提交成功',
       })
-    setTimeout(function(){
-      wx.navigateBack({
-        
+      wx.navigateTo({
+        url: '/pages/index/consultation-details/index?consultationId=' + that.data.consultationId + '&date=' + that.data.dateAdded,
       })
-    },1000)
+      console.log(',.....',that.data.consultationId)
+    // setTimeout(function(){
+    //   wx.navigateBack({
+        
+    //   })
+    // },1000)
     }
     var fail = function(e){
       console.log(12312312312)
@@ -194,20 +202,20 @@ Page({
   onShareAppMessage: function () {
     
   },
-  getType:function(){
-    //问题类型
-    var that = this
-    var typeUrl = api.getArticleTypeUrl()
-    var message = ""
-    var successType = function (data) {
-      console.log(data.data)
-      that.setData({
-        array: data.data,
-      })
-    }
-    var failType = function (e) {
-      console.log("错误", e)
-    }
-    wxrequest.requestGet(typeUrl, message, successType, failType)
-  }
+  // getType:function(){
+  //   //问题类型
+  //   var that = this
+  //   var typeUrl = api.getArticleTypeUrl()
+  //   var message = ""
+  //   var successType = function (data) {
+  //     console.log(data.data)
+  //     that.setData({
+  //       array: data.data,
+  //     })
+  //   }
+  //   var failType = function (e) {
+  //     console.log("错误", e)
+  //   }
+  //   wxrequest.requestGet(typeUrl, message, successType, failType)
+  // }
 })

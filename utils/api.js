@@ -248,7 +248,11 @@ var UserReply = '/lawyer/freeText/'
 function getUserReply(){
   return HOST_URL + UserReply
 }
-//var 
+//关于
+var About = '/aboutus'
+function getAbout(){
+  return HOST_URL + About
+}
 module.exports={
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,
@@ -290,5 +294,6 @@ module.exports={
   getType:getType,
   getExpertPhone: getExpertPhone,
   getFreetextList: getFreetextList,
-  getUserReply: getUserReply
+  getUserReply: getUserReply,
+  getAbout: getAbout
 }
