@@ -65,5 +65,10 @@
     "color": "#b5b5b6",
     "selectedColor": "#1eecbc",
     "borderStyle": "white"
-  }
+  },
+"networkTimeout": {
+  "request": 6000, 
+  "onnecSocket": 6000,
+  "downloadFile": 6000
+}
 }

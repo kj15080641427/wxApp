@@ -9,6 +9,12 @@ Page({
       demandType:'',
       typeindex:''
   },
+  //文字咨询
+  gotoconsul:function(){
+    wx.navigateTo({
+      url: '../../index/consultation/index',
+    })
+  },
   //服务分类
   getDemandType:function(){
     var that = this
@@ -44,7 +50,7 @@ Page({
         icon: 'none'
       })
       wx.navigateTo({
-        url: '../demand-detail/index?demandType=' + JSON.stringify(this.data.demandType) + '&index=' + e.currentTarget.dataset.typeindex+'&id=1',
+        url: '../demand-detail/index?demandType=' + JSON.stringify(this.data.demandType[e.currentTarget.dataset.typeindex]) + '&index=' + e.currentTarget.dataset.typeindex+'&id=1',
       })
     }
   },

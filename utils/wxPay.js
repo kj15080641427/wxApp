@@ -45,7 +45,7 @@ const getPayInfo = (v) =>{
                     complete: function (res) { }
                   })
                 }
-                else if (v.type == 3) {
+                else if (v.type == 3 && v.product == 2) {
                   // var that = this
                   // that.getQuick(res.data.data.orderno)
                   wx.request({
@@ -56,23 +56,49 @@ const getPayInfo = (v) =>{
                       'X-Token': wx.getStorageSync("token")
                     },
                     method: "POSt",
-                    data: { payOrderNo: res.data.data.orderno, payType: 3, payAmount: v.money, typeId: v.typeQuick },
+                    data: { payOrderNo: res.data.data.orderno, payType: 3, payAmount: v.money, typeId: v.typeQuick.id },
                     success(data) {
                       console.log("余额支付33", data)
                       wx.navigateTo({
-                        url: '../quick-consultation-finish/index?orderNo=' + data.data.data.orderNo + '&timeStamp=' + data.data.data.timeStamp + '&type=' + v.typeQuick + '&phone=' + v.phone + '&money=' + v.money,
+                        url: '../quick-consultation-finish/index?orderNo=' + data.data.data.orderNo + '&timeStamp=' + data.data.data.timeStamp + '&type=' + v.typeQuick.typeName + '&phone=' + v.phone + '&money=' + v.money,
                       })
                     },
                     fail(e) {
                       console.log("余额支付失败333", e)
                     }
                   })
+                } else if (v.type == 3 && v.product==3){
+                  v.countDown = true
+                  v.downTime
+                  // v.countDown=true
+                  // wx.request({
+                  //   url: api.getExpertPhone(),
+                  //   data: '',
+                  //   header: {
+                  //     'Content-Type': 'application/json',
+                  //     'device': JSON.stringify(device),
+                  //     'X-Token': wx.getStorageSync("token")
+                  //   },
+                  //   method: 'POST',
+                  //   dataType: 'json',
+                  //   responseType: 'text',
+                  //   success: function(res) {
+                      
+                  //     console.log(res)
+                  //   },
+                  //   fail: function(res) {
+                  //     console.log(res)
+                  //   },
+                  //   complete: function(res) {},
+                  // })
                 }
               }else{
-                wx.showToast({
-                  title: res.data.message,
-                  icon:'none'
-                })
+                // wx.showToast({
+                //   title: res.data.message,
+                //   icon:'none'
+                // })
+                v.go=true
+                
                 // console.log("余额不足",res.data.message)
                 reject(res)
               }

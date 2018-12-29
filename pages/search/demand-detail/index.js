@@ -20,7 +20,7 @@ Page({
     // markNext:'', //问题标签
     // industry:'',//向下传递熟悉行业
     postList: {
-      "requirementId": String(wx.getStorageSync("requirementId")) || '0',
+      "requirementId": '0',
       "requirementTypeId": '',
       "requirementTypeName": '',
       "requirementBusiId": "",
@@ -33,7 +33,7 @@ Page({
       "tagId": '',
       "tag": '',
       "targetLawyerId": '',
-      "isFirst":'1'
+      "isFirst": 1
     }
   },
   //标签列表
@@ -96,8 +96,8 @@ Page({
     this.setData({
       seindex: e.currentTarget.dataset.selectindex,
       [`selist[${e.currentTarget.dataset.selectindex}].is`]: !this.data.selist[e.currentTarget.dataset.selectindex].is,
-      // ['postList.tagId']: String(this.data.markList[e.currentTarget.dataset.selectindex].id),
-      // ['postList.tag']: this.data.markList[e.currentTarget.dataset.selectindex].name
+      ['postList.tagId']: String(this.data.markList[e.currentTarget.dataset.selectindex].tagId),
+      ['postList.tag']: this.data.markList[e.currentTarget.dataset.selectindex].tagName
     })
     // console.log("selist",this.data.seindex)
     // if(selist){
@@ -147,8 +147,8 @@ Page({
       }
     })
     tagIndexList.map(function(item){
-      tagIdList.push(that.data.markList[item].id)
-      tagNameList.push(that.data.markList[item].name)
+      tagIdList.push(that.data.markList[item].tagId)
+      tagNameList.push(that.data.markList[item].tagName)
     })
     var test= tagIdList
     // test
@@ -156,9 +156,9 @@ Page({
       ['postList.tagId']: tagIdList,
       ['postList.tag']: tagNameList
     })
-    console.log("标签", that.data.postList.tag)
+    console.log("标签", that.data.selist)
     var par = this.data.postList
-    if (!that.data.id ? par.skillId=="" || par.skillName == '' :false){
+    if (that.data.id ? par.skillId=="" || par.skillName == '' :false){
       wx.showToast({
         title: '请选择擅长领域',
         icon:'none'
@@ -198,7 +198,7 @@ Page({
     this.setData({
       // markId: JSON.parse(options.busiType)
       busiType: options.busiTypes ? JSON.parse(options.busiTypes):'',//服务类型: 诉讼/仲裁 审查/起草合同....
-      id:options.id ? options.id:0,
+      id:options.id ? 0:1,
       // demandType:
       ['postList.requirementTypeId']: options.demandType ? JSON.parse(options.demandType).requireTypeId:'',
       ['postList.requirementTypeName']: options.demandType ? JSON.parse(options.demandType).requireTypeName:'',
@@ -207,7 +207,7 @@ Page({
     })
     console.log("leixing", JSON.parse(options.demandType))
     console.log("feilei", options.busiTypes ? 1:0)
-    console.log("类型id", this.data.business)
+    console.log("类型id", this.data.id)
     
   },
 

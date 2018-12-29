@@ -7,21 +7,21 @@
   </view>
 </view>
 <view style='background-color:white;padding-right:35rpx;'>
-  <image class='law-page-avatar'src="{{lawyerList[index].iconImage? lawyerList[index].iconImage : '../../../image/my_icon@3x/mine_icon_02_3x.png'}}"></image>
+  <image class='law-page-avatar'src="{{lawyerCard.iconImage? lawyerCard.iconImage : '../../../image/my_icon@3x/mine_icon_02_3x.png'}}"></image>
   <!-- {{lawyerList[index].iconImage}} -->
   <view class='law-page-name'>
     <view class='law-flex law-page-name-right'>
-      <view>{{lawyerList[index].memberName}} <text wx:if="{{lawyerList[index].memberPositionName}}"  class='law-page-min-size'> ({{lawyerList[index].memberPositionName}})</text></view>
-      <view class='law-page-gender-view' style="{{lawyerList[index].sex==1 ? 'background-color: #76cbbf' :' background-color: #f9c0e7;' }}">
-        <image src="{{lawyerList[index].sex==1 ? '../../../image/my_icon@3x/mine_icon_03_3x.png' : '../../../image/my_icon@3x/mine_icon_04_3x.png'}}" class='law-gender-icon'></image>
+      <view>{{lawyerCard.memberName}} <text wx:if="{{lawyerCard.memberPositionName}}"  class='law-page-min-size'> ({{lawyerCard.memberPositionName}})</text></view>
+      <view class='law-page-gender-view' style="{{lawyerCard.sex==1 ? 'background-color: #76cbbf' :' background-color: #f9c0e7;' }}">
+        <image src="{{lawyerCard.sex==1 ? '../../../image/my_icon@3x/mine_icon_03_3x.png' : '../../../image/my_icon@3x/mine_icon_04_3x.png'}}" class='law-gender-icon'></image>
         <view>{{age}}岁</view>
       </view>
     </view>
-    <view class='law-page-min-size law-page-martop'> {{lawyerList[index].institutionName}}<text style='color:#b5b5b5'>|</text> 执业{{year}}年</view>
+    <view class='law-page-min-size law-page-martop'> {{lawyerCard.institutionName}}<text style='color:#b5b5b5'>|</text> 执业{{year}}年</view>
   </view>
 
   <view class='law-info-flex'>
-      <view class='law-page-address' wx:if="{{lawyerList[index].region}}">
+      <view class='law-page-address' wx:if="{{lawyerCard.region}}">
         <image src='../../../image/search_icon@3x/Personalhomepage-20@3x.png' class='law-address-icon'></image>
         {{address[0]}}{{address[1]}}
         <!-- <text wx:if="{{!lawyerList[index].region}}">暂无地址</text> -->
@@ -74,7 +74,7 @@
         <image src="{{index==0? '../../../image/search_icon@3x/Personalhomepage-10@3x.png': index == 1 ? '../../../image/search_icon@3x/Personalhomepage-11@3x.png' :'../../../image/search_icon@3x/Personalhomepage-12@3x.png'}}" class='law-num-icon'></image> 
         <view class='law-margin-left'>{{item.businessTypeName}}</view>
       </view>
-      <view class='law-center-icon-text'>{{item.score*9000*100/9000}}%</view>
+      <view class='law-center-icon-text'>{{score[index]}}%</view>
     </view>
     <view class='law-page-line'></view>
 </view>
@@ -237,4 +237,45 @@
   </view>
 </view>
 
+<!-- <view wx:if="{{quick}}"> -->
+<view style='height:150rpx;'></view>
+<view class='quick-button-view' bindtap='islogin' >
+  <button class='quick-button' bindtap='quickConsultation'catchtap="showModal" >电话咨询</button>
+  <button class='quick-button'>发送需求</button>
+</view>
+<!-- </view> -->
 
+<view class="commodity_screen" wx:if="{{showModalStatus}}"></view>
+  <!--弹出框  -->
+<view  class="commodity_attr_box" wx:if="{{showModalStatus}}">
+    <view wx:if="{{countDown}}">
+      <view style='width:680rpx;display:flex;justify-content:center;margin-left:35rpx;margin-right:35rpx;margin-top:100rpx;'>为保护您的个人权益,我们将先为您联系律师,请注意接听1的电话</view>
+      <view style='width:680rpx;text-align:center;margin-top:100rpx;'>联系倒计时:{{time<=9?'0'+time :time}}</view>
+      <view style='width:680rpx;text-align:center;margin-top:100rpx;'catchtap="closemodal">关闭</view>
+    </view>
+
+  <view wx:if="{{close}}">
+    <view style='width:680rpx;display:flex;justify-content:center;margin-left:35rpx;margin-right:35rpx;margin-top:100rpx;'>现在关闭无法联系律师,是否继续关闭!,</view>
+      <view style='width:680rpx;text-align:center;margin-top:100rpx;display:flex;justify-content:space-around'>
+        <view catchtap="hideModal" >继续关闭</view>
+        <view catchtap="back">再等一会</view>
+      </view>
+  </view>
+
+  <view wx:if="{{start}}">
+    <view style='width:680rpx;display:flex;justify-content:center;margin-left:35rpx;margin-right:35rpx;margin-top:100rpx;'>律师咨询价格为{{}}元/小时,我们将照秒为单位进行计费,前30秒免费</view>
+      <view style='width:680rpx;text-align:center;margin-top:100rpx;display:flex;justify-content:space-around'>
+        <view catchtap="hideModal" >关闭</view>
+        <view catchtap="goto">拨打电话</view>
+      </view>
+  </view>
+
+  <view wx:if="{{isgo}}">
+    <view style='width:680rpx;display:flex;justify-content:center;margin-left:35rpx;margin-right:35rpx;margin-top:100rpx;'>专家咨询为计时扣费,您的账户当前余额不足,请去充值</view>
+      <view style='width:680rpx;text-align:center;margin-top:100rpx;display:flex;justify-content:space-around'>
+        <view catchtap="hideModal" style='margin-top:50rpx;'>再看看</view>
+        <view catchtap="gotoCharge" style='margin-top:50rpx;'>去充值</view>
+      </view>
+  </view>
+
+</view>

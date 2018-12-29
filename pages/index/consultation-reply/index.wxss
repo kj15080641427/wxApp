@@ -84,7 +84,7 @@
 .reply-lower-input{
     height: 80rpx;
     width: 100%;
-    /* background-color: red; */
-    position: absolute;
+    background-color: #b5b5b5;
+    position: fixed;
     bottom: 0;
 }

@@ -41,7 +41,7 @@ Page({
     dataJSON = {
       "pageNum": '1',
       "pageSize": '10',
-      // "lawyerName": t.noFilter.lawyerName || '',
+      "lawyerName": t.noFilter.lawyerName || '',
       // "sort": t.noFilter.sort || '',
       "practiceYearId": t.practiceYearId ? t.practiceYearId : gs.practiceYearId ? gs.practiceYearId : '',
       "sex": t.sex ? t.sex : gs.sex ? gs.sex : '',
@@ -99,7 +99,7 @@ Page({
   onLoad: function (options) {
     var that = this
     that.setData({
-      // noFilter: JSON.parse(options.noFilter),
+      noFilter: JSON.parse(options.noFilter),
       name: JSON.parse(options.noFilter).lawyerName ? JSON.parse(options.noFilter).lawyerName : ''
     })
     console.log(JSON.parse(options.noFilter))

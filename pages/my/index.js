@@ -31,9 +31,20 @@ Page({
   },
   // 关于我们
   gotoAbout:function(){
-    wx.navigateTo({
-      url: '../my/about/index',
-    })
+    var url = api.getAbout()
+    var success = data =>{
+      // this.setData({
+      //   aboutUrl: data.data.share.url
+      // })
+      console.log(data)
+       wx.navigateTo({
+         url: '../my/about/index?url=' + data.data.share.url,
+       })
+    }
+    var fail = e =>{
+      console.log(e)
+    }
+    wxrequest.requestGet(url,'',success,fail)
   },
   // 我的关注
   gotoWatchlist:function(){
@@ -49,25 +60,25 @@ Page({
   gotoEditInfo:function(){
     if(wx.getStorageSync("token")){
       wx.navigateTo({
-        url: '../my/edit-info/index'
+        url: '/pages/my/edit-info/index'
       })
     }else{
       wx.navigateTo({
-        url: '../userlogin/index',
+        url: '/pages/userlogin/index',
       })
     }
   },
   //跳转
   goto:function(url){
     wx.navigateTo({
-      url: '../userlogin/index',
+      url: '/pages/userlogin/index',
     })
   },
   // 订单
   gotoOrder:function(){
     if(wx.getStorageSync("token")){
       wx.navigateTo({
-        url: '../my/order/index?memberId=' + this.data.userInfo.memberId + '&mobile=' + this.data.userInfo.mobile,
+        url: '/pages/my/order/index?memberId=' + this.data.userInfo.memberId + '&mobile=' + this.data.userInfo.mobile,
       })
     }else{
       this.goto()
@@ -156,7 +167,10 @@ Page({
    */
   // 'apabfdc34cc00042c2991bd59b9e8a1ae8ap'
   onLoad: function (options) {
-    wx.removeStorageSync("picIndexList")
+    this.setData({
+      token: wx.getStorageSync('token')
+    })
+    this.getMemberId()
     // if(wx.getStorageInfoSync().keys.length<=1){
     //   wx.clearStorage()
     // }
@@ -248,10 +262,11 @@ Page({
    */
   onShow: function () {
     //获取memberID
-    this.getMemberId()
+    
     // 获取用户详情
     //年龄
     this.getAge()
+    wx.removeStorageSync("picIndexList")
   },
 
   /**

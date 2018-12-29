@@ -4,31 +4,36 @@
     <image src='../../image/homeicon_3x/homepage_01_3x.png' style='width:40rpx;height:40rpx;margin-right:20rpx ' ></image>
     <input placeholder='搜索律师' placeholder-style='color:#ffffff;' confirm-type="search" bindconfirm="confirm" bindinput='searchInput' style='width:100%;color:white'></input>
   </view>
+  <view style='font-size:20rpx;color:white;width:90rpx;margin-right:35rpx;' bindtap='gotoDemand'>
+      <view style='display:flex;justify-content:center;width:90rpx;'>
+        <image src='../../image/search_icon@3x/Personalhomepage-25@3x.png' style='width:79rpx;height:55rpx;'></image>
+      </view>
+      <view style='display:flex;justify-content:center;width:90rpx;'>发布需求</view>
+    </view>
 </view>
 
 <view wx:if="{{hasList}}">
 
 <view class='search-tab-list'>
   <view  class='search-tab-icon'bindtap='sort'>
-    <view class='search-tab-text' style='color:#1ec88c'>{{sort[sortIndex]}}</view>
+    <view class='search-tab-text' style='color:#1ec88c;text-align:right'>{{sort[sortIndex]}}</view>
     <image src='../../image/search_icon@3x/Personalhomepage-22@3x.png' class='search-page-icon'></image>
   </view>
   <view  class='search-tab-icon' bindtap='selectExpert'>
-    <view class='search-tab-text' style="{{expertColor ? 'color:#1ec88c':''}}">{{expert}}</view>
+    <view class='search-tab-text' style="{{expertColor ? 'color:#1ec88c;text-align:right':'text-align:right'}}">{{expert}}</view>
     <image src='../../image/search_icon@3x/Personalhomepage-22@3x.png' class='search-page-icon'></image>
   </view>
   <view  class='search-tab-icon' bindtap='selectRegion'>
-    <view class='search-tab-text' style="{{selectedCityColor ? 'color:#1ec88c' :''}}">{{selectedCity}}</view>
+    <view class='search-tab-text' style="{{selectedCityColor ? 'color:#1ec88c;text-align:right' :'text-align:right'}}">{{selectedCity}}</view>
     <image src='../../image/search_icon@3x/Personalhomepage-22@3x.png' class='search-page-icon'></image>
   </view>
   <view  class='search-tab-icon' bindtap='gotoFilter'>
-    <view class='search-tab-text' style="{{filterColor ? 'color:#1ec88c' :''}}">筛选</view>
+    <view class='search-tab-text' style="{{filterColor ? 'color:#1ec88c;text-align:right' :'text-align:right'}}">筛选</view>
     <image src='../../image/search_icon@3x/Personalhomepage-21@3x.png' class='search-page-icon' style='width:35rpx;height:35rpx'></image>
   </view>
 </view>
 </view>
 
-<button bindtap='gotoDemand'>发布需求</button>
 <!-- <view style='margin-top:200rpx;'></view> -->
 <!-- 排序 -->
     <view class='search-select-flex' style='z-index:998;position:fixed;top:180rpx;display:flex;' wx:if="{{showSort}}">
@@ -90,7 +95,7 @@
 
 
 <view style='height:750rpx;' wx:if="{{hasList}}">
-  <view style='margin-top:280rpx;'></view>
+  <view style='margin-top:215rpx;'></view>
 <view class="" >
   <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}"  data-index="{{index}}" catchtap='getIndex'>
     <view class='watchlist-page'>

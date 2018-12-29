@@ -52,7 +52,7 @@ Page({
     var startDate = this.data.startTime.split(" ")[0]
     var nowDate = formatTime.formatTime(new Date()).split(" ")[0]
     var startTime = this.data.startTime.split(" ")[1]
-    var nowTime = formatTime.formatTime(new Date()).split(" ")[0]
+    var nowTime = formatTime.formatTime(new Date()).split(" ")[1]
     console.log("订单开始时间",this.data.startTime.split(" "))
     console.log("现在时间",formatTime.formatTime(new Date()).split(" "))
     if (nowDate.split("/")[0]-startDate.split("-")[0]>0){
@@ -70,34 +70,39 @@ Page({
         time: false
       })
       console.log('日')
-    } else if ((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]))>900){
+    } else if ((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]))>9000){
       this.setData({
         time: false,
       })
     }else{
       var hasTime = (nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]))
       this.setData({
-        hasTime: 900-((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]))),
-        statusValue: true
+        hasTime: 900-hasTime,
+        // statusValue: true
       })
-      console.log("剩余时间")
+      console.log("剩余时间",hasTime)
       var that = this
-      var secondInt = that.data.hasTime
+      var secondInt = hasTime
       that.setData({
         minute: parseInt(secondInt / 60),
         second: secondInt % 60
       })
+      console.log('计时器', that.data.minute)
       this.setData({
         timedown:setInterval(function () {
           // var downTime = hasTime -- 
           that.setData({
             second: that.data.second - 1
           })
-          if (that.data.second <= 0 && that.data.minute !=0) {
+          if (that.data.second <= 0 ) {
             that.setData({
               second: 60,
-              minute: that.data.minute - 1
             })
+            if (that.data.minute != 0){
+              that.setData({
+                minute: that.data.minute - 1
+              })
+            }
           }
           if (that.data.minute <= 0 && that.data.second<=0) {
             that.setData({
@@ -107,7 +112,7 @@ Page({
             clearInterval(that.data.timedown)
             console.log("清除计时器")
           }
-          console.log('计时器', that.data.minute)
+          console.log('计时器', that.data.second)
         }, 1000)
       })
     }

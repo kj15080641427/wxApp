@@ -28,5 +28,5 @@
     <view class='balance-prompt-text'>温馨提示</view>
     <view class='balance-prompt-text'>1.账户余额仅用于支付绿豆圈平台提供的法律服务。</view>
     <view class='balance-prompt-text'>2.为避免因费用不足导致的咨询中断，建议账户余额不少于100元。</view>
-    <view class='balance-prompt-text'>3.如有疑问，请联系绿豆圈客服400-811-3060</view>
+    <view class='balance-prompt-text'>3.如有疑问，请联系绿豆圈客服</view>
 </view>

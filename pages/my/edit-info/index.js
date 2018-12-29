@@ -100,11 +100,13 @@ Page({
         org:data.data
       })
       that.data.org.map(function(item){
-        if (item.organizationId == userInfo.organizations[0].organizationId){
-        that.setData({
-          orgN: item.organizationName
-        })
-      }
+        if (item.organizationId[0]){
+          if (item.organizationId == userInfo.organizations[0].organizationId) {
+            that.setData({
+              orgN: item.organizationName
+            })
+          }
+        }
         // console.log("哈哈哈哈哈哈哈哈", item.organizationName, "=", userInfo)
       })
     }

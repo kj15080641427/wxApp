@@ -1,20 +1,27 @@
  <view class='reply-page'>
 
-<!-- 律师 -->
-    <view class='reply-page-flex' style='background-color:#f2f2f2;height:80rpx'>
+<!--  -->
+
+
+   <!-- -->
+  <view wx:key="{{index}}" wx:for="{{freeText}}"style="margin-bottom:100rpx;">
+  <view class='reply-page-flex'>
     <view class='reply-page-top'>
-      <view class='reply-page-lawyer-icon'></view>
-      <view class='reply-page-lawyer-nikename'>{{freeTetxList.lawyerName}}</view>
-      <view class='reply-page-lawyer-lawfirm'>{{freeTetxList.lawyerFirm}}</view>
+      <image class='reply-page-icon' src="{{freeText[index].type==1 ? freeText[index].lawyerIconImage :userInfo.iconImage}}"></image>
+      <view class='reply-page-nikename'>{{freeText[index].type==1 ? freeText[index].lawyerName:userInfo.memberName}}</view>
+      <view class='reply-page-line'></view>
+      <view class='reply-page-nikename'>{{freeText[index].type==1 ? freeText[index].lawyerFirm:userInfo.addressExtend.province+userInfo.addressExtend.city}}</view>
     </view>
-    <image src='../../image/homeicon_3x/homepage_10_3x.png' style='width:20rpx;height:20rpx;margin-right:15rpx'></image>
   </view>
-    <view class='reply-page-answer'>{{freeTetxList.content}}</view>
+  <view class='reply-page-answer'>{{freeText[index].content}}</view>
 
   <view class='reply-page-reply'>
     <view class='reply-page-reply-left'>
-      <view>{{lawago}}{{lawagoText}}前</view>
-      <view class='reply-page-reply-margin'>{{lawtList}}</view>
+      <!-- <view>{{lawago[index]}}{{lawagoText[index]}}</view>
+      <view class='reply-page-reply-margin'>{{timelaw[index]}}</view> -->
+      <!-- <view >{{lawago[index]}}{{lawagoText[index]}}</view> -->
+      <view class='reply-page-reply-margin' >{{timelaw[index]}}</view>
+
       <view class='reply-page-top reply-page-reply-margin'>
         <!-- <view class='reply-page-reply-dot'></view> -->
       </view>
@@ -22,30 +29,7 @@
     </view>
     <!-- <view><label style='color:#1ec88c'>5</label>条回复</view> -->
   </view>
-
-   <!--用户 -->
-  <view class='reply-page-flex'>
-    <view class='reply-page-top'>
-      <view class='reply-page-icon'></view>
-      <view class='reply-page-nikename'>北燕南飞</view>
-      <view class='reply-page-line'></view>
-      <view class='reply-page-nikename'>湖南常德</view>
-    </view>
-  </view>
-  <view class='reply-page-answer'>{{answer}}</view>
-
-  <view class='reply-page-reply'>
-    <view class='reply-page-reply-left'>
-      <view>5天前</view>
-      <view class='reply-page-reply-margin'>13:14</view>
-      <view class='reply-page-top reply-page-reply-margin'>
-        <view class='reply-page-reply-dot'></view>
-      </view>
-      <view class='reply-page-reply-margin' bindtap='deleteInfo'>删除</view>
-    </view>
-    <!-- <view><label style='color:#1ec88c'>5</label>条回复</view> -->
-  </view>
-
+ </view>
  </view>
  <view class='reply-lower-line'></view>
  <input class='reply-lower-input' placeholder='回复' placeholder-style="margin-left:40rpx"bindinput="userreply" confirm-type="search" bindconfirm="confirm"></input>

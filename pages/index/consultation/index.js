@@ -7,7 +7,7 @@ Page({
    */
   data: {
     checked:1,
-    array: ['婚姻家事', '房产土地', '债权债务', '公司工商'],
+    array: [],
     hasSelect:true,
     hasSelectAddress:true,
     region: '',
@@ -30,9 +30,9 @@ Page({
       hasSelect:false,
     })
     this.setData({
-      consultationTypeId: Number(e.detail.value)+1
+      consultationTypeId: this.data.array[e.detail.value].id
     })
-    // console.log(e.detail.value)
+    console.log(this.data.consultationTypeId)
   },
   // 选择地区
   bindRegionChange: function (e) {
@@ -53,23 +53,31 @@ Page({
   },
   // 提交
   commit:function(){
+    var that = this
     var commitURL = api.getCommitUrl()
     var data = {
-      "consultationTypeId": this.data.consultationTypeId,
-      "regionId": this.data.regionId, 
-      "content": this.data.commitContent,
-      "isHide": this.data.isHide == true ? '1':'0'
+      "consultationTypeId": that.data.consultationTypeId,
+      "regionId": that.data.regionId, 
+      "content": that.data.commitContent,
+      "isHide": that.data.isHide == true ? '1':'0'
      }
     var success = function(data){
+      that.setData({
+        consultation:data
+      })
     console.log('成功')
       wx.showToast({
         title: '提交成功',
       })
-    setTimeout(function(){
-      wx.navigateBack({
-        
+      wx.navigateTo({
+        url: '/pages/index/consultation-details/index?consultationId=' + that.data.consultationId + '&date=' + that.data.dateAdded,
       })
-    },1000)
+      console.log(',.....',that.data.consultationId)
+    // setTimeout(function(){
+    //   wx.navigateBack({
+        
+    //   })
+    // },1000)
     }
     var fail = function(e){
       console.log(12312312312)
@@ -97,13 +105,35 @@ Page({
       wxrequest.request(commitURL, data, success, fail)
     }
   },
+  //解决方案类型  
+  getArticleType:function(){
+    var that = this
+    var url = api.getArticleTypeUrl()
+    var messagetype = ""
+    var data = { "pageNum": 1, "pageSize": 100,"deviceInfoId":5 }
+    var success = function (data) {
+      wx.hideLoading()
+      console.log("解决方案分类list", data.data)
+      that.setData({
+        array: data.data,
+      })
+      // that.getArticleList()
+      // initIndex: data.data.list[0].id
+    }
+    var fail = function (e) {
+      wx.hideLoading()
+      console.log("解决方案错误", e)
+    }
+    wxrequest.requestPost(url, data, messagetype, success, fail)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      array: JSON.parse(options.type)
-    })
+    this.getArticleType()
+    // this.setData({
+    //   array: JSON.parse(options.type)
+    // })
     console.log("问题类型",this.data.array)
     //问题类型
     // var that = this
@@ -172,20 +202,20 @@ Page({
   onShareAppMessage: function () {
     
   },
-  getType:function(){
-    //问题类型
-    var that = this
-    var typeUrl = api.getArticleTypeUrl()
-    var message = ""
-    var successType = function (data) {
-      console.log(data.data)
-      that.setData({
-        array: data.data,
-      })
-    }
-    var failType = function (e) {
-      console.log("错误", e)
-    }
-    wxrequest.requestGet(typeUrl, message, successType, failType)
-  }
+  // getType:function(){
+  //   //问题类型
+  //   var that = this
+  //   var typeUrl = api.getArticleTypeUrl()
+  //   var message = ""
+  //   var successType = function (data) {
+  //     console.log(data.data)
+  //     that.setData({
+  //       array: data.data,
+  //     })
+  //   }
+  //   var failType = function (e) {
+  //     console.log("错误", e)
+  //   }
+  //   wxrequest.requestGet(typeUrl, message, successType, failType)
+  // }
 })

@@ -32,7 +32,7 @@
 
 <view style='margin-top:180rpx;'></view>
 
-  <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}"   >
+  <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}" data-lawindex="{{index}}" catchtap='gotoexpert'>
     <view class='watchlist-page'>
       <view class='watchlist-page-flex'>
         <view class='watchlist-page-left' style="z-index:55;">
@@ -47,7 +47,7 @@
               <view>{{lawyerList[index].memberName}}</view>
               <label wx:if="{{lawyerList[index].memberPositionName}}" class='watchlist-page-firm'>({{lawyerList[index].memberPositionName}})</label>
             </view>
-            <view class='demand-button' data-index="{{index}}" catchtap='getExpert'>咨询</view>
+            <!-- <view class='demand-button' data-index="{{index}}" catchtap='getExpert'>咨询</view> -->
           </view>
           <view class='watchlist-page-address'>{{address[index]}} <text wx:if="{{lawyerList[index].region&&lawyerList[index].institutionName}}">|</text> {{lawyerList[index].institutionName}}</view>
           <view class='watchlist-page-adept'>{{lawyerList[index].description}} </view>

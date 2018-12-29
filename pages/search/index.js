@@ -39,7 +39,7 @@ Page({
    */
   data: {
     lawyerList: '', //律师信息
-    year1: '', //执业年限
+    year: '', //执业年限
     getPage: 10, //页数
     // dataJSON: '', //
     address: '', //地址
@@ -70,11 +70,15 @@ Page({
     var that = this
     that.setData({
       hasList:true,
-      noFilter: { "pageNum": '1', "pageSize": '10' }
+      noFilter: { "pageNum": '1', "pageSize": '10' },
+      expert:'擅长领域',
+      selectedCity: '选择地区',
+      expertColor:false,
+      selectedCityColor:false
     })
     // wx.removeStorageSync("picIndexList")
   },
-  //需求test
+  //需求
   gotoDemand: function () {
     wx.navigateTo({
       url: '../search/demand/index',
@@ -192,7 +196,7 @@ Page({
     var year = that.data.year //执业年限
     var lawyerList = that.data.lawyerList
       wx.navigateTo({
-        url: 'lawyer-detail/index?listIndex=' + listIndex + '&year=' + year[listIndex] + '&lawyerList=' + JSON.stringify(lawyerList),
+        url: 'lawyer-detail/index?listIndex=' + listIndex + '&year=' + year[listIndex] + '&memberId=' + lawyerList[listIndex].memberId,
       })
   },
   // 筛选
@@ -222,6 +226,7 @@ Page({
         lawyerList: data.data.list,
         ishidden:true
       })
+      console.log("lawyerList",that.data.lawyerList)
       that.getAge()
     }
     var fail = function (e) {
@@ -319,7 +324,7 @@ Page({
       addressList.push(item.region.split('-', 2))
     }) : ''
     this.setData({
-      year1: yearList,
+      year: yearList,
       address: addressList,
     })
   },
@@ -386,10 +391,6 @@ Page({
    */
   onReachBottom: function () {
     var that = this
-    // wx.showLoading({
-    //   title: '加载中',
-    // })
-
     that.setData({
       getPage: that.data.getPage + 10,
       ishidden: false
