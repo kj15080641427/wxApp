@@ -1,5 +1,7 @@
 // pages/my/order-detail/index.js
 var formatTime = require('../../../utils/util.js')
+var api = require('../../../utils/api.js')
+var wxrequest = require('../../../utils/request.js')
 Page({
 
   /**
@@ -21,10 +23,35 @@ Page({
     statusValue:false
     // orderDetail:''
   },
-  gotoChat:function(){
-    // wx.navigateTo({
-    //   url: '../order-chat/index',
-    // })
+  // gotoChat:function(){
+  //   if(this.data.lawyerPhone){
+
+  //   }
+  //   // wx.navigateTo({
+  //   //   url: '../order-chat/index',
+  //   // })
+  // },
+  //获取律师电话
+  getLawyerPhone:function(){
+    console.log('获取律师电话')
+    var url = api.getLawyerPhone() + this.data.orderDetail.orderNo
+    var success = (data=>{
+      this.setData({
+        lawyerPhone:data.data
+      })
+      wx.makePhoneCall({
+        phoneNumber: data.data
+      })
+      console.log(data)
+    })
+    var fail=(e)=>{
+      console.log(e)
+      wx.showToast({
+        title: e.data.message,
+        icon:'none'
+      })
+    }
+    wxrequest.requestGet(url,'',success,fail)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -33,6 +60,7 @@ Page({
     var data = JSON.parse(options.orderDetail)
     this.setData({
       // orderDetail:data,
+      orderDetail : JSON.parse(options.orderDetail),
       ['detailList[0].text']: data.orderNo,
       ['detailList[1].text']: data.createDate,
       ['detailList[2].text']: data.orderType,
@@ -43,12 +71,14 @@ Page({
       // ['detailList[7].text']: data.beginTime
       startTime:data.createDate
     })
-    if( options.statusValue=='已接单'){
+    if (this.data.orderDetail.orderStatus == 5) {
       this.setData({
-        statusValue:true
+        statusValue: true
       })
     }
-    this.data.startTime
+    console.log(this.data.orderDetail)
+    // this.getLawyerPhone()
+
     var startDate = this.data.startTime.split(" ")[0]
     var nowDate = formatTime.formatTime(new Date()).split(" ")[0]
     var startTime = this.data.startTime.split(" ")[1]
@@ -131,7 +161,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    clearInterval(this.data.timedown)
   },
 
   /**

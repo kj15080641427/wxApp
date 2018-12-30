@@ -2,6 +2,7 @@
   "pages":[
     "pages/index/index",
     "pages/my/index",
+    "pages/index/consultation-input/index",
     "pages/my/order/index",
     "pages/index/expert-filter/index",
     "pages/search/index",

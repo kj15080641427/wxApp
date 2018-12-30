@@ -78,12 +78,12 @@
 
 }
 
-
-
 .box{padding: 20px 15px;}
 
-picker-view view{line-height: 50px; padding-left:10px;}
-
+picker-view view{
+  line-height: 50px;
+  padding-left:10px;
+}
 .modal-dialog{
   display: flex;
   justify-content: space-between;

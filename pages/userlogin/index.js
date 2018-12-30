@@ -114,6 +114,7 @@ Page({
             var message = ''
             var idData = wx.getStorageSync("token")
             var success = function (res) {
+                wx.setStorageSync("userInfo", res.data)
                 wx.setStorageSync("memberId", res.data.memberId)
                 wx.setStorageSync("mobile", res.data.mobile)
                 if(!jM.isLogin()){

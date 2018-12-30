@@ -80,6 +80,21 @@ Page({
       item.toFixed(2)
     })
   },
+  //律师单价
+  getLawyerMoney:function(){
+    // console.log(this.data.lawyerList)
+    var url = api.getLawyerMoney() + this.data.lawyerList
+    var success = data =>{
+      console.log('律师单价',data.data)
+      this.setData({
+        lawyerMoney:data.data
+      })
+    }
+    var fail = e =>{
+      console.log(e)
+    }
+    wxrequest.requestGet(url,'',success,fail)
+  },
   //律师主页
   getlawyer: function (e) {
     var that = this
@@ -253,6 +268,12 @@ Page({
       this.hideModal()
     }
   },
+  //发布需求
+  toDemand:function(){
+    wx.navigateTo({
+      url: '/pages/search/demand/index',
+    })
+  },
   //充值
   gotoCharge:function(){
     wx.navigateTo({
@@ -270,7 +291,8 @@ Page({
   //支付
   goto:function(){
     var t = {
-      money: 1, type: 3, product: 3, downTime: this.downTime(), countDown: this.setData({ start: false,countDown: true,start: false,})}
+      money: 1, type: 3, product: 3, downTime: this.downTime(), countDown: this.setData({ start: false,countDown: true,start: false,})
+      }
     wxPay(t).then(res => { //支付成功
        console.log('??>?>?>')
     },(err=>{ //支付失败
@@ -301,6 +323,13 @@ Page({
       wx.navigateTo({
         url: '/pages/userlogin/index',
       })
+    }
+  },
+  //余额是否足够
+  isEnough:function(){
+    console.log(this.data.lawyerMoney.balance)
+    if (this.data.lawyerMoney.balance >= this.data.lawyerMoney.lawyerPrice/60){
+      this.showModal()
     }
   },
   showModal: function () {
@@ -357,10 +386,13 @@ Page({
   //支付
   //快速咨询
   quickConsultation:function(){
-    var t = { money: 100, type: 3, product:3}
-    // wxPay(t).then(res=>{
-    //   console.log(res)
-    // })
+    console.log('电话咨询')
+    var t = {
+      money: this.data.lawyerMoney.lawyerPrice*100, type: 3, product: 5,lawyerId:this.data.lawyerList, downTime: this.downTime(), countDown: this.setData({ start: false, countDown: true, start: false, })
+    }
+    wxPay(t).then(res => {
+      console.log('支付', res)
+    })
     // PA18122702075861469
     // var url = api.getExpertPhone() +'/PA18122702075861469'
     // var success = data =>{
@@ -379,7 +411,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.quickConsultation()
     this.setData({
       lawyerList: options.memberId,
       quick:options.quick ? true:false
@@ -387,8 +418,10 @@ Page({
     wx.showLoading({
       title: '获取律师信息',
     })
+    console.log("律师ID",options)
     this.search()
     this.followList()
+    this.getLawyerMoney()
     // this.getlawyer()
   },
   /**

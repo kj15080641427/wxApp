@@ -24,6 +24,6 @@
   <view>温馨提示</view>
   <view>1.仅限支付宝提现</view>
   <view>2.提交申请后,我们将在3-7个工作日内转到您的支付宝账户,感谢您对品台的支持</view>
-  <view>3.如有疑问,请联系绿豆圈客服<text style='color:#1ec88c'>400-811-3060</text></view>
+  <view>3.如有疑问,请联系绿豆圈客服<text style='color:#1ec88c'></text></view>
 </view>
 <button >申请提现</button>

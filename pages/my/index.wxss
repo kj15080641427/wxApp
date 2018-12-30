@@ -23,11 +23,13 @@
   height: 40rpx;
   align-items: center;
   position: absolute;
-  right: 5%
+  right: 5%;
+  margin-top:80rpx;
 }
 .my-page-editinfo{
   font-size: 30rpx;
-  color: #ffffff
+  color: #ffffff;
+
 }
 .my-page-textgenter{
   display: flex;

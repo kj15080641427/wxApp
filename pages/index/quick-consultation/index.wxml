@@ -17,12 +17,22 @@
 <view class='quick-page-font'>
 
   <view class='quick-page-flex quick-center'>
-    <view style='margin-left:35rpx;width:120rpx;'>问题类型</view>
-    <picker value='{{index}}' range="{{popular}}" range-key = "{{'typeName'}}"bindchange='changeType' class='quick-page-right'bindtap='getQuType'> {{popular[index].typeName}}<label wx:if="{{selectType}}">{{selectProblem}}</label></picker>
+    <view style='margin-left:35rpx;width:140rpx;'><text style='color:red'>*</text>问题类型</view>
+    <picker value='{{index}}' range="{{popular}}" range-key = "{{'typeName'}}"bindchange='changeType' class='quick-page-right'bindtap='getQuType'> 
+      <view style='display:flex;align-items:center;justify-content: space-between;width:550rpx;'>
+        <view style='display:flex;align-items:center;'>
+          <view>{{popular[index].typeName}}</view>
+          <view wx:if="{{selectType}}" style='color:#b5b5b5'>{{selectProblem}}</view>
+        </view>
+        <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
+      </view>
+    </picker>
   </view>
+
+
 <view class='quick-page-line-center'></view>
   <view class='quick-page-flex quick-center'>
-    <view style='margin-left:35rpx;width:120rpx;'>联系手机</view>
+    <view style='margin-left:35rpx;width:140rpx;'> <text style='color:red'>*</text>联系手机</view>
     <input class='quick-page-right quick-phone' bindinput='phoneInput' value='{{phone}}'></input>
     <!-- <view style='font-size:27rpx;margin-right:35rpx;margin-left:35rpx;width:120rpx;'>更换手机</view> -->
   </view>

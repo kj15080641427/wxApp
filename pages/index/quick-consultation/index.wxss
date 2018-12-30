@@ -52,20 +52,23 @@
 }
 .quick-page-font{
   font-size: 28rpx;
-  color: #b5b5b5;
+  color: #323232;
   background-color: white
 }
 .quick-page-right{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   height: 100rpx;
   line-height: 100rpx;
-  width: 500rpx;
+  width: 550rpx;
   margin-left: 35rpx;
   font-size: 27rpx;
 }
 .quick-phone{
   line-height: 100rpx;
   height: 100rpx;
-  width: 460rpx;
+  width: 550rpx;
   font-size: 28rpx;
   color: #323232;
 }
@@ -140,4 +143,9 @@
 .consul-balance{
   color: #b5b5b5;
   font-size: 24rpx;
+}
+.detail-page-icon{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 35rpx;
 }

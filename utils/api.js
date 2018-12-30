@@ -253,6 +253,16 @@ var About = '/aboutus'
 function getAbout(){
   return HOST_URL + About
 }
+//抢单后获取律师电话
+var LawPhone = '/lawyer/order/quick/userphone/'
+function getLawyerPhone(){
+  return HOST_URL + LawPhone
+}
+//获取律师单价
+var LawyerMoney = '/client/expert/price/'
+function getLawyerMoney(){
+  return HOST_URL + LawyerMoney
+}
 module.exports={
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,
@@ -295,5 +305,7 @@ module.exports={
   getExpertPhone: getExpertPhone,
   getFreetextList: getFreetextList,
   getUserReply: getUserReply,
-  getAbout: getAbout
+  getAbout: getAbout,
+  getLawyerPhone: getLawyerPhone,
+  getLawyerMoney: getLawyerMoney,
 }

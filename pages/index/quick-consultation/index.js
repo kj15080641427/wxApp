@@ -63,24 +63,21 @@ Page({
         title: '请选择问题类型',
         icon: 'none'
       })
-    } else {
-      // if (!(/^1[345678]\d{9}$/.test(this.data.phone))) {
-    // if 
+    } else if (!(/^1[3456789]\d{9}$/.test(this.data.phone))) {
     // (this.data.phone) {
-    //   wx.showToast({
-    //     title: '请输入正确的手机号码',
-    //     icon: 'none'
-    //   })
-    // }else
-    // {
-      var t = { typeQuick: this.data.popular[this.data.index], money: this.data.money, type: 1, product: 2 }
+      wx.showToast({
+        title: '请输入正确的手机号码',
+        icon: 'none'
+      })
+    }else{
       if(this.data.checked1){
+        var t = { typeQuick: this.data.popular[this.data.index], money: this.data.money, type: 1, product: 2, phone:this.data.phone}
         var that = this
         var payMoney = that.data.money
         console.log("money", that.data.money)
         wxPay(t).then(res => {
           console.log("微信支付", res.data.data.orderno)
-          that.getQuick(res.data.data.orderno)
+          // this.getQuick.then(res.data.data.orderno)
         })
       }else{
         var that = this
@@ -89,7 +86,10 @@ Page({
         wxPay(s).then(res => {
           // this.getQuick.then(res.data.data.orderno)
           console.log("余额支付", res.data.data.orderno)
-        },error => {console.log(error)})
+        },error => {console.log(error),wx,wx.showToast({
+          title: error,
+          icon: 'none',
+        })})
       }
     // }
   }
@@ -97,7 +97,7 @@ Page({
   // 快速咨询
   // getQuick: function (orderNo){
   //   var url = api.getQuick()
-  //   var data = { "payOrderNo": orderNo, "payType": this.data.checked1 ?1:3, "payAmount": this.data.money, "typeId": this.data.popular[this.data.index].id}
+  //   var data = { "payOrderNo": orderNo, "payType": 1, "payAmount": this.data.money, "typeId": this.data.popular[this.data.index].id}
   //   var success = data => {
   //     console.log("支付成功",data)
   //     wx.navigateTo({

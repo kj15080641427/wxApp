@@ -14,24 +14,13 @@ Page({
       replyInput:e.detail.value
     })
   },
-//回复
-  confirm(e){
-    var that = this
-    var url = api.getUserReply() + wx.getStorageSync("consultationId") +'/reply/post'
-    var data = { "consultationId": wx.getStorageSync("consultationId"), "type": 2, "content": that.data.replyInput, "lawyerId": wx.getStorageSync("freeTextList").lawyerId}
-    var success = data =>{
-      this.setData({
-        reply:data.data
-      })
-      that.getFreeText()
-      console.log("用户回复",data.data)
-    }
-    var fail = e=>{
-      console.log(e)
-    }
-    wxrequest.request(url,data,success,fail)
-  },
 
+  //回复页
+  toinput:function(){
+    wx.navigateTo({
+      url: '/pages/index/consultation-input/index?',
+    })
+  },
   //文字咨询回复详情
   getFreeText: function () {
     var url = api.getFreeText() + this.data.freeTextList.consultationId + '/' + this.data.freeTextList.lawyerId + '/reply/detail/1/99'
@@ -146,7 +135,7 @@ Page({
       // lawagoText:options.lawagoText
     })
     console.log("huifu",this.data.freeTextList)
-    this.getFreeText()
+    // this.getFreeText()
   },
 
   /**
@@ -160,7 +149,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.getFreeText()
   },
 
   /**

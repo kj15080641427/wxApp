@@ -31,5 +31,10 @@
   </view>
  </view>
  </view>
- <view class='reply-lower-line'></view>
- <input class='reply-lower-input' placeholder='回复' placeholder-style="margin-left:40rpx"bindinput="userreply" confirm-type="search" bindconfirm="confirm"></input>
+ <!-- <view class='reply-lower-line'></view>
+ <input class='reply-lower-input' placeholder='回复' placeholder-style="margin-left:40rpx"bindinput="userreply" confirm-type="search" bindconfirm="confirm"></input> -->
+<view style='position: fixed;bottom: 0;' class='consul-page-button-view'>
+  <view class="consul-oage-button-view">
+    <button class="consul-page-button" bindtap='toinput'>回复</button>
+  </view>
+</view>

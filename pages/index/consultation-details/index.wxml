@@ -23,14 +23,14 @@
       </view> -->
       <!-- <view class='details-page-reply-margin' bindtap='deleteInfo'>删除</view> -->
     </view>
-    <view><label style='color:#1ec88c'></label>{{freetotal.total}}条回复</view>
+    <view><label style='color:#1ec88c'></label>{{allTotal}}条回复</view>
   </view>
 </view>
 
 <view wx:key="{{index}}" wx:for="{{freeTextList}}">
   <view class='details-page-line-center'></view>
   <view class='details-page'>
-    <view class='details-page-flex details-page-lawyer'>
+    <view class='details-page-flex details-page-lawyer' bindtap='toLawyerHomePage' data-lawindex="{{index}}">
       <view class='details-page-top'>
         <image class='details-page-lawyer-icon' src="{{freeTextList[index].lawyerIconImage? freeTextList[index].lawyerIconImage :'/image/my_icon@3x/mine_icon_02_3x.png'}}"></image>
         <view class='details-page-lawyer-nikename'>{{freeTextList[index].lawyerName}}</view>
@@ -47,7 +47,7 @@
       <view >{{lawago[index]}}{{lawagoText[index]}}</view>
       <view class='details-page-reply-margin' >{{timelaw[index]}}</view>
       <view class='details-page-reply-background details-page-reply-margin'>
-        <view  data-freeindex="{{index}}" bindtap='gotoReply'>{{freeLength[index]}}回复</view>
+        <view  data-freeindex="{{index}}" bindtap='gotoReply'>{{freeText[index]>1?freeText[index]:''}}回复</view>
       </view>
     </view>
   </view>

@@ -1,6 +1,7 @@
 // pages/search/demand-detail/index.js
 var api = require('../../../utils/api.js')
 var wxrequest = require('../../../utils/request.js')
+var reg = require('../../../region.js');
 Page({
   /**
    * 页面的初始数据
@@ -8,7 +9,7 @@ Page({
   data: {
     markId:'',
     markList:'',
-    region: ['湖南省', '长沙市'],
+    // region: ['湖南省', '长沙市'],
     selist: [], //标签
     seindex:'',//标签index
     business:'', //擅长领域列表
@@ -34,8 +35,54 @@ Page({
       "tag": '',
       "targetLawyerId": '',
       "isFirst": 1
-    }
+    },
+
+    multiIndex: [0, 0],
+    multiArray: ''
   },
+  //选择地区
+  //选择地区
+  bindMultiPickerColumnChange: function (e) {
+    var data = {
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex
+    };
+    console.log(e.detail.column)
+    data.multiIndex[e.detail.column] = e.detail.value;
+    switch (e.detail.column) {
+      case 0:
+        data.multiArray[1] = this.data.multiArray[e.detail.column][e.detail.value].child;
+        break;
+    }
+    this.setData({
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex,
+    })
+
+    // this.multiArray = this.data.multiArray;
+    // this.multiIndex = this.data.multiIndex;
+    // // 使用wepy开发，this.$apply()为脏数据检查
+    // this.$apply();
+  },
+  bindMultiPickerChange: function (e) {
+    // console.log(
+    //   this.multiArray[0][e.detail.value[0]],
+    //   this.multiArray[1][e.detail.value[1]]
+    // ); // {value: "431000", label: "郴州市", level: 2}
+    console.log(this.data.multiArray[0][e.detail.value[0]])
+    console.log(this.data.multiArray[1][e.detail.value[1]])
+    this.setData({
+      ['postList.lawyerRegionId']: this.data.multiArray[1][e.detail.value[1]].regionId ? this.data.multiArray[1][e.detail.value[1]].regionId : this.data.multiArray[0][e.detail.value[0]].regionId
+    })
+
+    this.setData({
+      multiIndex: e.detail.value
+    })
+    // this.multiIndex = e.detail.value;
+    // this.$apply();
+  },
+
+
   //标签列表
   getMark:function(){
     var that = this
@@ -118,13 +165,13 @@ Page({
     })
   },
   //region
-  bindRegionChange(e) {
-    this.setData({
-      region: e.detail.value,
-      ['postList.lawyerRegionId']: e.detail.code[1]
-    })
-    // console.log("diqu",e.detail.code[2])
-  },
+  // bindRegionChange(e) {
+  //   this.setData({
+  //     region: e.detail.value,
+  //     ['postList.lawyerRegionId']: e.detail.code[1]
+  //   })
+  //   // console.log("diqu",e.detail.code[2])
+  // },
   //选择擅长领域 
   pickerLIst:function(e){
     this.setData({
@@ -195,6 +242,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //选择地区
+    var city = reg.citysData
+    // this.multiArray = [[...city], [...city[0].children]];
+    // this.$apply();
+    this.setData({
+      multiArray: [[...city], [...city[0].child]],
+    })
+    console.log(this.data.multiArray)
+    console.log('地区',reg)
+
     this.setData({
       // markId: JSON.parse(options.busiType)
       busiType: options.busiTypes ? JSON.parse(options.busiTypes):'',//服务类型: 诉讼/仲裁 审查/起草合同....

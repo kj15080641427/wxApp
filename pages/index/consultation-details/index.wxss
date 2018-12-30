@@ -135,3 +135,35 @@ page{
   width: 110rpx;
   height: 35rpx;
 }
+.no-message{
+  width: 750rpx;
+}
+.no-messge-image-view{
+  display: flex;
+  justify-content: center;
+}
+.no-message-imag{
+  margin-top: 220rpx;
+  width: 330rpx;
+  height: 330rpx;
+}
+.no-message-tips-view{
+  display: flex;
+  justify-content: center;
+  margin-top: 50rpx;
+  font-size: 28rpx;
+}
+.np-message-tips{
+  font-size: 28rpx;
+  color: #323232;
+}
+.no-message-button{
+  width: 280rpx;
+  height: 94rpx;
+  border-radius:  55rpx;
+  background-color: #1ec88c;
+  color: white;
+  font-size: 36rpx;
+  margin-top: 65rpx;
+  line-height: 94rpx;
+}

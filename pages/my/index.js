@@ -101,11 +101,11 @@ Page({
     var message = ''
     var idData = wx.getStorageSync("token")
     var success = function (data) {
-      that.getUserDetail()
       wx.setStorage({
         key: 'memberId',
         data: data.data.memberId,
       })
+      that.getUserDetail()
     }
     var fail = function (e) {
       console.log(e)
@@ -136,12 +136,12 @@ Page({
     var failDetail = function (eDetail) {
       if (eDetail.code == 10002) {
         wx.showToast({
-          title: '请重新登陆' + eDetail.message,
+          title: '请重新登录' + eDetail.message,
         })
         wx.clearStorage()
       }
       // wx.showToast({
-      //   title: '请重新登陆' + eDetail.message,
+      //   title: '请重新登录' + eDetail.message,
       // })
       console.log("e", eDetail.code)
     }
@@ -162,6 +162,19 @@ Page({
       // console.log("年龄",that.data.age)
     }
   },
+  //
+  onTabItemTap(item) {
+    if(!wx.getStorageSync("token")){
+      wx.navigateTo({
+        url: '/pages/userlogin/index',
+      })
+    }
+    this.getMemberId()
+    this.getAge()
+    // console.log(item.index)
+    // console.log(item.pagePath)
+    // console.log(item.text)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -170,7 +183,7 @@ Page({
     this.setData({
       token: wx.getStorageSync('token')
     })
-    this.getMemberId()
+    // this.getMemberId()
     // if(wx.getStorageInfoSync().keys.length<=1){
     //   wx.clearStorage()
     // }
@@ -262,10 +275,9 @@ Page({
    */
   onShow: function () {
     //获取memberID
-    
     // 获取用户详情
     //年龄
-    this.getAge()
+    // this.getAge()
     wx.removeStorageSync("picIndexList")
   },
 

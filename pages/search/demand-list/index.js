@@ -11,7 +11,7 @@ Page({
         getPage: 10,
         parameter: '',
         noFilter: {
-            "regionId": '430100',
+            "regionId": '',
             "lawyerName": '',
             "practiceYearId": '',
             "sex": '',
@@ -31,7 +31,8 @@ Page({
         },
       sort: ["综合排序", "最新入驻", "活跃度最高"],
       sortIndex: 0,//排序index
-      getPage: 10
+      getPage: 10,
+      hasList:true,
     },
       //排序Index
   getSortIndex: function (e) {
@@ -154,6 +155,11 @@ Page({
             that.setData({
                 lawyerList: data.data.list,
             })
+          if (!data.data.list[0]) {
+            that.setData({
+              hasList: false
+            })
+          }
             // 成功后调用onShow刷新页面
             that.onShow()
             that.onShow()

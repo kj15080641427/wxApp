@@ -1,5 +1,6 @@
 var wxrequest = require('../../../utils/request.js')
 var api = require('../../../utils/api.js')
+var reg = require('../../../region.js');
 Page({
 
   /**
@@ -16,7 +17,60 @@ Page({
     regionId:"",
     commitContent:"",
     isHide:1,
+
+    multiIndex: [0,0],
+    multiArray: ''
   },
+  //地区
+
+  hideRegion: function () {
+    this.setData({
+      hasaddress: false,
+    })
+  },
+  //选择地区
+  bindMultiPickerColumnChange: function (e) {
+    var data = {
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex
+    };
+    console.log(e.detail.column)
+    data.multiIndex[e.detail.column] = e.detail.value;
+    switch (e.detail.column) {
+      case 0:
+        data.multiArray[1] = this.data.multiArray[e.detail.column][e.detail.value].child;
+        break;
+    }
+    this.setData({
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex,
+      hasSelectAddress: false,
+    })
+
+    // this.multiArray = this.data.multiArray;
+    // this.multiIndex = this.data.multiIndex;
+    // // 使用wepy开发，this.$apply()为脏数据检查
+    // this.$apply();
+  },
+  bindMultiPickerChange: function (e) {
+    // console.log(
+    //   this.multiArray[0][e.detail.value[0]],
+    //   this.multiArray[1][e.detail.value[1]]
+    // ); // {value: "431000", label: "郴州市", level: 2}
+    console.log(this.data.multiArray[0][e.detail.value[0]])
+    console.log(this.data.multiArray[1][e.detail.value[1]])
+    this.setData({
+      regionId: this.data.multiArray[1][e.detail.value[1]].regionId ? this.data.multiArray[1][e.detail.value[1]].regionId : this.data.multiArray[0][e.detail.value[0]].regionId
+    })
+
+    this.setData({
+      multiIndex: e.detail.value
+    })
+    // this.multiIndex = e.detail.value;
+    // this.$apply();
+  },
+
+
   // 匿名
   radioChange: function (e) {
     this.setData({
@@ -34,16 +88,8 @@ Page({
     })
     console.log(this.data.consultationTypeId)
   },
-  // 选择地区
-  bindRegionChange: function (e) {
-    // console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      region: e.detail.value,
-      hasSelectAddress:false,
-      regionId: e.detail.code[2]
-    })
-    // console.log(e.detail.code[2])
-  },
+
+ 
   // input
   getInput:function(e){
     // console.log(e.detail.value)
@@ -65,14 +111,12 @@ Page({
       that.setData({
         consultation:data
       })
+    that.getOrder()
     console.log('成功')
       wx.showToast({
         title: '提交成功',
       })
-      wx.navigateTo({
-        url: '/pages/index/consultation-details/index?consultationId=' + that.data.consultationId + '&date=' + that.data.dateAdded,
-      })
-      console.log(',.....',that.data.consultationId)
+      console.log(',.....',that.data.consultation)
     // setTimeout(function(){
     //   wx.navigateBack({
         
@@ -91,7 +135,7 @@ Page({
         title: '请选择问题类型',
         icon: 'none'
       })
-    } else if (cdata.region == '') {
+    } else if (cdata.regionId == '') {
       wx.showToast({
         title: '请选择地区',
         icon: 'none'
@@ -104,6 +148,29 @@ Page({
     } else {
       wxrequest.request(commitURL, data, success, fail)
     }
+  },
+  //订单
+  getOrder: function () {
+    var that = this
+    var url = api.getOrder()
+    var data = {
+      "memberId": this.data.memberId,
+      "pageNum": 1,
+      "pageSize": 50
+    }
+    var success = (data) => {
+      this.setData({
+        order: data.data.list
+      })
+      console.log("订单", data)
+      wx.redirectTo({
+        url: '/pages/index/consultation-details/index?orderDetail=' + JSON.stringify(that.data.order[0]) ,
+      })
+    }
+    var fail = (e) => {
+      console.log(e)
+    }
+    wxrequest.request(url, data, success, fail)
   },
   //解决方案类型  
   getArticleType:function(){
@@ -130,28 +197,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //选择地区
+    var city = reg.citysData
+    // this.multiArray = [[...city], [...city[0].children]];
+    // this.$apply();
+    this.setData({
+      multiArray: [[...city], [...city[0].child]],
+    })
+    console.log(this.data.multiArray)
+
+
     this.getArticleType()
-    // this.setData({
-    //   array: JSON.parse(options.type)
-    // })
     console.log("问题类型",this.data.array)
-    //问题类型
-    // var that = this
-    // var typeUrl = api.getArticleTypeUrl()
-    // var message = ""
-    // var successType = function (data) {
-    //   console.log(data.data)
-    //   that.setData({
-    //     array: data.data,
-    //   })
-    //   wx.showToast({
-    //     title: '成功',
-    //   })
-    // }
-    // var failType = function (e) {
-    //   console.log("错误", e)
-    // }
-    // wxrequest.requestPost(typeUrl, message, successType, failType)
   },
 
   /**
@@ -202,20 +259,4 @@ Page({
   onShareAppMessage: function () {
     
   },
-  // getType:function(){
-  //   //问题类型
-  //   var that = this
-  //   var typeUrl = api.getArticleTypeUrl()
-  //   var message = ""
-  //   var successType = function (data) {
-  //     console.log(data.data)
-  //     that.setData({
-  //       array: data.data,
-  //     })
-  //   }
-  //   var failType = function (e) {
-  //     console.log("错误", e)
-  //   }
-  //   wxrequest.requestGet(typeUrl, message, successType, failType)
-  // }
 })

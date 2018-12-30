@@ -6,6 +6,8 @@
   </view>
 </view>
 
+<!-- <view  wx:if="{{hasList}}"> -->
+
 <view class='search-tab-list'>
   <view  class='search-tab-icon'bindtap='sort'>
     <view class='search-tab-text' style='color:#1ec88c'>{{sort[sortIndex]}}</view>
@@ -63,3 +65,15 @@
       </view>
     </view>
   </view>
+
+<!-- </view> -->
+
+  <view class='no-message' wx:if="{{!hasList}}">
+  <view class='no-messge-image-view'>
+    <image src='../../../image/search_icon@3x/Default page_04_max.png' class='no-message-imag'></image>
+  </view>
+  <view class='no-message-tips-view'>
+      <view class='no-message-tips'>没有找到您要搜索的结果</view>
+  </view>
+  <button class='no-message-button' bindtap='again'>重新搜索</button>
+</view>

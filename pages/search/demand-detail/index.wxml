@@ -35,7 +35,7 @@
   </picker>
   <view class='detail-page-line'></view>
 
-  <picker class='detail-page-picker' mode="region"     bindchange="bindRegionChange" value="{{region}}"custom-item="{{customItem}}">
+  <!-- <picker class='detail-page-picker' mode="region"     bindchange="bindRegionChange" value="{{region}}"custom-item="{{customItem}}">
     <view style='display:flex;justify-content: space-between;width:715rpx;'>
       <view class='detail-page-text'>律师所在区域</view>
       <view style='display:flex;align-items:center' >
@@ -44,7 +44,26 @@
       </view>
     </view>
   </picker>
+    <view class='detail-page-line'></view> -->
+  <picker class='detail-page-picker' mode="multiSelector" bindtap='hideRegion'  bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}" range-key="name">
+    <view style='display:flex;justify-content: space-between;width:715rpx;'>
+      <view class='detail-page-text'>律师所在区域</view>
+      <view style='display:flex;align-items:center' >
+        <view class='hide-text'>{{multiArray[0][multiIndex[0]].name}}-{{multiArray[1][multiIndex[1]].name}}</view>
+        <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
+      </view>
+    </view>
+  </picker>
     <view class='detail-page-line'></view>
+
+
+<!-- <picker mode="multiSelector"  class="info-page-input" bindtap='hideRegion'  bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}" range-key="name">
+      <view class="picker">
+     <text wx:if="{{hasaddress}}"> {{userInfo.addressExtend.province ? userInfo.addressExtend.province:'选择'}}-{{userInfo.addressExtend.city ?userInfo.addressExtend.city:'地区' }} </text>
+       <text wx:if="{{!hasaddress}}"> {{multiArray[0][multiIndex[0]].name}}-{{multiArray[1][multiIndex[1]].name}} </text>
+      </view>
+</picker>
+  <view class='detail-page-line'></view> -->
 
   <view class='detail-page-picker'>
    <view style='display:flex;justify-content: space-between;width:715rpx;align-items:center'>

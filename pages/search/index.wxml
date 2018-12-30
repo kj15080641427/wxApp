@@ -93,8 +93,8 @@
 </view>
 </view>
 
-
-<view style='height:750rpx;' wx:if="{{hasList}}">
+<view style='height:750rpx;' wx:if="{{hasList}}" style='height:100%'>
+<scroll-view scrool-y scroll-top='500px'    >
   <view style='margin-top:215rpx;'></view>
 <view class="" >
   <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}"  data-index="{{index}}" catchtap='getIndex'>
@@ -108,7 +108,7 @@
         <view class='watchlist-page-right'>
           <view class='watchlist-page-name'>{{lawyerList[index].memberName}}<label wx:if="{{lawyerList[index].memberPositionName}}" class='watchlist-page-firm'>({{lawyerList[index].memberPositionName}})</label></view>
           <view class='watchlist-page-address'>{{address[index]}} <text wx:if="{{lawyerList[index].region&&lawyerList[index].institutionName}}">|</text> {{lawyerList[index].institutionName}}</view>
-          <view class='watchlist-page-adept'>擅长领域: {{lawyerList[index].description}} </view>
+          <view class='watchlist-page-adept' wx:if="{{lawyerList[index].description}}">擅长领域: {{lawyerList[index].description}} </view>
         </view>
 
       </view>
@@ -124,6 +124,8 @@
     </view>
   </view>
 </view>
+
+</scroll-view>
 
 <view style='width:750rpx;height:100rpx;display:flex;justify-content:center;align-items:center;background-color:whitemargin-top:15rpx;'>
   <image hidden="{{ishidden}}"  src="../../image/search_icon@3x/loading.gif" style='width:50rpx;height:50rpx;font-size:28rpx;'></image>

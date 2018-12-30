@@ -1,0 +1,10 @@
+<!--pages/index/consultation-input/index.wxml-->
+<!-- <input placeholder='输入您的回复' class='reply-input'></input> -->
+<view style='width:750rpx;display:flex;justify-content:center'>
+  <textarea placeholder='输入您的回复'class='reply-input' confirm-type="search" bindconfirm="confirm" bindinput="userreply"></textarea>
+</view>
+  <view style='position: absolute;bottom: 0;' class='consul-page-button-view'>
+    <view class="consul-oage-button-view">
+    <button class="consul-page-button" bindtap='confirm'>回复</button>
+  </view>
+</view>

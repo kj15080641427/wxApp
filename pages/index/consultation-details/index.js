@@ -1,14 +1,15 @@
 var api = require('../../../utils/api.js')
 var wxrequest = require('../../../utils/request.js')
 var formatTime = require('../../../utils/util.js')
-var lengthList =0
-var freeLengthList=[]
+var x=[]
+var all = 0
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    answer:""
+    answer:"",
+    i: 0
   },
   // 删除已发布咨询
   deleteInfo:function(){
@@ -47,14 +48,19 @@ Page({
     var success = data =>{
       this.setData({
         freeTextList:data.data.list,
-        freetotal:data.data
+        freetotal:data.data,
+        listLength: data.data.list.length,
+        i:0,
+        allTotal:0
       })
-      // this.getFreeText()
+      all=0
+      x = []
+      this.data.freeTextList.map(item=>{
+        this.getFreeText(item.consultationId,item.lawyerId)
+      })
+ 
       this.lawTime()
-      console.log("文字咨询列表",data)
-      // data.data.list.map(item=>{
-      //   this.getFreeText()
-      // })
+      console.log("文字咨询列表freeTextList", this.data.freeTextList)
     }
     var fail = e =>{
       console.log("文字咨询列表错误",e)
@@ -62,34 +68,38 @@ Page({
     wxrequest.requestGetpar(url,data,'',success,fail)
   },
   //文字咨询回复详情
-  getFreeText: function () {
-    var url = api.getFreeText() + this.data.freeTextList[0].consultationId + '/' + this.data.freeTextList[0].lawyerId + '/reply/detail/1/99'
-    var data = { "consultationId": this.data.freeTextList[0].consultationId, "lawyerId": this.data.freeTextList[0].lawyerId, "pageNum": 1, "pageSize": 99 }
+  getFreeText: function (consultationId, lawyerId) {
+    var url = api.getFreeText() + consultationId + '/' + lawyerId + '/reply/detail/1/99'
+    var data = { "consultationId": consultationId, "lawyerId": lawyerId, "pageNum": 1, "pageSize": 99 }
     var success = data => {
-      freeLengthList.push(data.data.list.length)
+      x.push(data.data.total)
       this.setData({
-        freeLength: freeLengthList
+        freeText: x,
+        i: this.data.i+1
       })
-      
-      lengthList = Number(lengthList) + Number(this.data.freeLength)
-      this.setData({
-        lgh: lengthList
-      })
+      if (this.data.i == this.data.listLength) {
+        this.data.freeText.map(item => {
+          all = all + item
+        })
+        this.setData({
+          allTotal: all
+        })
+      }
       this.lawTime()
-      console.log("回复list", this.data.lgh)
+      console.log('wwwwwwww', this.data.i)
+      console.log("文字咨询回复详情freeText", this.data.freeText)
     }
     var fail = e => {
-      console.log("文字咨询回复详情错误", e)
+      console.log("文字咨询回复详情", e)
     }
     wxrequest.requestGetpar(url, data, '', success, fail)
-    // console.log("文字咨询回复详情tttttttt", this.data.freeTextList[this.data.index])
   },
   // 回复
   gotoReply:function(e){
     wx.navigateTo({
       url: '../consultation-reply/index?lawtList=' + this.data.lawtList[e.currentTarget.dataset.freeindex] + '&time='+this.data.time   ,
     })
-    // wx.setStorageSync("freeTextList", this.data.freeTextList[e.currentTarget.dataset.freeindex])
+    wx.setStorageSync("freeTextList", this.data.freeTextList[e.currentTarget.dataset.freeindex])
     console.log(e)
   },
   //
@@ -179,12 +189,18 @@ Page({
     })
 
   },
+  //律师主页
+  toLawyerHomePage:function(e){
+    wx.navigateTo({
+      url: '/pages/search/lawyer-detail/index?memberId=' + this.data.freeTextList[e.currentTarget.dataset.lawindex].lawyerId,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     this.setData({
-      id: options.orderDetail ? JSON.parse(options.orderDetail).id : options.consultationId,
+      id: JSON.parse(options.orderDetail).id,
       orderDetail: options.orderDetail ? JSON.parse(options.orderDetail) : options.date,
       userInfo: wx.getStorageSync("userInfo"),
       time: options.orderDetail ? JSON.parse(options.orderDetail).createDate.split(" ")[1].split(":",2).join(":"):''
@@ -192,9 +208,9 @@ Page({
     console.log('qqqqqqqqqqqq',JSON.parse(options.orderDetail))
 
 
-    options.id ? wx.setStorageSync('consultationId', JSON.parse(options.orderDetail).id) : wx.setStorageSync('consultationId', options.consultationId)
+    wx.setStorageSync('consultationId', JSON.parse(options.orderDetail).id) 
     this.userTime()
-    this.getFreetextList()
+    // this.getFreetextList()
     this.getFree()
     
     // this.getFreetextList()
@@ -212,21 +228,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+    this.getFreetextList()
+  
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-    
+    var x = []
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-    
+    var x = []
   },
 
   /**

@@ -1,0 +1,31 @@
+/* pages/index/consultation-input/index.wxss */
+.consul-oage-button-view{
+    line-height: 120rpx;
+    height: 120rpx;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.consul-page-button-view{
+  width: 100%;
+  /* background-color: white */
+}
+.consul-page-button{
+    line-height: 70rpx;
+    height: 70rpx;
+    width: 360rpx;
+    background-color: #1ec88c;
+    color: #ffffff;
+    font-size: 32rpx;
+    border-radius: 35rpx;
+}
+.reply-input{
+  /* width: 650rpx; */
+  font-size: 28rpx;
+  color: #323232;
+  padding-top:50rpx;
+  height: 500rpx;
+  padding-left:35rpx;
+  padding-right:35rpx;
+  border:2rpx solid #b5b5b5
+}

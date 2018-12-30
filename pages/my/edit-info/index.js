@@ -1,5 +1,5 @@
 var app = getApp();
-var cityData = require('../../../region.js');
+var reg = require('../../../region.js');
 var wxrequest = require('../../../utils/request.js')
 var api = require('../../../utils/api.js')
 var userInfo = wx.getStorageSync("userInfo")
@@ -11,7 +11,6 @@ Page({
   data: {
     index: userInfo.sex ? userInfo.sex -1  :'0', //性别index
     index1: wx.getStorageSync("index1") ? wx.getStorageSync("index1") : '' , //行业index
-    indexarea:'0', //自定义地区
     industry:[], //行业列表
     enidUserInfo:'', //用户信息
     selectIndestry:false,
@@ -33,15 +32,67 @@ Page({
     institutionName: userInfo.institutionName ? userInfo.institutionName : '', //企业名称
     orgName: userInfo.organizationId ? userInfo.organizationId :[],
     //地区
-    citysData: cityData.citysData,
+    // citysData: cityData.citysData,
     provinces: [],
     citys: [],
     areas: [],
     value: [0, 0, 0],
     name: '',
     regionId: '',
-    indexadd: ''
+    indexadd: '',
+
+    multiIndex: [0,0],
+    multiArray: ''
   },
+  //
+  hideRegion:function(){
+    this.setData({
+      hasaddress: false,
+    })
+  },
+  //选择地区
+  bindMultiPickerColumnChange: function (e) {
+    var data = {
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex
+    };
+    console.log(e.detail.column)
+    data.multiIndex[e.detail.column] = e.detail.value;
+    switch (e.detail.column) {
+      case 0:
+        data.multiArray[1] = this.data.multiArray[e.detail.column][e.detail.value].child;
+        break;
+    }
+    this.setData({
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex,
+    })
+    
+    // this.multiArray = this.data.multiArray;
+    // this.multiIndex = this.data.multiIndex;
+    // // 使用wepy开发，this.$apply()为脏数据检查
+    // this.$apply();
+  },
+  bindMultiPickerChange: function (e) {
+    // console.log(
+    //   this.multiArray[0][e.detail.value[0]],
+    //   this.multiArray[1][e.detail.value[1]]
+    // ); // {value: "431000", label: "郴州市", level: 2}
+    console.log(this.data.multiArray[0][e.detail.value[0]])
+    console.log(this.data.multiArray[1][e.detail.value[1]])
+    this.setData({
+      editaddress: this.data.multiArray[1][e.detail.value[1]].regionId ? this.data.multiArray[1][e.detail.value[1]].regionId : this.data.multiArray[0][e.detail.value[0]].regionId
+    })
+
+    this.setData({
+      multiIndex: e.detail.value
+    })
+    // this.multiIndex = e.detail.value;
+    // this.$apply();
+  },
+
+
+
   //获取用户详情
   getUserDetail:function(){
     var that = this
@@ -188,13 +239,6 @@ Page({
       institutionName:e.detail.value
     })
   },
-  //自定义地区
-  changearea: function (e) {
-    this.setData({
-      indexarea: e.detail.value
-    })
-    console.log(e)
-  },
   // 选择时间
   bindDateChange: function (e) {
     this.setData({
@@ -266,8 +310,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    /*选择地区
+
+    */
+    var city = reg.citysData
+    // this.multiArray = [[...city], [...city[0].children]];
+    // this.$apply();
+    this.setData({
+      multiArray: [[...city], [...city[0].child]],
+    })
+    console.log(this.data.multiArray)
+
+
     userInfo = wx.getStorageSync("userInfo")
-    this.initData();
+    // this.initData();
     var that = this
     // 行业列表
     this.getIndustry()
@@ -313,40 +369,11 @@ Page({
     // console.log(wx.getStorageInfoSync())
 
 
-
-    // // 企业列表
-    // var instituUrl = api.getInstitutionUrl()
-    // var instituData = { "parentId": "0" }
-
-    // var instituSuccess = function (data) {
-    //   console.log("企业",data.data)
-    //   that.setData({
-    //     institu: data.data
-    //   })
-    // }
-    // var instituFail = function (e) {
-    //   console.log(e)
-    // }
-    // wxrequest.request(instituUrl, instituData, instituSuccess, instituFail)
     wx.showLoading({
       title: '加载中',
     })
     // 获取用户详情
     this.getUserDetail()
-
-    // if ( !wx.getStorageSync('index1')) {
-    //   that.setData({
-    //     selectInstitu:true,
-    //     selectIndestry:true,
-    //   })
-    // }
-
-    // wx.removeStorage({
-    //   key: 'institu',
-    //   success: function(res) {},
-    // })
-    // console.log("infoiiiii", wx.getStorageInfoSync())
-    // console.log("time", this.data.time)
   
     this.setData({
       index1: wx.getStorageSync('index1'),
@@ -387,136 +414,4 @@ Page({
   onShareAppMessage: function () {
 
   },
-  initData: function () {
-    var provinces = [];
-    var citys = [];
-    var areas = [];
-
-    this.data.citysData.forEach(function (province, i) {
-      provinces.push(province.name);
-      if (i === 0) {
-        citys.push(province.child[i].name);
-        areas = province.child[i].child;
-      }
-    });
-
-    this.setData({
-      provinces: provinces,
-      citys: citys,
-      areas: areas
-    });
-  },
-
-  bindChange: function (e) {
-    var citysData = this.data.citysData;
-    var value = this.data.value;
-    var current_value = e.detail.value;
-    var citys = [];
-
-    var provinceObj = {};
-    var cityObj = {};
-
-    this.setData({
-      indexadd: e.detail.value,
-      hasaddress:false
-    })
-    
-    provinceObj = citysData[current_value[0]];
-
-    if (value[0] !== current_value[0]) {
-      // 滑动省份
-      provinceObj.child.forEach(function (v) {
-        citys.push(v.name);
-      });
-      this.setData({
-        citys: citys,
-        selectAddress:false,
-      });
-      cityObj = provinceObj.child[0];
-      this.setData({
-        areas: cityObj.child,
-        value: [current_value[0], 0, 0],
-        regionId: this.data.areas[this.data.value[2]].regionId,
-      });
-    } else if (value[0] === current_value[0] && value[1] !== current_value[1]) {
-      // 滑动城市
-      if (current_value[1] >= provinceObj.child.length) {
-        // 数据不存在 跳过
-        return;
-      }
-      cityObj = provinceObj.child[current_value[1]];
-      this.setData({
-        areas: cityObj.child,
-        value: [current_value[0], current_value[1], 0],
-        selectAddress:false
-      });
-      console.log(this.data.areas)
-    } else {
-      // 滑动区县
-      cityObj = provinceObj.child[current_value[1]];
-      this.setData({
-        value: current_value,
-        regionId: this.data.areas[this.data.value[2]].regionId,
-        selectAddress:false
-      });
-      console.log(this.data.areas[this.data.value[2]].regionId)
-    }
-
-    this.setData({
-      name: provinceObj.name + '-' + cityObj.name + '-' + cityObj.child[this.data.value[2]].name
-    });
-  },
-
-  // 页面初始化事件
-  // onLoad: function () {
-    
-  // },
-  showModal: function () {
-    // 显示遮罩层
-    wx.hideTabBar({})
-    var animation = wx.createAnimation({
-      duration: 100,
-      timingFunction: "linear",
-      delay: 0
-    })
-    this.animation = animation
-    animation.translateY(200).step()
-    this.setData({
-      animationData: animation.export(),
-      showModalStatus: true
-    })
-    setTimeout(function () {
-      animation.translateY(0).step()
-      this.setData({
-        animationData: animation.export()
-      })
-    }.bind(this), 200)
-  },
-  //隐藏对话框
-  hideModal: function () {
-    // 隐藏遮罩层
-    var animation = wx.createAnimation({
-      duration: 200,
-      timingFunction: "linear",
-      delay: 0
-    })
-    this.animation = animation
-    animation.translateY(300).step()
-    this.setData({
-      animationData: animation.export(),
-    })
-    setTimeout(function () {
-      animation.translateY(0).step()
-      this.setData({
-        animationData: animation.export(),
-        showModalStatus: false
-      })
-    }.bind(this), 200)
-    wx.showTabBar({})
-    this.setData({
-      editaddress: this.data.areas[this.data.value[2]].regionId
-    })
-    console.log(this.data.areas[this.data.value[2]].regionId)
-  },
-
 })

@@ -88,3 +88,23 @@
     position: fixed;
     bottom: 0;
 }
+.consul-oage-button-view{
+    line-height: 120rpx;
+    height: 120rpx;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.consul-page-button-view{
+  width: 100%;
+  /* background-color: white */
+}
+.consul-page-button{
+    line-height: 70rpx;
+    height: 70rpx;
+    width: 360rpx;
+    background-color: #1ec88c;
+    color: #ffffff;
+    font-size: 32rpx;
+    border-radius: 35rpx;
+}

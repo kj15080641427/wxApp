@@ -33,7 +33,7 @@ Page({
         var data = {
             "memberId": this.data.memberId,
             "pageNum": 1,
-            "pageSize": 50
+            "pageSize": 999
         }
         var success = (data) => {
             this.setData({
