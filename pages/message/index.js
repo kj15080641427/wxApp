@@ -14,9 +14,6 @@ Page({
     },
 
     onLoad(options) {
-        wx.showLoading({
-          title: '加载中',
-        })
         this.checkLogin() 
     },
     onReady() {

@@ -2,7 +2,7 @@
 var api = require('../../../utils/api.js')
 import wxPay from '../../../utils/wxPay.js'
 var wxrequest = require('../../../utils/request.js')
-var throttle =  require( '../../../utils/throttle.js')
+var throttle = require('../../../utils/throttle.js')
 Page({
 
     /**
@@ -10,7 +10,8 @@ Page({
      */
     data: {
         balance: '',
-        memberId: ''
+        memberId: '',
+        bindClick: false
     },
     //交易明细
     gotoDetail: function () {
@@ -35,21 +36,42 @@ Page({
             this.setData({
                 balance: data
             })
-          console.log("余额", this.data.balance.data.balanceAmount)
+            console.log("余额", this.data.balance.data.balanceAmount)
         }
         var fail = (e) => {
             console.log(e)
         }
         wxrequest.requestGetpar(url, data, '', succeee, fail)
     },
-    charge(e){
-      this.setData({
-        money:e.currentTarget.dataset.amt/10
-      })
-      var v = { type: 1, product: 4, money: this.data.money}
-      //   //  调取微信支付
-      wxPay(v).then(res => { this.getBalance()})
-      console.log("充值", e.currentTarget.dataset.amt)
+    touchStart(e) {
+        this.touchStartTime = e.timeStamp;
+    },
+    touchEnd(e) {
+        this.touchEndTime = e.timeStamp;
+    },
+    charge(e) {
+        let that = this
+        if(!that.data.bindClick){
+            that.setData({
+                bindClick: true
+            })
+            var v = {
+                type: 1,
+                product: 4,
+                money: e.currentTarget.dataset.amt /10
+            }
+            wxPay(v).then(res => {
+                that.getBalance()
+                that.setData({
+                    bindClick: false
+                })
+            },err => {
+                that.setData({
+                    bindClick: false
+                })
+            })
+        }
+        console.log("充值", e.currentTarget.dataset.amt)
     },
     /**
      * 生命周期函数--监听页面加载
