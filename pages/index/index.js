@@ -1,7 +1,6 @@
 var wxrequest = require('../../utils/request.js')
 var api = require('../../utils/api.js')
 var initIndex = ''
-let pageSize = 10
 Page({
 // <<<<<<< HEAD
   data: {
@@ -30,7 +29,8 @@ Page({
     winHeight: "",//窗口高度
     scrollLeft: 0, //tab标题的滚动条位置
     adBanner:'',
-    listHeight:''
+    listHeight:'',
+    pageSize:10
   },
   //获取swiper高度
   // getHeight: function (e) {
@@ -109,11 +109,11 @@ Page({
     wxrequest.requestPost(url, data, messagetype, success, fail)
   },
   //解决方案
-  getArticleList:function(id){
+  getArticleList:function(){
     var that = this
     var listUrl = api.getArticleListUrl()
     var message = ""
-    var listData = { "typeId": id, "pageNum": 1, "pageSize": 20, "deviceInfoId": 5 }
+    var listData = { "typeId": that.data.popular[0].id, "pageNum": 1, "pageSize": that.data.pageSize, "deviceInfoId": 5 }
     var successList = function (data) {
       
       that.setData({
@@ -153,13 +153,14 @@ Page({
     var that = this
     // page=10
     this.setData({
-      articleIndex: e.detail.current
+      articleIndex: e.detail.current,
+      pageSize:10
     });
     this.checkCor();
 
     var listUrl = api.getArticleListUrl()
     var message = ""
-    var listData = { "typeId": that.data.popular[that.data.articleIndex].id, "pageNum": 1, "pageSize": 20, "deviceInfoId": 5 }
+    var listData = { "typeId": that.data.popular[that.data.articleIndex].id, "pageNum": 1, "pageSize": that.data.pageSize, "deviceInfoId": 5 }
     var successList = function (data) {
       wx.hideLoading()
       that.setData({
@@ -289,14 +290,14 @@ Page({
   onReady: function () {
 
   },
-  // onReachBottom: function () {
-  //   var that = this
-  //   // that.setData({
-  //     // var pageSize=pageSize + 10
-  //   //   ishidden: false
-  //   // })
-  //   // this.getArticleList()
-  // },
+  onReachBottom: function () {
+    var that = this
+    that.setData({
+      pageSize:that.data.pageSize + 10,
+      ishidden: false
+    })
+    this.getArticleList()
+  },
     // 消息
     judgeTips: function () {
         if (this.data.tipsNumber < 10) {
