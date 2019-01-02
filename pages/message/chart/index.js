@@ -109,11 +109,15 @@ Page({
             header: { 'Authorization': 'Basic NTdlYzIzM2U0ODE1ZjExMjM1YjMyMzk1OmIyMWY2YzYzOGU3MzIwYjE0YTVhMTQ2OQ==' },
             method: 'get',
             success(res){
-                // console.log(res.data.messages)
+                console.log(res.data.messages)
+                console.log(userName)
+                let _arr = res.data.messages.filter(item => {
+                    return item.from_id == userName
+                })
                 // console.log(userName)
                 let dArr = []
                 //  存在异步操作，只能用递归的形式加载数据
-                that.buildListData(userName, 0, res.data.messages, res.data.messages.length, dArr)
+                that.buildListData(userName, 0, _arr, _arr.length, dArr)
             }
         })
     },
@@ -146,22 +150,45 @@ Page({
     },
     //  拼装列表数据
     buildListData(userName,i,arr,len,targetArr) {
+        console.log(arr)
+        console.log(len)
         let that = this
-        if (arr[i].from_id == userName){
-            if(arr[i].msg_type == "voice"){
-                jM.getResource({
-                    'media_id': arr[i].msg_body.media_id
-                }).onSuccess(function (gRes) {
+        if(len>0){
+            if (arr[i].from_id == userName){
+                if(arr[i].msg_type == "voice"){
+                    jM.getResource({
+                        'media_id': arr[i].msg_body.media_id
+                    }).onSuccess(function (gRes) {
+                        targetArr.push({
+                            from_id: arr[i].from_id,
+                            msg_type: arr[i].msg_type,
+                            duration: arr[i].msg_body.duration,
+                            msg_id: arr[i].msgid,
+                            content: gRes.url
+                        })
+                        if( ++i < len ){
+                            that.buildListData(userName,i,arr,len,targetArr)
+                        } else{
+                            that.setData({
+                                messageList: that.getUnReadMsg(targetArr)
+                            },function(){
+                                console.log(that.data.messageList)
+                                that.pageScroll(that)
+                            })
+                        }
+                    }).onFail(function (data) {
+                        console.log('error:' + JSON.stringify(data));
+                    });
+                }else if(arr[i].msg_type == "text"){
                     targetArr.push({
                         from_id: arr[i].from_id,
                         msg_type: arr[i].msg_type,
-                        duration: arr[i].msg_body.duration,
                         msg_id: arr[i].msgid,
-                        content: gRes.url
+                        content: arr[i].msg_body.text
                     })
                     if( ++i < len ){
                         that.buildListData(userName,i,arr,len,targetArr)
-                    } else{
+                    } else {
                         that.setData({
                             messageList: that.getUnReadMsg(targetArr)
                         },function(){
@@ -169,10 +196,31 @@ Page({
                             that.pageScroll(that)
                         })
                     }
-                }).onFail(function (data) {
-                    console.log('error:' + JSON.stringify(data));
-                });
-            }else if(arr[i].msg_type == "text"){
+                } else if(arr[i].msg_type == "custom"){
+                    targetArr.push({
+                        from_id: arr[i].from_id,
+                        msg_type: arr[i].msg_type,
+                        msg_id: arr[i].msgid,
+                        content: arr[i].msg_body.content
+                    })
+                    if( ++i < len ){
+                        console.log(len)
+                        console.log(++i)
+                        that.buildListData(userName,i,arr,len,targetArr)
+                    } else {
+                        that.setData({
+                            messageList: that.getUnReadMsg(targetArr)
+                        },function(){
+                            console.log(that.data.messageList)
+                            that.pageScroll(that)
+                        })
+                    }
+                } else {
+                    if( ++i < len ){
+                        that.buildListData(userName,i,arr,len,targetArr)
+                    }
+                }
+            } else if(arr[i].target_id == userName) {
                 targetArr.push({
                     from_id: arr[i].from_id,
                     msg_type: arr[i].msg_type,
@@ -189,40 +237,6 @@ Page({
                         that.pageScroll(that)
                     })
                 }
-            } else if(arr[i].msg_type == "custom"){
-                targetArr.push({
-                    from_id: arr[i].from_id,
-                    msg_type: arr[i].msg_type,
-                    msg_id: arr[i].msgid,
-                    content: arr[i].msg_body.content
-                })
-                if( ++i < len ){
-                    that.buildListData(userName,i,arr,len,targetArr)
-                } else {
-                    that.setData({
-                        messageList: that.getUnReadMsg(targetArr)
-                    },function(){
-                        console.log(that.data.messageList)
-                        that.pageScroll(that)
-                    })
-                }
-            }
-        } else if(arr[i].target_id == userName) {
-            targetArr.push({
-                from_id: arr[i].from_id,
-                msg_type: arr[i].msg_type,
-                msg_id: arr[i].msgid,
-                content: arr[i].msg_body.text
-            })
-            if( ++i < len ){
-                that.buildListData(userName,i,arr,len,targetArr)
-            } else {
-                that.setData({
-                    messageList: that.getUnReadMsg(targetArr)
-                },function(){
-                    console.log(that.data.messageList)
-                    that.pageScroll(that)
-                })
             }
         }
     },

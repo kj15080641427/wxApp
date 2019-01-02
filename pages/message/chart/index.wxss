@@ -17,7 +17,7 @@
     background: #b5b5b5;
     color: #333;
     padding: 6rpx 10rpx;
-    border-radius: 50%;
+    border-radius: 10rpx;
     font-size: 24rpx;
     margin: 16rpx 0;
     position: relative;
