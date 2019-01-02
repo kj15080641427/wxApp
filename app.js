@@ -21,24 +21,24 @@ App({
         //     },
         //     fail() {
         //       // session_key 已经失效，需要重新执行登录流程
-            wx.login({
-                success: res => {
-                    console.log(res)
-                    // 发送 res.code 到后台换取 openId, sessionKey, unionId
-                    wx.request({
-                        url: api.appLogin(),
-                        method: 'POST',
-                        data: { code: res.code },
-                        success(r){
-                            console.log(r)
-                            wx.setStorageSync('openid', r.data.data.openid)
-                        }
-                    })
-                }
-            })
+        wx.login({
+            success: res => {
+                console.log(res)
+                // 发送 res.code 到后台换取 openId, sessionKey, unionId
+                wx.request({
+                    url: api.appLogin(),
+                    method: 'POST',
+                    data: { code: res.code },
+                    success(r) {
+                        console.log(r)
+                        wx.setStorageSync('openid', r.data.data.openid)
+                    }
+                })
+            }
+        })
         //     }
         // })
-        
+
         // 获取用户信息
         wx.getSetting({
             success: res => {
@@ -47,10 +47,10 @@ App({
                     wx.authorize({
                         scope: 'scope.userLocation',
                         success() {
-                        // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
+                            // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
                         }
                     })
-                } 
+                }
                 // else {
                 //     // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
                 //     wx.getUserInfo({
@@ -72,7 +72,7 @@ App({
     globalData: {
         userInfo: null,
         jMessage: new JMessage({
-            debug:true   //  是否开启debug模式
+            debug: true   //  是否开启debug模式
         })
     }
 })

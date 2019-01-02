@@ -17,9 +17,11 @@ Page({
                 url: '../../index/consultation-details/index?orderDetail=' + JSON.stringify(this.data.order[e.currentTarget.dataset.orderindex]) + '&mobile=' + this.data.mobile,
             })
         } else if (that.data.order[e.currentTarget.dataset.orderindex].orderType == '需求') {
-            wx.navigateTo({
-                url: '../../message/chart/index?name=' + e.currentTarget.dataset.lawyername + '&userName=' + e.currentTarget.dataset.lawyerid + '&avatar=' + e.currentTarget.dataset.lawyeravatar
-            })
+            if(e.currentTarget.dataset.orderstatus != '未接单'){
+                wx.navigateTo({
+                    url: '../../message/chart/index?name=' + e.currentTarget.dataset.lawyername + '&userName=' + e.currentTarget.dataset.lawyerid + '&avatar=' + e.currentTarget.dataset.lawyeravatar
+                })
+            }
         } else if (that.data.order[e.currentTarget.dataset.orderindex].orderType == '快速电话咨询') {
             wx.navigateTo({
                 url: '../order-detail/index?orderDetail=' + JSON.stringify(that.data.order[e.currentTarget.dataset.orderindex]),
