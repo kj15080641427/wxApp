@@ -58,7 +58,7 @@ Page({
             var v = {
                 type: 1,
                 product: 4,
-                money: e.currentTarget.dataset.amt /10
+                money: e.currentTarget.dataset.amt / 10
             }
             wxPay(v).then(res => {
                 that.getBalance()
@@ -66,6 +66,7 @@ Page({
                     bindClick: false
                 })
             },err => {
+                console.log(123)
                 that.setData({
                     bindClick: false
                 })
