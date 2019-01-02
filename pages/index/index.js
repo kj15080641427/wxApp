@@ -113,7 +113,7 @@ Page({
     var that = this
     var listUrl = api.getArticleListUrl()
     var message = ""
-    var listData = { "typeId": that.data.popular[0].id, "pageNum": 1, "pageSize": that.data.pageSize, "deviceInfoId": 5 }
+    var listData = { "typeId": that.data.popular[that.data.articleIndex].id, "pageNum": 1, "pageSize": that.data.pageSize, "deviceInfoId": 5 }
     var successList = function (data) {
       
       that.setData({

@@ -39,6 +39,7 @@ const getPayInfo = (v) => {
 // <<<<<<< HEAD
               if(res.data.code == 0){
                 if (v.type == 1) {
+                  // if(v.product==)
                   wx.requestPayment({
                     timeStamp: res.data.data.timestamp,
                     nonceStr: res.data.data.nonceStr,
@@ -46,7 +47,7 @@ const getPayInfo = (v) => {
                     signType: 'MD5',
                     paySign: res.data.data.sign,
                     success: function (payRes) {
-
+                      if(v.product == 2){
                       wx.request({
                         url: api.getQuick(),
                         header: {
@@ -61,13 +62,15 @@ const getPayInfo = (v) => {
                           wx.navigateTo({
                             url: '../quick-consultation-finish/index?orderNo=' + data.data.data.orderNo + '&timeStamp=' + data.data.data.timeStamp + '&type=' + v.typeQuick.typeName + '&phone=' + v.phone + '&money=' + v.money,
                           })
+                          reslove(data)
                         },
                         fail(e) {
                           console.log("余额支付失败333", e)
                         }
                       })
-
-                      reslove(res)
+                      }else if(v.product == 4){
+                        reslove(res)
+                      }
                     },
                     fail: function (res) {
                       console.log(res)
@@ -97,7 +100,7 @@ const getPayInfo = (v) => {
                       console.log("余额支付失败333", e)
                     }
                   })
-                } else if (v.type == 3 && v.product==5){
+                } else if (v.type == 3 && v.product==3){
                   console.log('专家咨询支付',res)
                   wx.request({
                     url: api.getExpertPhone() + v.lawyerId,
