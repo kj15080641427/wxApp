@@ -8,24 +8,28 @@
   <image src='../../../image/my_icon@3x/My order_icon_02_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'/>
 </view> -->
 <view class='detail-page-background'>
-<view wx:key="{{index}}" wx:for="{{detailList}}">
-  <view  class="{{index == 0 ? 'detail-page-flex-once':'detail-page-flex'}}">
-    <view style='width:120rpx;display:flex;justify-content: space-between'>{{item['name']}}</view>
-    <view class="{{item['name'] == '订单金额' ? 'detail-page-color': 'detail-page-right'}}"><text wx:if="{{item['name'] == '订单金额'}}">¥</text>{{item['text']}}<text wx:if="{{item['name'] == '订单金额'}}">元</text></view>
+  <view wx:key="{{index}}" wx:for="{{detailList}}">
+    <view class="{{index == 0 ? 'detail-page-flex-once':'detail-page-flex'}}">
+      <view style='width:120rpx;display:flex;justify-content: space-between'>{{item['name']}}</view>
+      <view class="{{item['name'] == '订单金额' ? 'detail-page-color': 'detail-page-right'}}">
+        <text wx:if="{{item['name'] == '订单金额'}}">¥</text>{{item['text']}}
+        <text wx:if="{{item['name'] == '订单金额'}}">元</text>
+      </view>
+    </view>
+    <!-- <view class='detail-page-line'></view> -->
   </view>
-  <!-- <view class='detail-page-line'></view> -->
-</view>
 </view>
 <view class='detail-page-head-tips'>温馨提示</view>
 <view class='detail-page-tips'>
   <view>1.为保护你的隐私, 我们使用号码保护技术, 律师不会看到您的真实电话号码</view>
   <view>2.若律师接单后长时间未回电, 您可点击下方按钮联系律师</view>
-  <view>3.如有疑问, 请联系绿豆圈客服<label style='color:#1ec88c'></label></view>
+  <view>3.如有疑问, 请联系绿豆圈客服
+    <label style='color:#1ec88c'></label>
+  </view>
 </view>
 
 <view class='detail-page-line detail-page-bottom-line'></view>
 <view class='detail-page-button-view detail-page-bottom'>
-  <button class='detail-page-button' bindtap='getLawyerPhone' wx:if="{{statusValue}}" >联系律师</button>
-  <button class='detail-page-button-no' wx:if="{{!statusValue}}" >{{orderDetail.statusValue}}</button>
+  <button class='detail-page-button' bindtap='getLawyerPhone' wx:if="{{statusValue}}">联系律师</button>
+  <button class='detail-page-button-no' wx:if="{{!statusValue}}">{{orderDetail.statusValue}}</button>
 </view>
-

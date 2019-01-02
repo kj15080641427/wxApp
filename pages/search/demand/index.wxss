@@ -1,22 +1,26 @@
 /* pages/search/demand/index.wxss */
-.demand-page-top-background{
+
+.demand-page-top-background {
   display: flex;
   height: 200rpx;
   align-items: center;
-  justify-content: center
+  justify-content: center;
 }
-.demand-top-view{
+
+.demand-top-view {
   height: 50rpx;
   width: 187rpx;
   display: flex;
   align-items: center;
   position: relative;
 }
-.demand-page-top-icon{
+
+.demand-page-top-icon {
   height: 50rpx;
-  width:187rpx;
+  width: 187rpx;
 }
-.demand-top-text{
+
+.demand-top-text {
   margin-left: 10rpx;
   position: absolute;
   top: 5rpx;
@@ -30,8 +34,9 @@
   font-size: 24rpx;
   color: white;
 }
-.demand-top-text-next{
-  box-sizing:border-box;
+
+.demand-top-text-next {
+  box-sizing: border-box;
   margin-left: 10rpx;
   position: absolute;
   top: 5rpx;
@@ -43,9 +48,10 @@
   justify-content: center;
   align-items: center;
   font-size: 24rpx;
-  color: #b5b5b5
+  color: #b5b5b5;
 }
-.demand-top-view-text{
+
+.demand-top-view-text {
   margin-left: 10rpx;
   position: absolute;
   /* left: 50%; */
@@ -53,28 +59,32 @@
   color: #1ec88c;
   /* top: 10rpx; */
 }
-.demand-icon-number{
+
+.demand-icon-number {
   width: 200rpx;
   height: 200rpx;
   border-radius: 50%;
   background-color: #1ec88c;
 }
-.demand-page-center{
-  background-color: white;
 
+.demand-page-center {
+  background-color: white;
 }
-.demand-page-tips{
+
+.demand-page-tips {
   color: #b5b5b5;
   font-size: 28rpx;
   padding-top: 35rpx;
   padding-bottom: 35rpx;
 }
-.demand-page-center-icon{
+
+.demand-page-center-icon {
   margin-top: 20rpx;
   width: 100rpx;
   height: 100rpx;
 }
-.demand-page-icon{
+
+.demand-page-icon {
   margin-left: 25rpx;
   margin-right: 25rpx;
   display: flex;
@@ -82,14 +92,16 @@
   justify-content: space-between;
   align-items: center;
 }
-.demand-page-background{
+
+.demand-page-background {
   background-color: #1ec88c;
   border-radius: 10rpx;
   margin-top: 20rpx;
   width: 200rpx;
   height: 200rpx;
 }
-.demand-page-text{
+
+.demand-page-text {
   width: 200rpx;
   display: flex;
   justify-content: center;
@@ -98,12 +110,13 @@
   margin-top: 10rpx;
   /* margin-left: 10rpx;
   margin-right: 10rpx; */
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow:ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   /* margin-bottom: 25rpx; */
 }
-.demand-page-tips{
+
+.demand-page-tips {
   color: #b5b5b5;
   font-size: 24rpx;
   margin-left: 35rpx;

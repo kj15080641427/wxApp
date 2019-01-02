@@ -3,7 +3,7 @@
 <view class='order-page' wx:key="{{index}}" wx:for="{{order}}"data-orderindex="{{index}}"catchtap="getOrderIndex">
   <view class='order-page-top'>
     <view>{{item.createDate}}</view>
-    <view class="{{item.orderStatus == 0 ? 'order-statu': ''}}">{{item.statusValue}}</view>
+    <view wx:if="{{item.statusValue != '已支付,未接单'}}" class="{{item.orderStatus == 0 ? 'order-statu': ''}}">{{item.statusValue}}</view>
     <view wx:if="{{item.statusValue == '已支付,未接单'}}" style='color:red'>未接单</view>
   </view>
   <view class='order-page-line'></view>

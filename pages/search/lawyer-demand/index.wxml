@@ -1,0 +1,52 @@
+<!--pages/search/lawyer-demand/index.wxml-->
+
+<view class='detail-page-center'>
+  <picker class='detail-page-picker' range="{{type}}" range-key="{{'requireTypeName'}}" value="{{index}}" bindchange="pickerRequire">
+    <view style='display:flex;justify-content: space-between;width:715rpx;'>
+      <view class='detail-page-text'><text style='color:red'>*</text>服务类型</view>
+      <view style='display:flex;align-items:center'>
+        <text class='hide-text'>{{type[index].requireTypeName}}</text>
+        <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
+      </view>
+    </view>
+  </picker>
+  <view class='detail-page-line'></view>
+
+  <picker class='detail-page-picker' range="{{lawyerInfo.businessType}}" range-key="{{'businessTypeName'}}" value="{{index}}" bindchange="pickerBusiness">
+    <view style='display:flex;justify-content: space-between;width:715rpx;'>
+      <view class='detail-page-text'><text style='color:red'>*</text>擅长领域</view>
+      <view style='display:flex;align-items:center'>
+        <text class='hide-text'>{{lawyerInfo.businessType[indexBus].businessTypeName}}</text>
+        <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
+      </view>
+    </view>
+  </picker>
+  <view class='detail-page-line'></view>
+
+  <view class='detail-page-picker'>
+    <view style='display:flex;justify-content: space-between;width:715rpx;align-items:center'>
+      <view class='detail-page-text'>
+        <text style='color:red'>*</text>最高可承受费用</view>
+      <view style='display:flex;align-items:center'>
+        <input style='color:black;width:400rpx;height:80rpx;text-align:right;padding:right:10rpx;' bindinput="getInput" type='number'></input>
+        <view style='margin-right:35rpx;margin-left:20rpx;'>元</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='detail-page-problem'>
+  <textarea placeholder='输入问题' maxlength='300' class="detail-textarea" bindinput='getContent'></textarea>
+</view>
+
+<view class='select-mark-view'wx:if="{{markList[0]}}" >
+  <view class='select-mark-text' >选择问题标签</view>
+  <view class='select-mark-flex'>
+    <view class="{{selist[index].is ? 'selected-mark': 'select-mark'}}" wx:key="{{index}}" wx:for="{{markList}}" catchtap='isSelected' data-selectindex="{{index}}">{{item.tagName}}</view>
+  </view>
+  <view style='height:20rpx'></view>
+</view>
+<view class='mark-page-line'></view>
+<view class='mark-button-view'>
+  <button class='mark-button' bindtap="publish">发布需求</button>
+</view>
