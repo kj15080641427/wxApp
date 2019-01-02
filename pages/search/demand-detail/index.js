@@ -38,7 +38,8 @@ Page({
     },
 
     multiIndex: [0, 0],
-    multiArray: ''
+    multiArray: '',
+    isOnce:false
   },
   //选择地区
   //选择地区
@@ -57,6 +58,7 @@ Page({
     this.setData({
       multiArray: this.data.multiArray,
       multiIndex: this.data.multiIndex,
+      isOnce:true
     })
 
     // this.multiArray = this.data.multiArray;
@@ -227,7 +229,7 @@ Page({
       })
     }else{
       wx.navigateTo({
-        url: '../demand-list/index?parameter=' + JSON.stringify(this.data.postList),
+        url: '/pahes/search/lawyer-detail?parameter=' + JSON.stringify(this.data.postList),
       })
     }
 

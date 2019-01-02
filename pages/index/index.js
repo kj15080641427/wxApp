@@ -131,7 +131,6 @@ Page({
             "deviceInfoId": 5
         }
         var successList = function (data) {
-
             that.setData({
                 article: data.data.list ? data.data.list : data.data,
                 listHeight: data.data.list.length ? data.data.list.length * 230 + 200 + 'rpx' : ''

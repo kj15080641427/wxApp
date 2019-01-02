@@ -203,9 +203,9 @@ Page({
       id: JSON.parse(options.orderDetail).id,
       orderDetail: options.orderDetail ? JSON.parse(options.orderDetail) : options.date,
       userInfo: wx.getStorageSync("userInfo"),
-      time: options.orderDetail ? JSON.parse(options.orderDetail).createDate.split(" ")[1].split(":",2).join(":"):''
+      time: options.orderDetail ? JSON.parse(options.orderDetail).createDate:''
     })
-    console.log('qqqqqqqqqqqq',JSON.parse(options.orderDetail))
+    console.log('qqqqqqqqqqqq',this.data.time)
 
 
     wx.setStorageSync('consultationId', JSON.parse(options.orderDetail).id) 

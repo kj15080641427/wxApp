@@ -71,6 +71,7 @@ Page({
       // ['detailList[7].text']: data.beginTime
       startTime:data.createDate
     })
+    console.log(data,'快速电话咨询')
     if (this.data.orderDetail.orderStatus == 5) {
       this.setData({
         statusValue: true
