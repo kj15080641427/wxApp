@@ -2,6 +2,7 @@ var wxrequest = require('../../utils/request.js')
 var api = require('../../utils/api.js')
 var initIndex = ''
 Page({
+// <<<<<<< HEAD
   // <<<<<<< HEAD
   data: {
     swiperH: '', //swiper高度
@@ -18,7 +19,6 @@ Page({
     articleIndex: 0,
     userInfo: {},
     hasUserInfo: false,
-    // canIUse: wx.canIUse('button.open-type.getUserInfo'),
     winHeight: "", //窗口高度
     scrollLeft: 0, //tab标题的滚动条位置
     adBanner: '',
@@ -112,7 +112,7 @@ Page({
         listHeight: that.data.article.length ? that.data.article.length * 250 + 200 + 'rpx' : ''
       })
 
-      console.log("解决方案list", that.data.article)
+      console.log("解决方案list", that.data.total)
     }
     var failList = function(e) {
       console.log("解决方案错误", e)
@@ -147,7 +147,8 @@ Page({
     this.setData({
       articleIndex: e.detail.current,
       article: [],
-      pageNum: 1
+      pageNum: 1,
+      total:10,
     });
     this.checkCor();
 
@@ -166,7 +167,10 @@ Page({
         // listHeight: data.data.list.length * 220 + 300 + 'rpx'
         total: data.data.total,
         article: that.data.article.concat(data.data.list),
-        listHeight: that.data.article.length ? that.data.article.length * 250 + 200 + 'rpx' : ''
+      })
+      console.log(that.data.listHeight)
+      that.setData({
+        listHeight: that.data.article.length * 230 + 200 + 'rpx' 
       })
     }
     var failList = function(e) {
@@ -290,12 +294,13 @@ Page({
   },
   onReachBottom: function() {
     var that = this
-    // if (this.data.total >= 10){
+    if (this.data.total == 10){
     that.setData({
       pageNum: that.data.pageNum + 1,
     })
     this.getArticleList()
-    // }
+    console.log('?????????????????????????????????????')
+    }
     console.log('页数', this.data.pageNum, )
   },
   // 消息
@@ -384,4 +389,28 @@ Page({
     }.bind(this), 200)
     wx.showTabBar({})
   }
+
+//     //解决方案
+//     getArticleList: function () {
+//         var that = this
+//         var listUrl = api.getArticleListUrl()
+//         var message = ""
+//         var listData = {
+//             "typeId": that.data.popular[0].id,
+//             "pageNum": 1,
+//             "pageSize": that.data.pageSize,
+//             "deviceInfoId": 5
+//         }
+//         var successList = function (data) {
+//             that.setData({
+//                 article: data.data.list ? data.data.list : data.data,
+//                 listHeight: data.data.list.length ? data.data.list.length * 230 + 200 + 'rpx' : ''
+//             })
+//             console.log("解决方案list", that.data.listHeight)
+//         }
+//         var failList = function (e) {
+//             console.log("解决方案错误", e)
+//         }
+//         wxrequest.requestPost(listUrl, listData, message, successList, failList)
+//     },
 })

@@ -8,7 +8,6 @@ Page({
    */
   data: {
     listIndex: '',
-    getPage: 10,
     parameter: '',
     noFilter: {
       "regionId": '',
@@ -35,8 +34,9 @@ Page({
     },
     sort: ["综合排序", "最新入驻", "活跃度最高"],
     sortIndex: 0, //排序index
-    getPage: 10,
     hasList: true,
+    pageNum:1,
+    hasNextPage:true
   },
   //排序Index
   getSortIndex: function(e) {
@@ -59,7 +59,6 @@ Page({
   searchInput: function(e) {
     this.setData({
       ['noFilter.lawyerName']: e.detail.value,
-      getPage: 10,
       ishidden: true
     })
   },
@@ -78,16 +77,11 @@ Page({
     })
   },
   //上拉搜索
-  topSearch: function() {
+  topSearch: function () {
     var that = this
-    var url = api.getSearchLawyer() + "1/" + that.data.getPage
+    var url = api.getSearchLawyer() + that.data.pageNum + "/" + '/10'
     var datan = that.data.noFilter
-    // this.setData({
-    //   ['noFilter.lawyerName']: e.detail.value,
-    //   getPage: 10,
-    //   ishidden: true
-    // })
-    var success = function(data) {
+    var success = function (data) {
       wx.hideLoading()
       if (!data.data.list[0]) {
         that.setData({
@@ -95,12 +89,11 @@ Page({
         })
       }
       that.setData({
-        lawyerList: data.data.list,
-        ishidden: true
+        hasNextPage: data.data.hasNextPage,
+        lawyerList: that.data.lawyerList.concat(data.data.list),
       })
-      // that.getAge()
     }
-    var fail = function(e) {
+    var fail = function (e) {
       wx.hideLoading()
       wx.showToast({
         title: '获取数据失败',
@@ -116,7 +109,7 @@ Page({
   //
   confirm(e) {
     var that = this
-    var url = api.getSearchLawyer() + "1/" + that.data.getPage
+    var url = api.getSearchLawyer() + that.data.pageNum+"/" + '/10'
     var datan = that.data.noFilter
     that.setData({})
     var success = function(data) {
@@ -149,7 +142,7 @@ Page({
   searchLawyer: function() {
     var that = this
     // var noFilter = noFilter
-    var url = api.getSearchLawyer() + "1/" + that.data.getPage
+    var url = api.getSearchLawyer() + that.data.pageNum+"/" + '/10'
     var data = that.data.noFilter
     // console.log("上传参数")
     var success = function(data) {
@@ -199,7 +192,7 @@ Page({
           // }
           that.setData({
               ['parameter.requirementId']: data.data.requirementId,
-              ['parameter.isFirst']: 0,
+              ['parameter.isFirst']: 1,
             },
             function() {
               wx.navigateTo({
@@ -307,12 +300,17 @@ Page({
    */
   onReachBottom: function() {
     var that = this
+    if (that.data.hasNextPage){
     that.setData({
-      getPage: that.data.getPage + 10,
-      ishidden: false
+      pageNum: that.data.pageNum + 1,
     })
-    var page = that.data.getPage
-    that.topSearch(page)
+    that.topSearch()
+    }else {
+      wx.showToast({
+        title: '没有更多数据',
+        icon:'none'
+      })
+    }
   },
 
   /**

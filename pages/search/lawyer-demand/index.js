@@ -13,6 +13,7 @@ Page({
     var url = api.getDemandType()
     var data = wx.getStorageSync("token")
     var success = data => {
+      data.data.pop()
       console.log(data)
       this.setData({
         type: data.data
@@ -49,7 +50,7 @@ Page({
   //问题内容
   getContent:function(e){
     this.setData({
-      ['parameter.content']:e.detail.value
+      ['parameter.requirementContent']:e.detail.value
     })
   },
   //标签列表
@@ -117,7 +118,7 @@ Page({
     var success = data => {
       wx.showToast({
         title: data,
-        icon: none
+        icon: 'none'
       })
       console.log(data)
     }
@@ -136,7 +137,9 @@ Page({
   onLoad: function(options) {
     this.getDemandType()
     this.setData({
-      lawyerInfo: JSON.parse(options.lawyerDetail)
+      lawyerInfo: JSON.parse(options.lawyerDetail),
+      ['parameter.isFirst']: 1,
+      ['parameter.targetLawyerId']: JSON.parse(options.lawyerDetail).memberId
     })
     console.log("擅长领域", this.data.lawyerInfo)
   },

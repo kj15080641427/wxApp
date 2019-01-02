@@ -30,10 +30,9 @@
       </view>
     </view>
 
-
+<scroll-view scrool-y scroll-top='500px'>
 <view style='margin-top:180rpx;'></view>
-
-  <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}"   >
+  <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}">
     <view class='watchlist-page'>
       <view class='watchlist-page-flex'>
         <view class='watchlist-page-left' style="z-index:55;">
@@ -65,7 +64,8 @@
       </view>
     </view>
   </view>
-
+  </scroll-view>
+  <view style='height:35rpx'></view>
 <!-- </view> -->
 
   <view class='no-message' wx:if="{{!hasList}}">

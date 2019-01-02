@@ -63,13 +63,13 @@
   </view> -->
   <!-- 热门推荐 -->
   <view class='index-layout index-tab-margin'>
-    <view  class='index-text-style'>
+    <view class='index-text-style'>
       <view class="index-green-line"></view>
       <view style="font-size:32rpx">热门推荐</view>
     </view>
-    <view class="index-text-style" catchtap='loadMorePopular' >
-      <label  style='font-size:28rpx;color:#b5b5b6' >..</label>
-      <image src="../../image/homeicon_3x/homepage_09_3x.png" style="width:20rpx;height:20rpx;margin-left:10rpx"/>
+    <view class="index-text-style" catchtap='loadMorePopular'>
+      <label style='font-size:28rpx;color:#b5b5b6'>..</label>
+      <image src="../../image/homeicon_3x/homepage_09_3x.png" style="width:20rpx;height:20rpx;margin-left:10rpx" />
     </view>
   </view>
   <!-- 横向滑动列表 -->

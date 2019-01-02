@@ -80,6 +80,7 @@
   width: 30rpx;
   height: 30rpx;
   margin-right: 35rpx;
+  margin-left: 20rpx;
 }
 .detail-page-line{
   height: 1rpx;

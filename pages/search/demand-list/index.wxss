@@ -1,13 +1,16 @@
 /* pages/search/demand-list/index.wxss */
+
 /* pages/search/index.wxss */
-.search-input-height{
+
+.search-input-height {
   display: flex;
   align-items: center;
   height: 100rpx;
   background-color: #1ec88c;
-  border-top: 1rpx solid #32b987
+  border-top: 1rpx solid #32b987;
 }
-.index-search{
+
+.index-search {
   display: flex;
   align-items: center;
   height: 70rpx;
@@ -20,33 +23,40 @@
   font-size: 28rpx;
   border-radius: 10rpx;
 }
-.serach-select-sort{
+
+
+
+.serach-select-sort {
   position: relative;
   padding-left: 35rpx;
   height: 100rpx;
   width: 750rpx;
   line-height: 100rpx;
-  overflow:hidden;
-  white-space:nowrap;
-  text-overflow:ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
-.search-tab{
+
+.search-tab {
   display: flex;
 }
-.search-tab-icon{
+
+.search-tab-icon {
   width: 300rpx;
   height: 100rpx;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.search-page-icon{
+
+.search-page-icon {
   margin-left: 10rpx;
   /* margin-top: 10rpx; */
-  width:20rpx;
-  height:20rpx
+  width: 20rpx;
+  height: 20rpx;
 }
-.search-tab-list{
+
+.search-tab-list {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -55,28 +65,34 @@
   padding-left: 35rpx;
   padding-right: 35rpx;
 }
-.search-tab-text{
+
+.search-tab-text {
   color: #b5b5b5;
   font-size: 24rpx;
 }
+
 /* pages/my/watchlist/index.wxss */
-.watchlist-page{
+
+.watchlist-page {
   margin-left: 25rpx;
-  margin-right:25rpx;
+  margin-right: 25rpx;
   margin-top: 25rpx;
-  background-color: white
+  background-color: white;
 }
-.watchlist-page-flex{
+
+.watchlist-page-flex {
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
 }
-.watchlist-page-avatar{
+
+.watchlist-page-avatar {
   width: 120rpx;
   height: 120rpx;
   /* background-color: red; */
   border-radius: 50%;
 }
-.watchlist-page-practice{
+
+.watchlist-page-practice {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,111 +105,128 @@
   margin-top: 20rpx;
   margin-bottom: 20rpx;
 }
-.watchlist-page-label{
-  margin-left:20rpx;
-  width:120rpx;
+
+.watchlist-page-label {
+  margin-left: 20rpx;
+  width: 120rpx;
   font-size: 27rpx;
-  color: #b5b5b5
+  color: #b5b5b5;
 }
-.watchlist-page-left{
+
+.watchlist-page-left {
   margin-top: 35rpx;
-  margin-left:20rpx
+  margin-left: 20rpx;
 }
-.watchlist-page-right{
+
+.watchlist-page-right {
   margin-left: 25rpx;
   margin-top: 35rpx;
   margin-right: 20rpx;
-  /* margin-right:20rpx */
-  /* height: 285rpx; */
+  /* margin-right:20rpx *//* height: 285rpx; */
 }
-.watchlist-page-name{
+
+.watchlist-page-name {
   font-size: 16px;
   color: #323232;
   font-weight: bold;
   display: flex;
   justify-content: space-between;
-  align-items: center
+  align-items: center;
 }
-.watchlist-page-firm{
+
+.watchlist-page-firm {
   margin-left: 20rpx;
   font-size: 24rpx;
-  color:#323232;
-  font-weight: normal
+  color: #323232;
+  font-weight: normal;
 }
-.watchlist-page-address{
+
+.watchlist-page-address {
   margin-top: 25rpx;
   font-size: 24rpx;
-  color: #717171
+  color: #717171;
 }
-.watchlist-page-adept{
+
+.watchlist-page-adept {
   margin-top: 25rpx;
   color: #b5b5b5;
   font-size: 24rpx;
 }
-.watchlist-page-line{
+
+.watchlist-page-line {
   background-color: #f4f4f4;
   height: 1rpx;
   margin-right: 25rpx;
   margin-left: 25rpx;
 }
-.watch-page-lower{
-  display:flex;
-  padding-top:25rpx;
-  height:60rpx;
-  margin-left:25rpx;
+
+.watch-page-lower {
+  display: flex;
+  padding-top: 25rpx;
+  height: 60rpx;
+  margin-left: 25rpx;
   /* margin-right: 25rpx; */
-  background-color:white
+  background-color: white;
 }
-.lawyerList-top{
-  background-color:white;
-  margin-left:35rpx;
-  margin-right:35rpx
+
+.lawyerList-top {
+  background-color: white;
+  margin-left: 35rpx;
+  margin-right: 35rpx;
 }
-.lawyerList-tab{
-  background-color:white;
-  width:700rpx;
-  margin-left:25rpx
+
+.lawyerList-tab {
+  background-color: white;
+  width: 700rpx;
+  margin-left: 25rpx;
 }
-.demand-button{
+
+.demand-button {
   width: 120rpx;
   height: 40rpx;
   background-color: #1ec88c;
   border-radius: 20rpx;
-  color: #ffffff;
+  color: #fff;
   font-size: 24rpx;
   line-height: 40rpx;
-  font-weight:normal;
+  font-weight: normal;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 35rpx;
 }
-.no-message{
+
+.no-message {
   width: 750rpx;
 }
-.no-messge-image-view{
+
+.no-messge-image-view {
   display: flex;
   justify-content: center;
 }
-.no-message-imag{
+
+.no-message-imag {
   margin-top: 220rpx;
   width: 330rpx;
   height: 330rpx;
 }
-.no-message-tips-view{
+
+.no-message-tips-view {
   display: flex;
   justify-content: center;
   margin-top: 50rpx;
   font-size: 28rpx;
 }
-.np-message-tips{
+
+.np-message-tips {
   font-size: 28rpx;
   color: #323232;
 }
-.no-message-button{
+
+.no-message-button {
   width: 280rpx;
   height: 94rpx;
-  border-radius:  55rpx;
+  border-radius: 55rpx;
   background-color: #1ec88c;
   color: white;
   font-size: 36rpx;
