@@ -263,6 +263,11 @@ var LawyerMoney = '/client/expert/price/'
 function getLawyerMoney(){
   return HOST_URL + LawyerMoney
 }
+// 获取律师与某个用户所有需求列表，id为用户id
+var AllRequireList = '/lawyer/requirement/between/'
+function getAllRequireList() { 
+  return HOST_URL + AllRequireList
+}
 module.exports={
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,
@@ -308,4 +313,5 @@ module.exports={
   getAbout: getAbout,
   getLawyerPhone: getLawyerPhone,
   getLawyerMoney: getLawyerMoney,
+  getAllRequireList: getAllRequireList
 }

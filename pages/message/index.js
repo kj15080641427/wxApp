@@ -45,21 +45,6 @@ Page({
                             },function () {
                                 wx.hideLoading()
                              })
-                          //缓存conversationList
-                          // wx.setStorageSybc("conversationList",data.conversations)
-                            //data.code 返回码
-                            //data.message 描述
-                            //data.conversations[] 会话列表，属性如下示例
-                            //data.conversations[0].extras 附加字段
-                            //data.conversations[0].unread_msg_count 消息未读数
-                            //data.conversations[0].name  会话名称
-                            //data.conversations[0].appkey  appkey(单聊)
-                            //data.conversations[0].username  用户名(单聊)
-                            //data.conversations[0].nickname  用户昵称(单聊)
-                            //data.conversations[0].avatar  头像 media_id 
-                            //data.conversations[0].mtime 会话最后的消息时间戳
-                            //data.conversations[0].gid 群 id(群聊)
-                            //data.conversations[0].type  会话类型(3 代表单聊会话类型，4 代表群聊会话类型)
                         }).onFail(function(data) {
                             console.log(data)
                             //data.code 返回码
@@ -71,19 +56,6 @@ Page({
                                 that.setData({
                                     conversationList: data.conversations
                                 })
-                                //data.code 返回码
-                                //data.message 描述
-                                //data.conversations[] 会话列表，属性如下示例
-                                //data.conversations[0].extras 附加字段
-                                //data.conversations[0].unread_msg_count 消息未读数
-                                //data.conversations[0].name  会话名称
-                                //data.conversations[0].appkey  appkey(单聊)
-                                //data.conversations[0].username  用户名(单聊)
-                                //data.conversations[0].nickname  用户昵称(单聊)
-                                //data.conversations[0].avatar  头像 media_id 
-                                //data.conversations[0].mtime 会话最后的消息时间戳
-                                //data.conversations[0].gid 群 id(群聊)
-                                //data.conversations[0].type  会话类型(3 代表单聊会话类型，4 代表群聊会话类型)
                             }).onFail(function(data) {
                                 console.log(data)
                                 wx.hideLoading()  

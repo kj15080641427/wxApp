@@ -1,6 +1,34 @@
 .chart{
     background: #f1f1f1;
 }
+.chart .require{
+    width: 100%;
+    height: 60rpx;
+    line-height: 60rpx;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #ffeabc;
+    color: #ff4220;
+    font-size: 24rpx;
+    padding: 0 20rpx;
+    box-sizing: border-box;
+    z-index: 1999;
+}
+.chart .require-switch{
+    float: right;
+    color: #4da7f1;
+}
+.chart .require-list{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20rpx;
+    position: fixed;
+    top: 60rpx;
+    left: 0;
+    z-index: 1999;
+    background: #fff;
+}
 .chart .chart-content{
     width: 100%;
     padding: 35rpx 35rpx 115rpx 35rpx;
@@ -50,8 +78,8 @@
     position: relative;
 }
 .chart .msg-list .text-box .audio .audio-img{
-    width: 40rpx;
-    height: 40rpx;
+    width: 30rpx;
+    height: 30rpx;
 }
 .chart .msg-list .avatar .avatar-img{
     width: 100%;
@@ -103,9 +131,10 @@
     box-sizing: border-box;
 }
 .chart .lawyer-msg .text-box .audio-duration{
-    position: absolute;
-    right: -30rpx;
-    top: 20rpx;
+    position:absolute;
+    right:-45rpx;
+    top:0rpx;
+    width:40rpx;
 }
 .chart .lawyer-msg .avatar{
     margin-right: 25rpx;
@@ -117,8 +146,8 @@
     border-left: 16rpx solid transparent;
     border-bottom: 16rpx solid transparent;
     position: absolute;
-    top: 32rpx;
-    left: -26rpx;
+    top: 30rpx;
+    left: -28rpx;
     z-index: 99;
 }
 .chart .lawyer-msg .text-box::after{
@@ -128,8 +157,8 @@
     border-left: 16rpx solid transparent;
     border-bottom: 16rpx solid transparent;
     position: absolute;
-    top: 32rpx;
-    left: -24rpx;
+    top: 30rpx;
+    left: -26rpx;
     z-index: 100;
 }
 
