@@ -78,10 +78,39 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        jM.login({
-            'username' : 'lex' + wx.getStorageSync('memberId'),
-            'password' : hex_md5(wx.getStorageSync('mobile'))
-        })
+        wx.showLoading()
+        if(!jM.isLogin()){
+            wxrequest.requestGet(api.getImConfig(),'',getImConfigSuccess,getImConfigFail)
+            function getImConfigSuccess (res) {
+                //  初始化jmessage
+                wx.setStorageSync('appkey', res.data.appkey)
+                jM.init({
+                    "appkey"    : res.data.appkey,
+                    "random_str": res.data.random,
+                    "signature" : res.data.signature,
+                    "timestamp" : res.data.timestamp,
+                    "flag": 1
+                }).onSuccess(function(data) {
+                    jM.login({
+                        'username' : 'lex' + wx.getStorageSync('memberId'),
+                        'password' : hex_md5(wx.getStorageSync('mobile'))
+                    }).onSuccess(function(lData) {
+                        wx.hideLoading()
+                    }).onFail(function(data){
+                      wx.hideLoading() 
+                        console.log(data.message)
+                        //同上
+                    })
+                }).onFail(function(data) {
+                  wx.hideLoading() 
+                    console.log(data)
+                }); 
+                console.log(app.globalData)
+            }
+            function getImConfigFail() {  }
+        }else{
+            wx.hideLoading() 
+        }
     },
   /**
    * 生命周期函数--监听页面隐藏

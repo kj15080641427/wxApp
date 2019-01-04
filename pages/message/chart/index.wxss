@@ -245,7 +245,7 @@
 .chart .input-box .input{
     /* flex: 1; */
     /* margin: 0 20rpx; */
-    width:100%;
+    width:86%;
     border:1rpx solid #e7e7e7;
     border-radius: 5rpx;
     background: #fff;
