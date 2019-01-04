@@ -1,11 +1,14 @@
 /* pages/my/order/index.wxss */
-.order-page{
+
+.order-page {
   background-color: white;
   margin-left: 35rpx;
   margin-right: 35rpx;
   margin-top: 35rpx;
+  border-radius: 20rpx;
 }
-.order-page-top{
+
+.order-page-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -13,33 +16,77 @@
   margin-right: 25rpx;
   color: #b5b5b5;
   font-size: 28rpx;
-  height: 70rpx
+  height: 70rpx;
 }
-.order-statu{
-  color: #ea5514
+
+.order-statu {
+  color: #ea5514;
 }
-.order-page-type{
+
+.order-page-type {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 150rpx;
 }
-.order-page-line{
+
+.order-page-line {
   background-color: #f2f2f2;
   height: 1rpx;
   /* width: 95%; */
   margin-left: 25rpx;
   margin-right: 25rpx;
 }
-.order-page-left{
+
+.order-page-left {
   padding-left: 20rpx;
 }
-.order-page-consultype{
+
+.order-page-consultype {
   font-size: 24rpx;
   margin-top: 35rpx;
-  color: #717171
+  color: #717171;
 }
-.order-page-font{
+
+.order-page-font {
   font-size: 32rpx;
   color: #323232;
+}
+
+.no-message {
+  width: 750rpx;
+}
+
+.no-messge-image-view {
+  display: flex;
+  justify-content: center;
+}
+
+.no-message-imag {
+  margin-top: 220rpx;
+  width: 330rpx;
+  height: 330rpx;
+}
+
+.no-message-tips-view {
+  display: flex;
+  justify-content: center;
+  margin-top: 50rpx;
+  font-size: 28rpx;
+}
+
+.np-message-tips {
+  font-size: 28rpx;
+  color: #323232;
+}
+
+.no-message-button {
+  width: 280rpx;
+  height: 94rpx;
+  border-radius: 55rpx;
+  background-color: #1ec88c;
+  color: white;
+  font-size: 36rpx;
+  margin-top: 65rpx;
+  line-height: 94rpx;
 }

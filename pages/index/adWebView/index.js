@@ -15,7 +15,7 @@ Page({
     this.setData({
       adUrl:options.adUrl
     })
-  // console.log(options.adUrl)
+  console.log(options.adUrl)
   },
 
   /**

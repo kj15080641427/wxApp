@@ -10,7 +10,7 @@ Page({
     checked:1,
     array: [],
     hasSelect:true,
-    hasSelectAddress:true,
+    hasSelectAddress:false,
     region: '',
 
     consultationTypeId:"",
@@ -25,7 +25,7 @@ Page({
 
   hideRegion: function () {
     this.setData({
-      hasaddress: false,
+      hasSelectAddress: false,
     })
   },
   //选择地区
@@ -34,7 +34,6 @@ Page({
       multiArray: this.data.multiArray,
       multiIndex: this.data.multiIndex
     };
-    console.log(e.detail.column)
     data.multiIndex[e.detail.column] = e.detail.value;
     switch (e.detail.column) {
       case 0:
@@ -43,31 +42,15 @@ Page({
     }
     this.setData({
       multiArray: this.data.multiArray,
-      multiIndex: this.data.multiIndex,
-      hasSelectAddress: false,
+      // multiIndex: this.data.multiIndex,
     })
-
-    // this.multiArray = this.data.multiArray;
-    // this.multiIndex = this.data.multiIndex;
-    // // 使用wepy开发，this.$apply()为脏数据检查
-    // this.$apply();
   },
   bindMultiPickerChange: function (e) {
-    // console.log(
-    //   this.multiArray[0][e.detail.value[0]],
-    //   this.multiArray[1][e.detail.value[1]]
-    // ); // {value: "431000", label: "郴州市", level: 2}
-    console.log(this.data.multiArray[0][e.detail.value[0]])
-    console.log(this.data.multiArray[1][e.detail.value[1]])
     this.setData({
-      regionId: this.data.multiArray[1][e.detail.value[1]].regionId ? this.data.multiArray[1][e.detail.value[1]].regionId : this.data.multiArray[0][e.detail.value[0]].regionId
+      regionId: this.data.multiArray[1][e.detail.value[1]].regionId,
+      multiIndex: e.detail.value,
+      hasSelectAddress: true,
     })
-
-    this.setData({
-      multiIndex: e.detail.value
-    })
-    // this.multiIndex = e.detail.value;
-    // this.$apply();
   },
 
 
@@ -97,17 +80,30 @@ Page({
       commitContent: e.detail.value
     })
   },
+  formSubmit(e) {
+    console.log('form发生了submit事件，携带数据为：', e)
+    this.setData({
+      formId:e.detail.formId
+    })
+    this.commit()
+  },
   // 提交
   commit:function(){
     var that = this
     var commitURL = api.getCommitUrl()
-    var data = {
+    var freedata = {
       "consultationTypeId": that.data.consultationTypeId,
       "regionId": that.data.regionId, 
       "content": that.data.commitContent,
-      "isHide": that.data.isHide == true ? '1':'0'
+      "isHide": that.data.isHide == true ? '1':'0',
+      "wxReportSubmit": {
+        "openId": wx.getStorageSync('openid'),
+        "formId": that.data.formId
+      }
      }
+    console.log("formIdsssssssssssss",that.data.formId)
     var success = function(data){
+      console.log("上传参数", freedata)
       that.setData({
         consultation:data
       })
@@ -117,14 +113,9 @@ Page({
         title: '提交成功',
       })
       console.log(',.....',that.data.consultation)
-    // setTimeout(function(){
-    //   wx.navigateBack({
-        
-    //   })
-    // },1000)
     }
     var fail = function(e){
-      console.log(12312312312)
+      console.log(12312312312,e)
       wx.showToast({
         title: '提交失败',
       })
@@ -146,7 +137,7 @@ Page({
         icon: 'none'
       })
     } else {
-      wxrequest.request(commitURL, data, success, fail)
+      wxrequest.request(commitURL, freedata, success, fail)
     }
   },
   //订单
@@ -174,41 +165,38 @@ Page({
   },
   //解决方案类型  
   getArticleType:function(){
-    var that = this
-    var url = api.getArticleTypeUrl()
-    var messagetype = ""
-    var data = { "pageNum": 1, "pageSize": 100,"deviceInfoId":5 }
-    var success = function (data) {
-      wx.hideLoading()
-      console.log("解决方案分类list", data.data)
-      that.setData({
-        array: data.data,
-      })
-      // that.getArticleList()
-      // initIndex: data.data.list[0].id
+    if(this.data.array==[]){
+      var that = this
+      var url = api.getArticleTypeUrl()
+      var messagetype = ""
+      var data = { "pageNum": 1, "pageSize": 100, "deviceInfoId": 5 }
+      var success = function (data) {
+        wx.hideLoading()
+        console.log("解决方案分类list", data.data)
+        that.setData({
+          array: data.data,
+        })
+        // that.getArticleList()
+        // initIndex: data.data.list[0].id
+      }
+      var fail = function (e) {
+        wx.hideLoading()
+        console.log("解决方案错误", e)
+      }
+      wxrequest.requestPost(url, data, messagetype, success, fail)
     }
-    var fail = function (e) {
-      wx.hideLoading()
-      console.log("解决方案错误", e)
-    }
-    wxrequest.requestPost(url, data, messagetype, success, fail)
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
     //选择地区
-    var city = reg.citysData
-    // this.multiArray = [[...city], [...city[0].children]];
-    // this.$apply();
     this.setData({
-      multiArray: [[...city], [...city[0].child]],
+      array: JSON.parse(options.type),
+      // multiArray: wx.getStorageSync("cityList"),
     })
     console.log(this.data.multiArray)
-
-
-    this.getArticleType()
-    console.log("问题类型",this.data.array)
+    console.log("问题类型", JSON.parse(options.type))
   },
 
   /**

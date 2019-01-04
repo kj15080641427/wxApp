@@ -27,3 +27,12 @@
     </view>
   </view>
 </view>
+
+<view class='no-message' wx:if="{{!myFollow[0]}}">
+  <view class='no-messge-image-view'>
+    <image src='../../../image/search_icon@3x/Defaultpage_04_max.png' class='no-message-imag'></image>
+  </view>
+  <view class='no-message-tips-view'>
+    <view class='no-message-tips'>暂无关注</view>
+  </view>
+</view>

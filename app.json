@@ -1,75 +1,80 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
     "pages/my/index",
-    "pages/index/consultation-input/index",
-    "pages/my/order/index",
-    "pages/index/expert-filter/index",
     "pages/search/index",
-    "pages/index/expert-service/index",
-    "pages/search/case-web/index",
     "pages/userlogin/index",
-    "pages/my/balance/index",
-    "pages/message/index",
-    "pages/message/chart/index",
-    "pages/my/cash/index",
-    "pages/my/balance-detail/index",
-    "pages/my/balance-detail-two/index",
+    "pages/index/consultation-input/index",
+    "pages/index/expert-filter/index",
+    "pages/index/expert-service/index",
+    "pages/index/quick-consultation/index",
+    "pages/index/consultation-details/index",
+    "pages/index/quick-consultation-finish/index",
+    "pages/index/consultation/index",
+    "pages/index/consultation-reply/index",
+    "pages/index/webView/index",
+    "pages/index/adWebView/index",
+    "pages/search/lawyer-demand/index",
+    "pages/search/case-web/index",
     "pages/search/demand-detail/index",
     "pages/search/demand/index",
     "pages/search/demand-list/index",
     "pages/search/demand-type/index",
     "pages/search/lawyer-detail/index",
     "pages/search/filter/index",
+    "pages/search/orgweb-view/index",
+    "pages/my/order/index",
+    "pages/my/balance/index",
+    "pages/my/cash/index",
+    "pages/my/balance-detail/index",
+    "pages/my/balance-detail-two/index",
     "pages/my/edit-info/index",
     "pages/my/order-chat/index",
-    "pages/index/quick-consultation/index",
-    "pages/index/consultation-details/index",
-    "pages/index/quick-consultation-finish/index",
     "pages/my/watchlist/index",
-    "pages/index/consultation/index",
-    "pages/index/consultation-reply/index",
-    "pages/logs/logs",
-    "pages/my/guide/index",
     "pages/my/about/index",
     "pages/my/order-detail/index",
-    "pages/index/webView/index",
-    "pages/index/adWebView/index"
+    "pages/message/index",
+    "pages/message/chart/index"
   ],
-  "window":{
+  "window": {
     "navigationBarBackgroundColor": "#1ec88c",
     "navigationBarTitleText": "绿豆圈",
-    "navigationBarTextStyle":"white",
-    "onReachBottom":true
+    "navigationBarTextStyle": "white",
+    "onReachBottom": true
   },
   "tabBar": {
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "selectedIconPath":"image/homeicon_3x/homepage_15_max.png",
-        "iconPath":"image/homeicon_3x/homepage_16_max.png"
+        "selectedIconPath": "image/homeicon_3x/homepage_15_max.png",
+        "iconPath": "image/homeicon_3x/homepage_16_max.png"
       },
       {
         "pagePath": "pages/search/index",
         "text": "找律师",
-        "selectedIconPath":"image/homeicon_3x/homepage_17_max.png",
-        "iconPath":"image/homeicon_3x/homepage_18_max.png"
+        "selectedIconPath": "image/homeicon_3x/homepage_17_max.png",
+        "iconPath": "image/homeicon_3x/homepage_18_max.png"
       },
       {
         "pagePath": "pages/my/index",
         "text": "我的",
-        "selectedIconPath":"image/homeicon_3x/homepage_19_max.png",
-        "iconPath":"image/homeicon_3x/homepage_20_max.png"
+        "selectedIconPath": "image/homeicon_3x/homepage_19_max.png",
+        "iconPath": "image/homeicon_3x/homepage_20_max.png"
       }
     ],
     "color": "#b5b5b6",
     "selectedColor": "#1eecbc",
     "borderStyle": "white"
   },
-"networkTimeout": {
-  "request": 6000, 
-  "onnecSocket": 6000,
-  "downloadFile": 6000
-}
+  "networkTimeout": {
+    "request": 6000,
+    "onnecSocket": 6000,
+    "downloadFile": 6000
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "."
+    }
+  }
 }

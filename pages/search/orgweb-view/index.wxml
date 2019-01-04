@@ -1,0 +1,2 @@
+<!--pages/search/orgweb-view/index.wxml-->
+<web-view src="{{orgurl}}"></web-view>

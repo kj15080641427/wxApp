@@ -1,59 +1,4 @@
-/* pages/search/demand-detail/index.wxss */
-.demand-page-top-background{
-  /* background-color: white; */
-  display: flex;
-  height: 200rpx;
-  align-items: center;
-  justify-content: center
-}
-.demand-top-view{
-  height: 50rpx;
-  width: 187rpx;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-.demand-page-top-icon{
-  height: 50rpx;
-  width:187rpx;
-}
-.demand-top-text{
-  margin-left: 10rpx;
-  position: absolute;
-  top: 5rpx;
-  width: 30rpx;
-  height: 30rpx;
-  background-color: #1ec88c;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24rpx;
-  color: white;
-}
-.demand-top-text-next{
-  box-sizing:border-box;
-  margin-left: 10rpx;
-  position: absolute;
-  top: 5rpx;
-  width: 30rpx;
-  height: 30rpx;
-  border-radius: 50%;
-  border: 1rpx solid #b5b5b5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24rpx;
-  color: #b5b5b5
-}
-.demand-top-view-text{
-  margin-left: 10rpx;
-  position: absolute;
-  /* left: 50%; */
-  font-size: 28rpx;
-  color: #1ec88c;
-  /* top: 10rpx; */
-}
+/* pages/search/lawyer-demand/index.wxss */
 .detail-page-center{
   background-color: white;
 }
@@ -80,7 +25,7 @@
   width: 30rpx;
   height: 30rpx;
   margin-right: 35rpx;
-  margin-left: 20rpx;
+  margin-left:20rpx;
 }
 .detail-page-line{
   height: 1rpx;

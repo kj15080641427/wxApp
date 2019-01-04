@@ -30,10 +30,9 @@
       </view>
     </view>
 
-
-<view style='margin-top:180rpx;'></view>
-
-  <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}"   >
+<scroll-view scrool-y scroll-top='500px'>
+<view style='margin-top:215rpx;'></view>
+  <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}">
     <view class='watchlist-page'>
       <view class='watchlist-page-flex'>
         <view class='watchlist-page-left' style="z-index:55;">
@@ -65,15 +64,15 @@
       </view>
     </view>
   </view>
-
+  </scroll-view>
+  <view style='height:35rpx'></view>
 <!-- </view> -->
 
   <view class='no-message' wx:if="{{!hasList}}">
   <view class='no-messge-image-view'>
-    <image src='../../../image/search_icon@3x/Default page_04_max.png' class='no-message-imag'></image>
+    <image src='../../../image/search_icon@3x/Defaultpage_04_max.png' class='no-message-imag'></image>
   </view>
   <view class='no-message-tips-view'>
       <view class='no-message-tips'>没有找到您要搜索的结果</view>
   </view>
-  <button class='no-message-button' bindtap='again'>重新搜索</button>
 </view>

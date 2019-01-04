@@ -51,7 +51,7 @@ Page({
   //律师主页
   getIndex:function(e){
     wx.navigateTo({
-      url: '../../search/lawyer-detail/index?memberId='+this.data.myFollow[e.currentTarget.dataset.index].memberId,
+      url: '../../search/lawyer-detail/index?id='+this.data.myFollow[e.currentTarget.dataset.index].memberId,
     })
     console.log(e)
   },

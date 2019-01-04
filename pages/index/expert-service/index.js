@@ -36,7 +36,7 @@ Page({
   // 跳转至专家咨询
   gotoexpert:function(e){
     wx.navigateTo({
-      url: '../../search/lawyer-detail/index?memberId='+this.data.lawyerList[e.currentTarget.dataset.lawindex].memberId+'&quick=true',
+      url: '../../search/lawyer-detail/index?id='+this.data.lawyerList[e.currentTarget.dataset.lawindex].memberId,
     })
     // console.log(',as',this.data.lawyerList[e.currentTarget.dataset.lawindex].memberId)
   },

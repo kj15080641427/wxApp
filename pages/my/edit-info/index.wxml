@@ -7,83 +7,72 @@
       <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'></image>
     </view>
   </view>
- <view style='background-color:white;margin-top:35rpx'>
-   <view class='info-page-list'>
-    <view class='info-page-label'>用户名称</view>
-    <input class="info-page-input" value='{{userInfo.memberName}}' maxlength='10' bindinput='member' placeholder='输入用户名称'>{{editMember}}</input>
+  <view style='background-color:white;margin-top:35rpx'>
+    <view class='info-page-list'>
+      <view class='info-page-label'>用户名称</view>
+      <input class="info-page-input" value='{{userInfo.memberName}}' maxlength='10' bindinput='member' placeholder='输入用户名称'>{{editMember}}</input>
+    </view>
+    <view class='info-page-center-line'></view>
+    <view class='info-page-list'>
+      <view class='info-page-label'>性别</view>
+      <picker class="info-page-input" value="{{index}}" range='{{gender}}' range-key='gender' bindchange='bindChangegender'>{{gender[index]['gender']}}</picker>
+    </view>
+    <view class='info-page-center-line'></view>
+    <view class='info-page-list'>
+      <view class='info-page-label'>出生日期</view>
+      <picker class="info-page-input" mode="date" value="{{time}}" start="1900-09-01" end="2018-09-01" bindchange="bindDateChange">
+        <text wx:if="{{selecttime}}">{{time}}</text>
+        <text wx:if="{{systime}}">{{date}}</text>
+      </picker>
+    </view>
+    <view class='info-page-center-line'></view>
+    <view class='info-page-list'>
+      <view class='info-page-label'>所在地区</view>
+
+      <picker mode="multiSelector" class="info-page-input" bindtap='hideRegion' bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}" range-key="name">
+        <view class="picker">
+          <text wx:if="{{!hasaddress}}"> {{userInfo.addressExtend.province ? userInfo.addressExtend.province:'选择'}}-{{userInfo.addressExtend.city ?userInfo.addressExtend.city:'地区' }} </text>
+          <text wx:if="{{hasaddress}}"> {{multiArray[0][multiIndex[0]].name}}-{{multiArray[1][multiIndex[1]].name}} </text>
+        </view>
+      </picker>
+
+    </view>
+  </view>
+
+  <view style='background-color:white;margin-top:35rpx'>
+    <view class='info-page-list'>
+      <view class='info-page-label'>您的行业</view>
+      <picker class="info-page-input" style='white-space:nowrap;' value="{{index1}}" range="{{industry}}" range-key="industryName" bindchange='changeindustry'>{{industry[index1]['industryName']|| industryName || '选择行业' }}</picker>
+    </view>
   </view>
   <view class='info-page-center-line'></view>
+  <view style='background-color:white;'>
     <view class='info-page-list'>
-    <view class='info-page-label'>性别</view>
-    <picker class="info-page-input" value="{{index}}" range='{{gender}}' range-key='gender' bindchange='bindChangegender'  >{{gender[index]['gender']}}</picker>
+      <view class='info-page-label'>您的企业</view>
+      <input class="info-page-input" value="{{institutionName}}" maxlength="30" bindinput='institutionTypeName' placeholder="输入您的职位"></input>
+    </view>
   </view>
   <view class='info-page-center-line'></view>
+  <view style='background-color:white;'>
     <view class='info-page-list'>
-    <view class='info-page-label'>出生日期</view>
-    <picker class="info-page-input" mode="date" value="{{time}}" start="1900-09-01" end="2018-09-01" bindchange="bindDateChange" >       <text wx:if="{{selecttime}}">{{time}}</text><text wx:if="{{systime}}">{{date}}</text></picker>
+      <view class='info-page-label'>您的职务</view>
+      <input class="info-page-input" value="{{memberPositionName}}" maxlength="30" placeholder='输入您的职位' bindinput='businessTypeName'></input>
+    </view>
   </view>
   <view class='info-page-center-line'></view>
+  <view style='background-color:white;'>
     <view class='info-page-list'>
-    <view class='info-page-label'>所在地区</view>
-
-<picker mode="multiSelector"  class="info-page-input" bindtap='hideRegion'  bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}" range-key="name">
-      <view class="picker">
-     <text wx:if="{{hasaddress}}"> {{userInfo.addressExtend.province ? userInfo.addressExtend.province:'选择'}}-{{userInfo.addressExtend.city ?userInfo.addressExtend.city:'地区' }} </text>
-       <text wx:if="{{!hasaddress}}"> {{multiArray[0][multiIndex[0]].name}}-{{multiArray[1][multiIndex[1]].name}} </text>
-      </view>
-</picker>
-
-
-    <!-- <view class="info-page-input" bindtap="showModal"><text wx:if="{{hasaddress}}" >{{userInfo.addressExtend.province}}-{{userInfo.addressExtend.city}}-{{userInfo.addressExtend.area}}</text><text>{{name}}</text></view> -->
-
-  </view>
- </view>
-
-<view style='background-color:white;margin-top:35rpx'>
-    <view class='info-page-list'>
-    <view class='info-page-label'>您的行业</view>
-    <!-- <input class="info-page-input" value="{{editInsTypeName}}"bindinput='insTypeName'></input> -->
-     <picker class="info-page-input" style='white-space:nowrap;' value="{{index1}}" range="{{industry}}" range-key="industryName" bindchange='changeindustry' >{{industry[index1]['industryName']|| industryName || '选择行业' }}</picker>
-  </view>
-</view>
-<view class='info-page-center-line'></view>
-<view style='background-color:white;'>
-    <view class='info-page-list'>
-    <view class='info-page-label'>您的企业</view>
-    <input class="info-page-input" value="{{institutionName}}" maxlength="30" bindinput='institutionTypeName'  placeholder="输入您的职位"></input>
-    <!-- <picker class="info-page-input"  range="{{institu}}" range-key="institutionTypeName" bindchange='changeinstitu' >{{institu[index2]['institutionTypeName']}}<text wx:if="{{selectInstitu}}">选择企业</text></picker> -->
-  </view>
-</view>
-<view class='info-page-center-line'></view>
-<view style='background-color:white;'>
-    <view class='info-page-list'>
-    <view class='info-page-label'>您的职务</view>
-    <input class="info-page-input" value="{{memberPositionName}}" maxlength="30" value = "{{memberPositionName}}"  placeholder='输入您的职位'bindinput='businessTypeName'></input>
-  </view>
-</view>
-<view class='info-page-center-line'></view>
-<view style='background-color:white;'>
-    <view class='info-page-list'>
-    <view class='info-page-label'>您的邮箱</view>
-    <input class="info-page-input" placeholder='输入您的邮箱' maxlength="30" value="{{editEmail}}" bindinput='email'></input>
-  </view>
-</view>
-<view class='info-page-center-line'></view>
-<view style='background-color:white;'>
-    <view class='info-page-list'>
-    <view class='info-page-label'>商会组织</view>
-    <!-- <input class="info-page-input" value="{{editOrganizationName}}" placeholder='输入您的商会'bindinput='organizations'></input> -->
-    <picker class="info-page-input" style='white-space:nowrap;' value="{{index2}}" range="{{org}}" range-key="organizationName" bindchange='changeorg' >{{org[index2].organizationName || orgN || "选择商会"}}</picker>
-  </view>
-</view>
-
-<!-- <view wx:key="{{index}}" wx:for="{{infoList}}">
-  <view class='info-page-list' >
-    <view class='info-page-label'>{{item}}</view>
-    <input class="info-page-input" id = "{{index}}"></input>
+      <view class='info-page-label'>您的邮箱</view>
+      <input class="info-page-input" placeholder='输入您的邮箱' maxlength="30" value="{{editEmail}}" bindinput='email'></input>
+    </view>
   </view>
   <view class='info-page-center-line'></view>
-</view> -->
+  <view style='background-color:white;'>
+    <view class='info-page-list'>
+      <view class='info-page-label'>商会组织</view>
+      <picker class="info-page-input" style='white-space:nowrap;' value="{{index2}}" range="{{org}}" range-key="organizationName" bindchange='changeorg'>{{org[index2].organizationName || orgN || "选择商会"}}</picker>
+    </view>
+  </view>
 
   <view class='info-page-line'></view>
   <view class='info-page-button-view'>

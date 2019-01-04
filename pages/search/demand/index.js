@@ -6,51 +6,52 @@ Page({
    * 页面的初始数据
    */
   data: {
-      demandType:'',
-      typeindex:''
+    demandType: '',
+    typeindex: ''
   },
   //文字咨询
-  gotoconsul:function(){
+  gotoconsul: function () {
     wx.navigateTo({
       url: '../../index/consultation/index',
     })
   },
   //服务分类
-  getDemandType:function(){
+  getDemandType: function () {
     var that = this
     var url = api.getDemandType()
     var data = wx.getStorage({
       key: 'token',
-      success: function(res) {},
+      success: function (res) { },
     })
-    var success = function(data){
+    var success = function (data) {
+      wx.hideLoading()
       data.data.pop()
       that.setData({
-        demandType:data.data
+        demandType: data.data
       })
-      console.log("服务分类",data.data)
+      console.log("服务分类", data.data)
     }
-    var fail = function(e){
+    var fail = function (e) {
       console.log(e)
     }
     wxrequest.requestGetpar(url, data, '', success, fail)
   },
   //index
-  getTypeIndex:function(e){
+  getTypeIndex: function (e) {
     this.setData({
-      typeindex:e.currentTarget.dataset.typeindex
+      typeindex: e.currentTarget.dataset.typeindex
     })
-    if (this.data.demandType[e.currentTarget.dataset.typeindex].busiTypes[0].businessTypeId !== null){
+    if (this.data.demandType[e.currentTarget.dataset.typeindex].busiTypes[0].businessTypeId !== null) {
       wx.navigateTo({
         url: '../demand-type/index?demandType=' + JSON.stringify(this.data.demandType) + '&index=' + e.currentTarget.dataset.typeindex,
       })
-    }else{
+    } else {
       wx.showToast({
         title: '无擅长领域',
         icon: 'none'
       })
       wx.navigateTo({
-        url: '../demand-detail/index?demandType=' + JSON.stringify(this.data.demandType[e.currentTarget.dataset.typeindex]) + '&index=' + e.currentTarget.dataset.typeindex+'&id=1',
+        url: '../demand-detail/index?demandType=' + JSON.stringify(this.data.demandType[e.currentTarget.dataset.typeindex]) + '&index=' + e.currentTarget.dataset.typeindex + '&id=1',
       })
     }
   },
@@ -59,6 +60,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    })
     this.getDemandType()
   },
 

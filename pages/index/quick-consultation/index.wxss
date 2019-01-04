@@ -62,13 +62,13 @@
   height: 100rpx;
   line-height: 100rpx;
   width: 550rpx;
-  margin-left: 35rpx;
+  margin-left: 30rpx;
   font-size: 27rpx;
 }
 .quick-phone{
   line-height: 100rpx;
   height: 100rpx;
-  width: 550rpx;
+  width: 450rpx;
   font-size: 28rpx;
   color: #323232;
 }
