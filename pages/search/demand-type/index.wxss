@@ -59,7 +59,7 @@
   padding-top: 35rpx;
   padding-bottom: 35rpx;
   font-size: 28rpx;
-  color: #b5b5b5;
+  color: #323232;
 }
 .busi-image-view{
   display: flex;

@@ -38,8 +38,7 @@
   <!-- 排序 -->
   <view class='search-select-flex' style='z-index:998;position:fixed;top:180rpx;display:flex;' wx:if="{{showSort}}">
     <view>
-      <!-- bindtap='selectRegion' -->
-      <view wx:key="{{index}}" wx:for="{{sort}}" class='serach-select-sort' data-sortIndex="{{index}}" catchtap='getSortIndex' style="{{index==sortIndex  ? 'color:#1ec88c;background-color:white':'background-color:#f4f4f4'}}">
+      <view wx:key="{{index}}" wx:for="{{sort}}" class='serach-select-sort' data-sortIndex="{{index}}" catchtap='getSortIndex' style="{{index==sortIndex  ? 'color:#1ec88c;background-color:white':'background-color:#f4f4f4;background-color:white'}}">
         <view class='right-width'>{{item}}</view>
         <image src='../../image/search_icon@3x/selectcity.png' wx:if="{{index==sortIndex }}" class='select-image-sort'></image>
         <view class='search-select-line'></view>
@@ -144,7 +143,7 @@
 </view> -->
 <view class='no-message' wx:if="{{!hasList}}">
   <view class='no-messge-image-view'>
-    <image src='../../image/search_icon@3x/Default page_04_max.png' class='no-message-imag'></image>
+    <image src='../../image/search_icon@3x/Defaultpage_04_max.png' class='no-message-imag'></image>
   </view>
   <view class='no-message-tips-view'>
     <view class='no-message-tips'>没有找到您要搜索的结果</view>

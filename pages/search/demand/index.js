@@ -24,6 +24,7 @@ Page({
       success: function (res) { },
     })
     var success = function (data) {
+      wx.hideLoading()
       data.data.pop()
       that.setData({
         demandType: data.data
@@ -59,6 +60,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    })
     this.getDemandType()
   },
 

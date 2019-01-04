@@ -43,7 +43,7 @@
 <view class='law-page-attest' wx:if="{{lawyerCard.orgTags[0]}}">
   <view>认证标签</view>
   <view wx:key="{{index}}" wx:for="{{lawyerCard.orgTags}}">
-    <image class='law-page-attest-icon' src='{{item.image}}'></image>
+    <image class='law-page-attest-icon' src='{{item.image}}'  data-orgindex="{{index}}" catchtap='toOrgId'></image>
   </view>
 </view>
 
@@ -75,7 +75,7 @@
               <image src="{{index==0? '../../../image/search_icon@3x/Personalhomepage-10@3x.png': index == 1 ? '../../../image/search_icon@3x/Personalhomepage-11@3x.png' :'../../../image/search_icon@3x/Personalhomepage-12@3x.png'}}" class='law-num-icon'></image>
               <view class='law-margin-left'>{{item.businessTypeName}}</view>
             </view>
-            <view class='law-center-icon-text'>{{score[index]}}%</view>
+            <view class='law-center-icon-text'>{{score[index]>100.00?100:score[index]}}%</view>
           </view>
           <view class='law-page-line'></view>
         </view>
@@ -236,9 +236,21 @@
     </view>
   </view>
 </view>
-<view wx:if="{{isshowCase}}" wx:if="{{!caseList[0]}}" style='height:500rpx;width:750rpx;display:flex;justify-content:center'>
+
+<!-- <view wx:if="{{isshowCase&!caseList[0]}}"  style='height:500rpx;width:750rpx;display:flex;justify-content:center'>
   <view style='height:500rpx;'>无案例展示</view>
+</view> -->
+
+<view class='no-message' wx:if="{{isshowCase&!caseList[0]}}">
+  <view class='no-messge-image-view'>
+    <image src='../../../image/search_icon@3x/Defaultpage_04_max.png' class='no-message-imag'></image>
+  </view>
+  <view class='no-message-tips-view'>
+    <view class='no-message-tips'>暂无案例展示</view>
+  </view>
+  <!-- <button class='no-message-button' bindtap='again'>重新搜索</button> -->
 </view>
+
 
 <view style='height:150rpx;'></view>
 <view class='quick-button-view' bindtap='islogin'>

@@ -1,1 +1,5 @@
-{}
+{
+  "navigationBarTitleText": "事务分类",
+  "onReachBottomDistance": "500",
+  "onReachBottom": true
+}

@@ -1,5 +1,6 @@
 var wxrequest = require('../../utils/request.js')
 var api = require('../../utils/api.js')
+var reg = require('../../region.js');
 var initIndex = ''
 Page({
 // <<<<<<< HEAD
@@ -82,9 +83,12 @@ Page({
     }
     var success = function(data) {
       wx.hideLoading()
-      console.log("解决方案分类list", data.data)
+      console.log("解决方案分类list", data.data.sort(toSort))
+      function toSort(a,b){
+        return a.sort-b.sort
+      }
       that.setData({
-        popular: data.data,
+        popular: data.data.sort(toSort),
       })
       that.getArticleList()
     }
@@ -127,11 +131,20 @@ Page({
   },
 
   //onload
-  onLoad: function() {
+  onLoad: function(options) {
     wx.showLoading({
       title: '数据加载中',
     })
-    console.log('12312312', wx.getStorageInfoSync())
+    var cityList = [
+      reg.citysData,
+      reg.citysData[0].child
+    ]
+    console.log('城市',cityList)
+    wx.setStorageSync("cityList", cityList)
+    if(options.channel){
+    wx.setStorageSync('channel', options.channel)
+    }
+    console.log('12312312', wx.getStorageInfoSync(),options)
     this.getArticleType()
     this.getAdbanner()
     this.judgeTips()
@@ -151,7 +164,9 @@ Page({
       total:10,
     });
     this.checkCor();
-
+    wx.showLoading({
+      title: '加载中',
+    })
     var listUrl = api.getArticleListUrl()
     var message = ""
     var listData = {
@@ -241,6 +256,7 @@ Page({
       wx.navigateTo({
         url: '../index/consultation/index?type=' + JSON.stringify(this.data.popular)
       })
+      // console.log(this.data.popular)
     } else {
       wx.navigateTo({
         url: '../userlogin/index'
@@ -389,28 +405,4 @@ Page({
     }.bind(this), 200)
     wx.showTabBar({})
   }
-
-//     //解决方案
-//     getArticleList: function () {
-//         var that = this
-//         var listUrl = api.getArticleListUrl()
-//         var message = ""
-//         var listData = {
-//             "typeId": that.data.popular[0].id,
-//             "pageNum": 1,
-//             "pageSize": that.data.pageSize,
-//             "deviceInfoId": 5
-//         }
-//         var successList = function (data) {
-//             that.setData({
-//                 article: data.data.list ? data.data.list : data.data,
-//                 listHeight: data.data.list.length ? data.data.list.length * 230 + 200 + 'rpx' : ''
-//             })
-//             console.log("解决方案list", that.data.listHeight)
-//         }
-//         var failList = function (e) {
-//             console.log("解决方案错误", e)
-//         }
-//         wxrequest.requestPost(listUrl, listData, message, successList, failList)
-//     },
 })

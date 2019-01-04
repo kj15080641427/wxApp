@@ -24,7 +24,7 @@
   align-items: center;
   position: absolute;
   right: 5%;
-  margin-top:80rpx;
+  /* margin-top:80rpx; */
 }
 .my-page-editinfo{
   font-size: 30rpx;

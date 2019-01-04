@@ -18,7 +18,7 @@ Page({
     selectAddress: true,
     selecttime: true,
     systime: false,
-    hasaddress: true,
+    hasaddress: false,
     industryName: '', //行业
     orgN: '',
     avatarUrl: userInfo.iconImage ? userInfo.iconImage : '',
@@ -69,19 +69,11 @@ Page({
     }
     this.setData({
       multiArray: this.data.multiArray,
-      multiIndex: this.data.multiIndex,
+      // multiIndex: this.data.multiIndex,
     })
 
-    // this.multiArray = this.data.multiArray;
-    // this.multiIndex = this.data.multiIndex;
-    // // 使用wepy开发，this.$apply()为脏数据检查
-    // this.$apply();
   },
   bindMultiPickerChange: function(e) {
-    // console.log(
-    //   this.multiArray[0][e.detail.value[0]],
-    //   this.multiArray[1][e.detail.value[1]]
-    // ); // {value: "431000", label: "郴州市", level: 2}
     console.log(this.data.multiArray[0][e.detail.value[0]])
     console.log(this.data.multiArray[1][e.detail.value[1]])
     this.setData({
@@ -89,10 +81,9 @@ Page({
     })
 
     this.setData({
-      multiIndex: e.detail.value
+      multiIndex: e.detail.value,
+      hasaddress: true
     })
-    // this.multiIndex = e.detail.value;
-    // this.$apply();
   },
 
 
@@ -100,7 +91,6 @@ Page({
   //获取用户详情
   getUserDetail: function() {
     var that = this
-    // console.log(wx.getStorageSync("memberId"))
     var userDetailUrl = api.getUserDetail() + wx.getStorageSync("memberId")
     var userData = wx.getStorageSync("memberId")
     var message = ''
@@ -255,6 +245,11 @@ Page({
     })
     // console.log(e.detail.value)
   },
+  showLoad: function() {
+    wx.showLoading({
+      title: '上传中',
+    })
+  },
   // 更换头像
   replaceAvatar: function() {
     var that = this
@@ -262,29 +257,25 @@ Page({
       count: 1,
       sourceType: ['album', 'camera'],
       success: function(res) {
-
-        // console.log(res)
-        wx.uploadFile({
-          url: api.getImageUrl(),
-          filePath: res.tempFilePaths[0],
-          name: 'file',
-          formData: {
-            "type": '2'
-          },
-          success(data) {
-            var imageUrl = JSON.parse(data.data)
-            // wx.setStorage({
-            //   key: 'avatar',
-            //   data: imageUrl.data.weburl,
-            // })
-            that.setData({
-              avatarUrl: imageUrl.data.weburl
-            })
-          },
-          fail(e) {
-            console.log(e)
-          }
-        })
+        that.showLoad(),
+          wx.uploadFile({
+            url: api.getImageUrl(),
+            filePath: res.tempFilePaths[0],
+            name: 'file',
+            formData: {
+              "type": '2'
+            },
+            success(data) {
+              wx.hideLoading()
+              var imageUrl = JSON.parse(data.data)
+              that.setData({
+                avatarUrl: imageUrl.data.weburl
+              })
+            },
+            fail(e) {
+              console.log(e)
+            }
+          })
       },
     })
   },
@@ -323,10 +314,7 @@ Page({
     // this.multiArray = [[...city], [...city[0].children]];
     // this.$apply();
     this.setData({
-      multiArray: [
-        [...city],
-        [...city[0].child]
-      ],
+      multiArray: wx.getStorageSync("cityList")
     })
     console.log(this.data.multiArray)
 
@@ -364,19 +352,6 @@ Page({
       editIndustryId: editInfo.industryId ? editInfo.industryId : '',
       orgName: editInfo.institutionId ? editInfo.institutionId : ''
     })
-    // console.log("userinfottt", wx.getStorageInfoSync())
-    // console.log("time", that.data.time)
-    // if (!wx.getStorageSync('index2') || !wx.getStorageSync('index1') || !wx.getStorageSync('index')) {
-    //   that.setData({
-    //     selectInstitu:true,
-    //     selectIndestry:true,
-    //   })
-    // }
-    // this.setData({
-    //   time: this.data.time
-    // })
-    // console.log(wx.getStorageInfoSync())
-
 
     wx.showLoading({
       title: '加载中',

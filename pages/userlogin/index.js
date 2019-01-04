@@ -190,12 +190,35 @@ Page({
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
+// <<<<<<< HEAD
+//   /**
+//    * 生命周期函数--监听页面显示
+//    */
+//   onShow: function() {
 
-  },
+//   },
+// =======
+    /**
+     * 生命周期函数--监听页面显示
+     */
+    onShow: function () {
+        wx.login({
+            success: res => {
+                console.log(res)
+                // 发送 res.code 到后台换取 openId, sessionKey, unionId
+                wx.request({
+                    url: api.appLogin(),
+                    method: 'POST',
+                    data: { code: res.code },
+                    success(r){
+                        console.log(r)
+                        wx.setStorageSync('openid', r.data.data.openid)
+                    }
+                })
+            }
+        })
+    },
+// >>>>>>> 3c15fca08001c3458f8712bbeb8ecd73787b947c
 
   /**
    * 生命周期函数--监听页面隐藏

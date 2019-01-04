@@ -117,7 +117,7 @@ Page({
     var data = this.data.parameter
     var success = data => {
       wx.showToast({
-        title: data,
+        title: '发送成功',
         icon: 'none'
       })
       console.log(data)

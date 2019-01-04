@@ -15,6 +15,7 @@ Page({
     this.setData({
       url:options.url
     })
+    console.log('web-viewURL', options)
   },
 
   /**

@@ -194,11 +194,12 @@ Page({
               ['parameter.requirementId']: data.data.requirementId,
               ['parameter.isFirst']: 1,
             },
-            function() {
-              wx.navigateTo({
-                url: '../../message/index'
-              })
-            })
+            // function() {
+            //   wx.navigateTo({
+            //     url: '../../message/index'
+            //   })
+            // }
+            )
         }
       })
       console.log(data)

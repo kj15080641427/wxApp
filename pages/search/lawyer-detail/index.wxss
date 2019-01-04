@@ -444,3 +444,21 @@ display:-webkit-box;
   z-index: 1000;
   color: #fff;
 }
+.no-message{
+  width: 750rpx;
+}
+.no-messge-image-view{
+  display: flex;
+  justify-content: center;
+}
+.no-message-imag{
+  margin-top: 220rpx;
+  width: 330rpx;
+  height: 330rpx;
+}
+.no-message-tips-view{
+  display: flex;
+  justify-content: center;
+  margin-top: 50rpx;
+  font-size: 28rpx;
+}

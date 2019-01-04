@@ -18,8 +18,6 @@ Page({
       { "name": '订单金额', "text": '' },
       { "name": '订单状态', "text": '' },
       ],
-    minute:14,
-    second:59,
     statusValue:false
     // orderDetail:''
   },
@@ -33,7 +31,6 @@ Page({
   // },
   //获取律师电话
   getLawyerPhone:function(){
-    console.log('获取律师电话')
     var url = api.getLawyerPhone() + this.data.orderDetail.orderNo
     var success = (data=>{
       this.setData({
@@ -42,7 +39,7 @@ Page({
       wx.makePhoneCall({
         phoneNumber: data.data
       })
-      console.log(data)
+      console.log('获取律师电话',data)
     })
     var fail=(e)=>{
       console.log(e)
@@ -69,22 +66,20 @@ Page({
       ['detailList[5].text']: data.buyerPayAmount,
       ['detailList[6].text']: data.statusValue,
       // ['detailList[7].text']: data.beginTime
-      startTime:data.createDate
+      startTime: data.grabTime
     })
-    console.log(data,'快速电话咨询')
     if (this.data.orderDetail.orderStatus == 5) {
       this.setData({
         statusValue: true
       })
     }
-    console.log(this.data.orderDetail)
     // this.getLawyerPhone()
 
     var startDate = this.data.startTime.split(" ")[0]
     var nowDate = formatTime.formatTime(new Date()).split(" ")[0]
     var startTime = this.data.startTime.split(" ")[1]
     var nowTime = formatTime.formatTime(new Date()).split(" ")[1]
-    console.log("订单开始时间",this.data.startTime.split(" "))
+    console.log("订单开始时间", this.data.startTime.split(" "))
     console.log("现在时间",formatTime.formatTime(new Date()).split(" "))
     if (nowDate.split("/")[0]-startDate.split("-")[0]>0){
       this.setData({
@@ -101,17 +96,18 @@ Page({
         time: false
       })
       console.log('日')
-    } else if ((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]))>9000){
+    } else if ((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]))>900){
       this.setData({
         time: false,
       })
+      console.log('小时')
     }else{
-      var hasTime = (nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]))
-      this.setData({
-        hasTime: 900-hasTime,
-        // statusValue: true
-      })
-      console.log("剩余时间",hasTime)
+      var hasTime = 900-((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2])))
+      // this.setData({
+      //   hasTime: 900-hasTime,
+      //   // statusValue: true
+      // })
+      console.log("剩余时间", hasTime, startTime.split(":")[2])
       var that = this
       var secondInt = hasTime
       that.setData({
@@ -125,7 +121,7 @@ Page({
           that.setData({
             second: that.data.second - 1
           })
-          if (that.data.second <= 0 ) {
+          if (that.data.second <= 0 && that.data.minute > 0) {
             that.setData({
               second: 60,
             })
@@ -146,9 +142,8 @@ Page({
           console.log('计时器', that.data.second)
         }, 1000)
       })
-    }
- 
-    console.log("??????", startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]) )
+    } 
+    // console.log("??????", startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]) )
   },
 
   /**
@@ -162,7 +157,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    clearInterval(this.data.timedown)
+    // clearInterval(this.data.timedown)
   },
 
   /**

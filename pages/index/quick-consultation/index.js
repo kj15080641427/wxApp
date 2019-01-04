@@ -9,14 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // phoneInput:'',
-    typeName:['婚姻家庭'],
     selectType:true,
-    // payList: [
-    //   { "icon":'../../../image/my_icon@3x/Rapidconsultation_icon_01_3x.png',"name":'微信支付',checked:true},
-    //   { "icon": '../../../image/my_icon@3x/Rapidconsultation_icon_02_3x.png', "name": '账户余额', checked:false}
-    //   ],
-    selectProblem:'请选择问题类型',
     money:0,
     balance:'',
     checked1:true,

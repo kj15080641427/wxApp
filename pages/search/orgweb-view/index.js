@@ -1,4 +1,4 @@
-// pages/my/guide/index.js
+// pages/search/orgweb-view/index.js
 Page({
 
   /**
@@ -12,7 +12,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      orgurl:wx.getStorageSync("orgUrl")
+    })
+    console.log('orgweb-view-URLcccccc', this.data.orgurl)
   },
 
   /**

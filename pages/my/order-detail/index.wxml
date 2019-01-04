@@ -1,12 +1,12 @@
 <!--pages/my/order-detail/index.wxml-->
-<!-- <view class='detail-page-time'wx:if="{{statusValue}}">
+<view class='detail-page-time'wx:if="{{statusValue}}">
   <view style='display:flex' >
      <image src='../../../image/my_icon@3x/My order_icon_01_3x.png' style='width:30rpx;height:30rpx'/>
      <view style='margin-left:15rpx' wx:if="{{time}}">剩余咨询时间 {{minute}}:<text wx:if="{{second<10}}">0</text>{{second}}</view>
      <view style='margin-left:15rpx' wx:if="{{!time}}">00:00</view>
   </view>
   <image src='../../../image/my_icon@3x/My order_icon_02_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'/>
-</view> -->
+</view>
 <view class='detail-page-background'>
   <view wx:key="{{index}}" wx:for="{{detailList}}">
     <view class="{{index == 0 ? 'detail-page-flex-once':'detail-page-flex'}}">
@@ -31,5 +31,5 @@
 <view class='detail-page-line detail-page-bottom-line'></view>
 <view class='detail-page-button-view detail-page-bottom'>
   <button class='detail-page-button' bindtap='getLawyerPhone' wx:if="{{statusValue}}">联系律师</button>
-  <button class='detail-page-button-no' wx:if="{{!statusValue}}">{{orderDetail.statusValue}}</button>
+  <button class='detail-page-button-no' bindtap='getLawyerPhone' wx:if="{{!statusValue}}">{{orderDetail.statusValue}}</button>
 </view>

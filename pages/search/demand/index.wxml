@@ -42,7 +42,7 @@
     </view>
   </view>
 
-  <view class='demand-page-tips'>
+  <view class='demand-page-tips-lower'>
     <view>绿豆圈仅为你匹配适合的律师，不参与你与律师商议服务费用。</view>
     <view style='margin-top:25rpx;'>不确定是否要找律师,试试发布
       <text style='color:#1ec88c;' catchtap="gotoconsul">文字咨询>></text>

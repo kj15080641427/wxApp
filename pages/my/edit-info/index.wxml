@@ -31,8 +31,8 @@
 
       <picker mode="multiSelector" class="info-page-input" bindtap='hideRegion' bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}" range-key="name">
         <view class="picker">
-          <text wx:if="{{hasaddress}}"> {{userInfo.addressExtend.province ? userInfo.addressExtend.province:'选择'}}-{{userInfo.addressExtend.city ?userInfo.addressExtend.city:'地区' }} </text>
-          <text wx:if="{{!hasaddress}}"> {{multiArray[0][multiIndex[0]].name}}-{{multiArray[1][multiIndex[1]].name}} </text>
+          <text wx:if="{{!hasaddress}}"> {{userInfo.addressExtend.province ? userInfo.addressExtend.province:'选择'}}-{{userInfo.addressExtend.city ?userInfo.addressExtend.city:'地区' }} </text>
+          <text wx:if="{{hasaddress}}"> {{multiArray[0][multiIndex[0]].name}}-{{multiArray[1][multiIndex[1]].name}} </text>
         </view>
       </picker>
 
@@ -56,7 +56,7 @@
   <view style='background-color:white;'>
     <view class='info-page-list'>
       <view class='info-page-label'>您的职务</view>
-      <input class="info-page-input" value="{{memberPositionName}}" maxlength="30" value="{{memberPositionName}}" placeholder='输入您的职位' bindinput='businessTypeName'></input>
+      <input class="info-page-input" value="{{memberPositionName}}" maxlength="30" placeholder='输入您的职位' bindinput='businessTypeName'></input>
     </view>
   </view>
   <view class='info-page-center-line'></view>

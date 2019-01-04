@@ -2,7 +2,7 @@ var device = {
   "device_type": 5,
   "app_version": "1.0",
   "app_version_code": 1,
-  "channel": "wxapp"
+  "channel": wx.getStorageSync('channel')?wx.getStorageSync('channel'):"wxapp"
 }
 
 function request(url, params, success, fail) {

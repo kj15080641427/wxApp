@@ -141,7 +141,7 @@
   width: 680rpx;
   margin-left: 35rpx;
   margin-right: 35rpx;
-  margin-top: 30rpx;
+  /* margin-top: 30rpx; */
 }
 
 .index-more {

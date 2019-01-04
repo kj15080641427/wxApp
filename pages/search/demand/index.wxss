@@ -72,10 +72,11 @@
 }
 
 .demand-page-tips {
-  color: #b5b5b5;
+  color: #323232;
   font-size: 28rpx;
   padding-top: 35rpx;
   padding-bottom: 35rpx;
+  margin-left: 35rpx;
 }
 
 .demand-page-center-icon {
@@ -97,8 +98,8 @@
   background-color: #1ec88c;
   border-radius: 10rpx;
   margin-top: 20rpx;
-  width: 200rpx;
-  height: 200rpx;
+  width: 220rpx;
+  height: 220rpx;
 }
 
 .demand-page-text {
@@ -116,8 +117,10 @@
   /* margin-bottom: 25rpx; */
 }
 
-.demand-page-tips {
+.demand-page-tips-lower {
   color: #b5b5b5;
   font-size: 24rpx;
   margin-left: 35rpx;
+  margin-top: 35rpx;
+  padding-bottom: 35rpx;
 }

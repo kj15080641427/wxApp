@@ -23,7 +23,7 @@ var ArticleType = '/solution/type'
 var ArticleList = '/solution/list'
 
 // 文字咨询地址
-var Commit = '/client/freeText/post'
+var Commit = '/lawyer/freeText/post '
 
 // 上传图片地址
 var Image = '/upload/file'

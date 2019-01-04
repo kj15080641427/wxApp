@@ -14,19 +14,13 @@ Page({
     seindex: '', //标签index
     business: '', //擅长领域列表
     busiType: '', //前一页面事务分类 /个人及家事类/企业及商务类/涉外及海外类
-    // inputValueNext:'',//  最多可承受金额
-    // busiNext: '',// 擅长领域或熟悉行业
-    // regionIdNext:'', // 律师所在地区id
-    // contentNext:'', //问题内容
-    // markNext:'', //问题标签
-    // industry:'',//传递熟悉行业
     postList: {
       "requirementId": '0',
       "requirementTypeId": '',
       "requirementTypeName": '',
       "requirementBusiId": "",
       "requirementBusiName": '',
-      "lawyerRegionId": '430100',
+      "lawyerRegionId": '',
       "skillId": '',
       "skillName": '',
       "maxCost": '',
@@ -43,11 +37,12 @@ Page({
 
     multiIndex: [0, 0],
     multiArray: '',
-    isOnce: false
+    isOnce: false,
   },
   isCilck: function() {
     this.setData({
-      isOnce: true
+      isOnce: false,
+      ['postList.lawyerRegionId']:''
     })
   },
   //选择地区
@@ -65,18 +60,15 @@ Page({
     }
     this.setData({
       multiArray: this.data.multiArray,
-      multiIndex: this.data.multiIndex,
-      isOnce: true
     })
   },
   bindMultiPickerChange: function(e) {
     console.log(this.data.multiArray[0][e.detail.value[0]])
     console.log(this.data.multiArray[1][e.detail.value[1]])
     this.setData({
-      ['postList.lawyerRegionId']: this.data.multiArray[1][e.detail.value[1]].regionId ? this.data.multiArray[1][e.detail.value[1]].regionId : this.data.multiArray[0][e.detail.value[0]].regionId
-    })
-    this.setData({
-      multiIndex: e.detail.value
+      ['postList.lawyerRegionId']: this.data.multiArray[1][e.detail.value[1]].regionId,
+      multiIndex: e.detail.value,
+      isOnce: true
     })
   },
 
@@ -119,6 +111,7 @@ Page({
           })
         }
       })
+      wx.hideLoading()
       console.log("对应index擅长领域列表", data)
     }
     var fail = function(e) {
@@ -177,7 +170,6 @@ Page({
     }
     console.log('问题标签22222', this.data.markList)
     var test = tagIdList
-    // test
     that.setData({
       ['postList.tagId']: tagIdList,
       ['postList.tag']: tagNameList
@@ -189,7 +181,12 @@ Page({
         title: '请选择擅长领域',
         icon: 'none'
       })
-    } else if (par.maxCost == '') {
+    } else if (this.data.postList.lawyerRegionId==''){
+      wx.showToast({
+        title: '请选择地区',
+        icon: 'none'
+      })
+    }else if (par.maxCost == '') {
       wx.showToast({
         title: '请填写最高可承受费用',
         icon: 'none'
@@ -221,18 +218,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.showLoading({
+      title: '加载中',
+    })
+    //擅长领域
+    this.getexpert()
     //选择地区
     var city = reg.citysData
     // this.multiArray = [[...city], [...city[0].children]];
     // this.$apply();
     this.setData({
-      multiArray: [
-        [...city],
-        [...city[0].child]
-      ],
+      multiArray:wx.getStorageSync("cityList"),
     })
     console.log(this.data.multiArray)
-    console.log('地区', reg)
+    console.log('地区', wx.getStorageSync("cityList"))
 
     this.setData({
       // markId: JSON.parse(options.busiType)
@@ -262,9 +261,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    //擅长领域
-    this.getexpert()
-    // console.log("requirementId",requirementId)
+
   },
 
   /**

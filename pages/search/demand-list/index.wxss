@@ -173,6 +173,7 @@
   background-color: white;
   margin-left: 35rpx;
   margin-right: 35rpx;
+  border-radius:20rpx;
 }
 
 .lawyerList-tab {

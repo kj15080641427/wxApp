@@ -26,6 +26,15 @@ Page({
     time: 60,
     start: true
   },
+  //
+  toOrgId:function(e){
+    wx.setStorageSync('orgUrl', `${this.data.lawyerCard.orgTags[e.currentTarget.dataset.orgindex].link}&memberId=${wx.getStorageSync('memberId')}`)
+    wx.navigateTo({
+      url: '/pages/search/orgweb-view/index',
+    })
+    // console.log('orgList', this.data.lawyerCard.orgTags)
+    // console.log(wx.getStorageSync("orgUrl"))
+  },
   //关注
   follow: function() {
     var that = this
@@ -82,7 +91,6 @@ Page({
   },
   //律师单价
   getLawyerMoney: function() {
-    // console.log(this.data.lawyerList)
     var url = api.getLawyerMoney() + this.data.lawyerList
     var success = data => {
       console.log('律师单价', data.data)
@@ -116,7 +124,7 @@ Page({
       that.setData({
         score: scoreList
       })
-      console.log("律师主页", data.data)
+      console.log("律师主页", that.data.score)
       that.ageAddress()
     }
     var fail = function(e) {
@@ -342,6 +350,11 @@ Page({
     console.log(this.data.lawyerMoney.balance)
     if (this.data.lawyerMoney.balance >= this.data.lawyerMoney.lawyerPrice / 60) {
       this.showModal()
+    }else{
+      wx.showToast({
+        title: '余额不足',
+        icon:'none'
+      })
     }
   },
   showModal: function() {
@@ -419,7 +432,7 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      lawyerList: options.memberId,
+      lawyerList: options.id,
       quick: options.quick ? true : false
     })
     wx.showLoading({
