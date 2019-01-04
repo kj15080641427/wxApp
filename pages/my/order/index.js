@@ -1,6 +1,9 @@
 // pages/my/order/index.js
 var api = require('../../../utils/api.js')
 var wxrequest = require('../../../utils/request.js')
+import hex_md5 from '../../../jM/md5.js'
+var app = getApp()
+var jM = app.globalData.jMessage
 Page({
 
     /**
@@ -71,7 +74,10 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
+        jM.login({
+            'username' : 'lex' + wx.getStorageSync('memberId'),
+            'password' : hex_md5(wx.getStorageSync('mobile'))
+        })
     },
 
     /**

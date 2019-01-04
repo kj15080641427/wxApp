@@ -16,18 +16,51 @@
     z-index: 1999;
 }
 .chart .require-switch{
-    float: right;
+    position: fixed;
+    top: 10rpx;
+    right: 20rpx;
     color: #4da7f1;
+    font-size: 24rpx;
+    z-index: 2000;
 }
 .chart .require-list{
     width: 100%;
+    height: 100vh;
     box-sizing: border-box;
-    padding: 20rpx;
+    padding: 20rpx 20rpx 80rpx 20rpx;
     position: fixed;
     top: 60rpx;
     left: 0;
     z-index: 1999;
+    background: #f1f1f1;
+}
+.chart .require-list .list-item{
+    box-sizing: border-box;
     background: #fff;
+    padding: 0 20rpx 20rpx 20rpx;
+    margin-bottom: 20rpx;
+}
+.chart .require-list .list-item .item-head{
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 24rpx;
+    margin-bottom: 20rpx;
+    border-bottom: 2rpx solid #efefef;
+}
+.chart .require-list .list-item .item-status{
+    float: right;
+    font-size: 24rpx;
+}
+.chart .require-list .item-content {
+    font-size: 24rpx;
+}
+.chart .require-list .item-content .content-label{
+    display: inline-block;
+    vertical-align: middle;
+}
+.chart .require-list .item-content .content-label + view{
+    display: inline-block;
+    vertical-align: middle;
 }
 .chart .chart-content{
     width: 100%;
@@ -132,9 +165,10 @@
 }
 .chart .lawyer-msg .text-box .audio-duration{
     position:absolute;
-    right:-45rpx;
-    top:0rpx;
-    width:40rpx;
+    left:90rpx;
+    top:18rpx;
+    font-size: 24rpx;
+    color: #777;
 }
 .chart .lawyer-msg .avatar{
     margin-right: 25rpx;
@@ -168,7 +202,7 @@
     width: 100%;
     min-height: 100rpx;
     /* padding: 15rpx 125rpx; */
-    padding: 15rpx 125rpx 15rpx 35rpx;
+    padding: 15rpx 35rpx 15rpx 35rpx;
     border-top: 1rpx solid #e7e7e7; 
     background: #F4F4F4;
     position: fixed;
