@@ -13,10 +13,13 @@ Page({
         scrollTop: 0,
         userName: null,
         inputType: 'text',
-        recordBtnText: '按住 说话',
+        recordBtnText: '',
         requireShow: false,
         requireSwitchText: '查看需求',
         requireTimeReady: false,
+        requireList: [],
+        canInput: false,
+        tags:[],
         grabTime: 258581957,
         nowDate: null,
         timeText: '',
@@ -28,7 +31,7 @@ Page({
         delayMessages: [],
         lawyer_avatar: null,
         activeIndex: null,
-        my_avatar: wx.getStorageInfoSync('userInfo').iconImage || '../../../image/message/default_user.png'
+        my_avatar: wx.getStorageSync('userInfo').iconImage || '../../../image/message/default_user.png'
     },
     onLoad(option) {
         wx.setNavigationBarTitle({
@@ -45,7 +48,7 @@ Page({
     onShow() {
         let that = this
         wx.showLoading()
-        that.getMemberAllRequireList()
+        that.getMemberAllRequireList(this.data.userName)
         jM.resetUnreadCount({
             'username': this.data.userName
         });
@@ -117,16 +120,34 @@ Page({
         // innerAudioContext.destroy()
     },
     toggleRequire() {
+        console.log(123)
         this.setData({
             requireShow: !this.data.requireShow,
             requireSwitchText: !this.data.requireShow ? '收起需求' : '查看需求'
         })
     },
     //  获取当前用户所有需求列表
-    getMemberAllRequireList() {
+    getMemberAllRequireList(userName) {
         let that = this
-        wxrequest.superRequest(api.getAllRequireList() + 4, {}, 'GET').then(res => {
-        
+        wxrequest.superRequest(api.getAllRequireList() + userName.substr(3), {}, 'GET').then(res => {
+            console.log(res)
+            let isReceive = res.data.data.filter(item => {
+                return item.status == 1
+            })
+            that.setData({
+                requireList: res.data.data || [],
+                grabTime: isReceive.length == 0 ? 0 : isReceive.remain,
+                canInput: isReceive.length == 0 ? false : true
+            })
+            if(res.data.data[0].status == 0){
+                that.setData({
+                    recordBtnText: '未接单'
+                })
+            } else if (res.data.data[0].status == 3){
+                that.setData({
+                    recordBtnText: '已关闭'
+                })
+            }
             //  剩余服务时间
             timer1 = setInterval(function(){
                 if (that.data.grabTime > 0) {
@@ -162,7 +183,11 @@ Page({
                 console.log(userName)
                 let _arr = res.data.messages.filter(item => {
                     return item.from_id == userName
-                })
+                }).concat(
+                    res.data.messages.filter(item => {
+                        return item.target_id == userName
+                    })
+                )
                 // console.log(userName)
                 let dArr = []
                 //  存在异步操作，只能用递归的形式加载数据

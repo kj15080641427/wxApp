@@ -40,6 +40,21 @@ Page({
                     }).onSuccess(function(lData) {
                         console.log(lData)
                         jM.getConversation().onSuccess(function(data) {
+                            // jM.getResource({
+                            //     'media_id': data.conversations
+                            // }).onSuccess(function (gRes) {
+                            //     unReadMsgList.push({
+                            //         msg_id: msg.msg_id,
+                            //         from_id: msg.content.from_id,
+                            //         msg_type: msg.content.msg_type,
+                            //         duration: msg.content.msg_body.duration,
+                            //         content: gRes.url
+                            //     })
+                            //     wx.setStorageSync('unReadMsgList', unReadMsgList)
+                            // }).onFail(function (data) {
+                            //   wx.hideLoading() 
+                            //     console.log('error:' + JSON.stringify(data));
+                            // });
                             that.setData({
                                 conversationList: data.conversations
                             },function () {

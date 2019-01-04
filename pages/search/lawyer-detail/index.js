@@ -29,12 +29,12 @@ Page({
   },
   //
   toOrgId:function(e){
-    wx.setStorageSync('orgUrl', `${this.data.lawyerCard.orgTags[e.currentTarget.dataset.orgindex].link}&memberId=${wx.getStorageSync('memberId')}`)
+    wx.setStorageSync('orgUrl', `${this.data.lawyerCard.orgTags[e.currentTarget.dataset.orgindex].link}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
     wx.navigateTo({
       url: '/pages/search/orgweb-view/index',
     })
-    // console.log('orgList', this.data.lawyerCard.orgTags)
-    // console.log(wx.getStorageSync("orgUrl"))
+    console.log('orgList', this.data.lawyerCard.orgTags)
+    console.log(wx.getStorageSync("orgUrl"))
   },
   //关注
   follow: function() {

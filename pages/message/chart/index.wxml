@@ -1,11 +1,25 @@
 <view class="chart">
     <view wx:if="{{requireTimeReady}}" class="require" hover-class="none" hover-stop-propagation="false">
         剩余服务时间：{{timeText}}
-        <view class="require-switch" bindtap="toggleRequire">{{ requireSwitchText }}</view>
     </view>
-    <view wx:if="{{requireShow}}" class="require-list">
-        
-    </view>
+    <view class="require-switch" bindtap="toggleRequire">{{ requireSwitchText }}</view>
+    <scroll-view scroll-y="true" wx:if="{{requireShow}}" class="require-list">
+        <view wx:for="{{requireList}}" wx:key="{{index}}" wx:for-item="item" class="list-item">
+            <view class="item-head">
+                {{item.createTime}} 
+                <view wx:if="{{item.status == 0}}" class="item-status">未接单</view>
+                <view wx:if="{{item.status == 1}}" class="item-status">已接单</view>
+                <view wx:if="{{item.status == 2}}" class="item-status">已拒单</view>
+                <view wx:if="{{item.status == 3}}" class="item-status">已关闭</view>
+            </view>
+            <view class="item-content"><view class="content-label">服务类型：</view><view>{{item.requirementName}}</view></view>
+            <view class="item-content"><view class="content-label">事务分类：</view><view>{{item.requirementBusiTypeName}}</view></view>
+            <view class="item-content"><view class="content-label">需求标签：</view><view wx:if="{{tags.length == 0}}">暂无标签</view><block wx:else><view wx:for="{{tags}}" wx:for-item="sItem">{{sItem}}</view></block></view>
+            <view class="item-content"><view class="content-label">律师擅长领域：</view><view>{{item.skillName}}</view></view>
+            <view class="item-content"><view class="content-label">最高承受价格：</view><view>{{'¥'+item.amount+'元'}}</view></view>
+            <view class="item-content"><view class="content-label">描述内容：</view><view>{{item.requirementDescriptionValue}}</view></view>
+        </view>
+    </scroll-view>
     <scroll-view scroll-y="true" scroll-top="{{scrollTop}}" class="chart-content">
         <view id="chart-content">
             <block wx:for="{{messageList}}" wx:key="create_time">
@@ -21,7 +35,7 @@
                             </view>
                             <view wx:if="{{item.msg_type == 'voice'}}" id="{{index}}" data-src="{{item.content}}" class="text audio" bindtap="playAudio">
                                 <image class="audio-img" src="{{activeIndex==index?'../../../image/message/audio.gif':'../../../image/message/record1.png'}}" mode="scaleToFill" lazy-load="true" binderror="" bindload=""></image>
-                                <view class="audio-duration">{{ item.duration }}</view>
+                                <view class="audio-duration">{{ item.duration + '"' }}</view>
                             </view>
                         </view>
                         <view class="hidden"></view>
@@ -44,17 +58,14 @@
             {{ vaule }}
         </view>
     </scroll-view>
-    <view class="input-box {{ inputType == 'record' ? 'isRecord' : ''}}">
-        <!-- <view class="audio" bindtap="changeInputType">
-            <image class="" src="{{ inputType == 'record' ? '../../../image/message/board.png' : '../../../image/message/record.png' }}" mode="scaleToFill" lazy-load="false" binderror="" bindload=""></image>
-        </view> -->
-        <view wx:if="{{ inputType == 'text' }}" class="input">
+    <view class="input-box">
+        <view wx:if="{{canInput}}" class="input">
             <form bindsubmit="confirmSendText">
                 <textarea name="textarea" auto-height fixed maxlength="-1" focus="{{focus}}" cursor-spacing="30rpx" show-confirm-bar="{{showBar}}" confirm-type="发送" value="{{inputValue}}" bindfocus="textareaOnFocus" placeholder-style="color:#b5b5b5;" placeholder="回复" />
                 <!-- <view class="more">发送</view>   -->
                 <button form-type="submit" class="more"> 发送 </button>
             </form>      
         </view>
-        <view wx:if="{{ inputType == 'record' }}" class="record-btn" hover-class="active" bindtouchstart="recordTouchStart" bindtouchmove="recordTouchMove" bindtouchend="recordTouchEnd">{{ recordBtnText }}</view>
+        <view wx:else class="record-btn">{{ recordBtnText }}</view>
     </view>
 </view>
