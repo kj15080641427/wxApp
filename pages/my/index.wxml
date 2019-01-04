@@ -27,10 +27,9 @@
     </view>
 
         <view class='my-page-text' style='font-size:30rpx;height:50rpx'>{{userInfo.addressExtend['province']}}{{userInfo.addressExtend['city']}}</view>
-        <view class='my-page-unions' wx:if="{{userInfo.organizations[0]}}" wx:key="{{index}}" wx:for="{{userInfo.organizations}}">
+        <!-- <view class='my-page-unions' wx:if="{{userInfo.organizations[0]}}" wx:key="{{index}}" wx:for="{{userInfo.organizations}}">
             <view class='my-page-unions-detail'>{{item.organizationName}}</view>
-            <!-- <view class='my-page-unions-detail'>中国浙商会湖南分会</view> -->
-        </view>
+        </view> -->
     </view>
 </view>
 
@@ -80,7 +79,7 @@
     <view class='my-page-lower-left'>关于绿豆圈</view>
     <image src='../../image/homeicon_3x/homepage_09_3x.png' class='my-page-lower-right' />
 </view>
-<view class='my-page-lower' style='margin-top:35rpx'>
+<view class='my-page-lower' style='margin-top:35rpx' bindtap='toService'>
     <view class='my-page-lower-left'>联系客服</view>
     <image src='../../image/homeicon_3x/homepage_09_3x.png' class='my-page-lower-right' />
 </view>

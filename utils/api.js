@@ -290,7 +290,7 @@ function getLawyerPhone() {
   return HOST_URL + LawPhone
 }
 //获取律师单价
-var LawyerMoney = '/client/expert/price/'
+var LawyerMoney = '/expert/price/'
 
 function getLawyerMoney() {
   return HOST_URL + LawyerMoney

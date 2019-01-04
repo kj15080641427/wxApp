@@ -3,8 +3,6 @@ var api = require('../../utils/api.js')
 var reg = require('../../region.js');
 var initIndex = ''
 Page({
-// <<<<<<< HEAD
-  // <<<<<<< HEAD
   data: {
     swiperH: '', //swiper高度
     nowIdx: 0, //当前swiper索引
@@ -90,6 +88,7 @@ Page({
       that.setData({
         popular: data.data.sort(toSort),
       })
+      wx.setStorageSync('type', that.data.popular)
       that.getArticleList()
     }
     var fail = function(e) {
@@ -113,7 +112,7 @@ Page({
       that.setData({
         total: data.data.total,
         article: that.data.article.concat(data.data.list),
-        listHeight: that.data.article.length ? that.data.article.length * 250 + 200 + 'rpx' : ''
+        listHeight: that.data.article.length ? that.data.article.length * 220 + 200 + 'rpx' : ''
       })
 
       console.log("解决方案list", that.data.total)
@@ -130,21 +129,14 @@ Page({
     this.judgeTips()
   },
 
-  //onload
+
   onLoad: function(options) {
     wx.showLoading({
       title: '数据加载中',
     })
-    var cityList = [
-      reg.citysData,
-      reg.citysData[0].child
-    ]
-    console.log('城市',cityList)
-    wx.setStorageSync("cityList", cityList)
     if(options.channel){
     wx.setStorageSync('channel', options.channel)
     }
-    console.log('12312312', wx.getStorageInfoSync(),options)
     this.getArticleType()
     this.getAdbanner()
     this.judgeTips()

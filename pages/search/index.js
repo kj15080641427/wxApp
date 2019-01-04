@@ -36,6 +36,7 @@ Page({
     hasList: true,
     lawyerName: '',
     hasNextPage:true,
+    pageNum:1
   },
   //重新搜索
   again: function() {
@@ -51,6 +52,8 @@ Page({
       expertColor: false,
       selectedCityColor: false,
       ishidden:true,
+      pageNum: 1,
+      hasNextPage: true
     })
     // wx.removeStorageSync("picIndexList")
   },
@@ -67,6 +70,8 @@ Page({
       showRegion: false,
       showExpert: false,
       ishidden: true,
+      pageNum: 1,
+      hasNextPage: true
     })
   },
   //选择擅长领域
@@ -77,6 +82,8 @@ Page({
       showRegion: false,
       showSort: false,
       ishidden: true,
+      pageNum: 1,
+      hasNextPage: true
     })
   },
   // 选择地区
@@ -86,6 +93,8 @@ Page({
       showExpert: false,
       showSort: false,
       ishidden: true,
+      pageNum: 1,
+      hasNextPage: true
     })
   },
   // 关键字搜索
@@ -93,6 +102,8 @@ Page({
     this.setData({
       lawyerName: e.detail.value,
       ishidden: true,
+      pageNum: 1,
+      hasNextPage: true
     })
   },
   //排序Index
@@ -255,7 +266,9 @@ Page({
   pc: function() {
     var that = this
     that.setData({
-      lawyerList: ''
+      lawyerList: '',
+      pageNum:1,
+      hasNextPage: true
     })
     var url = api.getSearchLawyer() + that.data.pageNum + "/" + '/10'
     var datan = that.data.noFilter
@@ -310,11 +323,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log('?????',options.id)
     wx.showLoading({
       title: '加载中',
-    })
-    this.setData({
-      pageNum: 1,
     })
     const re = [...regionSearch.citysData]
     // var re = regionSearch.citysData
@@ -332,6 +343,7 @@ Page({
     })
     this.setData({
       region: re,
+      id:options.id
     })
     console.log("地区", regionSearch.citysData, '地区+全国', this.data.region)
     // this.pc()
@@ -349,8 +361,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    // this.pc()
-    // this.getAge()
+    if (this.data.id) {
+      this.pc()
+    }
   },
 
   /**
@@ -385,6 +398,14 @@ Page({
       })
       that.topSearch()
       console.log('moremmmmmmmmmm', that.data.pageNum)
+    }else{
+      this.setData({
+        ishidden:true
+      })
+      wx.showToast({
+        title: '没有更多数据',
+        icon:'none'
+      })
     }
   },
   /**

@@ -1,12 +1,13 @@
 <form report-submit='true' bindsubmit="formSubmit">
 <view class="consul-page">
 <!-- 选择问题类型 -->
- <picker  bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="{{'typeName'}}" bindtap="">
+ <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="{{'typeName'}}" bindtap="">
     <view class="consul-picker">
       <view class="consul-picker-text"><text style='color:red'>*</text>问题类型</view>
       <view class="consul-page-flex">
         <view class='consul-picker-text' style="margin-right:20rpx">{{array[index].typeName}}</view>
         <view class="consul-picker-text-glass" wx:if="{{hasSelect}}">请选择问题类型</view>
+        <input hidden='{{true}}' name='consultationTypeId' value='{{consultationTypeId}}'></input>
         <image src='../../../image/homeicon_3x/homepage_09_3x.png'style="width:20rpx;height:20rpx;" />
       </view>
     </view>
@@ -19,17 +20,20 @@
     <view class="consul-picker">
       <view class="consul-picker-text"><text style='color:red'>*</text>选择地区</view>
       <view class='consul-page-flex'>
-        <view class='consul-picker-text' wx:if="{{hasSelectAddress}}" style="margin-right:20rpx">{{multiArray[0][multiIndex[0]].name}}-{{multiArray[1][multiIndex[1]].name}}</view>
+        <view name='region' class='consul-picker-text' wx:if="{{hasSelectAddress}}" style="margin-right:20rpx">{{multiArray[0][multiIndex[0]].name}}-{{multiArray[1][multiIndex[1]].name}}</view>
+        <input hidden='{{true}}' name='regionId' value='{{regionId}}'></input>
         <view class="consul-picker-text-glass" wx:if="{{!hasSelectAddress}}">选择律师所在的地区</view>
       <image src='../../../image/homeicon_3x/homepage_09_3x.png'style="width:20rpx;height:20rpx;" />
       </view>
     </view>
   </picker>
 
-<textarea placeholder="*"  placeholder="完整的叙述，会得到律师更详细的建议指导 (限10-300字)" placeholder-style="font-size:28rpx;color:#b5b5b5" maxlength="300" class="consul-page-textarea" bindinput='getInput'></textarea>
+<textarea name='content' placeholder="*"  placeholder="完整的叙述，会得到律师更详细的建议指导 (限10-300字)" placeholder-style="font-size:28rpx;color:#b5b5b5" maxlength="300" class="consul-page-textarea" bindinput='getInput'></textarea>
 
-<view class='consul-page-flex consul-page-anonymous-view'>
+<view class='consul-page-flex consul-page-anonymous-view' >
     <radio checked="{{isHide}}"bindtap="radioChange"/>{{item.value}}
+      <input hidden='{{true}}' name='isHide' value="{{that.data.isHide == true ? '1':'0'}}"></input>
+      <input hidden='{{true}}' name='openid' value="{{openid}}"></input>
     <!-- <view class='consul-page-anonymous' wx:if="{{!anonymous}}"></view> -->
   <view class="consul-page-publist">匿名发布  (隐藏我的头像,用户名等信息)</view>
 </view>

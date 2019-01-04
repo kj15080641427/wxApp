@@ -224,14 +224,10 @@ Page({
     //擅长领域
     this.getexpert()
     //选择地区
-    var city = reg.citysData
-    // this.multiArray = [[...city], [...city[0].children]];
-    // this.$apply();
     this.setData({
-      multiArray:wx.getStorageSync("cityList"),
+      multiArray: [[reg.citysData][0], [reg.citysData][0][0].child],
     })
     console.log(this.data.multiArray)
-    console.log('地区', wx.getStorageSync("cityList"))
 
     this.setData({
       // markId: JSON.parse(options.busiType)

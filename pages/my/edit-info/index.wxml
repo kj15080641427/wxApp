@@ -1,7 +1,7 @@
 <!--pages/my/edit-info/index.wxml-->
 <view class='info-page'>
   <view class='info-page-flex'>
-    <image class='info-page-avatar' src="{{avatarUrl}}"></image>
+    <image class='info-page-avatar' src="{{avatarUrl ? avatarUrl:userInfo.iconImage ? userInfo.iconImage : '../../../image/my_icon@3x/mine_icon_02_3x.png'}}"></image>
     <view style='display:flex;height:40rpx;align-items:center' bindtap='replaceAvatar'>
       <view class='info-page-text'>更换头像</view>
       <image src='../../../image/homeicon_3x/homepage_09_3x.png' style='width:30rpx;height:30rpx;margin-right:35rpx'></image>
@@ -21,7 +21,7 @@
     <view class='info-page-list'>
       <view class='info-page-label'>出生日期</view>
       <picker class="info-page-input" mode="date" value="{{time}}" start="1900-09-01" end="2018-09-01" bindchange="bindDateChange">
-        <text wx:if="{{selecttime}}">{{time}}</text>
+        <text wx:if="{{selecttime}}">{{birthday}}</text>
         <text wx:if="{{systime}}">{{date}}</text>
       </picker>
     </view>
@@ -42,37 +42,37 @@
   <view style='background-color:white;margin-top:35rpx'>
     <view class='info-page-list'>
       <view class='info-page-label'>您的行业</view>
-      <picker class="info-page-input" style='white-space:nowrap;' value="{{index1}}" range="{{industry}}" range-key="industryName" bindchange='changeindustry'>{{industry[index1]['industryName']|| industryName || '选择行业' }}</picker>
+      <picker class="info-page-input" style='white-space:nowrap;' value="{{index1}}" range="{{industry}}" range-key="industryName" bindchange='changeindustry'>{{industry[index1]['industryName']|| userInfo.industryName || '选择行业' }}</picker>
     </view>
   </view>
   <view class='info-page-center-line'></view>
   <view style='background-color:white;'>
     <view class='info-page-list'>
       <view class='info-page-label'>您的企业</view>
-      <input class="info-page-input" value="{{institutionName}}" maxlength="30" bindinput='institutionTypeName' placeholder="输入您的职位"></input>
+      <input class="info-page-input" value="{{userInfo.institutionName}}" maxlength="30" bindinput='institutionTypeName' placeholder="输入您的企业"></input>
     </view>
   </view>
   <view class='info-page-center-line'></view>
   <view style='background-color:white;'>
     <view class='info-page-list'>
       <view class='info-page-label'>您的职务</view>
-      <input class="info-page-input" value="{{memberPositionName}}" maxlength="30" placeholder='输入您的职位' bindinput='businessTypeName'></input>
+      <input class="info-page-input" value="{{userInfo.memberPositionName}}" maxlength="30" placeholder='输入您的职务' bindinput='businessTypeName'></input>
     </view>
   </view>
   <view class='info-page-center-line'></view>
   <view style='background-color:white;'>
     <view class='info-page-list'>
       <view class='info-page-label'>您的邮箱</view>
-      <input class="info-page-input" placeholder='输入您的邮箱' maxlength="30" value="{{editEmail}}" bindinput='email'></input>
+      <input class="info-page-input" placeholder='输入您的邮箱' maxlength="30" value="{{userInfo.email}}" bindinput='email'></input>
     </view>
   </view>
   <view class='info-page-center-line'></view>
-  <view style='background-color:white;'>
+  <!-- <view style='background-color:white;'>
     <view class='info-page-list'>
       <view class='info-page-label'>商会组织</view>
       <picker class="info-page-input" style='white-space:nowrap;' value="{{index2}}" range="{{org}}" range-key="organizationName" bindchange='changeorg'>{{org[index2].organizationName || orgN || "选择商会"}}</picker>
     </view>
-  </view>
+  </view> -->
 
   <view class='info-page-line'></view>
   <view class='info-page-button-view'>

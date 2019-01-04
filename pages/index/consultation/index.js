@@ -7,33 +7,35 @@ Page({
    * 页面的初始数据
    */
   data: {
-    checked:1,
+    checked: 1,
     array: [],
-    hasSelect:true,
-    hasSelectAddress:false,
+    hasSelect: true,
+    hasSelectAddress: false,
     region: '',
 
-    consultationTypeId:"",
-    regionId:"",
-    commitContent:"",
-    isHide:1,
+    consultationTypeId: "",
+    regionId: "",
+    commitContent: "",
+    isHide: 1,
 
-    multiIndex: [0,0],
-    multiArray: ''
+    multiIndex: [0, 0],
+    multiArray: '',
+    openid:wx.getStorageSync('openid')
   },
   //地区
 
-  hideRegion: function () {
+  hideRegion: function() {
     this.setData({
       hasSelectAddress: false,
     })
   },
   //选择地区
-  bindMultiPickerColumnChange: function (e) {
+  bindMultiPickerColumnChange: function(e) {
     var data = {
       multiArray: this.data.multiArray,
       multiIndex: this.data.multiIndex
     };
+    console.log(data, 'data')
     data.multiIndex[e.detail.column] = e.detail.value;
     switch (e.detail.column) {
       case 0:
@@ -45,7 +47,7 @@ Page({
       // multiIndex: this.data.multiIndex,
     })
   },
-  bindMultiPickerChange: function (e) {
+  bindMultiPickerChange: function(e) {
     this.setData({
       regionId: this.data.multiArray[1][e.detail.value[1]].regionId,
       multiIndex: e.detail.value,
@@ -55,16 +57,16 @@ Page({
 
 
   // 匿名
-  radioChange: function (e) {
+  radioChange: function(e) {
     this.setData({
       isHide: !this.data.isHide
     })
   },
   // 选择问题
-  bindPickerChange: function (e) {
+  bindPickerChange: function(e) {
     this.setData({
       index: e.detail.value,
-      hasSelect:false,
+      hasSelect: false,
     })
     this.setData({
       consultationTypeId: this.data.array[e.detail.value].id
@@ -72,33 +74,30 @@ Page({
     console.log(this.data.consultationTypeId)
   },
 
- 
+
   // input
-  getInput:function(e){
+  getInput: function(e) {
     // console.log(e.detail.value)
     this.setData({
       commitContent: e.detail.value
     })
   },
   formSubmit(e) {
+    var that = this
     console.log('form发生了submit事件，携带数据为：', e)
     this.setData({
-      formId:e.detail.formId
+      formId: e.detail.formId
     })
-    this.commit()
-  },
-  // 提交
-  commit:function(){
-    var that = this
+
     var commitURL = api.getCommitUrl()
     var freedata = {
-      "consultationTypeId": that.data.consultationTypeId,
-      "regionId": that.data.regionId, 
-      "content": that.data.commitContent,
-      "isHide": that.data.isHide == true ? '1':'0',
+      "consultationTypeId": e.detail.value.consultationTypeId,
+      "regionId": e.detail.value.regionId, 
+      "content": e.detail.value.content,
+      "isHide": e.detail.value.isHide,
       "wxReportSubmit": {
-        "openId": wx.getStorageSync('openid'),
-        "formId": that.data.formId
+        "openId": e.detail.value.openid,
+        "formId": e.detail.formId
       }
      }
     console.log("formIdsssssssssssss",that.data.formId)
@@ -137,11 +136,76 @@ Page({
         icon: 'none'
       })
     } else {
-      wxrequest.request(commitURL, freedata, success, fail)
+      wxrequest.requestForm(commitURL, freedata,'', success, fail)
     }
+
+    // let formData = new FormData();
+    // formData.append("consultationTypeId", that.data.consultationTypeId)
+    // formData.append("regionId", that.data.regionId)
+    // formData.append("content", that.data.commitContent)
+    // formData.append("isHide", that.data.isHide == true ? '1' : '0')
+    // formData.append("wxReportSubmit", {
+    //   "openId": wx.getStorageSync('openid'),
+    //   "formId": e.detail.formId
+    // })
+    // this.commit()
+    // console.log(formData.get('consultationTypeId'));
+  },
+  // 提交
+  commit: function() {
+    var that = this
+    // var commitURL = api.getCommitUrl()
+    // var freedata = {
+    //   "consultationTypeId": that.data.consultationTypeId,
+    //   "regionId": that.data.regionId, 
+    //   "content": that.data.commitContent,
+    //   "isHide": that.data.isHide == true ? '1':'0',
+    //   "wxReportSubmit": {
+    //     "openId": wx.getStorageSync('openid'),
+    //     "formId": that.data.formId
+    //   }
+    //  }
+    // console.log("formIdsssssssssssss",that.data.formId)
+    // var success = function(data){
+    //   console.log("上传参数", freedata)
+    //   that.setData({
+    //     consultation:data
+    //   })
+    // that.getOrder()
+    // console.log('成功')
+    //   wx.showToast({
+    //     title: '提交成功',
+    //   })
+    //   console.log(',.....',that.data.consultation)
+    // }
+    // var fail = function(e){
+    //   console.log(12312312312,e)
+    //   wx.showToast({
+    //     title: '提交失败',
+    //   })
+    // }
+    // var cdata = this.data
+    // if (cdata.consultationTypeId == '') {
+    //   wx.showToast({
+    //     title: '请选择问题类型',
+    //     icon: 'none'
+    //   })
+    // } else if (cdata.regionId == '') {
+    //   wx.showToast({
+    //     title: '请选择地区',
+    //     icon: 'none'
+    //   })
+    // } else if (cdata.commitContent.length < 10) {
+    //   wx.showToast({
+    //     title: '问题描述需10字以上',
+    //     icon: 'none'
+    //   })
+    // } else {
+    //   wxrequest.request(commitURL, freedata, success, fail)
+    // }
   },
   //订单
-  getOrder: function () {
+  getOrder: function() {
     var that = this
     var url = api.getOrder()
     var data = {
@@ -155,7 +219,7 @@ Page({
       })
       console.log("订单", data)
       wx.redirectTo({
-        url: '/pages/index/consultation-details/index?orderDetail=' + JSON.stringify(that.data.order[0]) ,
+        url: '/pages/index/consultation-details/index?orderDetail=' + JSON.stringify(that.data.order[0]),
       })
     }
     var fail = (e) => {
@@ -164,87 +228,99 @@ Page({
     wxrequest.request(url, data, success, fail)
   },
   //解决方案类型  
-  getArticleType:function(){
-    if(this.data.array==[]){
-      var that = this
-      var url = api.getArticleTypeUrl()
-      var messagetype = ""
-      var data = { "pageNum": 1, "pageSize": 100, "deviceInfoId": 5 }
-      var success = function (data) {
-        wx.hideLoading()
-        console.log("解决方案分类list", data.data)
-        that.setData({
-          array: data.data,
-        })
-        // that.getArticleList()
-        // initIndex: data.data.list[0].id
-      }
-      var fail = function (e) {
-        wx.hideLoading()
-        console.log("解决方案错误", e)
-      }
-      wxrequest.requestPost(url, data, messagetype, success, fail)
+  getArticleType: function() {
+    var that = this
+    var url = api.getArticleTypeUrl()
+    var messagetype = ""
+    var data = {
+      "pageNum": 1,
+      "pageSize": 100,
+      "deviceInfoId": 5
     }
+    var success = function(data) {
+      wx.hideLoading()
+      console.log("解决方案分类list", data.data)
+
+      function toSort(a, b) {
+        return a.sort - b.sort
+      }
+      // that.setData({
+      //   array: data.data,
+      // })
+      wx.setStorageSync('type', data.data.sort(toSort))
+      // that.getArticleList()
+      // initIndex: data.data.list[0].id
+    }
+    var fail = function(e) {
+      wx.hideLoading()
+      console.log("解决方案错误", e)
+    }
+    wxrequest.requestPost(url, data, messagetype, success, fail)
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     //选择地区
+    // JSON.parse(options.type)
+    this.getArticleType()
     this.setData({
-      array: JSON.parse(options.type),
-      // multiArray: wx.getStorageSync("cityList"),
+      array: wx.getStorageSync('type'),
+      multiArray: [
+        [reg.citysData][0],
+        [reg.citysData][0][0].child
+      ],
     })
     console.log(this.data.multiArray)
-    console.log("问题类型", JSON.parse(options.type))
+    // console.log("问题类型", JSON.parse(options.type))
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-    
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    
+  onShow: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-    
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-    
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-    
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-    
+  onReachBottom: function() {
+
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    
+  onShareAppMessage: function() {
+
   },
 })

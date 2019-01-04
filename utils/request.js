@@ -58,6 +58,55 @@ function requestLoading(url, params, message, success, fail) {
   })
 }
 
+//FormData
+function requestForm(url, params, message, success, fail) {
+  wx.showNavigationBarLoading()
+  if (message != "") {
+    wx.showLoading({
+      title: message,
+    })
+  }
+  wx.request({
+    url: url,
+    data: params,
+    header: {
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+      'device': JSON.stringify(device),
+      'X-Token': wx.getStorageSync("token")
+    },
+    method: 'POST',
+    success: function (res) {
+      wx.hideNavigationBarLoading()
+      if (message != "") {
+        wx.hideLoading()
+      }
+      if (res.statusCode == 200 && res.data.code == 0) {
+        success(res.data)
+      } else {
+        if (res.statusCode == 401) {
+          wx.navigateTo({
+            url: '/pages/userlogin/index',
+            complete: function (res) {
+              console.log(res)
+            }
+          })
+        }
+        fail(res.data)
+      }
+    },
+    fail: function (res) {
+      wx.hideNavigationBarLoading()
+      if (message != "") {
+        wx.hideLoading()
+      }
+      console.log('request', e)
+      fail(res)
+    },
+    complete: function (res) {
+
+    },
+  })
+}
 // POST
 function requestPost(url, params, message, success, fail) {
   wx.showNavigationBarLoading()
@@ -256,4 +305,5 @@ module.exports = {
   requestPost: requestPost,
   requestGetpar: requestGetpar,
   superRequest: superRequest,
+  requestForm: requestForm
 }

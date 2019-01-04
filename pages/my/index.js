@@ -35,10 +35,18 @@ Page({
       url: '../my/about/index?url=' + wx.getStorageSync('aboutUrl'),
     })
   },
-  //
+  //联系客服
+  toService:function(){
+    wx.makePhoneCall({
+      phoneNumber: wx.getStorageSync('service') // 仅为示例，并非真实的电话号码
+    })
+  },
   getUrl:function(){
     var url = api.getAbout()
     var success = data => {
+      if (data.data.kefuPhone) {
+        wx.setStorageSync('service', data.data.kefuPhone)
+      }
       if (data.data.aboutUsUrl){
       wx.setStorageSync('aboutUrl', data.data.aboutUsUrl)
       }
@@ -100,26 +108,26 @@ Page({
       this.goto()
     }
   },
-  getMemberId: function() {
-    // 获取用户memberID信息
-    var that = this
-    var userInfoUrl = api.getUserInfo()
-    var message = ''
-    var idData = wx.getStorageSync("token")
-    var success = function(data) {
-      wx.setStorage({
-        key: 'memberId',
-        data: data.data.memberId,
-      })
-      that.getUserDetail()
-    }
-    var fail = function(e) {
-      console.log(e)
-    }
-    if (wx.getStorageSync("token")) {
-      wxrequest.requestGet(userInfoUrl, message, success, fail)
-    }
-  },
+  // getMemberId: function() {
+  //   // 获取用户memberID信息
+  //   var that = this
+  //   var userInfoUrl = api.getUserInfo()
+  //   var message = ''
+  //   var idData = wx.getStorageSync("token")
+  //   var success = function(data) {
+  //     wx.setStorage({
+  //       key: 'memberId',
+  //       data: data.data.memberId,
+  //     })
+  //     that.getUserDetail()
+  //   }
+  //   var fail = function(e) {
+  //     console.log(e)
+  //   }
+  //   if (wx.getStorageSync("token")) {
+  //     wxrequest.requestGet(userInfoUrl, message, success, fail)
+  //   }
+  // },
   //获取用户详情
   getUserDetail: function() {
     var that = this
@@ -177,7 +185,8 @@ Page({
         url: '/pages/userlogin/index',
       })
     }else{
-    this.getMemberId()
+    // this.getMemberId()
+    // this.getUserDetail()
     this.getAge()
     }
   },
@@ -189,7 +198,7 @@ Page({
     this.setData({
       token: wx.getStorageSync('token')
     })
-    this.getUrl()
+    // this.getUrl()
   },
 
   /**

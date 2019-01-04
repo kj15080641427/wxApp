@@ -24,7 +24,8 @@ Page({
     isshowCard: true,
     isshowCase: false,
     time: 60,
-    start: true
+    start: true,
+    lawyerFirm:''
   },
   //
   toOrgId:function(e){
@@ -124,7 +125,7 @@ Page({
       that.setData({
         score: scoreList
       })
-      console.log("律师主页", that.data.score)
+      console.log("律师主页", that.data)
       that.ageAddress()
     }
     var fail = function(e) {
@@ -231,7 +232,8 @@ Page({
     var data = {
       "memberId": this.data.lawyerCard.memberId,
       "pageNum": '1',
-      "pageSize": '10'
+      "pageSize": '10',
+      'lawyerFirm': this.data.lawyerCard.institutionName
     }
     var success = (data) => {
       this.setData({
