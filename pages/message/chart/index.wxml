@@ -1,4 +1,11 @@
 <view class="chart">
+    <view wx:if="{{requireTimeReady}}" class="require" hover-class="none" hover-stop-propagation="false">
+        剩余服务时间：{{timeText}}
+        <view class="require-switch" bindtap="toggleRequire">{{ requireSwitchText }}</view>
+    </view>
+    <view wx:if="{{requireShow}}" class="require-list">
+        
+    </view>
     <scroll-view scroll-y="true" scroll-top="{{scrollTop}}" class="chart-content">
         <view id="chart-content">
             <block wx:for="{{messageList}}" wx:key="create_time">
@@ -12,8 +19,8 @@
                             <view wx:if="{{item.msg_type == 'text'}}" class="text">
                                 {{item.content}}
                             </view>
-                            <view wx:if="{{item.msg_type == 'voice'}}" data-src="{{item.content}}" class="text audio" bindtap="playAudio">
-                                <image class="audio-img" src="../../../image/message/record1.png" mode="scaleToFill" lazy-load="true" binderror="" bindload=""></image>
+                            <view wx:if="{{item.msg_type == 'voice'}}" id="{{index}}" data-src="{{item.content}}" class="text audio" bindtap="playAudio">
+                                <image class="audio-img" src="{{activeIndex==index?'../../../image/message/audio.gif':'../../../image/message/record1.png'}}" mode="scaleToFill" lazy-load="true" binderror="" bindload=""></image>
                                 <view class="audio-duration">{{ item.duration }}</view>
                             </view>
                         </view>

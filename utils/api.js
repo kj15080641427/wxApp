@@ -295,7 +295,16 @@ var LawyerMoney = '/client/expert/price/'
 function getLawyerMoney() {
   return HOST_URL + LawyerMoney
 }
-module.exports = {
+// <<<<<<< HEAD
+// module.exports = {
+// =======
+// 获取律师与某个用户所有需求列表，id为用户id
+var AllRequireList = '/lawyer/requirement/between/'
+function getAllRequireList() { 
+  return HOST_URL + AllRequireList
+}
+module.exports={
+// >>>>>>> 6ddf86c02480870b423ee77c55697f31ce9756b0
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
@@ -340,4 +349,5 @@ module.exports = {
   getAbout: getAbout,
   getLawyerPhone: getLawyerPhone,
   getLawyerMoney: getLawyerMoney,
+  getAllRequireList: getAllRequireList
 }
