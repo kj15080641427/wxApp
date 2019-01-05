@@ -37,9 +37,9 @@ Page({
         title: '提现成功',
         icon:'none'
       })
-      wx.navigateBack({
-        delta:5
-      })
+      // wx.navigateBack({
+      //   delta:5
+      // })
       console.log(data)
     }
     var fail = e =>{
@@ -48,7 +48,14 @@ Page({
         icon:'none'
       })
     }
+    if (that.data.balance >= 1){
     wxrequest.request(url,data,success,fail)
+    }else{
+      wx.showToast({
+        title: '余额大于1元才能提现',
+        icon:'none'
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面加载
