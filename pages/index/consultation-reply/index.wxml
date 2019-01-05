@@ -1,13 +1,9 @@
 <view class='reply-page'>
 
-  <!--  -->
-
-
-  <!-- -->
   <view wx:key="{{index}}" wx:for="{{freeText}}" style="margin-bottom:100rpx;">
     <view class='reply-page-flex'>
       <view class='reply-page-top'>
-        <image class='reply-page-icon' src="{{freeText[index].type==1 ? freeText[index].lawyerIconImage ? freeText[index].lawyerIconImage: '/image/my_icon@3x/mine_icon_02_3x.png':userInfo.iconImage?userInfo.iconImage:'/image/my_icon@3x/mine_icon_02_3x.png'}}"></image>
+        <image class='reply-page-icon' src="{{freeText[index].type==1 ? freeText[index].lawyerIconImage ? freeText[index].lawyerIconImage: '/image/my_icon@3x/mine_icon-03@3x.png':userInfo.iconImage?userInfo.iconImage:'/image/my_icon@3x/mine_icon_02_3x.png'}}"></image>
         <view class='reply-page-nikename'>{{freeText[index].type==1 ? freeText[index].lawyerName:userInfo.memberName}}</view>
         <view class='reply-page-line'></view>
         <view class='reply-page-nikename'>{{freeText[index].type==1 ? freeText[index].lawyerFirm:userInfo.addressExtend.province+userInfo.addressExtend.city}}</view>

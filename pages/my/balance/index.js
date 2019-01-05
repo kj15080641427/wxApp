@@ -61,7 +61,7 @@ Page({
       var v = {
         type: 1,
         product: 4,
-        money: e.currentTarget.dataset.amt * 100
+        money: e.currentTarget.dataset.amt 
       }
       wxPay(v).then(res => {
         that.getBalance()
