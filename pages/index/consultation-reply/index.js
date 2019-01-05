@@ -112,7 +112,6 @@ Page({
         that.setData({
           timelaw: showtimeList
         })
-        console.log(that.data.lawago,that.data.lawagoText)
       } else {
         showtimeList.push('刚刚')
         that.setData({

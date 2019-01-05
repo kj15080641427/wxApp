@@ -9,13 +9,13 @@
 </view>
 
 <!-- 性别 -->
-<view class='filter-page-gender-top filter-background'>律师性别</view>
+<!-- <view class='filter-page-gender-top filter-background'>律师性别</view>
 <view style='background-color:white'>
   <view class='filter-page-line'></view>
 </view>
 <view class='filter-page-gender-view filter-background'>
   <view class="{{index== sex ? 'filter-page-gender-color' :'filter-page-gender'}}"wx:key="{{index}}" data-genderindex="{{index}}" bindtap='gender'  wx:for="{{search[1].items}}"><text class='filter-page-frame-text'>{{item.text}}</text></view>
-</view>
+</view> -->
 
 <!-- 行业 -->
   <view class='filter-page-cneter filter-background' >

@@ -36,7 +36,8 @@ Page({
     hasList: true,
     lawyerName: '',
     hasNextPage:true,
-    pageNum:1
+    pageNum:1,
+    webData:false
   },
   //重新搜索
   again: function() {
@@ -319,11 +320,21 @@ Page({
     this.pc()
     // this.getAge()
   },
+
+  webDataFn:function(e){
+    // this.setData({
+    //   webData:true
+    // })
+    console.log(e)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('?????',options.id)
+    var that = this
+    this.setData({
+      orgurl: wx.getStorageSync("orgUrl")
+    })
     wx.showLoading({
       title: '加载中',
     })
@@ -341,9 +352,9 @@ Page({
         }]
       }]
     })
-    this.setData({
+    that.setData({
       region: re,
-      id:options.id
+      id: options.id ? options.id:''
     })
     console.log("地区", regionSearch.citysData, '地区+全国', this.data.region)
     // this.pc()
@@ -360,10 +371,8 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-    if (this.data.id) {
-      this.pc()
-    }
+  onShow: function(options) {
+
   },
 
   /**

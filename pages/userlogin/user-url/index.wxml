@@ -1,0 +1,2 @@
+<!--pages/userlogin/user-url/index.wxml-->
+<web-view src="{{url}}"></web-view>

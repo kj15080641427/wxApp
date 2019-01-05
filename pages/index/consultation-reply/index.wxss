@@ -15,7 +15,6 @@
 }
 .reply-page-icon{
   border-radius: 50%;
-  background-color: red;
   width: 40rpx;
   height: 40rpx;
 }

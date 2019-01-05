@@ -10,7 +10,7 @@ Page({
    */
   data: {
     selectType:true,
-    money:0,
+    // money:0,
     balance:'',
     checked1:true,
     checked2:false,
@@ -40,7 +40,8 @@ Page({
     this.setData({
       index:e.detail.value,
       selectType:false,
-      money: Number(e.detail.value)+1
+      money: this.data.popular[e.detail.value].price
+      // money: Number(e.detail.value)+1
     })
   },
   phoneInput:function(e){
@@ -64,7 +65,7 @@ Page({
       })
     }else{
       if(this.data.checked1){
-        var t = { typeQuick: this.data.popular[this.data.index], money: this.data.money, type: 1, product: 2, phone:this.data.phone}
+        var t = { typeQuick: this.data.popular[this.data.index], money: this.data.money*100, type: 1, product: 2, phone:this.data.phone}
         var that = this
         var payMoney = that.data.money
         console.log("money", that.data.money)
@@ -74,7 +75,7 @@ Page({
         })
       }else{
         var that = this
-        var s = { typeQuick: this.data.popular[this.data.index], money: this.data.money, type: 3, product: 2 ,phone:this.data.phone}
+        var s = { typeQuick: this.data.popular[this.data.index], money: this.data.money*100, type: 3, product: 2 ,phone:this.data.phone}
         console.log(this.data.popular[this.data.index])
         wxPay(s).then(res => {
           // this.getQuick.then(res.data.data.orderno)
@@ -87,21 +88,26 @@ Page({
     // }
   }
   },
-  // 快速咨询
-  // getQuick: function (orderNo){
-  //   var url = api.getQuick()
-  //   var data = { "payOrderNo": orderNo, "payType": 1, "payAmount": this.data.money, "typeId": this.data.popular[this.data.index].id}
-  //   var success = data => {
-  //     console.log("支付成功",data)
-  //     wx.navigateTo({
-  //       url: '../quick-consultation-finish/index?orderNo=' + data.data.orderNo + '&timeStamp=' + data.data.timeStamp + '&type=' + this.data.popular[this.data.index].typeName + '&phone=' + this.data.phone +'&money=' + this.data.money
-  //     })
-  //   }
-  //   var fail = e => {
-  //     console.log(e)
-  //   }
-  //   wxrequest.request(url, data, success,fail)
-  // },
+  //快速咨询资费说明
+  gettariffUrl:function(){
+    var url = api.getTariff()
+    var data = {}
+    var success = data =>{
+      this.setData({
+        tariffUrl: data.data.tariffExplanationUrl
+      })
+      console.log(data)
+    }
+    var fail = e =>{
+      console.log(e)
+    }
+    wxrequest.requestGet(url,'',success,fail)
+  },
+  toTariff:function(){
+    wx.navigateTo({
+      url: '../adWebView/index?adUrl=' + this.data.tariffUrl,
+    })
+  },
   //查询余额
   getBalance:function(){
     var url = api.getBalance() + wx.getStorageSync("memberId")
@@ -156,6 +162,7 @@ Page({
    */
   onLoad: function (options) {
     this.getQuType()
+    this.gettariffUrl()
     // this.getQuick()
     this.getBalance()
     var that = this

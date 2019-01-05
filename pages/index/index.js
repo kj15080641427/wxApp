@@ -277,7 +277,8 @@ Page({
   gotoExpert: function() {
     if (wx.getStorageSync("token")) {
       wx.navigateTo({
-        url: '../index/expert-service/index',
+        // url: '../index/expert-service/index',
+        url:'/pages/search/demand/index'
       })
     } else {
       wx.navigateTo({

@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   height: 70rpx;
-  width: 580rpx;
+  width: 700rpx;
   margin-left: 35rpx;
   margin-right: 35rpx;
   background-color: #32b987;

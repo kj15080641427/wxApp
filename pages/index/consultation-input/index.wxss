@@ -21,11 +21,14 @@
 }
 .reply-input{
   /* width: 650rpx; */
+  /* margin-top: 100rpx; */
+  width: 750rpx;
   font-size: 28rpx;
   color: #323232;
   padding-top:50rpx;
-  height: 500rpx;
+  height: 1000rpx;
   padding-left:35rpx;
   padding-right:35rpx;
-  border:2rpx solid #b5b5b5
+  border:2rpx solid #b5b5b5;
+  background-color: white;
 }

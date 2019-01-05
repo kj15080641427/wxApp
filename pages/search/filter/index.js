@@ -15,7 +15,7 @@ Page({
     indexPicker: '',
     click: false,
     practiceYearId: 1, //执业年限
-    sex: '', //性别
+    // sex: '', //性别
     industryId: '', //行业
     skillId: '', //基本技能
     expandId: '', // 扩展技能
@@ -31,7 +31,7 @@ Page({
   },
 
   // 确定按钮
-  getSearchLawyer: function () {
+  getSearchLawyer: function() {
     var that = this
     var t = that.data
     wx.setStorageSync("picIndexList", picIndexList)
@@ -44,7 +44,7 @@ Page({
       "lawyerName": t.noFilter.lawyerName || '',
       "sort": t.noFilter.sort || '',
       "practiceYearId": t.practiceYearId ? t.practiceYearId : gs.practiceYearId ? gs.practiceYearId : '',
-      "sex": t.sex ? t.sex : gs.sex ? gs.sex : '',
+      // "sex": t.sex ? t.sex : gs.sex ? gs.sex : '',
       "industryId": t.industryId ? t.industryId : gs.insIndex ? t.search[2].items[gs.insIndex].id : '',
       "baseSkillId": t.skillId ? t.skillId : gs.baseSkillIndex ? t.search[3].items[gs.baseSkillIndex].id : '',
       "otherSkillId": t.expandId ? t.expandId : gs.ohterSkillIndex ? t.search[4].items[gs.ohterSkillIndex].id : '',
@@ -73,7 +73,7 @@ Page({
     })
   },
   // 重置按钮
-  reset: function () {
+  reset: function() {
     var that = this
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1]; //当前页面
@@ -94,12 +94,29 @@ Page({
     wx.removeStorageSync("picIndexList")
     this.onShow()
   },
-
+  //法院列表
+  getCourt: function() {
+    var url = api.getCourt()
+    var data = {
+      keywords: '',
+      regionId: '430100',
+      pageNum: 1,
+      pageSize: 10
+    }
+    var success = data =>{
+      console.log('法院列表',data)
+    }
+    var fail = e =>{
+      console.log(e)
+    }
+    wxrequest.request(url,data,success,fail)
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+    this.getCourt()
     var that = this
     that.setData({
       noFilter: JSON.parse(options.noFilter),
@@ -107,13 +124,13 @@ Page({
     })
     console.log(JSON.parse(options.noFilter))
     var searchUrl = api.getSearch()
-    var searchSuccess = function (data) {
+    var searchSuccess = function(data) {
       that.setData({
         search: data.data
       })
       console.log("成功", data.data)
     }
-    var searchFail = function (e) {
+    var searchFail = function(e) {
       wx.showToast({
         title: '获取筛选列表失败',
         icon: 'none'
@@ -126,19 +143,19 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     var that = this
     var gs = wx.getStorageSync("picIndexList")
     that.setData({
       practiceYearId: gs.practiceYearId ? gs.practiceYearId : 1, //执业年限
-      sex: gs.sex ? gs.sex : '',
+      // sex: gs.sex ? gs.sex : '',
       insIndex: gs.insIndex ? gs.insIndex : '', //行业
       baseSkillIndex: gs.baseSkillIndex ? gs.baseSkillIndex : '', //基本技能
       ohterSkillIndex: gs.ohterSkillIndex ? gs.ohterSkillIndex : '', //扩展技能
@@ -157,39 +174,39 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
   //熟悉行业
-  changeIndustry: function (e) {
+  changeIndustry: function(e) {
     var pickeridx = e.detail.value
     this.setData({
       insIndex: +e.detail.value,
@@ -200,7 +217,7 @@ Page({
     console.log('选中信息', picIndexList)
   },
   //基本技能
-  changeSkill: function (e) {
+  changeSkill: function(e) {
     this.setData({
       baseSkillIndex: e.detail.value,
       skillId: this.data.search[3].items[e.detail.value].id
@@ -209,7 +226,7 @@ Page({
 
   },
   //扩展技能
-  changeExpand: function (e) {
+  changeExpand: function(e) {
     this.setData({
       ohterSkillIndex: e.detail.value,
       expandId: this.data.search[4].items[e.detail.value].id
@@ -217,7 +234,7 @@ Page({
     picIndexList.ohterSkillIndex = e.detail.value
   },
   // 第二语言
-  changeLanguage: function (e) {
+  changeLanguage: function(e) {
     this.setData({
       langSkillIndex: e.detail.value,
       languageId: this.data.search[5].items[e.detail.value].id
@@ -225,7 +242,7 @@ Page({
     picIndexList.langSkillIndex = e.detail.value
   },
   // 常去法院
-  changeCourt: function (e) {
+  changeCourt: function(e) {
     this.setData({
       courtIndex: e.detail.value,
       courtId: this.data.search[6].items[e.detail.value] ? this.data.search[6].items[e.detail.value].id : ""
@@ -233,7 +250,7 @@ Page({
     picIndexList.courtIndex = e.detail.value
   },
   //常去检察院
-  changeProcuratorate: function (e) {
+  changeProcuratorate: function(e) {
     this.setData({
       procuratorateIndex: e.detail.value,
       procuratorateId: this.data.search[7].items[e.detail.value] ? this.data.search[7].items[e.detail.value].id : ""
@@ -241,7 +258,7 @@ Page({
     picIndexList.procuratorateIndex = e.detail.value
   },
   //律师职位
-  changePosition: function (e) {
+  changePosition: function(e) {
     this.setData({
       positionIndex: e.detail.value,
       positionId: this.data.search[8].items[e.detail.value].id
@@ -249,7 +266,7 @@ Page({
     picIndexList.positionIndex = e.detail.value
   },
   //所获荣誉
-  changeHonor: function (e) {
+  changeHonor: function(e) {
     this.setData({
       honorIndex: e.detail.value,
       honorId: this.data.search[9].items[e.detail.value].id
@@ -257,7 +274,7 @@ Page({
     picIndexList.honorIndex = e.detail.value
   },
   //社会职务
-  changeSocial: function (e) {
+  changeSocial: function(e) {
     this.setData({
       socialIndex: e.detail.value,
       socialId: this.data.search[10].items[e.detail.value].id
@@ -265,7 +282,7 @@ Page({
     picIndexList.socialIndex = e.detail.value
   },
   //增信担保
-  changeGuarantee: function (e) {
+  changeGuarantee: function(e) {
     this.setData({
       depositIndex: e.detail.value,
       guaranteeId: this.data.search[11].items[e.detail.value].id
@@ -273,7 +290,7 @@ Page({
     picIndexList.depositIndex = e.detail.value
   },
   //绿豆圈
-  changeMung: function (e) {
+  changeMung: function(e) {
     this.setData({
       lexMungIndex: e.detail.value,
       mungId: this.data.search[12].items[e.detail.value].id
@@ -281,7 +298,7 @@ Page({
     picIndexList.lexMungIndex = e.detail.value
   },
   //商会组织
-  changeOrganization: function (e) {
+  changeOrganization: function(e) {
     this.setData({
       organziationIndex: e.detail.value,
       organizationId: this.data.search[13].items[e.detail.value].id
@@ -289,21 +306,21 @@ Page({
     picIndexList.organziationIndex = e.detail.value
   },
   //选择执业年限
-  changeColor: function (e) {
+  changeColor: function(e) {
     this.setData({
       practiceYearId: this.data.search[0].items[e.currentTarget.dataset.yearindex].id
     })
     picIndexList.practiceYearId = this.data.practiceYearId
     console.log("yearrrrrrrrrrrrr", e.currentTarget.dataset.yearindex)
   },
-  //选择性别
-  gender: function (e) {
-    this.setData({
-      sex: this.data.search[1].items[e.currentTarget.dataset.genderindex].id
-    })
-    picIndexList.sex = this.data.sex
-  },
-  getType: function (e) {
+  // //选择性别
+  // gender: function (e) {
+  //   this.setData({
+  //     sex: this.data.search[1].items[e.currentTarget.dataset.genderindex].id
+  //   })
+  //   picIndexList.sex = this.data.sex
+  // },
+  getType: function(e) {
     this.setData({
       listIndex: e.currentTarget.dataset.getindex
     })

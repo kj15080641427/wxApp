@@ -120,6 +120,11 @@ Page({
         title: '发送成功',
         icon: 'none'
       })
+      setTimeout(()=>{
+        wx.navigateBack({
+          delta:3
+        })
+      },1500)
       console.log(data)
     }
     var fail = e => {

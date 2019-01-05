@@ -23,7 +23,7 @@ var ArticleType = '/solution/type'
 var ArticleList = '/solution/list'
 
 // 文字咨询地址
-var Commit = '/lawyer/freeText/post '
+var Commit = '/lawyer/freeText/post'
 
 // 上传图片地址
 var Image = '/upload/file'
@@ -303,8 +303,22 @@ var AllRequireList = '/client/requirement/between/'
 function getAllRequireList() { 
   return HOST_URL + AllRequireList
 }
+//用户协议
+var UserUrl = '/userRegisterAgreenmentUrl'
+function getUserUrl(){
+  return HOST_URL + UserUrl
+}
+//快速咨询资费
+var Tariff = '/tariffExplanationUrl'
+function getTariff(){
+  return HOST_URL + Tariff
+}
+//法院列表
+var Court = '/common/court'
+function getCourt(){
+  return HOST_URL + Court
+}
 module.exports={
-// >>>>>>> 6ddf86c02480870b423ee77c55697f31ce9756b0
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
@@ -349,5 +363,8 @@ module.exports={
   getAbout: getAbout,
   getLawyerPhone: getLawyerPhone,
   getLawyerMoney: getLawyerMoney,
-  getAllRequireList: getAllRequireList
+  getAllRequireList: getAllRequireList,
+  getUserUrl: getUserUrl,
+  getCourt: getCourt,
+  getTariff: getTariff
 }

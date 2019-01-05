@@ -1,2 +1,57 @@
 <!--pages/search/orgweb-view/index.wxml-->
-<web-view src="{{orgurl}}"></web-view>
+
+
+<view style='height:750rpx;' wx:if="{{hasList}}" style='height:100%'>
+  <scroll-view scrool-y scroll-top='500px'>
+    <view class="">
+      <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}" data-index="{{index}}" catchtap='getIndex'>
+        <view class='watchlist-page'>
+          <view class='watchlist-page-flex'>
+            <view class='watchlist-page-left' style="z-index:55;">
+              <image lazy-load="true" class='watchlist-page-avatar' src="{{lawyerList[index].iconImage ? lawyerList[index].iconImage :'../../image/my_icon@3x/mine_icon_02_3x.png'}}" style="z-index:55;"></image>
+              <view class='watchlist-page-practice' style="z-index:55;">执业{{year[index]>=1 ?year[index]:1 }}年 </view>
+
+            </view>
+            <view class='watchlist-page-right'>
+              <view class='watchlist-page-name'>{{lawyerList[index].memberName}}
+                <label wx:if="{{lawyerList[index].memberPositionName}}" class='watchlist-page-firm'>({{lawyerList[index].memberPositionName}})</label>
+              </view>
+              <view class='watchlist-page-address'>{{address[index]}}
+                <text wx:if="{{lawyerList[index].region&&lawyerList[index].institutionName}}">|</text> {{lawyerList[index].institutionName}}</view>
+              <view class='watchlist-page-adept' wx:if="{{lawyerList[index].description}}">擅长领域: {{lawyerList[index].description}} </view>
+            </view>
+
+          </view>
+        </view>
+        <view style='background-color:white;width:700rpx;margin-left:25rpx'>
+          <view class='watchlist-page-line'></view>
+        </view>
+        <view class='watch-page-lower' wx:if="{{lawyerList[index].orgTags[0]}}">
+          <view class='watchlist-page-label'>认证标签</view>
+          <view wx:key="{{index}}" wx:for="{{lawyerList[index].orgTags}}">
+            <image lazy-load="true" src='{{item.image}}' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
+          </view>
+        </view>
+      </view>
+    </view>
+
+  </scroll-view>
+
+  <view style='width:750rpx;height:100rpx;display:flex;justify-content:center;align-items:center;background-color:whitemargin-top:15rpx;'>
+    <image hidden="{{ishidden}}" src="../../../image/search_icon@3x/loading.gif" style='width:50rpx;height:50rpx;font-size:28rpx;'></image>
+  </view>
+</view>
+
+
+<!-- <view class='search-more'>
+<view>正在加载</view>
+</view> -->
+<view class='no-message' wx:if="{{!hasList}}">
+  <view class='no-messge-image-view'>
+    <image src='../../../image/search_icon@3x/Defaultpage_04_max.png' class='no-message-imag'></image>
+  </view>
+  <view class='no-message-tips-view'>
+    <view class='no-message-tips'>没有找到您要搜索的结果</view>
+  </view>
+  <button class='no-message-button' bindtap='again'>重新搜索</button>
+</view>

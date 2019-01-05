@@ -13,7 +13,7 @@
       <view class="index-text-style">
         <image src='../../image/homeicon_3x/homepage_03_3x.png' style='width:120rpx;height:120rpx'></image>
       </view>
-      <label class='index-text-style'>免费咨询</label>
+      <label class='index-text-style'>文字咨询</label>
       <view class='index-text-style-mini'>
         <label class='index-text-style-green'>免费</label>
         <label class='index-text-style-gray'>答疑解惑</label>
@@ -34,10 +34,10 @@
       <view class="index-text-style">
         <image src='../../image/homeicon_3x/homepage_05_3x.png' style='width:120rpx;height:120rpx'></image>
       </view>
-      <label class='index-text-style'>专家服务</label>
+      <label class='index-text-style'>发布需求</label>
       <view class='index-text-style-mini'>
-        <label class='index-text-style-green'>1对1</label>
-        <label class='index-text-style-gray '>电话服务</label>
+        <label class='index-text-style-green'>找到</label>
+        <label class='index-text-style-gray '>合适律师</label>
       </view>
     </view>
   </view>

@@ -34,7 +34,7 @@
 
 <view class='login-lower-center'>
   <view class='login-lower-tips'>成功登录小程序即表示您同意
-    <text>《用户协议》</text>
+    <text bindtap='toWeb'>《用户协议》</text>
   </view>
 </view>
 

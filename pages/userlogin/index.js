@@ -15,6 +15,26 @@ Page({
     countdown: 60,
     startCountdown: false
   },
+  //用户协议
+  getUrl:function(){
+    var url = api.getUserUrl()
+    var success = data =>{
+      this.setData({
+        userUrl:data
+      })
+      console.log('用户协议',data)
+    }
+    var fail = e =>{
+      console.log(e)
+    }
+    wxrequest.requestGet(url,'',success,fail)
+  },
+  //跳转web-view
+  toWeb:function(){
+    wx.navigateTo({
+      url: '/pages/userlogin/user-url/index?url=' + this.data.userUrl.data.userRegisterAgreenmentUrl,
+    })
+  },
   //获取手机号输入框值
   getPhoneInput: function(e) {
     this.setData({
@@ -180,7 +200,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.getUrl()
   },
 
   /**

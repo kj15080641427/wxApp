@@ -144,10 +144,11 @@ Page({
         })
       } else if (lawnowYear[2] - lawyear[2] > 2 && lawnowYear[2] - lawyear[2] <= 7) {
         lawgaoList.push(lawnowYear[2] - lawyear[2])
-        showtimeList.push('天前' + this.data.freeTextList[index].dateAdded.split(" ")[1].split(":", 2).join(":"))
+        showtimeList.push(lawnowYear[2] - lawyear[2]+'天前' + this.data.freeTextList[index].dateAdded.split(" ")[1].split(":", 2).join(":"))
         this.setData({
           timelaw: showtimeList,
         })
+        console.log('前天', lawnowYear[2] ,lawyear[2],this.data.timelaw)
       }
       else if (lawnowYear[2] - lawyear[2] == 2) {
         lawagoTextList.push()
@@ -289,44 +290,44 @@ userTime:function(){
   if (nowYear[0] - year[0] > 0) {
     // showtimeList.push(this.data.freeTextList[index].dateAdded.split(" "))
     that.setData({
-      timet: this.data.time
+      timet: this.data.time.split(':', 2).join(":")
     })
   } else if (nowYear[1] - year[1] > 0) {
     // showtimeList.push(this.data.freeTextList[index].dateAdded.split(" "))
     that.setData({
-      timet: this.data.time
+      timet: this.data.time.split(':', 2).join(":")
     })
   }
   else if (nowYear[2] - year[2] > 7) {
     this.setData({
-      timet: this.data.time
+      timet: this.data.time.split(':', 2).join(":")
     })
   } else if (nowYear[2] - year[2] > 2 && nowYear[2] - year[2] <= 7) {
     // lawgaoList.push(nowYear[2] - year[2])
     // lawagoTextList.push('天前')
     this.setData({
-      timet: this.data.time,
-      ago: nowYear[2] - year[2],
-      agoText: '天前',
+      timet: nowYear[2] - year[2] + this.data.time.split(' ')[1].split(':', 2).join(":") + '天前',
+      // ago: nowYear[2] - year[2],
+      // agoText: '天前',
     })
   }
   else if (nowYear[2] - year[2] == 2) {
     // lawagoTextList.push('前天')
     that.setData({
-      agoText: '前天',
-      timet: this.data.time
+      // agoText: '前天',
+      timet: '前天' + this.data.time.split(' ')[1].split(':',2).join(":")
     })
     console.log("<><<<<<<<<<<<", this.data.timelaw)
   } else if (nowYear[2] - year[2] == 1) {
     that.setData({
-      agoText: '昨天',
-      timet: this.data.time
+      // agoText: '昨天',
+      timet: '昨天' + this.data.time.split(' ')[1].split(':', 2).join(":")
     })
   }
   else if (nowYear[2] - year[2] == 0 && nowYearTime[0].split(":")[0] - yearTime[0].split(":")[0] >= 1) {
     // showtimeList.push(this.data.freeTextList[index].dateAdded.split(" ")[1].split(":", 2).join(":"))
     that.setData({
-      timet: this.data.time
+      timet: this.data.time.split(':', 2).join(":")
     })
     console.log('律师回阿诗丹顿复时间', this.data.timelaw)
   }
