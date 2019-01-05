@@ -31,6 +31,7 @@ Page({
         delayMessages: [],
         lawyer_avatar: null,
         activeIndex: null,
+        isSend: false,
         my_avatar: wx.getStorageSync('userInfo').iconImage || '../../../image/message/default-avatar.png'
     },
     onLoad(option) {
@@ -322,7 +323,7 @@ Page({
     },
     //  拼装列表数据
     buildListData(userName, i, arr, len, targetArr) {
-        console.log(arr)
+        // console.log(arr)
         let that = this
         if (len > 0) {
             if (arr[i].from_id == userName) {
@@ -437,54 +438,52 @@ Page({
         }
     },
     textareaOnFocus(e) {
-        console.log(e.detail.height)
         wx.pageScrollTo({
             scrollTop: e.detail.height
         })
     },
     //  发送文字消息
     confirmSendText(e) {
-        console.log(e.detail.value.textarea)
+        // console.log(e.detail.value.textarea)
         //  发消息
         let that = this
-        that.setData({
-            value: e.detail.value.textarea
-        })
-        jM.sendSingleMsg({
-            'target_username': this.data.userName,
-            'content': e.detail.value.textarea,
-            'no_offline': true
-        }).onSuccess(function (data, msg) {
-            console.log(data)
-            console.log(msg)
-            let arr = that.data.messageList
-            arr.push({
-                msg_id: msg.content.msgid,
-                from_id: msg.content.from_id,
-                msg_type: msg.content.msg_type,
-                content: msg.content.msg_body.text
-            })
-            that.setData({
-                inputValue: '',
-                messageList: arr,
-            }, function () {
-                that.pageScroll(that)
-            })
-        }).onFail(function (data) {
-            //data.code 返回码
-            //data.message 描述
-        })
-        // jM.sendMessage(this.data.userName, e.detail.value).then( msg => {
-        //     console.log(msg)
-        //     let arr = that.data.messageList
-        //     arr.push(msg.content)
-        //     that.setData({
-        //         inputValue: '',
-        //         messageList: arr,
-        //     },function(){
-        //         that.pageScroll(that)
-        //     })
-        // })
+        if(e.detail.value.textarea != ''){
+            if (!this.data.isSend){
+                that.setData({
+                    isSend: true
+                })
+                jM.sendSingleMsg({
+                    'target_username': that.data.userName,
+                    'content': e.detail.value.textarea,
+                    'no_offline': that
+                }).onSuccess(function (data, msg) {
+                    // console.log(data)
+                    console.log(msg)
+                    let arr = that.data.messageList
+                    arr.push({
+                        msg_id: msg.content.msgid,
+                        from_id: msg.content.from_id,
+                        msg_type: msg.content.msg_type,
+                        content: msg.content.msg_body.text
+                    })
+                    that.setData({
+                        inputValue: '',
+                        messageList: arr,
+                        isSend: false
+                    }, function () {
+                        that.pageScroll(that)
+                    })
+                }).onFail(function (data) {
+                    that.setData({
+                        isSend: false
+                    })
+                    wx.showToast({
+                        title: '发送失败'
+                    })
+                })
+            }
+        }
+        
     },
 
     //  发送语音消息
