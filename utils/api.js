@@ -318,6 +318,11 @@ var Court = '/common/court'
 function getCourt(){
   return HOST_URL + Court
 }
+//提现
+var Cash = '/pay/withdraw'
+function getCash(){
+  return HOST_URL + Cash
+}
 module.exports={
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,
@@ -366,5 +371,6 @@ module.exports={
   getAllRequireList: getAllRequireList,
   getUserUrl: getUserUrl,
   getCourt: getCourt,
-  getTariff: getTariff
+  getTariff: getTariff,
+  getCash: getCash
 }

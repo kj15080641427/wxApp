@@ -3,6 +3,8 @@
   width: 750rpx;
   height: 300rpx;
   position: relative;
+  /* z-index:1; */
+  /* position: absolute */
 }
 .law-page-avatar{
   width: 165rpx;

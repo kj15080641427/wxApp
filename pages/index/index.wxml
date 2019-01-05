@@ -35,7 +35,7 @@
             <view class="index-text-style">
                 <image src='../../image/homeicon_3x/homepage_05_3x.png' style='width:120rpx;height:120rpx'></image>
             </view>
-            <label class='index-text-style'>发布需求</label>
+            <label class='index-text-style'>律师服务</label>
             <view class='index-text-style-mini'>
                 <label class='index-text-style-green'>找到</label>
                 <label class='index-text-style-gray '>合适律师</label>

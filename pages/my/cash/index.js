@@ -1,4 +1,7 @@
 // pages/my/cash/index.js
+var api = require('../../../utils/api.js')
+var wxrequest = require('../../../utils/request.js')
+import hex_md5 from '../../../jM/md5.js'
 Page({
 
   /**
@@ -7,7 +10,41 @@ Page({
   data: {
     balance:''
   },
+  //姓名
+  name:function(e){
+    this.setData({
+      userName:e.detail.value
+    })
+  },
+  //支付宝
+  userName:function(e){
+    this.setData({
+      account:e.detail.value
+    })
+  },
+  cash:function(){
+    var that = this
+    var moneyt = that.data.balance
+    var accountt = that.data.account
+    const res = wx.getSystemInfoSync()
+    let _ua = 'wxapp:brand(' + res.brand + ') model(' + res.model + ') system(' + res.system + ') SDKVersion(' + res.SDKVersion + ')'
+    var url = api.getCash()
+    var data = { money: that.data.balance, account: that.data.account, name: that.data.userName, ua: _ua, sign: hex_md5('money=' +  moneyt  + '&account=' +  accountt  + '&ua=' +  _ua ) }
+    var success = data =>{
+      wx.showToast({
+        title: '提现成功',
+        icon:'none'
+      })
+      wx.navigateBack({
+        delta:5
+      })
+      console.log(data)
+    }
+    var fail = e =>{
 
+    }
+    wxrequest.request(url,data,success,fail)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -15,6 +52,7 @@ Page({
     this.setData({
       balance: JSON.parse(options.balance).data.balanceAmount
     })
+    console.log(this.data.balance)
   },
 
   /**
