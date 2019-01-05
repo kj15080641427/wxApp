@@ -165,7 +165,7 @@ Page({
                 if(arr[i].avatar == ''){
                     let k = null
                     k = arr[i]
-                    k.avatar = '../../image/message/default-avatar.png'
+                    k.avatar = '../../image/message/default-lawyer.png'
                     targetArr.push(arr[i])
                     if (++i < len) {
                         that.getUserAvatarResource(i, arr, len, targetArr)
@@ -237,7 +237,8 @@ Page({
         })
     },
     goChart(e) {
-        wx.setStorageSync('lawyer-avatar', e.currentTarget.dataset.avatar)
+        let avatar = e.currentTarget.dataset.avatar.indexOf('../') == -1 ? e.currentTarget.dataset.avatar : '../'+e.currentTarget.dataset.avatar
+        wx.setStorageSync('lawyer-avatar', avatar)
         wx.navigateTo({
             url: '../message/chart/index?name=' + e.currentTarget.dataset.name + '&userName=' + e.currentTarget.dataset.user + '&avatar=' + e.currentTarget.dataset.avatar,
             complete:function(res){
