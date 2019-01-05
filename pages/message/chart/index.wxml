@@ -13,7 +13,7 @@
                 <view wx:if="{{item.status == 3}}" class="item-status">已关闭</view>
             </view>
             <view class="item-content"><view class="content-label">服务类型：</view><view>{{item.requirementName}}</view></view>
-            <view class="item-content"><view class="content-label">事务分类：</view><view>{{item.requirementBusiTypeName}}</view></view>
+            <!-- <view class="item-content"><view class="content-label">事务分类：</view><view>{{item.requirementBusiTypeName}}</view></view> -->
             <view class="item-content"><view class="content-label">需求标签：</view><view wx:if="{{tags.length == 0}}">暂无标签</view><block wx:else><view wx:for="{{tags}}" wx:for-item="sItem">{{sItem}}</view></block></view>
             <view class="item-content"><view class="content-label">律师擅长领域：</view><view>{{item.skillName}}</view></view>
             <view class="item-content"><view class="content-label">最高承受价格：</view><view>{{'¥'+item.amount+'元'}}</view></view>

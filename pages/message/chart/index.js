@@ -37,11 +37,12 @@ Page({
         wx.setNavigationBarTitle({
             title: option.name
         })
+        console.log(wx.getStorageSync('lawyer-avatar'))
         this.setData({
             userName: option.userName,
             // grabTime: option.grabTime || null,
             nowDate: option.nowDate || null,
-            lawyer_avatar: option.avatar || '../../../image/message/default_user.png'
+            lawyer_avatar: wx.getStorageSync('lawyer-avatar') == '' ? '../../../image/message/default_user.png' : wx.getStorageSync('lawyer-avatar')
         })
         console.log(option.userName.substr(3))
     },
