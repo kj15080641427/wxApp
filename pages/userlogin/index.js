@@ -121,7 +121,7 @@ Page({
        
         var that = this
         var editUrl = api.getEditDetail()
-        var editDetailData = { memberId: wx.getStorageSync('memberId'), memberName: '手机用户' + res.data.mobile.slice(0, 6) }
+        var editDetailData = { memberId: wx.getStorageSync('memberId'), memberName: wx.getStorageSync('userInfo').memberName ? wx.getStorageSync('userInfo').memberName:'手机用户' + res.data.mobile.slice(0, 7) }
         var success = function (data) {
         }
         var fail = function (e) {

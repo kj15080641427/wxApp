@@ -52,13 +52,13 @@ const getPayInfo = (v) => {
                       payOrderNo: res.data.data.orderno,
                       phone: v.phone,
                       payType: 1,
-                      payAmount: v.money,
+                      payAmount: v.money/100,
                       typeId: v.typeQuick.id
                     },
                     success(data) {
                       console.log("余额支付33", data)
                       wx.navigateTo({
-                        url: '../quick-consultation-finish/index?orderNo=' + data.data.data.orderNo + '&timeStamp=' + data.data.data.timeStamp + '&type=' + v.typeQuick.typeName + '&phone=' + v.phone + '&money=' + v.money,
+                        url: '../quick-consultation-finish/index?orderNo=' + data.data.data.orderNo + '&timeStamp=' + data.data.data.timeStamp + '&type=' + v.typeQuick.typeName + '&phone=' + v.phone + '&money=' + v.money/100,
                       })
                       reslove(data)
                     },

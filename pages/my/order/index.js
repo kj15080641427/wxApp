@@ -9,11 +9,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    order: '', //我的订单列表
     mobile: '', //电话
     pageNum: 1,
-    order:[],
-    hasNextPage:true,
+    order: [],
+    hasNextPage: true,
   },
   getOrderIndex: function(e) {
     var that = this
@@ -23,7 +22,7 @@ Page({
       })
     } else if (that.data.order[e.currentTarget.dataset.orderindex].orderType == '需求') {
       if (e.currentTarget.dataset.orderstatus != '未接单') {
-          wx.setStorageSync('lawyer-avatar', e.currentTarget.dataset.lawyeravatar)
+        wx.setStorageSync('lawyer-avatar', e.currentTarget.dataset.lawyeravatar)
         wx.navigateTo({
           url: '../../message/chart/index?name=' + e.currentTarget.dataset.lawyername + '&userName=lex' + e.currentTarget.dataset.lawyerid + '&avatar=' + e.currentTarget.dataset.lawyeravatar
         })
@@ -32,7 +31,13 @@ Page({
       wx.navigateTo({
         url: '../order-detail/index?orderDetail=' + JSON.stringify(that.data.order[e.currentTarget.dataset.orderindex]),
       })
+      console.log('asdasdas',JSON.stringify(that.data.order[e.currentTarget.dataset.orderindex]))
     }
+  },
+  clear:function(){
+    this.setData({
+      order:[]
+    })
   },
   //订单
   getOrder: function() {
@@ -61,7 +66,6 @@ Page({
       memberId: options.memberId,
       mobile: options.mobile
     })
-    this.getOrder()
   },
 
   /**
@@ -69,47 +73,50 @@ Page({
    */
   onReady: function() {
 
-    
+
 
   },
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-        wx.showLoading()
-        if(!jM.isLogin()){
-            wxrequest.requestGet(api.getImConfig(),'',getImConfigSuccess,getImConfigFail)
-            function getImConfigSuccess (res) {
-                //  初始化jmessage
-                wx.setStorageSync('appkey', res.data.appkey)
-                jM.init({
-                    "appkey"    : res.data.appkey,
-                    "random_str": res.data.random,
-                    "signature" : res.data.signature,
-                    "timestamp" : res.data.timestamp,
-                    "flag": 1
-                }).onSuccess(function(data) {
-                    jM.login({
-                        'username' : 'lex' + wx.getStorageSync('memberId'),
-                        'password' : hex_md5(wx.getStorageSync('mobile'))
-                    }).onSuccess(function(lData) {
-                        wx.hideLoading()
-                    }).onFail(function(data){
-                      wx.hideLoading() 
-                        console.log(data.message)
-                        //同上
-                    })
-                }).onFail(function(data) {
-                  wx.hideLoading() 
-                    console.log(data)
-                }); 
-                console.log(app.globalData)
-            }
-            function getImConfigFail() {  }
-        }else{
-            wx.hideLoading() 
-        }
-    },
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+    this.getOrder()
+    wx.showLoading()
+    if (!jM.isLogin()) {
+      wxrequest.requestGet(api.getImConfig(), '', getImConfigSuccess, getImConfigFail)
+
+      function getImConfigSuccess(res) {
+        //  初始化jmessage
+        wx.setStorageSync('appkey', res.data.appkey)
+        jM.init({
+          "appkey": res.data.appkey,
+          "random_str": res.data.random,
+          "signature": res.data.signature,
+          "timestamp": res.data.timestamp,
+          "flag": 1
+        }).onSuccess(function(data) {
+          jM.login({
+            'username': 'lex' + wx.getStorageSync('memberId'),
+            'password': hex_md5(wx.getStorageSync('mobile'))
+          }).onSuccess(function(lData) {
+            wx.hideLoading()
+          }).onFail(function(data) {
+            wx.hideLoading()
+            console.log(data.message)
+            //同上
+          })
+        }).onFail(function(data) {
+          wx.hideLoading()
+          console.log(data)
+        });
+        console.log(app.globalData)
+      }
+
+      function getImConfigFail() {}
+    } else {
+      wx.hideLoading()
+    }
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -135,15 +142,15 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-    if(this.data.hasNextPage){
+    if (this.data.hasNextPage) {
       this.setData({
         pageNum: this.data.pageNum + 1
       })
       this.getOrder()
-    }else{
+    } else {
       wx.showToast({
         title: '没有更多订单',
-        icon:'none'
+        icon: 'none'
       })
     }
   },

@@ -1,8 +1,8 @@
 <!--pages/search/lawyer-detail/index.wxml-->
 <view>
-  <image mode='aspectFill' class='law-page-background' src="{{lawyerCard.backgroundImage ? lawyerCard.backgroundImage:'../../../image/my_icon@3x/mine_icon_13_3x.png'}}"></image>
+  <image mode='aspectFill' class='law-page-background' src="{{lawyerCard.backgroundImage ? lawyerCard.backgroundImage:'../../../image/my_icon@3x/20190106000237.png'}}"></image>
   <view class='follow-lawyer' bindtap="{{isFollow ? 'unFollow':'follow'}}">
-    <image src="{{isFollow ? '../../../image/search_icon@3x/Personalhomepage-02@3x.png':'../../../image/search_icon@3x/Personalhomepage-01@3x.png'}}" style='height:25rpx;width:25rpx;margin-left:20rpx;'></image>
+    <image src="{{isFollow ? '../../../image/search_icon@3x/Personalhomepage-02@3x.png':'../../../image/search_icon@3x/Personalhomepage-01@3x.png'}}" style='height:25rpx;width:25rpx;margin-left:20rpx;z-index:1;'></image>
     <text style='margin-left:10rpx;'>{{isFollow ? '已关注':'关注'}}</text>
   </view>
 </view>
@@ -28,9 +28,9 @@
       <image src='../../../image/search_icon@3x/Personalhomepage-20@3x.png' class='law-address-icon'></image>
       {{address[0]}}{{address[1]}}
     </view>
-    <view class='law-page-LEX' wx:if="{{lawyerCard.totalDepositAmount}}">
+    <view class='law-page-LEX' wx:if="{{lawyerCard.price}}">
       <image src='../../../image/search_icon@3x/Personalhomepage-05@3x.png' class='law-address-icon'></image>
-      <text style='margin-left:10rpx;'>LEX提供最高{{lawyerCard.totalDepositAmount}}元服务担保</text>
+      <text style='margin-left:10rpx;'>LEX提供最高{{lawyerCard.price}}元服务担保</text>
     </view>
   </view>
 
@@ -65,7 +65,7 @@
 <view wx:if="{{isshowCard}}">
   <view wx:if="{{lawyerInfo.businessType}}">
     <view class='law-flex' style='background-color:white;height:300rpx;'>
-      <view class='law-long-text'>擅长领域</view>
+      <view class='law-long-text'></view>
 
       <view class='law-center-icon'>
         <!-- 1 -->

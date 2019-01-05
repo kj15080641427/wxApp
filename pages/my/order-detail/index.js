@@ -37,7 +37,7 @@ Page({
         lawyerPhone:data.data
       })
       wx.makePhoneCall({
-        phoneNumber: data.data
+        phoneNumber: data.data.phone
       })
     })
     var fail=(e)=>{
@@ -49,10 +49,17 @@ Page({
     }
     wxrequest.requestGet(url,'',success,fail)
   },
+  
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var pages = getCurrentPages();
+    var currPage = pages[pages.length - 1]; //当前页面
+    var prevPage = pages[pages.length - 2]; //上一个页面
+    prevPage.clear() //调用上一个页面方法
+    // prevPage.onTabItemTap()
+
     var data = JSON.parse(options.orderDetail)
     this.setData({
       // orderDetail:data,
@@ -67,40 +74,41 @@ Page({
       // ['detailList[7].text']: data.beginTime
       startTime: data.grabTime
     })
+    console.log('订单详情',JSON.parse(options.orderDetail))
     if (this.data.orderDetail.orderStatus == 5) {
       this.setData({
         statusValue: true
       })
     }
     // this.getLawyerPhone()
-
-    var startDate = this.data.startTime.split(" ")[0]
-    var nowDate = formatTime.formatTime(new Date()).split(" ")[0]
-    var startTime = this.data.startTime.split(" ")[1]
-    var nowTime = formatTime.formatTime(new Date()).split(" ")[1]
-    if (nowDate.split("/")[0]-startDate.split("-")[0]>0){
-      this.setData({
-        time: false
-      })
-    } else if (nowDate.split("/")[1] - startDate.split("-")[1] > 0){
-      this.setData({
-        time: false
-      })
-    } else if (nowDate.split("/")[2] - startDate.split("-")[2] > 0){
-      this.setData({
-        time: false
-      })
-    } else if ((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]))>900){
-      this.setData({
-        time: false,
-      })
-    }else{
-      var hasTime = 900-((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2])))
-      var that = this
-      var secondInt = hasTime
+    var that = this
+    // var startDate = this.data.startTime.split(" ")[0]
+    // var nowDate = formatTime.formatTime(new Date()).split(" ")[0]
+    // var startTime = this.data.startTime.split(" ")[1]
+    // var nowTime = formatTime.formatTime(new Date()).split(" ")[1]
+    // if (nowDate.split("/")[0]-startDate.split("-")[0]>0){
+    //   this.setData({
+    //     time: false
+    //   })
+    // } else if (nowDate.split("/")[1] - startDate.split("-")[1] > 0){
+    //   this.setData({
+    //     time: false
+    //   })
+    // } else if (nowDate.split("/")[2] - startDate.split("-")[2] > 0){
+    //   this.setData({
+    //     time: false
+    //   })
+    // } else if ((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]))>900){
+    //   this.setData({
+    //     time: false,
+    //   })
+    // }else{
+      // var hasTime = 900-((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2])))
+      // var that = this
+      // var secondInt = hasTime
       that.setData({
-        minute: parseInt(secondInt / 60),
-        second: secondInt % 60
+        minute: parseInt(data.remainingTime / 60),
+        second: data.remainingTime % 60
       })
       this.setData({
         timedown:setInterval(function () {
@@ -126,7 +134,7 @@ Page({
           }
         }, 1000)
       })
-    } 
+    // } 
   },
 
   /**
