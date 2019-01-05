@@ -32,21 +32,23 @@ Page({
         lawyer_avatar: null,
         activeIndex: null,
         isSend: false,
-        my_avatar: wx.getStorageSync('userInfo').iconImage || '../../../image/message/default-avatar.png'
+        my_avatar: null
     },
     onLoad(option) {
         wx.setNavigationBarTitle({
             title: option.name
         })
-        console.log(wx.getStorageSync('lawyer-avatar'))
+        // console.log(wx.getStorageSync('lawyer-avatar'))
         this.setData({
             userName: option.userName,
             // grabTime: option.grabTime || null,
             nowDate: option.nowDate || null,
+            my_avatar: wx.getStorageSync('userInfo').iconImage == '' ? '../../../image/message/default-avatar.png' : wx.getStorageSync('userInfo').iconImage,
             lawyer_avatar: wx.getStorageSync('lawyer-avatar') == '' ? '../../../image/message/default-lawyer.png' : wx.getStorageSync('lawyer-avatar')
         })
-        console.log(this.data.lawyer_avatar)
-        console.log(option.userName.substr(3))
+        // console.log(wx.getStorageSync('userInfo').iconImage)
+        // console.log(this.data.lawyer_avatar)
+        // console.log(option.userName.substr(3))
     },
     onShow() {
         let that = this
