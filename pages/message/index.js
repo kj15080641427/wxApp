@@ -237,7 +237,8 @@ Page({
         })
     },
     goChart(e) {
-        wx.setStorageSync('lawyer-avatar', e.currentTarget.dataset.avatar)
+        let avatar = e.currentTarget.dataset.avatar.indexOf('../') == -1 ? e.currentTarget.dataset.avatar : '../'+e.currentTarget.dataset.avatar
+        wx.setStorageSync('lawyer-avatar', avatar)
         wx.navigateTo({
             url: '../message/chart/index?name=' + e.currentTarget.dataset.name + '&userName=' + e.currentTarget.dataset.user + '&avatar=' + e.currentTarget.dataset.avatar,
             complete:function(res){

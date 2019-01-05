@@ -45,6 +45,7 @@ Page({
             nowDate: option.nowDate || null,
             lawyer_avatar: wx.getStorageSync('lawyer-avatar') == '' ? '../../../image/message/default-lawyer.png' : wx.getStorageSync('lawyer-avatar')
         })
+        console.log(this.data.lawyer_avatar)
         console.log(option.userName.substr(3))
     },
     onShow() {
