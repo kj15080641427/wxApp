@@ -48,7 +48,7 @@
 </view>
 
 <!-- 简介 -->
-<view class='law-page-Introduction-view' wx:if="{{lawyerCard.memberDescription}}">
+<view class='law-page-Introduction-view' wx:if="{{lawyerCard.memberDescription && lawyerCard.memberDescription !='完善个人简介，让用户可以更快的找到您(限1000字)'}}">
   <view class='law-page-Introduction'>
     <view class="{{showMore ? 'law-textarea-more':'law-textarea'}}" bindtap='showMore' id="getheight">{{lawyerCard.memberDescription}}</view>
     <image src='../../../image/search_icon@3x/Personalhomepage-06@3x.png' class="{{showMore ? 'law-icon-center-more law-address-icon' :'law-icon-center law-address-icon'}}" bindtap='showMore'></image>

@@ -35,7 +35,7 @@ Page({
     },
     hasList: true,
     lawyerName: '',
-    hasNextPage:true,
+    // hasNextPage:true,
     pageNum:1,
     webData:false
   },
@@ -54,7 +54,7 @@ Page({
       selectedCityColor: false,
       ishidden:true,
       pageNum: 1,
-      hasNextPage: true
+      // hasNextPage: true
     })
     // wx.removeStorageSync("picIndexList")
   },
@@ -72,7 +72,7 @@ Page({
       showExpert: false,
       ishidden: true,
       pageNum: 1,
-      hasNextPage: true
+      // hasNextPage: true
     })
   },
   //选择擅长领域
@@ -84,7 +84,7 @@ Page({
       showSort: false,
       ishidden: true,
       pageNum: 1,
-      hasNextPage: true
+      // hasNextPage: true
     })
   },
   // 选择地区
@@ -95,7 +95,7 @@ Page({
       showSort: false,
       ishidden: true,
       pageNum: 1,
-      hasNextPage: true
+      // hasNextPage: true
     })
   },
   // 关键字搜索
@@ -104,7 +104,7 @@ Page({
       lawyerName: e.detail.value,
       ishidden: true,
       pageNum: 1,
-      hasNextPage: true
+      // hasNextPage: true
     })
   },
   //排序Index
@@ -269,7 +269,7 @@ Page({
     that.setData({
       lawyerList: '',
       pageNum:1,
-      hasNextPage: true
+      // hasNextPage: true
     })
     var url = api.getSearchLawyer() + that.data.pageNum + "/" + '/10'
     var datan = that.data.noFilter
@@ -282,6 +282,7 @@ Page({
         })
       }
       that.setData({
+        hasNextPage: data.data.hasNextPage,
         lawyerList: data.data.list,
       })
       that.getAge()

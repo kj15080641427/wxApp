@@ -160,7 +160,6 @@ Page({
       console.log(e)
     }
     wxrequest.request(editUrl, editDetailData, success, fail)
-
   },
   //性别picker
   bindChangegender: function(e) {
@@ -196,7 +195,7 @@ Page({
       selecttime: false,
       systime: true
     })
-    // console.log(e.detail.value)
+    console.log(e.detail.value)
   },
   showLoad: function() {
     wx.showLoading({

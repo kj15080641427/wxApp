@@ -83,7 +83,11 @@ Page({
       wxrequest.request(verifyCodeUrl, verifydata, success, fail)
     }
   },
+  //默认用户名
+  // 保存
+  saveInfo: function () {
 
+  },
   // 注册
   userLogin: function() {
     var message = "1"
@@ -121,6 +125,17 @@ Page({
         wx.setStorageSync("userInfo", res.data)
         wx.setStorageSync("memberId", res.data.memberId)
         wx.setStorageSync("mobile", res.data.mobile)
+       
+        var that = this
+        var editUrl = api.getEditDetail()
+        var editDetailData = { memberId: wx.getStorageSync('memberId'), memberName: '手机用户' + res.data.mobile.slice(0, 6) }
+        var success = function (data) {
+        }
+        var fail = function (e) {
+          console.log(e)
+        }
+        wxrequest.request(editUrl, editDetailData, success, fail)
+
         if (!jM.isLogin()) {
           wxrequest.superRequest(api.getImConfig(), {}, 'GET').then(res => {
             console.log('config:', res)

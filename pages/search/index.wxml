@@ -104,7 +104,7 @@
         <view class='watchlist-page'>
           <view class='watchlist-page-flex'>
             <view class='watchlist-page-left' style="z-index:55;">
-              <image lazy-load="true" class='watchlist-page-avatar' src="{{lawyerList[index].iconImage ? lawyerList[index].iconImage :'../../image/my_icon@3x/mine_icon_02_3x.png'}}" style="z-index:55;"></image>
+              <image lazy-load="true" class='watchlist-page-avatar' src="{{lawyerList[index].iconImage ? lawyerList[index].iconImage :'../../image/my_icon@3x/mine_icon-03@3x.png'}}" style="z-index:55;"></image>
               <view class='watchlist-page-practice' style="z-index:55;">执业{{year[index]>=1 ?year[index]:1 }}年 </view>
 
             </view>

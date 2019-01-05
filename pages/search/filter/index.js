@@ -94,23 +94,23 @@ Page({
     wx.removeStorageSync("picIndexList")
     this.onShow()
   },
-  //法院列表
-  getCourt: function() {
-    var url = api.getCourt()
-    var data = {
-      keywords: '',
-      regionId: '430100',
-      pageNum: 1,
-      pageSize: 10
-    }
-    var success = data =>{
-      console.log('法院列表',data)
-    }
-    var fail = e =>{
-      console.log(e)
-    }
-    wxrequest.request(url,data,success,fail)
-  },
+  // //法院列表
+  // getCourt: function() {
+  //   var url = api.getCourt()
+  //   var data = {
+  //     keywords: '',
+  //     regionId: '430100',
+  //     pageNum: 1,
+  //     pageSize: 10
+  //   }
+  //   var success = data =>{
+  //     console.log('法院列表',data)
+  //   }
+  //   var fail = e =>{
+  //     console.log(e)
+  //   }
+  //   wxrequest.request(url,data,success,fail)
+  // },
 
   /**
    * 生命周期函数--监听页面加载

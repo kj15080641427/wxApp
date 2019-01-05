@@ -38,41 +38,30 @@ Page({
                         'username' : 'lex' + wx.getStorageSync('memberId'),
                         'password' : hex_md5(wx.getStorageSync('mobile'))
                     }).onSuccess(function(lData) {
-                        console.log(lData)
+                        // console.log(lData)
                         jM.getConversation().onSuccess(function(data) {
-                            // jM.getResource({
-                            //     'media_id': data.conversations
-                            // }).onSuccess(function (gRes) {
-                            //     unReadMsgList.push({
-                            //         msg_id: msg.msg_id,
-                            //         from_id: msg.content.from_id,
-                            //         msg_type: msg.content.msg_type,
-                            //         duration: msg.content.msg_body.duration,
-                            //         content: gRes.url
-                            //     })
-                            //     wx.setStorageSync('unReadMsgList', unReadMsgList)
-                            // }).onFail(function (data) {
-                            //   wx.hideLoading() 
-                            //     console.log('error:' + JSON.stringify(data));
-                            // });
-                            that.setData({
-                                conversationList: data.conversations
-                            },function () {
-                                wx.hideLoading()
-                             })
+                            let arr = []
+                            that.getUserAvatarResource(0,data.conversations,data.conversations.length,arr)
+                            // that.setData({
+                            //     conversationList: data.conversations
+                            // },function () {
+                            //     wx.hideLoading()
+                            //  })
                         }).onFail(function(data) {
-                            console.log(data)
+                            // console.log(data)
                             //data.code 返回码
                             //data.message 描述
                         });
                         jM.onMsgReceive(function(msgRes) {
                             jM.getConversation().onSuccess(function(data) {
-                                console.log(data)
-                                that.setData({
-                                    conversationList: data.conversations
-                                })
+                                // console.log(data)
+                                // that.setData({
+                                //     conversationList: data.conversations
+                                // })
+                                let arr = []
+                                that.getUserAvatarResource(0,data.conversations,data.conversations.length,arr)
                             }).onFail(function(data) {
-                                console.log(data)
+                                // console.log(data)
                                 wx.hideLoading()  
                                 //data.code 返回码
                                 //data.message 描述
@@ -82,17 +71,17 @@ Page({
                         wx.hideLoading()
                     }).onFail(function(data){
                       wx.hideLoading() 
-                        console.log(data.message)
+                        // console.log(data.message)
                         //同上
                     })
                 }).onFail(function(data) {
                   wx.hideLoading() 
-                    console.log(data)
+                    // console.log(data)
                 }); 
-                console.log(app.globalData)
+                // console.log(app.globalData)
             }
             function getImConfigFail (res) {
-                console.log(res)
+                // console.log(res)
             }
             //  获取im的必须参数
             wxrequest.requestGet(api.getImConfig(),'',getImConfigSuccess,getImConfigFail)
@@ -102,39 +91,109 @@ Page({
                 title: '加载中',
             })
             jM.getConversation().onSuccess(function(data) {
-                console.log(data)
-                that.setData({
-                    conversationList: data.conversations
-                },function(){
-                    wx.hideLoading()
-                })
+                // console.log(data)
+                // that.setData({
+                //     conversationList: data.conversations
+                // },function(){
+                //     wx.hideLoading()
+                // })
+                let arr = []
+                that.getUserAvatarResource(0,data.conversations,data.conversations.length,arr)
             }).onFail(function(data) {
               wx.hideLoading() 
-                console.log(data)
+                // console.log(data)
             });
             jM.onMsgReceiptChange(function(data) {
-                console.log(data)
+                // console.log(data)
                 that.setData({
                     messageCount: data.receipt_msgs[0].unread_count
                 })
             });
             jM.onMsgReceive(function(msgRes) {
                 jM.getConversation().onSuccess(function(data) {
-                    console.log(data)
-                    that.setData({
-                        conversationList: data.conversations
-                    })
+                    // console.log(data)
+                    // that.setData({
+                    //     conversationList: data.conversations
+                    // })
+                    let arr = []
+                    that.getUserAvatarResource(0,data.conversations,data.conversations.length,arr)
                 }).onFail(function(data) {
                   wx.hideLoading() 
-                    console.log(data)
+                    // console.log(data)
                 });
                 that.setMessage(msgRes)
             });
         }
     },
+    getUserAvatarResource(i, arr, len, targetArr) {
+        let that = this
+        if(len>0){
+            if(arr[i].avatar.indexOf('qiniu') != -1){
+                jM.getResource({
+                    'media_id': arr[i].avatar
+                }).onSuccess(function (gRes) {
+                    let k = null
+                    k = arr[i]
+                    k.avatar = gRes.url
+                    targetArr.push(k)
+                    if (++i < len) {
+                        that.getUserAvatarResource(i, arr, len, targetArr)
+                    } else {
+                        that.setData({
+                            conversationList: targetArr
+                        }, function () {
+                            wx.hideLoading()
+                        })
+                    }
+                }).onFail(function (data) {
+                    let k = null
+                    k = arr[i]
+                    k.avatar = ''
+                    targetArr.push(k)
+                    if (++i < len) {
+                        that.getUserAvatarResource(i, arr, len, targetArr)
+                    } else {
+                        that.setData({
+                            conversationList: targetArr
+                        }, function () {
+                            wx.hideLoading()
+                        })
+                    }
+                    // console.log('error:' + JSON.stringify(data));
+                });
+            } else {
+                if(arr[i].avatar == ''){
+                    let k = null
+                    k = arr[i]
+                    k.avatar = '../../image/message/default_user.png'
+                    targetArr.push(arr[i])
+                    if (++i < len) {
+                        that.getUserAvatarResource(i, arr, len, targetArr)
+                    } else {
+                        that.setData({
+                            conversationList: targetArr
+                        }, function () {
+                            wx.hideLoading()
+                        })
+                    }
+                }else {
+                    targetArr.push(arr[i])
+                    if (++i < len) {
+                        that.getUserAvatarResource(i, arr, len, targetArr)
+                    } else {
+                        that.setData({
+                            conversationList: targetArr
+                        }, function () {
+                            wx.hideLoading()
+                        })
+                    }
+                }
+            }
+        }
+    },
     setMessage(v){
         let unReadMsgList = wx.getStorageSync('unReadMsgList') || []
-        console.log(unReadMsgList)
+        // console.log(unReadMsgList)
         let msg = v.messages[0]
         if(msg.content.msg_type == 'voice'){
             jM.getResource({
@@ -150,7 +209,7 @@ Page({
                 wx.setStorageSync('unReadMsgList', unReadMsgList)
             }).onFail(function (data) {
               wx.hideLoading() 
-                console.log('error:' + JSON.stringify(data));
+                // console.log('error:' + JSON.stringify(data));
             });
         } else if(msg.content.msg_type == 'text'){
             unReadMsgList.push({
@@ -167,7 +226,7 @@ Page({
             wx.navigateTo({
                 url: '../userlogin/index',
                 complete:function(res){
-                    console.log(res)
+                    // console.log(res)
                 }            
             })
         }
@@ -178,10 +237,11 @@ Page({
         })
     },
     goChart(e) {
+        wx.setStorageSync('lawyer-avatar', e.currentTarget.dataset.avatar)
         wx.navigateTo({
             url: '../message/chart/index?name=' + e.currentTarget.dataset.name + '&userName=' + e.currentTarget.dataset.user + '&avatar=' + e.currentTarget.dataset.avatar,
             complete:function(res){
-                console.log(res)
+                // console.log(res)
             }            
         })
     },
@@ -192,10 +252,10 @@ Page({
         })
         let data = { memberId: wx.getStorageSync('memberId'), pageNum: pageNum, pageSize: 10}
         wxrequest.superRequest(api.getOrder(), data, 'POST').then(res => {
-            console.log(123)
+            // console.log(123)
             wx.hideLoading()
         }).catch(res => {
-            console.log(456)
+            // console.log(456)
         })
     },
     //  上拉加载

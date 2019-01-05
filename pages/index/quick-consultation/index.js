@@ -3,6 +3,7 @@ var wxrequest = require('../../../utils/request.js')
 var api = require('../../../utils/api.js')
 import wxPay from '../../../utils/wxPay.js'
 var pay = require('../../../utils/wxPay.js')
+var throttle = require('../../../utils/throttle.js')
 Page({
 
   /**
@@ -51,7 +52,7 @@ Page({
     console.log(e.detail.value)
   },
   // 跳转
-  gotofinish: function () {
+  gotofinish: throttle.throttle(function () {
     if (!this.data.index) {
       wx.showToast({
         title: '请选择问题类型',
@@ -87,7 +88,7 @@ Page({
       }
     // }
   }
-  },
+  },1000),
   //快速咨询资费说明
   gettariffUrl:function(){
     var url = api.getTariff()
@@ -115,7 +116,7 @@ Page({
     var success = (data)=>{
       console.log("余额",data)
       this.setData({
-        balance: data.data.balanceAmount
+        balance: data.data.balanceAmount||0
       })
     }
     var fail = (e) => {

@@ -15,6 +15,7 @@
     "pages/index/consultation-reply/index",
     "pages/index/webView/index",
     "pages/index/adWebView/index",
+    "pages/search/court/index",
     "pages/search/lawyer-demand/index",
     "pages/search/case-web/index",
     "pages/search/demand-detail/index",
