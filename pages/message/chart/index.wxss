@@ -62,6 +62,10 @@
     display: inline-block;
     vertical-align: middle;
 }
+.chart .require-list .item-content .tags{
+    display: inline-block;
+    vertical-align: middle;
+}
 .chart .chart-content{
     width: 100%;
     padding: 35rpx 35rpx 115rpx 35rpx;
