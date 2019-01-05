@@ -20,7 +20,7 @@
     <view class='info-page-center-line'></view>
     <view class='info-page-list'>
       <view class='info-page-label'>出生日期</view>
-      <picker class="info-page-input" mode="date" value="{{time}}" start="1900-09-01" end="2018-09-01" bindchange="bindDateChange">
+      <picker class="info-page-input" mode="date" value="{{birthday}}" start="1900-09-01" end="2018-09-01" bindchange="bindDateChange">
         <text wx:if="{{selecttime}}">{{birthday}}</text>
         <text wx:if="{{systime}}">{{date}}</text>
       </picker>

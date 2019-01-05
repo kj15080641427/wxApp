@@ -30,7 +30,6 @@
     </picker>
   </view>
 
-
   <view class='quick-page-line-center'></view>
   <view class='quick-page-flex quick-center'>
     <view style='margin-left:35rpx;width:140rpx;'>
@@ -77,7 +76,7 @@
   <view>2.为不影响您的体验,请尽量在工作时间发布咨询 (9:00-20:00) 发布咨询</view>
   <view>3.咨询时间为首次咨询的两小时内,请您提前准备好咨询内容</view>
   <view>4.详情流程请查看
-    <a class="quick-page-link">《绿豆圈快速咨询交易流程及服务规范》</a>
+    <a class="quick-page-link"bindtap="toTariff">《绿豆圈快速咨询交易流程及服务规范》</a>
   </view>
   <view>5.如有疑问,请联系绿豆圈客服
     <a class="quick-page-link"></a>
@@ -87,7 +86,7 @@
 <view class='quick-page-line-lower'></view>
 <view class='quick-page-lower'>
   <view class='quick-page-order'>订单金额
-    <!-- <label style='color:#f8b62d;font-weight:bold;margin-left:10rpx'>¥{{money}}</label> -->
+    <label style='color:#f8b62d;font-weight:bold;margin-left:10rpx'>¥{{popular[index].price}}<text wx:if="{{!selectType}}">元</text></label>
   </view>
   <button class='quick-page-button' bindtap='gotofinish'>支付订单</button>
 </view>

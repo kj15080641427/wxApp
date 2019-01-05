@@ -5,70 +5,139 @@ var wxrequest = require('../../../utils/request.js')
 var throttle = require('../../../utils/throttle.js')
 Page({
 
-    /**
-     * 页面的初始数据
-     */
-    data: {
-        balance: '',
-        memberId: '',
-        bindClick: false
-    },
-    //交易明细
-    gotoDetail: function () {
-        wx.navigateTo({
-            url: '../balance-detail/index?memberId=' + this.data.memberId,
+// <<<<<<< HEAD
+  /**
+   * 页面的初始数据
+   */
+  data: {
+    balance: '',
+    memberId: '',
+    bindClick: false
+  },
+  //交易明细
+  gotoDetail: function() {
+    wx.navigateTo({
+      url: '../balance-detail/index?memberId=' + this.data.memberId,
+    })
+  },
+  //提现
+  gotoCash: function() {
+    wx.navigateTo({
+      url: '../cash/index?balance=' + JSON.stringify(this.data.balance),
+    })
+  },
+  //获取账户余额
+  getBalance: function() {
+    var url = api.getBalance() + this.data.memberId
+    var data = {
+      "memberId": this.data.memberId
+    }
+    var succeee = (data) => {
+      console.log(data)
+      this.setData({
+        balance: data
+      })
+      console.log("余额", this.data.balance.data.balanceAmount)
+    }
+    var fail = (e) => {
+      console.log(e)
+    }
+    wxrequest.requestGetpar(url, data, '', succeee, fail)
+  },
+  touchStart(e) {
+    this.touchStartTime = e.timeStamp;
+  },
+  touchEnd(e) {
+    this.touchEndTime = e.timeStamp;
+  },
+  charge(e) {
+    let that = this
+    if (!that.data.bindClick) {
+      that.setData({
+        bindClick: true
+      })
+      var v = {
+        type: 1,
+        product: 4,
+        money: e.currentTarget.dataset.amt * 100
+      }
+      wxPay(v).then(res => {
+        that.getBalance()
+        that.setData({
+          bindClick: false
         })
-    },
-    //提现
-    gotoCash: function () {
-        wx.navigateTo({
-            url: '../cash/index?balance=' + JSON.stringify(this.data.balance),
-        })
-    },
-    //获取账户余额
-    getBalance: function () {
-        var url = api.getBalance() + this.data.memberId
-        var data = {
-            "memberId": this.data.memberId
-        }
-        var succeee = (data) => {
-            console.log(data)
-            this.setData({
-                balance: data
-            })
-            console.log("余额", this.data.balance.data.balanceAmount)
-        }
-        var fail = (e) => {
-            console.log(e)
-        }
-        wxrequest.requestGetpar(url, data, '', succeee, fail)
-    },
-    touchStart(e) {
-        this.touchStartTime = e.timeStamp;
-    },
-    touchEnd(e) {
-        this.touchEndTime = e.timeStamp;
-    },
-    charge(e) {
-        let that = this
-        if (!that.data.bindClick) {
-            that.setData({
-                bindClick: true
-            })
-            var v = {
-                type: 1,
-                product: 4,
-                money: e.currentTarget.dataset.amt / 10
-            }
-            wxPay(v).then(res => {
-                that.getBalance()
-                that.setData({
-                    bindClick: false
-                })
-            }, err => {
-                console.log(123)
-                that.setData({
-                    bindClick: false
+      }, err => {
+        console.log(err)
+        that.setData({
+          bindClick: false
+// // =======
+// //     /**
+// //      * 页面的初始数据
+// //      */
+// //     data: {
+// //         balance: '',
+// //         memberId: '',
+// //         bindClick: false
+// //     },
+// //     //交易明细
+// //     gotoDetail: function () {
+// //         wx.navigateTo({
+// //             url: '../balance-detail/index?memberId=' + this.data.memberId,
+// //         })
+// //     },
+// //     //提现
+// //     gotoCash: function () {
+// //         wx.navigateTo({
+// //             url: '../cash/index?balance=' + JSON.stringify(this.data.balance),
+// // >>>>>>> f906cf30a4e6d021c0e1da732d1cc9acc4d0462d
+//         })
+//     }
+// }
+// },
+//     //获取账户余额
+//     getBalance: function () {
+//         var url = api.getBalance() + this.data.memberId
+//         var data = {
+//             "memberId": this.data.memberId
+//         }
+//         var succeee = (data) => {
+//             console.log(data)
+//             this.setData({
+//                 balance: data
+//             })
+//             console.log("余额", this.data.balance.data.balanceAmount)
+//         }
+//         var fail = (e) => {
+//             console.log(e)
+//         }
+//         wxrequest.requestGetpar(url, data, '', succeee, fail)
+//     },
+//     touchStart(e) {
+//         this.touchStartTime = e.timeStamp;
+//     },
+//     touchEnd(e) {
+//         this.touchEndTime = e.timeStamp;
+//     },
+//     charge(e) {
+//         let that = this
+//         if (!that.data.bindClick) {
+//             that.setData({
+//                 bindClick: true
+//             })
+//             var v = {
+//                 type: 1,
+//                 product: 4,
+//                 money: e.currentTarget.dataset.amt / 10
+//             }
+//             wxPay(v).then(res => {
+//                 that.getBalance()
+//                 that.setData({
+//                     bindClick: false
+//                 })
+//             }, err => {
+//                 console.log(123)
+//                 that.setData({
+//                     bindClick: false
                 })
             })
         }

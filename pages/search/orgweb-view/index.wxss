@@ -1,1 +1,353 @@
 /* pages/search/orgweb-view/index.wxss */
+/* pages/search/index.wxss */
+
+.search-input-height {
+  display: flex;
+  align-items: center;
+  height: 100rpx;
+  background-color: #1ec88c;
+  /* border-top: 1rpx solid #32b987 */
+}
+
+.index-search {
+  display: flex;
+  align-items: center;
+  height: 70rpx;
+  width: 580rpx;
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+  background-color: #32b987;
+  /* margin-top: 15rpx; */
+  padding-left: 20rpx;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+}
+
+.search-tab {
+  display: flex;
+}
+
+.search-tab-icon {
+  width: 150rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.search-page-icon {
+  margin-left: 10rpx;
+  /* margin-top: 10rpx; */
+  width: 20rpx;
+  height: 20rpx;
+}
+
+.search-tab-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80rpx;
+  background-color: white;
+  padding-left: 35rpx;
+  padding-right: 35rpx;
+}
+
+.search-tab-text {
+  width: 120rpx;
+  color: #b5b5b5;
+  font-size: 24rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /* text-align: center; */
+}
+
+/* pages/my/watchlist/index.wxss */
+
+.watchlist-page {
+  margin-left: 25rpx;
+  margin-right: 25rpx;
+  margin-top: 25rpx;
+  background-color: white;
+}
+
+.watchlist-page-flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.watchlist-page-avatar {
+  width: 140rpx;
+  height: 140rpx;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.watchlist-page-practice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 90rpx; */
+  height: 30rpx;
+  border-radius: 20rpx;
+  border: 1rpx solid #f8b65d;
+  color: #f8b65d;
+  font-size: 24rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.watchlist-page-label {
+  margin-left: 20rpx;
+  width: 120rpx;
+  font-size: 27rpx;
+  color: #b5b5b5;
+}
+
+.watchlist-page-left {
+  margin-top: 35rpx;
+  margin-left: 20rpx;
+}
+
+.watchlist-page-right {
+  margin-left: 25rpx;
+  margin-top: 35rpx;
+  margin-right: 20rpx;
+  width: 750rpx;
+  /* margin-right:20rpx *//* height: 285rpx; */
+}
+
+.watchlist-page-name {
+  font-size: 16px;
+  color: #323232;
+  font-weight: bold;
+}
+
+.watchlist-page-firm {
+  margin-left: 20rpx;
+  font-size: 24rpx;
+  color: #323232;
+  font-weight: normal;
+}
+
+.watchlist-page-address {
+  margin-top: 25rpx;
+  font-size: 24rpx;
+  color: #717171;
+}
+
+.watchlist-page-adept {
+  margin-top: 25rpx;
+  color: #b5b5b5;
+  font-size: 24rpx;
+  /* padding-bottom: 15rpx; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.watchlist-page-line {
+  background-color: #f4f4f4;
+  height: 1rpx;
+  margin-right: 25rpx;
+  margin-left: 25rpx;
+}
+
+.watch-page-lower {
+  display: flex;
+  padding-top: 25rpx;
+  height: 60rpx;
+  margin-left: 25rpx;
+  margin-right: 25rpx;
+  background-color: white;
+}
+
+.lawyerList-top {
+  background-color: white;
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+  border-radius: 20rpx;
+}
+
+.lawyerList-tab {
+  background-color: white;
+  width: 700rpx;
+  margin-left: 25rpx;
+}
+
+.search-more {
+  margin-top: 35rpx;
+  margin-bottom: 35rpx;
+  height: 30rpx;
+  width: 750rp;
+  background-color: #b5b5b5;
+  display: flex;
+  justify-content: center;
+  color: black;
+  font-size: 28rpx;
+}
+
+.search-select-view {
+  background-color: white;
+  /* display: flex; *//* height: 1500rpx; */
+}
+
+.search-select-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-select-province {
+  height: 100rpx;
+  /* line-height: 100rpx; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 34rpx;
+}
+
+.search-select-sort {
+  height: 100rpx;
+  /* line-height: 100rpx; */
+  display: flex;
+  align-items: center;
+  background-color: #f4f4f4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 34rpx;
+  padding-left: 35rpx;
+}
+
+.serach-select-city {
+  position: relative;
+  margin-left: 35rpx;
+  height: 100rpx;
+  width: 400rpx;
+  line-height: 100rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.serach-select-sort {
+  position: relative;
+  padding-left: 35rpx;
+  height: 100rpx;
+  width: 750rpx;
+  line-height: 100rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.right-width {
+  position: relative;
+  margin-left: 35rpx;
+  height: 99rpx;
+  width: 280rpx;
+  line-height: 99rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 34rpx;
+}
+
+.search-select-line {
+  background-color: #f4f4f4;
+  height: 1rpx;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.select-image {
+  margin-left: 150rpx;
+  /* margin-top: 20rpx; */
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.select-image-sort {
+  /* margin-left: 150rpx; *//* margin-top: 20rpx; */
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+  top: 50%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+}
+
+.select-hidden {
+  width: 500rpx;
+  background-color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.select-scroll-left {
+  height: 920rpx;
+  width: 300rpx;
+  font-size: 34rpx;
+}
+
+.select-scroll-right {
+  height: 960rpx;
+  width: 10rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.no-message {
+  width: 750rpx;
+}
+
+.no-messge-image-view {
+  display: flex;
+  justify-content: center;
+}
+
+.no-message-imag {
+  margin-top: 220rpx;
+  width: 330rpx;
+  height: 330rpx;
+}
+
+.no-message-tips-view {
+  display: flex;
+  justify-content: center;
+  margin-top: 50rpx;
+  font-size: 28rpx;
+}
+
+.np-message-tips {
+  font-size: 28rpx;
+  color: #323232;
+}
+
+.no-message-button {
+  width: 280rpx;
+  height: 94rpx;
+  border-radius: 55rpx;
+  background-color: #1ec88c;
+  color: white;
+  font-size: 36rpx;
+  margin-top: 65rpx;
+  line-height: 94rpx;
+}

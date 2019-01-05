@@ -36,30 +36,32 @@ Page({
   pickerBusiness: function(e) {
     this.setData({
       indexBus: e.detail.value,
-      ['parameter.skillName']: this.data.lawyerInfo.businessType[e.detail.value].businessTypeName,
-      ['parameter.skillId']: this.data.lawyerInfo.businessType[e.detail.value].businessTypeId
+      ['parameter.skillName']: this.data.lawyerInfo.businessType[0] ? this.data.lawyerInfo.businessType[e.detail.value].businessTypeName : this.data.business[e.detail.value].businessTypeName,
+      ['parameter.skillId']: this.data.lawyerInfo.businessType[0] ? this.data.lawyerInfo.businessType[e.detail.value].businessTypeId : this.data.business[e.detail.value].businessTypeId
     })
     this.getMark()
   },
   //最高可承受费用
-  getInput:function(e){
+  getInput: function(e) {
     this.setData({
-      ['parameter.maxCost']:e.detail.value
+      ['parameter.maxCost']: e.detail.value
     })
   },
   //问题内容
-  getContent:function(e){
+  getContent: function(e) {
     this.setData({
-      ['parameter.requirementContent']:e.detail.value
+      ['parameter.requirementContent']: e.detail.value
     })
   },
   //标签列表
   getMark: function() {
     var that = this
-    var url = api.getMark() + that.data.lawyerInfo.businessType[that.data.indexBus].businessTypeId
+    var urltest = that.data.lawyerInfo.businessType[0] ? that.data.lawyerInfo.businessType[that.data.indexBus].businessTypeId : that.data.business[that.data.indexBus].businessTypeId
+    var url = api.getMark() + urltest
     var data = {
-      "businessTypeId": that.data.lawyerInfo.businessType[that.data.indexBus].businessTypeId
+      "businessTypeId": urltest
     }
+    console.log('标签urllllllllllllllllllll',url)
     var success = function(data) {
       that.setData({
         selist: []
@@ -87,18 +89,18 @@ Page({
     })
   },
   //已选标签list
-  getMarkList:function(){
+  getMarkList: function() {
     var that = this
     var tagIndexList = []
     var tagIdList = []
     var tagNameList = []
-    if (this.data.selist[0]){
-      this.data.selist.map(function (item, index) {
+    if (this.data.selist[0]) {
+      this.data.selist.map(function(item, index) {
         if (item.is) {
           tagIndexList.push(index)
         }
       })
-      tagIndexList.map(function (item) {
+      tagIndexList.map(function(item) {
         tagIdList.push(that.data.markList[item].tagId)
         tagNameList.push(that.data.markList[item].tagName)
       })
@@ -120,16 +122,36 @@ Page({
         title: '发送成功',
         icon: 'none'
       })
+      setTimeout(() => {
+        wx.navigateBack({
+          delta: 3
+        })
+      }, 1500)
       console.log(data)
     }
     var fail = e => {
       wx.showToast({
         title: e.message,
-        icon:'none'
+        icon: 'none'
       })
       console.log(e)
     }
     wxrequest.request(url, data, success, fail)
+  },
+  //擅长领域
+  getexpert: function() {
+    var that = this
+    var url = api.getExpert()
+    var success = function(data) {
+      that.setData({
+        business: data.data[1].children
+      })
+      console.log("对应index擅长领域列表", data.data[1].children)
+    }
+    var fail = function(e) {
+      console.log("擅长领域", e)
+    }
+    wxrequest.requestGet(url, '', success, fail)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -141,7 +163,8 @@ Page({
       ['parameter.isFirst']: 1,
       ['parameter.targetLawyerId']: JSON.parse(options.lawyerDetail).memberId
     })
-    console.log("擅长领域", this.data.lawyerInfo)
+    console.log("擅长领域", this.data.lawyerInfo.businessType[0])
+    this.getexpert()
   },
 
   /**

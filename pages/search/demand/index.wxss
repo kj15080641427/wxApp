@@ -57,6 +57,9 @@
   /* left: 50%; */
   font-size: 28rpx;
   color: #1ec88c;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
   /* top: 10rpx; */
 }
 

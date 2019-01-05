@@ -30,9 +30,9 @@
 </view>
 
 <view class='detail-page-center'>
-  <picker class='detail-page-picker' range="{{business}}" range-key="{{'businessTypeName'}}" value="{{index}}" bindchange="pickerLIst">
+  <picker class='detail-page-picker' range="{{business}}" range-key="{{'businessTypeName'}}" value="{{index}}" bindchange="pickerLIst" wx:if="{{id}}">
     <view style='display:flex;justify-content: space-between;width:715rpx;'>
-      <view class='detail-page-text'><text style='color:red'>*</text>律师擅长领域</view>
+      <view class='detail-page-text' ><text style='color:red'>*</text>律师擅长领域</view>
       <view style='display:flex;align-items:center'>
         <text class='hide-text'>{{business[index].businessTypeName}}</text>
         <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
@@ -65,7 +65,7 @@
 </view>
 
 <view class='detail-page-problem'>
-  <textarea placeholder='请描述您遇到的问题 (限20-600字)' maxlength='300' class="detail-textarea" bindinput='getTextarea'></textarea>
+  <textarea placeholder='请描述您遇到的问题' maxlength='600' class="detail-textarea" bindinput='getTextarea'></textarea>
 </view>
 
 <view class='select-mark-view' wx:if="{{id}}" wx:if="{{markList[0]}}">

@@ -50,6 +50,9 @@
   margin-left: 10rpx;
   position: absolute;
   /* left: 50%; */
+  height:40rpx;
+  display: flex;
+  align-items: center;
   font-size: 28rpx;
   color: #1ec88c;
   /* top: 10rpx; */

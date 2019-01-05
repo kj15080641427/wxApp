@@ -1,38 +1,29 @@
- <view class='reply-page'>
+<view class='reply-page'>
 
-<!--  -->
+  <!--  -->
 
 
-   <!-- -->
-  <view wx:key="{{index}}" wx:for="{{freeText}}"style="margin-bottom:100rpx;">
-  <view class='reply-page-flex'>
-    <view class='reply-page-top'>
-      <image class='reply-page-icon' src="{{freeText[index].type==1 ? freeText[index].lawyerIconImage :userInfo.iconImage}}"></image>
-      <view class='reply-page-nikename'>{{freeText[index].type==1 ? freeText[index].lawyerName:userInfo.memberName}}</view>
-      <view class='reply-page-line'></view>
-      <view class='reply-page-nikename'>{{freeText[index].type==1 ? freeText[index].lawyerFirm:userInfo.addressExtend.province+userInfo.addressExtend.city}}</view>
-    </view>
-  </view>
-  <view class='reply-page-answer'>{{freeText[index].content}}</view>
-
-  <view class='reply-page-reply'>
-    <view class='reply-page-reply-left'>
-      <!-- <view>{{lawago[index]}}{{lawagoText[index]}}</view>
-      <view class='reply-page-reply-margin'>{{timelaw[index]}}</view> -->
-      <!-- <view >{{lawago[index]}}{{lawagoText[index]}}</view> -->
-      <view class='reply-page-reply-margin' >{{timelaw[index]}}</view>
-
-      <view class='reply-page-top reply-page-reply-margin'>
-        <!-- <view class='reply-page-reply-dot'></view> -->
+  <!-- -->
+  <view wx:key="{{index}}" wx:for="{{freeText}}" style="margin-bottom:100rpx;">
+    <view class='reply-page-flex'>
+      <view class='reply-page-top'>
+        <image class='reply-page-icon' src="{{freeText[index].type==1 ? freeText[index].lawyerIconImage ? freeText[index].lawyerIconImage: '/image/my_icon@3x/mine_icon_02_3x.png':userInfo.iconImage?userInfo.iconImage:'/image/my_icon@3x/mine_icon_02_3x.png'}}"></image>
+        <view class='reply-page-nikename'>{{freeText[index].type==1 ? freeText[index].lawyerName:userInfo.memberName}}</view>
+        <view class='reply-page-line'></view>
+        <view class='reply-page-nikename'>{{freeText[index].type==1 ? freeText[index].lawyerFirm:userInfo.addressExtend.province+userInfo.addressExtend.city}}</view>
       </view>
-      <!-- <view class='reply-page-reply-margin' bindtap='deleteInfo'>删除</view> -->
     </view>
-    <!-- <view><label style='color:#1ec88c'>5</label>条回复</view> -->
+    <view class='reply-page-answer'>{{freeText[index].content}}</view>
+
+    <view class='reply-page-reply'>
+      <view class='reply-page-reply-left'>
+        <view class='reply-page-reply-margin'>{{timelaw[index]}}</view>
+        <view class='reply-page-top reply-page-reply-margin'>
+        </view>
+      </view>
+    </view>
   </view>
- </view>
- </view>
- <!-- <view class='reply-lower-line'></view>
- <input class='reply-lower-input' placeholder='回复' placeholder-style="margin-left:40rpx"bindinput="userreply" confirm-type="search" bindconfirm="confirm"></input> -->
+</view>
 <view style='position: fixed;bottom: 0;' class='consul-page-button-view'>
   <view class="consul-oage-button-view">
     <button class="consul-page-button" bindtap='toinput'>回复</button>

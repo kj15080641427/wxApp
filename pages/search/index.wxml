@@ -1,15 +1,16 @@
+<web-view wx:if="{{webData}}" src="{{orgurl}}" bindmessage='webDataFn'></web-view>
 <view style='position:fixed; top:0;width: 750rpx;z-index:999'>
   <view class='search-input-height'>
     <view class='index-search '>
       <image src='../../image/homeicon_3x/homepage_01_3x.png' style='width:40rpx;height:40rpx;margin-right:20rpx '></image>
       <input placeholder='搜索律师' placeholder-style='color:#ffffff;' confirm-type="search" bindconfirm="confirm" bindinput='searchInput' style='width:100%;color:white'></input>
     </view>
-    <view style='font-size:20rpx;color:white;width:90rpx;margin-right:35rpx;' bindtap='gotoDemand'>
+    <!-- <view style='font-size:20rpx;color:white;width:90rpx;margin-right:35rpx;' bindtap='gotoDemand'>
       <view style='display:flex;justify-content:center;width:90rpx;'>
         <image src='../../image/search_icon@3x/Personalhomepage-25@3x.png' style='width:79rpx;height:55rpx;'></image>
       </view>
       <view style='display:flex;justify-content:center;width:90rpx;'>发布需求</view>
-    </view>
+    </view> -->
   </view>
 
   <view wx:if="{{hasList}}">
@@ -103,7 +104,7 @@
         <view class='watchlist-page'>
           <view class='watchlist-page-flex'>
             <view class='watchlist-page-left' style="z-index:55;">
-              <image lazy-load="true" class='watchlist-page-avatar' src="{{lawyerList[index].iconImage ? lawyerList[index].iconImage :'../../image/my_icon@3x/mine_icon_02_3x.png'}}" style="z-index:55;"></image>
+              <image lazy-load="true" class='watchlist-page-avatar' src="{{lawyerList[index].iconImage ? lawyerList[index].iconImage :'../../image/my_icon@3x/mine_icon-03@3x.png'}}" style="z-index:55;"></image>
               <view class='watchlist-page-practice' style="z-index:55;">执业{{year[index]>=1 ?year[index]:1 }}年 </view>
 
             </view>

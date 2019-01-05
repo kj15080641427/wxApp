@@ -35,8 +35,9 @@ Page({
     },
     hasList: true,
     lawyerName: '',
-    hasNextPage:true,
-    pageNum:1
+    // hasNextPage:true,
+    pageNum:1,
+    webData:false
   },
   //重新搜索
   again: function() {
@@ -53,7 +54,7 @@ Page({
       selectedCityColor: false,
       ishidden:true,
       pageNum: 1,
-      hasNextPage: true
+      // hasNextPage: true
     })
     // wx.removeStorageSync("picIndexList")
   },
@@ -71,7 +72,7 @@ Page({
       showExpert: false,
       ishidden: true,
       pageNum: 1,
-      hasNextPage: true
+      // hasNextPage: true
     })
   },
   //选择擅长领域
@@ -83,7 +84,7 @@ Page({
       showSort: false,
       ishidden: true,
       pageNum: 1,
-      hasNextPage: true
+      // hasNextPage: true
     })
   },
   // 选择地区
@@ -94,7 +95,7 @@ Page({
       showSort: false,
       ishidden: true,
       pageNum: 1,
-      hasNextPage: true
+      // hasNextPage: true
     })
   },
   // 关键字搜索
@@ -103,7 +104,7 @@ Page({
       lawyerName: e.detail.value,
       ishidden: true,
       pageNum: 1,
-      hasNextPage: true
+      // hasNextPage: true
     })
   },
   //排序Index
@@ -268,7 +269,7 @@ Page({
     that.setData({
       lawyerList: '',
       pageNum:1,
-      hasNextPage: true
+      // hasNextPage: true
     })
     var url = api.getSearchLawyer() + that.data.pageNum + "/" + '/10'
     var datan = that.data.noFilter
@@ -281,6 +282,7 @@ Page({
         })
       }
       that.setData({
+        hasNextPage: data.data.hasNextPage,
         lawyerList: data.data.list,
       })
       that.getAge()
@@ -319,11 +321,21 @@ Page({
     this.pc()
     // this.getAge()
   },
+
+  webDataFn:function(e){
+    // this.setData({
+    //   webData:true
+    // })
+    console.log(e)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log('?????',options.id)
+    var that = this
+    this.setData({
+      orgurl: wx.getStorageSync("orgUrl")
+    })
     wx.showLoading({
       title: '加载中',
     })
@@ -341,9 +353,9 @@ Page({
         }]
       }]
     })
-    this.setData({
+    that.setData({
       region: re,
-      id:options.id
+      id: options.id ? options.id:''
     })
     console.log("地区", regionSearch.citysData, '地区+全国', this.data.region)
     // this.pc()
@@ -360,10 +372,8 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-    if (this.data.id) {
-      this.pc()
-    }
+  onShow: function(options) {
+
   },
 
   /**

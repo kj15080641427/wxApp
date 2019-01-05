@@ -15,6 +15,26 @@ Page({
     countdown: 60,
     startCountdown: false
   },
+  //用户协议
+  getUrl:function(){
+    var url = api.getUserUrl()
+    var success = data =>{
+      this.setData({
+        userUrl:data
+      })
+      console.log('用户协议',data)
+    }
+    var fail = e =>{
+      console.log(e)
+    }
+    wxrequest.requestGet(url,'',success,fail)
+  },
+  //跳转web-view
+  toWeb:function(){
+    wx.navigateTo({
+      url: '/pages/userlogin/user-url/index?url=' + this.data.userUrl.data.userRegisterAgreenmentUrl,
+    })
+  },
   //获取手机号输入框值
   getPhoneInput: function(e) {
     this.setData({
@@ -63,7 +83,11 @@ Page({
       wxrequest.request(verifyCodeUrl, verifydata, success, fail)
     }
   },
+  //默认用户名
+  // 保存
+  saveInfo: function () {
 
+  },
   // 注册
   userLogin: function() {
     var message = "1"
@@ -101,6 +125,17 @@ Page({
         wx.setStorageSync("userInfo", res.data)
         wx.setStorageSync("memberId", res.data.memberId)
         wx.setStorageSync("mobile", res.data.mobile)
+       
+        var that = this
+        var editUrl = api.getEditDetail()
+        var editDetailData = { memberId: wx.getStorageSync('memberId'), memberName: '手机用户' + res.data.mobile.slice(0, 6) }
+        var success = function (data) {
+        }
+        var fail = function (e) {
+          console.log(e)
+        }
+        wxrequest.request(editUrl, editDetailData, success, fail)
+
         if (!jM.isLogin()) {
           wxrequest.superRequest(api.getImConfig(), {}, 'GET').then(res => {
             console.log('config:', res)
@@ -180,7 +215,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.getUrl()
   },
 
   /**

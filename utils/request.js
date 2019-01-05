@@ -74,7 +74,7 @@ function requestForm(url, params, message, success, fail) {
       'device': JSON.stringify(device),
       'X-Token': wx.getStorageSync("token")
     },
-    method: 'POST',
+    // method: 'POST',
     success: function (res) {
       wx.hideNavigationBarLoading()
       if (message != "") {

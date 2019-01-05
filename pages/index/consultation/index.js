@@ -82,23 +82,76 @@ Page({
       commitContent: e.detail.value
     })
   },
-  formSubmit(e) {
-    var that = this
-    console.log('form发生了submit事件，携带数据为：', e)
-    this.setData({
-      formId: e.detail.formId
-    })
+  // formSubmit(e) {
+  //   var that = this
+  //   console.log('form发生了submit事件，携带数据为：', e)
+  //   this.setData({
+  //     formId: e.detail.formId
+  //   })
 
+  //   var commitURL = api.getCommitUrl()
+  //   var freedata = {
+  //     "consultationTypeId": e.detail.value.consultationTypeId,
+  //     "regionId": e.detail.value.regionId, 
+  //     "content": e.detail.value.content,
+  //     "isHide": e.detail.value.isHide,
+  //     "wxReportSubmit": {
+  //       "openId": e.detail.value.openid,
+  //       "formId": e.detail.formId
+  //     }
+  //    }
+  //   console.log("formIdsssssssssssss",that.data.formId)
+  //   var success = function(data){
+  //     console.log("上传参数", freedata)
+  //     that.setData({
+  //       consultation:data
+  //     })
+  //   that.getOrder()
+  //   console.log('成功')
+  //     wx.showToast({
+  //       title: '提交成功',
+  //     })
+  //     console.log(',.....',that.data.consultation)
+  //   }
+  //   var fail = function(e){
+  //     console.log(12312312312,e)
+  //     wx.showToast({
+  //       title: '提交失败',
+  //     })
+  //   }
+  //   var cdata = this.data
+  //   if (cdata.consultationTypeId == '') {
+  //     wx.showToast({
+  //       title: '请选择问题类型',
+  //       icon: 'none'
+  //     })
+  //   } else if (cdata.regionId == '') {
+  //     wx.showToast({
+  //       title: '请选择地区',
+  //       icon: 'none'
+  //     })
+  //   } else if (cdata.commitContent.length < 10) {
+  //     wx.showToast({
+  //       title: '问题描述需10字以上',
+  //       icon: 'none'
+  //     })
+  //   } else {
+  //     wxrequest.requestForm(commitURL, freedata,'', success, fail)
+  //   }
+  // },
+  // 提交
+  commit: function() {
+    var that = this
     var commitURL = api.getCommitUrl()
     var freedata = {
-      "consultationTypeId": e.detail.value.consultationTypeId,
-      "regionId": e.detail.value.regionId, 
-      "content": e.detail.value.content,
-      "isHide": e.detail.value.isHide,
-      "wxReportSubmit": {
-        "openId": e.detail.value.openid,
-        "formId": e.detail.formId
-      }
+      "consultationTypeId": that.data.consultationTypeId,
+      "regionId": that.data.regionId, 
+      "content": that.data.commitContent,
+      "isHide": that.data.isHide == true ? '1':'0',
+      // "wxReportSubmit": {
+      //   "openId": wx.getStorageSync('openid'),
+      //   "formId": that.data.formId
+      // }
      }
     console.log("formIdsssssssssssss",that.data.formId)
     var success = function(data){
@@ -136,73 +189,8 @@ Page({
         icon: 'none'
       })
     } else {
-      wxrequest.requestForm(commitURL, freedata,'', success, fail)
+      wxrequest.request(commitURL, freedata, success, fail)
     }
-
-    // let formData = new FormData();
-    // formData.append("consultationTypeId", that.data.consultationTypeId)
-    // formData.append("regionId", that.data.regionId)
-    // formData.append("content", that.data.commitContent)
-    // formData.append("isHide", that.data.isHide == true ? '1' : '0')
-    // formData.append("wxReportSubmit", {
-    //   "openId": wx.getStorageSync('openid'),
-    //   "formId": e.detail.formId
-    // })
-    // this.commit()
-    // console.log(formData.get('consultationTypeId'));
-  },
-  // 提交
-  commit: function() {
-    var that = this
-    // var commitURL = api.getCommitUrl()
-    // var freedata = {
-    //   "consultationTypeId": that.data.consultationTypeId,
-    //   "regionId": that.data.regionId, 
-    //   "content": that.data.commitContent,
-    //   "isHide": that.data.isHide == true ? '1':'0',
-    //   "wxReportSubmit": {
-    //     "openId": wx.getStorageSync('openid'),
-    //     "formId": that.data.formId
-    //   }
-    //  }
-    // console.log("formIdsssssssssssss",that.data.formId)
-    // var success = function(data){
-    //   console.log("上传参数", freedata)
-    //   that.setData({
-    //     consultation:data
-    //   })
-    // that.getOrder()
-    // console.log('成功')
-    //   wx.showToast({
-    //     title: '提交成功',
-    //   })
-    //   console.log(',.....',that.data.consultation)
-    // }
-    // var fail = function(e){
-    //   console.log(12312312312,e)
-    //   wx.showToast({
-    //     title: '提交失败',
-    //   })
-    // }
-    // var cdata = this.data
-    // if (cdata.consultationTypeId == '') {
-    //   wx.showToast({
-    //     title: '请选择问题类型',
-    //     icon: 'none'
-    //   })
-    // } else if (cdata.regionId == '') {
-    //   wx.showToast({
-    //     title: '请选择地区',
-    //     icon: 'none'
-    //   })
-    // } else if (cdata.commitContent.length < 10) {
-    //   wx.showToast({
-    //     title: '问题描述需10字以上',
-    //     icon: 'none'
-    //   })
-    // } else {
-    //   wxrequest.request(commitURL, freedata, success, fail)
-    // }
   },
   //订单
   getOrder: function() {

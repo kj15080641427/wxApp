@@ -1,0 +1,3 @@
+<!--pages/search/court/index.wxml-->
+<input placeholder='搜索法院'></input>
+<picker></picker>
