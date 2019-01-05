@@ -59,7 +59,7 @@
     <view class='filter-page-line'></view>
   </view>
   <!-- 常去法院 -->
-  <view class='filter-page-cneter filter-background' >
+  <!-- <view class='filter-page-cneter filter-background' >
     <view style='display:flex;'>
       <picker bindchange="changeCourt" class='filter-page-picker' range="{{search[5].items}}" range-key="{{'text'}}" >{{search[5].text}}<text class='filter-page-picker-text' >{{search[5].items[courtIndex].text}}</text></picker>
     </view>
@@ -67,9 +67,9 @@
   </view>
   <view style='background-color:white'>
     <view class='filter-page-line'></view>
-  </view>
+  </view> -->
   <!-- 常去检察院 -->
-  <view class='filter-page-cneter filter-background' >
+  <!-- <view class='filter-page-cneter filter-background' >
     <view style='display:flex;'>
       <picker bindchange="changeProcuratorate" class='filter-page-picker' range="{{search[6].items}}" range-key="{{'text'}}" >{{search[6].text}}<text class='filter-page-picker-text' >{{search[6].items[procuratorateIndex].text}}</text></picker>
     </view>
@@ -77,7 +77,7 @@
   </view>
   <view style='background-color:white'>
     <view class='filter-page-line'></view>
-  </view>
+  </view> -->
   <!-- 分隔 -->
   <view style='height:35rpx'></view>
   <!-- 律师职位 -->

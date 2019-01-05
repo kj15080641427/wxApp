@@ -7,7 +7,7 @@
   </view>
 </view>
 <view style='background-color:white;padding-right:35rpx;'>
-  <image class='law-page-avatar' src="{{lawyerCard.iconImage? lawyerCard.iconImage : '../../../image/my_icon@3x/mine_icon_02_3x.png'}}"></image>
+  <image class='law-page-avatar' src="{{lawyerCard.iconImage? lawyerCard.iconImage : '../../../image/my_icon@3x/mine_icon-03@3x.png'}}"></image>
   <!-- {{lawyerList[index].iconImage}} -->
   <view class='law-page-name'>
     <view class='law-flex law-page-name-right'>
@@ -65,7 +65,7 @@
 <view wx:if="{{isshowCard}}">
   <view wx:if="{{lawyerInfo.businessType}}">
     <view class='law-flex' style='background-color:white;height:300rpx;'>
-      <view class='law-long-text'></view>
+      <view class='law-long-text'>擅长领域</view>
 
       <view class='law-center-icon'>
         <!-- 1 -->

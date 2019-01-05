@@ -32,7 +32,7 @@
   <view class='details-page'>
     <view class='details-page-flex details-page-lawyer' bindtap='toLawyerHomePage' data-lawindex="{{index}}">
       <view class='details-page-top'>
-        <image class='details-page-lawyer-icon' src="{{freeTextList[index].lawyerIconImage? freeTextList[index].lawyerIconImage :'/image/my_icon@3x/mine_icon_02_3x.png'}}"></image>
+        <image class='details-page-lawyer-icon' src="{{freeTextList[index].lawyerIconImage? freeTextList[index].lawyerIconImage :'/image/my_icon@3x/mine_icon-03@3x.png'}}"></image>
         <view class='details-page-lawyer-nikename'>{{freeTextList[index].lawyerName}}</view>
         <view class='details-page-lawyer-lawfirm'>{{freeTextList[index].lawyerFirm}}</view>
       </view>

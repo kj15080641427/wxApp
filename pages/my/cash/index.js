@@ -17,19 +17,20 @@ Page({
     })
   },
   //支付宝
-  userName:function(e){
+  acc:function(e){
     this.setData({
       account:e.detail.value
     })
   },
   cash:function(){
     var that = this
-    var moneyt = that.data.balance
+    var moneyt = Number(that.data.balance + '.01')
     var accountt = that.data.account
+    var namet = that.data.userName
     const res = wx.getSystemInfoSync()
     let _ua = 'wxapp:brand(' + res.brand + ') model(' + res.model + ') system(' + res.system + ') SDKVersion(' + res.SDKVersion + ')'
     var url = api.getCash()
-    var data = { money: that.data.balance, account: that.data.account, name: that.data.userName, ua: _ua, sign: hex_md5('money=' +  moneyt  + '&account=' +  accountt  + '&ua=' +  _ua ) }
+    var data = { money: moneyt, account: accountt, name: namet, ua: _ua, sign: hex_md5('money='+moneyt+'&account='+accountt+'&ua='+_ua) }
     var success = data =>{
       wx.showToast({
         title: '提现成功',
@@ -41,7 +42,10 @@ Page({
       console.log(data)
     }
     var fail = e =>{
-
+      wx.showToast({
+        title: '提现失败',
+        icon:'none'
+      })
     }
     wxrequest.request(url,data,success,fail)
   },

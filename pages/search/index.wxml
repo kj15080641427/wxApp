@@ -114,7 +114,7 @@
               </view>
               <view class='watchlist-page-address'>{{address[index]}}
                 <text wx:if="{{lawyerList[index].region&&lawyerList[index].institutionName}}">|</text> {{lawyerList[index].institutionName}}</view>
-              <view class='watchlist-page-adept' wx:if="{{lawyerList[index].description}}">擅长领域: {{lawyerList[index].description}} </view>
+              <view class='watchlist-page-adept' wx:if="{{lawyerList[index].description}}">{{lawyerList[index].description}} </view>
             </view>
 
           </view>

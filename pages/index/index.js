@@ -1,7 +1,8 @@
 var wxrequest = require('../../utils/request.js')
 var api = require('../../utils/api.js')
-var reg = require('../../region.js');
+var reg = require('../../region.js')
 var initIndex = ''
+  var App = getApp()
 Page({
   data: {
     swiperH: '', //swiper高度
@@ -23,7 +24,7 @@ Page({
     adBanner: '',
     listHeight: '',
     pageNum: 1,
-    total: 10,
+    total: 1,
   },
   //swiper滑动事件banner图
   swiperChange: function(e) {
@@ -80,8 +81,9 @@ Page({
     }
     var success = function(data) {
       wx.hideLoading()
-      function toSort(a,b){
-        return a.sort-b.sort
+
+      function toSort(a, b) {
+        return a.sort - b.sort
       }
       that.setData({
         popular: data.data.sort(toSort),
@@ -117,7 +119,7 @@ Page({
     var failList = function(e) {
       console.log("解决方案错误", e)
     }
-      wxrequest.requestPost(listUrl, listData, message, successList, failList)
+    wxrequest.requestPost(listUrl, listData, message, successList, failList)
   },
   //点击tabbar栏
   onTabItemTap(item) {
@@ -131,9 +133,12 @@ Page({
     wx.showLoading({
       title: '数据加载中',
     })
-    if(options.channel){
-    wx.setStorageSync('channel', options.channel)
+    if (options.scene) {
+      // wx.setStorageSync('scene', options.channel)
+      App.globalData.device.channel = options.scene
     }
+    console.log(options)
+    console.log('channel', options.scene)
     this.getArticleType()
     this.getAdbanner()
     this.judgeTips()
@@ -150,7 +155,6 @@ Page({
       articleIndex: e.detail.current,
       article: [],
       pageNum: 1,
-      total:10,
     });
     this.checkCor();
     wx.showLoading({
@@ -173,7 +177,7 @@ Page({
         article: that.data.article.concat(data.data.list),
       })
       that.setData({
-        listHeight: that.data.article.length * 230 + 200 + 'rpx' 
+        listHeight: that.data.article.length * 230 + 200 + 'rpx'
       })
     }
     var failList = function(e) {
@@ -272,7 +276,7 @@ Page({
     if (wx.getStorageSync("token")) {
       wx.navigateTo({
         // url: '../index/expert-service/index',
-        url:'/pages/search/demand/index'
+        url: '/pages/search/demand/index'
       })
     } else {
       wx.navigateTo({
@@ -297,11 +301,11 @@ Page({
   },
   onReachBottom: function() {
     var that = this
-    if (this.data.total == 10){
-    that.setData({
-      pageNum: that.data.pageNum + 1,
-    })
-    this.getArticleList()
+    if (this.data.total == 10) {
+      that.setData({
+        pageNum: that.data.pageNum + 1,
+      })
+      this.getArticleList()
     }
   },
   // 消息
