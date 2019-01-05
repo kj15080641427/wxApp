@@ -14,7 +14,6 @@ Page({
     wx.navigateTo({
       url: '../demand-detail/index?busiTypes=' + JSON.stringify(this.data.busiTypes[e.currentTarget.dataset.typeindex]) + '&demandType=' + JSON.stringify(this.data.demandType),
     })
-    // console.log(e)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -25,8 +24,6 @@ Page({
       demandType: JSON.parse(options.demandType)[options.index],
       typeindex:options.index
     })
-    // console.log(JSON.parse(options.busiTypes))
-    // console.log("typeindex",options.index)
   },
 
   /**

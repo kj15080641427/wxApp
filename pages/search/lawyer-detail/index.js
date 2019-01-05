@@ -33,8 +33,6 @@ Page({
     wx.navigateTo({
       url: '/pages/search/orgweb-viewTwo/index',
     })
-    console.log('orgList', this.data.lawyerCard.orgTags)
-    console.log(wx.getStorageSync("orgUrl"))
   },
   //关注
   follow: function() {
@@ -94,7 +92,6 @@ Page({
   getLawyerMoney: function() {
     var url = api.getLawyerMoney() + this.data.lawyerList
     var success = data => {
-      console.log('律师单价', data.data)
       this.setData({
         lawyerMoney: data.data
       })
@@ -125,7 +122,6 @@ Page({
       that.setData({
         score: scoreList
       })
-      console.log("律师主页", that.data)
       that.ageAddress()
     }
     var fail = function(e) {
@@ -155,7 +151,6 @@ Page({
       that.getCase()
       that.getlawyer()
       that.getAge()
-      console.log("背景图/荣誉", data.data)
     }
     var homeFail = function(e) {
       console.log(e)
@@ -239,7 +234,6 @@ Page({
       this.setData({
         caseList: data.data.list
       })
-      console.log("案例", data)
     }
     var fail = (e) => {
       console.log("案例错误", e)
@@ -299,7 +293,6 @@ Page({
             delta: 10
           })
         }, 1500)
-        console.log(data)
       }
       var fail = e => {
         wx.showToast({
@@ -344,7 +337,6 @@ Page({
       })
     }
     wxPay(t).then(res => { //支付成功
-      console.log('??>?>?>')
     }, (err => { //支付失败
       console.log("余额不足...", err, t.go)
     }))
@@ -375,7 +367,6 @@ Page({
   },
   //余额是否足够
   isEnough: function() {
-    console.log(this.data.lawyerMoney.balance)
     if (this.data.lawyerMoney.balance >= this.data.lawyerMoney.lawyerPrice / 60) {
       this.showModal()
     }else{
@@ -438,7 +429,6 @@ Page({
   //支付
   //快速咨询
   quickConsultation: function() {
-    console.log('电话咨询')
     var t = {
       money: this.data.lawyerMoney.lawyerPrice * 100,
       type: 3,
@@ -452,7 +442,7 @@ Page({
       })
     }
     wxPay(t).then(res => {
-      console.log('支付', res)
+      // console.log('支付', res)
     })
   },
   /**
@@ -469,7 +459,6 @@ Page({
     wx.showLoading({
       title: '获取律师信息',
     })
-    console.log("律师cansdhaskjdh", this.data.parameter)
     this.search()
     this.followList()
     this.getLawyerMoney()

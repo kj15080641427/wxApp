@@ -29,7 +29,6 @@ Page({
       that.setData({
         demandType: data.data
       })
-      console.log("服务分类", data.data)
     }
     var fail = function (e) {
       console.log(e)

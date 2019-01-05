@@ -16,7 +16,6 @@ Page({
   onLoad: function (options) {
     this.setData({
       sUrl:wx.getStorageSync("web"),
-      // index: options.resolveindex
     })
   },
 

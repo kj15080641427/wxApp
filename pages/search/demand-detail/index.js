@@ -51,7 +51,6 @@ Page({
       multiArray: this.data.multiArray,
       multiIndex: this.data.multiIndex
     };
-    console.log(e.detail.column)
     data.multiIndex[e.detail.column] = e.detail.value;
     switch (e.detail.column) {
       case 0:
@@ -63,8 +62,6 @@ Page({
     })
   },
   bindMultiPickerChange: function(e) {
-    console.log(this.data.multiArray[0][e.detail.value[0]])
-    console.log(this.data.multiArray[1][e.detail.value[1]])
     this.setData({
       ['postList.lawyerRegionId']: this.data.multiArray[1][e.detail.value[1]].regionId,
       multiIndex: e.detail.value,
@@ -92,7 +89,6 @@ Page({
       that.setData({
         markList: data.data.list
       })
-      console.log("问题标签", that.data.markList)
     }
     var fail = function(e) {
       console.log(e)
@@ -112,7 +108,6 @@ Page({
         }
       })
       wx.hideLoading()
-      console.log("对应index擅长领域列表", data)
     }
     var fail = function(e) {
       console.log("擅长领域", e)
@@ -149,7 +144,6 @@ Page({
       ['postList.skillName']: this.data.business[e.detail.value].businessTypeName
     })
     this.getMark()
-    // console.log("事务分类picker", this.data.business)
   },
   //发送需求
   gotoDemandList: function() {
@@ -168,13 +162,11 @@ Page({
         tagNameList.push(that.data.markList[item].tagName)
       })
     }
-    console.log('问题标签22222', this.data.markList)
     var test = tagIdList
     that.setData({
       ['postList.tagId']: tagIdList,
       ['postList.tag']: tagNameList
     })
-    console.log("标签", that.data.selist)
     var par = this.data.postList
     if (that.data.id ? par.skillId == "" || par.skillName == '' : false) {
       wx.showToast({
@@ -212,7 +204,6 @@ Page({
         console.log(item)
       }
     })
-    console.log(this.data.postList)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -227,7 +218,6 @@ Page({
     this.setData({
       multiArray: [[reg.citysData][0], [reg.citysData][0][0].child],
     })
-    console.log(this.data.multiArray)
 
     this.setData({
       // markId: JSON.parse(options.busiType)
@@ -240,10 +230,6 @@ Page({
       ['postList.requirementBusiId']: options.busiTypes ? JSON.parse(options.busiTypes).businessTypeId : '',
       ['postList.requirementBusiName']: options.busiTypes ? JSON.parse(options.busiTypes).businessTypeName : ''
     })
-    console.log("leixing", JSON.parse(options.demandType))
-    console.log("feilei", options.busiTypes ? 1 : 0)
-    console.log("类型id", this.data.id)
-
   },
 
   /**

@@ -135,7 +135,6 @@ Page({
       selectedCityColor: true,
       clickOhter: false,
     })
-    console.log("市ID", this.data.region[this.data.regionindex].child[e.currentTarget.dataset.cityindex].regionId)
     this.pc()
   },
   //选择擅长领域1级
@@ -216,7 +215,6 @@ Page({
       that.setData({
         lawyerList: data.data.list,
       })
-      console.log("lawyerList", that.data.lawyerList)
       that.getAge()
     }
     var fail = function (e) {
@@ -339,10 +337,6 @@ Page({
     that.setData({
       ['noFilter.orgId']: options.id ? options.id : ''
     })
-    console.log(options)
-    // this.pc()
-    // this.getExpert()
-    //  加载极光im
   },
 
   /**
@@ -388,7 +382,6 @@ Page({
         ishidden: false
       })
       that.topSearch()
-      console.log('moremmmmmmmmmm', that.data.pageNum)
     } else {
       this.setData({
         ishidden: true

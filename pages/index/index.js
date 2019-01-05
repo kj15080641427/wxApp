@@ -56,7 +56,6 @@ Page({
       this.setData({
         adBanner: data.data.list
       })
-      console.log("广告", data.data.list)
     }
     var fail = (e) => {
       console.log(e)
@@ -81,7 +80,6 @@ Page({
     }
     var success = function(data) {
       wx.hideLoading()
-      console.log("解决方案分类list", data.data.sort(toSort))
       function toSort(a,b){
         return a.sort-b.sort
       }
@@ -115,7 +113,6 @@ Page({
         listHeight: that.data.article.length ? that.data.article.length * 220 + 200 + 'rpx' : ''
       })
 
-      console.log("解决方案list", that.data.total)
     }
     var failList = function(e) {
       console.log("解决方案错误", e)
@@ -175,7 +172,6 @@ Page({
         total: data.data.total,
         article: that.data.article.concat(data.data.list),
       })
-      console.log(that.data.listHeight)
       that.setData({
         listHeight: that.data.article.length * 230 + 200 + 'rpx' 
       })
@@ -248,7 +244,6 @@ Page({
       wx.navigateTo({
         url: '../index/consultation/index?type=' + JSON.stringify(this.data.popular)
       })
-      // console.log(this.data.popular)
     } else {
       wx.navigateTo({
         url: '../userlogin/index'
@@ -259,7 +254,6 @@ Page({
   phoneConstultation: function() {
     var url = api.getPhone()
     var success = function(data) {
-      console.log(data)
       wx.makePhoneCall({
         phoneNumber: data.data.phone,
       })
@@ -308,9 +302,7 @@ Page({
       pageNum: that.data.pageNum + 1,
     })
     this.getArticleList()
-    console.log('?????????????????????????????????????')
     }
-    console.log('页数', this.data.pageNum, )
   },
   // 消息
   judgeTips: function() {
@@ -341,16 +333,10 @@ Page({
       tipsTwo: false
     })
   },
-  loadMorePopular: function() {
-    console.log('更多热门推荐')
-  },
-  loadMore: function() {
-    console.log("加载更多")
-  },
   test: function() {
     var that = this;
     // 显示加载图标
-    console.log(that.data.more)
+    // console.log(that.data.more)
     that.setData({
       more: !that.data.more
     })

@@ -21,7 +21,6 @@ Page({
       pageSize: 10
     }
     var success = data => {
-      console.log('法院列表', data)
     }
     var fail = e => {
       console.log(e)
@@ -39,7 +38,6 @@ Page({
       multiArray: this.data.multiArray,
       multiIndex: this.data.multiIndex
     };
-    console.log(e.detail.column)
     data.multiIndex[e.detail.column] = e.detail.value;
     switch (e.detail.column) {
       case 0:
@@ -53,8 +51,6 @@ Page({
 
   },
   bindMultiPickerChange: function (e) {
-    console.log(this.data.multiArray[0][e.detail.value[0]])
-    console.log(this.data.multiArray[1][e.detail.value[1]])
     this.setData({
       ['changeInfo.regionId']: this.data.multiArray[1][e.detail.value[1]].regionId ? this.data.multiArray[1][e.detail.value[1]].regionId : this.data.multiArray[0][e.detail.value[0]].regionId
     })

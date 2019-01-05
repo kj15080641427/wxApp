@@ -15,7 +15,6 @@ Page({
     this.setData({
       url:options.url
     })
-    console.log('哈哈哈哈哈哈哈哈哈哈或或或或',options.url)
   },
 
   /**

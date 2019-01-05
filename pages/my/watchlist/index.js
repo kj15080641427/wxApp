@@ -17,15 +17,11 @@ Page({
     var url = api.getMyFollow()
     var data = {"pageNum":'1',"pageSize":'50'}
     var success=(data)=>{
-      console.log(data)
       that.setData({
         myFollow:data.data.list
       })
       that.ageAddress()
     }
-    // var success = function(data){
-    //   console.log(data)
-    // }
     var fail=e=>{
       console.log(e)
     }
@@ -38,7 +34,7 @@ Page({
     var that = this
     that.data.myFollow ? that.data.myFollow.map(function (item) {
       yearList.push(formatTime.formatTime(new Date()).split("/")[0] - item.beginPracticeDate.split("-")[0])
-    }) : console.log('????')
+    }) : ''
     that.data.myFollow ? that.data.myFollow.map(function (item) {
       addressList.push(item.region.split('-', 2))
     }) : ''

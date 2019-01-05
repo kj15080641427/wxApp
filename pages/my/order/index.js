@@ -23,6 +23,7 @@ Page({
       })
     } else if (that.data.order[e.currentTarget.dataset.orderindex].orderType == '需求') {
       if (e.currentTarget.dataset.orderstatus != '未接单') {
+          wx.setStorageSync('lawyer-avatar', e.currentTarget.dataset.lawyeravatar)
         wx.navigateTo({
           url: '../../message/chart/index?name=' + e.currentTarget.dataset.lawyername + '&userName=lex' + e.currentTarget.dataset.lawyerid + '&avatar=' + e.currentTarget.dataset.lawyeravatar
         })
@@ -32,7 +33,6 @@ Page({
         url: '../order-detail/index?orderDetail=' + JSON.stringify(that.data.order[e.currentTarget.dataset.orderindex]),
       })
     }
-    console.log("index", that.data.order[e.currentTarget.dataset.orderindex])
   },
   //订单
   getOrder: function() {
@@ -47,7 +47,6 @@ Page({
         hasNextPage: data.data.hasNextPage,
         order: this.data.order.concat(data.data.list)
       })
-      console.log("订单", data)
     }
     var fail = (e) => {
       console.log(e)
@@ -63,7 +62,6 @@ Page({
       mobile: options.mobile
     })
     this.getOrder()
-    console.log("??", options.memberId)
   },
 
   /**

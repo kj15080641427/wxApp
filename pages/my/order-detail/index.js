@@ -39,7 +39,6 @@ Page({
       wx.makePhoneCall({
         phoneNumber: data.data
       })
-      console.log('获取律师电话',data)
     })
     var fail=(e)=>{
       console.log(e)
@@ -79,45 +78,32 @@ Page({
     var nowDate = formatTime.formatTime(new Date()).split(" ")[0]
     var startTime = this.data.startTime.split(" ")[1]
     var nowTime = formatTime.formatTime(new Date()).split(" ")[1]
-    console.log("订单开始时间", this.data.startTime.split(" "))
-    console.log("现在时间",formatTime.formatTime(new Date()).split(" "))
     if (nowDate.split("/")[0]-startDate.split("-")[0]>0){
       this.setData({
         time: false
       })
-      console.log('年', nowDate.split("/")[0] - startDate.split("-")[0])
     } else if (nowDate.split("/")[1] - startDate.split("-")[1] > 0){
       this.setData({
         time: false
       })
-      console.log('月')
     } else if (nowDate.split("/")[2] - startDate.split("-")[2] > 0){
       this.setData({
         time: false
       })
-      console.log('日')
     } else if ((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]))>900){
       this.setData({
         time: false,
       })
-      console.log('小时')
     }else{
       var hasTime = 900-((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2])))
-      // this.setData({
-      //   hasTime: 900-hasTime,
-      //   // statusValue: true
-      // })
-      console.log("剩余时间", hasTime, startTime.split(":")[2])
       var that = this
       var secondInt = hasTime
       that.setData({
         minute: parseInt(secondInt / 60),
         second: secondInt % 60
       })
-      console.log('计时器', that.data.minute)
       this.setData({
         timedown:setInterval(function () {
-          // var downTime = hasTime -- 
           that.setData({
             second: that.data.second - 1
           })
@@ -137,13 +123,10 @@ Page({
               statusValue:false
             })
             clearInterval(that.data.timedown)
-            console.log("清除计时器")
           }
-          console.log('计时器', that.data.second)
         }, 1000)
       })
     } 
-    // console.log("??????", startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]) )
   },
 
   /**

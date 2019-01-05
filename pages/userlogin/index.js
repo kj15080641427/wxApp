@@ -22,7 +22,6 @@ Page({
       this.setData({
         userUrl:data
       })
-      console.log('用户协议',data)
     }
     var fail = e =>{
       console.log(e)
@@ -64,7 +63,6 @@ Page({
       that.setData({
         isFocus: true
       })
-      console.log(data)
     }
     var fail = function(e) {
       wx.showToast({
@@ -94,7 +92,6 @@ Page({
       "code": "654321"
     }
     var success = function(data) {
-      console.log(data)
       wx.showToast({
         title: '登陆成功',
       })

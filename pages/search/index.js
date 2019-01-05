@@ -135,7 +135,6 @@ Page({
       selectedCityColor: true,
       clickOhter: false,
     })
-    console.log("市ID", this.data.region[this.data.regionindex].child[e.currentTarget.dataset.cityindex].regionId)
     this.pc()
   },
   //选择擅长领域1级
@@ -216,7 +215,6 @@ Page({
       that.setData({
         lawyerList: data.data.list,
       })
-      console.log("lawyerList", that.data.lawyerList)
       that.getAge()
     }
     var fail = function(e) {
@@ -228,9 +226,6 @@ Page({
       console.log(e)
     }
     wxrequest.request(url, datan, success, fail)
-    // wx.showLoading({
-    //   title: '正在加载',
-    // })
   },
   //上拉搜索
   topSearch: function() {
@@ -259,9 +254,6 @@ Page({
       console.log(e)
     }
     wxrequest.request(url, datan, success, fail)
-    // wx.showLoading({
-    //   title: '正在加载',
-    // })
   },
   //搜索
   pc: function() {
@@ -357,9 +349,6 @@ Page({
       region: re,
       id: options.id ? options.id:''
     })
-    console.log("地区", regionSearch.citysData, '地区+全国', this.data.region)
-    // this.pc()
-    // this.getExpert()
     //  加载极光im
   },
 
@@ -407,7 +396,6 @@ Page({
         ishidden: false
       })
       that.topSearch()
-      console.log('moremmmmmmmmmm', that.data.pageNum)
     }else{
       this.setData({
         ishidden:true

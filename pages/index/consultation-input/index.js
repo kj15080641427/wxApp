@@ -30,7 +30,6 @@ Page({
         
       })
       // that.getFreeText()
-      console.log("用户回复", data.data)
     }
     var fail = e => {
       wx.showToast({

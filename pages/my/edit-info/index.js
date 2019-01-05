@@ -56,7 +56,6 @@ Page({
       multiArray: this.data.multiArray,
       multiIndex: this.data.multiIndex
     };
-    console.log(e.detail.column)
     data.multiIndex[e.detail.column] = e.detail.value;
     switch (e.detail.column) {
       case 0:
@@ -70,8 +69,6 @@ Page({
 
   },
   bindMultiPickerChange: function(e) {
-    console.log(this.data.multiArray[0][e.detail.value[0]])
-    console.log(this.data.multiArray[1][e.detail.value[1]])
     this.setData({
       ['changeInfo.regionId']: this.data.multiArray[1][e.detail.value[1]].regionId ? this.data.multiArray[1][e.detail.value[1]].regionId : this.data.multiArray[0][e.detail.value[0]].regionId
     })
@@ -103,7 +100,6 @@ Page({
     }
     var fail = function(e) {
       console.log(e)
-      // console.log("行业", data)
     }
     wxrequest.request(url, data, success, fail)
   },
@@ -112,7 +108,6 @@ Page({
     var that = this
     var url = api.getOrganization()
     var success = (data) => {
-      // console.log("商会组织",data)
       this.setData({
         org: data.data
       })
@@ -136,7 +131,6 @@ Page({
     var that = this
     var editUrl = api.getEditDetail()
     var editDetailData = that.data.changeInfo
-    console.log(that.data.changeInfo)
     var success = function(data) {
       wx.setStorageSync('index1', that.data.index1)
       that.setData({
@@ -195,7 +189,6 @@ Page({
       selecttime: false,
       systime: true
     })
-    console.log(e.detail.value)
   },
   showLoad: function() {
     wx.showLoading({
@@ -237,7 +230,6 @@ Page({
     this.setData({
       ['changeInfo.memberName']: e.detail.value
     })
-    // console.log('input值', !!e.detail.value)
   },
 
   // 职务
@@ -273,8 +265,6 @@ Page({
       avatarUrl: wx.getStorageSync('userInfo').iconImage ? wx.getStorageSync('userInfo').iconImage :'',
       ['changeInfo.memberId']:wx.getStorageSync('memberId')
     })
-    console.log('indexindexxxxxxxxxxxx', this.data.index, '缓存index', wx.getStorageSync('userInfo').sex)
-    console.log(this.data.multiArray)
     // 行业列表
     this.getIndustry()
     this.getOrganization()
@@ -297,22 +287,6 @@ Page({
     this.setData({
       birthday: this.data.userInfo.birthday.split(" ")[0]
     })
-    console.log('生日', this.data.birthday)
-    // that.setData({
-
-    //   avatarUrl: editInfo.iconImage ? editInfo.iconImage : '../../../image/my_icon@3x/mine_icon_02_3x.png',
-    //   editMember: editInfo.memberName ? editInfo.memberName : '',
-    //   time: editInfo.birthday ? editInfo.birthday.split(" ")[0] : editInfo.birthday, //出生日期
-    //   index: editInfo.sex ? editInfo.sex - 1 : '0', //性别index
-    //   editEmail: editInfo.email ? editInfo.email : '', //邮箱
-    //   memberPositionName: editInfo.memberPositionName ? editInfo.memberPositionName : '', //职位名称
-    //   institutionName: editInfo.institutionName ? editInfo.institutionName : '', //企业名称
-    //   editIndustryId: editInfo.industryId ? editInfo.industryId : '',
-    //   orgName: editInfo.institutionId ? editInfo.institutionId : ''
-    // })
-    // wx.showLoading({
-    //   title: '加载中',
-    // })
     this.setData({
       index1: wx.getStorageSync('index1'),
     })

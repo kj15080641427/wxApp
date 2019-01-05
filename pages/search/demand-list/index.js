@@ -68,7 +68,6 @@ Page({
       listIndex: e.currentTarget.dataset.index,
       ['parameter.targetLawyerId']: this.data.lawyerList[e.currentTarget.dataset.index].memberId
     })
-    console.log(this.data.parameter)
   },
   //筛选
   gotoFilter: function() {
@@ -81,7 +80,6 @@ Page({
     wx.navigateTo({
       url: '/pages/search/lawyer-detail/index?id=' + this.data.lawyerList[e.currentTarget.dataset.lawindex].memberId + '&parameter=' + JSON.stringify(this.data.parameter)+'&justDo=true',
     })
-    console.log('需求参数',this.data.parameter)
   },
   //上拉搜索
   topSearch: function () {
@@ -109,9 +107,6 @@ Page({
       console.log(e)
     }
     wxrequest.request(url, datan, success, fail)
-    // wx.showLoading({
-    //   title: '正在加载',
-    // })
   },
   //
   confirm(e) {
@@ -141,9 +136,6 @@ Page({
       console.log(e)
     }
     wxrequest.request(url, datan, success, fail)
-    // wx.showLoading({
-    //   title: '正在加载',
-    // })
   },
   //搜索律师
   searchLawyer: function() {
@@ -151,9 +143,7 @@ Page({
     // var noFilter = noFilter
     var url = api.getSearchLawyer() + that.data.pageNum+"/" + '/10'
     var data = that.data.noFilter
-    // console.log("上传参数")
     var success = function(data) {
-      console.log("搜索成功", data)
       wx.hideLoading()
       that.setData({
         lawyerList: data.data.list,
@@ -174,7 +164,6 @@ Page({
       })
       console.log(e)
     }
-    // console.log("筛选参数", searchlawyerData)
     wxrequest.request(url, data, success, fail)
     wx.showLoading({
       title: '正在加载',
@@ -193,23 +182,9 @@ Page({
       wx.showToast({
         title: '发送需求成功',
         success() {
-          // wx.setStorageSync("requirementId", wx.getStorageSync("requirementId") + 1)
-          // if (!wx.getStorageSync("requirementId")){
-          //   wx.setStorageSync("requirementId", data.data.requirementId)
-          // }
-          // that.setData({
-          //     ['parameter.requirementId']: data.data.requirementId,
-          //     ['parameter.isFirst']: 1,
-          //   },
-            // function() {
-            //   wx.navigateTo({
-            //     url: '../../message/index'
-            //   })
-            // }
-            // )
+
         }
       })
-      console.log(data)
     }
     var fail = function(e) {
       wx.showToast({
@@ -218,7 +193,6 @@ Page({
       })
       console.log(e)
     }
-    console.log("请求参数", that.data.parameter)
     wxrequest.request(url, data, success, fail)
   },
   /**
@@ -235,7 +209,6 @@ Page({
       //   "clientAffordMaxAmount": ''
       // }
     })
-    console.log('dasdsad',JSON.parse(options.parameter))
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1]; //当前页面
     var prevPage = pages[pages.length - 2]; //上一个页面
@@ -244,9 +217,6 @@ Page({
     prevPage.setData({
       postList: JSON.parse(options.parameter)
     })
-    //筛选条件
-    // console.log(JSON.parse(options.parameter))
-    // noFilter.regionId = options.parameter.lawyerRegionId
     this.searchLawyer()
   },
 
@@ -275,8 +245,6 @@ Page({
       address: addressList,
       // region: region.citysData
     })
-
-    console.log("indexxxxxx", this.data.lawyerList)
   },
 
   /**
@@ -291,9 +259,6 @@ Page({
    */
   onUnload: function() {
     wx.removeStorageSync("requirementId")
-    // this.setData({
-    //   parameter: '',
-    // })
   },
 
   /**

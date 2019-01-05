@@ -14,7 +14,6 @@ Page({
     var data = wx.getStorageSync("token")
     var success = data => {
       data.data.pop()
-      console.log(data)
       this.setData({
         type: data.data
       })
@@ -61,7 +60,6 @@ Page({
     var data = {
       "businessTypeId": urltest
     }
-    console.log('标签urllllllllllllllllllll',url)
     var success = function(data) {
       that.setData({
         selist: []
@@ -74,7 +72,6 @@ Page({
       that.setData({
         markList: data.data.list
       })
-      console.log("问题标签", that.data.markList)
     }
     var fail = function(e) {
       console.log(e)
@@ -109,8 +106,6 @@ Page({
         ['parameter.tagName']: tagNameList,
       })
     }
-    console.log("已选择问题标签id", tagIdList)
-    console.log("已选择问题标签name", tagNameList)
   },
   //律师单价
   // getLawyerMoney: function () {
@@ -140,7 +135,6 @@ Page({
           delta: 3
         })
       }, 1500)
-      console.log(data)
     }
     var fail = e => {
       wx.showToast({
@@ -182,7 +176,6 @@ Page({
       that.setData({
         business: data.data[1].children
       })
-      console.log("对应index擅长领域列表", data.data[1].children)
     }
     var fail = function(e) {
       console.log("擅长领域", e)
@@ -199,10 +192,7 @@ Page({
       ['parameter.isFirst']: 1,
       ['parameter.targetLawyerId']: JSON.parse(options.lawyerDetail).memberId
     })
-    console.log("擅长领域", this.data.lawyerInfo.businessType[0])
     this.getexpert()
-    // this.getLawyerMoney()
-    console.log('律师信息', this.data.lawyerInfo)
   },
 
   /**

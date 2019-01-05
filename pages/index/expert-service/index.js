@@ -38,7 +38,6 @@ Page({
     wx.navigateTo({
       url: '../../search/lawyer-detail/index?id='+this.data.lawyerList[e.currentTarget.dataset.lawindex].memberId,
     })
-    // console.log(',as',this.data.lawyerList[e.currentTarget.dataset.lawindex].memberId)
   },
   //筛选
   gotoFilter: function () {
@@ -67,7 +66,6 @@ Page({
       listIndex: e.currentTarget.dataset.index,
       ['parameter.targetLawyerId']: this.data.lawyerList[e.currentTarget.dataset.index].memberId
     })
-    console.log(this.data.parameter)
   },
   //关键字搜索
   searchInput: function (e) {
@@ -83,9 +81,7 @@ Page({
     // var noFilter = noFilter
     var url = api.getSearchLawyer() + "1/" + that.data.getPage
     var data = that.data.noFilter
-    // console.log("上传参数")
     var success = function (data) {
-      console.log("搜索成功", data)
       wx.hideLoading()
       that.setData({
         lawyerList: data.data.list,
@@ -101,7 +97,6 @@ Page({
       })
       console.log(e)
     }
-    // console.log("筛选参数", searchlawyerData)
     wxrequest.request(url, data, success, fail)
     wx.showLoading({
       title: '正在加载',
@@ -113,9 +108,7 @@ Page({
     // var noFilter = noFilter
     var url = api.getSearchLawyer() + "1/" + that.data.getPage
     var data = that.data.noFilter
-    // console.log("上传参数")
     var success = function (data) {
-      console.log("搜索成功", data)
       wx.hideLoading()
       that.setData({
         lawyerList: data.data.list,
@@ -131,7 +124,6 @@ Page({
       })
       console.log(e)
     }
-    // console.log("筛选参数", searchlawyerData)
     wxrequest.request(url, data, success, fail)
     wx.showLoading({
       title: '正在加载',
@@ -179,8 +171,6 @@ Page({
       address: addressList,
       // region: region.citysData
     })
-
-    // console.log("indexxxxxx", this.data.lawyerList)
   },
 
   /**

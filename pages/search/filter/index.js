@@ -94,23 +94,6 @@ Page({
     wx.removeStorageSync("picIndexList")
     this.onShow()
   },
-  // //法院列表
-  // getCourt: function() {
-  //   var url = api.getCourt()
-  //   var data = {
-  //     keywords: '',
-  //     regionId: '430100',
-  //     pageNum: 1,
-  //     pageSize: 10
-  //   }
-  //   var success = data =>{
-  //     console.log('法院列表',data)
-  //   }
-  //   var fail = e =>{
-  //     console.log(e)
-  //   }
-  //   wxrequest.request(url,data,success,fail)
-  // },
 
   /**
    * 生命周期函数--监听页面加载
@@ -122,13 +105,11 @@ Page({
       noFilter: JSON.parse(options.noFilter),
       name: JSON.parse(options.noFilter).lawyerName ? JSON.parse(options.noFilter).lawyerName : ''
     })
-    console.log(JSON.parse(options.noFilter))
     var searchUrl = api.getSearch()
     var searchSuccess = function(data) {
       that.setData({
         search: data.data
       })
-      console.log("成功", data.data)
     }
     var searchFail = function(e) {
       wx.showToast({
@@ -214,7 +195,6 @@ Page({
     })
     //储存所选picker的Index值
     picIndexList.insIndex = e.detail.value
-    console.log('选中信息', picIndexList)
   },
   //基本技能
   changeSkill: function(e) {
@@ -311,7 +291,6 @@ Page({
       practiceYearId: this.data.search[0].items[e.currentTarget.dataset.yearindex].id
     })
     picIndexList.practiceYearId = this.data.practiceYearId
-    console.log("yearrrrrrrrrrrrr", e.currentTarget.dataset.yearindex)
   },
   // //选择性别
   // gender: function (e) {
@@ -324,7 +303,5 @@ Page({
     this.setData({
       listIndex: e.currentTarget.dataset.getindex
     })
-    // var typeIndex = e.currentTarget.dataset.getindex;
-    console.log("listIndex", this.data.listIndex)
   },
 })

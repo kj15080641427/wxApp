@@ -22,7 +22,7 @@ Page({
     var url = api.getBalanceDetail()
     var data = { "memberId": this.data.memberId, "pageNum": '1',"pageSize":'500'}
     var success = (data)=>{
-      if(!data.data.list[0]){
+      if(data.data.list[0]){
         this.setData({
           hasList:false
         })
@@ -30,7 +30,6 @@ Page({
       this.setData({
         detail:data.data.list
       })
-      console.log(this.data.detail)
     }
     var fail = (e)=>{
       console.log(e)

@@ -53,7 +53,6 @@ Page({
       if (data.data.guideUrl){
         wx.setStorageSync('guideUrl', data.data.guideUrl)
       }
-      console.log(data)
     }
     var fail = e => {
       console.log(e)
@@ -108,26 +107,6 @@ Page({
       this.goto()
     }
   },
-  // getMemberId: function() {
-  //   // 获取用户memberID信息
-  //   var that = this
-  //   var userInfoUrl = api.getUserInfo()
-  //   var message = ''
-  //   var idData = wx.getStorageSync("token")
-  //   var success = function(data) {
-  //     wx.setStorage({
-  //       key: 'memberId',
-  //       data: data.data.memberId,
-  //     })
-  //     that.getUserDetail()
-  //   }
-  //   var fail = function(e) {
-  //     console.log(e)
-  //   }
-  //   if (wx.getStorageSync("token")) {
-  //     wxrequest.requestGet(userInfoUrl, message, success, fail)
-  //   }
-  // },
   //获取用户详情
   getUserDetail: function() {
     var that = this
@@ -145,7 +124,6 @@ Page({
       that.setData({
         age: year
       })
-      console.log("userinfo", wx.getStorageSync("userInfo"))
     }
     var failDetail = function(eDetail) {
       if (eDetail.code == 10002) {
@@ -154,10 +132,6 @@ Page({
         })
         wx.clearStorage()
       }
-      // wx.showToast({
-      //   title: '请重新登录' + eDetail.message,
-      // })
-      console.log("e", eDetail.code)
     }
     if (wx.getStorageSync("token")) {
       wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
@@ -173,7 +147,6 @@ Page({
       that.setData({
         age: year
       })
-      // console.log("年龄",that.data.age)
     }
   },
   //

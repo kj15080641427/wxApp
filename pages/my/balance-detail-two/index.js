@@ -20,7 +20,6 @@ Page({
    */
   onLoad: function (options) {
     var data = JSON.parse(options.detailList)
-    console.log(JSON.parse(options.detailList))
     this.setData({
       ['detailList[0].text']: data.orderNo,//编号
       ['detailList[1].text']: data.createDate,//日期

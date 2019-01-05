@@ -70,11 +70,6 @@ Page({
     wx.navigateBack({
       url: '../index',
     })
-    //
-    //  if(picIndexList){
-
-    //   console.log("为空")
-    //  }
   },
   // 重置按钮
   reset: function () {
@@ -102,13 +97,11 @@ Page({
       noFilter: JSON.parse(options.noFilter),
       name: JSON.parse(options.noFilter).lawyerName ? JSON.parse(options.noFilter).lawyerName : ''
     })
-    console.log(JSON.parse(options.noFilter))
     var searchUrl = api.getSearch()
     var searchSuccess = function (data) {
       that.setData({
         search: data.data
       })
-      console.log("成功", data.data)
     }
     var searchFail = function (e) {
       wx.showToast({
@@ -149,7 +142,6 @@ Page({
       lexMungIndex: gs.lexMungIndex ? gs.lexMungIndex : '',//绿豆圈
       organziationIndex: gs.organziationIndex ? gs.organziationIndex : '',//商会组织
     })
-    // console.log(that.data.practiceIndex)
   },
 
   /**
@@ -195,7 +187,6 @@ Page({
     })
     //储存所选picker的Index值
     picIndexList.insIndex = e.detail.value
-    console.log('选中信息', picIndexList)
   },
   //基本技能
   changeSkill: function (e) {
@@ -292,7 +283,6 @@ Page({
       practiceYearId: this.data.search[0].items[e.currentTarget.dataset.yearindex].id
     })
     picIndexList.practiceYearId = this.data.practiceYearId
-    console.log("yearrrrrrrrrrrrr", e.currentTarget.dataset.yearindex)
   },
   //选择性别
   gender: function (e) {
@@ -305,7 +295,5 @@ Page({
     this.setData({
       listIndex: e.currentTarget.dataset.getindex
     })
-    // var typeIndex = e.currentTarget.dataset.getindex;
-    console.log("listIndex", this.data.listIndex)
   },
 })

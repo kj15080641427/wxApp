@@ -30,7 +30,6 @@ Page({
         freeText: data.data.list
       })
       this.lawTime()
-      console.log("文字咨询回复详情", data)
     }
     var fail = e => {
       console.log("文字咨询回复详情", e)
@@ -48,12 +47,8 @@ Page({
     var showtimeList = []
     that.data.freeText.map(item => {
       dateList.push(item.dateAdded)
-      // lawTimeList.push(item.dateAdded.split(" ")[1].split(":", 2).join(":"))
     })
-    // that.setData({
-    //   lawtList: lawTimeList
-    // })
-    // console.log("律师回复时间time", lawTimeList)
+
     dateList.map((item, index) => {
      
       var lawnowYear = formatTime.formatTime(new Date()).split(" ")[0].split("/")
@@ -90,7 +85,6 @@ Page({
 
           timelaw: showtimeList
         })
-        console.log("<><<<<<<<<<<<", this.data.timelaw)
       } else if (lawnowYear[2] - lawyear[2] == 1) {
         lawagoTextList.push()
         showtimeList.push('昨天'+this.data.freeText[index].dateAdded.split(" ")[1].split(":", 2).join(":"))
@@ -105,7 +99,6 @@ Page({
         that.setData({
           timelaw: showtimeList
         })
-        console.log('律师回阿诗丹顿复时间', this.data.timelaw)
       }
       else if (lawnowYearTime[0].split(":")[1] - lawyearTime[1] > 5) {
         showtimeList.push(lawnowYearTime[0].split(":")[1] - lawyearTime[1]+'分钟前')
@@ -118,7 +111,6 @@ Page({
           timelaw: showtimeList
         })
       }
-      console.log('律师回复时间', lawnowYearTime[0].split(":")[1] - lawyearTime[1] > 5 )
     })
    
   },
@@ -129,11 +121,7 @@ Page({
     this.setData({
       freeTextList: wx.getStorageSync("freeTextList"),
       userInfo:wx.getStorageSync("userInfo")
-      // lawtList: options.lawtList,
-      // lawago: options.lawago,
-      // lawagoText:options.lawagoText
     })
-    console.log("huifu",this.data.freeTextList)
     // this.getFreeText()
   },
 

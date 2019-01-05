@@ -1,92 +1,90 @@
 <!--pages/index/quick-consultation/index.wxml-->
 <view class='qucik-page-top'>
-  <view style='margin-left:40rpx'>填写信息</view>
-  <view>完成支付</view>
-  <view style='margin-right:40rpx'>律师回电</view>
+    <view style='margin-left:40rpx'>填写信息</view>
+    <view>完成支付</view>
+    <view style='margin-right:40rpx'>律师回电</view>
 </view>
 <view class='quick-page-height'>
-  <view class='quick-page-line-short'></view>
-  <view class='quick-page-round'>1</view>
-  <view class='quick-page-line'></view>
-  <view class='quick-page-round'>2</view>
-  <view class='quick-page-line'></view>
-  <view class='quick-page-round'>3</view>
-  <view class='quick-page-line-short'></view>
+    <view class='quick-page-line-short'></view>
+    <view class='quick-page-round'>1</view>
+    <view class='quick-page-line'></view>
+    <view class='quick-page-round'>2</view>
+    <view class='quick-page-line'></view>
+    <view class='quick-page-round'>3</view>
+    <view class='quick-page-line-short'></view>
 </view>
 <!-- 问题类型 联系手机 -->
 <view class='quick-page-font'>
 
-  <view class='quick-page-flex quick-center'>
-    <view style='margin-left:35rpx;width:140rpx;'>
-      <text style='color:red'>*</text>问题类型</view>
-    <picker value='{{index}}' range="{{popular}}" range-key="{{'typeName'}}" bindchange='changeType' class='quick-page-right' bindtap='getQuType'>
-      <view style='display:flex;align-items:center;justify-content: space-between;width:550rpx;'>
-        <view style='display:flex;align-items:center;'>
-          <view>{{popular[index].typeName}}</view>
-          <view wx:if="{{selectType}}" style='color:#b5b5b5'>请选择问题类型</view>
-        </view>
-        <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
-      </view>
-    </picker>
-  </view>
+    <view class='quick-page-flex quick-center'>
+        <view style='margin-left:35rpx;width:140rpx;'>
+            <text style='color:red'>*</text>问题类型</view>
+        <picker value='{{index}}' range="{{popular}}" range-key="{{'typeName'}}" bindchange='changeType' class='quick-page-right'
+            bindtap='getQuType'>
+            <view style='display:flex;align-items:center;justify-content: space-between;width:550rpx;'>
+                <view style='display:flex;align-items:center;'>
+                    <view>{{popular[index].typeName}}</view>
+                    <view wx:if="{{selectType}}" style='color:#b5b5b5'>请选择问题类型</view>
+                </view>
+                <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
+            </view>
+        </picker>
+    </view>
 
-  <view class='quick-page-line-center'></view>
-  <view class='quick-page-flex quick-center'>
-    <view style='margin-left:35rpx;width:140rpx;'>
-      <text style='color:red'>*</text>联系手机</view>
-    <input class='quick-page-right quick-phone' bindinput='phoneInput' value='{{phone}}'></input>
-    <!-- <view style='font-size:27rpx;margin-right:35rpx;margin-left:35rpx;width:120rpx;'>更换手机</view> -->
-  </view>
+    <view class='quick-page-line-center'></view>
+    <view class='quick-page-flex quick-center'>
+        <view style='margin-left:35rpx;width:140rpx;'>
+            <text style='color:red'>*</text>联系手机</view>
+        <input class='quick-page-right quick-phone' bindinput='phoneInput' value='{{phone}}'></input>
+        <!-- <view style='font-size:27rpx;margin-right:35rpx;margin-left:35rpx;width:120rpx;'>更换手机</view> -->
+    </view>
 </view>
 <!-- 支付方式 -->
 <view class='quick-pay-type'>
-  <view class='quick-select-type'>选择支付方式</view>
-  <!-- <radio-group> -->
-  <view bindtap='changeChecked1'>
-    <view class='quick-page-flex-between'>
-      <view class='quick-page-flex'>
-        <image src='../../../image/my_icon@3x/Rapidconsultation_icon_01_3x.png' class='quick-pay-icon'></image>
-        <view class='quick-pay-margin'>微信支付
-          <label wx:if="{{item['name']=='账户余额'}}" class="consul-balance">(¥{{balance}})</label>
+    <view class='quick-select-type'>选择支付方式</view>
+    <!-- <radio-group> -->
+    <view bindtap='changeChecked1'>
+        <view class='quick-page-flex-between'>
+            <view class='quick-page-flex'>
+                <image src='../../../image/my_icon@3x/Rapidconsultation_icon_01_3x.png' class='quick-pay-icon'></image>
+                <view class='quick-pay-margin'>微信支付
+                    <label wx:if="{{item['name']=='账户余额'}}" class="consul-balance">(¥{{balance}})</label>
+                </view>
+            </view>
+            <radio checked="{{checked1}}" style='width:120rpx;height:120rpx;line-height:80rpx;display:flex;  justify-content: center;align-items: center;'></radio>
         </view>
-      </view>
-      <radio checked="{{checked1}}" style='width:120rpx;height:120rpx;line-height:80rpx;display:flex;  justify-content: center;align-items: center;'></radio>
+        <view class='quick-page-line-center'></view>
     </view>
-    <view class='quick-page-line-center'></view>
-  </view>
 
-  <view bindtap='changeChecked2'>
-    <view class='quick-page-flex-between'>
-      <view class='quick-page-flex'>
-        <image src='../../../image/my_icon@3x/Rapidconsultation_icon_02_3x.png' class='quick-pay-icon'></image>
-        <view class='quick-pay-margin'>余额支付
-          <label class="consul-balance">(¥{{balance}})</label>
+    <view bindtap='changeChecked2'>
+        <view class='quick-page-flex-between'>
+            <view class='quick-page-flex'>
+                <image src='../../../image/my_icon@3x/Rapidconsultation_icon_02_3x.png' class='quick-pay-icon'></image>
+                <view class='quick-pay-margin'>余额支付
+                    <label class="consul-balance">(¥{{balance}})</label>
+                </view>
+            </view>
+            <radio checked="{{checked2}}" style='width:120rpx;height:120rpx;line-height:80rpx;display:flex;  justify-content: center;align-items: center;'></radio>
         </view>
-      </view>
-      <radio checked="{{checked2}}" style='width:120rpx;height:120rpx;line-height:80rpx;display:flex;  justify-content: center;align-items: center;'></radio>
+        <view class='quick-page-line-center'></view>
     </view>
-    <view class='quick-page-line-center'></view>
-  </view>
-  <!-- </radio-group> -->
+    <!-- </radio-group> -->
 </view>
 <!-- 温馨提示 -->
 <view class='quick-page-tips'>
-  <view>温馨提示</view>
-  <view>1.订单支付成功后,律师最快将在15分钟内联系你,请保持电话畅通</view>
-  <view>2.为不影响您的体验,请尽量在工作时间发布咨询 (9:00-20:00) 发布咨询</view>
-  <view>3.咨询时间为首次咨询的两小时内,请您提前准备好咨询内容</view>
-  <view>4.详情流程请查看
-    <a class="quick-page-link"bindtap="toTariff">《绿豆圈快速咨询交易流程及服务规范》</a>
-  </view>
-  <view>5.如有疑问,请联系绿豆圈客服
-    <a class="quick-page-link"></a>
-  </view>
+    <view>温馨提示</view>
+    <view>1.订单支付成功后,律师将在10分钟内联系您,请保持电话畅通.</view>
+    <view>2.为不影响您的体验,请尽量在工作时间发布咨询 (9:00-18:00) 发布咨询.</view>
+    <view>3.咨询时间为律师接单后半小时内,请您提前准备好咨询内容.</view>
+    <view>4.详情流程请查看
+        <a class="quick-page-link" bindtap="toTariff">《绿豆圈快速咨询交易流程及服务规范》</a>
+    </view>
 </view>
 <!-- 支付 -->
 <view class='quick-page-line-lower'></view>
 <view class='quick-page-lower'>
-  <view class='quick-page-order'>订单金额
-    <label style='color:#f8b62d;font-weight:bold;margin-left:10rpx'>¥{{popular[index].price}}<text wx:if="{{!selectType}}">元</text></label>
-  </view>
-  <button class='quick-page-button' bindtap='gotofinish'>支付订单</button>
+    <view class='quick-page-order'>订单金额
+        <label style='color:#f8b62d;font-weight:bold;margin-left:10rpx'>¥{{popular[index].price}}<text wx:if="{{!selectType}}">元</text></label>
+    </view>
+    <button class='quick-page-button' bindtap='gotofinish'>支付订单</button>
 </view>

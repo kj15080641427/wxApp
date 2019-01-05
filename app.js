@@ -43,6 +43,33 @@ App({
                 // }
             },
         })
+        wx.reportMonitor('1001', 2)
+        wx.reportMonitor('1002', 1)
+        wx.reportMonitor('1003', 1)
+        wx.reportMonitor('1004', 1)
+        wx.reportMonitor('1005', 1)
+        wx.reportMonitor('1006', 1)
+        wx.reportMonitor('1007', 1)
+        wx.reportMonitor('1008', 1)
+        wx.reportMonitor('1009', 1)
+        wx.reportMonitor('1010', 1)
+        wx.reportMonitor('1011', 1)
+        wx.reportMonitor('1012', 1)
+        wx.reportMonitor('1013', 1)
+        wx.reportMonitor('1014', 1)
+        wx.reportMonitor('1015', 1)
+        wx.reportMonitor('1016', 1)
+        wx.reportMonitor('1017', 1)
+        wx.reportMonitor('1018', 1)
+        wx.reportMonitor('1019', 1)
+        wx.reportMonitor('1020', 1)
+        wx.reportMonitor('1021', 1)
+        wx.reportMonitor('1022', 1)
+        wx.reportMonitor('1023', 1)
+        wx.reportMonitor('1024', 1)
+        wx.reportMonitor('1025', 1)
+        wx.reportMonitor('1026', 1)
+        wx.reportMonitor('1027', 1)
     },
     globalData: {
         userInfo: null,

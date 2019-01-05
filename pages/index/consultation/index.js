@@ -35,7 +35,6 @@ Page({
       multiArray: this.data.multiArray,
       multiIndex: this.data.multiIndex
     };
-    console.log(data, 'data')
     data.multiIndex[e.detail.column] = e.detail.value;
     switch (e.detail.column) {
       case 0:
@@ -71,7 +70,6 @@ Page({
     this.setData({
       consultationTypeId: this.data.array[e.detail.value].id
     })
-    console.log(this.data.consultationTypeId)
   },
 
 
@@ -153,21 +151,16 @@ Page({
       //   "formId": that.data.formId
       // }
      }
-    console.log("formIdsssssssssssss",that.data.formId)
     var success = function(data){
-      console.log("上传参数", freedata)
       that.setData({
         consultation:data
       })
     that.getOrder()
-    console.log('成功')
       wx.showToast({
         title: '提交成功',
       })
-      console.log(',.....',that.data.consultation)
     }
     var fail = function(e){
-      console.log(12312312312,e)
       wx.showToast({
         title: '提交失败',
       })
@@ -205,7 +198,6 @@ Page({
       this.setData({
         order: data.data.list
       })
-      console.log("订单", data)
       wx.redirectTo({
         url: '/pages/index/consultation-details/index?orderDetail=' + JSON.stringify(that.data.order[0]),
       })
@@ -227,7 +219,6 @@ Page({
     }
     var success = function(data) {
       wx.hideLoading()
-      console.log("解决方案分类list", data.data)
 
       function toSort(a, b) {
         return a.sort - b.sort
@@ -259,8 +250,6 @@ Page({
         [reg.citysData][0][0].child
       ],
     })
-    console.log(this.data.multiArray)
-    // console.log("问题类型", JSON.parse(options.type))
   },
 
   /**

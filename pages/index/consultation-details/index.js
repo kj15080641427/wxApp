@@ -19,10 +19,8 @@ Page({
       confirmColor:"#1ec88c",
       // content: '11'
       success:function(){
-        console.log("确定")
       },
       fail:function(){
-        console.log("取消")
       }
     })
   },
@@ -31,7 +29,6 @@ Page({
     var url = api.getFreeText()+this.data.id
     var data = {"consultationId":this.data.id}
     var success = data =>{
-      console.log("单条文字咨询详情", data)
       this.setData({
         freeOne:data.data
       })
@@ -60,7 +57,6 @@ Page({
       })
  
       this.lawTime()
-      console.log("文字咨询列表freeTextList", this.data.freeTextList)
     }
     var fail = e =>{
       console.log("文字咨询列表错误",e)
@@ -86,8 +82,6 @@ Page({
         })
       }
       this.lawTime()
-      console.log('wwwwwwww', this.data.i)
-      console.log("文字咨询回复详情freeText", this.data.freeText)
     }
     var fail = e => {
       console.log("文字咨询回复详情", e)
@@ -100,7 +94,6 @@ Page({
       url: '../consultation-reply/index?lawtList=' + this.data.lawtList[e.currentTarget.dataset.freeindex] + '&time='+this.data.time   ,
     })
     wx.setStorageSync("freeTextList", this.data.freeTextList[e.currentTarget.dataset.freeindex])
-    console.log(e)
   },
   //
 
@@ -119,7 +112,6 @@ Page({
     that.setData({
       lawtList: lawTimeList
     })
-    console.log("律师回复时间time", lawTimeList)
     dateList.map((item, index) => {
 
       var lawnowYear = formatTime.formatTime(new Date()).split(" ")[0].split("/")
@@ -148,7 +140,6 @@ Page({
         this.setData({
           timelaw: showtimeList,
         })
-        console.log('前天', lawnowYear[2] ,lawyear[2],this.data.timelaw)
       }
       else if (lawnowYear[2] - lawyear[2] == 2) {
         lawagoTextList.push()
@@ -157,7 +148,6 @@ Page({
 
           timelaw: showtimeList
         })
-        console.log("<><<<<<<<<<<<", this.data.timelaw)
       } else if (lawnowYear[2] - lawyear[2] == 1) {
         lawagoTextList.push()
         showtimeList.push('昨天' + this.data.freeTextList[index].dateAdded.split(" ")[1].split(":", 2).join(":"))
@@ -172,21 +162,18 @@ Page({
         that.setData({
           timelaw: showtimeList
         })
-        console.log('律师回阿诗丹顿复时间', this.data.timelaw)
       }
       else if (lawnowYearTime[0].split(":")[1] - lawyearTime[1] > 5) {
         showtimeList.push(lawnowYearTime[0].split(":")[1] - lawyearTime[1] + '分钟前')
         that.setData({
           timelaw: showtimeList
         })
-        console.log(that.data.lawago, that.data.lawagoText)
       } else {
         showtimeList.push('刚刚')
         that.setData({
           timelaw: showtimeList
         })
       }
-      console.log('律师回复时间', lawnowYearTime[0].split(":")[1] - lawyearTime[1] > 5)
     })
 
   },
@@ -206,8 +193,6 @@ Page({
       userInfo: wx.getStorageSync("userInfo"),
       time: options.orderDetail ? JSON.parse(options.orderDetail).createDate:''
     })
-    console.log('qqqqqqqqqqqq',this.data.time)
-
 
     wx.setStorageSync('consultationId', JSON.parse(options.orderDetail).id) 
     this.userTime()
@@ -275,14 +260,6 @@ userTime:function(){
   var lawgaoList = []
   var lawagoTextList = []
   var showtimeList = []
-  // that.data.freeTextList.map(item => {
-  //   dateList.push(item.dateAdded)
-  //   lawTimeList.push(item.dateAdded.split(" ")[1].split(":", 2).join(":"))
-  // })
-  // that.setData({
-  //   lawtList: lawTimeList
-  // })
-  // console.log("律师回复时间time", lawTimeList)
   var nowYear = formatTime.formatTime(new Date()).split(" ")[0].split("/")
   var year = this.data.orderDetail.createDate.split(" ")[0].split("-")
   var nowYearTime = formatTime.formatTime(new Date()).split(" ")[1].split(":")
@@ -317,7 +294,6 @@ userTime:function(){
       // agoText: '前天',
       timet: '前天' + this.data.time.split(' ')[1].split(':',2).join(":")
     })
-    console.log("<><<<<<<<<<<<", this.data.timelaw)
   } else if (nowYear[2] - year[2] == 1) {
     that.setData({
       // agoText: '昨天',
@@ -329,7 +305,6 @@ userTime:function(){
     that.setData({
       timet: this.data.time.split(':', 2).join(":")
     })
-    console.log('律师回阿诗丹顿复时间', this.data.timelaw)
   }
   else if (nowYearTime[0].split(":")[1] - yearTime[0].split(":")[1] > 5) {
     that.setData({
@@ -342,6 +317,5 @@ userTime:function(){
       agoText: '刚'
     })
   }
-  console.log('用户时间', nowYearTime, yearTime)
 }
 })
