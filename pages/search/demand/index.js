@@ -45,10 +45,10 @@ Page({
         url: '../demand-type/index?demandType=' + JSON.stringify(this.data.demandType) + '&index=' + e.currentTarget.dataset.typeindex,
       })
     } else {
-      wx.showToast({
-        title: '无擅长领域',
-        icon: 'none'
-      })
+      // wx.showToast({
+      //   title: '无擅长领域',
+      //   icon: 'none'
+      // })
       wx.navigateTo({
         url: '../demand-detail/index?demandType=' + JSON.stringify(this.data.demandType[e.currentTarget.dataset.typeindex]) + '&index=' + e.currentTarget.dataset.typeindex + '&id=1',
       })

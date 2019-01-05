@@ -30,9 +30,10 @@
 </view>
 
 <view class='detail-page-center'>
-  <picker class='detail-page-picker' range="{{business}}" range-key="{{'businessTypeName'}}" value="{{index}}" bindchange="pickerLIst" wx:if="{{id}}">
+  <picker class='detail-page-picker' range="{{business}}" range-key="{{'businessTypeName'}}" value="{{index}}" bindchange="pickerLIst">
     <view style='display:flex;justify-content: space-between;width:715rpx;'>
-      <view class='detail-page-text' ><text style='color:red'>*</text>律师擅长领域</view>
+      <view class='detail-page-text'>
+        <text style='color:red'>*</text>律师擅长领域</view>
       <view style='display:flex;align-items:center'>
         <text class='hide-text'>{{business[index].businessTypeName}}</text>
         <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
@@ -43,7 +44,8 @@
 
   <picker class='detail-page-picker' mode="multiSelector" bindchange="bindMultiPickerChange" bindtap='isCilck' bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}" range-key="name">
     <view style='display:flex;justify-content: space-between;width:715rpx;'>
-      <view class='detail-page-text'>律师所在区域</view>
+      <view class='detail-page-text'>
+        <text style='color:red'>*</text>律师所在区域</view>
       <view style='display:flex;align-items:center'>
         <view class='hide-text' wx:if="{{isOnce}}">{{multiArray[0][multiIndex[0]].name}}-{{multiArray[1][multiIndex[1]].name}}</view>
         <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
@@ -69,7 +71,7 @@
 </view>
 
 <view class='select-mark-view' wx:if="{{id}}" wx:if="{{markList[0]}}">
-  <view class='select-mark-text' >*请选择问题标签</view>
+  <view class='select-mark-text'>*请选择问题标签</view>
   <view class='select-mark-flex'>
     <view class="{{selist[index].is ? 'selected-mark': 'select-mark'}}" wx:key="{{index}}" wx:for="{{markList}}" catchtap='isSelected' data-selectindex="{{index}}">{{item.tagName}}</view>
   </view>

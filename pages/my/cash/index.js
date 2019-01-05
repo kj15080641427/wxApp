@@ -24,13 +24,14 @@ Page({
   },
   cash:function(){
     var that = this
-    var moneyt = Number(that.data.balance + '.01')
+    var moneyt = that.data.balance
     var accountt = that.data.account
     var namet = that.data.userName
     const res = wx.getSystemInfoSync()
-    let _ua = 'wxapp:brand(' + res.brand + ') model(' + res.model + ') system(' + res.system + ') SDKVersion(' + res.SDKVersion + ')'
+    let _ua = 'wxapp:brand(' + res.brand + ')model(' + res.model + ')system(' + res.system + ')SDKVersion(' + res.SDKVersion + ')'
     var url = api.getCash()
-    var data = { money: moneyt, account: accountt, name: namet, ua: _ua, sign: hex_md5('money='+moneyt+'&account='+accountt+'&ua='+_ua) }
+    var data = { intmoney: parseInt(moneyt), money: moneyt, account: accountt, name: namet, ua: _ua, sign: hex_md5('money=' + parseInt(moneyt)+'&account='+accountt+'&ua='+_ua) }
+    console.log('money=' + parseInt(moneyt) + '&account=' + accountt + '&ua=' + _ua)
     var success = data =>{
       wx.showToast({
         title: '提现成功',

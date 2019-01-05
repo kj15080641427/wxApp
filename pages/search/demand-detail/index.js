@@ -42,7 +42,7 @@ Page({
   isCilck: function() {
     this.setData({
       isOnce: false,
-      ['postList.lawyerRegionId']:''
+      ['postList.lawyerRegionId']: ''
     })
   },
   //选择地区
@@ -70,31 +70,31 @@ Page({
   },
 
 
-  //标签列表
-  getMark: function() {
-    var that = this
-    var url = api.getMark() + that.data.business[that.data.index].businessTypeId
-    var data = {
-      "businessTypeId": that.data.business[that.data.index].businessTypeId
-    }
-    var success = function(data) {
-      that.setData({
-        selist: []
-      })
-      data.data.list.map(function(item) {
-        that.data.selist.push({
-          "is": false
-        })
-      })
-      that.setData({
-        markList: data.data.list
-      })
-    }
-    var fail = function(e) {
-      console.log(e)
-    }
-    wxrequest.requestGetpar(url, data, '', success, fail)
-  },
+  // //标签列表
+  // getMark: function() {
+  //   var that = this
+  //   var url = api.getMark() + that.data.business[that.data.index].businessTypeId
+  //   var data = {
+  //     "businessTypeId": that.data.business[that.data.index].businessTypeId
+  //   }
+  //   var success = function(data) {
+  //     that.setData({
+  //       selist: []
+  //     })
+  //     data.data.list.map(function(item) {
+  //       that.data.selist.push({
+  //         "is": false
+  //       })
+  //     })
+  //     that.setData({
+  //       markList: data.data.list
+  //     })
+  //   }
+  //   var fail = function(e) {
+  //     console.log(e)
+  //   }
+  //   wxrequest.requestGetpar(url, data, '', success, fail)
+  // },
   //擅长领域
   getexpert: function() {
     var that = this
@@ -115,14 +115,14 @@ Page({
     wxrequest.requestGet(url, '', success, fail)
   },
   //标签是否选中
-  isSelected: function(e) {
-    this.setData({
-      seindex: e.currentTarget.dataset.selectindex,
-      [`selist[${e.currentTarget.dataset.selectindex}].is`]: !this.data.selist[e.currentTarget.dataset.selectindex].is,
-      ['postList.tagId']: String(this.data.markList[e.currentTarget.dataset.selectindex].tagId),
-      ['postList.tag']: this.data.markList[e.currentTarget.dataset.selectindex].tagName
-    })
-  },
+  // isSelected: function(e) {
+  //   this.setData({
+  //     seindex: e.currentTarget.dataset.selectindex,
+  //     [`selist[${e.currentTarget.dataset.selectindex}].is`]: !this.data.selist[e.currentTarget.dataset.selectindex].is,
+  //     ['postList.tagId']: String(this.data.markList[e.currentTarget.dataset.selectindex].tagId),
+  //     ['postList.tag']: this.data.markList[e.currentTarget.dataset.selectindex].tagName
+  //   })
+  // },
   //获取最高可承受费用值
   getInput: function(e) {
     this.setData({
@@ -173,12 +173,12 @@ Page({
         title: '请选择擅长领域',
         icon: 'none'
       })
-    } else if (this.data.postList.lawyerRegionId==''){
+    } else if (this.data.postList.lawyerRegionId == '') {
       wx.showToast({
         title: '请选择地区',
         icon: 'none'
       })
-    }else if (par.maxCost == '') {
+    } else if (par.maxCost == '') {
       wx.showToast({
         title: '请填写最高可承受费用',
         icon: 'none'
@@ -198,38 +198,110 @@ Page({
         url: '../demand-list/index?parameter=' + JSON.stringify(this.data.postList) + '&require=' + JSON.stringify(this.data.require),
       })
     }
-
+    this.getMarkList()
     this.data.selist.map(function(item) {
       if (item.is) {
         console.log(item)
       }
     })
   },
+  //标签列表
+  getMark: function() {
+    var that = this
+    var urltest = that.data.business[that.data.index].businessTypeId
+    var url = api.getMark() + urltest
+    var data = {
+      "businessTypeId": urltest
+    }
+    var success = function(data) {
+      that.setData({
+        selist: []
+      })
+      data.data.list.map(function(item) {
+        that.data.selist.push({
+          "is": false
+        })
+      })
+      that.setData({
+        markList: data.data.list
+      })
+    }
+    var fail = function(e) {
+      console.log(e)
+    }
+    wxrequest.requestGetpar(url, data, '', success, fail)
+  },
+  //标签是否选中 
+  isSelected: function(e) {
+    this.setData({
+      seindex: e.currentTarget.dataset.selectindex,
+      [`selist[${e.currentTarget.dataset.selectindex}].is`]: !this.data.selist[e.currentTarget.dataset.selectindex].is,
+    })
+  },
+  //已选标签list
+  getMarkList: function() {
+    var that = this
+    var tagIndexList = []
+    var tagIdList = []
+    var tagNameList = []
+    if (this.data.selist[0]) {
+      this.data.selist.map(function(item, index) {
+        if (item.is) {
+          tagIndexList.push(index)
+        }
+      })
+      tagIndexList.map(function(item) {
+        tagIdList.push(that.data.markList[item].tagId)
+        tagNameList.push(that.data.markList[item].tagName)
+      })
+      this.setData({
+        ['parameter.tagId']: tagIdList,
+        ['parameter.tagName']: tagNameList,
+      })
+    }
+  },
+  //擅长领域
+  getexperttwo: function() {
+    var that = this
+    var url = api.getExpert()
+    var success = function(data) {
+      that.setData({
+        business: data.data[1].children
+      })
+    }
+    var fail = function(e) {
+      console.log("擅长领域", e)
+    }
+    wxrequest.requestGet(url, '', success, fail)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    wx.showLoading({
-      title: '加载中',
-    })
-    //擅长领域
-    this.getexpert()
     //选择地区
     this.setData({
-      multiArray: [[reg.citysData][0], [reg.citysData][0][0].child],
+      multiArray: [
+        [reg.citysData][0],
+        [reg.citysData][0][0].child
+      ],
     })
 
     this.setData({
       // markId: JSON.parse(options.busiType)
       busiType: options.busiTypes ? JSON.parse(options.busiTypes) : '', //服务类型: 诉讼/仲裁 审查/起草合同....
-      id: options.id ? 0 : 1,
+      id: options.id ? 1 : 0,
       // demandType:
       ['require.requireTypeId']: JSON.parse(options.demandType).requireTypeId,
       ['postList.requirementTypeId']: JSON.parse(options.demandType).requireTypeId,
-      ['postList.requirementTypeName']:JSON.parse(options.demandType).requireTypeName ,
+      ['postList.requirementTypeName']: JSON.parse(options.demandType).requireTypeName,
       ['postList.requirementBusiId']: options.busiTypes ? JSON.parse(options.busiTypes).businessTypeId : '',
       ['postList.requirementBusiName']: options.busiTypes ? JSON.parse(options.busiTypes).businessTypeName : ''
     })
+    if (options.id) {
+      this.getexperttwo()
+    } else {
+      this.getexpert()
+    }
   },
 
   /**

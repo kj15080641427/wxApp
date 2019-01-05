@@ -249,8 +249,8 @@
 
 <view style='height:150rpx;'></view>
 <view class='quick-button-view' bindtap='islogin'>
-  <button class='quick-button' catchtap="isEnough" wx:if="{{lawyerMoney.lawyerPrice}}">
-    <text style='font-size:20rpx;'>{{lawyerMoney.lawyerPrice+'/'+lawyerMoney.priceUnit}}</text>电话咨询</button>
+  <!-- <button class='quick-button' catchtap="isEnough" wx:if="{{lawyerMoney.lawyerPrice}}">
+    <text style='font-size:20rpx;'>{{lawyerMoney.lawyerPrice+'/'+lawyerMoney.priceUnit}}</text>电话咨询</button> -->
   <button class='quick-button' bindtap='toDemand'>发送需求</button>
 </view>
 

@@ -107,22 +107,23 @@ Page({
       })
     }
   },
-  //律师单价
-  // getLawyerMoney: function () {
-  //   var url = api.getLawyerMoney() + this.data.lawyerInfo.memberId
-  //   var success = data => {
-  //     console.log('律师单价', data.data)
-  //     this.setData({
-  //       lawyerMoney: data.data
-  //     })
-  //   }
-  //   var fail = e => {
-  //     console.log(e)
-  //   }
-  //   wxrequest.requestGet(url, '', success, fail)
-  // },
+  // 律师单价
+  getLawyerMoney: function () {
+    var url = api.getLawyerMoney() + this.data.lawyerInfo.memberId
+    var success = data => {
+      console.log('律师单价', data.data)
+      this.setData({
+        lawyerMoney: data.data
+      })
+    }
+    var fail = e => {
+      console.log(e)
+    }
+    wxrequest.requestGet(url, '', success, fail)
+  },
   //发布需求
   publish: function() {
+    console.log(this.data.parameter.maxCost , this.data.lawyerMoney)
     var url = api.getPublish()
     var data = this.data.parameter
     var success = data => {
@@ -156,6 +157,11 @@ Page({
     } else if (!this.data.parameter.maxCost) {
       wx.showToast({
         title: '请填写最高可承受费用',
+        icon: 'none'
+      })
+    } else if (this.data.parameter.maxCost < this.data.lawyerMoney.lawyerPrice) {
+      wx.showToast({
+        title: '最高可承受费用不能低于律师最低可承受费用' +'('+ this.data.lawyerMoney.lawyerPrice+')',
         icon: 'none'
       })
     } else if (!this.data.parameter.requirementContent ) {
@@ -193,6 +199,7 @@ Page({
       ['parameter.targetLawyerId']: JSON.parse(options.lawyerDetail).memberId
     })
     this.getexpert()
+    this.getLawyerMoney()
   },
 
   /**
