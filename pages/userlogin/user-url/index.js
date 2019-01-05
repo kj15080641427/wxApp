@@ -15,6 +15,7 @@ Page({
     this.setData({
       url:options.url
     })
+    console.log('协议',options.url)
   },
 
   /**

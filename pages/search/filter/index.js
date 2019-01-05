@@ -45,18 +45,18 @@ Page({
       "sort": t.noFilter.sort || '',
       "practiceYearId": t.practiceYearId ? t.practiceYearId : gs.practiceYearId ? gs.practiceYearId : '',
       // "sex": t.sex ? t.sex : gs.sex ? gs.sex : '',
-      "industryId": t.industryId ? t.industryId : gs.insIndex ? t.search[2].items[gs.insIndex].id : '',
-      "baseSkillId": t.skillId ? t.skillId : gs.baseSkillIndex ? t.search[3].items[gs.baseSkillIndex].id : '',
-      "otherSkillId": t.expandId ? t.expandId : gs.ohterSkillIndex ? t.search[4].items[gs.ohterSkillIndex].id : '',
-      "langSkillId": t.languageId ? t.languageId : gs.langSkillIndex ? t.search[5].items[gs.langSkillIndex].id : '',
-      "courtId": t.courtId ? t.courtId : gs.courtIndex && t.search[6].items[0] ? t.search[6].items[gs.courtIndex].id : '',
-      "procuratorateId": t.procuratorateId ? t.procuratorateId : gs.procuratorateIndex && t.search[7].items[0] ? t.search[7].items[gs.procuratorateIndex].id : '',
-      "positionId": t.positionId ? t.positionId : gs.positionIndex ? t.search[8].items[gs.positionIndex].id : '',
-      "honorId": t.honorId ? t.honorId : gs.honorIndex ? t.search[9].items[gs.honorIndex].id : '',
-      "socialId": t.socialId ? t.socialId : gs.socialIndex ? t.search[10].items[gs.socialIndex].id : '',
-      "depositAmountId": t.guaranteeId ? t.guaranteeId : gs.depositIndex ? t.search[11].items[gs.depositIndex].id : '',
-      "lexMungId": t.mungId ? t.mungId : gs.lexMungIndex ? t.search[12].items[gs.lexMungIndex].id : '',
-      "orgId": t.organizationId ? t.organizationId : gs.organziationIndex ? t.search[13].items[gs.organziationIndex].id : ''
+      "industryId": t.industryId ? t.industryId : gs.insIndex ? t.search[1].items[gs.insIndex].id : '',
+      "baseSkillId": t.skillId ? t.skillId : gs.baseSkillIndex ? t.search[2].items[gs.baseSkillIndex].id : '',
+      "otherSkillId": t.expandId ? t.expandId : gs.ohterSkillIndex ? t.search[3].items[gs.ohterSkillIndex].id : '',
+      "langSkillId": t.languageId ? t.languageId : gs.langSkillIndex ? t.search[4].items[gs.langSkillIndex].id : '',
+      // "courtId": t.courtId ? t.courtId : gs.courtIndex && t.search[6].items[0] ? t.search[6].items[gs.courtIndex].id : '',
+      // "procuratorateId": t.procuratorateId ? t.procuratorateId : gs.procuratorateIndex && t.search[7].items[0] ? t.search[7].items[gs.procuratorateIndex].id : '',
+      "positionId": t.positionId ? t.positionId : gs.positionIndex ? t.search[7].items[gs.positionIndex].id : '',
+      "honorId": t.honorId ? t.honorId : gs.honorIndex ? t.search[8].items[gs.honorIndex].id : '',
+      "socialId": t.socialId ? t.socialId : gs.socialIndex ? t.search[9].items[gs.socialIndex].id : '',
+      "depositAmountId": t.guaranteeId ? t.guaranteeId : gs.depositIndex ? t.search[10].items[gs.depositIndex].id : '',
+      "lexMungId": t.mungId ? t.mungId : gs.lexMungIndex ? t.search[11].items[gs.lexMungIndex].id : '',
+      "orgId": t.organizationId ? t.organizationId : gs.organziationIndex ? t.search[11].items[gs.organziationIndex].id : ''
     }
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1]; //当前页面

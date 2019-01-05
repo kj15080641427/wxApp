@@ -17,13 +17,13 @@
   <view style='height:1rpx;background-color:#f4f4f4;margin-right:35rpx;'></view>
   <view class='cash-detail-flex'>
     <text><text style='color:red'>*</text>支付宝账号</text>
-    <input bindinput='userName'></input>
+    <input bindinput='acc'></input>
   </view>
 </view>
 <view class='cash-tips'>
   <view>温馨提示</view>
   <view>1.仅限支付宝提现</view>
-  <view>2.提交申请后,我们将在3-7个工作日内转到您的支付宝账户,感谢您对品台的支持</view>
+  <view>2.提交申请后,我们将在3-7个工作日内转到您的支付宝账户,感谢您对平台的支持</view>
   <view>3.如有疑问,请联系绿豆圈客服<text style='color:#1ec88c'></text></view>
 </view>
 <button bindtap="cash" >申请提现</button>

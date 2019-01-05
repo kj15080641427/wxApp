@@ -75,6 +75,12 @@ App({
         userInfo: null,
         jMessage: new JMessage({
             debug: true   //  是否开启debug模式
-        })
+        }),
+      device : {
+        "device_type": 5,
+        "app_version": "1.0",
+        "app_version_code": 1,
+        "channel":'wxapp'
+      }
     }
 })

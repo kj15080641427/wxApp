@@ -124,13 +124,13 @@ function getSearchLawyer() {
   return HOST_URL + SearchLawyer
 }
 // 获取律师信息
-var LawyerInfo = '/lawyer/member/homepage/card/'
+var LawyerInfo = '/common/member/homepage/card/'
 
 function getlawyerInfo() {
   return HOST_URL + LawyerInfo
 }
 //律师个人主页(背景图/所获荣誉/描述)
-var LawHomePage = '/lawyer/member/homepage/base/'
+var LawHomePage = '/common/member/homepage/base/'
 
 function getLawHomePage() {
   return HOST_URL + LawHomePage

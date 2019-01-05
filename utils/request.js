@@ -1,10 +1,6 @@
-var device = {
-  "device_type": 5,
-  "app_version": "1.0",
-  "app_version_code": 1,
-  "channel": wx.getStorageSync('channel')?wx.getStorageSync('channel'):"wxapp"
-}
-
+var App = getApp()
+var device = App.globalData.device
+console.log('device',device)
 function request(url, params, success, fail) {
   this.requestLoading(url, params, "", success, fail)
 }

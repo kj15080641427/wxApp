@@ -3,6 +3,7 @@ var formatTime = require('../../../utils/util.js')
 var api = require('../../../utils/api.js')
 var wxrequest = require('../../../utils/request.js')
 import wxPay from '../../../utils/wxPay.js'
+var App = getApp()
 Page({
   /**
    * 页面的初始数据
@@ -450,7 +451,7 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      lawyerList: options.id,
+      lawyerList: options.id ? options.id:options.id,
       quick: options.quick ? true : false,
       parameter: options.parameter?JSON.parse(options.parameter):'',
       ['parameter.targetLawyerId']: options.id? options.id :'',
@@ -459,6 +460,10 @@ Page({
     wx.showLoading({
       title: '获取律师信息',
     })
+    if (options.channel){
+      App.globalData.device.channel = options.channel
+    }
+    console.log('scence',options.scence)
     this.search()
     this.followList()
     this.getLawyerMoney()
