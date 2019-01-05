@@ -58,7 +58,7 @@
             {{ vaule }}
         </view>
     </scroll-view>
-    <view class="input-box">
+    <view class="input-box" wx:if="{{!requireShow}}">
         <view wx:if="{{canInput}}" class="input">
             <form bindsubmit="confirmSendText">
                 <textarea name="textarea" auto-height fixed maxlength="-1" focus="{{focus}}" cursor-spacing="30rpx" show-confirm-bar="{{showBar}}" confirm-type="发送" value="{{inputValue}}" bindfocus="textareaOnFocus" placeholder-style="color:#b5b5b5;" placeholder="回复" />

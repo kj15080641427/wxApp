@@ -20,7 +20,7 @@ Page({
         requireList: [],
         canInput: false,
         tags:[],
-        grabTime: 258581957,
+        grabTime: null,
         nowDate: null,
         timeText: '',
         focus: false,
@@ -31,7 +31,7 @@ Page({
         delayMessages: [],
         lawyer_avatar: null,
         activeIndex: null,
-        my_avatar: wx.getStorageSync('userInfo').iconImage || '../../../image/message/default_user.png'
+        my_avatar: wx.getStorageSync('userInfo').iconImage || '../../../image/message/default-avatar.png'
     },
     onLoad(option) {
         wx.setNavigationBarTitle({
@@ -42,39 +42,147 @@ Page({
             userName: option.userName,
             // grabTime: option.grabTime || null,
             nowDate: option.nowDate || null,
-            lawyer_avatar: wx.getStorageSync('lawyer-avatar') == '' ? '../../../image/message/default_user.png' : wx.getStorageSync('lawyer-avatar')
+            lawyer_avatar: wx.getStorageSync('lawyer-avatar') == '' ? '../../../image/message/default-avatar.png' : wx.getStorageSync('lawyer-avatar')
         })
         console.log(option.userName.substr(3))
     },
     onShow() {
         let that = this
         wx.showLoading()
-        that.getMemberAllRequireList(this.data.userName)
-        jM.resetUnreadCount({
-            'username': this.data.userName
-        });
-        that.addSingleReceiptReport()
-        that.getHistoryMessage(that.data.userName)
-        jM.onMsgReceive(function (lRes) {
-            console.log(lRes)
-            let arr = that.data.messageList
-            // arr.push(lRes.messages[0].content)
-            // that.setData({
-            //     messageList: arr,
-            //     delayMessages: arr
-            // },function(){
-            //     that.pageScroll(that)
-            // })
-            if (lRes.messages[0].content.msg_type == "voice") {
-                jM.getResource({
-                    'media_id': lRes.messages[0].content.msg_body.media_id
-                }).onSuccess(function (gRes) {
+        if(!jM.isLogin()){
+            function getImConfigSuccess (res) {
+                //  初始化jmessage
+                wx.setStorageSync('appkey', res.data.appkey)
+                jM.init({
+                    "appkey"    : res.data.appkey,
+                    "random_str": res.data.random,
+                    "signature" : res.data.signature,
+                    "timestamp" : res.data.timestamp,
+                    "flag": 1
+                }).onSuccess(function(data) {
+                    jM.login({
+                        'username' : 'lex' + wx.getStorageSync('memberId'),
+                        'password' : hex_md5(wx.getStorageSync('mobile'))
+                    }).onSuccess(function(lData) {
+                        that.getMemberAllRequireList(this.data.userName)
+                        jM.resetUnreadCount({
+                            'username': this.data.userName
+                        });
+                        that.addSingleReceiptReport()
+                        that.getHistoryMessage(that.data.userName)
+                        jM.onMsgReceive(function (lRes) {
+                            console.log(lRes)
+                            let arr = that.data.messageList
+                            // arr.push(lRes.messages[0].content)
+                            // that.setData({
+                            //     messageList: arr,
+                            //     delayMessages: arr
+                            // },function(){
+                            //     that.pageScroll(that)
+                            // })
+                            if (lRes.messages[0].content.msg_type == "voice") {
+                                jM.getResource({
+                                    'media_id': lRes.messages[0].content.msg_body.media_id
+                                }).onSuccess(function (gRes) {
+                                    arr.push({
+                                        msg_id: lRes.messages[0].content.msgid,
+                                        from_id: lRes.messages[0].content.from_id,
+                                        msg_type: lRes.messages[0].content.msg_type,
+                                        duration: lRes.messages[0].content.msg_body.duration,
+                                        content: gRes.url
+                                    })
+                                    that.setData({
+                                        messageList: arr
+                                    }, function () {
+                                        that.pageScroll(that)
+                                        // jM.resetConversationCount(userName)
+                                    })
+                                }).onFail(function (data) {
+                                    console.log('error:' + JSON.stringify(data));
+                                });
+                            } else if (lRes.messages[0].content.msg_type == "text") {
+                                arr.push({
+                                    msg_id: lRes.messages[0].content.msgid,
+                                    from_id: lRes.messages[0].content.from_id,
+                                    msg_type: lRes.messages[0].content.msg_type,
+                                    content: lRes.messages[0].content.msg_body.text
+                                })
+                                that.setData({
+                                    messageList: arr
+                                }, function () {
+                                    that.pageScroll(that)
+                                    // jM.resetConversationCount(userName)
+                                })
+                            } else if (lRes.messages[0].content.msg_type == "custom") {
+                                arr.push({
+                                    msg_id: lRes.messages[0].content.msgid,
+                                    from_id: lRes.messages[0].content.from_id,
+                                    msg_type: lRes.messages[0].content.msg_type,
+                                    content: lRes.messages[0].content.msg_body.content
+                                })
+                                that.setData({
+                                    messageList: arr
+                                }, function () {
+                                    that.pageScroll(that)
+                                    // jM.resetConversationCount(userName)
+                                })
+                            }
+                        });
+                    }).onFail(function(data){
+                      wx.hideLoading() 
+                    })
+                }).onFail(function(data) {
+                  wx.hideLoading() 
+                }); 
+            }
+            function getImConfigFail (res) {
+                // console.log(res)
+            }
+            //  获取im的必须参数
+            wxrequest.requestGet(api.getImConfig(),'',getImConfigSuccess,getImConfigFail)
+        } else {
+            that.getMemberAllRequireList(this.data.userName)
+            jM.resetUnreadCount({
+                'username': this.data.userName
+            });
+            that.addSingleReceiptReport()
+            that.getHistoryMessage(that.data.userName)
+            jM.onMsgReceive(function (lRes) {
+                console.log(lRes)
+                let arr = that.data.messageList
+                // arr.push(lRes.messages[0].content)
+                // that.setData({
+                //     messageList: arr,
+                //     delayMessages: arr
+                // },function(){
+                //     that.pageScroll(that)
+                // })
+                if (lRes.messages[0].content.msg_type == "voice") {
+                    jM.getResource({
+                        'media_id': lRes.messages[0].content.msg_body.media_id
+                    }).onSuccess(function (gRes) {
+                        arr.push({
+                            msg_id: lRes.messages[0].content.msgid,
+                            from_id: lRes.messages[0].content.from_id,
+                            msg_type: lRes.messages[0].content.msg_type,
+                            duration: lRes.messages[0].content.msg_body.duration,
+                            content: gRes.url
+                        })
+                        that.setData({
+                            messageList: arr
+                        }, function () {
+                            that.pageScroll(that)
+                            // jM.resetConversationCount(userName)
+                        })
+                    }).onFail(function (data) {
+                        console.log('error:' + JSON.stringify(data));
+                    });
+                } else if (lRes.messages[0].content.msg_type == "text") {
                     arr.push({
                         msg_id: lRes.messages[0].content.msgid,
                         from_id: lRes.messages[0].content.from_id,
                         msg_type: lRes.messages[0].content.msg_type,
-                        duration: lRes.messages[0].content.msg_body.duration,
-                        content: gRes.url
+                        content: lRes.messages[0].content.msg_body.text
                     })
                     that.setData({
                         messageList: arr
@@ -82,37 +190,23 @@ Page({
                         that.pageScroll(that)
                         // jM.resetConversationCount(userName)
                     })
-                }).onFail(function (data) {
-                    console.log('error:' + JSON.stringify(data));
-                });
-            } else if (lRes.messages[0].content.msg_type == "text") {
-                arr.push({
-                    msg_id: lRes.messages[0].content.msgid,
-                    from_id: lRes.messages[0].content.from_id,
-                    msg_type: lRes.messages[0].content.msg_type,
-                    content: lRes.messages[0].content.msg_body.text
-                })
-                that.setData({
-                    messageList: arr
-                }, function () {
-                    that.pageScroll(that)
-                    // jM.resetConversationCount(userName)
-                })
-            } else if (lRes.messages[0].content.msg_type == "custom") {
-                arr.push({
-                    msg_id: lRes.messages[0].content.msgid,
-                    from_id: lRes.messages[0].content.from_id,
-                    msg_type: lRes.messages[0].content.msg_type,
-                    content: lRes.messages[0].content.msg_body.content
-                })
-                that.setData({
-                    messageList: arr
-                }, function () {
-                    that.pageScroll(that)
-                    // jM.resetConversationCount(userName)
-                })
-            }
-        });
+                } else if (lRes.messages[0].content.msg_type == "custom") {
+                    arr.push({
+                        msg_id: lRes.messages[0].content.msgid,
+                        from_id: lRes.messages[0].content.from_id,
+                        msg_type: lRes.messages[0].content.msg_type,
+                        content: lRes.messages[0].content.msg_body.content
+                    })
+                    that.setData({
+                        messageList: arr
+                    }, function () {
+                        that.pageScroll(that)
+                        // jM.resetConversationCount(userName)
+                    })
+                }
+            });
+        }
+        
     },
     onUnload() {
         //  页面关闭时停止播放语音
@@ -121,7 +215,6 @@ Page({
         // innerAudioContext.destroy()
     },
     toggleRequire() {
-        console.log(123)
         this.setData({
             requireShow: !this.data.requireShow,
             requireSwitchText: !this.data.requireShow ? '收起需求' : '查看需求'
@@ -137,8 +230,27 @@ Page({
             })
             that.setData({
                 requireList: res.data.data || [],
-                grabTime: isReceive.length == 0 ? 0 : isReceive.remain,
-                canInput: isReceive.length == 0 ? false : true
+                grabTime: isReceive.length == 0 ? 0 : isReceive[0].remain,
+                canInput: isReceive.length == 0 ? false : true,
+                requireTimeReady: isReceive.length == 0 ? false : true,
+            },function(){
+                //  剩余服务时间
+                timer1 = setInterval(function(){
+                    if (that.data.grabTime > 0) {
+                        // console.log(44444)
+                        let h=Math.floor(that.data.grabTime/1000/60/60%24);
+                        let m=Math.floor(that.data.grabTime/1000/60%60);
+                        let s=Math.floor(that.data.grabTime/1000%60)<10?'0'+Math.floor(that.data.grabTime/1000%60):Math.floor(that.data.grabTime/1000%60);
+                        // console.log(h+':'+m+':'+s)
+                        that.setData({
+                            timeText: h+':'+m+':'+s,
+                            grabTime: that.data.grabTime-1000
+                        })
+                        // console.log(that.data.grabTime)
+                    } else {
+                        clearInterval(timer1);
+                    }
+                }, 1000);
             })
             if(res.data.data[0].status == 0){
                 that.setData({
@@ -149,23 +261,6 @@ Page({
                     recordBtnText: '已关闭'
                 })
             }
-            //  剩余服务时间
-            timer1 = setInterval(function(){
-                if (that.data.grabTime > 0) {
-                    let h=Math.floor(that.data.grabTime/1000/60/60%24);
-                    let m=Math.floor(that.data.grabTime/1000/60%60);
-                    let s=Math.floor(that.data.grabTime/1000%60)<10?'0'+Math.floor(that.data.grabTime/1000%60):Math.floor(that.data.grabTime/1000%60);
-                    // console.log(h+':'+m+':'+s)
-                    that.setData({
-                        requireTimeReady: true,
-                        timeText: h+':'+m+':'+s,
-                        grabTime: that.data.grabTime-1000
-                    })
-                    // console.log(that.data.grabTime)
-                } else {
-                    clearInterval(timer1);
-                }
-            }, 1000);
         })
     },
     getHistoryMessage(userName) {
@@ -182,13 +277,13 @@ Page({
             success(res) {
                 console.log(res.data.messages)
                 console.log(userName)
-                let _arr = res.data.messages.filter(item => {
-                    return item.from_id == userName
-                }).concat(
-                    res.data.messages.filter(item => {
-                        return item.target_id == userName
-                    })
-                )
+
+                let _arr = []
+                res.data.messages.forEach(item => {
+                    if(item.from_id == userName || item.target_id == userName){
+                        _arr.push(item)
+                    }
+                })
                 // console.log(userName)
                 let dArr = []
                 //  存在异步操作，只能用递归的形式加载数据
@@ -337,6 +432,8 @@ Page({
                     })
                 }
             }
+        }else{
+            wx.hideLoading()
         }
     },
     textareaOnFocus(e) {

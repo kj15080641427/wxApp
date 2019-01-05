@@ -251,6 +251,7 @@
     background: #fff;
     padding: 0 18rpx;
     box-sizing: border-box;
+    position: relative;
 }
 .chart .input-box .input textarea{
     width: 100%;
