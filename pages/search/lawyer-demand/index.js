@@ -112,9 +112,22 @@ Page({
     console.log("已选择问题标签id", tagIdList)
     console.log("已选择问题标签name", tagNameList)
   },
+  //律师单价
+  // getLawyerMoney: function () {
+  //   var url = api.getLawyerMoney() + this.data.lawyerInfo.memberId
+  //   var success = data => {
+  //     console.log('律师单价', data.data)
+  //     this.setData({
+  //       lawyerMoney: data.data
+  //     })
+  //   }
+  //   var fail = e => {
+  //     console.log(e)
+  //   }
+  //   wxrequest.requestGet(url, '', success, fail)
+  // },
   //发布需求
   publish: function() {
-    this.getMarkList()
     var url = api.getPublish()
     var data = this.data.parameter
     var success = data => {
@@ -136,7 +149,30 @@ Page({
       })
       console.log(e)
     }
-    wxrequest.request(url, data, success, fail)
+    if (!this.data.parameter.requirementTypeId ){
+    wx.showToast({
+      title: '请选择服务类型',
+      icon:'none'
+    })
+    } else if (!this.data.parameter.skillId){
+      wx.showToast({
+        title: '请选择擅长领域',
+        icon:'none'
+      })
+    } else if (!this.data.parameter.maxCost) {
+      wx.showToast({
+        title: '请填写最高可承受费用',
+        icon: 'none'
+      })
+    } else if (!this.data.parameter.requirementContent ) {
+      wx.showToast({
+        title: '请填写问题描述',
+        icon: 'none'
+      })
+    }else{
+      this.getMarkList()
+      wxrequest.request(url, data, success, fail)
+    }
   },
   //擅长领域
   getexpert: function() {
@@ -165,6 +201,8 @@ Page({
     })
     console.log("擅长领域", this.data.lawyerInfo.businessType[0])
     this.getexpert()
+    // this.getLawyerMoney()
+    console.log('律师信息', this.data.lawyerInfo)
   },
 
   /**

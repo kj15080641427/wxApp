@@ -22,8 +22,12 @@ Page({
   },
   //提现
   gotoCash: function() {
-    wx.navigateTo({
-      url: '../cash/index?balance=' + JSON.stringify(this.data.balance),
+    // wx.navigateTo({
+    //   url: '../cash/index?balance=' + JSON.stringify(this.data.balance),
+    // })
+    wx.showToast({
+      title: '暂不支持',
+      icon:'none'
     })
   },
   //获取账户余额

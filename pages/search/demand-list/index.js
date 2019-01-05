@@ -76,6 +76,13 @@ Page({
       url: '../../search/filter/index?noFilter=' + JSON.stringify(this.data.noFilter),
     })
   },
+  //律师主页
+  toLawyer:function(e){
+    wx.navigateTo({
+      url: '/pages/search/lawyer-detail/index?id=' + this.data.lawyerList[e.currentTarget.dataset.lawindex].memberId + '&parameter=' + JSON.stringify(this.data.parameter)+'&justDo=true',
+    })
+    console.log('需求参数',this.data.parameter)
+  },
   //上拉搜索
   topSearch: function () {
     var that = this
@@ -190,16 +197,16 @@ Page({
           // if (!wx.getStorageSync("requirementId")){
           //   wx.setStorageSync("requirementId", data.data.requirementId)
           // }
-          that.setData({
-              ['parameter.requirementId']: data.data.requirementId,
-              ['parameter.isFirst']: 1,
-            },
+          // that.setData({
+          //     ['parameter.requirementId']: data.data.requirementId,
+          //     ['parameter.isFirst']: 1,
+          //   },
             // function() {
             //   wx.navigateTo({
             //     url: '../../message/index'
             //   })
             // }
-            )
+            // )
         }
       })
       console.log(data)

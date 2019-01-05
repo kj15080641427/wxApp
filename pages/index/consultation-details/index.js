@@ -193,7 +193,7 @@ Page({
   //律师主页
   toLawyerHomePage:function(e){
     wx.navigateTo({
-      url: '/pages/search/lawyer-detail/index?memberId=' + this.data.freeTextList[e.currentTarget.dataset.lawindex].lawyerId,
+      url: '/pages/search/lawyer-detail/index?id=' + this.data.freeTextList[e.currentTarget.dataset.lawindex].lawyerId,
     })
   },
   /**

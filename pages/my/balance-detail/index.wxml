@@ -13,3 +13,11 @@
 <view class='ba-detail-line'></view>
 </view>
 <!-- wx:if="{{item.orderStatus==2}}" -->
+<view class='no-message' wx:if="{{!hasList}}">
+  <view class='no-messge-image-view'>
+    <image src='/image/search_icon@3x/Defaultpage_04_max.png' class='no-message-imag'></image>
+  </view>
+  <view class='no-message-tips-view'>
+    <view class='no-message-tips'>暂无交易明细</view>
+  </view>
+</view>

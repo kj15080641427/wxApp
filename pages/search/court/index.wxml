@@ -1,3 +1,8 @@
 <!--pages/search/court/index.wxml-->
 <input placeholder='搜索法院'></input>
-<picker></picker>
+      <picker mode="multiSelector" class="info-page-input" bindtap='hideRegion' bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}" range-key="name">
+        <view class="picker">
+          <text wx:if="{{!hasaddress}}"> {{userInfo.addressExtend.province ? userInfo.addressExtend.province:'选择'}}-{{userInfo.addressExtend.city ?userInfo.addressExtend.city:'地区' }} </text>
+          <text wx:if="{{hasaddress}}"> {{multiArray[0][multiIndex[0]].name}}-{{multiArray[1][multiIndex[1]].name}} </text>
+        </view>
+      </picker>

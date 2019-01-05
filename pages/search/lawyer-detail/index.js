@@ -286,9 +286,35 @@ Page({
   },
   //发布需求
   toDemand: function() {
-    wx.navigateTo({
-      url: '/pages/search/lawyer-demand/index?lawyerDetail=' + JSON.stringify(this.data.lawyerInfo),
-    })
+    if(this.data.justDo){
+      var url = api.getPublish()
+      var data = this.data.parameter
+      var success = data => {
+        wx.showToast({
+          title: '发送成功',
+          icon: 'none'
+        })
+        setTimeout(() => {
+          wx.navigateBack({
+            delta: 10
+          })
+        }, 1500)
+        console.log(data)
+      }
+      var fail = e => {
+        wx.showToast({
+          title: e.message,
+          icon: 'none'
+        })
+        console.log(e)
+      }
+     wxrequest.request(url, data, success, fail)
+
+    }else{
+      wx.navigateTo({
+        url: '/pages/search/lawyer-demand/index?lawyerDetail=' + JSON.stringify(this.data.lawyerInfo),
+      })
+    }
   },
   //充值
   gotoCharge: function() {
@@ -435,12 +461,15 @@ Page({
   onLoad: function(options) {
     this.setData({
       lawyerList: options.id,
-      quick: options.quick ? true : false
+      quick: options.quick ? true : false,
+      parameter: options.parameter?JSON.parse(options.parameter):'',
+      ['parameter.targetLawyerId']: options.id? options.id :'',
+      justDo: options.justDo? options.justDo :''
     })
     wx.showLoading({
       title: '获取律师信息',
     })
-    console.log("律师ID", options)
+    console.log("律师cansdhaskjdh", this.data.parameter)
     this.search()
     this.followList()
     this.getLawyerMoney()

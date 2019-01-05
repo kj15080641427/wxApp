@@ -99,10 +99,10 @@
         <view wx:key="index" wx:for="{{article}}" bindtap="gotoweb" data-resolveIndex='{{index}}'>
           <view class='index-page-line'></view>
           <view class='index-article'>
-            <view>
+            <view style='height:150rpx;'>
               <view class="index-article-text">{{item["title"]}}</view>
               <view class="index-article-text-lower">已帮助
-                <label style="color:#1ec88c">{{item['helpNumber']}}</label>人</view>
+                <text style="color:#1ec88c">{{item['helpNumber']}}</text>人</view>
             </view>
             <image src="{{item.image}}" style='width:223rpx;height:145rpx;'></image>
           </view>

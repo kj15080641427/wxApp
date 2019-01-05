@@ -65,8 +65,11 @@ Page({
         icon: 'none'
       })
     }else{
+      wx.showLoading({
+        title: '支付中',
+      })
       if(this.data.checked1){
-        var t = { typeQuick: this.data.popular[this.data.index], money: this.data.money*100, type: 1, product: 2, phone:this.data.phone}
+        var t = { typeQuick: this.data.popular[this.data.index], money: this.data.money * 100, type: 1, product: 2, phone: this.data.phone}
         var that = this
         var payMoney = that.data.money
         console.log("money", that.data.money)

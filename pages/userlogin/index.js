@@ -84,10 +84,6 @@ Page({
     }
   },
   //默认用户名
-  // 保存
-  saveInfo: function () {
-
-  },
   // 注册
   userLogin: function() {
     var message = "1"

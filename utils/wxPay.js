@@ -50,6 +50,7 @@ const getPayInfo = (v) => {
                     method: "POSt",
                     data: {
                       payOrderNo: res.data.data.orderno,
+                      phone: v.phone,
                       payType: 1,
                       payAmount: v.money,
                       typeId: v.typeQuick.id
@@ -87,6 +88,7 @@ const getPayInfo = (v) => {
               data: {
                 payOrderNo: res.data.data.orderno,
                 payType: 3,
+                phone: v.phone,
                 payAmount: v.money/100,
                 typeId: v.typeQuick.id
               },

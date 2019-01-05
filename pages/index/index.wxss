@@ -222,7 +222,10 @@
 }
 
 .index-article-text {
-  margin-top: 30rpx;
+  /* height: 100rpx; */
+  display: flex;
+  align-items: flex-start;
+  /* margin-top: 30rpx; */
   font-size: 32rpx;
   width: 457rpx;
 }

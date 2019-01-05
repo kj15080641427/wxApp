@@ -1,5 +1,5 @@
 var app = getApp();
-var reg = require('../../../region.js');
+var reg = require('../../../region.js')
 var wxrequest = require('../../../utils/request.js')
 var api = require('../../../utils/api.js')
 Page({

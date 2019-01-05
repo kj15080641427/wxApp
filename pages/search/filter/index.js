@@ -116,7 +116,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getCourt()
+    // this.getCourt()
     var that = this
     that.setData({
       noFilter: JSON.parse(options.noFilter),
@@ -210,7 +210,7 @@ Page({
     var pickeridx = e.detail.value
     this.setData({
       insIndex: +e.detail.value,
-      industryId: this.data.search[2].items[e.detail.value].id
+      industryId: this.data.search[1].items[e.detail.value].id
     })
     //储存所选picker的Index值
     picIndexList.insIndex = e.detail.value
@@ -220,7 +220,7 @@ Page({
   changeSkill: function(e) {
     this.setData({
       baseSkillIndex: e.detail.value,
-      skillId: this.data.search[3].items[e.detail.value].id
+      skillId: this.data.search[2].items[e.detail.value].id
     })
     picIndexList.baseSkillIndex = e.detail.value
 
@@ -229,7 +229,7 @@ Page({
   changeExpand: function(e) {
     this.setData({
       ohterSkillIndex: e.detail.value,
-      expandId: this.data.search[4].items[e.detail.value].id
+      expandId: this.data.search[3].items[e.detail.value].id
     })
     picIndexList.ohterSkillIndex = e.detail.value
   },
@@ -237,7 +237,7 @@ Page({
   changeLanguage: function(e) {
     this.setData({
       langSkillIndex: e.detail.value,
-      languageId: this.data.search[5].items[e.detail.value].id
+      languageId: this.data.search[4].items[e.detail.value].id
     })
     picIndexList.langSkillIndex = e.detail.value
   },
@@ -245,7 +245,7 @@ Page({
   changeCourt: function(e) {
     this.setData({
       courtIndex: e.detail.value,
-      courtId: this.data.search[6].items[e.detail.value] ? this.data.search[6].items[e.detail.value].id : ""
+      courtId: this.data.search[5].items[e.detail.value] ? this.data.search[5].items[e.detail.value].id : ""
     })
     picIndexList.courtIndex = e.detail.value
   },
@@ -253,7 +253,7 @@ Page({
   changeProcuratorate: function(e) {
     this.setData({
       procuratorateIndex: e.detail.value,
-      procuratorateId: this.data.search[7].items[e.detail.value] ? this.data.search[7].items[e.detail.value].id : ""
+      procuratorateId: this.data.search[6].items[e.detail.value] ? this.data.search[6].items[e.detail.value].id : ""
     })
     picIndexList.procuratorateIndex = e.detail.value
   },
@@ -261,7 +261,7 @@ Page({
   changePosition: function(e) {
     this.setData({
       positionIndex: e.detail.value,
-      positionId: this.data.search[8].items[e.detail.value].id
+      positionId: this.data.search[7].items[e.detail.value].id
     })
     picIndexList.positionIndex = e.detail.value
   },
@@ -269,7 +269,7 @@ Page({
   changeHonor: function(e) {
     this.setData({
       honorIndex: e.detail.value,
-      honorId: this.data.search[9].items[e.detail.value].id
+      honorId: this.data.search[8].items[e.detail.value].id
     })
     picIndexList.honorIndex = e.detail.value
   },
@@ -277,7 +277,7 @@ Page({
   changeSocial: function(e) {
     this.setData({
       socialIndex: e.detail.value,
-      socialId: this.data.search[10].items[e.detail.value].id
+      socialId: this.data.search[9].items[e.detail.value].id
     })
     picIndexList.socialIndex = e.detail.value
   },
@@ -285,7 +285,7 @@ Page({
   changeGuarantee: function(e) {
     this.setData({
       depositIndex: e.detail.value,
-      guaranteeId: this.data.search[11].items[e.detail.value].id
+      guaranteeId: this.data.search[10].items[e.detail.value].id
     })
     picIndexList.depositIndex = e.detail.value
   },
@@ -293,7 +293,7 @@ Page({
   changeMung: function(e) {
     this.setData({
       lexMungIndex: e.detail.value,
-      mungId: this.data.search[12].items[e.detail.value].id
+      mungId: this.data.search[11].items[e.detail.value].id
     })
     picIndexList.lexMungIndex = e.detail.value
   },
@@ -301,7 +301,7 @@ Page({
   changeOrganization: function(e) {
     this.setData({
       organziationIndex: e.detail.value,
-      organizationId: this.data.search[13].items[e.detail.value].id
+      organizationId: this.data.search[12].items[e.detail.value].id
     })
     picIndexList.organziationIndex = e.detail.value
   },

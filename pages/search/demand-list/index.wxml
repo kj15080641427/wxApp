@@ -32,7 +32,7 @@
 
 <scroll-view scrool-y scroll-top='500px'>
 <view style='margin-top:215rpx;'></view>
-  <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}">
+  <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}" data-lawindex="{{index}}" bindtap='toLawyer'>
     <view class='watchlist-page'>
       <view class='watchlist-page-flex'>
         <view class='watchlist-page-left' style="z-index:55;">
