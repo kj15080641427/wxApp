@@ -43,7 +43,7 @@ Page({
             userName: option.userName,
             // grabTime: option.grabTime || null,
             nowDate: option.nowDate || null,
-            lawyer_avatar: wx.getStorageSync('lawyer-avatar') == '' ? '../../../image/message/default-avatar.png' : wx.getStorageSync('lawyer-avatar')
+            lawyer_avatar: wx.getStorageSync('lawyer-avatar') == '' ? '../../../image/message/default-lawyer.png' : wx.getStorageSync('lawyer-avatar')
         })
         console.log(option.userName.substr(3))
     },

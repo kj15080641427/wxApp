@@ -165,7 +165,7 @@ Page({
                 if(arr[i].avatar == ''){
                     let k = null
                     k = arr[i]
-                    k.avatar = '../../image/message/default-avatar.png'
+                    k.avatar = '../../image/message/default-lawyer.png'
                     targetArr.push(arr[i])
                     if (++i < len) {
                         that.getUserAvatarResource(i, arr, len, targetArr)
