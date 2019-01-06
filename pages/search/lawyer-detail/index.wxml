@@ -20,7 +20,7 @@
       </view>
     </view>
     <view class='law-page-min-size law-page-martop'> {{lawyerCard.institutionName}}
-      <text style='color:#b5b5b5'>|</text> 执业{{year}}年</view>
+      <text style='color:#b5b5b5'>|</text> 执业{{year>1?year:1}}年</view>
   </view>
 
   <view class='law-info-flex'>
@@ -63,13 +63,13 @@
 <!-- 律师名片 -->
 <!-- 擅长领域 -->
 <view wx:if="{{isshowCard}}">
-  <view wx:if="{{lawyerInfo.businessType}}">
+  <view wx:if="{{lawyerInfo.businessType[0]}}">
     <view class='law-flex' style='background-color:white;height:300rpx;'>
       <view class='law-long-text'>擅长领域</view>
 
       <view class='law-center-icon'>
         <!-- 1 -->
-        <view wx:key="{{index}}" wx:for="{{lawyerInfo.businessType}}">
+        <view wx:key="{{index}}"  wx:for="{{lawyerInfo.businessType}}">
           <view class='law-space-flex'>
             <view class='law-flex' style=' align-items: center;'>
               <image src="{{index==0? '../../../image/search_icon@3x/Personalhomepage-10@3x.png': index == 1 ? '../../../image/search_icon@3x/Personalhomepage-11@3x.png' :'../../../image/search_icon@3x/Personalhomepage-12@3x.png'}}" class='law-num-icon'></image>

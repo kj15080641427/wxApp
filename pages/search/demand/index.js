@@ -25,7 +25,6 @@ Page({
     })
     var success = function (data) {
       wx.hideLoading()
-      data.data.pop()
       that.setData({
         demandType: data.data
       })

@@ -12,7 +12,7 @@ Page({
     mobile: '', //电话
     pageNum: 1,
     order: [],
-    hasNextPage: true,
+    hasNextPage: false,
   },
   getOrderIndex: function(e) {
     var that = this
@@ -80,7 +80,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.getOrder()
+    this.setData({
+      order:[]
+    })
+
     wx.showLoading()
     if (!jM.isLogin()) {
       wxrequest.requestGet(api.getImConfig(), '', getImConfigSuccess, getImConfigFail)
@@ -116,6 +119,7 @@ Page({
     } else {
       wx.hideLoading()
     }
+    this.getOrder()
   },
   /**
    * 生命周期函数--监听页面隐藏

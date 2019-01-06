@@ -1,6 +1,6 @@
 'use strict';
 // 地址
-var HOST_URL = 'https://api-test.lex-mung.com';
+var HOST_URL = 'https://api.lex-mung.com';
 
 //  获取openid
 var Openid = '/wechat/openid'
@@ -323,6 +323,11 @@ var Cash = '/pay/withdraw'
 function getCash(){
   return HOST_URL + Cash
 }
+//金额
+var lawCash = '/lawyer/require/'
+function getLawCash(){
+  return HOST_URL + lawCash
+}
 module.exports={
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,
@@ -372,5 +377,6 @@ module.exports={
   getUserUrl: getUserUrl,
   getCourt: getCourt,
   getTariff: getTariff,
-  getCash: getCash
+  getCash: getCash,
+  getLawCash: getLawCash,
 }

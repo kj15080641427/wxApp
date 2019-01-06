@@ -37,9 +37,9 @@ Page({
         title: '提现成功',
         icon:'none'
       })
-      // wx.navigateBack({
-      //   delta:5
-      // })
+      wx.navigateBack({
+        // delta:5
+      })
       console.log(data)
     }
     var fail = e =>{

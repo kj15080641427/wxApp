@@ -25,7 +25,7 @@ Page({
     positionId: '', //职位
     honorId: '', //荣誉
     socialId: '', // 社会职务
-    guaranteeId: '', //增信担保
+    // guaranteeId: '', //增信担保
     mungId: '', //绿豆圈
     organizationId: '', //商会组织
   },
@@ -54,8 +54,8 @@ Page({
       "positionId": t.positionId ? t.positionId : gs.positionIndex ? t.search[7].items[gs.positionIndex].id : '',
       "honorId": t.honorId ? t.honorId : gs.honorIndex ? t.search[8].items[gs.honorIndex].id : '',
       "socialId": t.socialId ? t.socialId : gs.socialIndex ? t.search[9].items[gs.socialIndex].id : '',
-      "depositAmountId": t.guaranteeId ? t.guaranteeId : gs.depositIndex ? t.search[10].items[gs.depositIndex].id : '',
-      "lexMungId": t.mungId ? t.mungId : gs.lexMungIndex ? t.search[11].items[gs.lexMungIndex].id : '',
+      // "depositAmountId": t.guaranteeId ? t.guaranteeId : gs.depositIndex ? t.search[10].items[gs.depositIndex].id : '',
+      "lexMungId": t.mungId ? t.mungId : gs.lexMungIndex ? t.search[10].items[gs.lexMungIndex].id : '',
       "orgId": t.organizationId ? t.organizationId : gs.organziationIndex ? t.search[11].items[gs.organziationIndex].id : ''
     }
     var pages = getCurrentPages();
@@ -262,18 +262,18 @@ Page({
     picIndexList.socialIndex = e.detail.value
   },
   //增信担保
-  changeGuarantee: function(e) {
-    this.setData({
-      depositIndex: e.detail.value,
-      guaranteeId: this.data.search[10].items[e.detail.value].id
-    })
-    picIndexList.depositIndex = e.detail.value
-  },
+  // changeGuarantee: function(e) {
+  //   this.setData({
+  //     depositIndex: e.detail.value,
+  //     guaranteeId: this.data.search[10].items[e.detail.value].id
+  //   })
+  //   picIndexList.depositIndex = e.detail.value
+  // },
   //绿豆圈
   changeMung: function(e) {
     this.setData({
       lexMungIndex: e.detail.value,
-      mungId: this.data.search[11].items[e.detail.value].id
+      mungId: this.data.search[10].items[e.detail.value].id
     })
     picIndexList.lexMungIndex = e.detail.value
   },
@@ -281,7 +281,7 @@ Page({
   changeOrganization: function(e) {
     this.setData({
       organziationIndex: e.detail.value,
-      organizationId: this.data.search[12].items[e.detail.value].id
+      organizationId: this.data.search[11].items[e.detail.value].id
     })
     picIndexList.organziationIndex = e.detail.value
   },

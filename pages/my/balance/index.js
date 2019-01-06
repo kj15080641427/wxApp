@@ -61,7 +61,7 @@ Page({
       var v = {
         type: 1,
         product: 4,
-        money: e.currentTarget.dataset.amt 
+        money: e.currentTarget.dataset.amt *100
       }
       wxPay(v).then(res => {
         that.getBalance()
@@ -97,7 +97,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    this.getBalance()
   },
 
   /**

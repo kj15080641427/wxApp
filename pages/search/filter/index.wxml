@@ -111,7 +111,7 @@
     <view class='filter-page-line'></view>
   </view>
   <!-- 增信担保 -->
-  <view class='filter-page-cneter filter-background' >
+  <!-- <view class='filter-page-cneter filter-background' >
     <view style='display:flex;'>
       <picker bindchange="changeGuarantee" class='filter-page-picker' range="{{search[10].items}}" range-key="{{'text'}}" >{{search[10].text}}<text class='filter-page-picker-text' >{{search[10].items[depositIndex].text}}</text></picker>
     </view>
@@ -119,11 +119,11 @@
   </view>
   <view style='background-color:white'>
     <view class='filter-page-line'></view>
-  </view>
+  </view> -->
   <!-- 绿豆圈 -->
   <view class='filter-page-cneter filter-background' >
     <view style='display:flex;'>
-      <picker bindchange="changeMung" class='filter-page-picker' range="{{search[11].items}}" range-key="{{'text'}}" ><label>{{search[11].text}}</label><text class='filter-page-picker-text' style='margin-left:60rpx;' >{{search[11].items[lexMungIndex].text}}</text></picker>
+      <picker bindchange="changeMung" class='filter-page-picker' range="{{search[10].items}}" range-key="{{'text'}}" ><label>{{search[10].text}}</label><text class='filter-page-picker-text' style='margin-left:60rpx;' >{{search[10].items[lexMungIndex].text}}</text></picker>
     </view>
     <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
   </view>
@@ -133,7 +133,7 @@
   <!-- 商会组织 -->
   <view class='filter-page-cneter filter-background' >
     <view style='display:flex;'>
-      <picker bindchange="changeOrganization"class='filter-page-picker' range="{{search[12].items}}" range-key="{{'text'}}" >{{search[12].text}}<text class='filter-page-picker-text' >{{search[12].items[organziationIndex].text}}</text></picker>
+      <picker bindchange="changeOrganization"class='filter-page-picker' range="{{search[11].items}}" range-key="{{'text'}}" >{{search[11].text}}<text class='filter-page-picker-text' >{{search[11].items[organziationIndex].text}}</text></picker>
     </view>
     <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
   </view>

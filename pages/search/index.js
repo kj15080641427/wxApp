@@ -347,7 +347,7 @@ Page({
     })
     that.setData({
       region: re,
-      id: options.id ? options.id:''
+      // id: options.id ? options.id:''
     })
     //  加载极光im
   },
@@ -362,7 +362,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function(options) {
-
+    this.setData({
+      ishidden:true
+    })
   },
 
   /**

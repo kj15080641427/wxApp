@@ -285,6 +285,7 @@ function superRequest(url, data, type) {
       },
       fail: function(res) {
         // fail
+        wx.hideLoading()
         console.log(res)
         reject(new Error(res.message))
       },

@@ -30,6 +30,7 @@ Page({
       ['parameter.requirementTypeId']: this.data.type[e.detail.value].requireTypeId,
       ['parameter.requirementTypeName']: this.data.type[e.detail.value].requireTypeName
     })
+    this.getLawCash()
   },
   //擅长领域
   pickerBusiness: function(e) {
@@ -107,20 +108,40 @@ Page({
       })
     }
   },
-  // 律师单价
-  getLawyerMoney: function () {
-    var url = api.getLawyerMoney() + this.data.lawyerInfo.memberId
-    var success = data => {
-      console.log('律师单价', data.data)
-      this.setData({
-        lawyerMoney: data.data
+  //金额
+  getLawCash:function(){
+    var url = api.getLawCash() + this.data.lawyerInfo.memberId
+    var data = { memberId: this.data.lawyerInfo.memberId}
+    var success = data =>{
+      data.data.map(item=>{
+        if (this.data.type[this.data.index].requireTypeName == item.requireTypeName) {
+          console.log(item.requireTypeName)
+          this.setData({
+            lawyerMoney: item.minAmount
+          })
+        }
       })
+      console.log('qq', data, this.data.lawyerMoney, this.data.type[this.data.index].requireTypeName)
     }
-    var fail = e => {
+    var fail = e =>{
       console.log(e)
     }
-    wxrequest.requestGet(url, '', success, fail)
+    wxrequest.request(url,data,success,fail)
   },
+  // 律师单价
+  // getLawyerMoney: function () {
+  //   var url = api.getLawyerMoney() + this.data.lawyerInfo.memberId
+  //   var success = data => {
+  //     console.log('律师单价', data.data)
+  //     this.setData({
+  //       lawyerMoney: data.data
+  //     })
+  //   }
+  //   var fail = e => {
+  //     console.log(e)
+  //   }
+  //   wxrequest.requestGet(url, '', success, fail)
+  // },
   //发布需求
   publish: function() {
     console.log(this.data.parameter.maxCost , this.data.lawyerMoney)
@@ -159,9 +180,9 @@ Page({
         title: '请填写最高可承受费用',
         icon: 'none'
       })
-    } else if (this.data.parameter.maxCost < this.data.lawyerMoney.lawyerPrice) {
+    } else if (this.data.parameter.maxCost < this.data.lawyerMoney) {
       wx.showToast({
-        title: '最高可承受费用不能低于律师最低可承受费用' +'('+ this.data.lawyerMoney.lawyerPrice+')',
+        title: '您的可承受费用低于律师的服务费用' +'('+ this.data.lawyerMoney+')',
         icon: 'none'
       })
     } else if (!this.data.parameter.requirementContent ) {
@@ -199,7 +220,7 @@ Page({
       ['parameter.targetLawyerId']: JSON.parse(options.lawyerDetail).memberId
     })
     this.getexpert()
-    this.getLawyerMoney()
+    // this.getLawyerMoney()
   },
 
   /**
