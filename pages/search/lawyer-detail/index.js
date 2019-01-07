@@ -26,13 +26,20 @@ Page({
     isshowCase: false,
     time: 60,
     start: true,
-    lawyerFirm:''
+    lawyerFirm: '',
+    firstPage:false //默认从此页面进入小程序
   },
   //
-  toOrgId:function(e){
+  toOrgId: function(e) {
     wx.setStorageSync('orgUrl', `${this.data.lawyerCard.orgTags[e.currentTarget.dataset.orgindex].link}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
     wx.navigateTo({
       url: '/pages/search/orgweb-viewTwo/index',
+    })
+  },
+  //回到首页
+  toindex:function(){
+    wx.switchTab({
+      url: '/pages/index/index',
     })
   },
   //关注
@@ -115,7 +122,7 @@ Page({
       that.setData({
         lawyerInfo: data.data
       })
-
+      // console.log('Info',data.data)
       var scoreList = []
       that.data.lawyerInfo.businessType.map(item => {
         scoreList.push((item.score * 100).toFixed(2))
@@ -149,7 +156,8 @@ Page({
       that.setData({
         lawyerCard: data.data
       })
-      that.getCase()
+      // console.log('card',data.data)
+      // that.getCase()
       that.getlawyer()
       that.getAge()
     }
@@ -281,7 +289,12 @@ Page({
   },
   //发布需求
   toDemand: function() {
-    if(this.data.justDo){
+    if (!wx.getStorageSync("token")) {
+      wx.navigateTo({
+        url: '/pages/userlogin/index',
+      })
+    }else{
+    if (this.data.justDo) {
       var url = api.getPublish()
       var data = this.data.parameter
       var success = data => {
@@ -302,12 +315,13 @@ Page({
         })
         console.log(e)
       }
-     wxrequest.request(url, data, success, fail)
+      wxrequest.request(url, data, success, fail)
 
-    }else{
+    } else {
       wx.navigateTo({
         url: '/pages/search/lawyer-demand/index?lawyerDetail=' + JSON.stringify(this.data.lawyerInfo),
       })
+    }
     }
   },
   //充值
@@ -370,10 +384,10 @@ Page({
   isEnough: function() {
     if (this.data.lawyerMoney.balance >= this.data.lawyerMoney.lawyerPrice / 60) {
       this.showModal()
-    }else{
+    } else {
       wx.showToast({
         title: '余额不足',
-        icon:'none'
+        icon: 'none'
       })
     }
   },
@@ -450,20 +464,35 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    if (options.scene) {
+      console.log('options',options.scene)
+      var sceneList = options.scene.split("-")
+      if (sceneList.length == 2) {
+        this.setData({
+          lawyerList : sceneList[0],
+          channel : sceneList[1],
+          firstPage:true
+        })
+        App.globalData.device.channel = sceneList[1]
+        console.log('channel',App.globalData.device.channel)
+      }else{
+        this.setData({
+          lawyerList : sceneList[0],
+          firstPage: true
+        })
+      }
+    }else{
     this.setData({
-      lawyerList: options.id ? options.id:options.id,
+      lawyerList: options.id,
       quick: options.quick ? true : false,
-      parameter: options.parameter?JSON.parse(options.parameter):'',
-      ['parameter.targetLawyerId']: options.id? options.id :'',
-      justDo: options.justDo? options.justDo :''
+      parameter: options.parameter ? JSON.parse(options.parameter) : '',
+      ['parameter.targetLawyerId']: options.id ? options.id : '',
+      justDo: options.justDo ? options.justDo : ''
     })
+    }
     wx.showLoading({
       title: '获取律师信息',
     })
-    if (options.channel){
-      App.globalData.device.channel = options.channel
-    }
-    console.log('scence',options.scence)
     this.search()
     this.followList()
     this.getLawyerMoney()
@@ -480,7 +509,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    //选择id
+    
   },
   /**
    * 生命周期函数--监听页面隐藏

@@ -43,7 +43,8 @@ App({
                 // }
             },
         })
-        wx.reportMonitor('1001', 2)
+        //数据埋点 上报
+        wx.reportMonitor('1001', 2) 
         wx.reportMonitor('1002', 1)
         wx.reportMonitor('1003', 1)
         wx.reportMonitor('1004', 1)

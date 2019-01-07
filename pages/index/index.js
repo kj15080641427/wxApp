@@ -134,11 +134,9 @@ Page({
       title: '数据加载中',
     })
     if (options.scene) {
-      // wx.setStorageSync('scene', options.channel)
       App.globalData.device.channel = options.scene
     }
     console.log(options)
-    console.log('channel', options.scene)
     this.getArticleType()
     this.getAdbanner()
     this.judgeTips()
@@ -326,9 +324,15 @@ Page({
     }
   },
   goToMessage() {
+    if(wx.getStorageSync("token")){
     wx.navigateTo({
       url: '../message/index',
     })
+    }else{
+      wx.navigateTo({
+        url: '/pages/userlogin/index',
+      })
+    }
   },
   // 清除消息
   clearTips: function() {

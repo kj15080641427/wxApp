@@ -1,7 +1,7 @@
 /* pages/search/lawyer-detail/index.wxss */
 .law-page-background{
   width: 750rpx;
-  height: 300rpx;
+  height: 421rpx;
   position: relative;
   /* z-index:1; */
   /* position: absolute */
@@ -12,7 +12,7 @@
   border-radius: 50%;
   position: absolute;
   left: 35rpx;
-  top: 285rpx;
+  top: 405rpx;
   border: 10rpx solid #efefef
 }
 .follow-lawyer{
@@ -30,6 +30,22 @@
   box-sizing: border-box;
   border-top-left-radius: 30rpx;
   border-bottom-left-radius: 30rpx;
+}
+.goto-index{
+  position: absolute;
+  left: 0;
+  top: 20rpx;
+  width: 155rpx;
+  height: 50rpx;
+  background-color: #272727;
+  opacity:0.6;
+  color: white;
+  font-size: 24rpx;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-top-right-radius: 30rpx;
+  border-bottom-right-radius: 30rpx;
 }
 .law-page-min-size{
   font-size: 24rpx;
@@ -105,10 +121,10 @@ font-weight:bold;
 }
 .law-page-honor{
   border: 1rpx solid #f8b62d;
-  border-radius:15rpx;
+  border-radius:20rpx;
   font-size: 25rpx;
   color: #f8b62d;
-  height: 30rpx;
+  /* height: 30rpx; */
   /* width:226rpx; */
   display: flex;
   justify-content: center;

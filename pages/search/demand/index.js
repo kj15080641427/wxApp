@@ -10,32 +10,41 @@ Page({
     typeindex: ''
   },
   //文字咨询
-  gotoconsul: function () {
+  gotoconsul: function() {
     wx.navigateTo({
       url: '../../index/consultation/index',
     })
   },
   //服务分类
-  getDemandType: function () {
+  getDemandType: function() {
     var that = this
     var url = api.getDemandType()
     var data = wx.getStorage({
       key: 'token',
-      success: function (res) { },
+      success: function(res) {},
     })
-    var success = function (data) {
+    var success = function(data) {
       wx.hideLoading()
+      var idx = -1
+      data.data.map((item, index) => {
+        if (item.requireTypeName == "电话咨询") {
+          idx = index
+        }
+      })
+      if (idx != -1) {
+        data.data.splice(idx, 1)
+      }
       that.setData({
         demandType: data.data
       })
     }
-    var fail = function (e) {
+    var fail = function(e) {
       console.log(e)
     }
     wxrequest.requestGetpar(url, data, '', success, fail)
   },
   //index
-  getTypeIndex: function (e) {
+  getTypeIndex: function(e) {
     this.setData({
       typeindex: e.currentTarget.dataset.typeindex
     })
@@ -56,59 +65,59 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     wx.showLoading({
       title: '加载中',
     })
     this.getDemandType()
   },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
 
-    },
+  },
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
 
-    },
+  },
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function() {
 
-    },
+  },
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function() {
 
-    },
+  },
 
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function() {
 
-    },
+  },
 
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function() {
 
-    },
+  },
 
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function () {
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function() {
 
-    }
+  }
 })

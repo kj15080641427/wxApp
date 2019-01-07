@@ -106,7 +106,7 @@
 }
 
 .demand-page-text {
-  width: 200rpx;
+  width: 220rpx;
   display: flex;
   justify-content: center;
   color: white;

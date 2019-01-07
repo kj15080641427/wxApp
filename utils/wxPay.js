@@ -1,12 +1,13 @@
 import api from './api.js'
 import hex_md5 from '../jM/md5.js'
-
-var device = {
-  "device_type": 5,
-  "app_version": "1.0",
-  "app_version_code": 1,
-  "channel": "wxapp"
-}
+var App = getApp()
+var device = App.globalData.device
+// var device = {
+//   "device_type": 5,
+//   "app_version": "1.0",
+//   "app_version_code": 1,
+//   "channel": "wxapp"
+// }
 //  获取微信支付信息
 const getPayInfo = (v) => {
   return new Promise((reslove, reject) => {
@@ -137,72 +138,6 @@ const getPayInfo = (v) => {
           v.go = true
           reject(res)
         }
-        // <<<<<<< HEAD
-        //               },
-        //               fail: function(res) {
-        //                 console.log(res)
-        //               },
-        //               complete: function(res) {}
-        //             })
-        //           } else if (v.type == 3 && v.product == 2) {
-        //             wx.request({
-        //               url: api.getQuick(),
-        //               header: {
-        //                 'Content-Type': 'application/json',
-        //                 'device': JSON.stringify(device),
-        //                 'X-Token': wx.getStorageSync("token")
-        //               },
-        //               method: "POSt",
-        //               data: {
-        //                 payOrderNo: res.data.data.orderno,
-        //                 payType: 3,
-        //                 payAmount: v.money/100,
-        //                 typeId: v.typeQuick.id
-        //               },
-        //               success(data) {
-        //                 console.log("余额支付33", data)
-        //                 wx.navigateTo({
-        //                   url: '../quick-consultation-finish/index?orderNo=' + data.data.data.orderNo + '&timeStamp=' + data.data.data.timeStamp + '&type=' + v.typeQuick.typeName + '&phone=' + v.phone + '&money=' + v.money/100,
-        //                 })
-        //               },
-        //               fail(e) {
-        //                 console.log("余额支付失败333", e)
-        //               }
-        //             })
-        //           } else if (v.type == 3 && v.product == 3) {
-        //             console.log('专家咨询支付', res)
-        //             wx.request({
-        //               url: api.getExpertPhone() + v.lawyerId,
-        //               data: '',
-        //               header: {
-        //                 'Content-Type': 'application/json',
-        //                 'device': JSON.stringify(device),
-        //                 'X-Token': wx.getStorageSync("token")
-        //               },
-        //               method: 'GET',
-        //               dataType: 'json',
-        //               responseType: 'text',
-        //               success: function(res) {
-        //                 v.downTime
-        //                 v.countDown = true
-        //                 console.log(res)
-        //               },
-        //               fail: function(res) {
-        //                 console.log(res)
-        //               },
-        //               complete: function(res) {},
-        //             })
-        //           }
-        //         } else {
-        //           wx.showToast({
-        //             title: res.data.message,
-        //             icon: 'none'
-        //           })
-        //           v.go = true
-        //           reject(res)
-        //         }
-        //       }
-        // =======
       }
     })
   })

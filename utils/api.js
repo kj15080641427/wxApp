@@ -118,7 +118,7 @@ function getSearch() {
   return HOST_URL + Search
 }
 //搜索律师
-var SearchLawyer = '/lawyer/search/'
+var SearchLawyer = '/common/lawyer/search/'
 
 function getSearchLawyer() {
   return HOST_URL + SearchLawyer
@@ -324,9 +324,9 @@ function getCash(){
   return HOST_URL + Cash
 }
 //金额
-var lawCash = '/lawyer/require/'
+var LawCash = '/lawyer/require/'
 function getLawCash(){
-  return HOST_URL + lawCash
+  return HOST_URL + LawCash
 }
 module.exports={
   appLogin: appLogin,

@@ -36,21 +36,21 @@ Page({
     })
   },
   //联系客服
-  toService:function(){
+  toService: function() {
     wx.makePhoneCall({
-      phoneNumber: wx.getStorageSync('service') // 仅为示例，并非真实的电话号码
+      phoneNumber: wx.getStorageSync('service') //
     })
   },
-  getUrl:function(){
+  getUrl: function() {
     var url = api.getAbout()
     var success = data => {
       if (data.data.kefuPhone) {
         wx.setStorageSync('service', data.data.kefuPhone)
       }
-      if (data.data.aboutUsUrl){
-      wx.setStorageSync('aboutUrl', data.data.aboutUsUrl)
+      if (data.data.aboutUsUrl) {
+        wx.setStorageSync('aboutUrl', data.data.aboutUsUrl)
       }
-      if (data.data.guideUrl){
+      if (data.data.guideUrl) {
         wx.setStorageSync('guideUrl', data.data.guideUrl)
       }
     }
@@ -157,10 +157,10 @@ Page({
       wx.navigateTo({
         url: '/pages/userlogin/index',
       })
-    }else{
-    // this.getMemberId()
-    // this.getUserDetail()
-    this.getAge()
+    } else {
+      // this.getMemberId()
+      // this.getUserDetail()
+      this.getAge()
     }
   },
   /**

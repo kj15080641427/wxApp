@@ -65,7 +65,8 @@ Page({
       getPage: 10,
       noFilter: {
         ...dataJSON
-      }
+      },
+      filterColor:true
     })
     prevPage.pc ? prevPage.pc() : prevPage.searchLawyer()
     wx.navigateBack({
@@ -88,7 +89,8 @@ Page({
         "pageSize": '10',
         "lawyerName": that.data.name
       },
-      ishidden: true
+      ishidden: true,
+      filterColor:false
     })
     picIndexList = {}
     wx.removeStorageSync("picIndexList")

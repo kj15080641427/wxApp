@@ -1,6 +1,11 @@
 <!--pages/search/lawyer-detail/index.wxml-->
 <view>
   <image mode='aspectFill' class='law-page-background' src="{{lawyerCard.backgroundImage ? lawyerCard.backgroundImage:'../../../image/my_icon@3x/20190106000237.png'}}"></image>
+  <view bindtap='toindex' wx:if="{{firstPage}}">
+   <view class='goto-index'>
+    <text style='margin-left:10rpx;'>回到首页</text>
+  </view>
+  </view>
   <view class='follow-lawyer' bindtap="{{isFollow ? 'unFollow':'follow'}}">
     <image src="{{isFollow ? '../../../image/search_icon@3x/Personalhomepage-02@3x.png':'../../../image/search_icon@3x/Personalhomepage-01@3x.png'}}" style='height:25rpx;width:25rpx;margin-left:20rpx;z-index:1;'></image>
     <text style='margin-left:10rpx;'>{{isFollow ? '已关注':'关注'}}</text>
@@ -14,9 +19,9 @@
       <view>{{lawyerCard.memberName}}
         <text wx:if="{{lawyerCard.memberPositionName}}" class='law-page-min-size'> ({{lawyerCard.memberPositionName}})</text>
       </view>
-      <view class='law-page-gender-view' style="{{lawyerCard.sex==1 ? 'background-color: #76cbbf' :' background-color: #f9c0e7;' }}">
+      <view wx:if="{{lawyerCard.birthday!='1970-01-01 00:00:01'&&lawyerCard.birthday!='1970-00-01 00:00:01'}}"  class='law-page-gender-view' style="{{lawyerCard.sex==1 ? 'background-color: #76cbbf' :' background-color: #f9c0e7;' }}">
         <image src="{{lawyerCard.sex==1 ? '../../../image/my_icon@3x/mine_icon_03_3x.png' : '../../../image/my_icon@3x/mine_icon_04_3x.png'}}" class='law-gender-icon'></image>
-        <view>{{age}}岁</view>
+        <view >{{age}}岁</view>
       </view>
     </view>
     <view class='law-page-min-size law-page-martop'> {{lawyerCard.institutionName}}
@@ -213,8 +218,8 @@
                 <view class='law-educ-name'>{{item.educationTitle}}</view>
                 <view class='law-educ-lower'>
                   <view>{{item.educationName}} </view>
-                  <view class='law-educ-margin'> | </view>
-                  <view> {{item.verifyComment || '法学'}}</view>
+                  <!-- <view class='law-educ-margin'> | </view> -->
+                  <!-- <view> {{item.verifyComment || '法学'}}</view> -->
                 </view>
               </view>
             </view>
@@ -248,7 +253,7 @@
 
 
 <view style='height:150rpx;'></view>
-<view class='quick-button-view' bindtap='islogin'>
+<view class='quick-button-view'>
   <!-- <button class='quick-button' catchtap="isEnough" wx:if="{{lawyerMoney.lawyerPrice}}">
     <text style='font-size:20rpx;'>{{lawyerMoney.lawyerPrice+'/'+lawyerMoney.priceUnit}}</text>电话咨询</button> -->
   <button class='quick-button' bindtap='toDemand'>发送需求</button>

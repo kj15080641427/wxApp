@@ -4,6 +4,7 @@ var api = require('../../../utils/api.js')
 import wxPay from '../../../utils/wxPay.js'
 var pay = require('../../../utils/wxPay.js')
 var throttle = require('../../../utils/throttle.js')
+var time = require('../../../utils/util.js')
 Page({
 
   /**
@@ -48,8 +49,7 @@ Page({
       phone: e.detail.value
     })
   },
-  // 跳转
-  gotofinish: throttle.throttle(function() {
+  wxPay:function(){
     wx.showLoading({
       title: '支付中',
       mask: true
@@ -91,15 +91,35 @@ Page({
         wxPay(s).then(res => {
           // this.getQuick.then(res.data.data.orderno)
         }, error => {
-          console.log(error),wx.showToast({
-            title: error,
+          console.log('asdasdasd', error.data.message), wx.showToast({
+            title: error.data.message,
             icon: 'none',
           })
         })
       }
       // }
     }
-  }, 1000),
+  },
+  // 跳转
+  gotofinish: function() {
+    var that = this
+    var hour = new Date().getHours()
+    console.log(hour)
+    if (hour < 9 || hour >= 22){
+      wx.showModal({
+        title: '温馨提示',
+        content: '当前不是律师工作时间范围,可能会回复的比较慢,建议您改成其他时间再来咨询',
+        confirmText:'继续咨询',
+        success(res){
+          if(res.confirm){
+            throttle.throttle(that.wxPay())
+          }
+        }
+      })
+    }else{
+      that.wxPay()
+    }
+  },
   //快速咨询资费说明
   gettariffUrl: function() {
     var url = api.getTariff()
@@ -153,6 +173,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    // console.log(new Date().getHours())
     this.getQuType()
     this.gettariffUrl()
     // this.getQuick()

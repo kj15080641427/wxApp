@@ -87,7 +87,7 @@
   justify-content: center;
   align-items: center;
   /* width: 90rpx; */
-  height: 30rpx;
+  /* height: 30rpx; */
   border-radius: 20rpx;
   border: 1rpx solid #f8b65d;
   color: #f8b65d;
