@@ -1,8 +1,0 @@
-<view class="index-article">
-  <view class="" >
-    <view class="index-article-text">{{articleName}}</view>
-    <view class="index-article-text-lower">已帮助<label style="color:#1ec88c">{{helpNumber}}</label>人</view>
-  </view>
-  <view class="index-article-icon"></view>
-  <view class="index-article-line"></view>
-</view>
