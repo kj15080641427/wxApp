@@ -1,6 +1,6 @@
 'use strict';
 // 地址
-var HOST_URL = 'https://api.lex-mung.com';
+var HOST_URL = 'https://api-test.lex-mung.com';
 
 //  获取openid
 var Openid = '/wechat/openid'
