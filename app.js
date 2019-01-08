@@ -2,12 +2,12 @@
 import JMessage from './jM/jmessage-wxapplet-sdk-1.4.0.min'
 import api from './utils/api'
 App({
-    device: {
-        "device_type": 1,
-        "app_version": "2.0",
-        "app_version_code": 2,
-        "channel": "wxapp"
-    },
+    // device: {
+    //     "device_type": 1,
+    //     "app_version": "1.0",
+    //     "app_version_code": 1,
+    //     "channel": "wxapp"
+    // },
     onLaunch: function () {
         // 展示本地存储能力
         var logs = wx.getStorageSync('logs') || []

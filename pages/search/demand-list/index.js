@@ -36,7 +36,7 @@ Page({
     sortIndex: 0, //排序index
     hasList: true,
     pageNum:1,
-    hasNextPage:true
+    // hasNextPage:true
   },
   //排序Index
   getSortIndex: function(e) {
@@ -72,7 +72,7 @@ Page({
   //筛选
   gotoFilter: function() {
     wx.navigateTo({
-      url: '../../search/filter/index?noFilter=' + JSON.stringify(this.data.noFilter),
+      url: '../../search/filter/index?noFilter=' + JSON.stringify(this.data.noFilter) + '&require=' + JSON.stringify(this.data.require),
     })
   },
   //律师主页
@@ -84,7 +84,7 @@ Page({
   //上拉搜索
   topSearch: function () {
     var that = this
-    var url = api.getSearchLawyer() + that.data.pageNum + "/" + '/10'
+    var url = api.getSearchLawyer() + that.data.pageNum  + '/10'
     var datan = that.data.noFilter
     var success = function (data) {
       wx.hideLoading()
@@ -92,7 +92,9 @@ Page({
         that.setData({
           hasList: false
         })
-      }
+      } that.setData({
+        hasList: true
+      })
       that.setData({
         hasNextPage: data.data.hasNextPage,
         lawyerList: that.data.lawyerList.concat(data.data.list),
@@ -111,7 +113,7 @@ Page({
   //
   confirm(e) {
     var that = this
-    var url = api.getSearchLawyer() + that.data.pageNum+"/" + '/10'
+    var url = api.getSearchLawyer() + that.data.pageNum + '/10'
     var datan = that.data.noFilter
     that.setData({})
     var success = function(data) {
@@ -120,7 +122,9 @@ Page({
         that.setData({
           hasList: false
         })
-      }
+      } that.setData({
+        hasList: true
+      })
       that.setData({
         lawyerList: data.data.list,
         ishidden: true
@@ -141,7 +145,7 @@ Page({
   searchLawyer: function() {
     var that = this
     // var noFilter = noFilter
-    var url = api.getSearchLawyer() + that.data.pageNum+"/" + '/10'
+    var url = api.getSearchLawyer() + that.data.pageNum + '/10'
     var data = that.data.noFilter
     var success = function(data) {
       wx.hideLoading()
@@ -151,6 +155,10 @@ Page({
       if (!data.data.list[0]) {
         that.setData({
           hasList: false
+        })
+      }else{
+        that.setData({
+          hasList: true
         })
       }
       // 成功后调用onShow刷新页面
@@ -203,7 +211,9 @@ Page({
       parameter: JSON.parse(options.parameter),
       ['noFilter.regionId']: JSON.parse(options.parameter).lawyerRegionId,
       ['noFilter.businessTypeId']: JSON.parse(options.parameter).skillId ? JSON.parse(options.parameter).skillId : '',
-      ['noFilter.require']: JSON.parse(options.require)
+      ['noFilter.require']: JSON.parse(options.require),
+      require: JSON.parse(options.require)
+
       // "require": {
       //   "requireTypeId": '',
       //   "clientAffordMaxAmount": ''

@@ -279,13 +279,33 @@ Page({
    */
   onLoad: function(options) {
     //选择地区
+
+    console.log('城市11', reg.citysData[0], [reg.citysData][0][17].child)
+    reg.citysData.map((item,index)=>{
+      if (item.name == wx.getStorageSync("province")){
+        this.setData({
+          provi: index
+        })
+      }
+    })
+    console.log('省', this.data.provi)
+    reg.citysData[this.data.provi].child.map((item, index) => {
+      if (item.name == wx.getStorageSync("city")) {
+        this.setData({
+          cit: index
+        })
+      }
+    })
+    console.log(reg.citysData[17].child, '市',this.data.cit)
+    this.setData({
+      multiIndex:[this.data.provi,this.data.cit]
+    })
     this.setData({
       multiArray: [
         [reg.citysData][0],
-        [reg.citysData][0][0].child
+        [reg.citysData][0][this.data.provi].child
       ],
     })
-
     this.setData({
       // markId: JSON.parse(options.busiType)
       busiType: options.busiTypes ? JSON.parse(options.busiTypes) : '', //服务类型: 诉讼/仲裁 审查/起草合同....

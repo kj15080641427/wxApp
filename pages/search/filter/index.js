@@ -56,7 +56,8 @@ Page({
       "socialId": t.socialId ? t.socialId : gs.socialIndex ? t.search[9].items[gs.socialIndex].id : '',
       // "depositAmountId": t.guaranteeId ? t.guaranteeId : gs.depositIndex ? t.search[10].items[gs.depositIndex].id : '',
       "lexMungId": t.mungId ? t.mungId : gs.lexMungIndex ? t.search[10].items[gs.lexMungIndex].id : '',
-      "orgId": t.organizationId ? t.organizationId : gs.organziationIndex ? t.search[11].items[gs.organziationIndex].id : ''
+      "orgId": t.organizationId ? t.organizationId : gs.organziationIndex ? t.search[11].items[gs.organziationIndex].id : '',
+      "require":this.data.require
     }
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1]; //当前页面
@@ -80,17 +81,17 @@ Page({
     var currPage = pages[pages.length - 1]; //当前页面
     var prevPage = pages[pages.length - 2]; //上一个页面
     dataJSON = {
-      "pageNum": '1',
       "pageSize": '10'
     }
     prevPage.setData({
       noFilter: {
-        "pageNum": '1',
         "pageSize": '10',
-        "lawyerName": that.data.name
+        // "lawyerName": that.data.name,
+        "require":that.data.require
       },
       ishidden: true,
-      filterColor:false
+      filterColor:false,
+      // lawyerName:''
     })
     picIndexList = {}
     wx.removeStorageSync("picIndexList")
@@ -105,8 +106,10 @@ Page({
     var that = this
     that.setData({
       noFilter: JSON.parse(options.noFilter),
-      name: JSON.parse(options.noFilter).lawyerName ? JSON.parse(options.noFilter).lawyerName : ''
+      name: JSON.parse(options.noFilter).lawyerName ? JSON.parse(options.noFilter).lawyerName : '',
+      require: options.require?JSON.parse(options.require):{}
     })
+    console.log('require',this.data.require)
     var searchUrl = api.getSearch()
     var searchSuccess = function(data) {
       that.setData({
@@ -205,7 +208,6 @@ Page({
       skillId: this.data.search[2].items[e.detail.value].id
     })
     picIndexList.baseSkillIndex = e.detail.value
-
   },
   //扩展技能
   changeExpand: function(e) {

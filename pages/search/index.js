@@ -33,14 +33,15 @@ Page({
     noFilter: {
       "pageSize": '10'
     },
-    hasList: true,
+    // hasList: true,
     lawyerName: '',
     // hasNextPage:true,
-    pageNum:1,
-    webData:false
+    pageNum: 1,
+    webData: false
   },
   //重新搜索
   again: function() {
+    wx.removeStorageSync("picIndexList")
     var that = this
     that.setData({
       hasList: true,
@@ -52,8 +53,10 @@ Page({
       selectedCity: '选择地区',
       expertColor: false,
       selectedCityColor: false,
-      ishidden:true,
+      ishidden: true,
       pageNum: 1,
+      lawyerName: '',
+      filterColor: false
       // hasNextPage: true
     })
     // wx.removeStorageSync("picIndexList")
@@ -200,7 +203,7 @@ Page({
   //点击键盘搜索
   confirm(e) {
     var that = this
-    var url = api.getSearchLawyer() + that.data.pageNum + "/" + '/10'
+    var url = api.getSearchLawyer() + that.data.pageNum + '/10'
     var datan = that.data.noFilter
     this.setData({
       ['noFilter.lawyerName']: e.detail.value,
@@ -211,8 +214,13 @@ Page({
         that.setData({
           hasList: false
         })
+      } else {
+        that.setData({
+          hasList: true
+        })
       }
       that.setData({
+        hasNextPage: data.data.hasNextPage,
         lawyerList: data.data.list,
       })
       that.getAge()
@@ -230,13 +238,17 @@ Page({
   //上拉搜索
   topSearch: function() {
     var that = this
-    var url = api.getSearchLawyer() + that.data.pageNum + "/" + '/10'
+    var url = api.getSearchLawyer() + that.data.pageNum + '/10'
     var datan = that.data.noFilter
     var success = function(data) {
       wx.hideLoading()
       if (!data.data.list[0]) {
         that.setData({
           hasList: false
+        })
+      } else {
+        that.setData({
+          hasList: true
         })
       }
       that.setData({
@@ -260,17 +272,21 @@ Page({
     var that = this
     that.setData({
       lawyerList: '',
-      pageNum:1,
+      pageNum: 1,
       // hasNextPage: true
     })
-    var url = api.getSearchLawyer() + that.data.pageNum + "/" + '/10'
+    var url = api.getSearchLawyer() + that.data.pageNum + '/10'
     var datan = that.data.noFilter
     var success = function(data) {
       wx.hideLoading()
       if (!data.data.list[0]) {
         that.setData({
           hasList: false,
-          ishidden:true
+          ishidden: true
+        })
+      } else {
+        that.setData({
+          hasList: true
         })
       }
       that.setData({
@@ -310,11 +326,12 @@ Page({
   },
   //点击tab
   onTabItemTap() {
+    this.onLoad()
     this.pc()
     // this.getAge()
   },
 
-  webDataFn:function(e){
+  webDataFn: function(e) {
     // this.setData({
     //   webData:true
     // })
@@ -355,15 +372,14 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-  },
+  onReady: function() {},
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function(options) {
     this.setData({
-      ishidden:true
+      ishidden: true
     })
   },
 
@@ -389,7 +405,7 @@ Page({
   },
   /**
    * 页面上拉触底事件的处理函数
-   */
+  */
   onReachBottom: function() {
     var that = this
     if (that.data.hasNextPage) {
@@ -398,13 +414,13 @@ Page({
         ishidden: false
       })
       that.topSearch()
-    }else{
+    } else {
       this.setData({
-        ishidden:true
+        ishidden: true
       })
       wx.showToast({
         title: '没有更多数据',
-        icon:'none'
+        icon: 'none'
       })
     }
   },

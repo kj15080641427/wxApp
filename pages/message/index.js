@@ -25,7 +25,8 @@ Page({
                 title: '加载中',
             })
             function getImConfigSuccess (res) {
-                //  初始化jmessage
+              // console.log('res',res.data.appkey)
+                //  初始化jmessager
                 wx.setStorageSync('appkey', res.data.appkey)
                 jM.init({
                     "appkey"    : res.data.appkey,

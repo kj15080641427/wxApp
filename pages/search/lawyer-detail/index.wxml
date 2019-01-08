@@ -2,9 +2,9 @@
 <view>
   <image mode='aspectFill' class='law-page-background' src="{{lawyerCard.backgroundImage ? lawyerCard.backgroundImage:'../../../image/my_icon@3x/20190106000237.png'}}"></image>
   <view bindtap='toindex' wx:if="{{firstPage}}">
-   <view class='goto-index'>
-    <text style='margin-left:10rpx;'>回到首页</text>
-  </view>
+    <view class='goto-index'>
+      <text style='margin-left:10rpx;'>回到首页</text>
+    </view>
   </view>
   <view class='follow-lawyer' bindtap="{{isFollow ? 'unFollow':'follow'}}">
     <image src="{{isFollow ? '../../../image/search_icon@3x/Personalhomepage-02@3x.png':'../../../image/search_icon@3x/Personalhomepage-01@3x.png'}}" style='height:25rpx;width:25rpx;margin-left:20rpx;z-index:1;'></image>
@@ -19,9 +19,9 @@
       <view>{{lawyerCard.memberName}}
         <text wx:if="{{lawyerCard.memberPositionName}}" class='law-page-min-size'> ({{lawyerCard.memberPositionName}})</text>
       </view>
-      <view wx:if="{{lawyerCard.birthday!='1970-01-01 00:00:01'&&lawyerCard.birthday!='1970-00-01 00:00:01'}}"  class='law-page-gender-view' style="{{lawyerCard.sex==1 ? 'background-color: #76cbbf' :' background-color: #f9c0e7;' }}">
+      <view wx:if="{{lawyerCard.birthday!='1970-01-01 00:00:01'&&lawyerCard.birthday!='1970-00-01 00:00:01'&&lawyerCard.sex!=0}}" class='law-page-gender-view' style="{{lawyerCard.sex==1 ? 'background-color: #76cbbf' :' background-color: #f9c0e7;' }}">
         <image src="{{lawyerCard.sex==1 ? '../../../image/my_icon@3x/mine_icon_03_3x.png' : '../../../image/my_icon@3x/mine_icon_04_3x.png'}}" class='law-gender-icon'></image>
-        <view >{{age}}岁</view>
+        <view>{{age}}岁</view>
       </view>
     </view>
     <view class='law-page-min-size law-page-martop'> {{lawyerCard.institutionName}}
@@ -48,7 +48,7 @@
 <view class='law-page-attest' wx:if="{{lawyerCard.orgTags[0]}}">
   <view>认证标签</view>
   <view wx:key="{{index}}" wx:for="{{lawyerCard.orgTags}}">
-    <image class='law-page-attest-icon' src='{{item.image}}'  data-orgindex="{{index}}" catchtap='toOrgId'></image>
+    <image class='law-page-attest-icon' src='{{item.image}}' data-orgindex="{{index}}" catchtap='toOrgId'></image>
   </view>
 </view>
 
@@ -74,13 +74,13 @@
 
       <view class='law-center-icon'>
         <!-- 1 -->
-        <view wx:key="{{index}}"  wx:for="{{lawyerInfo.businessType}}">
+        <view wx:key="{{index}}" wx:for="{{lawyerInfo.businessType}}">
           <view class='law-space-flex'>
             <view class='law-flex' style=' align-items: center;'>
               <image src="{{index==0? '../../../image/search_icon@3x/Personalhomepage-10@3x.png': index == 1 ? '../../../image/search_icon@3x/Personalhomepage-11@3x.png' :'../../../image/search_icon@3x/Personalhomepage-12@3x.png'}}" class='law-num-icon'></image>
               <view class='law-margin-left'>{{item.businessTypeName}}</view>
             </view>
-            <view class='law-center-icon-text'>{{score[index]>100.00?100:score[index]}}%</view>
+            <view class='law-center-icon-text'>{{score[index]>100.00?100.00:score[index]}}%</view>
           </view>
           <view class='law-page-line'></view>
         </view>
