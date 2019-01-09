@@ -41,24 +41,19 @@ Page({
                     }).onSuccess(function(lData) {
                         // console.log(lData)
                         jM.getConversation().onSuccess(function(data) {
-                            let arr = []
-                            that.getUserAvatarResource(0,data.conversations,data.conversations.length,arr)
-                            // that.setData({
-                            //     conversationList: data.conversations
-                            // },function () {
-                            //     wx.hideLoading()
-                            //  })
+                            console.log(data)                            
+                            if(data.conversations && data.conversations.length>0){
+                                let arr = []
+                                that.getUserAvatarResource(0,data.conversations,data.conversations.length,arr)
+                            }else{
+                                wx.hideLoading()
+                            }
                         }).onFail(function(data) {
-                            // console.log(data)
                             //data.code 返回码
                             //data.message 描述
                         });
                         jM.onMsgReceive(function(msgRes) {
                             jM.getConversation().onSuccess(function(data) {
-                                // console.log(data)
-                                // that.setData({
-                                //     conversationList: data.conversations
-                                // })
                                 let arr = []
                                 that.getUserAvatarResource(0,data.conversations,data.conversations.length,arr)
                             }).onFail(function(data) {
@@ -92,20 +87,21 @@ Page({
                 title: '加载中',
             })
             jM.getConversation().onSuccess(function(data) {
-                // console.log(data)
-                // that.setData({
-                //     conversationList: data.conversations
-                // },function(){
-                //     wx.hideLoading()
-                // })
-                let arr = []
-                that.getUserAvatarResource(0,data.conversations,data.conversations.length,arr)
+                console.log(data)
+                if(data.conversations && data.conversations.length>0){
+                    let arr = []
+                    that.getUserAvatarResource(0,data.conversations,data.conversations.length,arr)
+                }else{
+                    wx.hideLoading()
+                }
+                jM.onMutiUnreadMsgUpdate(function(d) {
+                    console.log({'mutiUnread =============>':d})
+                });
             }).onFail(function(data) {
-              wx.hideLoading() 
-                // console.log(data)
+                wx.hideLoading() 
             });
             jM.onMsgReceiptChange(function(data) {
-                // console.log(data)
+                console.log({'unread =>>>>>>>>>>':data})
                 that.setData({
                     messageCount: data.receipt_msgs[0].unread_count
                 })
@@ -113,14 +109,10 @@ Page({
             jM.onMsgReceive(function(msgRes) {
                 jM.getConversation().onSuccess(function(data) {
                     // console.log(data)
-                    // that.setData({
-                    //     conversationList: data.conversations
-                    // })
                     let arr = []
                     that.getUserAvatarResource(0,data.conversations,data.conversations.length,arr)
                 }).onFail(function(data) {
                   wx.hideLoading() 
-                    // console.log(data)
                 });
                 that.setMessage(msgRes)
             });
@@ -192,7 +184,16 @@ Page({
             }
         }
     },
+    //  处理时间
+    disposeTime(time){
+        if(time.toString().length == 10){
+            return time * 1000
+        }else{
+            return time
+        }
+    },
     setMessage(v){
+        let that = this
         let unReadMsgList = wx.getStorageSync('unReadMsgList') || []
         // console.log(unReadMsgList)
         let msg = v.messages[0]
@@ -203,7 +204,9 @@ Page({
                 unReadMsgList.push({
                     msg_id: msg.msg_id,
                     from_id: msg.content.from_id,
+                    target_id: msg.content.target_id,
                     msg_type: msg.content.msg_type,
+                    create_time: that.disposeTime(msg.content.create_time),
                     duration: msg.content.msg_body.duration,
                     content: gRes.url
                 })
@@ -216,7 +219,9 @@ Page({
             unReadMsgList.push({
                 from_id: msg.content.from_id,
                 msg_type: msg.content.msg_type,
+                target_id: msg.content.target_id,
                 content: msg.content.msg_body.text,
+                create_time: that.disposeTime(msg.content.create_time),
                 msg_id: msg.msg_id
             })
             wx.setStorageSync('unReadMsgList', unReadMsgList)
