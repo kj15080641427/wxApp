@@ -65,6 +65,23 @@
   margin-right: 30rpx;
   position: relative;
 }
+.index-news>image{
+  width: 100%;
+  height: 100%;
+}
+.index-news .unread-count{
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 18rpx;
+  position: absolute;
+  top: -18rpx;
+  right: -18rpx;
+  background: #ff4220;
+  color: #fff;
+  text-align: center;
+  line-height: 36rpx;
+  font-size: 24rpx;
+}
 
 .index-ml {
   padding-bottom: 30rpx;
