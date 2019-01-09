@@ -49,6 +49,10 @@ Page({
   },
   // 获取验证码
   getVerificationCode: function() {
+    wx.showLoading({
+      title: '',
+      mask: true
+    })
     var that = this
     var verifyCodeUrl = api.getVerifyCodeUrl()
     var verifydata = {
@@ -56,6 +60,7 @@ Page({
       "code": "654321"
     }
     var success = function(data) {
+      wx.hideLoading()
       wx.showToast({
         title: '发送成功',
       })
@@ -65,6 +70,7 @@ Page({
       })
     }
     var fail = function(e) {
+      wx,wx.hideLoading()
       wx.showToast({
         title: e.message,
         icon: 'none'

@@ -156,7 +156,7 @@ Page({
         wx.navigateBack({
           delta: 3
         })
-      }, 1500)
+      }, 1000)
     }
     var fail = e => {
       wx.showToast({

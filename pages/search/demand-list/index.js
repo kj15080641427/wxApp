@@ -192,10 +192,7 @@ Page({
         ['parameter.requirementId']: data.data.requirementId
       })
       wx.showToast({
-        title: '发送需求成功',
-        success() {
-
-        }
+        title: '需求发送成功,可在我的订单中查看',
       })
     }
     var fail = function(e) {

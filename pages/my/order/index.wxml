@@ -1,4 +1,4 @@
-<view class='no-message' wx:if="{{!order[0]}}">
+<view class='no-message' wx:if="{{isShow}}">
   <view class='no-messge-image-view'>
     <image src='../../../image/search_icon@3x/Defaultpage_04_max.png' class='no-message-imag'></image>
   </view>
