@@ -33,9 +33,8 @@ Page({
     noFilter: {
       "pageSize": '10'
     },
-    // hasList: true,
+    hasList: true,
     lawyerName: '',
-    // hasNextPage:true,
     pageNum: 1,
     webData: false
   },
@@ -202,6 +201,10 @@ Page({
   },
   //点击键盘搜索
   confirm(e) {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that = this
     var url = api.getSearchLawyer() + that.data.pageNum + '/10'
     var datan = that.data.noFilter
@@ -237,6 +240,10 @@ Page({
   },
   //上拉搜索
   topSearch: function() {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that = this
     var url = api.getSearchLawyer() + that.data.pageNum + '/10'
     var datan = that.data.noFilter
@@ -269,6 +276,10 @@ Page({
   },
   //搜索
   pc: function() {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that = this
     that.setData({
       lawyerList: '',
@@ -304,9 +315,6 @@ Page({
       console.log(e)
     }
     wxrequest.request(url, datan, success, fail)
-    wx.showLoading({
-      title: '正在加载',
-    })
   },
   //执业年份
   getAge: function() {
@@ -325,9 +333,11 @@ Page({
     })
   },
   //点击tab
-  onTabItemTap() {
+  onTabItemTap(e) {
+    if(e.index==1){
     this.onLoad()
-    this.pc()
+    console.log(e)
+    }
     // this.getAge()
   },
 
@@ -341,12 +351,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.pc()
     var that = this
     this.setData({
       orgurl: wx.getStorageSync("orgUrl")
     })
     wx.showLoading({
       title: '加载中',
+      mask: true
     })
     const re = [...regionSearch.citysData]
     // var re = regionSearch.citysData

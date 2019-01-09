@@ -2,7 +2,7 @@
 <view class="consul-page">
 <!-- 选择问题类型 -->
  <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}" range-key="{{'typeName'}}" bindtap="">
-    <view class="consul-picker">
+    <view class="consul-picker" bindtap='hasArticleType'>
       <view class="consul-picker-text"><text style='color:red'>*</text>问题类型</view>
       <view class="consul-page-flex">
         <view class='consul-picker-text' style="margin-right:20rpx">{{array[index].typeName}}</view>

@@ -114,7 +114,6 @@ Page({
     var that = this
     var listIndex = that.data.index //index
     var year = that.data.year //执业年限
-    // 律师名片
     var lawyerInfoUrl = api.getlawyerInfo() + that.data.lawyerCard.memberId
     var lawyerData = that.data.lawyerCard.memberId
     var success = function(data) {
@@ -131,6 +130,7 @@ Page({
         score: scoreList
       })
       that.ageAddress()
+      that.court()
     }
     var fail = function(e) {
       wx.hideLoading()
@@ -145,10 +145,10 @@ Page({
   //搜索
   search: function() {
     var that = this
-    // wx.showLoading({
-    //   title: '',
-    // })listIndex
-    wx.hideLoading()
+    wx.showLoading({
+      title: '加载中',
+      mask:true
+    })
     //律师主页 (背景图/所获荣誉/描述)
     var homeUrl = api.getLawHomePage() + that.data.lawyerList
     var homeData = that.data.lawyerList
@@ -160,11 +160,30 @@ Page({
       // that.getCase()
       that.getlawyer()
       that.getAge()
+      wx.hideLoading()
     }
     var homeFail = function(e) {
+      wx.hideLoading()
       console.log(e)
     }
     wxrequest.requestGetpar(homeUrl, homeData, '', homeSuccess, homeFail) //主页
+  },
+  //法院检察院
+  court:function(){
+    var courtList = []
+    var procList = []
+    console.log(this.data.lawyerInfo)
+    this.data.lawyerInfo.institution.map(item=>{
+      if(item.indexOf('检察院')==-1){
+        courtList.push(item)
+      }else{
+        procList.push(item)
+      }
+    })
+    this.setData({
+      court:courtList,
+      proc:procList
+    })
   },
   //我的关注
   followList: function() {
@@ -490,13 +509,11 @@ Page({
       justDo: options.justDo ? options.justDo : ''
     })
     }
-    wx.showLoading({
-      title: '获取律师信息',
-    })
     this.search()
-    this.followList()
     this.getLawyerMoney()
-    // this.getlawyer()
+    // if(wx.getStorageSync('token')){
+    //   this.followList()
+    // }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -509,7 +526,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    
+    // wx.showLoading({
+    //   title: '加载中',
+    //   mask: true
+    // })
   },
   /**
    * 生命周期函数--监听页面隐藏

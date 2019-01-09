@@ -102,6 +102,10 @@ Page({
     }
     var fail = function(e) {
       wx.hideLoading()
+      wx.showToast({
+        title: '获取解决方案数据失败',
+        icon: 'none'
+      })
       console.log("解决方案错误", e)
     }
     wxrequest.requestPost(url, data, messagetype, success, fail)
@@ -131,7 +135,7 @@ Page({
     wxrequest.requestPost(listUrl, listData, message, successList, failList)
   },
   //点击tabbar栏
-  onTabItemTap(item) {
+  onTabItemTap(e) {
     this.getArticleType()
     this.getAdbanner()
     this.judgeTips()
@@ -145,6 +149,7 @@ Page({
 
     wx.showLoading({
       title: '数据加载中',
+      mask:true
     })
     if (options.scene) {
       App.globalData.device.channel = options.scene
@@ -205,6 +210,8 @@ Page({
           //调用wx.getLocation的API
           vm.getLocation();
         }
+      },fail:(e)=>{
+        console.log(e)
       }
     })
   },
@@ -257,7 +264,9 @@ Page({
   },
   onShow: function() {
     let vm = this;
-    vm.getUserLocation();
+    if(wx.getStorageSync('token')){
+      vm.getUserLocation();
+    }
     wx.removeStorageSync("picIndexList")
   },
   // 滚动样式
@@ -268,10 +277,12 @@ Page({
       articleIndex: e.detail.current,
       article: [],
       pageNum: 1,
+      total:1,
     });
     this.checkCor();
     wx.showLoading({
       title: '加载中',
+      mask:true
     })
     var listUrl = api.getArticleListUrl()
     var message = ""
@@ -296,6 +307,10 @@ Page({
     var failList = function(e) {
       console.log("list", e)
       wx.hideLoading()
+      wx.showToast({
+        title: '获取数据失败',
+        icon: 'none'
+      })
     }
     wxrequest.requestPost(listUrl, listData, message, successList, failList)
   },

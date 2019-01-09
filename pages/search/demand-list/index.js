@@ -187,6 +187,10 @@ Page({
     var url = api.getPublish()
     var data = that.data.parameter
     var success = function(data) {
+      that.setData({
+        ['parameter.isFirst']: 0,
+        ['parameter.requirementId']: data.data.requirementId
+      })
       wx.showToast({
         title: '发送需求成功',
         success() {

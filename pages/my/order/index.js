@@ -52,6 +52,7 @@ Page({
         hasNextPage: data.data.hasNextPage,
         order: this.data.order.concat(data.data.list)
       })
+      console.log('订单列表',data)
     }
     var fail = (e) => {
       console.log(e)

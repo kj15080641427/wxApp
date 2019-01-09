@@ -168,6 +168,7 @@ Page({
    */
   // 'apabfdc34cc00042c2991bd59b9e8a1ae8ap'
   onLoad: function(options) {
+    // this.getUserDetail()
     this.setData({
       token: wx.getStorageSync('token')
     })

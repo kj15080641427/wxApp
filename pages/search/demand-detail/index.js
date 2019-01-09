@@ -97,6 +97,10 @@ Page({
   // },
   //擅长领域
   getexpert: function() {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that = this
     var url = api.getExpert()
     var success = function(data) {
@@ -110,7 +114,12 @@ Page({
       wx.hideLoading()
     }
     var fail = function(e) {
+      wx.showToast({
+        title: '加载失败',
+        icon:'none'
+      })
       console.log("擅长领域", e)
+      wx.hideLoading()
     }
     wxrequest.requestGet(url, '', success, fail)
   },
@@ -262,15 +271,25 @@ Page({
   },
   //擅长领域
   getexperttwo: function() {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that = this
     var url = api.getExpert()
     var success = function(data) {
       that.setData({
         business: data.data[1].children
       })
+      wx.hideLoading()
     }
     var fail = function(e) {
       console.log("擅长领域", e)
+      wx.showToast({
+        title: '加载失败',
+        icon: 'none'
+      })
+      wx.hideLoading()
     }
     wxrequest.requestGet(url, '', success, fail)
   },
@@ -278,9 +297,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     //选择地区
-
-    console.log('城市11', reg.citysData[0], [reg.citysData][0][17].child)
+    // console.log('城市11', reg.citysData[0], [reg.citysData][0][17].child)
     reg.citysData.map((item,index)=>{
       if (item.name == wx.getStorageSync("province")){
         this.setData({
@@ -288,7 +310,12 @@ Page({
         })
       }
     })
-    console.log('省', this.data.provi)
+    if(!this.data.provi){
+      this.setData({
+        provi:0
+      })
+    }
+    // console.log('省', this.data.provi)
     reg.citysData[this.data.provi].child.map((item, index) => {
       if (item.name == wx.getStorageSync("city")) {
         this.setData({
@@ -296,14 +323,20 @@ Page({
         })
       }
     })
-    console.log(reg.citysData[17].child, '市',this.data.cit)
+    if (!this.data.cit) {
+      this.setData({
+        cit: 0
+      })
+    }
+    // console.log(reg.citysData[17].child, '市',this.data.cit)
     this.setData({
       multiIndex:[this.data.provi,this.data.cit]
     })
     this.setData({
+      multiIndex: [this.data.provi, this.data.cit],
       multiArray: [
-        [reg.citysData][0],
-        [reg.citysData][0][this.data.provi].child
+        reg.citysData,
+        reg.citysData[this.data.provi].child
       ],
     })
     this.setData({

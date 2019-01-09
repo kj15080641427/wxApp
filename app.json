@@ -71,9 +71,9 @@
     "borderStyle": "white"
   },
   "networkTimeout": {
-    "request": 6000,
-    "onnecSocket": 6000,
-    "downloadFile": 6000
+    "request": 20000,
+    "onnecSocket": 20000,
+    "downloadFile": 20000
   },
   "permission": {
     "scope.userLocation": {

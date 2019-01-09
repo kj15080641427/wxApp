@@ -217,6 +217,14 @@ margin-left: 35rpx;
   margin-top: 30rpx;
   margin-bottom: 30rpx;
 }
+.law-long-text-flex{
+  white-space:nowrap;
+  color: #b5b5b5;
+  margin-left:35rpx;
+  font-size: 28rpx;
+  /* margin-top: 30rpx; */
+  /* margin-bottom: 30rpx; */
+}
 .law-center-icon{
   margin-left: 35rpx;
 }
@@ -239,8 +247,15 @@ margin-left: 35rpx;
   text-overflow:ellipsis;
   white-space:nowrap;
 }
+.law-page-line-skill{
+  padding-left:35rpx;
+  padding-right: 35rpx;
+  width: 680rpx;
+  background-color: #efefef;
+  height: 1rpx;
+}
 .law-page-line{
-  margin-top: 10rpx;
+  /* margin-top: 15rpx; */
   width: 500rpx;
   background-color: #efefef;
   height: 1rpx;
@@ -258,10 +273,11 @@ margin-left: 35rpx;
   margin-left: 35rpx;
 }
 .law-page-induistry-view{
+  line-height: 30rpx;
   background-color: #f4f4f4;
   border-radius: 10rpx;
   padding: 5rpx;
-
+  padding-right: 15rpx;
 }
 .law-page-industry-text{
   margin-bottom: 35rpx;
@@ -319,7 +335,12 @@ margin-left: 35rpx;
 .law-qualifi-right{
   font-size: 28rpx;
   margin-left: 35rpx;
-  margin-top: 30rpx;
+  height:80rpx;
+  display:flex;
+  justify-content:flex-start;
+  flex-wrap:wrap;
+  align-items:center;
+  /* margin-top: 30rpx; */
 }
 .skill-background{
   word-wrap:break-word;
@@ -336,9 +357,14 @@ margin-left: 35rpx;
   font-size: 28rpx;
 }
 .law-skill-right-other{
-  margin-top: 20rpx;
+  /* margin-top: 20rpx; */
   margin-left: 35rpx;
   font-size: 28rpx;
+  height:80rpx;
+  display:flex;
+  justify-content:flex-start;
+  flex-wrap:wrap; 
+  align-items: center;
 }
 .law-skill-flex{
   display: flex;
