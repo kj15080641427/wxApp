@@ -246,20 +246,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.getArticleType()
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
     reg.citysData.map((item, index) => {
       if (item.name == wx.getStorageSync("province")) {
         this.setData({
@@ -299,6 +285,27 @@ Page({
       title: '加载中',
       mask: true
     })
+    if (wx.getStorageSync('province') && wx.getStorageSync('city')) {
+    this.setData({
+      regionId: this.data.multiArray[1][this.data.multiIndex[1]].regionId,
+      hasSelectAddress:true
+    })
+    }
+    this.getArticleType()
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function() {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function() {
+
     setTimeout(() => {
       wx.hideLoading()
     }, 10000)

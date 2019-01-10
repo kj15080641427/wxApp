@@ -80,7 +80,7 @@
               <image src="{{index==0? '../../../image/search_icon@3x/Personalhomepage-10@3x.png': index == 1 ? '../../../image/search_icon@3x/Personalhomepage-11@3x.png' :'../../../image/search_icon@3x/Personalhomepage-12@3x.png'}}" class='law-num-icon'></image>
               <view class='law-margin-left'>{{item.businessTypeName}}</view>
             </view>
-            <view class='law-center-icon-text'>{{score[index]>100.00?'100.00':score[index]}}%</view>
+            <view class='law-center-icon-text'>{{score[index]>100.00?'100':score[index]}}%</view>
           </view>
           <view class='law-page-line'></view>
         </view>

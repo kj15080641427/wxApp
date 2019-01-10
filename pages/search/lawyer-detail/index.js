@@ -31,6 +31,7 @@ Page({
   },
   //
   toOrgId: function(e) {
+    console.log(this.data.lawyerCard.orgTags[e.currentTarget.dataset.orgindex].link)
     wx.setStorageSync('orgUrl', `${this.data.lawyerCard.orgTags[e.currentTarget.dataset.orgindex].link}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
     wx.navigateTo({
       url: '/pages/search/orgweb-viewTwo/index',
@@ -124,7 +125,11 @@ Page({
       // console.log('Info',data.data)
       var scoreList = []
       that.data.lawyerInfo.businessType.map(item => {
+        if (item.score>=1){
+          scoreList.push((item.score * 100))
+        }else{
         scoreList.push((item.score * 100).toFixed(2))
+        }
       })
       that.setData({
         score: scoreList

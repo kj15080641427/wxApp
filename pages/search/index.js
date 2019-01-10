@@ -40,12 +40,12 @@ Page({
   },
   //重新搜索
   again: function() {
-    wx.removeStorageSync("picIndexList")
+    // wx.removeStorageSync("picIndexList")
     var that = this
+    // wx.removeStorageSync("picIndexList"),
     that.setData({
       hasList: true,
       noFilter: {
-        "pageNum": this.data.pageNum,
         "pageSize": '10'
       },
       expert: '擅长领域',
@@ -55,8 +55,8 @@ Page({
       ishidden: true,
       pageNum: 1,
       lawyerName: '',
-      filterColor: false
-      // hasNextPage: true
+      filterColor: true,
+      hasNextPage: false
     })
     // wx.removeStorageSync("picIndexList")
   },
@@ -74,7 +74,7 @@ Page({
       showExpert: false,
       ishidden: true,
       pageNum: 1,
-      // hasNextPage: true
+      hasNextPage: false
     })
   },
   //选择擅长领域
@@ -86,7 +86,7 @@ Page({
       showSort: false,
       ishidden: true,
       pageNum: 1,
-      // hasNextPage: true
+      hasNextPage: false
     })
   },
   // 选择地区
@@ -97,7 +97,7 @@ Page({
       showSort: false,
       ishidden: true,
       pageNum: 1,
-      // hasNextPage: true
+      hasNextPage: false
     })
   },
   // 关键字搜索
@@ -106,7 +106,7 @@ Page({
       lawyerName: e.detail.value,
       ishidden: true,
       pageNum: 1,
-      // hasNextPage: true
+      hasNextPage: false
     })
   },
   //排序Index
@@ -284,7 +284,7 @@ Page({
     that.setData({
       lawyerList: '',
       pageNum: 1,
-      // hasNextPage: true
+      hasNextPage: false
     })
     var url = api.getSearchLawyer() + that.data.pageNum + '/10'
     var datan = that.data.noFilter
@@ -333,11 +333,9 @@ Page({
     })
   },
   //点击tab
-  onTabItemTap(e) {
-    if(e.index==1){
+  onTabItemTap() {
+    // this.onUnload()
     this.onLoad()
-    console.log(e)
-    }
     // this.getAge()
   },
 
@@ -399,14 +397,22 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    this.setData({
+      filterColor: false,
+      noFilter: {
+        "pageNum": this.data.pageNum,
+        "pageSize": '10'},
+      pageNum: 1,
+      expertColor:false,
+      selectedCityColor:false
+    })
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+ 
   },
 
   /**

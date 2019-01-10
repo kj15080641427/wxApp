@@ -119,7 +119,7 @@ Page({
         var currPage = pages[pages.length - 1]; //当前页面
         var prevPage = pages[pages.length - 2]; //上一个页面
         prevPage.onLoad() //调用上一个页面方法
-        prevPage.onTabItemTap()
+        // prevPage.onTabItemTap()
 
         wx.setStorageSync("userInfo", res.data)
         wx.setStorageSync("memberId", res.data.memberId)

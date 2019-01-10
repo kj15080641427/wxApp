@@ -67,7 +67,7 @@ Page({
       noFilter: {
         ...dataJSON
       },
-      filterColor:true
+      filterColor:true,
     })
     prevPage.pc ? prevPage.pc() : prevPage.searchLawyer()
     wx.navigateBack({

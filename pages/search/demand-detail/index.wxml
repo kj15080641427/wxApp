@@ -30,7 +30,7 @@
 </view>
 
 <view class='detail-page-center'>
-  <picker class='detail-page-picker' range="{{business}}" range-key="{{'businessTypeName'}}" value="{{index}}" bindchange="pickerLIst">
+  <picker class='detail-page-picker' range="{{business}}" range-key="{{'businessTypeName'}}" value="{{index}}" bindtap='getexpert' bindchange="pickerLIst">
     <view style='display:flex;justify-content: space-between;width:715rpx;'>
       <view class='detail-page-text'>
         <text style='color:red'>*</text>律师擅长领域</view>

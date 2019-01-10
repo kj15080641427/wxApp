@@ -15,7 +15,7 @@ Page({
     this.setData({
       orgurl: wx.getStorageSync("orgUrl")
     })
-    // console.log(this.data.orgurl)
+    console.log(this.data.orgurl)
   },
 
   /**

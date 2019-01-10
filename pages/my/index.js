@@ -126,12 +126,12 @@ Page({
       })
     }
     var failDetail = function(eDetail) {
-      if (eDetail.code == 10002) {
-        wx.showToast({
-          title: '请重新登录' + eDetail.message,
-        })
-        wx.clearStorage()
-      }
+      // if (eDetail.code == 10002) {
+      //   wx.showToast({
+      //     title: '请重新登录' + eDetail.message,
+      //   })
+      //   // wx.clearStorage()
+      // }
     }
     if (wx.getStorageSync("token")) {
       wxrequest.request(userDetailUrl, userData, successDetail, failDetail)
@@ -150,10 +150,10 @@ Page({
     }
   },
   //
-  onTabItemTap(item) {
+  onTabItemTap() {
     this.getUrl()
     if (!wx.getStorageSync("token")) {
-      wx.clearStorage()
+      // wx.clearStorage()
       wx.navigateTo({
         url: '/pages/userlogin/index',
       })
@@ -187,7 +187,7 @@ Page({
    */
   onShow: function() {
     wx.removeStorageSync("picIndexList")
-    this.getUserDetail()
+    // this.getUserDetail()
   },
 
   /**

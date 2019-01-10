@@ -27,7 +27,7 @@
       </view>
     </view>
   </picker>
-
+<!-- <view name='region' class='consul-picker-text'  style="margin-right:20rpx">{{multiArray[0][multiIndex[0]].name}}-{{multiArray[1][multiIndex[1]].name}}</view> -->
 <textarea name='content' placeholder="*"  placeholder="完整的叙述，会得到律师更详细的建议指导 (限10-300字)" placeholder-style="font-size:28rpx;color:#b5b5b5" maxlength="300" class="consul-page-textarea" bindinput='getInput'></textarea>
 
 <view class='consul-page-flex consul-page-anonymous-view' >

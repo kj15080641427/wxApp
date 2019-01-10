@@ -194,7 +194,7 @@ Page({
       })
     } else if (!(/^[0-9]*$/.test(par.maxCost))) {
       wx.showToast({
-        title: '请填写正确的最高可承受费用',
+        title: '请填写愿意支付的律师费用',
         icon: 'none'
       })
     } else if (par.requirementContent == '') {
@@ -350,6 +350,12 @@ Page({
       ['postList.requirementBusiId']: options.busiTypes ? JSON.parse(options.busiTypes).businessTypeId : '',
       ['postList.requirementBusiName']: options.busiTypes ? JSON.parse(options.busiTypes).businessTypeName : ''
     })
+    if (wx.getStorageSync('province') && wx.getStorageSync('city')) {
+    this.setData({
+      ['postList.lawyerRegionId']: this.data.multiArray[1][this.data.multiIndex[1]].regionId,
+      isOnce:true
+    })
+    }
     if (options.id) {
       this.getexperttwo()
     } else {

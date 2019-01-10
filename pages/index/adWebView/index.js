@@ -13,8 +13,9 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      adUrl:options.adUrl
+      adUrl:wx.getStorageSync('ad')
     })
+    console.log(this.data.adUrl)
   },
 
   /**
