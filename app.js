@@ -1,7 +1,8 @@
 //app.js
 import JMessage from './jM/jmessage-wxapplet-sdk-1.4.0.min'
 import api from './utils/api'
-App({
+App({ 
+  // << << < HEAD
   // device: {
   //     "device_type": 1,
   //     "app_version": "1.0",
