@@ -1,0 +1,3 @@
+<!--pages/search/court/search/index.wxml-->
+<input placeholder='搜索法院' bindinput='getInput' confirm-type='search' bindconfirm="confirm"></input>
+<view wx:for="{{searchList}}">{{item.institutionName}}</view>

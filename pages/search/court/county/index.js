@@ -1,61 +1,39 @@
-// pages/search/court/index.js
-var api = require('../../../utils/api.js')
-var wxrequest = require('../../../utils/request.js')
-var reg = require('../../../region.js');
+var api = require('../../../../utils/api.js')
+var wxrequest = require('../../../../utils/request.js')
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    city: '',
+
   },
-  //搜索
-  toSearch:function(){
-    wx.navigateTo({
-      url: '/pages/search/court/search/index',
-    })
-  },
-  //法院列表
+  //高级法院
   getCourt: function (courtName) {
     var url = api.getCourt()
     var data = {
-      keywords: courtName,
-      regionId: '',
+      keywords: '',
+      regionId: courtName,
       pageNum: 1,
-      pageSize: 1
+      pageSize: 20
     }
     var success = data => {
       this.setData({
-        bestCourt: data.data.result.list[0].institutionName
+        bestCourt: data.data.topList,
+        otherCourt: data.data.result.list
       })
-      console.log('success',data)
+      console.log('success', data)
     }
     var fail = e => {
       console.log(e)
     }
     wxrequest.request(url, data, success, fail)
   },
-  //选择
-  toSelectCity:function(e){
-    wx.navigateTo({
-      url: '/pages/search/court/city/index?city=' + JSON.stringify(this.data.city[e.currentTarget.dataset.cityindex].child) + '&province=' + this.data.city[e.currentTarget.dataset.cityindex].name,
-    })
-    // this.setData({
-    //   city: this.data.city[e.currentTarget.dataset.cityindex].child
-    // })
-    // console.log(e)
-  },
- 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      city: reg.citysData
-    })
-    console.log(this.data.city)
-    this.getCourt('最高人民')
+    this.getCourt(options.county)
   },
 
   /**

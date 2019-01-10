@@ -96,7 +96,24 @@ Page({
     wx.removeStorageSync("picIndexList")
     this.onShow()
   },
-
+  //toCourt
+  toCourt:function(){
+    wx.navigateTo({
+      url: '/pages/search/court/index',
+    })
+  },
+  //法院列表
+  getCourt:function(){
+    var url = api.getCourt()
+    var data = { keywords: '', regionId: 430700, pageNum: 1, pageSize:10}
+    const success = res =>{
+      console.log('res',res)
+    }
+    const fail = err =>{
+      console.log('error',err)
+    }
+    wxrequest.request(url,data,success,fail)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -113,6 +130,7 @@ Page({
         search: data.data
       })
     }
+    this.getCourt()//法院列表
     var searchFail = function(e) {
       wx.showToast({
         title: '获取筛选列表失败',

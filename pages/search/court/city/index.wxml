@@ -1,0 +1,10 @@
+<view class='court-view'>
+  <view class='court'>高级人民法院</view>
+  <view style='background-color:#f4f4f4;height:1rpx;margin-right:35rpx;'></view>
+  <view class='court-text'>{{bestCourt}}</view>
+</view>
+<view class='court-view'>
+  <view class='court'>中级人民法院&基层法院</view>
+  <view style='background-color:#f4f4f4;height:1rpx;margin-right:35rpx;'></view>
+  <view class='court-text' wx:key="{{index}}" wx:for="{{city}}" bindtap='toCounty' data-countyindex="{{index}}">{{item.name}}</view>
+</view>

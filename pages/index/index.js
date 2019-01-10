@@ -145,7 +145,7 @@ Page({
   onShow: function() {
     wx.removeStorageSync("picIndexList")
   },
-  // 滚动样式
+  // 滑动样式
   switchTab: function(e) {
     var that = this
     // page=10

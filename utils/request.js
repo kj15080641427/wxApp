@@ -45,7 +45,7 @@ function requestLoading(url, params, message, success, fail) {
       if (message != "") {
         wx.hideLoading()
       }
-      console.log('request', e)
+      // console.log('request', e)
       fail(res)
     },
     complete: function(res) {

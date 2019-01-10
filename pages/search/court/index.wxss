@@ -1,1 +1,12 @@
 /* pages/search/court/index.wxss */
+.city-view{
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+::-webkit-scrollbar{
+width: 0;
+height: 0;
+color: transparent;
+}

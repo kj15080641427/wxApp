@@ -35,7 +35,7 @@ Page({
     },
     hasList: true,
     lawyerName: '',
-    // hasNextPage:true,
+    hasNextPage:false,
     pageNum:1,
     webData:false
   },
@@ -213,6 +213,7 @@ Page({
         })
       }
       that.setData({
+        hasNextPage: data.data.hasNextPage,
         lawyerList: data.data.list,
       })
       that.getAge()
@@ -378,7 +379,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    this.onLoad()
   },
 
   /**
