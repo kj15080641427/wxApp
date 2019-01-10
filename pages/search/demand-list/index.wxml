@@ -75,4 +75,7 @@
   <view class='no-message-tips-view'>
       <view class='no-message-tips'>没有找到您要搜索的结果</view>
   </view>
+    <view class='no-message-tips-view'>
+      <view class='no-message-tips'>您的费用低于律师可接受费用，请适当提高</view>
+  </view>
 </view>

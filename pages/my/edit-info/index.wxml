@@ -10,7 +10,7 @@
   <view style='background-color:white;margin-top:35rpx'>
     <view class='info-page-list'>
       <view class='info-page-label'>用户名称</view>
-      <input class="info-page-input" value='{{userInfo.memberName}}' maxlength='10' bindinput='member' placeholder='输入用户名称'>{{editMember}}</input>
+      <input class="info-page-input" value='{{userInfo.memberName}}' maxlength='11' bindinput='member' placeholder='输入用户名称'>{{editMember}}</input>
     </view>
     <view class='info-page-center-line'></view>
     <view class='info-page-list'>

@@ -74,7 +74,7 @@ const getPayInfo = (v) => {
               fail: function(res) {
                 wx.hideLoading()
                 console.log(res)
-                reject(new Error(res))
+                reject(res)
               },
               complete: function(res) {}
             })
@@ -103,7 +103,7 @@ const getPayInfo = (v) => {
               fail(e) {
                 wx.hideLoading()
                 // console.log("余额支付失败333", e)
-                reject(new Error(res))
+                reject(res)
               }
             })
           } else if (v.type == 3 && v.product == 3) {
@@ -127,7 +127,7 @@ const getPayInfo = (v) => {
               },
               fail: function(res) {
                 console.log(res)
-                reject(new Error(res))
+                reject(res)
               },
               complete: function(res) {},
             })

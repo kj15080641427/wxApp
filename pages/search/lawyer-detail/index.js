@@ -29,7 +29,23 @@ Page({
     lawyerFirm: '',
     firstPage:false //默认从此页面进入小程序
   },
-  //
+  //预览头像
+  showImage:function(){
+    if (this.data.lawyerCard.iconImage){
+      wx.previewImage({
+        urls: [this.data.lawyerCard.iconImage],
+      })
+    }
+  },
+  //预览背景图
+  showBackgroundImage:function(){
+    if (this.data.lawyerCard.backgroundImage){
+      wx.previewImage({
+        urls: [this.data.lawyerCard.backgroundImage],
+      })
+    }
+  },
+  //组织
   toOrgId: function(e) {
     console.log(this.data.lawyerCard.orgTags[e.currentTarget.dataset.orgindex].link)
     wx.setStorageSync('orgUrl', `${this.data.lawyerCard.orgTags[e.currentTarget.dataset.orgindex].link}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
@@ -206,13 +222,13 @@ Page({
           })
         }
       })
+      // console.log('已关注列表',data.data.list, )
+      // console.log( '关注id', that.data.lawyerCard.memberId)
     }
     var fail = e => {
       console.log(e)
     }
-    if (wx.getStorageSync("token")) {
       wxrequest.request(url, data, success, fail)
-    }
   },
   // 简介加载更多
   showMore: function(e) {
@@ -326,11 +342,11 @@ Page({
           title: '发送成功',
           icon: 'none'
         })
-        setTimeout(() => {
-          wx.navigateBack({
-            delta: 10
-          })
-        }, 1500)
+        // setTimeout(() => {
+        //   wx.navigateBack({
+        //     delta: 10
+        //   })
+        // }, 1500)
       }
       var fail = e => {
         wx.showToast({
@@ -516,9 +532,9 @@ Page({
     }
     this.search()
     this.getLawyerMoney()
-    // if(wx.getStorageSync('token')){
-    //   this.followList()
-    // }
+    if(wx.getStorageSync('token')){
+      this.followList()
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

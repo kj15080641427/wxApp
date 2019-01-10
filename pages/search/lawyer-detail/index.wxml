@@ -1,18 +1,18 @@
 <!--pages/search/lawyer-detail/index.wxml-->
 <view>
-  <image mode='aspectFill' class='law-page-background' src="{{lawyerCard.backgroundImage ? lawyerCard.backgroundImage:'../../../image/my_icon@3x/20190106000237.png'}}"></image>
+  <image mode='aspectFill' class='law-page-background' src="{{lawyerCard.backgroundImage ? lawyerCard.backgroundImage:'../../../image/my_icon@3x/20190106000237.png'}}" bindtap='showBackgroundImage'></image>
   <view bindtap='toindex' wx:if="{{firstPage}}">
     <view class='goto-index'>
       <text style='margin-left:10rpx;'>回到首页</text>
     </view>
   </view>
   <view class='follow-lawyer' bindtap="{{ isFollow ? 'unFollow':'follow'}}">
-    <image src="{{isFollow ? '../../../image/search_icon@3x/Personalhomepage-02@3x.png':'../../../image/search_icon@3x/Personalhomepage-01@3x.png'}}" style='height:25rpx;width:25rpx;margin-left:20rpx;z-index:1;'></image>
+    <image src="{{isFollow ? '../../../image/search_icon@3x/Personalhomepage-02@3x.png':'../../../image/search_icon@3x/Personalhomepage-01@3x.png'}}" style='height:25rpx;width:25rpx;margin-left:20rpx;z-index:1;' ></image>
     <text style='margin-left:10rpx;'>{{isFollow ? '已关注':'关注'}}</text>
   </view>
 </view>
 <view style='background-color:white;padding-right:35rpx;'>
-  <image class='law-page-avatar' src="{{lawyerCard.iconImage? lawyerCard.iconImage : '../../../image/my_icon@3x/mine_icon-03@3x.png'}}"></image>
+  <image class='law-page-avatar' src="{{lawyerCard.iconImage? lawyerCard.iconImage : '../../../image/my_icon@3x/mine_icon-03@3x.png'}}"bindtap='showImage'></image>
   <!-- {{lawyerList[index].iconImage}} -->
   <view class='law-page-name'>
     <view class='law-flex law-page-name-right'>

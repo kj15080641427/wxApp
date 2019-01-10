@@ -116,7 +116,7 @@ Page({
     var fail = function(e) {
       wx.showToast({
         title: '加载失败',
-        icon:'none'
+        icon: 'none'
       })
       console.log("擅长领域", e)
       wx.hideLoading()
@@ -189,7 +189,7 @@ Page({
       })
     } else if (par.maxCost == '') {
       wx.showToast({
-        title: '请填写最高可承受费用',
+        title: '请填写愿意支付的律师费用',
         icon: 'none'
       })
     } else if (!(/^[0-9]*$/.test(par.maxCost))) {
@@ -303,16 +303,16 @@ Page({
     })
     //选择地区
     // console.log('城市11', reg.citysData[0], [reg.citysData][0][17].child)
-    reg.citysData.map((item,index)=>{
-      if (item.name == wx.getStorageSync("province")){
+    reg.citysData.map((item, index) => {
+      if (item.name == wx.getStorageSync("province")) {
         this.setData({
           provi: index
         })
       }
     })
-    if(!this.data.provi){
+    if (!this.data.provi) {
       this.setData({
-        provi:0
+        provi: 0
       })
     }
     // console.log('省', this.data.provi)
@@ -330,7 +330,7 @@ Page({
     }
     // console.log(reg.citysData[17].child, '市',this.data.cit)
     this.setData({
-      multiIndex:[this.data.provi,this.data.cit]
+      multiIndex: [this.data.provi, this.data.cit]
     })
     this.setData({
       multiIndex: [this.data.provi, this.data.cit],
@@ -351,10 +351,10 @@ Page({
       ['postList.requirementBusiName']: options.busiTypes ? JSON.parse(options.busiTypes).businessTypeName : ''
     })
     if (wx.getStorageSync('province') && wx.getStorageSync('city')) {
-    this.setData({
-      ['postList.lawyerRegionId']: this.data.multiArray[1][this.data.multiIndex[1]].regionId,
-      isOnce:true
-    })
+      this.setData({
+        ['postList.lawyerRegionId']: this.data.multiArray[1][this.data.multiIndex[1]].regionId,
+        isOnce: true
+      })
     }
     if (options.id) {
       this.getexperttwo()

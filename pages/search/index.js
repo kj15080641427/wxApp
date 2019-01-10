@@ -45,18 +45,18 @@ Page({
     // wx.removeStorageSync("picIndexList"),
     that.setData({
       hasList: true,
-      noFilter: {
-        "pageSize": '10'
-      },
-      expert: '擅长领域',
-      selectedCity: '选择地区',
-      expertColor: false,
-      selectedCityColor: false,
+      // noFilter: {
+      //   "pageSize": '10'
+      // },
+      // expert: '擅长领域',
+      // selectedCity: '选择地区',
+      // expertColor: false,
+      // selectedCityColor: false,
       ishidden: true,
       pageNum: 1,
       lawyerName: '',
-      filterColor: true,
-      hasNextPage: false
+      // filterColor: true,
+      // hasNextPage: false
     })
     // wx.removeStorageSync("picIndexList")
   },
@@ -397,15 +397,15 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-    this.setData({
-      filterColor: false,
-      noFilter: {
-        "pageNum": this.data.pageNum,
-        "pageSize": '10'},
-      pageNum: 1,
-      expertColor:false,
-      selectedCityColor:false
-    })
+    // this.setData({
+    //   filterColor: false,
+    //   noFilter: {
+    //     "pageSize": '10'},
+    //   pageNum: 1,
+    //   expertColor:false,
+    //   selectedCityColor:false
+    // })
+    // wx.removeStorageSync("picIndexList")
   },
 
   /**

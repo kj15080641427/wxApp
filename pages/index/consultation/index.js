@@ -1,6 +1,7 @@
 var wxrequest = require('../../../utils/request.js')
 var api = require('../../../utils/api.js')
 var reg = require('../../../region.js');
+import throttle from '../../../utils/throttle.js'
 Page({
 
   /**
@@ -136,8 +137,8 @@ Page({
   //     wxrequest.requestForm(commitURL, freedata,'', success, fail)
   //   }
   // },
-  // 提交
-  commit: function() {
+  //提交
+  commitRequest: throttle.throttle(function(){
     var that = this
     var commitURL = api.getCommitUrl()
     var freedata = {
@@ -150,20 +151,55 @@ Page({
       //   "formId": that.data.formId
       // }
     }
-    var success = function(data) {
+    var success = function (data) {
       that.setData({
         consultation: data
       })
-      that.getOrder()
       wx.showToast({
         title: '提交成功',
       })
+      that.getOrder()
     }
-    var fail = function(e) {
+    var fail = function (e) {
+      wx.hideLoading()
       wx.showToast({
         title: '提交失败',
       })
     }
+    wxrequest.request(commitURL, freedata, success, fail)
+  },500),
+  // 提交
+  commit: function() {
+    // var that = this
+    // var commitURL = api.getCommitUrl()
+    // var freedata = {
+    //   "consultationTypeId": that.data.consultationTypeId,
+    //   "regionId": that.data.regionId,
+    //   "content": that.data.commitContent,
+    //   "isHide": that.data.isHide == true ? '1' : '0',
+    //   // "wxReportSubmit": {
+    //   //   "openId": wx.getStorageSync('openid'),
+    //   //   "formId": that.data.formId
+    //   // }
+    // }
+    // var success = function(data) {
+    //   that.setData({
+    //     consultation: data
+    //   })
+    //   that.getOrder()
+    //   wx.showToast({
+    //     title: '提交成功',
+    //   })
+    // }
+    // var fail = function(e) {
+    //   wx.showToast({
+    //     title: '提交失败',
+    //   })
+    // }
+    wx.showLoading({
+      title: '提交中',
+      mask:true
+    })
     var cdata = this.data
     if (cdata.consultationTypeId == '') {
       wx.showToast({
@@ -181,7 +217,8 @@ Page({
         icon: 'none'
       })
     } else {
-      wxrequest.request(commitURL, freedata, success, fail)
+      // wxrequest.request(commitURL, freedata, success, fail)
+      this.commitRequest()
     }
   },
   //订单

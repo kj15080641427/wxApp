@@ -126,6 +126,7 @@ Page({
         hasList: true
       })
       that.setData({
+        hasNextPage: data.data.hasNextPage,
         lawyerList: data.data.list,
         ishidden: true
       })
@@ -150,10 +151,12 @@ Page({
     var success = function(data) {
       wx.hideLoading()
       that.setData({
+        hasNextPage: data.data.hasNextPage,
         lawyerList: data.data.list,
       })
       if (!data.data.list[0]) {
         that.setData({
+          
           hasList: false
         })
       }else{

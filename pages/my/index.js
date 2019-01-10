@@ -187,7 +187,7 @@ Page({
    */
   onShow: function() {
     wx.removeStorageSync("picIndexList")
-    // this.getUserDetail()
+    this.getUserDetail()
   },
 
   /**
