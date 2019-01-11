@@ -46,7 +46,8 @@
               <view>{{lawyerList[index].memberName}}</view>
               <label wx:if="{{lawyerList[index].memberPositionName}}" class='watchlist-page-firm'>({{lawyerList[index].memberPositionName}})</label>
             </view>
-            <view class='demand-button' data-index="{{index}}" catchtap='sendDemand'>发送需求</view>
+            <view wx:if="{{!isDemand[index]}}" class='demand-button' data-index="{{index}}" catchtap='sendDemand'>发送需求</view>
+            <view wx:if="{{isDemand[index]}}" class='demand-button' style='background-color:#b5b5b5' catchtap="nothing">已发送</view>
           </view>
           <view class='watchlist-page-address'>{{address[index]}} <text wx:if="{{lawyerList[index].region&&lawyerList[index].institutionName}}">|</text> {{lawyerList[index].institutionName}}</view>
           <view class='watchlist-page-adept'>{{lawyerList[index].description}} </view>

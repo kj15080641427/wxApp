@@ -15,7 +15,7 @@ Page({
     this.setData({
       adUrl:wx.getStorageSync('ad')
     })
-    console.log(this.data.adUrl)
+    console.log('ad',this.data.adUrl)
   },
 
   /**

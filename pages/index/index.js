@@ -43,7 +43,7 @@ Page({
       nowIdx: e.detail.current
     })
   },
-  //搜索律师
+  //跳转至搜索
   gotoSearch: function() {
     wx.switchTab({
       url: '../search/index',
@@ -52,10 +52,11 @@ Page({
   //h5
   gotoweb: function(e) {
     this.setData({
-      resIndex: e.currentTarget.dataset.resolveindex
+      [`article[${e.currentTarget.dataset.resolveindex}].helpNumber`]: this.data.article[e.currentTarget.dataset.resolveindex].helpNumber+1
     })
-    var array = this.data.article[e.currentTarget.dataset.resolveindex]
-    wx.setStorageSync("web", array)
+    console.log(this.data.article)
+    // var array = this.data.article[e.currentTarget.dataset.resolveindex]
+    wx.setStorageSync("web", this.data.article[e.currentTarget.dataset.resolveindex].solutionUrl)
     wx.navigateTo({
       url: 'webView/index'
     })
@@ -93,58 +94,6 @@ Page({
     }
     var success = function(data) {
       wx.hideLoading()
-
-      // <<<<<<< HEAD
-      //       function toSort(a, b) {
-      //         return a.sort - b.sort
-      //       }
-      //       that.setData({
-      //         popular: data.data.sort(toSort),
-      //       })
-      //       wx.setStorageSync('type', that.data.popular)
-      //       that.getArticleList()
-      //     }
-      //     var fail = function(e) {
-      //       wx.hideLoading()
-      //       wx.showToast({
-      //         title: '获取解决方案数据失败',
-      //         icon: 'none'
-      //       })
-      //       console.log("解决方案错误", e)
-      //     }
-      //     wxrequest.requestPost(url, data, messagetype, success, fail)
-      //   },
-      //   //解决方案
-      //   getArticleList: function() {
-      //     var that = this
-      //     var listUrl = api.getArticleListUrl()
-      //     var message = ""
-      //     var listData = {
-      //       "typeId": that.data.popular[that.data.articleIndex].id,
-      //       "pageNum": that.data.pageNum,
-      //       "pageSize": 10,
-      //       "deviceInfoId": 5
-      //     }
-      //     var successList = function(data) {
-      //       that.setData({
-      //         total: data.data.total,
-      //         article: that.data.article.concat(data.data.list),
-      //         listHeight: that.data.article.length ? that.data.article.length * 220 + 200 + 'rpx' : ''
-      //       })
-
-      //     }
-      //     var failList = function(e) {
-      //       console.log("解决方案错误", e)
-      //     }
-      //     wxrequest.requestPost(listUrl, listData, message, successList, failList)
-      //   },
-      //   //点击tabbar栏
-      //   onTabItemTap(e) {
-      //     this.getArticleType()
-      //     this.getAdbanner()
-      //     this.judgeTips()
-      //   },
-      // =======
       function toSort(a, b) {
         return a.sort - b.sort
       }
@@ -323,11 +272,11 @@ Page({
   },
   onShow: function() {
     let vm = this;
-    if ( !wx.getStorageSync('city')&&!wx.getStorageSync('province')) {
+    if ( !wx.getStorageSync('city')&&!wx.getStorageSync('province')) { //是否已有地理位置缓存
       this.getUserLocation()
     }
-    wx.removeStorageSync("picIndexList")
-    if (jM.isLogin()) {
+    wx.removeStorageSync("picIndexList") //移除找律师筛选条件
+    if (jM.isLogin()) { 
       vm.getUnReadMsg()
       jM.onMsgReceive(function(msgRes) {
         vm.getUnReadMsg()
@@ -446,7 +395,6 @@ Page({
       articleIndex: e.currentTarget.id
     })
     this.checkCor();
-
     var that = this;
     //  高度自适应
     wx.getSystemInfo({

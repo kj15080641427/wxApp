@@ -27,19 +27,19 @@ Page({
     time: 60,
     start: true,
     lawyerFirm: '',
-    firstPage:false //默认从此页面进入小程序
+    firstPage: false //默认从此页面进入小程序
   },
   //预览头像
-  showImage:function(){
-    if (this.data.lawyerCard.iconImage){
+  showImage: function() {
+    if (this.data.lawyerCard.iconImage) {
       wx.previewImage({
         urls: [this.data.lawyerCard.iconImage],
       })
     }
   },
   //预览背景图
-  showBackgroundImage:function(){
-    if (this.data.lawyerCard.backgroundImage){
+  showBackgroundImage: function() {
+    if (this.data.lawyerCard.backgroundImage) {
       wx.previewImage({
         urls: [this.data.lawyerCard.backgroundImage],
       })
@@ -54,7 +54,7 @@ Page({
     })
   },
   //回到首页
-  toindex:function(){
+  toindex: function() {
     wx.switchTab({
       url: '/pages/index/index',
     })
@@ -141,10 +141,10 @@ Page({
       // console.log('Info',data.data)
       var scoreList = []
       that.data.lawyerInfo.businessType.map(item => {
-        if (item.score>=1){
+        if (item.score >= 1) {
           scoreList.push((item.score * 100))
-        }else{
-        scoreList.push((item.score * 100).toFixed(2))
+        } else {
+          scoreList.push((item.score * 100).toFixed(2))
         }
       })
       that.setData({
@@ -168,7 +168,7 @@ Page({
     var that = this
     wx.showLoading({
       title: '加载中',
-      mask:true
+      mask: true
     })
     //律师主页 (背景图/所获荣誉/描述)
     var homeUrl = api.getLawHomePage() + that.data.lawyerList
@@ -190,20 +190,20 @@ Page({
     wxrequest.requestGetpar(homeUrl, homeData, '', homeSuccess, homeFail) //主页
   },
   //法院检察院
-  court:function(){
+  court: function() {
     var courtList = []
     var procList = []
     console.log(this.data.lawyerInfo)
-    this.data.lawyerInfo.institution.map(item=>{
-      if(item.indexOf('检察院')==-1){
+    this.data.lawyerInfo.institution.map(item => {
+      if (item.indexOf('检察院') == -1) {
         courtList.push(item)
-      }else{
+      } else {
         procList.push(item)
       }
     })
     this.setData({
-      court:courtList,
-      proc:procList
+      court: courtList,
+      proc: procList
     })
   },
   //我的关注
@@ -228,7 +228,7 @@ Page({
     var fail = e => {
       console.log(e)
     }
-      wxrequest.request(url, data, success, fail)
+    wxrequest.request(url, data, success, fail)
   },
   // 简介加载更多
   showMore: function(e) {
@@ -329,39 +329,45 @@ Page({
   },
   //发布需求
   toDemand: function() {
-    if (!wx.getStorageSync("token")) {
+    if (!wx.getStorageSync("token")) { //是否登录
       wx.navigateTo({
         url: '/pages/userlogin/index',
       })
-    }else{
-    if (this.data.justDo) {
-      var url = api.getPublish()
-      var data = this.data.parameter
-      var success = data => {
-        wx.showToast({
-          title: '发送成功',
-          icon: 'none'
-        })
-        // setTimeout(() => {
-        //   wx.navigateBack({
-        //     delta: 10
-        //   })
-        // }, 1500)
-      }
-      var fail = e => {
-        wx.showToast({
-          title: e.message,
-          icon: 'none'
-        })
-        console.log(e)
-      }
-      wxrequest.request(url, data, success, fail)
-
     } else {
-      wx.navigateTo({
-        url: '/pages/search/lawyer-demand/index?lawyerDetail=' + JSON.stringify(this.data.lawyerInfo),
-      })
-    }
+      if (this.data.justDo) { //从律师服务进律师主页 直接发送需求  
+        var url = api.getPublish()
+        var data = this.data.parameter
+        var success = data => {
+          if (this.data.demandIndex){
+          var pages = getCurrentPages();
+          var prevPage = pages[pages.length - 2]; //上一个页面
+          //直接调用上一个页面对象的setData()方法，把数据存到上一个页面中去
+          prevPage.setData({
+            [`isDemand[${this.data.demandIndex}]`]: true
+          })
+          setTimeout(()=>{
+            wx.navigateBack({
+            })
+          },1000)
+          }
+          wx.showToast({
+            title: '发送成功',
+            icon: 'none'
+          })
+        }
+        var fail = e => {
+          wx.showToast({
+            title: e.message,
+            icon: 'none'
+          })
+          console.log(e)
+        }
+        wxrequest.request(url, data, success, fail)
+      } else { //律师主页发布需求页面
+        wx.navigateTo({
+          url: '/pages/search/lawyer-demand/index?lawyerDetail=' + JSON.stringify(this.data.lawyerInfo),//参数为 律师擅长领域 律师最低可承受费用,律师ID
+        })
+      }
     }
   },
   //充值
@@ -505,34 +511,35 @@ Page({
    */
   onLoad: function(options) {
     if (options.scene) {
-      console.log('options',options.scene)
+      console.log('options', options.scene)
       var sceneList = options.scene.split("-")
       if (sceneList.length == 2) {
         this.setData({
-          lawyerList : sceneList[0],
-          channel : sceneList[1],
-          firstPage:true
+          lawyerList: sceneList[0],
+          channel: sceneList[1],
+          firstPage: true
         })
         App.globalData.device.channel = sceneList[1]
-        console.log('channel',App.globalData.device.channel)
-      }else{
+        console.log('channel', App.globalData.device.channel)
+      } else {
         this.setData({
-          lawyerList : sceneList[0],
+          lawyerList: sceneList[0],
           firstPage: true
         })
       }
-    }else{
-    this.setData({
-      lawyerList: options.id,
-      quick: options.quick ? true : false,
-      parameter: options.parameter ? JSON.parse(options.parameter) : '',
-      ['parameter.targetLawyerId']: options.id ? options.id : '',
-      justDo: options.justDo ? options.justDo : ''
-    })
+    } else {
+      this.setData({
+        lawyerList: options.id,
+        quick: options.quick ? true : false,
+        parameter: options.parameter ? JSON.parse(options.parameter) : '',
+        ['parameter.targetLawyerId']: options.id ? options.id : '',
+        justDo: options.justDo ? options.justDo : '', //是否直接发送
+        demandIndex: options.demandIndex ? options.demandIndex:'' //点击发布需求后按钮变灰
+      })
     }
     this.search()
     this.getLawyerMoney()
-    if(wx.getStorageSync('token')){
+    if (wx.getStorageSync('token')) {
       this.followList()
     }
   },

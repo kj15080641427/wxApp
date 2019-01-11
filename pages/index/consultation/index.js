@@ -24,7 +24,6 @@ Page({
     openid: wx.getStorageSync('openid')
   },
   //地区
-
   hideRegion: function() {
     this.setData({
       hasSelectAddress: false,
@@ -74,7 +73,7 @@ Page({
   },
 
 
-  // input
+  // 获取input框值
   getInput: function(e) {
     this.setData({
       commitContent: e.detail.value
@@ -235,7 +234,7 @@ Page({
         order: data.data.list
       })
       wx.redirectTo({
-        url: '/pages/index/consultation-details/index?orderDetail=' + JSON.stringify(that.data.order[0]),
+        url: '/pages/index/consultation-details/index?orderDetail=' + JSON.stringify(that.data.order[0]),//获取此条文字咨询详情, 调整至文字咨询详情页 
       })
     }
     var fail = (e) => {

@@ -272,7 +272,7 @@
 </view>
 
 <view class="commodity_screen" wx:if="{{showModalStatus}}"></view>
-<!--弹出框  -->
+<!--电话咨询 弹出框  -->
 <view class="commodity_attr_box" wx:if="{{showModalStatus}}">
   <view wx:if="{{countDown}}">
     <view style='width:680rpx;display:flex;justify-content:center;margin-left:35rpx;margin-right:35rpx;margin-top:100rpx;'>为保护您的个人权益,我们将先为您联系律师,请注意接听{{lawyerMoney.callCenterNo}}的电话</view>
