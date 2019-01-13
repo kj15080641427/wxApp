@@ -143,7 +143,7 @@
 .index-tab-margin {
   height: 90rpx;
   background-color: white;
-  margin-top: 40rpx;
+  /* margin-top: 40rpx; */
   padding-left: 35rpx;
   padding-right: 35rpx;
 }
@@ -322,7 +322,7 @@
   height: 0;
   color: transparent;
 }
-
+/* 
 .scoll-h {
   height: 100%;
 }
@@ -348,4 +348,4 @@ page {
 
 swiper {
   height: 800rpx;
-}
+} */

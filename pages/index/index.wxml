@@ -44,11 +44,13 @@
     </view>
   </view>
   <!-- 中部轮播图片 -->
-  <swiper previous-margin='80rpx' next-margin='80rpx' bindchange="swiperChange" duration="200" style='height:300rpx;margin-top:30rpx;'>
-    <swiper-item wx:for='{{adBanner}}' wx:key=''>
-      <image class='le-img {{nowIdx==index?"le-active":""}}' src='{{item.image}}' style='height:280rpx;width:100%;' data-adindex="{{index}}" bindtap='gotoAd'></image>
+  <view style='background-color:white'>
+  <swiper indicator-dots='true' indicator-active-color="#1ec88c" indicator-color='white' bindchange="swiperChange" autoplay="true"  interval="3000" duration="200" style='height:379rpx;width:680rpx;margin-left:35rpx'>
+    <swiper-item wx:for='{{adBanner}}' wx:key='index'>
+      <image  src='{{item.image}}' style='height:100%;width:100%' data-adindex="{{index}}" bindtap='gotoAd'></image>
     </swiper-item>
   </swiper>
+</view>
   <!-- 服务动态 -->
   <!-- <view class='index-service'>
     <image src='../../image/homeicon_3x/homepage_06_3x.png' style='width:90rpx;height:90rpx;margin-top:30rpx'></image>

@@ -6,6 +6,7 @@
     "pages/userlogin/index",
     "pages/userlogin/user-url/index",
     "pages/index/consultation-input/index",
+    "pages/index/consultation-h5/index",
     "pages/index/expert-filter/index",
     "pages/index/expert-service/index",
     "pages/index/quick-consultation/index",

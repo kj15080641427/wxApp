@@ -30,6 +30,7 @@ function requestLoading(url, params, message, success, fail) {
         success(res.data)
       } else {
         if (res.statusCode == 401) {
+          wx.clearStorage()
           wx.navigateTo({
             url: '/pages/userlogin/index',
             complete: function(res) {
@@ -80,6 +81,7 @@ function requestForm(url, params, message, success, fail) {
         success(res.data)
       } else {
         if (res.statusCode == 401) {
+          wx.clearStorage()
           wx.navigateTo({
             url: '/pages/userlogin/index',
             complete: function (res) {
@@ -129,6 +131,7 @@ function requestPost(url, params, message, success, fail) {
         success(res.data)
       } else {
         if (res.statusCode == 401) {
+          wx.clearStorage()
           wx.navigateTo({
             url: '/pages/userlogin/index',
             complete: function(res) {
@@ -180,6 +183,7 @@ function requestGet(url, message, success, fail) {
         success(res.data)
       } else {
         if (res.statusCode == 401) {
+          wx.clearStorage()
           wx.navigateTo({
             url: '/pages/userlogin/index',
             complete: function(res) {
@@ -231,6 +235,7 @@ function requestGetpar(url, params, message, success, fail) {
         success(res.data)
       } else {
         if (res.statusCode == 401) {
+          wx.clearStorage()
           wx.navigateTo({
             url: '/pages/userlogin/index',
             complete: function(res) {
@@ -276,6 +281,7 @@ function superRequest(url, data, type) {
         if (res.statusCode == 200) {
           reslove(res)
         } else if (res.statusCode == 401) {
+          wx.clearStorage()
           wx.navigateTo({
             url: '/pages/userlogin/index',
           })

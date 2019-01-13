@@ -69,6 +69,7 @@ Page({
       this.setData({
         adBanner: data.data.list
       })
+      console.log('广告', data.data.list)
     }
     var fail = (e) => {
       console.log(e)
@@ -77,10 +78,29 @@ Page({
   },
   //跳转至广告
   gotoAd: function(e) {
-    wx.setStorageSync('ad', this.data.adBanner[e.currentTarget.dataset.adindex].linkValue)
-    wx.navigateTo({
-      url: 'adWebView/index'
-    })
+    // wx.setStorageSync('ad', this.data.adBanner[e.currentTarget.dataset.adindex].linkValue)
+    wx.setStorageSync('ad', `${this.data.adBanner[e.currentTarget.dataset.adindex].linkValue}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
+    // if(wx.getStorageSync('token')){
+    //   wx.navigateTo({
+    //     url: 'adWebView/index'
+    //   })
+    // }else{
+    //   this.data.adBanner[e.currentTarget.dataset.adindex].linkValue.indexOf('needllogin=1')==-1
+    // }
+    if (this.data.adBanner[e.currentTarget.dataset.adindex].linkValue.indexOf('needlogin=1') == -1){
+      wx.navigateTo({
+        url: 'adWebView/index'
+      })
+    }else if(wx.getStorageSync('token')){
+      wx.navigateTo({
+        url: 'adWebView/index'
+      })
+    }else {
+      wx.navigateTo({
+        url: '/pages/userlogin/index',
+      })
+    }
+    console.log('aaaaaaaaaaaaaaa',this.data.adBanner[e.currentTarget.dataset.adindex].linkValue.indexOf('needllogin=1'))
   },
   //解决方案类型
   getArticleType: function() {

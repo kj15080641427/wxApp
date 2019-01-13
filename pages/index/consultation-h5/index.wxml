@@ -1,0 +1,4 @@
+<!--pages/index/consultation-h5/index.wxml-->
+<!-- <web-view sec="{{url}}"></web-view> -->
+<view >{{url}}</view>
+<web-view src="{{url}}"></web-view>
