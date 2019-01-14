@@ -28,6 +28,7 @@ Page({
               // console.log('res',res.data.appkey)
                 //  初始化jmessager
                 wx.setStorageSync('appkey', res.data.appkey)
+                wx.setStorageSync('authorization', res.data.authorization)
                 jM.init({
                     "appkey"    : res.data.appkey,
                     "random_str": res.data.random,
