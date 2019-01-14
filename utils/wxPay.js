@@ -53,13 +53,13 @@ const getPayInfo = (v) => {
                       payOrderNo: res.data.data.orderno,
                       phone: v.phone,
                       payType: 1,
-                      payAmount: v.money/100,
+                      payAmount: v.money / 100,
                       typeId: v.typeQuick.id
                     },
                     success(data) {
                       console.log("余额支付33", data)
                       wx.navigateTo({
-                        url: '../quick-consultation-finish/index?orderNo=' + data.data.data.orderNo + '&timeStamp=' + data.data.data.timeStamp + '&type=' + v.typeQuick.typeName + '&phone=' + v.phone + '&money=' + v.money/100,
+                        url: '../quick-consultation-finish/index?orderNo=' + data.data.data.orderNo + '&timeStamp=' + data.data.data.timeStamp + '&type=' + v.typeQuick.typeName + '&phone=' + v.phone + '&money=' + v.money / 100,
                       })
                       reslove(data)
                     },
@@ -74,7 +74,7 @@ const getPayInfo = (v) => {
               fail: function(res) {
                 wx.hideLoading()
                 console.log(res)
-                reject(new Error(res))
+                reject(res)
               },
               complete: function(res) {}
             })
@@ -91,19 +91,19 @@ const getPayInfo = (v) => {
                 payOrderNo: res.data.data.orderno,
                 payType: 3,
                 phone: v.phone,
-                payAmount: v.money/100,
+                payAmount: v.money / 100,
                 typeId: v.typeQuick.id
               },
               success(data) {
                 console.log("余额支付33", data)
                 wx.navigateTo({
-                  url: '../quick-consultation-finish/index?orderNo=' + data.data.data.orderNo + '&timeStamp=' + data.data.data.timeStamp + '&type=' + v.typeQuick.typeName + '&phone=' + v.phone + '&money=' + v.money/100,
+                  url: '../quick-consultation-finish/index?orderNo=' + data.data.data.orderNo + '&timeStamp=' + data.data.data.timeStamp + '&type=' + v.typeQuick.typeName + '&phone=' + v.phone + '&money=' + v.money / 100,
                 })
               },
               fail(e) {
                 wx.hideLoading()
                 // console.log("余额支付失败333", e)
-                reject(new Error(res))
+                reject(res)
               }
             })
           } else if (v.type == 3 && v.product == 3) {
@@ -127,7 +127,7 @@ const getPayInfo = (v) => {
               },
               fail: function(res) {
                 console.log(res)
-                reject(new Error(res))
+                reject(res)
               },
               complete: function(res) {},
             })

@@ -135,8 +135,9 @@ Page({
     wxrequest.requestGet(url, '', success, fail)
   },
   toTariff: function() {
+    // wx.setStorageSync('h5g', this.data.tariffUrl)
     wx.navigateTo({
-      url: '../adWebView/index?adUrl=' + this.data.tariffUrl,
+      url: '../consultation-h5/index?url=' + this.data.tariffUrl
     })
   },
   //查询余额

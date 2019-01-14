@@ -82,30 +82,6 @@ Page({
     }
     // this.getLawyerPhone()
     var that = this
-    // var startDate = this.data.startTime.split(" ")[0]
-    // var nowDate = formatTime.formatTime(new Date()).split(" ")[0]
-    // var startTime = this.data.startTime.split(" ")[1]
-    // var nowTime = formatTime.formatTime(new Date()).split(" ")[1]
-    // if (nowDate.split("/")[0]-startDate.split("-")[0]>0){
-    //   this.setData({
-    //     time: false
-    //   })
-    // } else if (nowDate.split("/")[1] - startDate.split("-")[1] > 0){
-    //   this.setData({
-    //     time: false
-    //   })
-    // } else if (nowDate.split("/")[2] - startDate.split("-")[2] > 0){
-    //   this.setData({
-    //     time: false
-    //   })
-    // } else if ((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2]))>900){
-    //   this.setData({
-    //     time: false,
-    //   })
-    // }else{
-      // var hasTime = 900-((nowTime.split(":")[0] * 60 * 60 + nowTime.split(":")[1] * 60 + Number(nowTime.split(":")[2])) - (startTime.split(":")[0] * 60 * 60 + startTime.split(":")[1] * 60 + Number(startTime.split(":")[2])))
-      // var that = this
-      // var secondInt = hasTime
       that.setData({
         minute: parseInt(data.remainingTime / 60),
         second: data.remainingTime % 60

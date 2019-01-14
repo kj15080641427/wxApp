@@ -16,7 +16,7 @@
 
   <view class='details-page-reply'>
     <view class='details-page-reply-left'>
-      <view>{{ago}}{{agoText}}</view>
+      <!-- <view>{{ago}}{{agoText}}</view> -->
       <view class='details-page-reply-margin'>{{timet}}</view>
       <!-- <view class='details-page-top details-page-reply-margin'>
         <view class='details-page-reply-dot'></view>

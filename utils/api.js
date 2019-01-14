@@ -112,7 +112,7 @@ function getInstitutype() {
   return HOST_URL + InstituType
 }
 // 律师搜索页筛选条件
-var Search = '/lawyer/search/page'
+var Search = '/common/lawyer/search/page'
 
 function getSearch() {
   return HOST_URL + Search

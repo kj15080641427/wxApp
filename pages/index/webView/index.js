@@ -17,6 +17,7 @@ Page({
     this.setData({
       sUrl:wx.getStorageSync("web"),
     })
+    // console.log(this.data.sUrl)
   },
 
   /**

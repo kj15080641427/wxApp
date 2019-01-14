@@ -13,6 +13,7 @@ Page({
     pageNum: 1,
     order: [],
     hasNextPage: false,
+    isShow:false,
   },
   getOrderIndex: function(e) {
     var that = this
@@ -48,10 +49,16 @@ Page({
       "pageSize": 20
     }
     var success = (data) => {
+      if(!data.data.list[0]){
+        this.setData({
+          isShow: true
+        })
+      }
       this.setData({
         hasNextPage: data.data.hasNextPage,
         order: this.data.order.concat(data.data.list)
       })
+      console.log('订单列表',data)
     }
     var fail = (e) => {
       console.log(e)

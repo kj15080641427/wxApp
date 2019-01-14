@@ -142,6 +142,7 @@
   flex-wrap: wrap;
   /* justify-content: space-between; */
   align-items: center;
+  margin-bottom:120rpx;
 }
 .select-mark-text{
   margin-left: 35rpx;

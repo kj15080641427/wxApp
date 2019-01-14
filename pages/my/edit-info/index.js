@@ -139,6 +139,10 @@ Page({
       wx.showToast({
         title: '保存成功',
       })
+      var pages = getCurrentPages();
+      var currPage = pages[pages.length - 1]; //当前页面
+      var prevPage = pages[pages.length - 2]; //上一个页面
+      prevPage.getUserDetail() //调用上一个页面方法
 
       setTimeout(function() {
         wx.navigateBack({
@@ -252,14 +256,49 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    /*选择地区
-     */
-    //性别index
+    /*选择地区*/
+    reg.citysData.map((item, index) => {
+      if (item.name == wx.getStorageSync("province")) {
+        this.setData({
+          provi: index
+        })
+      }
+    })
+    if (!this.data.provi) {
+      this.setData({
+        provi: 0
+      })
+    }
+    // console.log('省', this.data.provi)
+    reg.citysData[this.data.provi].child.map((item, index) => {
+      if (item.name == wx.getStorageSync("city")) {
+        this.setData({
+          cit: index
+        })
+      }
+    })
+    if (!this.data.cit) {
+      this.setData({
+        cit: 0
+      })
+    }
+    // console.log([reg.citysData][0][0], '市', this.data.cit)
+    // this.setData({
+    //   multiIndex:[this.data.provi,this.data.cit]
+    // })
     this.setData({
+      multiIndex: [this.data.provi, this.data.cit],
       multiArray: [
         [reg.citysData][0],
-        [reg.citysData][0][0].child
+        [reg.citysData][0][this.data.provi].child
       ],
+    })
+    //性别index
+    this.setData({
+      // multiArray: [
+      //   [reg.citysData][0],
+      //   [reg.citysData][0][0].child
+      // ],
       userInfo: wx.getStorageSync("userInfo"),
       index: wx.getStorageSync('userInfo').sex ? wx.getStorageSync('userInfo').sex - 1 : '0',
       avatarUrl: wx.getStorageSync('userInfo').iconImage ? wx.getStorageSync('userInfo').iconImage :'',

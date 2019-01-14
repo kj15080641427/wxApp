@@ -156,7 +156,7 @@ Page({
         wx.navigateBack({
           delta: 3
         })
-      }, 1500)
+      }, 1000)
     }
     var fail = e => {
       wx.showToast({
@@ -177,7 +177,7 @@ Page({
       })
     } else if (!this.data.parameter.maxCost) {
       wx.showToast({
-        title: '请填写最高可承受费用',
+        title: '请填写愿意支付的律师费用',
         icon: 'none'
       })
     } else if (this.data.parameter.maxCost < this.data.lawyerMoney) {

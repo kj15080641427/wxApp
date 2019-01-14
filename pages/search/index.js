@@ -33,31 +33,30 @@ Page({
     noFilter: {
       "pageSize": '10'
     },
-    // hasList: true,
+    hasList: true,
     lawyerName: '',
-    // hasNextPage:true,
     pageNum: 1,
     webData: false
   },
   //重新搜索
   again: function() {
-    wx.removeStorageSync("picIndexList")
+    // wx.removeStorageSync("picIndexList")
     var that = this
+    // wx.removeStorageSync("picIndexList"),
     that.setData({
       hasList: true,
-      noFilter: {
-        "pageNum": this.data.pageNum,
-        "pageSize": '10'
-      },
-      expert: '擅长领域',
-      selectedCity: '选择地区',
-      expertColor: false,
-      selectedCityColor: false,
+      // noFilter: {
+      //   "pageSize": '10'
+      // },
+      // expert: '擅长领域',
+      // selectedCity: '选择地区',
+      // expertColor: false,
+      // selectedCityColor: false,
       ishidden: true,
       pageNum: 1,
       lawyerName: '',
-      filterColor: false
-      // hasNextPage: true
+      // filterColor: true,
+      // hasNextPage: false
     })
     // wx.removeStorageSync("picIndexList")
   },
@@ -75,7 +74,7 @@ Page({
       showExpert: false,
       ishidden: true,
       pageNum: 1,
-      // hasNextPage: true
+      hasNextPage: false
     })
   },
   //选择擅长领域
@@ -87,7 +86,7 @@ Page({
       showSort: false,
       ishidden: true,
       pageNum: 1,
-      // hasNextPage: true
+      hasNextPage: false
     })
   },
   // 选择地区
@@ -98,7 +97,7 @@ Page({
       showSort: false,
       ishidden: true,
       pageNum: 1,
-      // hasNextPage: true
+      hasNextPage: false
     })
   },
   // 关键字搜索
@@ -107,7 +106,7 @@ Page({
       lawyerName: e.detail.value,
       ishidden: true,
       pageNum: 1,
-      // hasNextPage: true
+      hasNextPage: false
     })
   },
   //排序Index
@@ -202,6 +201,10 @@ Page({
   },
   //点击键盘搜索
   confirm(e) {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that = this
     var url = api.getSearchLawyer() + that.data.pageNum + '/10'
     var datan = that.data.noFilter
@@ -237,6 +240,10 @@ Page({
   },
   //上拉搜索
   topSearch: function() {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that = this
     var url = api.getSearchLawyer() + that.data.pageNum + '/10'
     var datan = that.data.noFilter
@@ -269,11 +276,15 @@ Page({
   },
   //搜索
   pc: function() {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     var that = this
     that.setData({
       lawyerList: '',
       pageNum: 1,
-      // hasNextPage: true
+      hasNextPage: false
     })
     var url = api.getSearchLawyer() + that.data.pageNum + '/10'
     var datan = that.data.noFilter
@@ -304,9 +315,6 @@ Page({
       console.log(e)
     }
     wxrequest.request(url, datan, success, fail)
-    wx.showLoading({
-      title: '正在加载',
-    })
   },
   //执业年份
   getAge: function() {
@@ -326,8 +334,8 @@ Page({
   },
   //点击tab
   onTabItemTap() {
+    // this.onUnload()
     this.onLoad()
-    this.pc()
     // this.getAge()
   },
 
@@ -341,12 +349,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.pc()
     var that = this
     this.setData({
       orgurl: wx.getStorageSync("orgUrl")
     })
     wx.showLoading({
       title: '加载中',
+      mask: true
     })
     const re = [...regionSearch.citysData]
     // var re = regionSearch.citysData
@@ -387,14 +397,22 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-
+    // this.setData({
+    //   filterColor: false,
+    //   noFilter: {
+    //     "pageSize": '10'},
+    //   pageNum: 1,
+    //   expertColor:false,
+    //   selectedCityColor:false
+    // })
+    // wx.removeStorageSync("picIndexList")
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+ 
   },
 
   /**

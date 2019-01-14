@@ -6,6 +6,7 @@
     "pages/userlogin/index",
     "pages/userlogin/user-url/index",
     "pages/index/consultation-input/index",
+    "pages/index/consultation-h5/index",
     "pages/index/expert-filter/index",
     "pages/index/expert-service/index",
     "pages/index/quick-consultation/index",
@@ -71,9 +72,9 @@
     "borderStyle": "white"
   },
   "networkTimeout": {
-    "request": 6000,
-    "onnecSocket": 6000,
-    "downloadFile": 6000
+    "request": 20000,
+    "onnecSocket": 20000,
+    "downloadFile": 20000
   },
   "permission": {
     "scope.userLocation": {

@@ -49,6 +49,10 @@ Page({
   },
   // 获取验证码
   getVerificationCode: function() {
+    wx.showLoading({
+      title: '',
+      mask: true
+    })
     var that = this
     var verifyCodeUrl = api.getVerifyCodeUrl()
     var verifydata = {
@@ -56,6 +60,7 @@ Page({
       "code": "654321"
     }
     var success = function(data) {
+      wx.hideLoading()
       wx.showToast({
         title: '发送成功',
       })
@@ -65,6 +70,7 @@ Page({
       })
     }
     var fail = function(e) {
+      wx,wx.hideLoading()
       wx.showToast({
         title: e.message,
         icon: 'none'
@@ -113,7 +119,7 @@ Page({
         var currPage = pages[pages.length - 1]; //当前页面
         var prevPage = pages[pages.length - 2]; //上一个页面
         prevPage.onLoad() //调用上一个页面方法
-        prevPage.onTabItemTap()
+        // prevPage.onTabItemTap()
 
         wx.setStorageSync("userInfo", res.data)
         wx.setStorageSync("memberId", res.data.memberId)

@@ -36,7 +36,11 @@ Page({
     sortIndex: 0, //排序index
     hasList: true,
     pageNum:1,
+    isDemand:true
     // hasNextPage:true
+  },
+  nothing:function(){
+
   },
   //排序Index
   getSortIndex: function(e) {
@@ -78,7 +82,7 @@ Page({
   //律师主页
   toLawyer:function(e){
     wx.navigateTo({
-      url: '/pages/search/lawyer-detail/index?id=' + this.data.lawyerList[e.currentTarget.dataset.lawindex].memberId + '&parameter=' + JSON.stringify(this.data.parameter)+'&justDo=true',
+      url: '/pages/search/lawyer-detail/index?id=' + this.data.lawyerList[e.currentTarget.dataset.lawindex].memberId + '&parameter=' + JSON.stringify(this.data.parameter) + '&justDo=true' + '&demandIndex=' + e.currentTarget.dataset.lawindex,
     })
   },
   //上拉搜索
@@ -126,6 +130,7 @@ Page({
         hasList: true
       })
       that.setData({
+        hasNextPage: data.data.hasNextPage,
         lawyerList: data.data.list,
         ishidden: true
       })
@@ -150,10 +155,12 @@ Page({
     var success = function(data) {
       wx.hideLoading()
       that.setData({
+        hasNextPage: data.data.hasNextPage,
         lawyerList: data.data.list,
       })
       if (!data.data.list[0]) {
         that.setData({
+          
           hasList: false
         })
       }else{
@@ -187,11 +194,13 @@ Page({
     var url = api.getPublish()
     var data = that.data.parameter
     var success = function(data) {
+      that.setData({
+        ['parameter.isFirst']: 0,
+        ['parameter.requirementId']: data.data.requirementId,
+        [`isDemand[${e.currentTarget.dataset.index}]`]:true
+      })
       wx.showToast({
-        title: '发送需求成功',
-        success() {
-
-        }
+        title: '需求发送成功,可在我的订单中查看',
       })
     }
     var fail = function(e) {

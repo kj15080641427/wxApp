@@ -1,11 +1,11 @@
-// pages/search/orgweb-viewTwo/index.js
+// pages/index/consultation-h5/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    url:''
   },
 
   /**
@@ -13,9 +13,9 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      orgurl: wx.getStorageSync("orgUrl")
+      url: options.url
     })
-    console.log(this.data.orgurl)
+    console.log('??????????',this.data.url)
   },
 
   /**

@@ -1,6 +1,7 @@
 var wxrequest = require('../../../utils/request.js')
 var api = require('../../../utils/api.js')
 var reg = require('../../../region.js');
+import throttle from '../../../utils/throttle.js'
 Page({
 
   /**
@@ -20,10 +21,9 @@ Page({
 
     multiIndex: [0, 0],
     multiArray: '',
-    openid:wx.getStorageSync('openid')
+    openid: wx.getStorageSync('openid')
   },
   //地区
-
   hideRegion: function() {
     this.setData({
       hasSelectAddress: false,
@@ -73,9 +73,8 @@ Page({
   },
 
 
-  // input
+  // 获取input框值
   getInput: function(e) {
-    // console.log(e.detail.value)
     this.setData({
       commitContent: e.detail.value
     })
@@ -137,34 +136,69 @@ Page({
   //     wxrequest.requestForm(commitURL, freedata,'', success, fail)
   //   }
   // },
-  // 提交
-  commit: function() {
+  //提交
+  commitRequest: throttle.throttle(function(){
     var that = this
     var commitURL = api.getCommitUrl()
     var freedata = {
       "consultationTypeId": that.data.consultationTypeId,
-      "regionId": that.data.regionId, 
+      "regionId": that.data.regionId,
       "content": that.data.commitContent,
-      "isHide": that.data.isHide == true ? '1':'0',
+      "isHide": that.data.isHide == true ? '1' : '0',
       // "wxReportSubmit": {
       //   "openId": wx.getStorageSync('openid'),
       //   "formId": that.data.formId
       // }
-     }
-    var success = function(data){
+    }
+    var success = function (data) {
       that.setData({
-        consultation:data
+        consultation: data
       })
-    that.getOrder()
       wx.showToast({
         title: '提交成功',
       })
+      that.getOrder()
     }
-    var fail = function(e){
+    var fail = function (e) {
+      wx.hideLoading()
       wx.showToast({
         title: '提交失败',
       })
     }
+    wxrequest.request(commitURL, freedata, success, fail)
+  },500),
+  // 提交
+  commit: function() {
+    // var that = this
+    // var commitURL = api.getCommitUrl()
+    // var freedata = {
+    //   "consultationTypeId": that.data.consultationTypeId,
+    //   "regionId": that.data.regionId,
+    //   "content": that.data.commitContent,
+    //   "isHide": that.data.isHide == true ? '1' : '0',
+    //   // "wxReportSubmit": {
+    //   //   "openId": wx.getStorageSync('openid'),
+    //   //   "formId": that.data.formId
+    //   // }
+    // }
+    // var success = function(data) {
+    //   that.setData({
+    //     consultation: data
+    //   })
+    //   that.getOrder()
+    //   wx.showToast({
+    //     title: '提交成功',
+    //   })
+    // }
+    // var fail = function(e) {
+    //   wx.showToast({
+    //     title: '提交失败',
+    //   })
+    // }
+    wx.showLoading({
+      title: '提交中',
+      mask:true
+    })
     var cdata = this.data
     if (cdata.consultationTypeId == '') {
       wx.showToast({
@@ -182,7 +216,8 @@ Page({
         icon: 'none'
       })
     } else {
-      wxrequest.request(commitURL, freedata, success, fail)
+      // wxrequest.request(commitURL, freedata, success, fail)
+      this.commitRequest()
     }
   },
   //订单
@@ -199,13 +234,26 @@ Page({
         order: data.data.list
       })
       wx.redirectTo({
-        url: '/pages/index/consultation-details/index?orderDetail=' + JSON.stringify(that.data.order[0]),
+        url: '/pages/index/consultation-details/index?orderDetail=' + JSON.stringify(that.data.order[0]),//获取此条文字咨询详情, 调整至文字咨询详情页 
       })
     }
     var fail = (e) => {
       console.log(e)
     }
     wxrequest.request(url, data, success, fail)
+  },
+  //首页解决方案类型是否加载成功
+  hasArticleType:function(){
+    if (!wx.getStorageSync('type')) {
+      wx.showLoading({
+        title: '加载中',
+        mask: true
+      })
+      setTimeout(() => {
+        wx.hideLoading()
+      }, 10000)
+      this.getArticleType()
+    }
   },
   //解决方案类型  
   getArticleType: function() {
@@ -218,17 +266,11 @@ Page({
       "deviceInfoId": 5
     }
     var success = function(data) {
-      wx.hideLoading()
-
       function toSort(a, b) {
         return a.sort - b.sort
       }
-      // that.setData({
-      //   array: data.data,
-      // })
       wx.setStorageSync('type', data.data.sort(toSort))
-      // that.getArticleList()
-      // initIndex: data.data.list[0].id
+      wx.hideLoading()
     }
     var fail = function(e) {
       wx.hideLoading()
@@ -240,16 +282,52 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    //选择地区
-    // JSON.parse(options.type)
-    this.getArticleType()
+    reg.citysData.map((item, index) => {
+      if (item.name == wx.getStorageSync("province")) {
+        this.setData({
+          provi: index
+        })
+      }
+    })
+    if (!this.data.provi) {
+      this.setData({
+        provi: 0
+      })
+    }
+    // console.log('省', this.data.provi)
+    reg.citysData[this.data.provi].child.map((item, index) => {
+      if (item.name == wx.getStorageSync("city")) {
+        this.setData({
+          cit: index
+        })
+      }
+    })
+    if (!this.data.cit) {
+      this.setData({
+        cit: 0
+      })
+    }
+    this.setData({
+      multiIndex: [this.data.provi, this.data.cit]
+    })
     this.setData({
       array: wx.getStorageSync('type'),
       multiArray: [
-        [reg.citysData][0],
-        [reg.citysData][0][0].child
+        reg.citysData,
+        reg.citysData[this.data.provi].child
       ],
     })
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    if (wx.getStorageSync('province') && wx.getStorageSync('city')) {
+    this.setData({
+      regionId: this.data.multiArray[1][this.data.multiIndex[1]].regionId,
+      hasSelectAddress:true
+    })
+    }
+    this.getArticleType()
   },
 
   /**
@@ -264,6 +342,9 @@ Page({
    */
   onShow: function() {
 
+    setTimeout(() => {
+      wx.hideLoading()
+    }, 10000)
   },
 
   /**
