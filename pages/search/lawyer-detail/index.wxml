@@ -8,7 +8,7 @@
   </view>
   <view class='go-back' style='height:{{navH-statuH}}px;position: fixed;left:0;top:{{statuH}}px' bindtap='tabBack'>
     <image src='/image/homeicon_3x/back.png' class='back-image'></image>
-    <view>{{lawyerCard.memberName}}</view>
+    <!-- <view>{{lawyerCard.memberName}}</view> -->
   </view>
   <view class='follow-lawyer' bindtap="{{ isFollow ? 'unFollow':'follow'}}">
     <image src="{{isFollow ? '../../../image/search_icon@3x/Personalhomepage-02@3x.png':'../../../image/search_icon@3x/Personalhomepage-01@3x.png'}}" style='height:25rpx;width:25rpx;margin-left:20rpx;z-index:1;'></image>
@@ -60,7 +60,9 @@
 <view class='law-page-Introduction-view' wx:if="{{lawyerCard.memberDescription && lawyerCard.memberDescription !='完善个人简介，让用户可以更快的找到您(限1000字)'}}">
   <view class='law-page-Introduction'>
     <view class="{{showMore ? 'law-textarea-more':'law-textarea'}}" bindtap='showMore' id="getheight">{{lawyerCard.memberDescription}}</view>
-    <image src='../../../image/search_icon@3x/Personalhomepage-06@3x.png' class="{{showMore ? 'law-icon-center-more law-address-icon' :'law-icon-center law-address-icon'}}" bindtap='showMore'></image>
+    <view bindtap='showMore' style='width:750rpx;'>
+      <image src='../../../image/search_icon@3x/Personalhomepage-06@3x.png' class="{{showMore ? 'law-icon-center-more law-address-icon' :'law-icon-center law-address-icon'}}" ></image>
+    </view>
   </view>
 </view>
 

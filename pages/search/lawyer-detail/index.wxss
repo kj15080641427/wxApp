@@ -13,7 +13,7 @@
   border-radius: 50%;
   position: absolute;
   left: 35rpx;
-  top: 405rpx;
+  top: 465rpx;
   border: 10rpx solid #efefef;
 }
 
