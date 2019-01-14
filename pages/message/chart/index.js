@@ -58,6 +58,7 @@ Page({
             function getImConfigSuccess(res) {
                 //  初始化jmessage
                 wx.setStorageSync('appkey', res.data.appkey)
+                wx.setStorageSync('authorization', res.data.authorization)
                 jM.init({
                     "appkey": res.data.appkey,
                     "random_str": res.data.random,
@@ -255,7 +256,7 @@ Page({
                         // console.log(44444)
                         let d = Math.floor(that.data.grabTime / 1000 / 60 / 60 / 24);
                         let h = Math.floor(that.data.grabTime / 1000 / 60 / 60 % 24);
-                        let m = Math.floor(that.data.grabTime / 1000 / 60 % 60);
+                        let m = Math.floor(that.data.grabTime / 1000 / 60 % 60) < 10 ? '0' + Math.floor(that.data.grabTime / 1000 / 60 % 60) : Math.floor(that.data.grabTime / 1000 / 60 % 60);
                         let s = Math.floor(that.data.grabTime / 1000 % 60) < 10 ? '0' + Math.floor(that.data.grabTime / 1000 % 60) : Math.floor(that.data.grabTime / 1000 % 60);
                         // console.log(h+':'+m+':'+s)
                         that.setData({
@@ -287,7 +288,8 @@ Page({
         wx.request({
             url: encodeURI('https://report.im.jpush.cn/v2/users/lex' + wx.getStorageSync('memberId') + '/messages?count=500&begin_time=' + wxformatTime.fTime(beginTime) + '&end_time=' + wxformatTime.fTime(now)),
             header: {
-                'Authorization': 'Basic NTdlYzIzM2U0ODE1ZjExMjM1YjMyMzk1OmIyMWY2YzYzOGU3MzIwYjE0YTVhMTQ2OQ=='
+                'Authorization': 'Basic '+wx.getStorageSync('authorization')
+                // 'Authorization': 'Basic MGM2M2VmOWNkYjAzODVkMGFiMTNmNmRkOjEzYzM0YTI3MTFhMDJkOWM0MWVkZDA3MQ=='
             },
             method: 'get',
             success(res) {
