@@ -1,10 +1,9 @@
-// pages/search/court/index.js
+// pages/search/Procur/index.js
 var api = require('../../../utils/api.js')
 var wxrequest = require('../../../utils/request.js')
 var reg = require('../../../region.js');
 // import pc from '../../../..//utils/search.js'
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -14,21 +13,21 @@ Page({
   //搜索
   toSearch:function(){
     wx.navigateTo({
-      url: '/pages/search/court/search/index',
+      url: '/pages/search/Procur/search/index',
     })
   },
   //法院列表
-  getCourt: function (courtName) {
-    var url = api.getCourt()
+  getProcur: function (ProcurName) {
+    var url = api.getProcur()
     var data = {
-      keywords: courtName,
+      keywords: ProcurName,
       regionId: '',
       pageNum: 1,
       pageSize: 1
     }
     var success = data => {
       this.setData({
-        bestCourt: data.data.result.list[0]
+        bestProcur: data.data.result.list[0]
       })
       console.log('success',data)
     }
@@ -38,18 +37,18 @@ Page({
     wxrequest.request(url, data, success, fail)
   },
   //选择最高人民法院
-  selectBestCourt: function (e) {
-    wx.setStorageSync('courtId', this.data.bestCourt.institutionId)
-    wx.setStorageSync('courtName', this.data.bestCourt.institutionName)
+  selectBestProcur: function (e) {
+    wx.setStorageSync('ProcurId', this.data.bestProcur.institutionId)
+    wx.setStorageSync('ProcurName', this.data.bestProcur.institutionName)
     wx.navigateBack({
       delta: 1,
     })
-    // console.log(this.data.bestCourt, e.currentTarget.dataset.index)
+    // console.log(this.data.bestProcur, e.currentTarget.dataset.index)
   },
   //选择
   toSelectCity:function(e){
     wx.navigateTo({
-      url: '/pages/search/court/city/index?city=' + JSON.stringify(this.data.city[e.currentTarget.dataset.cityindex].child) + '&regionId=' + this.data.city[e.currentTarget.dataset.cityindex].regionId + '&noFilter=' + this.data.noFilter,
+      url: '/pages/search/Procuratorate/city/index?city=' + JSON.stringify(this.data.city[e.currentTarget.dataset.cityindex].child) + '&regionId=' + this.data.city[e.currentTarget.dataset.cityindex].regionId + '&noFilter=' + this.data.noFilter,
     })
     // this.setData({
     //   city: this.data.city[e.currentTarget.dataset.cityindex].child
@@ -66,7 +65,7 @@ Page({
       noFilter: options.noFilter
     })
     console.log(this.data.noFilter)
-    this.getCourt('最高人民')
+    this.getProcur('最高人民')
   },
 
   /**

@@ -158,7 +158,9 @@ Page({
     if(wx.getStorageSync('token')){
       this.getUserLocation()
     }
-    this.getArticleType()
+    if(this.data.total>=10){
+      this.getArticleType()
+    }
     this.getAdbanner()
     this.judgeTips()
   },
@@ -291,11 +293,15 @@ Page({
     });
   },
   onShow: function() {
+    wx.removeStorageSync("picIndexList") //删除搜索条件
+    wx.removeStorageSync("courtId")
+    wx.removeStorageSync("courtName")
+    wx.removeStorageSync("ProcurId")
+    wx.removeStorageSync("ProcurName")
     let vm = this;
     if ( !wx.getStorageSync('city')&&!wx.getStorageSync('province')) { //是否已有地理位置缓存
       this.getUserLocation()
     }
-    wx.removeStorageSync("picIndexList") //移除找律师筛选条件
     if (jM.isLogin()) { 
       vm.getUnReadMsg()
       jM.onMsgReceive(function(msgRes) {

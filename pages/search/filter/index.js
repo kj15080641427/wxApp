@@ -29,7 +29,20 @@ Page({
     mungId: '', //绿豆圈
     organizationId: '', //商会组织
   },
-
+  //常去法院
+  toCourt: function() {
+    wx.setStorageSync("picIndexList", picIndexList)
+    wx.navigateTo({
+      url: '/pages/search/court/index?noFilter=' + this.data.noFilter + '&picIndexList' + this.data.picIndexList,
+    })
+  },
+  //常去检察院
+  toProcur:function(){
+    wx.setStorageSync("picIndexList", picIndexList)
+    wx.navigateTo({
+      url: '/pages/search/Procuratorate/index?noFilter=' + this.data.noFilter + '&picIndexList' + this.data.picIndexList,
+    })
+  },
   // 确定按钮
   getSearchLawyer: function() {
     var that = this
@@ -49,15 +62,16 @@ Page({
       "baseSkillId": t.skillId ? t.skillId : gs.baseSkillIndex ? t.search[2].items[gs.baseSkillIndex].id : '',
       "otherSkillId": t.expandId ? t.expandId : gs.ohterSkillIndex ? t.search[3].items[gs.ohterSkillIndex].id : '',
       "langSkillId": t.languageId ? t.languageId : gs.langSkillIndex ? t.search[4].items[gs.langSkillIndex].id : '',
+      "courtId": wx.getStorageSync('courtId') ? wx.getStorageSync('courtId') : '', //常去法院
       // "courtId": t.courtId ? t.courtId : gs.courtIndex && t.search[6].items[0] ? t.search[6].items[gs.courtIndex].id : '',
-      // "procuratorateId": t.procuratorateId ? t.procuratorateId : gs.procuratorateIndex && t.search[7].items[0] ? t.search[7].items[gs.procuratorateIndex].id : '',
+      "procuratorateId": wx.getStorageSync('ProcurId') ? wx.getStorageSync('ProcurId') : '',
       "positionId": t.positionId ? t.positionId : gs.positionIndex ? t.search[7].items[gs.positionIndex].id : '',
       "honorId": t.honorId ? t.honorId : gs.honorIndex ? t.search[8].items[gs.honorIndex].id : '',
       "socialId": t.socialId ? t.socialId : gs.socialIndex ? t.search[9].items[gs.socialIndex].id : '',
       // "depositAmountId": t.guaranteeId ? t.guaranteeId : gs.depositIndex ? t.search[10].items[gs.depositIndex].id : '',
       "lexMungId": t.mungId ? t.mungId : gs.lexMungIndex ? t.search[10].items[gs.lexMungIndex].id : '',
       "orgId": t.organizationId ? t.organizationId : gs.organziationIndex ? t.search[11].items[gs.organziationIndex].id : '',
-      "require":this.data.require
+      "require": this.data.require
     }
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1]; //当前页面
@@ -67,7 +81,7 @@ Page({
       noFilter: {
         ...dataJSON
       },
-      filterColor:true,
+      filterColor: true,
     })
     prevPage.pc ? prevPage.pc() : prevPage.searchLawyer()
     wx.navigateBack({
@@ -87,14 +101,18 @@ Page({
       noFilter: {
         "pageSize": '10',
         // "lawyerName": that.data.name,
-        "require":that.data.require
+        "require": that.data.require
       },
       ishidden: true,
-      filterColor:false,
+      filterColor: false,
       // lawyerName:''
     })
     picIndexList = {}
+    wx.removeStorageSync("courtId")
+    wx.removeStorageSync("courtName")
     wx.removeStorageSync("picIndexList")
+    wx.removeStorageSync("ProcurId")
+    wx.removeStorageSync("ProcurName")
     this.onShow()
   },
 
@@ -107,9 +125,9 @@ Page({
     that.setData({
       noFilter: JSON.parse(options.noFilter),
       name: JSON.parse(options.noFilter).lawyerName ? JSON.parse(options.noFilter).lawyerName : '',
-      require: options.require?JSON.parse(options.require):{}
+      require: options.require ? JSON.parse(options.require) : {}
     })
-    console.log('require',this.data.require)
+    console.log('require', this.data.require)
     var searchUrl = api.getSearch()
     var searchSuccess = function(data) {
       that.setData({
@@ -146,8 +164,10 @@ Page({
       baseSkillIndex: gs.baseSkillIndex ? gs.baseSkillIndex : '', //基本技能
       ohterSkillIndex: gs.ohterSkillIndex ? gs.ohterSkillIndex : '', //扩展技能
       langSkillIndex: gs.langSkillIndex ? gs.langSkillIndex : '', //第二语言
-      courtIndex: gs.courtIndex ? gs.courtIndex : '', //常去法院
-      procuratorateIndex: gs.procuratorateIndex ? gs.procuratorateIndex : '', //常去检察院
+      // courtIndex: gs.courtIndex ? gs.courtIndex : '', //常去法院
+      courtName: wx.getStorageSync('courtName') ,
+      procurName: wx.getStorageSync('ProcurName') ,
+      // procuratorateIndex: gs.procuratorateIndex ? gs.procuratorateIndex : '', //常去检察院
       positionIndex: gs.positionIndex ? gs.positionIndex : '', //律师职位
       honorIndex: gs.honorIndex ? gs.honorIndex : '', //所获荣誉
       socialIndex: gs.socialIndex ? gs.socialIndex : '', //社会职务
@@ -225,22 +245,22 @@ Page({
     })
     picIndexList.langSkillIndex = e.detail.value
   },
-  // 常去法院
-  changeCourt: function(e) {
-    this.setData({
-      courtIndex: e.detail.value,
-      courtId: this.data.search[5].items[e.detail.value] ? this.data.search[5].items[e.detail.value].id : ""
-    })
-    picIndexList.courtIndex = e.detail.value
-  },
-  //常去检察院
-  changeProcuratorate: function(e) {
-    this.setData({
-      procuratorateIndex: e.detail.value,
-      procuratorateId: this.data.search[6].items[e.detail.value] ? this.data.search[6].items[e.detail.value].id : ""
-    })
-    picIndexList.procuratorateIndex = e.detail.value
-  },
+  // // 常去法院
+  // changeCourt: function(e) {
+  //   this.setData({
+  //     courtIndex: e.detail.value,
+  //     courtId: this.data.search[5].items[e.detail.value] ? this.data.search[5].items[e.detail.value].id : ""
+  //   })
+  //   picIndexList.courtIndex = e.detail.value
+  // },
+  // //常去检察院
+  // changeProcuratorate: function(e) {
+  //   this.setData({
+  //     procuratorateIndex: e.detail.value,
+  //     procuratorateId: this.data.search[6].items[e.detail.value] ? this.data.search[6].items[e.detail.value].id : ""
+  //   })
+  //   picIndexList.procuratorateIndex = e.detail.value
+  // },
   //律师职位
   changePosition: function(e) {
     this.setData({

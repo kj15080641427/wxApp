@@ -4,7 +4,6 @@ var wxrequest = require('../../utils/request.js')
 var time = require('../../utils/util.js');
 var formatTime = require('../../utils/util.js')
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -13,7 +12,8 @@ Page({
     userInfo: wx.getStorageSync("userInfo"),
     age: '',
     second: 60,
-    minute: 1
+    minute: 1,
+    navH:48
   },
   // 登陆
   login: function() {
@@ -169,6 +169,22 @@ Page({
   // 'apabfdc34cc00042c2991bd59b9e8a1ae8ap'
   onLoad: function(options) {
     // this.getUserDetail()
+    // 获取导航栏高度
+    var that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          navH: res.statusBarHeight + 40//导航栏总高度 IOS
+        })
+        console.log('ios',that.data.navH,res)
+        if (res.model.indexOf("iPhone") == -1) {
+          that.setData({
+            navH: res.statusBarHeight + 48//导航栏总高度 安卓
+          })
+          console.log('az',that.data.navH)
+        }
+      },
+    })
     this.setData({
       token: wx.getStorageSync('token')
     })
@@ -186,7 +202,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    wx.removeStorageSync("picIndexList")
+    wx.removeStorageSync("picIndexList") //删除搜索条件
+    wx.removeStorageSync("courtId")
+    wx.removeStorageSync("courtName")
+    wx.removeStorageSync("ProcurId")
+    wx.removeStorageSync("ProcurName")
     this.getUserDetail()
   },
 

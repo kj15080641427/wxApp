@@ -1,9 +1,6 @@
-<!--pages/my/index.wxml-->
-<image src='../../image/my_icon@3x/mine_icon_01_3x.png' style='width:100%;height:320rpx;position: absolute'>
-
+<image src='../../image/my_icon@3x/mine_icon_01_3x.png' style='width:100%;height:500rpx;position: absolute;'>
 </image>
-
-<view class='my-page-background'>
+<view class='my-page-background' style='padding-top:{{navH}}px'>
   <view class=''>
     <view style='display:flex;justify-content:center'>
       <image class='my-page-avatar' src="{{userInfo.iconImage ? userInfo.iconImage : '../../image/my_icon@3x/mine_icon_02_3x.png'}}" bindtap='login'></image>
@@ -32,7 +29,7 @@
 </view>
 
 
-<view class='my-page-flex'>
+<view class='my-page-flex' style='margin-top:35rpx'>
   <view style='display:flex;align-items:center' bindtap="gotoOrder">
     <view>
       <view class='my-page-icon-center'>

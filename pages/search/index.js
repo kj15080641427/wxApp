@@ -40,9 +40,7 @@ Page({
   },
   //重新搜索
   again: function() {
-    // wx.removeStorageSync("picIndexList")
     var that = this
-    // wx.removeStorageSync("picIndexList"),
     that.setData({
       hasList: true,
       // noFilter: {

@@ -328,6 +328,11 @@ var LawCash = '/lawyer/require/'
 function getLawCash(){
   return HOST_URL + LawCash
 }
+//检察院
+var Procur = '/common/procuratorate'
+function getProcur(){
+  return HOST_URL + Procur
+}
 module.exports={
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,
@@ -379,4 +384,5 @@ module.exports={
   getTariff: getTariff,
   getCash: getCash,
   getLawCash: getLawCash,
+  getProcur: getProcur,
 }

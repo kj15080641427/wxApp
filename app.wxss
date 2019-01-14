@@ -12,3 +12,23 @@ page {
   background-color:	#F4F4F4;
   height: 100%;
 }
+.court{
+  color: #1ec88c;
+  font-size: 32rpx;
+  font-weight: bold;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+}
+.court-text{
+  color: #323232;
+  font-size: 28rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+}
+.court-view{
+  background-color: white;
+  padding-left: 35rpx;
+  margin-top: 30rpx;
+}

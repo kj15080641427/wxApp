@@ -1,0 +1,7 @@
+<!--pages/search/court/search/index.wxml-->
+<input placeholder='搜索法院' bindinput='getInput' confirm-type='search' bindconfirm="confirm" class='court-view'></input>
+<!-- <view class='court' wx:key="{{index}}" wx:for="{{searchList}}">{{item.institutionName}}</view> -->
+<view class='court-view'>
+  <view style='background-color:#f4f4f4;height:1rpx;margin-right:35rpx;'></view>
+<view class='court-text' wx:key="{{index}}" wx:for="{{searchList}}" data-courtindex="{{index}}" bindtap='selectCourt'>{{item.institutionName}}</view>
+</view>

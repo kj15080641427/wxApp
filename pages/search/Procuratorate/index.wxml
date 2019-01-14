@@ -1,9 +1,9 @@
 <!--pages/search/court/index.wxml-->
-<view class='court-view' bindtap='toSearch'>搜索法院</view>
+<view class='court-view' bindtap='toSearch'>搜索检察院</view>
 <view class='court-view'>
-  <view class='court' >最高人民法院</view>
+  <view class='court' >最高人民检察院</view>
   <view style='background-color:#f4f4f4;height:1rpx;margin-right:35rpx;'></view>
-  <view class='court-text'  data-index="{{index}}" bindtap='selectBestCourt'>{{bestCourt.institutionName}}</view>
+  <view class='court-text'  data-index="{{index}}" bindtap='selectBestProcur'>{{bestProcur.institutionName}}</view>
 </view>
 <view class='court-view'>
   <view class='court'>按省份选择</view>
@@ -11,6 +11,5 @@
     <view class='city-view' bindtap='toSelectCity' data-cityindex="{{index}}" wx:key="{{index}}" wx:for="{{city}}">{{item.name}}
       <view style='background-color:#f4f4f4;height:1rpx;margin-right:35rpx;'></view>
     </view>
-
   </scroll-view>
 </view>

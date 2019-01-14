@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/search/index",
     "pages/index/index",
     "pages/my/index",
-    "pages/search/index",
     "pages/userlogin/index",
     "pages/userlogin/user-url/index",
     "pages/index/consultation-input/index",
@@ -17,6 +17,7 @@
     "pages/index/webView/index",
     "pages/index/adWebView/index",
     "pages/search/court/index",
+    "pages/search/Procuratorate/index",
     "pages/search/lawyer-demand/index",
     "pages/search/case-web/index",
     "pages/search/demand-detail/index",

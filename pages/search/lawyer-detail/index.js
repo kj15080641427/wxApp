@@ -29,6 +29,12 @@ Page({
     lawyerFirm: '',
     firstPage: false //默认从此页面进入小程序
   },
+  //返回
+  tabBack:function(){
+    wx.navigateBack({
+      
+    })
+  },
   //预览头像
   showImage: function() {
     if (this.data.lawyerCard.iconImage) {
@@ -510,6 +516,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          statuH:res.statusBarHeight,
+          navH: res.statusBarHeight + 40//导航栏总高度 IOS
+        })
+        if (res.model.indexOf("iPhone") == -1) {
+          that.setData({
+            navH: res.statusBarHeight + 48//导航栏总高度 安卓
+          })
+        }
+      },
+    })
     if (options.scene) {
       console.log('options', options.scene)
       var sceneList = options.scene.split("-")
