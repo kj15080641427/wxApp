@@ -8,10 +8,10 @@ Page({
   data: {
 
   },
-  //选择法院
-  selectCourt: function (e) {
-    wx.setStorageSync('courtId', this.data.searchList[e.currentTarget.dataset.courtindex].institutionId)
-    wx.setStorageSync('courtName', this.data.searchList[e.currentTarget.dataset.courtindex].institutionName)
+  //选择检察院
+  selectProcur: function (e) {
+    wx.setStorageSync('ProcurId', this.data.searchList[e.currentTarget.dataset.procurindex].institutionId)
+    wx.setStorageSync('ProcurName', this.data.searchList[e.currentTarget.dataset.procurindex].institutionName)
     wx.navigateBack({
       delta: 2,
     })
@@ -22,13 +22,13 @@ Page({
       bestName: e.detail.value
     })
   },
-  //搜索法院名称
+  //搜索检察院名称
   confirm:function() {
-    var url = api.getCourt()
+    var url = api.getProcur()
     var data = {
       keywords: this.data.bestName,
       regionId: '',
-      pageNum: 2,
+      pageNum: 1,
       pageSize: 50
     }
     var success = data => {

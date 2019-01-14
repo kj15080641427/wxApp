@@ -13,7 +13,7 @@ Page({
   //搜索
   toSearch:function(){
     wx.navigateTo({
-      url: '/pages/search/Procur/search/index',
+      url: '/pages/search/Procuratorate/search/index',
     })
   },
   //法院列表

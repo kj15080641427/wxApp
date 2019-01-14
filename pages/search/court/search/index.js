@@ -28,7 +28,7 @@ Page({
     var data = {
       keywords: this.data.bestName,
       regionId: '',
-      pageNum: 2,
+      pageNum: 1,
       pageSize: 50
     }
     var success = data => {

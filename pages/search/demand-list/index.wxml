@@ -14,7 +14,7 @@
     <image src='../../../image/search_icon@3x/Personalhomepage-22@3x.png' class='search-page-icon'></image>
   </view>
   <view  class='search-tab-icon' bindtap='gotoFilter'>
-    <view class='search-tab-text'>筛选</view>
+    <view class='search-tab-text' style="{{filterColor ? 'color:#1ec88c;text-align:right' :'text-align:right'}}">筛选</view>
     <image src='../../../image/search_icon@3x/Personalhomepage-21@3x.png' class='search-page-icon' style='width:35rpx;height:35rpx'></image>
   </view>
 </view>

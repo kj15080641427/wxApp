@@ -36,7 +36,8 @@ Page({
     sortIndex: 0, //排序index
     hasList: true,
     pageNum:1,
-    isDemand:true
+    isDemand:true,
+    filterColor:false
     // hasNextPage:true
   },
   nothing:function(){
