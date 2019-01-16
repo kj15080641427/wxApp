@@ -119,7 +119,7 @@ Page({
   loading:function(){
     setTimeout(()=>{
       wx.hideLoading()
-    },1000)
+    },600)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -138,6 +138,7 @@ Page({
       that.setData({
         search: data.data
       })
+      // wx.hideLoading()
     }
     var searchFail = function(e) {
       wx.showToast({

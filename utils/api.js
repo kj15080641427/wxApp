@@ -20,7 +20,6 @@ var Login = '/passport/app/login';
 var ArticleType = '/solution/type'
 
 // 文章列表地址 解决方案
-// var ArticleList = '/client/solution/list'
 var ArticleList = '/solution/list'
 
 // 文字咨询地址
