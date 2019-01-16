@@ -61,7 +61,7 @@
   <view class='law-page-Introduction'>
     <view class="{{showMore ? 'law-textarea-more':'law-textarea'}}" bindtap='showMore' id="getheight">{{lawyerCard.memberDescription}}</view>
     <view bindtap='showMore' style='width:750rpx;'>
-      <image src='../../../image/search_icon@3x/Personalhomepage-06@3x.png' class="{{showMore ? 'law-icon-center-more law-address-icon' :'law-icon-center law-address-icon'}}" ></image>
+      <image src='../../../image/search_icon@3x/Personalhomepage-06@3x.png' class="{{showMore ? 'law-icon-center-more law-address-icon' :'law-icon-center law-address-icon'}}"></image>
     </view>
   </view>
 </view>
@@ -246,7 +246,6 @@
       </view>
     </view>
   </view>
-
 </view>
 <!-- 案例展示 -->
 <!-- <view class="detail-case-show" wx:key="{{index}}" wx:for="{{caseList}}" data-caseindex="{{index}}" bindtap="gotoCase" wx:if="{{isshowCase}}">
@@ -272,8 +271,8 @@
 
 <view style='height:150rpx;'></view>
 <view class='quick-button-view'>
-  <!-- <button class='quick-button' catchtap="isEnough" wx:if="{{lawyerMoney.lawyerPrice}}">
-    <text style='font-size:20rpx;'>{{lawyerMoney.lawyerPrice+'/'+lawyerMoney.priceUnit}}</text>电话咨询</button> -->
+  <button class='quick-button' catchtap="isEnough" wx:if="{{lawyerMoney.lawyerPrice}}">
+    <text style='font-size:20rpx;'>{{lawyerMoney.lawyerPrice+'/'+lawyerMoney.priceUnit}}</text>电话咨询</button>
   <button class='quick-button' bindtap='toDemand'>发送需求</button>
 </view>
 

@@ -30,9 +30,9 @@ Page({
     firstPage: false //默认从此页面进入小程序
   },
   //返回
-  tabBack:function(){
+  tabBack: function() {
     wx.navigateBack({
-      
+
     })
   },
   //预览头像
@@ -186,7 +186,7 @@ Page({
       // console.log('card',data.data)
       // that.getCase()
       that.getlawyer()
-      that.getAge()
+      that.getYear()
       wx.hideLoading()
     }
     var homeFail = function(e) {
@@ -316,7 +316,7 @@ Page({
     })
   },
   //执业年份
-  getAge: function() {
+  getYear: function() {
     var that = this
     that.setData({
       year: formatTime.formatTime(new Date()).split("/")[0] - that.data.lawyerCard.beginPracticeDate.split("-")[0],
@@ -344,17 +344,16 @@ Page({
         var url = api.getPublish()
         var data = this.data.parameter
         var success = data => {
-          if (this.data.demandIndex){
-          var pages = getCurrentPages();
-          var prevPage = pages[pages.length - 2]; //上一个页面
-          //直接调用上一个页面对象的setData()方法，把数据存到上一个页面中去
-          prevPage.setData({
-            [`isDemand[${this.data.demandIndex}]`]: true
-          })
-          setTimeout(()=>{
-            wx.navigateBack({
+          if (this.data.demandIndex) {
+            var pages = getCurrentPages();
+            var prevPage = pages[pages.length - 2]; //上一个页面
+            //直接调用上一个页面对象的setData()方法，把数据存到上一个页面中去
+            prevPage.setData({
+              [`isDemand[${this.data.demandIndex}]`]: true
             })
-          },1000)
+            setTimeout(() => {
+              wx.navigateBack({})
+            }, 1000)
           }
           wx.showToast({
             title: '发送成功',
@@ -371,7 +370,7 @@ Page({
         wxrequest.request(url, data, success, fail)
       } else { //律师主页发布需求页面
         wx.navigateTo({
-          url: '/pages/search/lawyer-demand/index?lawyerDetail=' + JSON.stringify(this.data.lawyerInfo),//参数为 律师擅长领域 律师最低可承受费用,律师ID
+          url: '/pages/search/lawyer-demand/index?lawyerDetail=' + JSON.stringify(this.data.lawyerInfo), //参数为 律师擅长领域 律师最低可承受费用,律师ID
         })
       }
     }
@@ -434,12 +433,18 @@ Page({
   },
   //余额是否足够
   isEnough: function() {
-    if (this.data.lawyerMoney.balance >= this.data.lawyerMoney.lawyerPrice / 60) {
-      this.showModal()
-    } else {
-      wx.showToast({
-        title: '余额不足',
-        icon: 'none'
+    if(wx.getStorageSync('token')){
+      if (this.data.lawyerMoney.balance >= this.data.lawyerMoney.lawyerPrice / 60) {
+        this.showModal()
+      } else {
+        wx.showToast({
+          title: '余额不足',
+          icon: 'none'
+        })
+      }
+    }else{
+      wx.navigateTo({
+        url: '/pages/userlogin/index',
       })
     }
   },
@@ -496,6 +501,7 @@ Page({
   //支付
   //快速咨询
   quickConsultation: function() {
+    var that = this
     var t = {
       money: this.data.lawyerMoney.lawyerPrice * 100,
       type: 3,
@@ -510,6 +516,10 @@ Page({
     }
     wxPay(t).then(res => {
       // console.log('支付', res)
+    }).catch(error =>{
+      that.hideModal()
+      clearInterval(that.data.settime)
+      console.log('钱不够',error)
     })
   },
   /**
@@ -518,14 +528,14 @@ Page({
   onLoad: function(options) {
     var that = this
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         that.setData({
-          statuH:res.statusBarHeight,
-          navH: res.statusBarHeight + 40//导航栏总高度 IOS
+          statuH: res.statusBarHeight,
+          navH: res.statusBarHeight + 40 //导航栏总高度 IOS
         })
         if (res.model.indexOf("iPhone") == -1) {
           that.setData({
-            navH: res.statusBarHeight + 48//导航栏总高度 安卓
+            navH: res.statusBarHeight + 48 //导航栏总高度 安卓
           })
         }
       },
@@ -554,7 +564,7 @@ Page({
         parameter: options.parameter ? JSON.parse(options.parameter) : '',
         ['parameter.targetLawyerId']: options.id ? options.id : '',
         justDo: options.justDo ? options.justDo : '', //是否直接发送
-        demandIndex: options.demandIndex ? options.demandIndex:'' //点击发布需求后按钮变灰
+        demandIndex: options.demandIndex ? options.demandIndex : '' //点击发布需求后按钮变灰
       })
     }
     this.search()

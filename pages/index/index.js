@@ -4,8 +4,6 @@ var reg = require('../../region.js')
 var initIndex = ''
 var App = getApp()
 var jM = App.globalData.jMessage
-
-// const app = getApp();
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
 Page({
@@ -18,7 +16,6 @@ Page({
     choose: false,
     chooseSize: false,
     animationData: {},
-    tipsNumber: 999,
     tipsOne: false,
     tipsTwo: false,
     articleIndex: 0,
@@ -49,19 +46,18 @@ Page({
       url: '../search/index',
     })
   },
-  //h5
+  //h5文章
   gotoweb: function(e) {
     this.setData({
-      [`article[${e.currentTarget.dataset.resolveindex}].helpNumber`]: this.data.article[e.currentTarget.dataset.resolveindex].helpNumber+1
+      [`article[${e.currentTarget.dataset.resolveindex}].helpNumber`]: this.data.article[e.currentTarget.dataset.resolveindex].helpNumber + 1
     })
     console.log(this.data.article)
-    // var array = this.data.article[e.currentTarget.dataset.resolveindex]
     wx.setStorageSync("web", this.data.article[e.currentTarget.dataset.resolveindex].solutionUrl)
     wx.navigateTo({
       url: 'webView/index'
     })
   },
-  //广告
+  //h5广告
   getAdbanner: function() {
     var url = api.getAdbanner()
     var success = (data) => {
@@ -78,29 +74,20 @@ Page({
   },
   //跳转至广告
   gotoAd: function(e) {
-    // wx.setStorageSync('ad', this.data.adBanner[e.currentTarget.dataset.adindex].linkValue)
     wx.setStorageSync('ad', `${this.data.adBanner[e.currentTarget.dataset.adindex].linkValue}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
-    // if(wx.getStorageSync('token')){
-    //   wx.navigateTo({
-    //     url: 'adWebView/index'
-    //   })
-    // }else{
-    //   this.data.adBanner[e.currentTarget.dataset.adindex].linkValue.indexOf('needllogin=1')==-1
-    // }
-    if (this.data.adBanner[e.currentTarget.dataset.adindex].linkValue.indexOf('needlogin=1') == -1){
+    if (this.data.adBanner[e.currentTarget.dataset.adindex].linkValue.indexOf('needlogin=1') == -1) {
       wx.navigateTo({
         url: 'adWebView/index'
       })
-    }else if(wx.getStorageSync('token')){
+    } else if (wx.getStorageSync('token')) {
       wx.navigateTo({
         url: 'adWebView/index'
       })
-    }else {
+    } else {
       wx.navigateTo({
         url: '/pages/userlogin/index',
       })
     }
-    console.log('aaaaaaaaaaaaaaa',this.data.adBanner[e.currentTarget.dataset.adindex].linkValue.indexOf('needllogin=1'))
   },
   //解决方案类型
   getArticleType: function() {
@@ -114,6 +101,7 @@ Page({
     }
     var success = function(data) {
       wx.hideLoading()
+
       function toSort(a, b) {
         return a.sort - b.sort
       }
@@ -144,9 +132,10 @@ Page({
       that.setData({
         total: data.data.total,
         article: that.data.article.concat(data.data.list),
-        listHeight: that.data.article.length ? that.data.article.length * 220 + 200 + 'rpx' : ''
       })
-
+      that.setData({
+        listHeight: that.data.article.length * 220 + 200 + 'rpx'
+      })
     }
     var failList = function(e) {
       console.log("解决方案错误", e)
@@ -155,21 +144,15 @@ Page({
   },
   //点击tabbar栏
   onTabItemTap() {
-    if(wx.getStorageSync('token')){
+    if (wx.getStorageSync('token')) {
       this.getUserLocation()
     }
-    if(this.data.total>=10){
-      this.getArticleType()
-    }
     this.getAdbanner()
-    this.judgeTips()
   },
-
-
 
   onLoad: function(options) {
     this.setData({
-      scene: options.scene ? options.scene:false
+      scene: options.scene ? options.scene : false
     })
     qqmapsdk = new QQMapWX({
       key: 'P7DBZ-HPSWU-62RVI-BLU3E-CXJY6-2PFR4' //这里自己的key秘钥进行填充
@@ -185,7 +168,6 @@ Page({
     console.log(options)
     this.getArticleType()
     this.getAdbanner()
-    this.judgeTips()
   },
 
   getUserLocation: function() {
@@ -210,7 +192,7 @@ Page({
               } else if (res.confirm) {
                 wx.showLoading({
                   title: '获取地理位置中',
-                  mask:true
+                  mask: true
                 })
                 wx.openSetting({
                   success: function(dataAu) {
@@ -299,10 +281,10 @@ Page({
     wx.removeStorageSync("ProcurId")
     wx.removeStorageSync("ProcurName")
     let vm = this;
-    if ( !wx.getStorageSync('city')&&!wx.getStorageSync('province')) { //是否已有地理位置缓存
+    if (!wx.getStorageSync('city') && !wx.getStorageSync('province')) { //是否已有地理位置缓存
       this.getUserLocation()
     }
-    if (jM.isLogin()) { 
+    if (jM.isLogin()) {
       vm.getUnReadMsg()
       jM.onMsgReceive(function(msgRes) {
         vm.getUnReadMsg()
@@ -377,12 +359,11 @@ Page({
   // 滚动样式
   switchTab: function(e) {
     var that = this
-    // page=10
     this.setData({
       articleIndex: e.detail.current,
       article: [],
       pageNum: 1,
-      total:1
+      total: 1
     });
     this.checkCor();
     wx.showLoading({
@@ -399,13 +380,9 @@ Page({
     var successList = function(data) {
       wx.hideLoading()
       that.setData({
-        // article: data.data.list ? data.data.list : data.data,
-        // listHeight: data.data.list.length * 220 + 300 + 'rpx'
+        listHeight: data.data.list.length * 220 + 300 + 'rpx',
         total: data.data.total,
         article: that.data.article.concat(data.data.list),
-      })
-      that.setData({
-        listHeight: that.data.article.length * 230 + 200 + 'rpx'
       })
     }
     var failList = function(e) {
@@ -497,7 +474,7 @@ Page({
     }
     wxrequest.requestGet(url, '', success, fail)
   },
-  //专家咨询
+  //律师服务
   gotoExpert: function() {
     if (wx.getStorageSync("token")) {
       wx.navigateTo({
@@ -534,23 +511,23 @@ Page({
       this.getArticleList()
     }
   },
-  // 消息
-  judgeTips: function() {
-    if (this.data.tipsNumber < 10) {
-      this.setData({
-        tipsOne: true
-      })
-    } else if (this.data.tipsNumber >= 10 && this.data.tipsNumber < 100) {
-      this.setData({
-        tipsOne: true
-      })
-    } else {
-      this.setData({
-        tipsNumber: "...",
-        tipsTwo: true
-      })
-    }
-  },
+  // // 消息
+  // judgeTips: function() {
+  //   if (this.data.tipsNumber < 10) {
+  //     this.setData({
+  //       tipsOne: true
+  //     })
+  //   } else if (this.data.tipsNumber >= 10 && this.data.tipsNumber < 100) {
+  //     this.setData({
+  //       tipsOne: true
+  //     })
+  //   } else {
+  //     this.setData({
+  //       tipsNumber: "...",
+  //       tipsTwo: true
+  //     })
+  //   }
+  // },
   goToMessage() {
     if (wx.getStorageSync("token")) {
       wx.navigateTo({

@@ -26,6 +26,10 @@ Page({
         this.setData({
           hasList:false
         })
+      }else{
+        this.setData({
+          hasList: true
+        })
       }
       this.setData({
         detail:data.data.list

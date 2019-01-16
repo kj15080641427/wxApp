@@ -33,7 +33,7 @@ Page({
     sort: ["综合排序", "最新入驻", "活跃度最高"],
     sortIndex: 0,//排序index
   },
-  // 跳转至专家咨询
+  // 跳转至律师主页
   gotoexpert:function(e){
     wx.navigateTo({
       url: '../../search/lawyer-detail/index?id='+this.data.lawyerList[e.currentTarget.dataset.lawindex].memberId,

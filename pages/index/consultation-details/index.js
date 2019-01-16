@@ -295,10 +295,11 @@ Page({
       // lawgaoList.push(nowYear[2] - year[2])
       // lawagoTextList.push('天前')
       this.setData({
-        timet: nowYear[2] - year[2] + this.data.time.split(' ')[1].split(':', 2).join(":") + '天前',
+        timet: nowYear[2] - year[2] + '天前'+ this.data.time.split(' ')[1].split(':', 2).join(":") 
         // ago: nowYear[2] - year[2],
         // agoText: '天前',
       })
+      console.log('天气',this.data.time)
     } else if (nowYear[2] - year[2] == 2) {
       // lawagoTextList.push('前天')
       that.setData({

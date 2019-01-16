@@ -14,7 +14,6 @@ const getPayInfo = (v) => {
     const res = wx.getSystemInfoSync()
     let _ua = 'wxapp:brand(' + res.brand + ') model(' + res.model + ') system(' + res.system + ') SDKVersion(' + res.SDKVersion + ')'
 
-    // <<<<<<< HEAD
     wx.request({
       url: api.getPayInfo(),
       method: 'POST',

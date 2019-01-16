@@ -115,7 +115,12 @@ Page({
     wx.removeStorageSync("ProcurName")
     this.onShow()
   },
-
+  //loading
+  loading:function(){
+    setTimeout(()=>{
+      wx.hideLoading()
+    },1000)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -175,6 +180,12 @@ Page({
       lexMungIndex: gs.lexMungIndex ? gs.lexMungIndex : '', //绿豆圈
       organziationIndex: gs.organziationIndex ? gs.organziationIndex : '', //商会组织
     })
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    that.loading()
+    console.log('加载中')
   },
 
   /**
