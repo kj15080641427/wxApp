@@ -31,6 +31,7 @@ Page({
     selectedCity: '选择地区', //选择地区
     filterColor: false,
     noFilter: {
+      "sort":0,
       "pageSize": '10'
     },
     hasList: true,

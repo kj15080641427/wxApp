@@ -104,6 +104,7 @@ Page({
         hasNextPage: data.data.hasNextPage,
         lawyerList: that.data.lawyerList.concat(data.data.list),
       })
+      that.getAge()
     }
     var fail = function (e) {
       wx.hideLoading()
@@ -135,7 +136,7 @@ Page({
         lawyerList: data.data.list,
         ishidden: true
       })
-      // that.getAge()
+      that.getAge()
     }
     var fail = function(e) {
       wx.hideLoading()
@@ -170,7 +171,6 @@ Page({
         })
       }
       // 成功后调用onShow刷新页面
-      that.onShow()
       that.onShow()
     }
     var fail = function(e) {
@@ -213,6 +213,22 @@ Page({
     }
     wxrequest.request(url, data, success, fail)
   },
+  getAge:function(){
+    var yearList = []
+    var addressList = []
+    var that = this
+    this.data.lawyerList ? this.data.lawyerList.map(function (item) {
+      yearList.push(formatTime.formatTime(new Date()).split("/")[0] - item.beginPracticeDate.split("-")[0])
+    }) : ''
+    that.data.lawyerList ? that.data.lawyerList.map(function (item) {
+      addressList.push(item.region.split('-', 2))
+    }) : ''
+    this.setData({
+      year: yearList,
+      address: addressList,
+      // region: region.citysData
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -251,20 +267,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    var yearList = []
-    var addressList = []
-    var that = this
-    this.data.lawyerList ? this.data.lawyerList.map(function(item) {
-      yearList.push(formatTime.formatTime(new Date()).split("/")[0] - item.beginPracticeDate.split("-")[0])
-    }) : ''
-    that.data.lawyerList ? that.data.lawyerList.map(function(item) {
-      addressList.push(item.region.split('-', 2))
-    }) : ''
-    this.setData({
-      year: yearList,
-      address: addressList,
-      // region: region.citysData
-    })
+    this.getAge()
   },
 
   /**
