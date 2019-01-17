@@ -356,7 +356,7 @@ Page({
       return time
     }
   },
-  // 滚动样式
+  // 滑动样式
   switchTab: function(e) {
     var that = this
     this.setData({

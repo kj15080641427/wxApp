@@ -33,6 +33,7 @@
         <label class='index-text-style-gray'>精准匹配</label>
       </view>
     </view>
+
     <view class='index-mr' bindtap='gotoExpert'>
       <view class="index-text-style">
         <image src='../../image/homeicon_3x/homepage_05_3x.png' style='width:120rpx;height:120rpx'></image>
@@ -120,7 +121,6 @@
   <!-- <view class='index-layout-center' bindtap="test" >
     <view class='index-more' bindtap='loadMore'>加载更多</view>
   </view> -->
-
   <!-- 蒙层 -->
   <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
   <!--弹出框  -->

@@ -125,7 +125,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // this.getCourt()
     var that = this
     that.setData({
       noFilter: JSON.parse(options.noFilter),
