@@ -7,7 +7,7 @@
   align-items: center;
   height: 100rpx;
   background-color: #1ec88c;
-  border-top: 1rpx solid #32b987;
+  /* border-top: 1rpx solid #32b987; */
 }
 
 .index-search {

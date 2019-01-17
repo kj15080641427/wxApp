@@ -1,4 +1,6 @@
-<!--pages/search/lawyer-detail/index.wxml-->
+<!-- <view class='radarContainer'>
+<canvas class='radarCanvas' canvas-id='radarCanvas'></canvas>
+</view> -->
 <view>
   <image mode='aspectFill' class='law-page-background' style='height:500rpx;' src="{{lawyerCard.backgroundImage ? lawyerCard.backgroundImage:'../../../image/my_icon@3x/20190106000237.png'}}" bindtap='showBackgroundImage'></image>
   <view bindtap='toindex' wx:if="{{firstPage}}">
