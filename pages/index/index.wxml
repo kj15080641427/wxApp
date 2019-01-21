@@ -1,4 +1,3 @@
-<!-- <button bindtap="gotoExpert">专家咨询</button> -->
 <view class='index'>
   <!-- 搜索框 -->
   <view class='index-layout index-input-height'>

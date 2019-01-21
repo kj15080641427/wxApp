@@ -93,10 +93,9 @@ Page({
   //跳转至广告
   gotoAd: function(e) {
     wx.setStorageSync('ad', `${this.data.adBanner[e.currentTarget.dataset.adindex].linkValue}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
-    console.log('?????', `${this.data.adBanner[e.currentTarget.dataset.adindex].linkValue}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
     if (this.data.adBanner[e.currentTarget.dataset.adindex].linkValue.indexOf('needlogin=1') == -1) {
       wx.navigateTo({
-        url: 'adWebView/index?url='+`${this.data.adBanner[e.currentTarget.dataset.adindex].linkValue}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`
+        url: 'adWebView/index'
       })
     } else if (wx.getStorageSync('token')) {
       wx.navigateTo({
@@ -170,7 +169,6 @@ Page({
   },
 
   onLoad: function(options) {
-    Time(['2017-01-01 01:01:01', '2019-01-18 11:01:01'])
     this.setData({
       scene: options.scene ? options.scene : false
     })
