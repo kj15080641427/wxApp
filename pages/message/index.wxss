@@ -1,4 +1,116 @@
+.msg-bar {
+  display: flex;
+  background: #fff;
+}
 
+.msg-bar .bar-item {
+  flex: 1;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 28rpx;
+  position: relative;
+}
+
+.msg-bar .bar-item.active::after {
+  content: '';
+  width: 100%;
+  height: 4rpx;
+  background: #1ec88c;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.message .msg-count {
+  font-size: 24rpx;
+  background: #ff4220;
+  padding: 4rpx 10rpx;
+  display: inline-block;
+  line-height: 1;
+  color: #fff;
+  border-radius: 25%;
+  position: absolute;
+  top: 20rpx;
+  left: 50%;
+  margin-left: 70rpx;
+}
+
+.msg-list .list-item {
+  display: flex;
+  height: 150rpx;
+  background: #fff;
+  border-top: 1rpx solid #f1f1f1;
+}
+
+.hide-title {
+  width: 350rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: none;
+}
+
+.time-title {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 15rpx;
+  font-size: 32rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.msg-list .list-tap {
+  background: #f4f4f4;
+}
+
+.order-avatar {
+  border-radius: 50%;
+  width: 105rpx;
+  height: 105rpx;
+  /* background-color: ; */
+}
+.order-actar-view{
+  height: 150rpx;
+  display: flex;
+  align-items: center;
+}
+.msg-list .list-item .avatar {
+  width: 150rpx;
+  position: relative;
+}
+
+.msg-list .list-item .avatar .avatar-img {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  margin: 0 auto;
+  background: #999;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.msg-list .list-item .avatar .count {
+  width: 30rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  text-align: center;
+  background: #ff4220;
+  color: #fff;
+  font-size: 20rpx;
+  border-radius: 50%;
+  position: absolute;
+  right: 30rpx;
+  top: 30rpx;
+}
+
+.msg-list .list-item .body {
+  flex: 1;
+}
+
+<<<<<<< HEAD
 .msg-bar{
     display: flex;
     background: #fff;
@@ -83,29 +195,123 @@
     color: #717171;
 }
 .message-tab{
+=======
+.msg-list .list-item .body .name {
+  margin: 30rpx 0;
+  font-size: 30rpx;
+  color: #323232;
+}
+
+.info {
+  font-size: 24rpx;
+  padding-top: 30rpx;
+  width: 480rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.msg-list .list-item .body .info {
+  font-size: 24rpx;
+  color: #717171;
+}
+
+.red-round-view {
+  width: 20rpx;
+  height: 20rpx;
+  margin-top: 15rpx;
+  margin-right: 35rpx;
+}
+
+.red-round {
+  background-color: red;
+  border-radius: 50%;
+  width: 20rpx;
+  height: 20rpx;
+  margin-top: 15rpx;
+  margin-right: 35rpx;
+}
+
+.order-view-detail {
+  border-radius: 20rpx;
+  width: 630rpx;
+  margin-top: 35rpx;
+  display: flex;
+  background-color: white;
+  height: 150rpx;
+  font-size: 30rpx;
+  padding-left: 25rpx;
+  padding-right: 25rpx;
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+}
+
+.order-msg-isread {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-view-line {
+  height: 1rpx;
+  background-color: #f4f4f4;
+}
+
+.message-tab {
+>>>>>>> 25c2cd65a546ca6aeb1060337f79af5cbc60b7f2
   width: 750rpx;
   display: flex;
   justify-content: space-around;
 }
+<<<<<<< HEAD
 .msg-read-all-view{
   background-color: white;
+=======
+
+.msg-read-all-view {
+  /* background-color: white; */
+>>>>>>> 25c2cd65a546ca6aeb1060337f79af5cbc60b7f2
   width: 750rpx;
   height: 60rpx;
   display: flex;
   justify-content: flex-end;
+<<<<<<< HEAD
   align-items: center;
 }
 .msg-read-all{
   font-size: 24rpx;
   background-color:white;
+=======
+  align-items: flex-end;
+}
+
+.msg-read-all {
+  font-size: 24rpx;
+  background-color: white;
+>>>>>>> 25c2cd65a546ca6aeb1060337f79af5cbc60b7f2
   border-radius: 30rpx;
   border: 1rpx solid #1ec88c;
   padding-left: 10rpx;
   padding-right: 10rpx;
   text-align: center;
+<<<<<<< HEAD
   /* margin-top: 20rpx; */
 }
 .sys-msg-list{
   background-color: white;
   border-bottom: 1rpx solid #b5b5b5
+=======
+  margin-right: 35rpx;
+  /* margin-top: 20rpx; */
+}
+
+.sys-msg-list {
+  background-color: white;
+  /* border-bottom: 1rpx solid #b5b5b5; */
+>>>>>>> 25c2cd65a546ca6aeb1060337f79af5cbc60b7f2
 }

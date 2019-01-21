@@ -6,6 +6,7 @@ var App = getApp()
 var jM = App.globalData.jMessage
 var QQMapWX = require('../../utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
+import Time from '../../utils/date-time.js'
 Page({
   data: {
     swiperH: '', //swiper高度
@@ -33,13 +34,29 @@ Page({
     latitude: '',
     longitude: '',
     unReadCount: 0, // 消息未读数
-    sysUnread:0//系统消息未读数
+    unreadOrder: 0, //未读订单消息
+    unreadSystem: 0, //系统未读消息
   },
   //swiper滑动事件banner图
   swiperChange: function(e) {
     this.setData({
       nowIdx: e.detail.current
     })
+  },
+  //所有未读消息
+  getUnread: function() {
+    var url = api.getUnread()
+    var success = (res) => {
+      console.log('all', res)
+      this.setData({
+        unreadOrder: res.data.unreadOrderMsgCount,
+        unreadSystem: res.data.unreadSysMsgCount
+      })
+    }
+    var fail = (e) => {
+      console.log(e)
+    }
+    wxrequest.requestGet(url, '', success, fail)
   },
   //跳转至搜索
   gotoSearch: function() {
@@ -76,9 +93,10 @@ Page({
   //跳转至广告
   gotoAd: function(e) {
     wx.setStorageSync('ad', `${this.data.adBanner[e.currentTarget.dataset.adindex].linkValue}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
+    console.log('?????', `${this.data.adBanner[e.currentTarget.dataset.adindex].linkValue}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
     if (this.data.adBanner[e.currentTarget.dataset.adindex].linkValue.indexOf('needlogin=1') == -1) {
       wx.navigateTo({
-        url: 'adWebView/index'
+        url: 'adWebView/index?url='+`${this.data.adBanner[e.currentTarget.dataset.adindex].linkValue}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`
       })
     } else if (wx.getStorageSync('token')) {
       wx.navigateTo({
@@ -152,6 +170,7 @@ Page({
   },
 
   onLoad: function(options) {
+    Time(['2017-01-01 01:01:01', '2019-01-18 11:01:01'])
     this.setData({
       scene: options.scene ? options.scene : false
     })
@@ -282,8 +301,9 @@ Page({
     wx.removeStorageSync("ProcurId")
     wx.removeStorageSync("ProcurName")
     let vm = this;
-    if(wx.getStorageSync('token')){
-      setInterval(vm.getSystemUnread, 10000) //系统未读消息
+    if (wx.getStorageSync('token')) {
+      vm.getUnread()
+      setInterval(vm.getUnread, 10000)
     }
     if (!wx.getStorageSync('city') && !wx.getStorageSync('province')) { //是否已有地理位置缓存
       this.getUserLocation()
@@ -529,23 +549,6 @@ Page({
       this.getArticleList()
     }
   },
-  // // 消息
-  // judgeTips: function() {
-  //   if (this.data.tipsNumber < 10) {
-  //     this.setData({
-  //       tipsOne: true
-  //     })
-  //   } else if (this.data.tipsNumber >= 10 && this.data.tipsNumber < 100) {
-  //     this.setData({
-  //       tipsOne: true
-  //     })
-  //   } else {
-  //     this.setData({
-  //       tipsNumber: "...",
-  //       tipsTwo: true
-  //     })
-  //   }
-  // },
   goToMessage() {
     if (wx.getStorageSync("token")) {
       wx.navigateTo({
@@ -567,7 +570,6 @@ Page({
   test: function() {
     var that = this;
     // 显示加载图标
-    // console.log(that.data.more)
     that.setData({
       more: !that.data.more
     })

@@ -33,7 +33,7 @@ Page({
     var addressList = []
     var that = this
     that.data.myFollow ? that.data.myFollow.map(function (item) {
-      yearList.push(formatTime.formatTime(new Date()).split("/")[0] - item.beginPracticeDate.split("-")[0])
+      yearList.push(formatTime.formatTime(new Date()).split("-")[0] - item.beginPracticeDate.split("-")[0])
     }) : ''
     that.data.myFollow ? that.data.myFollow.map(function (item) {
       addressList.push(item.region.split('-', 2))

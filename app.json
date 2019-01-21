@@ -40,6 +40,7 @@
     "pages/my/about/index",
     "pages/my/order-detail/index",
     "pages/message/index",
+    "pages/message/sysweb/index",
     "pages/message/chart/index"
   ],
   "window": {

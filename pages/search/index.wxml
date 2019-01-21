@@ -99,34 +99,31 @@
 <view style='height:750rpx;' wx:if="{{hasList}}" style='height:100%'>
   <scroll-view scrool-y scroll-top='500px'>
     <view style='margin-top:215rpx;'></view>
-    <view class="">
-      <view class='lawyerList-top' wx:key="{{index}}" wx:for="{{lawyerList}}" data-index="{{index}}" catchtap='getIndex'>
-        <view class='watchlist-page'>
-          <view class='watchlist-page-flex'>
-            <view class='watchlist-page-left' style="z-index:55;">
-              <image lazy-load="true" class='watchlist-page-avatar' src="{{lawyerList[index].iconImage ? lawyerList[index].iconImage :'../../image/my_icon@3x/mine_icon-03@3x.png'}}" style="z-index:55;"></image>
-              <view class='watchlist-page-practice' style="z-index:55;">执业{{year[index]>=1 ?year[index]:1 }}年 </view>
-
-            </view>
-            <view class='watchlist-page-right'>
-              <view class='watchlist-page-name'>{{lawyerList[index].memberName}}
-                <label wx:if="{{lawyerList[index].memberPositionName}}" class='watchlist-page-firm'>({{lawyerList[index].memberPositionName}})</label>
-              </view>
-              <view class='watchlist-page-address'>{{address[index]}}
-                <text wx:if="{{lawyerList[index].region&&lawyerList[index].institutionName}}">|</text> {{lawyerList[index].institutionName}}</view>
-              <view class='watchlist-page-adept' wx:if="{{lawyerList[index].description}}">{{lawyerList[index].description}} </view>
-            </view>
-
+    <view class='lawyerList-top'  hover-class='click-style' wx:key="{{index}}" wx:for="{{lawyerList}}" data-index="{{index}}" catchtap='getIndex'>
+      <view class='watchlist-page'>
+        <view class='watchlist-page-flex'>
+          <view class='watchlist-page-left' style="z-index:55;">
+            <image lazy-load="true" class='watchlist-page-avatar' src="{{lawyerList[index].iconImage ? lawyerList[index].iconImage :'../../image/my_icon@3x/mine_icon-03@3x.png'}}" style="z-index:55;"></image>
+            <view class='watchlist-page-practice' style="z-index:55;">执业{{year[index]>=1 ?year[index]:1 }}年 </view>
           </view>
-        </view>
-        <view style='background-color:white;width:700rpx;margin-left:25rpx'>
-          <view class='watchlist-page-line'></view>
-        </view>
-        <view class='watch-page-lower' wx:if="{{lawyerList[index].orgTags[0]}}">
-          <view class='watchlist-page-label'>认证标签</view>
-          <view wx:key="{{index}}" wx:for="{{lawyerList[index].orgTags}}">
-            <image lazy-load="true" src='{{item.image}}' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
+          <view class='watchlist-page-right'>
+            <view class='watchlist-page-name'>{{lawyerList[index].memberName}}
+              <label wx:if="{{lawyerList[index].memberPositionName}}" class='watchlist-page-firm'>({{lawyerList[index].memberPositionName}})</label>
+            </view>
+            <view class='watchlist-page-address'>{{address[index]}}
+              <text wx:if="{{lawyerList[index].region&&lawyerList[index].institutionName}}">|</text> {{lawyerList[index].institutionName}}</view>
+            <view class='watchlist-page-adept' wx:if="{{lawyerList[index].description}}">{{lawyerList[index].description}} </view>
           </view>
+
+        </view>
+      </view>
+      <view style='background-color:white;width:700rpx;margin-left:25rpx'>
+        <view class='watchlist-page-line'></view>
+      </view>
+      <view class='watch-page-lower' wx:if="{{lawyerList[index].orgTags[0]}}">
+        <view class='watchlist-page-label'>认证标签</view>
+        <view wx:key="{{index}}" wx:for="{{lawyerList[index].orgTags}}">
+          <image lazy-load="true" src='{{item.image}}' style='width:35rpx;height:35rpx;margin-left:25rpx'></image>
         </view>
       </view>
     </view>

@@ -6,7 +6,7 @@ const formatTime = date => {
   const minute = date.getMinutes()
   const second = date.getSeconds()
 
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
 }
 
 const fTime = date => {
@@ -29,7 +29,4 @@ const formatNumber = n => {
 module.exports = {
   formatTime: formatTime,
   fTime: fTime
-}
-function test(){
-  console.log(21)
 }

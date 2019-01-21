@@ -1,4 +1,4 @@
-<image src='../../image/my_icon@3x/mine_icon_01_3x.png' style='width:100%;height:500rpx;position: absolute;'>
+<image src='../../image/my_icon@3x/mine_icon_01_3x.png' style='width:100%;height:500rpx;position: absolute;z-index:-1'>
 </image>
 <view class='my-page-background' style='padding-top:{{navH}}px'>
   <view class=''>

@@ -1,16 +1,23 @@
 import wxrequest from '../../utils/request.js'
 import api from '../../utils/api.js'
 import hex_md5 from '../../jM/md5.js'
+var formatTime = require('../../utils/util.js')
+import Time from '../../utils/date-time.js'
 var app = getApp()
 var jM = app.globalData.jMessage
 Page({
   data: {
+<<<<<<< HEAD
     current:0,
+=======
+    current: 0,
+>>>>>>> 25c2cd65a546ca6aeb1060337f79af5cbc60b7f2
     content: 'demand',
     messageCount: 0,
     conversationList: [],
     orderList: [],
     pageNum: 1,
+<<<<<<< HEAD
     articleIndex:0
   },
   //滑动
@@ -79,6 +86,160 @@ Page({
       console.log(e)
     }
     wxrequest.requestGet(url,'',success,fail)
+=======
+    articleIndex: 0
+  },
+  //回复时间
+  time: function () {
+    let list = []
+    this.data.orderMsg.map(item=>{
+      list.push(item.createTime)
+    })
+    this.setData({
+      msgTime:Time(list)
+    })
+  },
+  //滑动
+  swiper: function(e) {
+    this.setData({
+      current: e.detail.current
+    })
+    console.log('currrrrrrrrr', this.data.current)
+    if (e.detail.current == 2) {
+      this.getSystem()
+    } else if (e.detail.current == 1) {
+      this.getOrdermsg()
+    }
+  },
+  //gotourl
+  gotourl: function(e) {
+    this.getReadone(this.data.sysMessage[e.currentTarget.dataset.sysindex].pushMessageId)
+    wx.navigateTo({
+      url: '/pages/message/sysweb/index?url=' + this.data.sysMessage[e.currentTarget.dataset.sysindex].url,
+    })
+  },
+  //订单消息列表
+  getOrdermsg: function() {
+    var url = api.getOrdermsg()
+    var success = (res) => {
+      this.setData({
+        orderMsg: res.data.list
+      })
+      console.log('订单消息', res)
+      this.time()
+    }
+    var fail = (e) => {
+      console.log(e)
+    }
+    wxrequest.requestGet(url, '', success, fail)
+  },
+  //系统消息列表
+  getSystem: function() {
+    var url = api.getSystem()
+    var success = (res) => {
+      console.log('系统消息', res)
+      this.setData({
+        sysMessage: res.data.list
+      })
+    }
+    var fail = (e) => {
+      console.log(e)
+    }
+    wxrequest.requestGet(url, '', success, fail)
+  },
+  //未读消息
+  getUnread: function() {
+    var url = api.getUnread()
+    var success = (res) => {
+      console.log('全部未读消息', res)
+      this.setData({
+        unread: res.data
+      })
+    }
+    var fail = (e) => {
+      console.log(e)
+    }
+    wxrequest.requestGet(url, '', success, fail)
+  },
+  //更新某类消息为已读
+  getAllread: function() {
+    if (this.data.current == 2) {
+      var type = 1
+    } else if (this.data.current == 1) {
+      var type = 2
+    } else {
+      var type = 3
+    }
+    var url = api.getAllread() + type
+    var success = (res) => {
+      if (type == 2) {
+        this.getOrdermsg()
+      }
+      console.log('readall', res)
+    }
+    var fail = (e) => {
+      console.log(e)
+    }
+    wxrequest.requestGet(url, '', success, fail)
+  },
+  //更新某条消息为已读
+  getReadone: function(url) {
+    var url = api.getReadone() + url
+    var success = (res) => {
+      this.getOrdermsg()
+    }
+    var fail = (e) => {
+      console.log(e)
+    }
+    wxrequest.requestGet(url, '', success, fail)
+  },
+  clear: function() {
+    
+  },
+  // 针对用户端：240 免费咨询有新的回复，241快速咨询被接单了，242律师接单10分钟还未拨打电话，243需求有律师回复，244专家咨询已完成，扣款的时候发送//300 用户向律师发了条需求，跳转到需求详情；301：律师回复了用户，跳转到需求详情；302用户回复了律师，跳转到需求详情；303：超过20分钟未接单，跳转到需求详情；304用户评价了律师，跳转到需求详情
+  //点击订单消息
+  clickOrder: function(e) {
+    var data = {
+      memberId: wx.getStorageSync('memberId'),
+      pageNum: 1,
+      pageSize: 999,
+    }
+    if (this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 240) {
+      wx.showLoading({
+        mask:true
+      })
+      this.getReadone(this.data.orderMsg[e.currentTarget.dataset.orderindex].pushMessageId)
+      wxrequest.superRequest(api.getOrder(), data, 'POST').then((res) => {
+        res.data.data.list.some((item, index) => {
+          if (item.id == this.data.orderMsg[e.currentTarget.dataset.orderindex].busiId) {
+            wx.navigateTo({
+              url: '/pages/index/consultation-details/index?orderDetail=' + JSON.stringify(res.data.data.list[index]),
+            })
+          }
+        })
+      }).catch((err) => {
+        wx.showToast({
+          title: err.message,
+          icon: 'none'
+        })
+      })
+    } else if (this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 241) {
+      this.getReadone(this.data.orderMsg[e.currentTarget.dataset.orderindex].pushMessageId)
+      wxrequest.superRequest(api.getOrder(), data, 'POST').then((res) => {
+        res.data.data.list.some((item, index) => {
+          if (item.id == this.data.orderMsg[e.currentTarget.dataset.orderindex].busiId && item.orderType =='快速电话咨询' ) {
+            wx.navigateTo({
+              url: '/pages/my/order-detail/index?orderDetail=' + JSON.stringify(res.data.data.list[index]),
+            })
+          }
+        })
+      }).catch((err)=>{
+        console.log('241快速电话咨询',err)
+      })
+    } else if (this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 244){
+      this.getReadone(this.data.orderMsg[e.currentTarget.dataset.orderindex].pushMessageId)
+    }
+>>>>>>> 25c2cd65a546ca6aeb1060337f79af5cbc60b7f2
   },
   onLoad(options) {
     this.getUnread()
@@ -315,9 +476,17 @@ Page({
     this.setData({
       current: e.currentTarget.dataset.current
     })
+<<<<<<< HEAD
     console.log('current',e.currentTarget.dataset.current)
     if (e.detail.current == 2) {
       this.getSystem()
+=======
+    console.log('current', e.currentTarget.dataset.current)
+    if (e.currentTarget.dataset.current == 2) {
+      this.getSystem()
+    } else if (e.currentTarget.dataset.current == 1) {
+      this.getOrdermsg()
+>>>>>>> 25c2cd65a546ca6aeb1060337f79af5cbc60b7f2
     }
   },
   goChart(e) {

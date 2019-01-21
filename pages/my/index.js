@@ -118,7 +118,7 @@ Page({
         userInfo: dataDetail.data
       })
       wx.setStorageSync("userInfo", dataDetail.data)
-      var now = time.formatTime(new Date()).split("/")[0]
+      var now = time.formatTime(new Date()).split("-")[0]
       var old = that.data.userInfo.birthday.split("-")[0]
       var year = Number(now) - Number(old)
       that.setData({
@@ -141,7 +141,7 @@ Page({
   getAge: function() {
     var that = this
     if (that.data.userInfo.birthday) {
-      var now = time.formatTime(new Date()).split("/")[0]
+      var now = time.formatTime(new Date()).split("-")[0]
       var old = that.data.userInfo.birthday.split("-")[0]
       var year = Number(now) - Number(old)
       that.setData({

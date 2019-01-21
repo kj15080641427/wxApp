@@ -1,13 +1,14 @@
 var api = require('../../../utils/api.js')
 var wxrequest = require('../../../utils/request.js')
 var formatTime = require('../../../utils/util.js')
+import Time from '../../../utils/date-time.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    answer:"哈哈哈哈呵呵哈哈哈呵呵哈哈哈哈哈哈哈"
+    answer:""
   },
   userreply:function(e){
     this.setData({
@@ -38,81 +39,13 @@ Page({
   },
     //律师回复时间
   lawTime: function () {
-    //律师回复时间
-    var that = this
-    var dateList = []
-    // var lawTimeList = []
-    var lawgaoList = []
-    var lawagoTextList = []
-    var showtimeList = []
-    that.data.freeText.map(item => {
-      dateList.push(item.dateAdded)
+    let list = []
+    this.data.freeText.map(item=>{
+      list.push(item.dateAdded)
     })
-
-    dateList.map((item, index) => {
-     
-      var lawnowYear = formatTime.formatTime(new Date()).split(" ")[0].split("/")
-      var lawyear = item.split(" ")[0].split("-")
-      var lawnowYearTime = formatTime.formatTime(new Date()).split(" ")[1].split("/")
-      var lawyearTime = item.split(" ")[1].split(":")
-      if (lawnowYear[0] - lawyear[0] > 0) {
-        showtimeList.push(this.data.freeText[index].dateAdded.split(" "))
-        that.setData({
-          timelaw: showtimeList
-        })
-      } else if (lawnowYear[1] - lawyear[1] > 0) {
-        showtimeList.push(this.data.freeText[index].dateAdded.split(" "))
-        that.setData({
-          timelaw: showtimeList
-        })
-      }
-      else if (lawnowYear[2] - lawyear[2] > 7) {
-        showtimeList.push(this.data.freeText[index].dateAdded.split(" "))
-        this.setData({
-          timelaw: showtimeList
-        })
-      } else if (lawnowYear[2] - lawyear[2] > 2 && lawnowYear[2] - lawyear[2] <= 7) {
-        lawgaoList.push(lawnowYear[2] - lawyear[2])
-        showtimeList.push('天前'+this.data.freeText[index].dateAdded.split(" ")[1].split(":", 2).join(":"))
-        this.setData({
-          timelaw: showtimeList,
-        })
-      }
-      else if (lawnowYear[2] - lawyear[2] == 2) {
-        lawagoTextList.push()
-        showtimeList.push('前天'+this.data.freeText[index].dateAdded.split(" ")[1].split(":", 2).join(":"))
-        that.setData({
-
-          timelaw: showtimeList
-        })
-      } else if (lawnowYear[2] - lawyear[2] == 1) {
-        lawagoTextList.push()
-        showtimeList.push('昨天'+this.data.freeText[index].dateAdded.split(" ")[1].split(":", 2).join(":"))
-        that.setData({
-
-          timelaw: showtimeList
-        })
-
-      }
-      else if (lawnowYear[2] - lawyear[2] == 0 && lawnowYearTime[0].split(":")[0] - lawyearTime[0] >= 1) {
-        showtimeList.push(this.data.freeText[index].dateAdded.split(" ")[1].split(":", 2).join(":"))
-        that.setData({
-          timelaw: showtimeList
-        })
-      }
-      else if (lawnowYearTime[0].split(":")[1] - lawyearTime[1] > 5) {
-        showtimeList.push(lawnowYearTime[0].split(":")[1] - lawyearTime[1]+'分钟前')
-        that.setData({
-          timelaw: showtimeList
-        })
-      } else {
-        showtimeList.push('刚刚')
-        that.setData({
-          timelaw: showtimeList
-        })
-      }
+    this.setData({
+      timelaw:Time(list)
     })
-   
   },
   /**
    * 生命周期函数--监听页面加载
@@ -122,7 +55,6 @@ Page({
       freeTextList: wx.getStorageSync("freeTextList"),
       userInfo:wx.getStorageSync("userInfo")
     })
-    // this.getFreeText()
   },
 
   /**

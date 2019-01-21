@@ -12,6 +12,9 @@ page {
   background-color:	#F4F4F4;
   height: 100%;
 }
+.click-style{
+  background-color: #f4f4f4
+}
 .court{
   color: #1ec88c;
   font-size: 32rpx;

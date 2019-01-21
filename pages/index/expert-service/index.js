@@ -161,7 +161,7 @@ Page({
     var addressList = []
     var that = this
     this.data.lawyerList ? this.data.lawyerList.map(function (item) {
-      yearList.push(formatTime.formatTime(new Date()).split("/")[0] - item.beginPracticeDate.split("-")[0])
+      yearList.push(formatTime.formatTime(new Date()).split("-")[0] - item.beginPracticeDate.split("-")[0])
     }) : ''
     that.data.lawyerList ? that.data.lawyerList.map(function (item) {
       addressList.push(item.region.split('-', 2))
