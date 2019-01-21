@@ -5,7 +5,9 @@
   <view class='filter-page-line'></view>
 </view>
 <view class='filter-page-frame-view filter-background'>
-  <view class="{{index == practiceYearId -1  ? 'filter-page-gender-color' :'filter-page-gender'}}"wx:key="{{index}}" data-yearindex="{{index}}" bindtap='changeColor'  wx:for="{{search[0].items}}"><text class='filter-page-frame-text'>{{item.text}}</text></view>
+  <view class="{{index == practiceYearId -1  ? 'filter-page-gender-color' :'filter-page-gender'}}" wx:key="{{index}}" data-yearindex="{{index}}" bindtap='changeColor' wx:for="{{search[0].items}}">
+    <text class='filter-page-frame-text'>{{item.text}}</text>
+  </view>
 </view>
 
 <!-- 性别 -->
@@ -18,37 +20,44 @@
 </view> -->
 
 <!-- 行业 -->
-  <view class='filter-page-cneter filter-background' >
-    <view style='display:flex;'>
-      <picker bindchange="changeIndustry" class='filter-page-picker' range="{{search[1].items}}" range-key="{{'text'}}" >{{search[1].text}}<text style="margin-left:35rpx;color:black;" >{{search[1].items[insIndex].text}}</text></picker>
-    </view>
-    <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
+<view class='filter-page-cneter filter-background'>
+  <view style='display:flex;'>
+    <picker bindchange="changeIndustry" class='filter-page-picker' range="{{search[1].items}}" range-key="{{'text'}}">{{search[1].text}}
+      <text style="margin-left:35rpx;color:black;">{{search[1].items[insIndex].text}}</text>
+    </picker>
   </view>
-  <view style='background-color:white'>
-    <view class='filter-page-line'></view>
-  </view>
+  <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
+</view>
+<view style='background-color:white'>
+  <view class='filter-page-line'></view>
+</view>
 
 <!-- 基本技能 -->
- <view class='filter-page-cneter filter-background' >
-    <view style='display:flex;'>
-      <picker bindchange="changeSkill" class='filter-page-picker' range="{{search[2].items}}" range-key="{{'text'}}" >{{search[2].text}}<text class='filter-page-picker-text' >{{search[2].items[baseSkillIndex].text}}</text></picker>
-    </view>
-    <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
+<view class='filter-page-cneter filter-background'>
+  <view style='display:flex;'>
+    <picker bindchange="changeSkill" class='filter-page-picker' range="{{search[2].items}}" range-key="{{'text'}}">{{search[2].text}}
+      <text class='filter-page-picker-text'>{{search[2].items[baseSkillIndex].text}}</text>
+    </picker>
   </view>
-  <view style='background-color:white'>
-    <view class='filter-page-line'></view>
-  </view>
+  <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
+</view>
+<view style='background-color:white'>
+  <view class='filter-page-line'></view>
+</view>
 <!-- 扩展技能 -->
- <view class='filter-page-cneter filter-background' >
-    <view style='display:flex;'>
-      <picker bindchange="changeExpand" class='filter-page-picker' range="{{search[3].items}}" range-key="{{'text'}}" >{{search[3].text}}<text class='filter-page-picker-text' >{{search[3].items[ohterSkillIndex].text}}</text></picker>
-    </view>
-    <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
+<view class='filter-page-cneter filter-background'>
+  <view style='display:flex;'>
+    <picker bindchange="changeExpand" class='filter-page-picker' range="{{search[3].items}}" range-key="{{'text'}}">{{search[3].text}}
+      <text class='filter-page-picker-text'>{{search[3].items[ohterSkillIndex].text}}</text>
+    </picker>
   </view>
-  <view style='background-color:white'>
-    <view class='filter-page-line'></view>
-  </view>
+  <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
+</view>
+<view style='background-color:white'>
+  <view class='filter-page-line'></view>
+</view>
 <!-- 第二语言 -->
+<!-- <<<<<<< HEAD -->
  <view class='filter-page-cneter filter-background' >
     <view style='display:flex;'>
       <picker bindchange="changeLanguage" class='filter-page-picker' range="{{search[4].items}}" range-key="{{'text'}}" >{{search[4].text}}<text class='filter-page-picker-text' >{{search[4].items[langSkillIndex].text}}</text></picker>
@@ -96,22 +105,31 @@
       <picker bindchange="changeHonor" class='filter-page-picker' range="{{search[8].items}}" range-key="{{'text'}}" >{{search[8].text}}<text class='filter-page-picker-text' >{{search[8].items[honorIndex].text}}</text></picker>
     </view>
     <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
+<!-- =======
+<view class='filter-page-cneter filter-background'>
+  <view style='display:flex;'>
+    <picker bindchange="changeLanguage" class='filter-page-picker' range="{{search[4].items}}" range-key="{{'text'}}">{{search[4].text}}
+      <text class='filter-page-picker-text'>{{search[4].items[langSkillIndex].text}}</text>
+    </picker>
+>>>>>>> 92b73f7a40f81ec9a3f3870db360990b740295dd -->
+</view>
+<view style='background-color:white'>
+  <view class='filter-page-line'></view>
+</view>
+<!-- 社会职务 -->
+<view class='filter-page-cneter filter-background'>
+  <view style='display:flex;'>
+    <picker bindchange="changeSocial" class='filter-page-picker' range="{{search[9].items}}" range-key="{{'text'}}">{{search[9].text}}
+      <text class='filter-page-picker-text'>{{search[9].items[socialIndex].text}}</text>
+    </picker>
   </view>
-  <view style='background-color:white'>
-    <view class='filter-page-line'></view>
-  </view>
-  <!-- 社会职务 -->
-  <view class='filter-page-cneter filter-background' >
-    <view style='display:flex;'>
-      <picker bindchange="changeSocial" class='filter-page-picker' range="{{search[9].items}}" range-key="{{'text'}}" >{{search[9].text}}<text class='filter-page-picker-text' >{{search[9].items[socialIndex].text}}</text></picker>
-    </view>
-    <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
-  </view>
-  <view style='background-color:white'>
-    <view class='filter-page-line'></view>
-  </view>
-  <!-- 增信担保 -->
-  <!-- <view class='filter-page-cneter filter-background' >
+  <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
+</view>
+<view style='background-color:white'>
+  <view class='filter-page-line'></view>
+</view>
+<!-- 增信担保 -->
+<!-- <view class='filter-page-cneter filter-background' >
     <view style='display:flex;'>
       <picker bindchange="changeGuarantee" class='filter-page-picker' range="{{search[10].items}}" range-key="{{'text'}}" >{{search[10].text}}<text class='filter-page-picker-text' >{{search[10].items[depositIndex].text}}</text></picker>
     </view>
@@ -120,26 +138,31 @@
   <view style='background-color:white'>
     <view class='filter-page-line'></view>
   </view> -->
-  <!-- 绿豆圈 -->
-  <view class='filter-page-cneter filter-background' >
-    <view style='display:flex;'>
-      <picker bindchange="changeMung" class='filter-page-picker' range="{{search[10].items}}" range-key="{{'text'}}" ><label>{{search[10].text}}</label><text class='filter-page-picker-text' style='margin-left:60rpx;' >{{search[10].items[lexMungIndex].text}}</text></picker>
-    </view>
-    <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
+<!-- 绿豆圈 -->
+<view class='filter-page-cneter filter-background'>
+  <view style='display:flex;'>
+    <picker bindchange="changeMung" class='filter-page-picker' range="{{search[10].items}}" range-key="{{'text'}}">
+      <label>{{search[10].text}}</label>
+      <text class='filter-page-picker-text' style='margin-left:60rpx;'>{{search[10].items[lexMungIndex].text}}</text>
+    </picker>
   </view>
-  <view style='background-color:white'>
-    <view class='filter-page-line'></view>
+  <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
+</view>
+<view style='background-color:white'>
+  <view class='filter-page-line'></view>
+</view>
+<!-- 商会组织 -->
+<view class='filter-page-cneter filter-background'>
+  <view style='display:flex;'>
+    <picker bindchange="changeOrganization" class='filter-page-picker' range="{{search[11].items}}" range-key="{{'text'}}">{{search[11].text}}
+      <text class='filter-page-picker-text'>{{search[11].items[organziationIndex].text}}</text>
+    </picker>
   </view>
-  <!-- 商会组织 -->
-  <view class='filter-page-cneter filter-background' >
-    <view style='display:flex;'>
-      <picker bindchange="changeOrganization"class='filter-page-picker' range="{{search[11].items}}" range-key="{{'text'}}" >{{search[11].text}}<text class='filter-page-picker-text' >{{search[11].items[organziationIndex].text}}</text></picker>
-    </view>
-    <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
-  </view>
-  <view style='background-color:white'>
-    <view class='filter-page-line'></view>
-  </view>
+  <image src='../../../image/homeicon_3x/homepage_09_3x.png' class='filter-page-icon'></image>
+</view>
+<view style='background-color:white'>
+  <view class='filter-page-line'></view>
+</view>
 <!-- <view wx:key="*this" wx:for="{{search}}"  wx:if="{{item.text !='执业年限' && item.text !='律师性别'}}" data-getindex='{{index}}' catchtap='getType' bindtap="getList">
   <view class='filter-page-cneter filter-background' >
     <view style='display:flex;'>
