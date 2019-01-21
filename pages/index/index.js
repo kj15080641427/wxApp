@@ -32,7 +32,8 @@ Page({
     city: '',
     latitude: '',
     longitude: '',
-    unReadCount: 0 // 消息未读数
+    unReadCount: 0, // 消息未读数
+    sysUnread:0//系统消息未读数
   },
   //swiper滑动事件banner图
   swiperChange: function(e) {
@@ -281,6 +282,9 @@ Page({
     wx.removeStorageSync("ProcurId")
     wx.removeStorageSync("ProcurName")
     let vm = this;
+    if(wx.getStorageSync('token')){
+      setInterval(vm.getSystemUnread, 10000) //系统未读消息
+    }
     if (!wx.getStorageSync('city') && !wx.getStorageSync('province')) { //是否已有地理位置缓存
       this.getUserLocation()
     }
@@ -291,6 +295,20 @@ Page({
         vm.setMessage(msgRes)
       });
     }
+  },
+  //获取系统未读消息
+  getSystemUnread(){
+    var url = api.getUnread()
+    var success = (res)=>{
+      this.setData({
+        sysUnread: res.data.unreadSysMsgCount
+      })
+      console.log('系统未读消息',res)
+    }
+    var fail = (e)=>{
+      console.log(e)
+    }
+    wxrequest.requestGet(url,'',success,fail)
   },
   //  获取未读消息
   getUnReadMsg() {

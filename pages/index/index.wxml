@@ -1,19 +1,19 @@
 <!-- <button bindtap="gotoExpert">专家咨询</button> -->
-<view class='index'>
-  <!-- 搜索框 -->
-  <view class='index-layout index-input-height'>
-    <view class='index-search' bindtap='gotoSearch'>
-      <image src='../../image/homeicon_3x/homepage_01_3x.png' style='width:40rpx;height:40rpx;margin-right:20rpx '></image>
-      <input placeholder='搜索律师' confirm-type="search" placeholder-style='color:#ffffff;' style='width:550rpx;height:60rpx;line-height:60rpx;color:white' confirm-type="search"></input>
-    </view>
-    <view class="index-news" bindtap='goToMessage'>
-      <image src='../../image/homeicon_3x/homepage_02_3x.png'></image>
-      <view wx:if="{{unReadCount>0}}" class="unread-count">{{unReadCount}}</view>
-    </view>
+<!-- <view class='index'> -->
+<!-- 搜索框 -->
+<view class='index-layout index-input-height'>
+  <view class='index-search' bindtap='gotoSearch'>
+    <image src='../../image/homeicon_3x/homepage_01_3x.png' style='width:40rpx;height:40rpx;margin-right:20rpx '></image>
+    <input placeholder='搜索律师' confirm-type="search" placeholder-style='color:#ffffff;' style='width:550rpx;height:60rpx;line-height:60rpx;color:white' confirm-type="search"></input>
   </view>
-  <!-- 图标 -->
-  <view class='index-layout index-background'>
-    <view class='index-ml' bindtap="gotoConstultation">
+  <view class="index-news" bindtap='goToMessage'>
+    <image src='../../image/homeicon_3x/homepage_02_3x.png'></image>
+    <view wx:if="{{unReadCount>0||sysUnread>0}}" class="unread-count">{{unReadCount+sysUnread}}</view>
+  </view>
+</view>
+<!-- 图标 -->
+<view class='index-layout index-background'>
+  <view class='index-ml' bindtap="gotoConstultation">
       <view class="index-text-style">
         <image src='../../image/homeicon_3x/homepage_03_3x.png' style='width:120rpx;height:120rpx'></image>
       </view>
@@ -23,38 +23,66 @@
         <label class='index-text-style-gray'>答疑解惑</label>
       </view>
     </view>
-    <view class="gotoQuick" bindtap="gotoQuick">
-      <view class="index-text-style">
-        <image src='../../image/homeicon_3x/homepage_04_3x.png' style='width:120rpx;height:120rpx;'></image>
-      </view>
-      <label class='index-text-style'>快速咨询</label>
-      <view class='index-text-style-mini'>
-        <label class='index-text-style-green'>10分钟</label>
-        <label class='index-text-style-gray'>精准匹配</label>
-      </view>
+  <!-- 快速咨询 -->
+  <view class="gotoQuick" bindtap="gotoQuick">
+    <view class="index-text-style">
+      <image src='../../image/homeicon_3x/homepage_04_3x.png' style='width:120rpx;height:120rpx;'></image>
     </view>
+    <label class='index-text-style'>快速咨询</label>
+    <view class='index-text-style-mini'>
+      <label class='index-text-style-green'>10分钟</label>
+      <label class='index-text-style-gray'>精准匹配</label>
+    </view>
+  </view>
+  <!-- 专家服务 -->
+  <!-- <view class="gotoQuick" bindtap="gotoQuick">
+    <view class="index-text-style">
+      <image src='../../image/homeicon_3x/homepage_04_3x.png' style='width:120rpx;height:120rpx;'></image>
+    </view>
+    <label class='index-text-style'>专家服务</label>
+    <view class='index-text-style-mini'>
+      <label class='index-text-style-green'>2000+</label>
+      <label class='index-text-style-gray'>专业律师在线回复</label>
+    </view>
+  </view> -->
+  <!-- 律师服务 -->
+  <view class='index-mr' bindtap='gotoExpert'>
+    <view class="index-text-style">
+      <image src='../../image/homeicon_3x/homepage_05_3x.png' style='width:120rpx;height:120rpx'></image>
+    </view>
+    <label class='index-text-style'>律师服务</label>
+    <view class='index-text-style-mini'>
+      <label class='index-text-style-green'>找到</label>
+      <label class='index-text-style-gray '>合适律师</label>
+    </view>
+  </view>
+</view>
 
-    <view class='index-mr' bindtap='gotoExpert'>
-      <view class="index-text-style">
-        <image src='../../image/homeicon_3x/homepage_05_3x.png' style='width:120rpx;height:120rpx'></image>
-      </view>
-      <label class='index-text-style'>律师服务</label>
-      <view class='index-text-style-mini'>
-        <label class='index-text-style-green'>找到</label>
-        <label class='index-text-style-gray '>合适律师</label>
-      </view>
-    </view>
-  </view>
-  <!-- 中部轮播图片 -->
-  <view style='background-color:white'>
-    <swiper indicator-dots='true' indicator-active-color="#1ec88c" indicator-color='white' bindchange="swiperChange" autoplay="true" interval="3000" duration="200" style='height:379rpx;width:680rpx;margin-left:35rpx'>
-      <swiper-item wx:for='{{adBanner}}' wx:key='index'>
-        <image src='{{item.image}}' style='height:100%;width:100%' data-adindex="{{index}}" bindtap='gotoAd'></image>
-      </swiper-item>
-    </swiper>
-  </view>
-  <!-- 服务动态 -->
-  <!-- <view class='index-service'>
+<!--  -->
+<!-- <view class='logo-content'>
+  <view>已为xxxx人解决了法律问题</view>
+</view> -->
+<!--  -->
+
+<!-- <view class='index-type-flex'>
+  <view>价格评估</view>
+  <view>微课堂</view>
+</view>
+<view class='index-type-flex'>
+  <view>免费咨询</view>
+  <view>企业法务卡</view>
+</view> -->
+
+<!-- 轮播图 -->
+<view style='background-color:white'>
+  <swiper indicator-dots='true' indicator-active-color="#1ec88c" indicator-color='white' bindchange="swiperChange" autoplay="true" interval="3000" duration="200" style='height:379rpx;width:680rpx;margin-left:35rpx'>
+    <swiper-item wx:for='{{adBanner}}' wx:key='index'>
+      <image src='{{item.image}}' style='height:100%;width:100%' data-adindex="{{index}}" bindtap='gotoAd'></image>
+    </swiper-item>
+  </swiper>
+</view>
+<!-- 服务动态 -->
+<!-- <view class='index-service'>
     <image src='../../image/homeicon_3x/homepage_06_3x.png' style='width:90rpx;height:90rpx;margin-top:30rpx'></image>
     <view class='index-service-right'>
       <view class='index-layout'>
@@ -67,85 +95,88 @@
       </view>
     </view>
   </view> -->
-  <!-- 热门推荐 -->
-  <view class='index-layout index-tab-margin'>
-    <view class='index-text-style'>
-      <view class="index-green-line"></view>
-      <view style="font-size:32rpx">解决方案</view>
-    </view>
-    <!-- <view class="index-text-style" catchtap='loadMorePopular'>
+<!-- 热门推荐 -->
+<view class='index-layout index-tab-margin'>
+  <view class='index-text-style'>
+    <view class="index-green-line"></view>
+    <view style="font-size:32rpx">解决方案</view>
+  </view>
+  <!-- <view class="index-text-style" catchtap='loadMorePopular'>
       <label style='font-size:28rpx;color:#b5b5b6'>..</label>
       <image src="../../image/homeicon_3x/homepage_09_3x.png" style="width:20rpx;height:20rpx;margin-left:10rpx" />
     </view> -->
+</view>
+<!-- 横向滑动列表 -->
+<view class='index-page-line-view'>
+  <view class='index-page-line'></view>
+</view>
+<scroll-view scroll-x class="scroll-x" scroll-left="{{scrollLeft}}">
+  <view wx:for="{{popular}}" wx:key="index" class="view-parent">
+    <view class="{{articleIndex==index ? 'view-item-color' : 'view-item'}}" bindtap="selsectArticle" id="{{index}}" data-current="{{item.id}}">{{item.typeName}}</view>
+    <view class="{{articleIndex==index ? 'view-item-green-line' : ''}}"></view>
   </view>
-  <!-- 横向滑动列表 -->
-  <view class='index-page-line-view'>
-    <view class='index-page-line'></view>
-  </view>
-  <scroll-view scroll-x class="scroll-x" scroll-left="{{scrollLeft}}">
-    <view wx:for="{{popular}}" wx:key="index" class="view-parent">
-      <view class="{{articleIndex==index ? 'view-item-color' : 'view-item'}}" bindtap="selsectArticle" id="{{index}}" data-current="{{item.id}}">{{item.typeName}}</view>
-      <view class="{{articleIndex==index ? 'view-item-green-line' : ''}}"></view>
-    </view>
-  </scroll-view>
-  <!-- 头像 -->
-  <!-- <view>{{popular}}</view> -->
-  <!-- <view class="index-tab-margin">
+</scroll-view>
+<!-- 头像 -->
+<!-- <view>{{popular}}</view> -->
+<!-- <view class="index-tab-margin">
   <view class='index-lawyer-icon'></view>
   <view class="index-lawyer-name">邓松岩</view>
   <view class="index-lawyer-remark">本周人气冠军</view>
+
+
 </view> -->
-  <!-- 文章 -->
-  <!-- <view class='index-page-line-view'>
+<!-- 文章 -->
+<!-- <view class='index-page-line-view'>
   <view class='index-page-line'></view>
 </view> -->
-  <swiper class="tab-content" current="{{articleIndex}}" duration="300" bindchange="switchTab" style='height:{{listHeight}}'>
-    <block wx:key="{{index}}" wx:for="{{popular}}">
-      <swiper-item>
-        <view wx:key="index" wx:for="{{article}}" bindtap="gotoweb" data-resolveIndex='{{index}}'>
-          <view class='index-page-line'></view>
-          <view class='index-article'>
-            <view style='height:150rpx;'>
-              <view class="index-article-text">{{item.title}}</view>
-              <view class="index-article-text-lower">已帮助
-                <text style="color:#1ec88c">{{item.helpNumber}}</text>人</view>
-            </view>
-            <image src="{{item.image}}" style='width:223rpx;height:145rpx;'></image>
-          </view>
-        </view>
-      </swiper-item>
-    </block>
-  </swiper>
 
-  <!-- 加载更多 -->
-  <!-- <view class='index-layout-center' bindtap="test" >
+<swiper class="tab-content" current="{{articleIndex}}" duration="300" bindchange="switchTab" style='height:{{listHeight}}'>
+  <block wx:key="{{index}}" wx:for="{{popular}}">
+    <swiper-item>
+      <view wx:key="index" wx:for="{{article}}" bindtap="gotoweb" data-resolveIndex='{{index}}'>
+        <view class='index-page-line'></view>
+        <view class='index-article'>
+          <view style='height:150rpx;'>
+            <view class="index-article-text">{{item.title}}</view>
+            <view class="index-article-text-lower">已帮助
+              <text style="color:#1ec88c">{{item.helpNumber}}</text>人</view>
+          </view>
+          <image src="{{item.image}}" style='width:223rpx;height:145rpx;'></image>
+        </view>
+      </view>
+    </swiper-item>
+  </block>
+</swiper>
+
+<!-- 加载更多 -->
+<!-- <view class='index-layout-center' bindtap="test" >
     <view class='index-more' bindtap='loadMore'>加载更多</view>
   </view> -->
-  <!-- 蒙层 -->
-  <view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
-  <!--弹出框  -->
-  <view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
-    <!-- 热线咨询 -->
-    <view class="modal-dialog" style="margin-top:30rpx" bindtap='phoneConstultation'>
-      <image src="../../image/homeicon_3x/home_page_07_3x.png" style="width:110rpx;height:100rpx;margin-left:40rpx" />
-      <view class="index-consult">
-        <view class="index-consult-text">热线咨询</view>
-        <view class="index-consult-text-lower">免费电话咨询,限时15分钟</view>
-      </view>
-      <image src="../../image/homeicon_3x/homepage_10_3x.png" style="width:20rpx;height:20rpx;margin-right:40rpx" />
+<!-- 蒙层 -->
+<view class="commodity_screen" bindtap="hideModal" wx:if="{{showModalStatus}}"></view>
+<!--弹出框  -->
+<view animation="{{animationData}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+  <!-- 热线咨询 -->
+  <view class="modal-dialog" style="margin-top:30rpx" bindtap='phoneConstultation'>
+    <image src="../../image/homeicon_3x/home_page_07_3x.png" style="width:110rpx;height:100rpx;margin-left:40rpx" />
+    <view class="index-consult">
+      <view class="index-consult-text">热线咨询</view>
+      <view class="index-consult-text-lower">免费电话咨询,限时15分钟</view>
     </view>
-    <!-- 图文咨询 -->
-    <view class="modal-dialog" bindtap="gotoConstultation">
-      <image src="../../image/homeicon_3x/home_page_08_3x.png" style="width:110rpx;height:100rpx;margin-left:40rpx" />
-      <view class="index-consult">
-        <view class="index-consult-text">文字咨询</view>
-        <view class="index-consult-text-lower">专业律师回复,轻微问题推荐使用</view>
-      </view>
-      <image src="../../image/homeicon_3x/homepage_10_3x.png" style="width:20rpx;height:20rpx;margin-right:40rpx" />
+    <image src="../../image/homeicon_3x/homepage_10_3x.png" style="width:20rpx;height:20rpx;margin-right:40rpx" />
+  </view>
+  <!-- 图文咨询 -->
+  <view class="modal-dialog" bindtap="gotoConstultation">
+    <image src="../../image/homeicon_3x/home_page_08_3x.png" style="width:110rpx;height:100rpx;margin-left:40rpx" />
+    <view class="index-consult">
+      <view class="index-consult-text">文字咨询</view>
+      <view class="index-consult-text-lower">专业律师回复,轻微问题推荐使用</view>
     </view>
-    <!-- 取消按钮 -->
-    <view style="display:flex;justify-content:center;margin-top:30rpx" bindtap="hideModal">
-      <image src="../../image/homeicon_3x/homepage_11_3x.png" style="width:50rpx;height:50rpx;margin-top:100rpx" />
-    </view>
+    <image src="../../image/homeicon_3x/homepage_10_3x.png" style="width:20rpx;height:20rpx;margin-right:40rpx" />
+  </view>
+  <!-- 取消按钮 -->
+  <view style="display:flex;justify-content:center;margin-top:30rpx" bindtap="hideModal">
+    <image src="../../image/homeicon_3x/homepage_11_3x.png" style="width:50rpx;height:50rpx;margin-top:100rpx" />
   </view>
 </view>
+<!-- </view> -->

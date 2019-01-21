@@ -11,7 +11,7 @@
   </view>
 
   <view class="details-page-title">
-   {{orderDetail.content}}
+    {{orderDetail.content}}
   </view>
 
   <view class='details-page-reply'>
@@ -23,7 +23,8 @@
       </view> -->
       <!-- <view class='details-page-reply-margin' bindtap='deleteInfo'>删除</view> -->
     </view>
-    <view><label style='color:#1ec88c'></label>{{allTotal}}条回复</view>
+    <view>
+      <label style='color:#1ec88c'></label>{{allTotal}}条回复</view>
   </view>
 </view>
 <view style='background-color:#b5b5b5;height:1rpx;'></view>
@@ -45,13 +46,23 @@
 
     <view class='details-page-answer-info'>
       <!-- <view >{{lawago[index]}}{{lawagoText[index]}}</view> -->
-      <view class='details-page-reply-margin' >{{timelaw[index]}}</view>
+      <view class='details-page-reply-margin'>{{timelaw[index]}}</view>
       <view class='details-page-reply-background details-page-reply-margin'>
-        <view  data-freeindex="{{index}}" bindtap='gotoReply'>{{freeText[index]>1?freeText[index]:''}}回复</view>
+        <view data-freeindex="{{index}}" bindtap='gotoReply'>{{freeText[index]>1?freeText[index]:''}}回复</view>
       </view>
     </view>
   </view>
 </view>
-
-
-
+<!--  -->
+<view class=''>
+  <view class='consoul-detail'>
+    <image src='' class='image-consoul-detail'></image>
+  </view>
+  <view class='consoul-detail'>这个咨询还没有律师回答</view>
+  <view class='consoul-detail'>去快速咨询,分钟响应</view>
+</view>
+<!-- 推荐内容 -->
+<view class='consoul-content-flex'>
+  <view>推荐内容</view>
+  <view>查看更多</view>
+</view>

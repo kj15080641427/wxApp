@@ -176,9 +176,6 @@ function requestGet(url, message, success, fail) {
     method: 'GET',
     success: function(res) {
       wx.hideNavigationBarLoading()
-      if (message != "") {
-        // wx.hideLoading()
-      }
       if (res.statusCode == 200 && res.data.code == 0) {
         success(res.data)
       } else {

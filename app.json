@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/index/index",
     "pages/search/index",
+    "pages/index/index",
+    "pages/index/all-search/index",
     "pages/my/index",
     "pages/userlogin/index",
     "pages/userlogin/user-url/index",

@@ -82,3 +82,30 @@
     font-size: 24rpx;
     color: #717171;
 }
+.message-tab{
+  width: 750rpx;
+  display: flex;
+  justify-content: space-around;
+}
+.msg-read-all-view{
+  background-color: white;
+  width: 750rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.msg-read-all{
+  font-size: 24rpx;
+  background-color:white;
+  border-radius: 30rpx;
+  border: 1rpx solid #1ec88c;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  text-align: center;
+  /* margin-top: 20rpx; */
+}
+.sys-msg-list{
+  background-color: white;
+  border-bottom: 1rpx solid #b5b5b5
+}

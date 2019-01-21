@@ -1,50 +1,58 @@
-.details-page{
+.details-page {
   padding-left: 35rpx;
   padding-right: 35rpx;
 }
-.details-page-flex{
+
+.details-page-flex {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-top: 35rpx; */
-  /* background-color: #f0fff2 */
+  /* margin-top: 35rpx; *//* background-color: #f0fff2 */
 }
-.details-page-flex-user{
-  height: 110rpx
+
+.details-page-flex-user {
+  height: 110rpx;
 }
-.details-page-background{
+
+.details-page-background {
   /* background-color: white; */
   padding-left: 35rpx;
-  padding-right: 35rpx
+  padding-right: 35rpx;
 }
-.details-page-top{
+
+.details-page-top {
   display: flex;
   align-items: center;
 }
-.details-page-icon{
+
+.details-page-icon {
   border-radius: 50%;
   /* background-color: red; */
   width: 40rpx;
   height: 40rpx;
 }
-.details-page-nikename{
+
+.details-page-nikename {
   font-size: 24rpx;
   color: #b7b7b7;
   margin-left: 20rpx;
 }
-.details-page-line{
+
+.details-page-line {
   width: 2rpx;
   height: 30rpx;
   background-color: #b7b7b7;
   margin-left: 20rpx;
 }
-.details-page-line-center{
-  background-color: #B5B5B5;
+
+.details-page-line-center {
+  background-color: #b5b5b5;
   height: 1rpx;
   width: 750rpx;
   padding-left: 0rpx;
 }
-.details-page-type{
+
+.details-page-type {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,29 +65,34 @@
   padding-left: 10rpx;
   padding-right: 10rpx;
 }
-.details-page-title{
+
+.details-page-title {
   font-size: 32rpx;
   color: #323232;
   font-weight: bold;
   margin-top: 35rpx;
-  line-height: 40rpx
+  line-height: 40rpx;
 }
-.details-page-reply{
+
+.details-page-reply {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 24rpx;
   color: #717171;
   margin-top: 40rpx;
-  padding-bottom: 40rpx
+  padding-bottom: 40rpx;
 }
-.details-page-reply-left{
+
+.details-page-reply-left {
   display: flex;
 }
-.details-page-reply-margin{
+
+.details-page-reply-margin {
   margin-left: 10rpx;
 }
-.details-page-reply-dot{
+
+.details-page-reply-dot {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,45 +101,52 @@
   width: 5rpx;
   height: 5rpx;
 }
-.details-page-lawyer{
-  background-color:#f2f2f2;
-  height:90rpx;
-  border-radius:10rpx;
-  padding-left:15rpx;
+
+.details-page-lawyer {
+  background-color: #f2f2f2;
+  height: 90rpx;
+  border-radius: 10rpx;
+  padding-left: 15rpx;
   margin-top: 30rpx;
 }
-.details-page-lawyer-icon{
+
+.details-page-lawyer-icon {
   width: 65rpx;
   height: 65rpx;
-  /* background-color: red; */
-  border-radius: 50%
+  border-radius: 50%;
 }
-.details-page-lawyer-nikename{
-  font-size:28rpx;
+
+.details-page-lawyer-nikename {
+  font-size: 28rpx;
   color: #323232;
   margin-left: 25rpx;
 }
-.details-page-lawyer-lawfirm{
+
+.details-page-lawyer-lawfirm {
   font-size: 24rpx;
   color: #717171;
   margin-left: 20rpx;
 }
-.details-page-answer{
+
+.details-page-answer {
   margin-top: 35rpx;
   font-size: 28rpx;
   color: #323232;
 }
-.details-page-answer-info{
+
+.details-page-answer-info {
   padding-top: 40rpx;
   display: flex;
-  font-size:24rpx;
+  font-size: 24rpx;
   color: #717171;
-  padding-bottom: 40rpx
+  padding-bottom: 40rpx;
 }
-page{
-  background-color: white
+
+page {
+  background-color: white;
 }
-.details-page-reply-background{
+
+.details-page-reply-background {
   display: flex;
   align-content: center;
   justify-content: center;
@@ -135,35 +155,57 @@ page{
   width: 110rpx;
   height: 35rpx;
 }
-.no-message{
+
+.no-message {
   width: 750rpx;
 }
-.no-messge-image-view{
+
+.no-messge-image-view {
   display: flex;
   justify-content: center;
 }
-.no-message-imag{
+
+.no-message-imag {
   margin-top: 220rpx;
   width: 330rpx;
   height: 330rpx;
 }
-.no-message-tips-view{
+
+.no-message-tips-view {
   display: flex;
   justify-content: center;
   margin-top: 50rpx;
   font-size: 28rpx;
 }
-.np-message-tips{
+
+.np-message-tips {
   font-size: 28rpx;
   color: #323232;
 }
-.no-message-button{
+
+.no-message-button {
   width: 280rpx;
   height: 94rpx;
-  border-radius:  55rpx;
+  border-radius: 55rpx;
   background-color: #1ec88c;
   color: white;
   font-size: 36rpx;
   margin-top: 65rpx;
   line-height: 94rpx;
+}
+
+.image-consoul-detail {
+  background-color: red;
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.consoul-detail {
+  width: 750rpx;
+  display: flex;
+  justify-content: center;
+}
+.consoul-content-flex{
+  display: flex;
+  justify-content: space-between
 }

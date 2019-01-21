@@ -1,25 +1,40 @@
 /* pages/search/lawyer-detail/index.wxss */
-.radarContainer{
-   background-color: white;
-   width:100%;
-   height:420px;
-   display: flex;
-   justify-content:center;
-    align-items: center; 
-   position: relative;
-   
+
+.radarContainer {
+  background-color: white;
+  width: 100%;
+  height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
-.radarCanvas{
-   width:400px;
-   height:400px;
-   margin: 0 auto;
-   position: absolute;
+
+.radarCanvas {
+  width: 350px;
+  height: 400px;
+  margin: 0 auto;
+  position: absolute;
 }
+
 .law-page-background {
   width: 750rpx;
   position: relative;
-  z-index:0;
+  z-index: 0;
   /* z-index:1; *//* position: absolute */
+}
+
+.lawyer-info {
+  position: absolute;
+  top: 350rpx;
+  left: 35rpx;
+  color: #fff;
+  font-size: 24rpx;
+}
+
+.lawyer-name {
+  font-size: 42rpx;
+  font-weight: bold;
 }
 
 .law-page-avatar {
@@ -28,8 +43,69 @@
   border-radius: 50%;
   position: absolute;
   left: 35rpx;
-  top: 465rpx;
+  top: 165rpx;
   border: 10rpx solid #efefef;
+}
+
+.tab-class {
+  width: 100%;
+  height: 120rpx;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #b5b5b5;
+  white-space: nowrap;
+}
+
+.skill-style-view {
+  display: flex;
+  width: 750rpx;
+  font-size: 28rpx;
+}
+
+.skill-style {
+  width: 600rpx;
+}
+
+.tab-detail {
+  margin-top: 30rpx;
+  width: 120rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  margin-left: 35rpx;
+  margin-right: 35rpx;
+  font-weight: bold;
+}
+
+/* 圆形进度条 */
+
+.circleBar {
+  width: 100%;
+  display: flex;
+  font-size: 28rpx;
+  /* height: auto; *//* overflow: hidden; *//* position: relative; */
+}
+
+.cir {
+  display: inline-block;
+  /* background-color: #fff; */
+  border-radius: 100%;
+}
+
+/* .canvas-flex {
+  display: felx;
+  width: 80rpx;
+  height: 80rpx;
+} */
+
+.centerWord {
+  width: 100%;
+  position: absolute;
+  top: 63rpx;
+  left: 70rpx;
+  color: red;
 }
 
 .follow-lawyer {
@@ -53,12 +129,11 @@
   width: 70rpx;
   height: 70rpx;
   position: relative;
-  z-index:99999
+  z-index: 99999;
 }
 
 .go-back {
   position: absolute;
-  /* width: 300rpx; */
   color: black;
   font-size: 36rpx;
   display: flex;
@@ -80,11 +155,6 @@
   box-sizing: border-box;
   border-top-right-radius: 30rpx;
   border-bottom-right-radius: 30rpx;
-}
-
-.law-page-min-size {
-  font-size: 24rpx;
-  font-weight: normal;
 }
 
 .law-flex {
@@ -131,6 +201,10 @@
   height: 80rpx;
 }
 
+.lawyer-address-firm {
+  margin-top: 60rpx;
+}
+
 .law-page-address {
   margin-left: 50rpx;
   font-size: 20rpx;
@@ -149,10 +223,7 @@
 }
 
 .law-page-LEX {
-  color: #1ec88c;
   font-size: 24rpx;
-  margin-left: 50rpx;
-  /* margin-top: 30rpx; */
   height: 60rpx;
   display: flex;
   align-items: center;
@@ -265,15 +336,6 @@
   height: 50rpx;
 }
 
-.law-long-text {
-  white-space: nowrap;
-  color: #b5b5b5;
-  margin-left: 35rpx;
-  font-size: 28rpx;
-  margin-top: 30rpx;
-  margin-bottom: 30rpx;
-}
-
 .law-long-text-flex {
   white-space: nowrap;
   color: #b5b5b5;
@@ -302,10 +364,10 @@
 .law-margin-left {
   margin-left: 20rpx;
   font-size: 28rpx;
-  width: 300rpx;
-  overflow: hidden;
+  display: flex;
+  /* flex-wrap: wrap; *//* width: 300rpx; *//* overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: nowrap; */
 }
 
 .law-page-line-skill {
@@ -434,14 +496,9 @@
 }
 
 .law-skill-right-other {
-  /* margin-top: 20rpx; */
-  margin-left: 35rpx;
   font-size: 28rpx;
-  height: 80rpx;
   display: flex;
-  justify-content: flex-start;
   flex-wrap: wrap;
-  align-items: center;
 }
 
 .law-skill-flex {

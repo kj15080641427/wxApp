@@ -1,0 +1,42 @@
+<!-- 搜索输入框 -->
+<view class='searcg-input'>
+  <input placeholder='输入搜索内容' placeholder-class='place-inout-class'></input>
+  <view>搜索</view>
+</view>
+<!-- 免费咨询 -->
+<view>
+  <view class='user-info'>
+    <image src='' class='user-avatar-style'></image>
+    <view>name | </view>
+    <view>address</view>
+    <view>type</view>
+  </view>
+  <view class='search-consul-content'>content</view>
+  <view class='allsearch-flex'>
+    <view>time</view>
+    <view>reply</view>
+  </view>
+  <view class='allsearch-line'></view>
+</view>
+<!-- 推荐律师 -->
+<view class='allsearch-flex'>
+  <view>推荐律师</view>
+  <view>查看更多</view>
+</view>
+<view class='allsearch-flex'>
+  <image src='' class='lawyer-avatar'></image>
+  <view>
+    <view>lawyername</view>
+    <view>add|lawfirm</view>
+  </view>
+  <view>查看主页</view>
+</view>
+<!-- 文章 -->
+<view class='allsearch-flex'>
+  <view>
+    <view>title</view>
+    <view>helpnumber</view>
+  </view>
+  <image src='' class='article-image'></image>
+</view>
+<view class='allsearch-line'></view>

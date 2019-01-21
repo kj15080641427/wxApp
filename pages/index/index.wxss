@@ -322,30 +322,17 @@
   height: 0;
   color: transparent;
 }
-/* 
-.scoll-h {
-  height: 100%;
+.logo-content{
+  background-color: #b5b5b5;
+  height: 120rpx;
+  width: 750rpx;
+  border-radius: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.swiper {
-  padding-top: 30px;
+.index-type-flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-
-.le-img {
-  display: block;
-  transform: scale(0.8);
-  transition: all 0.3s ease;
-  border-radius: 6px;
-}
-
-.le-img.le-active {
-  transform: scale(1);
-}
-
-page {
-  height: 1500rpx;
-}
-
-swiper {
-  height: 800rpx;
-} */
