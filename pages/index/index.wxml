@@ -8,7 +8,7 @@
     </view>
     <view class="index-news" bindtap='goToMessage'>
       <image src='../../image/homeicon_3x/homepage_02_3x.png'></image>
-      <view wx:if="{{unReadCount>0}}" class="unread-count">{{unReadCount}}</view>
+      <view wx:if="{{unReadCount>0 || unreadOrder>0||unreadSystem>0}}" class="unread-count">{{unReadCount+unreadOrder+unreadSystem}}</view>
     </view>
   </view>
   <!-- 图标 -->
@@ -101,7 +101,7 @@
   <swiper class="tab-content" current="{{articleIndex}}" duration="300" bindchange="switchTab" style='height:{{listHeight}}'>
     <block wx:key="{{index}}" wx:for="{{popular}}">
       <swiper-item>
-        <view wx:key="index" wx:for="{{article}}" bindtap="gotoweb" data-resolveIndex='{{index}}'>
+        <view wx:key="index" wx:for="{{article}}" bindtap="gotoweb" data-resolveIndex='{{index}}' hover-class='click-style'>
           <view class='index-page-line'></view>
           <view class='index-article'>
             <view style='height:150rpx;'>

@@ -43,7 +43,6 @@ Page({
     }
     this.setData({
       multiArray: this.data.multiArray,
-      // multiIndex: this.data.multiIndex,
     })
   },
   bindMultiPickerChange: function(e) {
@@ -169,32 +168,6 @@ Page({
   },500),
   // 提交
   commit: function() {
-    // var that = this
-    // var commitURL = api.getCommitUrl()
-    // var freedata = {
-    //   "consultationTypeId": that.data.consultationTypeId,
-    //   "regionId": that.data.regionId,
-    //   "content": that.data.commitContent,
-    //   "isHide": that.data.isHide == true ? '1' : '0',
-    //   // "wxReportSubmit": {
-    //   //   "openId": wx.getStorageSync('openid'),
-    //   //   "formId": that.data.formId
-    //   // }
-    // }
-    // var success = function(data) {
-    //   that.setData({
-    //     consultation: data
-    //   })
-    //   that.getOrder()
-    //   wx.showToast({
-    //     title: '提交成功',
-    //   })
-    // }
-    // var fail = function(e) {
-    //   wx.showToast({
-    //     title: '提交失败',
-    //   })
-    // }
     wx.showLoading({
       title: '提交中',
       mask:true
@@ -216,7 +189,6 @@ Page({
         icon: 'none'
       })
     } else {
-      // wxrequest.request(commitURL, freedata, success, fail)
       this.commitRequest()
     }
   },
@@ -234,7 +206,7 @@ Page({
         order: data.data.list
       })
       wx.redirectTo({
-        url: '/pages/index/consultation-details/index?orderDetail=' + JSON.stringify(that.data.order[0]),//获取此条文字咨询详情, 调整至文字咨询详情页 
+        url: '/pages/index/consultation-details/index?orderDetail=' + JSON.stringify(that.data.order[0]),//获取此条文字咨询详情, tiaozhuan至文字咨询详情页 
       })
     }
     var fail = (e) => {
@@ -294,7 +266,6 @@ Page({
         provi: 0
       })
     }
-    // console.log('省', this.data.provi)
     reg.citysData[this.data.provi].child.map((item, index) => {
       if (item.name == wx.getStorageSync("city")) {
         this.setData({

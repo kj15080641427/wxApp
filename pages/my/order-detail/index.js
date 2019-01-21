@@ -21,14 +21,6 @@ Page({
     statusValue:false
     // orderDetail:''
   },
-  // gotoChat:function(){
-  //   if(this.data.lawyerPhone){
-
-  //   }
-  //   // wx.navigateTo({
-  //   //   url: '../order-chat/index',
-  //   // })
-  // },
   //获取律师电话
   getLawyerPhone:function(){
     var url = api.getLawyerPhone() + this.data.orderDetail.orderNo

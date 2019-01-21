@@ -27,9 +27,7 @@ Page({
         title: '回复成功',
       })
       wx.navigateBack({
-        
       })
-      // that.getFreeText()
     }
     var fail = e => {
       wx.showToast({

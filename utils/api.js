@@ -334,6 +334,31 @@ var Procur = '/common/procuratorate'
 function getProcur(){
   return HOST_URL + Procur
 }
+//所以分类未读消息
+var Unread = '/client/message/unread/count'
+function getUnread() {
+  return HOST_URL + Unread
+}
+//系统消息列表
+var System = '/client/message/system'
+function getSystem() {
+  return HOST_URL + System
+}
+//订单消息列表
+var Ordermsg = '/client/message/order'
+function getOrdermsg() {
+  return HOST_URL + Ordermsg
+}
+//更新某类未读消息为已读
+var Allread = '/client/message/unread/update/'
+function getAllread() {
+  return HOST_URL + Allread
+}
+//更新某条消息为已读
+var OneRead = '/client/message/unread/update/single/'
+function getReadone() {
+  return HOST_URL + OneRead
+}
 module.exports={
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,
@@ -386,4 +411,9 @@ module.exports={
   getCash: getCash,
   getLawCash: getLawCash,
   getProcur: getProcur,
+  getUnread: getUnread,
+  getSystem: getSystem,
+  getAllread: getAllread,
+  getReadone: getReadone,
+  getOrdermsg: getOrdermsg,
 }

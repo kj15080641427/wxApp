@@ -1,30 +1,71 @@
 <view class="message">
-    <!-- <view class="msg-bar">
-        <view class="bar-item {{content == 'demand' ? 'active' : ''}}" data-content="demand" bindtap="switchTab">我的需求 <view class="msg-count" wx:if="{{ messageCount > 0 }}">{{ messageCount }}</view></view>
-        <view class="bar-item {{content == 'message' ? 'active' : ''}}" data-content="message" bindtap="switchTab">我的消息</view>
-    </view> -->
-
-    <view wx:if="{{content == 'demand'}}" class="msg-list">
-        <view wx:for="{{conversationList}}" wx:key="name" class="list-item" hover-class="list-tap" data-avatar="{{item.avatar}}" data-name="{{ item.nickName }}" data-user="{{item.username}}" bindtap="goChart">
-            <view class="avatar">
-                <image class="avatar-img" src="{{item.avatar}}" mode="scaleToFill" lazy-load="true" binderror="" bindload=""></image>
-                <view wx:if="{{item.unread_msg_count>0}}" class="count">{{item.unread_msg_count}}</view>
-            </view>
-            <view class="body">
-                <view class="name">{{ item.nickName }}</view>
-                <view class="info">{{ info }}</view>
-            </view>
-        </view>
+  <view class="msg-bar">
+    <view class="bar-item {{current == 0 ? 'active' : ''}}" data-current='0' bindtap="switchTab">需求消息
+      <view class="msg-count" wx:if="{{ messageCount > 0 }}">{{ messageCount }}</view>
     </view>
-    <scroll-view wx:if="{{content == 'message'}}" class="" scroll-y="true" upper-threshold="50" lower-threshold="50" scroll-top="0" enable-back-to-top="true" bindscrolltoupper="" bindscrolltolower="loadData" bindscroll="">
-        <view class="list-item" hover-class="list-tap" hover-stop-propagation="false">
+    <view class="bar-item {{current == 1 ? 'active' : ''}}" data-current="1" bindtap="switchTab">订单消息</view>
+    <view class="bar-item {{current == 2 ? 'active' : ''}}" data-current="2" bindtap="switchTab">系统消息</view>
+  </view>
+  <view class='msg-read-all-view'>
+    <view bindtap='getAllread' class='msg-read-all'>全部设为已读</view>
+  </view>
+  <!-- 需求消息 -->
+  <swiper bindchange='swiper' current="{{current}}" style="height:1200rpx;">
+    <swiper-item>
+      <scroll-view scroll-y style='height:1200rpx'>
+        <view wx:if="{{current == 0}}" class="msg-list">
+          <view wx:for="{{conversationList}}" wx:key="name" class="list-item" hover-class="list-tap" data-avatar="{{item.avatar}}" data-name="{{ item.nickName }}" data-user="{{item.username}}" bindtap="goChart">
             <view class="avatar">
-                
+              <image class="avatar-img" src="{{item.avatar}}" mode="scaleToFill" lazy-load="true" binderror="" bindload=""></image>
+              <view wx:if="{{item.unread_msg_count>0}}" class="count">{{item.unread_msg_count}}</view>
             </view>
             <view class="body">
-                <view class="name"></view>
-                <view class="info"></view>
+              <view class="name">{{ item.nickName }}</view>
+              <view class="info">{{ info }}</view>
             </view>
+          </view>
         </view>
-    </scroll-view>
+      </scroll-view>
+    </swiper-item>
+    <!-- 订单消息 -->
+    <swiper-item>
+      <scroll-view wx:if="{{current == 1}}" class="" scroll-y="true" upper-threshold="50" lower-threshold="50" scroll-top="0" enable-back-to-top="true" bindscrolltoupper="" bindscrolltolower="loadData" bindscroll="" style='height:1200rpx;'>
+        <view hover-class="list-tap" wx:key="{{index}}" class="order-view-detail" wx:for="{{orderMsg}}" data-orderindex="{{index}}" bindtap='clickOrder'>
+          <image src='{{item.icon}}' class="order-avatar"></image>
+          <view class='red-round-view'>
+            <view wx:if="{{!item.isRead}}" class='red-round'></view>
+          </view>
+          <view>
+            <view class='time-title'>
+              <view class='hide-title'>{{item.title}}</view>
+              <view style='font-size:20rpx'>{{msgTime[index]}}</view>
+            </view>
+            <view class="info">{{item.content}}</view>
+          </view>
+
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <!-- 系统消息 -->
+    <swiper-item>
+      <scroll-view wx:if="{{current == 2}}" class="" scroll-y="true" upper-threshold="50" lower-threshold="50" scroll-top="0" enable-back-to-top="true" bindscrolltoupper="" bindscrolltolower="loadData" bindscroll="" style='height:1200rpx;'>
+        <view hover-class="list-tap" wx:key="{{index}}" class="order-view-detail" wx:for="{{sysMessage}}" data-sysindex="{{index}}" bindtap='clickOrder'>
+          <view class='order-actar-view'>
+            <image src='/image/message/Message_icon_01@3x.png' class="order-avatar"></image>
+          </view>
+          <view class='red-round-view'>
+            <view wx:if="{{!item.isRead}}" class='red-round'></view>
+          </view>
+          <view>
+            <view class='time-title'>
+              <view class='hide-title'>title{{item.title}}</view>
+              <view style='font-size:20rpx'>{{timelaw[index]}}</view>
+            </view>
+            <view class="info">{{item.url}}</view>
+          </view>
+
+        </view>
+      </scroll-view>
+    </swiper-item>
+  </swiper>
 </view>

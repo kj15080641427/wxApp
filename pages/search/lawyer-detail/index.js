@@ -281,7 +281,7 @@ Page({
         "positionName": item.positionName
       })
     }) : ''
-    var now = formatTime.formatTime(new Date()).split('/')[0]
+    var now = formatTime.formatTime(new Date()).split('-')[0]
     var age = that.data.lawyerCard.birthday.split("-")[0]
     that.setData({
       education: educationList,
@@ -333,7 +333,7 @@ Page({
   getYear: function() {
     var that = this
     that.setData({
-      year: formatTime.formatTime(new Date()).split("/")[0] - that.data.lawyerCard.beginPracticeDate.split("-")[0],
+      year: formatTime.formatTime(new Date()).split("-")[0] - that.data.lawyerCard.beginPracticeDate.split("-")[0],
     })
   },
   //关闭弹窗
@@ -516,16 +516,21 @@ Page({
   //快速咨询
   quickConsultation: function() {
     var that = this
+    wx.showLoading({
+      mask:true
+    })
     var url = api.getExpertPhone() + that.data.lawyerList
     var success = (res)=>{
       console.log(res)
       this.setData({
         countDown : true
       })
+      wx.hideLoading()
       this.downTime()
     }
     var fail = (e)=>{
       this.hideModal()
+      wx.hideLoading()
       console.log(e)
     }
     wxrequest.requestGet(url,'',success,fail)

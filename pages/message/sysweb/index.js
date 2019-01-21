@@ -1,11 +1,11 @@
-// pages/index/adWebView/index.js
+// pages/message/sysweb/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    adUrl:''
+
   },
 
   /**
@@ -13,10 +13,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      // adUrl:wx.getStorageSync('ad')
-      adUrl:options.url
+      url:options.url
     })
-    console.log('ad', options.url)
   },
 
   /**

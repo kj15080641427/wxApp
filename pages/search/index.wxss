@@ -350,3 +350,6 @@
   margin-top: 65rpx;
   line-height: 94rpx;
 }
+.click-style{
+  background-color: #f4f4f4
+}
