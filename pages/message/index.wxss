@@ -68,6 +68,7 @@
   border-radius: 50%;
   width: 105rpx;
   height: 105rpx;
+  margin-top: 15rpx;
   /* background-color: ; */
 }
 .order-actar-view{
