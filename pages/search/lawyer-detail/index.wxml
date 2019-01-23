@@ -297,7 +297,7 @@
     </view>
 
     <view wx:if="{{start}}">
-      <view style='width:680rpx;display:flex;justify-content:center;margin-left:35rpx;margin-right:35rpx;margin-top:100rpx;'>律师咨询价格为{{lawyerMoney.lawyerPrice+'/元'+lawyerMoney.priceUnit}},我们将照秒为单位进行计费,前{{lawyerMoney.freeTime}}免费</view>
+      <view style='width:680rpx;display:flex;justify-content:center;margin-left:35rpx;margin-right:35rpx;margin-top:100rpx;'>律师咨询价格为{{lawyerMoney.lawyerPrice+'/元'+lawyerMoney.priceUnit}},我们将照秒为单位进行计费,前{{lawyerMoney.freeTime}}免费 当前可通话<text wx:if="{{hour}}">{{hour}}小时</text>{{minute}}分{{second}}秒</view>
       <view style='width:680rpx;text-align:center;margin-top:100rpx;display:flex;justify-content:space-around'>
         <view catchtap="hideModal">关闭</view>
         <view catchtap="quickConsultation">拨打电话</view>

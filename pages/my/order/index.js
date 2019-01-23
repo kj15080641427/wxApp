@@ -33,6 +33,10 @@ Page({
         url: '../order-detail/index?orderDetail=' + JSON.stringify(that.data.order[e.currentTarget.dataset.orderindex]),
       })
       console.log('asdasdas',JSON.stringify(that.data.order[e.currentTarget.dataset.orderindex]))
+    } else if (that.data.order[e.currentTarget.dataset.orderindex].orderType == '专家电话咨询'){
+      wx.navigateTo({
+        url: '../order-expert/index?orderDetail=' + JSON.stringify(that.data.order[e.currentTarget.dataset.orderindex]),
+      })
     }
   },
   clear:function(){
@@ -70,9 +74,10 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      memberId: options.memberId,
-      mobile: options.mobile
+      memberId: wx.getStorageSync('memberId'),
+      mobile: wx.getStorageSync('mobile')
     })
+    this.getOrder()
   },
 
   /**
@@ -87,9 +92,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    this.setData({
-      order:[]
-    })
+    // this.setData({
+    //   order:[]
+    // })
 
     wx.showLoading()
     if (!jM.isLogin()) {
@@ -126,7 +131,6 @@ Page({
     } else {
       wx.hideLoading()
     }
-    this.getOrder()
   },
   /**
    * 生命周期函数--监听页面隐藏

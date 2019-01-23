@@ -37,12 +37,31 @@
       <view class="index-text-style">
         <image src='../../image/homeicon_3x/homepage_05_3x.png' style='width:120rpx;height:120rpx'></image>
       </view>
-      <label class='index-text-style'>律师服务</label>
+      <label class='index-text-style'>专家咨询</label>
       <view class='index-text-style-mini'>
-        <label class='index-text-style-green'>找到</label>
-        <label class='index-text-style-gray '>合适律师</label>
+        <label class='index-text-style-green'>1对1</label>
+        <label class='index-text-style-gray '>电话服务</label>
       </view>
     </view>
+  </view>
+
+  <view class='lawyer-view'>
+    <view class='lawyer-service' bindtap='gotodemand'>
+      <view class='lawyer-image-flex'>
+        <view>律师服务</view>
+        <image src='/image/homeicon_3x/lawyer-service.png' class='lawyer-image'></image>
+      </view>
+      <view class='lawyer-service-content'>找到合适律师</view>
+    </view>
+
+    <view class='lawyer-service' style='background-color:#fffaf0' bindtap='gotoMember'>
+      <view class='lawyer-image-flex'>
+        <view>在线法务会员</view>
+        <image src='/image/homeicon_3x/firm.png' class='lawyer-image'></image>
+      </view>
+      <view class='lawyer-service-content'>优选法律专家团</view>
+    </view>
+
   </view>
   <!-- 中部轮播图片 -->
   <view style='background-color:white'>
@@ -83,7 +102,7 @@
   </view>
   <scroll-view scroll-x class="scroll-x" scroll-left="{{scrollLeft}}">
     <view wx:for="{{popular}}" wx:key="index" class="view-parent">
-      <view class="{{articleIndex==index ? 'view-item-color' : 'view-item'}}" bindtap="selsectArticle" id="{{index}}" data-current="{{item.id}}">{{item.typeName}}</view>
+      <view class="{{articleIndex==index ? 'view-item-color' : 'view-item'}}" bindtap="selsectArticle" id="{{index}}" data-current="{{item.id}}">{{item.alias}}</view>
       <view class="{{articleIndex==index ? 'view-item-green-line' : ''}}"></view>
     </view>
   </scroll-view>

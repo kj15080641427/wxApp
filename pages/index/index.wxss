@@ -56,6 +56,42 @@
   border-radius: 10rpx;
 }
 
+.lawyer-view{
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding-top: 50rpx;
+  padding-bottom: 35rpx;
+  padding-left: 35rpx;
+  padding-right: 35rpx;
+}
+.lawyer-service{
+  background-color: #f5fdff;
+  width: 320rpx;
+  height: 160rpx;
+  border-radius: 10rpx;
+  font-size: 34rpx;
+  font-weight: bold;
+
+}
+.lawyer-service-content{
+  margin-top: 20rpx;
+  margin-left: 25rpx;
+  font-size: 30rpx;
+  font-weight: normal;
+}
+.lawyer-image-flex{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 35rpx;
+  margin-left: 25rpx;
+}
+.lawyer-image{
+  width:  50rpx;
+  height: 50rpx;
+  /* background-color: red; */
+  margin-right: 25rpx;
+}
 .index-news {
   width: 50rpx;
   height: 40rpx;

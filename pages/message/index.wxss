@@ -142,7 +142,17 @@
   margin-top: 15rpx;
   margin-right: 35rpx;
 }
-
+.red-round-top{
+  background-color: red;
+  border-radius: 50%;
+  width: 20rpx;
+  height: 20rpx;
+  margin-top: 15rpx;
+  margin-right: 35rpx;
+  position: absolute;
+  top: 0;
+  left: 70%
+}
 .red-round {
   background-color: red;
   border-radius: 50%;
@@ -187,8 +197,18 @@
   width: 750rpx;
   height: 60rpx;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: flex-end;
+}
+.switch-component{
+  font-size: 30rpx;
+  /* background-color: white; */
+  /* border-radius: 30rpx; */
+  /* border: 1rpx solid #1ec88c; */
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  margin-left: 35rpx;
+  text-align:start;
 }
 
 .msg-read-all {

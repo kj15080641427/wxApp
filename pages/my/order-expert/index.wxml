@@ -1,0 +1,36 @@
+<view class='detail-page-background'>
+  <view class='detail-page-flex-once'>
+    <view style='width:120rpx;display:flex;justify-content: space-between'>订单编号</view>
+    <view class="detail-page-right">{{expert.orderNo}}</view>
+  </view>
+
+  <view class='detail-page-flex'>
+    <view style='width:120rpx;display:flex;justify-content: space-between'>创建日期</view>
+    <view class="detail-page-right">{{expert.createDate}}</view>
+  </view>
+
+  <view class='detail-page-flex'>
+    <view style='width:120rpx;display:flex;justify-content: space-between'>商品名称</view>
+    <view class="detail-page-right">{{expert.orderType}}</view>
+  </view>
+
+  <view class='detail-page-flex'>
+    <view style='width:120rpx;display:flex;justify-content: space-between'>咨询律师</view>
+    <view class="detail-page-right">{{expert.lmemberName}}</view>
+  </view>
+
+  <view class='detail-page-flex'>
+    <view style='width:120rpx;display:flex;justify-content: space-between'>通话时长</view>
+    <view class="detail-page-right">{{hour}}:{{minute}}:{{second}}</view>
+  </view>
+
+  <view class='detail-page-flex'>
+    <view style='width:120rpx;display:flex;justify-content: space-between'>订单金额</view>
+    <view class="detail-page-color">¥ {{expert.buyerPayAmount}}元</view>
+  </view>
+
+  <view class='detail-page-flex'>
+    <view style='width:120rpx;display:flex;justify-content: space-between'>订单状态</view>
+    <view class="detail-page-right">{{expert.statusValue}}</view>
+  </view>
+</view>

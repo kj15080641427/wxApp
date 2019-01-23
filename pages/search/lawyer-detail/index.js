@@ -6,11 +6,11 @@ import wxPay from '../../../utils/wxPay.js'
 var App = getApp()
 
 
-var numCount = 6;  //元素个数
-var numSlot = 5;  //一条线上的总节点数
-var mW = 400;  //Canvas的宽度
-var mCenter = mW / 2;  
-var mAngle = Math.PI * 2 / numCount; 
+var numCount = 6; //元素个数
+var numSlot = 5; //一条线上的总节点数
+var mW = 400; //Canvas的宽度
+var mCenter = mW / 2;
+var mAngle = Math.PI * 2 / numCount;
 var mRadius = mCenter - 60; //半径(减去的值用于给绘制的文本留空间)
 //获取指定的Canvas
 var radCtx = wx.createCanvasContext("radarCanvas")
@@ -21,8 +21,22 @@ Page({
    */
   data: {
     stepText: 5,
-    chanelArray1: [["", 88], ["", 30], ["", 66], ["", 90], ["", 95], ["", 88]],
-    chanelArray2: [["", 24], ["", 60], ["", 88], ["", 49], ["", 46], ["", 92]],
+    chanelArray1: [
+      ["", 88],
+      ["", 30],
+      ["", 66],
+      ["", 90],
+      ["", 95],
+      ["", 88]
+    ],
+    chanelArray2: [
+      ["", 24],
+      ["", 60],
+      ["", 88],
+      ["", 49],
+      ["", 46],
+      ["", 92]
+    ],
     lawyerInfo: '',
     lawyerList: '',
     index: '',
@@ -447,20 +461,44 @@ Page({
   },
   //余额是否足够
   isEnough: function() {
-    if(wx.getStorageSync('token')){
+    if (wx.getStorageSync('token')) {
       if (this.data.lawyerMoney.balance >= this.data.lawyerMoney.lawyerPrice / 60) {
-        this.showModal()
+        //每秒单价
+        let secondPrice = this.data.lawyerMoney.lawyerPrice / 60 / 60
+        let balance = this.data.lawyerMoney.balance
+        this.setData({
+          hour: Math.round((balance / secondPrice + 15) / 60 /60) > 1 ? Math.round((balance / secondPrice + 15) / 60 / 60) + '小时' : '',
+          minute: Math.round((balance / secondPrice + 15) / 60 %60 ) + '分',
+          second: Math.round((balance / secondPrice + 15)%60)  + '秒'
+        })
+        console.log(this.data.hour, secondPrice, balance)
+        this.callPhone()
+        // this.showModal()
       } else {
         wx.showToast({
-          title: '余额不足',
+          title: '最低通话时间为1分钟,当前余额不足,请先充值',
           icon: 'none'
         })
       }
-    }else{
+    } else {
       wx.navigateTo({
         url: '/pages/userlogin/index',
       })
     }
+  },
+  //拨打电话
+  callPhone: function() {
+    wx.showModal({
+      title: '联系律师',
+      content: `律师咨询价格为${this.data.lawyerMoney.lawyerPrice}/元${this.data.lawyerMoney.priceUnit},我们将以秒为单位进行计费,前${this.data.lawyerMoney.freeTime}免费,当前可通话${this.data.hour}${this.data.minute}${this.data.second}`,
+      confirmText: '拨打电话',
+      success: (res) => {
+        if (res.confirm) {
+          this.quickConsultation()
+          console.log('modal拨打电话')
+        }
+      }
+    })
   },
   showModal: function() {
     // 显示遮罩层
@@ -513,70 +551,28 @@ Page({
     // wx.showTabBar({})
   },
   //支付
-  //快速咨询
+  //专家服务
   quickConsultation: function() {
     var that = this
     wx.showLoading({
-      mask:true
+      title:'正在联系律师',
+      mask: true
     })
     var url = api.getExpertPhone() + that.data.lawyerList
-    var success = (res)=>{
+    var success = (res) => {
       console.log(res)
-      this.setData({
-        countDown : true
-      })
+      // this.setData({
+      //   countDown: true
+      // })
       wx.hideLoading()
       this.downTime()
     }
-    var fail = (e)=>{
-      this.hideModal()
+    var fail = (e) => {
+      // this.hideModal()
       wx.hideLoading()
       console.log(e)
     }
-    wxrequest.requestGet(url,'',success,fail)
-
-      // wx.request({
-      //   url: api.getExpertPhone() + v.lawyerId,
-      //   data: '',
-      //   header: {
-      //     'Content-Type': 'application/json',
-      //     'device': JSON.stringify(device),
-      //     'X-Token': wx.getStorageSync("token")
-      //   },
-      //   method: 'GET',
-      //   dataType: 'json',
-      //   responseType: 'text',
-      //   success: function (res) {
-      //     v.downTime
-      //     v.countDown = true
-      //     console.log(res)
-      //     reslove(res)
-      //   },
-      //   fail: function (res) {
-      //     console.log(res)
-      //     reject(res)
-      //   },
-      //   complete: function (res) { },
-      // })
-    // var t = {
-    //   money: this.data.lawyerMoney.lawyerPrice * 100,
-    //   type: 3,
-    //   product: 5,
-    //   lawyerId: this.data.lawyerList,
-    //   downTime: this.downTime(),
-    //   countDown: this.setData({
-    //     start: false,
-    //     countDown: true,
-    //     start: false,
-    //   })
-    // }
-    // wxPay(t).then(res => {
-    //   // console.log('支付', res)
-    // }).catch(error =>{
-    //   that.hideModal()
-    //   clearInterval(that.data.settime)
-    //   console.log('钱不够',error)
-    // })
+    wxrequest.requestGet(url, '', success, fail)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -636,7 +632,7 @@ Page({
 
   },
   // 雷达图
-  drawRadar: function () {
+  drawRadar: function() {
     var sourceData1 = this.data.chanelArray1
     // var sourceData2 = this.data.chanelArray2
 
@@ -656,9 +652,9 @@ Page({
     radCtx.draw()
   },
   // 绘制6条边
-  drawEdge: function () {
+  drawEdge: function() {
     radCtx.setStrokeStyle("white")
-    radCtx.setLineWidth(2)  //设置线宽
+    radCtx.setLineWidth(2) //设置线宽
     for (var i = 0; i < numSlot; i++) {
       //计算半径
       radCtx.beginPath()
@@ -676,7 +672,7 @@ Page({
     }
   },
   // 绘制连接点
-  drawLinePoint: function () {
+  drawLinePoint: function() {
     radCtx.beginPath();
     // for (var k = 0; k < numCount; k++) {
     //   var x = mCenter + mRadius * Math.cos(mAngle * k);
@@ -688,7 +684,7 @@ Page({
     radCtx.stroke();
   },
   //绘制数据区域(数据和填充颜色)
-  drawRegion: function (mData, color) {
+  drawRegion: function(mData, color) {
 
     radCtx.beginPath();
     for (var m = 0; m < numCount; m++) {
@@ -704,10 +700,10 @@ Page({
   },
 
   //绘制文字
-  drawTextCans: function (mData) {
+  drawTextCans: function(mData) {
 
     radCtx.setFillStyle("white")
-    radCtx.font = 'bold 17px cursive'  //设置字体
+    radCtx.font = 'bold 17px cursive' //设置字体
     for (var n = 0; n < numCount; n++) {
       var x = mCenter + mRadius * Math.cos(mAngle * n);
       var y = mCenter + mRadius * Math.sin(mAngle * n);
@@ -726,7 +722,7 @@ Page({
     }
   },
   //画点
-  drawCircle: function (mData, color) {
+  drawCircle: function(mData, color) {
     var r = 3; //设置节点小圆点的半径
     for (var i = 0; i < numCount; i++) {
       var x = mCenter + mRadius * Math.cos(mAngle * i) * mData[i][1] / 100;

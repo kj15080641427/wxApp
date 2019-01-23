@@ -511,6 +511,15 @@
   line-height: 80rpx;
 }
 
+.modal-button{
+  background-color: #1ec88c;
+  /* height: 80rpx; */
+  /* width: 300rpx; */
+  border-radius: 40rpx;
+  color: white;
+  line-height: 80rpx;
+}
+
 .commodity_attr_box {
   height: 500rpx;
   width: 100%;
