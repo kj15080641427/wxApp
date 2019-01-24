@@ -335,19 +335,6 @@ function getProcur(){
 }
 //所以分类未读消息
 var Unread = '/client/message/unread/count'
-<<<<<<< HEAD
-function getUnread(){
-  return HOST_URL+Unread
-}
-//系统消息列表
-var System = '/client/message/system'
-function getSystem(){
-  return HOST_URL + System
-}
-//更新某类未读消息为已读
-var Allread = '/client/message/unread/update/'
-function getAllread(){
-=======
 function getUnread() {
   return HOST_URL + Unread
 }
@@ -364,18 +351,12 @@ function getOrdermsg() {
 //更新某类未读消息为已读
 var Allread = '/client/message/unread/update/'
 function getAllread() {
->>>>>>> 25c2cd65a546ca6aeb1060337f79af5cbc60b7f2
   return HOST_URL + Allread
 }
 //更新某条消息为已读
 var OneRead = '/client/message/unread/update/single/'
-<<<<<<< HEAD
-function getReadone(){
-  return HOST_URL+OneRead
-=======
 function getReadone() {
   return HOST_URL + OneRead
->>>>>>> 25c2cd65a546ca6aeb1060337f79af5cbc60b7f2
 }
 module.exports={
   appLogin: appLogin,
@@ -433,8 +414,5 @@ module.exports={
   getSystem: getSystem,
   getAllread: getAllread,
   getReadone: getReadone,
-<<<<<<< HEAD
-=======
   getOrdermsg: getOrdermsg,
->>>>>>> 25c2cd65a546ca6aeb1060337f79af5cbc60b7f2
 }

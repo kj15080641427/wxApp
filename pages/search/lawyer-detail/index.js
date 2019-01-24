@@ -63,7 +63,10 @@ Page({
     this.setData({
       tabindex: e.currentTarget.dataset.tabindex
     })
-    console.log(e)
+    // if (e.currentTarget.dataset.tabindex==0){
+      this.drawRadar()
+    // }
+    console.log(e.currentTarget.dataset.tabindex)
   },
   //返回
   tabBack: function() {
@@ -625,13 +628,10 @@ Page({
     let rightItems = 90;
     let completePercent = parseInt((rightItems / totalItems) * 100);
     // that.getResultComment(completePercent);
-    that.showScoreAnimation(90, totalItems, 'canvasArc');
-    // that.showScoreAnimation(100, totalItems, 'canvasArc1');
-    // that.showScoreAnimation(100, totalItems, 'canvasArc2');
-    // that.showScoreAnimation(100, totalItems, 'canvasArc3');
-    // that.showScoreAnimation(10, totalItems, 'canvasArc4');
+    that.showScoreAnimation(90, totalItems, 'canvasArc',120,40);
+    that.showScoreAnimation(100, totalItems, 'canvasArc',40,40);
   },
-  showScoreAnimation: function(rightItems, totalItems, canvasArc) {
+  showScoreAnimation: function(rightItems, totalItems, canvasArc,x,y) {
     /*
     cxt_arc.arc(x, y, r, sAngle, eAngle, counterclockwise);
     x	                    Number	  圆的x坐标
@@ -656,14 +656,14 @@ Page({
           cxt_arc.setStrokeStyle('#b5b5b5'); //绘线的颜色
           cxt_arc.setLineCap('round'); //线条端点样式
           cxt_arc.beginPath(); //开始一个新的路径
-          cxt_arc.arc(53, 53, 30, 0, 2 * Math.PI, false); //设置一个原点(53,53)，半径为50的圆的路径到当前路径
+          cxt_arc.arc(x, y, 30, 0, 2 * Math.PI, false); //设置一个原点(53,53)，半径为50的圆的路径到当前路径
           cxt_arc.stroke(); //对当前路径进行描边
           //这部分是蓝色部分
           cxt_arc.setLineWidth(6);
           cxt_arc.setStrokeStyle('white');
           cxt_arc.setLineCap('round')
           cxt_arc.beginPath(); //开始一个新的路径
-          cxt_arc.arc(53, 53, 30, -Math.PI * 1 / 2, 2 * Math.PI * ((100-copyRightItems) / totalItems) - Math.PI * 1 / 2, true);
+          cxt_arc.arc(x, y, 30, -Math.PI * 1 / 2, 2 * Math.PI * ((100-copyRightItems) / totalItems) - Math.PI * 1 / 2, true);
           cxt_arc.stroke(); //对当前路径进行描边
           cxt_arc.draw();
         }
@@ -684,8 +684,8 @@ Page({
     //设置文本数据
     this.drawTextCans(sourceData1)
     //设置节点
-    this.drawCircle(sourceData1, 'red')
-    this.drawCircle(sourceData2, 'yellow')
+    // this.drawCircle(sourceData1, '#f8b62d')
+    // this.drawCircle(sourceData2, '#caffd6')
     //开始绘制
     radCtx.draw()
   },
@@ -752,7 +752,7 @@ Page({
   //绘制文字
   drawTextCans: function(mData) {
     radCtx.setFillStyle("black")
-    radCtx.font = 'bold 24rpx' //设置字体
+    // radCtx.font = 'bold 24rpx' //设置字体
     for (var n = 0; n < numCount; n++) {
       var x = mCenter + mRadius * Math.cos(mAngle * n);
       var y = mCenter + mRadius * Math.sin(mAngle * n);
@@ -771,19 +771,18 @@ Page({
     }
   },
   //画点
-  drawCircle: function(mData, color) {
-    var r = 3; //设置节点小圆点的半径
-    for (var i = 0; i < numCount; i++) {
-      var x = mCenter + mRadius * Math.cos(mAngle * i) * mData[i][1] / 100;
-      var y = mCenter + mRadius * Math.sin(mAngle * i) * mData[i][1] / 100;
+  // drawCircle: function(mData, color) {
+    // var r = 3; //设置节点小圆点的半径
+    // for (var i = 0; i < numCount; i++) {
+    //   var x = mCenter + mRadius * Math.cos(mAngle * i) * mData[i][1] / 100;
+    //   var y = mCenter + mRadius * Math.sin(mAngle * i) * mData[i][1] / 100;
 
-      radCtx.beginPath();
-      radCtx.arc(x, y, r, 0, Math.PI * 2);
-      radCtx.fillStyle = color;
-      radCtx.fill();
-    }
-
-  },
+    //   radCtx.beginPath();
+    //   radCtx.arc(x, y, r, 0, Math.PI * 2);
+    //   radCtx.fillStyle = color;
+    //   radCtx.fill();
+    // }
+  // },
   /**
    * 生命周期函数--监听页面显示
    */

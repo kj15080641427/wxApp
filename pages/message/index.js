@@ -7,86 +7,12 @@ var app = getApp()
 var jM = app.globalData.jMessage
 Page({
   data: {
-<<<<<<< HEAD
-    current:0,
-=======
     current: 0,
->>>>>>> 25c2cd65a546ca6aeb1060337f79af5cbc60b7f2
     content: 'demand',
     messageCount: 0,
     conversationList: [],
     orderList: [],
     pageNum: 1,
-<<<<<<< HEAD
-    articleIndex:0
-  },
-  //滑动
-  swiper:function(e){
-    this.setData({
-      current:e.detail.current
-    })
-    console.log('currrrrrrrrr',this.data.current)
-    if(e.detail.current==1){
-      this.getSystem()
-    }
-  },
-  //系统消息列表
-  getSystem:function(){
-    var url = api.getSystem()
-    var success = (res)=>{
-      console.log('系统消息',res)
-      this.setData({
-        sysMessage:res.data
-      })
-    }
-    var fail = (e)=>{
-      console.log(e)
-    }
-    wxrequest.requestGet(url,'',success,fail)
-  },
-  //未读消息
-  getUnread:function(){
-    var url = api.getUnread()
-    var success = (res)=>{
-      console.log('全部未读消息',res)
-      this.setData({
-        unread:res.data
-      })
-    }
-    var fail = (e)=>{
-      console.log(e)
-    }
-    wxrequest.requestGet(url,'',success,fail)
-  },
-  //更新某类消息为已读
-  getAllread:function(){
-    if (this.data.current==3){
-      var type = 1
-    } else if (this.data.current == 1){
-      var type = 2
-    } else {
-      var type = 1
-    }
-    var url = api.getAllread()+type
-    var success = (res)=>{
-      console.log('readall',res)
-    }
-    var fail = (e)=>{
-      console.log(e)
-    }
-    wxrequest.requestGet(url,'',success,fail)
-  },
-  //更新某条消息为已读
-  getReadone:function(){
-    var url = api.getReadone()
-    var success = (res)=>{
-      console.log('readone',res)
-    }
-    var fail = (e)=>{
-      console.log(e)
-    }
-    wxrequest.requestGet(url,'',success,fail)
-=======
     articleIndex: 0
   },
   //回复时间
@@ -239,7 +165,6 @@ Page({
     } else if (this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 244){
       this.getReadone(this.data.orderMsg[e.currentTarget.dataset.orderindex].pushMessageId)
     }
->>>>>>> 25c2cd65a546ca6aeb1060337f79af5cbc60b7f2
   },
   onLoad(options) {
     this.getUnread()
@@ -476,17 +401,11 @@ Page({
     this.setData({
       current: e.currentTarget.dataset.current
     })
-<<<<<<< HEAD
-    console.log('current',e.currentTarget.dataset.current)
-    if (e.detail.current == 2) {
-      this.getSystem()
-=======
     console.log('current', e.currentTarget.dataset.current)
     if (e.currentTarget.dataset.current == 2) {
       this.getSystem()
     } else if (e.currentTarget.dataset.current == 1) {
       this.getOrdermsg()
->>>>>>> 25c2cd65a546ca6aeb1060337f79af5cbc60b7f2
     }
   },
   goChart(e) {

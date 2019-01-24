@@ -28,27 +28,6 @@
       </scroll-view>
     </swiper-item>
     <!-- 订单消息 -->
-<<<<<<< HEAD
-    <swiper-item >
-  <scroll-view wx:if="{{current == 1}}" class="" scroll-y="true" upper-threshold="50" lower-threshold="50" scroll-top="0" enable-back-to-top="true" bindscrolltoupper="" bindscrolltolower="loadData" bindscroll="">
-    <view class="list-item" hover-class="list-tap" hover-stop-propagation="false">
-      <view class="avatar">
-      </view>
-      <view class="body">
-        <view class="name"></view>
-        <view class="info"></view>
-      </view>
-    </view>
-  </scroll-view>
-   </swiper-item>
-    <!-- 系统消息 -->
-    <swiper-item>
-      <scroll-view scroll-y style='height:1200rpx'>
-        <view wx:if="{{current == 2}}">
-          <view wx:key="{{index}}" wx:for="{{[1,2,3]}}" bindtap='getReadone' class='sys-msg-list'>
-            系统消息
-          </view>
-=======
     <swiper-item>
       <scroll-view wx:if="{{current == 1}}" class="" scroll-y="true" upper-threshold="50" lower-threshold="50" scroll-top="0" enable-back-to-top="true" bindscrolltoupper="" bindscrolltolower="loadData" bindscroll="" style='height:1200rpx;'>
         <view hover-class="list-tap" wx:key="{{index}}" class="order-view-detail" wx:for="{{orderMsg}}" data-orderindex="{{index}}" bindtap='clickOrder'>
@@ -84,8 +63,6 @@
             </view>
             <view class="info">{{item.url}}</view>
           </view>
-
->>>>>>> 25c2cd65a546ca6aeb1060337f79af5cbc60b7f2
         </view>
       </scroll-view>
     </swiper-item>

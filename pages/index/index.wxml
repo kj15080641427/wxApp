@@ -141,14 +141,12 @@
               <view class="index-article-text-lower">已帮助
                 <text style="color:#1ec88c">{{item.helpNumber}}</text>人</view>
             </view>
-            <image src="{{item.image}}" style='width:223rpx;height:145rpx></image>
+            <image src="{{item.image}}" style='width:223rpx;height:145rpx;'></image>
           </view>
-          <image src="{{item.image}}" style='width:223rpx;height:145rpx;'></image>
         </view>
-      </view>
-    </swiper-item>
-  </block>
-</swiper>
+      </swiper-item>
+    </block>
+  </swiper>
 
 <!-- 加载更多 -->
 <!-- <view class='index-layout-center' bindtap="test" >
