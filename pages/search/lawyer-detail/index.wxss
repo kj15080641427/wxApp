@@ -53,10 +53,18 @@
   height: 910rpx;
   position: relative;
   z-index: 0;
-  opacity: 0.4;
-  filter: alpha(opacity=60);
+  /* opacity: 0.4;
+  filter: alpha(opacity=60); */
 }
-
+.law-page-background-image{
+  width: 750rpx;
+  height: 910rpx;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  /* opacity: 0.4;
+  filter: alpha(opacity=60); */
+}
 .law-skill-right-other {
   display: flex;
   flex-wrap: wrap;
@@ -125,6 +133,7 @@
   left: 35rpx;
   top: 165rpx;
   border: 10rpx solid #efefef;
+  z-index: 66
 }
 
 .tab-class {
@@ -177,7 +186,12 @@
   width: 600rpx;
   margin-right: 35rpx;
 }
-
+.skill-style{
+  display: flex;
+  flex-wrap: wrap;
+  width: 600rpx;
+  margin-right: 35rpx;
+}
 .skill-view {
   width: 130rpx;
   /* height: 50rpx; */
@@ -413,6 +427,7 @@
   box-sizing: border-box;
   border-top-left-radius: 30rpx;
   border-bottom-left-radius: 30rpx;
+  z-index: 66
 }
 
 .active-view {
@@ -431,11 +446,11 @@
   margin-top: 50rpx;
   /* margin-bottom: 35rpx; */
 }
-.dimback {
+/* .dimback {
   background: linear-gradient(black,black);
   height: 910rpx;
   width: 750rpx;
-}
+} */
 
 .active-image {
   height: 70rpx;
