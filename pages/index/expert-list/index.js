@@ -1,8 +1,8 @@
-var api = require('../../utils/api.js')
-var wxrequest = require('../../utils/request.js')
-var formatTime = require('../../utils/util.js')
-var throttle = require('../../utils/throttle.js')
-var regionSearch = require('../../region.js')
+var api = require('../../../utils/api.js')
+var wxrequest = require('../../../utils/request.js')
+var formatTime = require('../../../utils/util.js')
+var throttle = require('../../../utils/throttle.js')
+var regionSearch = require('../../../region.js')
 
 Page({
   /**
@@ -31,7 +31,7 @@ Page({
     selectedCity: '选择地区', //选择地区
     filterColor: false,
     noFilter: {
-      "sort":0,
+      "sort": 0,
       "pageSize": '10'
     },
     hasList: true,
@@ -62,7 +62,7 @@ Page({
   //需求
   gotoDemand: function() {
     wx.navigateTo({
-      url: '../search/demand/index',
+      url: '/pages/search/demand/index',
     })
   },
   //排序
@@ -182,6 +182,102 @@ Page({
     }
     wxrequest.requestGet(url, '', success, fail)
   },
+  //获取律师专家咨询价格和余额
+  // getExpertPrice: function(url) {
+  //   return new Promise((reslove,reject)=>{
+  //     wx.request({
+  //       url: url,
+  //       method:'GET',
+  //       success:function(res){
+  //         if(res.statusData == 200){
+  //           if(res.data.balance >= res.data.balance ){
+  //           reslove(res)
+  //           }else{
+  //             wx.showToast({
+  //               title: '最低通话时间为1分钟,您当前余额不足',
+  //             })
+  //           }
+  //         }else if(res.statusData == 401){
+  //           wx.navigateTo({
+  //             url: '/pages/userlogin/index',
+  //           })
+  //           wx.clearStorageSync('token')
+  //         }else{
+  //           console.log('>???????????????')
+  //         }
+  //       },
+  //       fail:function(error){
+  //         reject(error.message)
+  //         console.log(error)
+  //       }
+  //     })
+  //   })
+  // },
+  //专家咨询
+  callExpert: function(e) {
+    let data = ''
+    // this.getExpertPrice(api.getLawyerMoney() + this.data.lawyerList[e.currentTarget.dataset.expertidx].memberId)
+    wxrequest.superRequest(api.getLawyerMoney() + this.data.lawyerList[e.currentTarget.dataset.expertidx].memberId,data,'GET').then((res)=>{
+      this.setData({
+        lawyerMoney:res.data.data
+      })
+      console.log(res.data.data.lawyerPrice)
+      if (res.data.data.balance >= res.data.data.lawyerPrice / 60 ){
+        //每秒单价
+        let secondPrice = res.data.data.lawyerPrice / 60 / 60
+        let balance = res.data.data.balance
+        this.setData({
+          hour: Math.round((balance / secondPrice + 15) / 60 / 60) > 0 ? Math.round((balance / secondPrice + 15) / 60 / 60) + '小时' : '',
+          minute: Math.round((balance / secondPrice + 15) / 60 % 60) + '分',
+          second: Math.round((balance / secondPrice + 15) % 60) + '秒'
+        })
+        this.callPhone()
+      }else{
+        wx.showToast({
+          title: `律师价格为${this.data.lawyerMoney.lawyerPrice}/元${this.data.lawyerMoney.priceUnit},最低通话时间为1分钟,当前余额不足,请先充值`,
+          icon:'none',
+          duration:3000
+        })
+      }
+    })
+  },
+  //拨打电话
+  callPhone: function () {
+    wx.showModal({
+      title: '联系律师',
+      content: `律师咨询价格为${this.data.lawyerMoney.lawyerPrice}/元${this.data.lawyerMoney.priceUnit},我们将以秒为单位进行计费,前${this.data.lawyerMoney.freeTime}免费,当前可通话${this.data.hour}${this.data.minute}${this.data.second}`,
+      confirmText: '拨打电话',
+      success: (res) => {
+        if (res.confirm) {
+          this.quickConsultation()
+          console.log('modal拨打电话')
+        }
+      }
+    })
+  },
+  //专家服务
+  quickConsultation: function () {
+    var that = this
+    wx.showLoading({
+      title: '正在联系律师',
+      mask: true
+    })
+    var url = api.getExpertPhone() + [e.currentTarget.dataset.expertidx].memberId
+    var success = (res) => {
+      console.log(res)
+      // this.setData({
+      //   countDown: true
+      // })
+      wx.hideLoading()
+      this.downTime()
+    }
+    var fail = (e) => {
+      // this.hideModal()
+      wx.hideLoading()
+      console.log(e)
+    }
+    wxrequest.requestGet(url, '', success, fail)
+  },
   // 获取律师列表index并根据index搜索律师信息
   getIndex: function(e) {
     var that = this
@@ -189,13 +285,13 @@ Page({
     var year = that.data.year //执业年限
     var lawyerList = that.data.lawyerList
     wx.navigateTo({
-      url: 'lawyer-detail/index?id=' + lawyerList[listIndex].memberId,
+      url: '/pages/search/lawyer-detail/index?id=' + lawyerList[listIndex].memberId,
     })
   },
   // 筛选
   gotoFilter: function() {
     wx.navigateTo({
-      url: '../search/filter/index?noFilter=' + JSON.stringify(this.data.noFilter),
+      url: '/pages/search/filter/index?noFilter=' + JSON.stringify(this.data.noFilter),
     })
   },
   //点击键盘搜索
@@ -411,8 +507,7 @@ Page({
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
-  },
+  onUnload: function() {},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -422,7 +517,7 @@ Page({
   },
   /**
    * 页面上拉触底事件的处理函数
-  */
+   */
   onReachBottom: function() {
     var that = this
     if (that.data.hasNextPage) {

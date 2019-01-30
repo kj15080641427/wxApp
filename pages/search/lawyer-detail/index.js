@@ -4,14 +4,12 @@ var api = require('../../../utils/api.js')
 var wxrequest = require('../../../utils/request.js')
 import wxPay from '../../../utils/wxPay.js'
 var App = getApp()
-
-
 var numCount = 6; //元素个数
 var numSlot = 5; //一条线上的总节点数
 var mW = 350; //Canvas的宽度
 var mCenter = mW / 2;
 var mAngle = Math.PI * 2 / numCount;
-var mRadius = mCenter - 60; //半径(减去的值用于给绘制的文本留空间)
+var mRadius = mCenter - 100; //半径(减去的值用于给绘制的文本留空间)
 //获取指定的Canvas
 var radCtx = wx.createCanvasContext("radarCanvas")
 Page({
@@ -19,36 +17,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    stepText: 5,
-    chanelArray1: [
-      ["民间借贷", 60],
-      ["房屋抵押", 88],
-      ["债务担保", 30],
-      ["P2P借款", 66],
-      ["民间筹资", 90],
-      ["金融理财", 95]
-    ],
-    chanelArray2: [
-      ["", 24],
-      ["", 60],
-      ["", 88],
-      ["", 49],
-      ["", 46],
-      ["", 92]
-    ],
-    tabList: ['基本信息', '服务价格', '活跃度', '诚信度', '社会资源', '诉讼经验', '非诉经验'],
-    lawyerInfo: '',
-    lawyerList: '',
+    tabList: ['基本信息', '服务价格', '活跃度', '诚信度', '社会资源', '诉讼经验'],
+    // lawyerInfo: '',
+    lawyerID: '',
     index: '',
     year: '',
     education: '',
-    work: '',
-    address: '',
-    age: '',
-    lawyerCard: '',
+    workExp: '',
     showMore: false, //展示更多简介
     isFollow: '', //是否已关注
-    myFollow: '', //我的关注列表
     caseList: '', //案例
     isshowCard: true,
     isshowCase: false,
@@ -63,10 +40,7 @@ Page({
     this.setData({
       tabindex: e.currentTarget.dataset.tabindex
     })
-    // if (e.currentTarget.dataset.tabindex==0){
-      this.drawRadar()
-    // }
-    console.log(e.currentTarget.dataset.tabindex)
+    let idx = e.currentTarget.dataset.tabindex
   },
   //返回
   tabBack: function() {
@@ -74,24 +48,24 @@ Page({
   },
   //预览头像
   showImage: function() {
-    if (this.data.lawyerCard.iconImage) {
+    if (this.data.lawyerInfoV2.iconImage) {
       wx.previewImage({
-        urls: [this.data.lawyerCard.iconImage],
+        urls: [this.data.lawyerInfoV2.iconImage],
       })
     }
   },
   //预览背景图
   showBackgroundImage: function() {
-    if (this.data.lawyerCard.backgroundImage) {
+    if (this.data.lawyerInfoV2.backgroundImage) {
       wx.previewImage({
-        urls: [this.data.lawyerCard.backgroundImage],
+        urls: [this.data.lawyerInfoV2.backgroundImage],
       })
     }
   },
   //组织
   toOrgId: function(e) {
-    console.log(this.data.lawyerCard.orgTags[e.currentTarget.dataset.orgindex].link)
-    wx.setStorageSync('orgUrl', `${this.data.lawyerCard.orgTags[e.currentTarget.dataset.orgindex].link}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
+    console.log(this.data.lawyerInfoV2.orgTags[e.currentTarget.dataset.orgindex].link)
+    wx.setStorageSync('orgUrl', `${this.data.lawyerInfoV2.orgTags[e.currentTarget.dataset.orgindex].link}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
     wx.navigateTo({
       url: '/pages/search/orgweb-viewTwo/index',
     })
@@ -105,8 +79,8 @@ Page({
   //关注
   follow: function() {
     var that = this
-    var url = api.getFollow() + that.data.lawyerCard.memberId
-    var data = that.data.lawyerCard.memberId
+    var url = api.getFollow() + that.data.lawyerID
+    var data = that.data.lawyerID
     var success = function(data) {
       that.setData({
         isFollow: true
@@ -130,8 +104,8 @@ Page({
   //取消关注
   unFollow: function() {
     var that = this
-    var url = api.getUnfollow() + that.data.lawyerCard.memberId
-    var data = that.data.lawyerCard.memberId
+    var url = api.getUnfollow() + that.data.lawyerID
+    var data = that.data.lawyerID
     var success = (data) => {
       that.setData({
         isFollow: false
@@ -158,7 +132,7 @@ Page({
   },
   //律师单价
   getLawyerMoney: function() {
-    var url = api.getLawyerMoney() + this.data.lawyerList
+    var url = api.getLawyerMoney() + this.data.lawyerID
     var success = data => {
       this.setData({
         lawyerMoney: data.data
@@ -169,158 +143,100 @@ Page({
     }
     wxrequest.requestGet(url, '', success, fail)
   },
-  //律师主页
-  getlawyer: function(e) {
-    var that = this
-    var listIndex = that.data.index //index
-    var year = that.data.year //执业年限
-    var lawyerInfoUrl = api.getlawyerInfo() + that.data.lawyerCard.memberId
-    var lawyerData = that.data.lawyerCard.memberId
-    var success = function(data) {
-      wx.hideLoading()
-      that.setData({
-        lawyerInfo: data.data
-      })
-      // console.log('Info',data.data)
-      var scoreList = []
-      that.data.lawyerInfo.businessType.map(item => {
-        if (item.score >= 1) {
-          scoreList.push((item.score * 100))
-        } else {
-          scoreList.push((item.score * 100).toFixed(2))
-        }
-      })
-      that.setData({
-        score: scoreList
-      })
-      that.ageAddress()
-      that.court()
-    }
-    var fail = function(e) {
-      wx.hideLoading()
-      wx.showToast({
-        title: '获取律师信息失败',
-        icon: 'none'
-      })
-      console.log(e)
-    }
-    wxrequest.requestGetpar(lawyerInfoUrl, lawyerData, '', success, fail)
-  },
-  //搜索
-  search: function() {
-    var that = this
+  //获取律师信息V2
+  getlawyerInfoV2: function() {
     wx.showLoading({
-      title: '加载中',
-      mask: true
+      
     })
-    //律师主页 (背景图/所获荣誉/描述)
-    var homeUrl = api.getLawHomePage() + that.data.lawyerList
-    var homeData = that.data.lawyerList
-    var homeSuccess = function(data) {
-      that.setData({
-        lawyerCard: data.data
+    wxrequest.superRequest(api.getlawyerInfoV2() + this.data.lawyerID, this.data.lawyerID, "GET").then((res) => {
+      this.setData({
+        lawyerInfoV2: res.data.data,
+        isFollow: res.data.data.isCollect, //是否已关注
+        workExp: res.data.data.reliabilityInfo.workExp, //工作经验
+        education: res.data.data.reliabilityInfo.education, //教育背景
       })
-      // console.log('card',data.data)
-      // that.getCase()
-      that.getlawyer()
-      that.getYear()
-      wx.hideLoading()
-    }
-    var homeFail = function(e) {
-      wx.hideLoading()
-      console.log(e)
-    }
-    wxrequest.requestGetpar(homeUrl, homeData, '', homeSuccess, homeFail) //主页
-  },
-  //法院检察院
-  court: function() {
-    var courtList = []
-    var procList = []
-    console.log(this.data.lawyerInfo)
-    this.data.lawyerInfo.institution.map(item => {
-      if (item.indexOf('检察院') == -1) {
-        courtList.push(item)
-      } else {
-        procList.push(item)
+      this.getTime(res.data.data.reliabilityInfo.workExp, res.data.data.reliabilityInfo.education) //工作.教育 时间
+      this.getCase()
+      console.log('律师信息V2', this.data.lawyerInfoV2)
+    }).then((res) => {
+      wx.hideLoading()  //hide loading
+      let scoreLawyer = []
+      let scoreAvg = []
+      this.data.lawyerInfoV2.baseInfo.businessRadar.map((item) => {
+        scoreLawyer.push([
+          item.businessTypeName, item.score * 100
+        ])
+        scoreAvg.push(['', item.avgScore * 100])
+      })
+      this.getRound() //圆环
+      if (this.data.lawyerInfoV2.baseInfo.businessRadar[0]){
+        this.drawRadar(scoreLawyer, scoreAvg) //雷达图
       }
-    })
-    this.setData({
-      court: courtList,
-      proc: procList
-    })
-  },
-  //我的关注
-  followList: function() {
-    var that = this
-    var url = api.getMyFollow()
-    var data = {
-      "pageNum": '1',
-      "pageSize": '50'
-    }
-    var success = (data) => {
-      data.data.list.map(function(item) {
-        if (that.data.lawyerCard.memberId == item.memberId) {
-          that.setData({
-            isFollow: true,
-          })
-        }
-      })
-      // console.log('已关注列表',data.data.list, )
-      // console.log( '关注id', that.data.lawyerCard.memberId)
-    }
-    var fail = e => {
+    }).catch((e)=>{
       console.log(e)
-    }
-    wxrequest.request(url, data, success, fail)
-  },
-  // 简介加载更多
-  showMore: function(e) {
-    this.setData({
-      showMore: !this.data.showMore
+      wx.hideLoading()
     })
-    console.log(e)
   },
-  //年龄地址
-  ageAddress: function() {
+  //工作 教育时间
+  getTime: function(workTime, educaTime) {
+    let startWorkTimeList = []
+    let endWorkTimeList = []
+    let startEducaTimeList = []
+    let endEducaTimeList = []
+    workTime.map((item) => {
+      startWorkTimeList.push(item.startDate.split(" ")[0])
+      endWorkTimeList.push(item.endDate.split(" ")[0])
+    })
+    educaTime.map((item) => {
+      startEducaTimeList.push(item.startDate.split(" ")[0])
+      endEducaTimeList.push(item.endDate.split(" ")[0])
+    })
+    this.setData({
+      startWorkList: startWorkTimeList,
+      startEducaList: startEducaTimeList,
+      endWorkList: endWorkTimeList,
+      endEducaList: endEducaTimeList
+    })
+    console.log('shijian', startWorkTimeList, endWorkTimeList)
+  },
+  //获取律师服务价格
+  // getlawyerPrice:function(){
+  //   wxrequest.superRequest(api.getlawyerPrice()+this.data.lawyerID,this.data.lawyerID,"POST").then((res)=>{
+  //     this.setData({
+  //       servicePrice:res.data.data
+  //     })
+  //     console.log('律师服务价格',res)
+  //   })
+  // },
+  /**
+   * 圆环
+   */
+  getRound: function() {
     var that = this
-    var td = that.data.lawyerInfo
-    //教育信息
-    var educationList = []
-    td.education[0] ? td.education.map(function(item) {
-      educationList.push({
-        "startDate": item.startDate.split(" ")[0].split('-', 2).join("/"),
-        "endDate": item.endDate.split(" ")[0].split('-', 2).join("/"),
-        "educationTitle": item.educationTitle,
-        "educationName": item.educationName
-      })
-    }) : ''
-    //工作经历
-    var workList = []
-    td.workExp[0] ? td.workExp.map(function(item) {
-      workList.push({
-        "startDate": item.startDate.split(" ")[0].split('-', 2).join("/"),
-        "endDate": item.endDate.split(" ")[0].split('-', 2).join("/"),
-        "institutionName": item.institutionName,
-        "positionName": item.positionName
-      })
-    }) : ''
-    var now = formatTime.formatTime(new Date()).split('-')[0]
-    var age = that.data.lawyerCard.birthday.split("-")[0]
-    that.setData({
-      education: educationList,
-      work: workList,
-      address: that.data.lawyerCard.region.split('-', 2),
-      age: now - age
+    //获取系统信息
+    wx.getSystemInfo({
+      success: function(res) {
+        that.setData({
+          width: res.windowWidth
+        })
+        // console.log('设备信息', that.data.width)
+        let dataF = that.data.lawyerInfoV2.evaluation
+        that.showScoreAnimation(dataF.aspectLitigation.score, 100, 'canvasArc', that.data.width / 5 / 2, that.data.width / 5 / 2);
+        that.showScoreAnimation(dataF.aspectNonLitigation.score, 100, 'canvasArc2', that.data.width / 5 / 2, that.data.width / 5 / 2);
+        that.showScoreAnimation(dataF.aspectReliability.score, 100, 'canvasArc3', that.data.width / 5 / 2, that.data.width / 5 / 2);
+        that.showScoreAnimation(dataF.aspectSocial.score, 100, 'canvasArc4', that.data.width / 5 / 2, that.data.width / 5 / 2);
+        that.showScoreAnimation(dataF.aspectVitality.score, 100, 'canvasArc5', that.data.width / 5 / 2, that.data.width / 5 / 2);
+      },
     })
   },
   //案例
   getCase: function() {
     var url = api.getCase()
     var data = {
-      "memberId": this.data.lawyerCard.memberId,
+      "memberId": this.data.lawyerInfoV2.memberId,
       "pageNum": '1',
       "pageSize": '10',
-      'lawyerFirm': this.data.lawyerCard.institutionName
+      'lawyerFirm': this.data.lawyerInfoV2.institutionName
     }
     var success = (data) => {
       this.setData({
@@ -334,9 +250,11 @@ Page({
   },
   //案件h5
   gotoCase: function(e) {
+    wx.setStorageSync('caseUrl', this.data.caseList[e.currentTarget.dataset.caseindex].url)
     wx.navigateTo({
-      url: '../case-web/index?url=' + this.data.caseList[e.currentTarget.dataset.caseindex].url,
+      url: '../case-web/index',
     })
+    // console.log(this.data.caseList[e.currentTarget.dataset.caseindex].url)
   },
   //显示名片
   showCard: function() {
@@ -351,24 +269,6 @@ Page({
       isshowCard: false,
       isshowCase: true
     })
-  },
-  //执业年份
-  getYear: function() {
-    var that = this
-    that.setData({
-      year: formatTime.formatTime(new Date()).split("-")[0] - that.data.lawyerCard.beginPracticeDate.split("-")[0],
-    })
-  },
-  //关闭弹窗
-  closemodal: function() {
-    if (this.data.time > 0) {
-      this.setData({
-        close: true,
-        countDown: false
-      })
-    } else {
-      this.hideModal()
-    }
   },
   //发布需求
   toDemand: function() {
@@ -388,14 +288,13 @@ Page({
             prevPage.setData({
               [`isDemand[${this.data.demandIndex}]`]: true
             })
+            wx.showToast({
+              title: '发送成功',
+            })
             setTimeout(() => {
               wx.navigateBack({})
-            }, 1000)
+            }, 2000)
           }
-          wx.showToast({
-            title: '发送成功',
-            icon: 'none'
-          })
         }
         var fail = e => {
           wx.showToast({
@@ -407,7 +306,7 @@ Page({
         wxrequest.request(url, data, success, fail)
       } else { //律师主页发布需求页面
         wx.navigateTo({
-          url: '/pages/search/lawyer-demand/index?lawyerDetail=' + JSON.stringify(this.data.lawyerInfo), //参数为 律师擅长领域 律师最低可承受费用,律师ID
+          url: '/pages/search/lawyer-demand/index?bussType=' + JSON.stringify(this.data.lawyerInfoV2.baseInfo.businessRadar) + "&money=" + this.data.lawyerMoney.lawyerPrice + "&memberId=" + this.data.lawyerInfoV2.memberId, //参数为 律师擅长领域 律师最低可承受费用,律师ID
         })
       }
     }
@@ -453,9 +352,10 @@ Page({
         })
         if (this.data.time < 1) {
           clearInterval(this.data.settime)
-          this.setData({
-            time: 0
-          })
+          this.hideModal()
+          // this.setData({
+          //   time: 0
+          // })
         }
       }, 1000)
     })
@@ -472,10 +372,19 @@ Page({
   isEnough: function() {
     if (wx.getStorageSync('token')) {
       if (this.data.lawyerMoney.balance >= this.data.lawyerMoney.lawyerPrice / 60) {
+        //每秒单价
+        let secondPrice = this.data.lawyerMoney.lawyerPrice / 60 / 60
+        let balance = this.data.lawyerMoney.balance
+        this.setData({
+          hour: Math.round((balance / secondPrice + 15) / 60 / 60) > 1 ? Math.round((balance / secondPrice + 15) / 60 / 60) + '小时' : '',
+          minute: Math.round((balance / secondPrice + 15) / 60 % 60) + '分',
+          second: Math.round((balance / secondPrice + 15) % 60) + '秒'
+        })
+        // this.callPhone()
         this.showModal()
       } else {
         wx.showToast({
-          title: '余额不足',
+          title: '最低通话时间为1分钟,当前余额不足,请先充值',
           icon: 'none'
         })
       }
@@ -504,6 +413,17 @@ Page({
         animationData: animation.export()
       })
     }.bind(this), 200)
+  },
+  //关闭弹窗
+  closemodal: function () {
+    if (this.data.time > 0) {
+      this.setData({
+        close: true,
+        countDown: false
+      })
+    } else {
+      this.hideModal()
+    }
   },
   //隐藏对话框
   hideModal: function() {
@@ -536,26 +456,24 @@ Page({
     // wx.showTabBar({})
   },
   //支付
-  //专家咨询
-  expertConsultation: function() {
-    wx.showLoading({})
+  //专家服务
+  quickConsultation: function() {
     var that = this
-    wx.showLoading({
-      mask:true
-    })
-    var url = api.getExpertPhone() + that.data.lawyerList
+    // wx.showLoading({
+    //   title:'正在联系律师',
+    //   mask: true
+    // })
+    var url = api.getExpertPhone() + that.data.lawyerInfoV2.memberId
     var success = (res) => {
-      wx.hideLoading()
       console.log(res)
       this.setData({
-        countDown: true
+        countDown: true,
+        start: false
       })
       wx.hideLoading()
       this.downTime()
     }
     var fail = (e) => {
-      wx.hideLoading()
-      this.hideModal()
       wx.hideLoading()
       console.log(e)
     }
@@ -570,11 +488,13 @@ Page({
       success: function(res) {
         that.setData({
           statuH: res.statusBarHeight,
-          navH: res.statusBarHeight + 40 //导航栏总高度 IOS
+          navH: res.statusBarHeight + 40, //导航栏总高度 IOS
+          tabH: res.statusBarHeight
         })
         if (res.model.indexOf("iPhone") == -1) {
           that.setData({
-            navH: res.statusBarHeight + 48 //导航栏总高度 安卓
+            navH: res.statusBarHeight + 48, //导航栏总高度 安卓
+            tabH: res.statusBarHeight,
           })
         }
       },
@@ -584,7 +504,7 @@ Page({
       var sceneList = options.scene.split("-")
       if (sceneList.length == 2) {
         this.setData({
-          lawyerList: sceneList[0],
+          lawyerID: sceneList[0],
           channel: sceneList[1],
           firstPage: true
         })
@@ -592,13 +512,13 @@ Page({
         console.log('channel', App.globalData.device.channel)
       } else {
         this.setData({
-          lawyerList: sceneList[0],
+          lawyerID: sceneList[0],
           firstPage: true
         })
       }
     } else {
       this.setData({
-        lawyerList: options.id,
+        lawyerID: options.id,
         quick: options.quick ? true : false,
         parameter: options.parameter ? JSON.parse(options.parameter) : '',
         ['parameter.targetLawyerId']: options.id ? options.id : '',
@@ -606,32 +526,20 @@ Page({
         demandIndex: options.demandIndex ? options.demandIndex : '' //点击发布需求后按钮变灰
       })
     }
-    this.search()
-    this.getLawyerMoney()
-    if (wx.getStorageSync('token')) {
-      this.followList()
-    }
+    this.getLawyerMoney() //律师价格
+    this.getlawyerInfoV2() //最新律师信息V2
+    // this.getlawyerPrice() //律师服务价格
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-    wx.getSystemInfoSync({
-      success(res) {
-        console.log('?????????????', res)
-      }
-    })
-    // 页面初始化 options为页面跳转所带来的参数
     let that = this;
-
     let totalItems = 100;
     let rightItems = 90;
     let completePercent = parseInt((rightItems / totalItems) * 100);
-    // that.getResultComment(completePercent);
-    that.showScoreAnimation(90, totalItems, 'canvasArc',120,40);
-    that.showScoreAnimation(100, totalItems, 'canvasArc',40,40);
   },
-  showScoreAnimation: function(rightItems, totalItems, canvasArc,x,y) {
+  showScoreAnimation: function(rightItems, totalItems, canvasArc, x, y) {
     /*
     cxt_arc.arc(x, y, r, sAngle, eAngle, counterclockwise);
     x	                    Number	  圆的x坐标
@@ -642,38 +550,27 @@ Page({
     counterclockwise	    Boolean	  可选。指定弧度的方向是逆时针还是顺时针。默认是false，即顺时针。
     */
     let that = this;
-    let copyRightItems = 0;
-    that.setData({
-      timer: setInterval(function() {
-        copyRightItems++;
-        if (copyRightItems == rightItems) {
-          clearInterval(that.data.timer)
-        } else {
-          // 页面渲染完成
-          // 这部分是灰色底层
-          let cxt_arc = wx.createCanvasContext(canvasArc); //创建并返回绘图上下文context对象。
-          cxt_arc.setLineWidth(6); //绘线的宽度
-          cxt_arc.setStrokeStyle('#b5b5b5'); //绘线的颜色
-          cxt_arc.setLineCap('round'); //线条端点样式
-          cxt_arc.beginPath(); //开始一个新的路径
-          cxt_arc.arc(x, y, 30, 0, 2 * Math.PI, false); //设置一个原点(53,53)，半径为50的圆的路径到当前路径
-          cxt_arc.stroke(); //对当前路径进行描边
-          //这部分是蓝色部分
-          cxt_arc.setLineWidth(6);
-          cxt_arc.setStrokeStyle('white');
-          cxt_arc.setLineCap('round')
-          cxt_arc.beginPath(); //开始一个新的路径
-          cxt_arc.arc(x, y, 30, -Math.PI * 1 / 2, 2 * Math.PI * ((100-copyRightItems) / totalItems) - Math.PI * 1 / 2, true);
-          cxt_arc.stroke(); //对当前路径进行描边
-          cxt_arc.draw();
-        }
-      }, 20)
-    })
+    // 页面渲染完成
+    // 这部分是灰色底层
+    let cxt_arc = wx.createCanvasContext(canvasArc); //创建并返回绘图上下文context对象。
+    cxt_arc.setLineWidth(3); //绘线的宽度
+    cxt_arc.setStrokeStyle('#717171'); //绘线的颜色
+    cxt_arc.setLineCap('round'); //线条端点样式
+    cxt_arc.beginPath(); //开始一个新的路径
+    cxt_arc.arc(x, y, 25, 0, 2 * Math.PI, false); //设置一个原点(x,y)，半径为25的圆的路径到当前路径
+    cxt_arc.stroke(); //对当前路径进行描边
+    //这部分是蓝色部分
+    cxt_arc.setLineWidth(3);
+    cxt_arc.setStrokeStyle('#ffffff');
+    cxt_arc.setLineCap('round')
+    cxt_arc.beginPath(); //开始一个新的路径
+    cxt_arc.arc(x, y, 25, -Math.PI * 1 / 2, 2 * Math.PI * ((100 - rightItems) / totalItems) - Math.PI * 1 / 2, true);
+    cxt_arc.stroke(); //对当前路径进行描边
+    cxt_arc.draw();
   },
+
   // 雷达图
-  drawRadar: function() {
-    var sourceData1 = this.data.chanelArray1
-    var sourceData2 = this.data.chanelArray2
+  drawRadar: function(sourceData1, sourceData2) {
     this.drawRegion2(sourceData2, '#caffd6') //平均值
     //调用
     this.drawEdge() //画六边形
@@ -684,7 +581,7 @@ Page({
     //设置文本数据
     this.drawTextCans(sourceData1)
     //设置节点
-    // this.drawCircle(sourceData1, '#f8b62d')
+    this.drawCircle(sourceData1, '#f8b62d')
     // this.drawCircle(sourceData2, '#caffd6')
     //开始绘制
     radCtx.draw()
@@ -693,6 +590,7 @@ Page({
   drawEdge: function() {
     radCtx.setStrokeStyle("#b5b5b5")
     radCtx.setLineWidth(1) //设置线宽
+
     for (var i = 0; i < numSlot; i++) {
       //计算半径
       radCtx.beginPath()
@@ -741,7 +639,6 @@ Page({
     for (var m = 0; m < numCount; m++) {
       var x = mCenter + mRadius * Math.cos(mAngle * m) * mData[m][1] / 100;
       var y = mCenter + mRadius * Math.sin(mAngle * m) * mData[m][1] / 100;
-
       radCtx.lineTo(x, y);
     }
     radCtx.closePath();
@@ -771,28 +668,22 @@ Page({
     }
   },
   //画点
-  // drawCircle: function(mData, color) {
-    // var r = 3; //设置节点小圆点的半径
-    // for (var i = 0; i < numCount; i++) {
-    //   var x = mCenter + mRadius * Math.cos(mAngle * i) * mData[i][1] / 100;
-    //   var y = mCenter + mRadius * Math.sin(mAngle * i) * mData[i][1] / 100;
+  drawCircle: function(mData, color) {
+    var r = 3; //设置节点小圆点的半径
+    for (var i = 0; i < numCount; i++) {
+      var x = mCenter + mRadius * Math.cos(mAngle * i) * mData[i][1] / 100;
+      var y = mCenter + mRadius * Math.sin(mAngle * i) * mData[i][1] / 100;
 
-    //   radCtx.beginPath();
-    //   radCtx.arc(x, y, r, 0, Math.PI * 2);
-    //   radCtx.fillStyle = color;
-    //   radCtx.fill();
-    // }
-  // },
+      radCtx.beginPath();
+      radCtx.arc(x, y, r, 0, Math.PI * 2);
+      radCtx.fillStyle = color;
+      radCtx.fill();
+    }
+  },
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-    // wx.showLoading({
-    //   title: '加载中',
-    //   mask: true
-    // })
-    this.drawRadar()
-  },
+  onShow: function() {},
   /**
    * 生命周期函数--监听页面隐藏
    */

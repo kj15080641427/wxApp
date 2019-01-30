@@ -3,10 +3,21 @@
     <view class="bar-item {{current == 0 ? 'active' : ''}}" data-current='0' bindtap="switchTab">需求消息
       <view class="msg-count" wx:if="{{ messageCount > 0 }}">{{ messageCount }}</view>
     </view>
-    <view class="bar-item {{current == 1 ? 'active' : ''}}" data-current="1" bindtap="switchTab">订单消息</view>
-    <view class="bar-item {{current == 2 ? 'active' : ''}}" data-current="2" bindtap="switchTab">系统消息</view>
+    <!-- <view  style='display:flex'> -->
+    <view class="bar-item {{current == 1 ? 'active' : ''}}" data-current="1" bindtap="switchTab">订单消息
+      <view class='red-round-top' wx:if='{{unread.unreadOrderMsgCount}}'></view>
+    </view>
+    <!-- </view> -->
+
+    <view class="bar-item {{current == 2 ? 'active' : ''}}" data-current="2" bindtap="switchTab">系统消息
+      <view class='red-round-top' wx:if='{{unread.unreadSysMsgCount}}'></view>
+    </view>
+
   </view>
-  <view class='msg-read-all-view'>
+  <view class='msg-read-all-view' wx:if="{{current!=0}}">
+    <view class='switch-component'>收到消息时震动
+      <switch bindchange='shockMsg' type='checkbox'></switch>
+    </view>
     <view bindtap='getAllread' class='msg-read-all'>全部设为已读</view>
   </view>
   <!-- 需求消息 -->
@@ -31,7 +42,7 @@
     <swiper-item>
       <scroll-view wx:if="{{current == 1}}" class="" scroll-y="true" upper-threshold="50" lower-threshold="50" scroll-top="0" enable-back-to-top="true" bindscrolltoupper="" bindscrolltolower="loadData" bindscroll="" style='height:1200rpx;'>
         <view hover-class="list-tap" wx:key="{{index}}" class="order-view-detail" wx:for="{{orderMsg}}" data-orderindex="{{index}}" bindtap='clickOrder'>
-          <image src='{{item.icon}}' class="order-avatar"></image>
+          <image src='/image/message/Message_icon_01@3x.png' class="order-avatar"></image>
           <view class='red-round-view'>
             <view wx:if="{{!item.isRead}}" class='red-round'></view>
           </view>

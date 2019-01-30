@@ -36,8 +36,8 @@ Page({
   pickerBusiness: function(e) {
     this.setData({
       indexBus: e.detail.value,
-      ['parameter.skillName']: this.data.lawyerInfo.businessType[0] ? this.data.lawyerInfo.businessType[e.detail.value].businessTypeName : this.data.business[e.detail.value].businessTypeName,
-      ['parameter.skillId']: this.data.lawyerInfo.businessType[0] ? this.data.lawyerInfo.businessType[e.detail.value].businessTypeId : this.data.business[e.detail.value].businessTypeId
+      ['parameter.skillName']: this.data.bussType[0] ? this.data.bussType[e.detail.value].businessTypeName : this.data.business[e.detail.value].businessTypeName,
+      ['parameter.skillId']: this.data.bussType[0] ? this.data.bussType[e.detail.value].businessTypeId : this.data.business[e.detail.value].businessTypeId
     })
     this.getMark()
   },
@@ -56,7 +56,7 @@ Page({
   //标签列表
   getMark: function() {
     var that = this
-    var urltest = that.data.lawyerInfo.businessType[0] ? that.data.lawyerInfo.businessType[that.data.indexBus].businessTypeId : that.data.business[that.data.indexBus].businessTypeId
+    var urltest = that.data.bussType[0] ? that.data.bussType[that.data.indexBus].businessTypeId : that.data.business[that.data.indexBus].businessTypeId
     var url = api.getMark() + urltest
     var data = {
       "businessTypeId": urltest
@@ -109,11 +109,13 @@ Page({
     }
   },
   //金额
-  getLawCash:function(){
-    var url = api.getLawCash() + this.data.lawyerInfo.memberId
-    var data = { memberId: this.data.lawyerInfo.memberId}
-    var success = data =>{
-      data.data.map(item=>{
+  getLawCash: function() {
+    var url = api.getLawCash() + this.data.lawyerId
+    var data = {
+      memberId: this.data.lawyerId
+    }
+    var success = data => {
+      data.data.map(item => {
         if (this.data.type[this.data.index].requireTypeName == item.requireTypeName) {
           console.log(item.requireTypeName)
           this.setData({
@@ -123,10 +125,10 @@ Page({
       })
       console.log('qq', data, this.data.lawyerMoney, this.data.type[this.data.index].requireTypeName)
     }
-    var fail = e =>{
+    var fail = e => {
       console.log(e)
     }
-    wxrequest.request(url,data,success,fail)
+    wxrequest.request(url, data, success, fail)
   },
   // 律师单价
   // getLawyerMoney: function () {
@@ -144,7 +146,7 @@ Page({
   // },
   //发布需求
   publish: function() {
-    console.log(this.data.parameter.maxCost , this.data.lawyerMoney)
+    console.log(this.data.parameter.maxCost, this.data.lawyerMoney)
     var url = api.getPublish()
     var data = this.data.parameter
     var success = data => {
@@ -165,15 +167,15 @@ Page({
       })
       console.log(e)
     }
-    if (!this.data.parameter.requirementTypeId ){
-    wx.showToast({
-      title: '请选择服务类型',
-      icon:'none'
-    })
-    } else if (!this.data.parameter.skillId){
+    if (!this.data.parameter.requirementTypeId) {
+      wx.showToast({
+        title: '请选择服务类型',
+        icon: 'none'
+      })
+    } else if (!this.data.parameter.skillId) {
       wx.showToast({
         title: '请选择擅长领域',
-        icon:'none'
+        icon: 'none'
       })
     } else if (!this.data.parameter.maxCost) {
       wx.showToast({
@@ -182,15 +184,15 @@ Page({
       })
     } else if (this.data.parameter.maxCost < this.data.lawyerMoney) {
       wx.showToast({
-        title: '您的可承受费用低于律师的服务费用' +'('+ this.data.lawyerMoney+')',
+        title: '您的可承受费用低于律师的服务费用' + '(' + this.data.lawyerMoney + ')',
         icon: 'none'
       })
-    } else if (!this.data.parameter.requirementContent ) {
+    } else if (!this.data.parameter.requirementContent) {
       wx.showToast({
         title: '请填写问题描述',
         icon: 'none'
       })
-    }else{
+    } else {
       this.getMarkList()
       wxrequest.request(url, data, success, fail)
     }
@@ -203,6 +205,7 @@ Page({
       that.setData({
         business: data.data[1].children
       })
+      console.log("擅长领域", data.data[1].children)
     }
     var fail = function(e) {
       console.log("擅长领域", e)
@@ -215,10 +218,13 @@ Page({
   onLoad: function(options) {
     this.getDemandType()
     this.setData({
-      lawyerInfo: JSON.parse(options.lawyerDetail),
+      // lawyerInfo: JSON.parse(options.lawyerDetail)
+      bussType: JSON.parse(options.bussType),
       ['parameter.isFirst']: 1,
-      ['parameter.targetLawyerId']: JSON.parse(options.lawyerDetail).memberId
+      ['parameter.targetLawyerId']: options.memberId,
+      lawyerId: options.memberId,
     })
+    console.log("擅长领域", options.bussType)
     this.getexpert()
     // this.getLawyerMoney()
   },

@@ -13,10 +13,14 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      // adUrl:wx.getStorageSync('ad')
-      adUrl:options.url
+      adUrl:wx.getStorageSync('ad')
+      // adUrl:options.url
     })
-    console.log('ad', options.url)
+    // console.log('ad', options.url)
+    // var pages = getCurrentPages() //获取加载的页面
+    // var currentPage = pages[pages.length - 1] //获取当前页面的对象
+    // var url = currentPage.route //当前页面url
+    // console.log('当前页面url', url )
   },
 
   /**

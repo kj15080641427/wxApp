@@ -14,7 +14,6 @@ Page({
       { "name": '订单日期', "text": '' },
       { "name": '商品名称', "text": '' },
       { "name": '咨询类型', "text": '' },
-      { "name": '联系手机', "text": '' },
       { "name": '订单金额', "text": '' },
       { "name": '订单状态', "text": '' },
       ],
@@ -49,7 +48,7 @@ Page({
     var pages = getCurrentPages();
     var currPage = pages[pages.length - 1]; //当前页面
     var prevPage = pages[pages.length - 2]; //上一个页面
-    prevPage.clear() //调用上一个页面方法
+    // prevPage.clear() //调用上一个页面方法
     // prevPage.onTabItemTap()
 
     var data = JSON.parse(options.orderDetail)
@@ -60,9 +59,9 @@ Page({
       ['detailList[1].text']: data.createDate,
       ['detailList[2].text']: data.orderType,
       ['detailList[3].text']: data.typeName,
-      ['detailList[4].text']: wx.getStorageSync("mobile"),//手机号
-      ['detailList[5].text']: data.buyerPayAmount,
-      ['detailList[6].text']: data.statusValue,
+      // ['detailList[4].text']: wx.getStorageSync("mobile"),//手机号
+      ['detailList[4].text']: data.buyerPayAmount,
+      ['detailList[5].text']: data.statusValue,
       // ['detailList[7].text']: data.beginTime
       startTime: data.grabTime
     })

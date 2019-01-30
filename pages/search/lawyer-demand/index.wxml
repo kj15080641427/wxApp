@@ -12,11 +12,11 @@
   </picker>
   <view class='detail-page-line'></view>
 
-  <picker class='detail-page-picker' range="{{lawyerInfo.businessType[0] ? lawyerInfo.businessType : business}}" range-key="{{'businessTypeName'}}" value="{{index}}" bindchange="pickerBusiness">
+  <picker class='detail-page-picker' range="{{bussType[0] ? bussType : business}}" range-key="{{'businessTypeName'}}" value="{{index}}" bindchange="pickerBusiness">
     <view style='display:flex;justify-content: space-between;width:715rpx;'>
       <view class='detail-page-text'><text style='color:red'>*</text>擅长领域</view>
       <view style='display:flex;align-items:center'>
-        <text class='hide-text'>{{lawyerInfo.businessType[0]?lawyerInfo.businessType[indexBus].businessTypeName:business[indexBus].businessTypeName}}</text>
+        <text class='hide-text'>{{bussType[0]?bussType[indexBus].businessTypeName:business[indexBus].businessTypeName}}</text>
         <image src='../../../image/homeicon_3x/homepage_10_3x.png' class='detail-page-icon'></image>
       </view>
     </view>

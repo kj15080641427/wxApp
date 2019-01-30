@@ -1,11 +1,11 @@
-// pages/search/case-web/index.js
+// pages/index/member/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    url:''
+
   },
 
   /**
@@ -13,9 +13,8 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      url:wx.getStorageSync("caseUrl")
+      url:options.url
     })
-    console.log('aaaaaaaaaaaa',this.data.url)
   },
 
   /**

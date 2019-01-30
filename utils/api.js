@@ -236,7 +236,7 @@ function getAdbanner() {
   return HOST_URL + Adbanner
 }
 //案例
-var Case = '/lawyer/case'
+var Case = '/case/list'
 
 function getCase() {
   return HOST_URL + Case
@@ -300,65 +300,98 @@ function getLawyerMoney() {
 // =======
 // 获取律师与某个用户所有需求列表，id为用户id
 var AllRequireList = '/client/requirement/between/'
-function getAllRequireList() { 
+
+function getAllRequireList() {
   return HOST_URL + AllRequireList
 }
 //用户协议
 var UserUrl = '/userRegisterAgreenmentUrl'
-function getUserUrl(){
+
+function getUserUrl() {
   return HOST_URL + UserUrl
 }
 //快速咨询资费
 var Tariff = '/tariffExplanationUrl'
-function getTariff(){
+
+function getTariff() {
   return HOST_URL + Tariff
 }
 //法院列表
 var Court = '/common/court'
-function getCourt(){
+
+function getCourt() {
   return HOST_URL + Court
 }
 //提现
 var Cash = '/pay/withdraw'
-function getCash(){
+
+function getCash() {
   return HOST_URL + Cash
 }
 //金额
 var LawCash = '/lawyer/require/'
-function getLawCash(){
+
+function getLawCash() {
   return HOST_URL + LawCash
 }
 //检察院
 var Procur = '/common/procuratorate'
-function getProcur(){
+
+function getProcur() {
   return HOST_URL + Procur
 }
 //所以分类未读消息
 var Unread = '/client/message/unread/count'
+
 function getUnread() {
   return HOST_URL + Unread
 }
 //系统消息列表
 var System = '/client/message/system'
+
 function getSystem() {
   return HOST_URL + System
 }
 //订单消息列表
 var Ordermsg = '/client/message/order'
+
 function getOrdermsg() {
   return HOST_URL + Ordermsg
 }
 //更新某类未读消息为已读
 var Allread = '/client/message/unread/update/'
+
 function getAllread() {
   return HOST_URL + Allread
 }
 //更新某条消息为已读
 var OneRead = '/client/message/unread/update/single/'
+
 function getReadone() {
   return HOST_URL + OneRead
 }
-module.exports={
+
+//获取律师个人主页信息V2
+var LawyerInfoV2 = '/lawyer/member/homepage/base/v2/'
+function getlawyerInfoV2(){
+  return HOST_URL + LawyerInfoV2
+}
+// 律师服务价格
+var LawyerPrice = '/lawyer/require/'
+function getlawyerPrice(){
+  return HOST_URL + LawyerPrice
+}
+// 律师评价 活跃度,可信度,社会资源,诉讼经验,非诉经验
+var Evaluation = '/lawyer/evaluation/'
+function getEvaluation(){
+  return HOST_URL + Evaluation
+}
+//获取律师活跃度
+var Dynamic = '/lawyer/member/dynamic'
+function getDynamic(){
+  return HOST_URL + Dynamic
+}
+module.exports = {
   appLogin: appLogin,
   getLoginUrl: getLoginUrl,
   getVerifyCodeUrl: getVerifyCodeUrl,
@@ -415,4 +448,8 @@ module.exports={
   getAllread: getAllread,
   getReadone: getReadone,
   getOrdermsg: getOrdermsg,
+  getlawyerInfoV2: getlawyerInfoV2,
+  getlawyerPrice: getlawyerPrice,
+  getEvaluation: getEvaluation,
+  getDynamic: getDynamic
 }

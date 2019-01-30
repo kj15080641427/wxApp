@@ -338,8 +338,8 @@ Page({
         reg.citysData,
         reg.citysData[this.data.provi].child
       ],
-    })
-    this.setData({
+    // })
+    // this.setData({
       // markId: JSON.parse(options.busiType)
       busiType: options.busiTypes ? JSON.parse(options.busiTypes) : '', //服务类型: 诉讼/仲裁 审查/起草合同....
       id: options.id ? 1 : 0,

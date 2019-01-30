@@ -2,7 +2,20 @@
 import JMessage from './jM/jmessage-wxapplet-sdk-1.4.0.min'
 import api from './utils/api'
 App({ 
+  globalData: {
+    userInfo: null,
+    jMessage: new JMessage({
+      debug: true //  是否开启debug模式
+    }),
+    device: {
+      "device_type": 5,
+      "app_version": "1.0",
+      "app_version_code": 1,
+      "channel": 'wxapp'
+    }
+  },
   onLaunch: function() {
+    var that = this
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -24,7 +37,13 @@ App({
         })
       }
     })
-
+    // //获取系统信息
+    wx.getSystemInfo({
+      success: function(res) {
+        that.globalData.systemInfo = res.data
+        console.log('设备信息',res)
+      },
+    })
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -68,16 +87,4 @@ App({
     wx.reportMonitor('1026', 1)
     wx.reportMonitor('1027', 1)
   },
-  globalData: {
-    userInfo: null,
-    jMessage: new JMessage({
-      debug: true //  是否开启debug模式
-    }),
-    device: {
-      "device_type": 5,
-      "app_version": "1.0",
-      "app_version_code": 1,
-      "channel": 'wxapp'
-    }
-  }
 })

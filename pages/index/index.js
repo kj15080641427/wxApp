@@ -43,11 +43,35 @@ Page({
       nowIdx: e.detail.current
     })
   },
+  //企业法务
+  gotoMember:function(){
+    wx.navigateTo({
+      url: '/pages/index/member/index',
+    })
+  },
+  //专家咨询
+  gotoExpert:function(){
+    if(wx.getStorageSync('token')){
+    wx.navigateTo({
+      url: '/pages/index/expert-list/index',
+    })
+    }else{
+      wx.navigateTo({
+        url: '/pages/userlogin/index',
+      })
+    }
+  },
   //所有未读消息
   getUnread: function() {
     var url = api.getUnread()
     var success = (res) => {
-      console.log('all', res)
+      if(wx.getStorageSync('shockMsg')){
+        if (res.data.unreadOrderMsgCount > wx.getStorageSync('orderMsg') || res.data.unreadSysMsgCount > wx.getStorageSync('systemMsg')) {
+          wx.vibrateLong({})
+        }
+      }
+      wx.setStorageSync('orderMsg', res.data.unreadOrderMsgCount)
+      wx.setStorageSync('systemMsg', res.data.unreadSysMsgCount)
       this.setData({
         unreadOrder: res.data.unreadOrderMsgCount,
         unreadSystem: res.data.unreadSysMsgCount
@@ -56,7 +80,9 @@ Page({
     var fail = (e) => {
       console.log(e)
     }
-    wxrequest.requestGet(url, '', success, fail)
+    if(wx.getStorageInfoSync('token')){
+      wxrequest.requestGet(url, '', success, fail)
+    }
   },
   //跳转至搜索
   gotoSearch: function() {
@@ -93,10 +119,9 @@ Page({
   //跳转至广告
   gotoAd: function(e) {
     wx.setStorageSync('ad', `${this.data.adBanner[e.currentTarget.dataset.adindex].linkValue}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
-    console.log('?????', `${this.data.adBanner[e.currentTarget.dataset.adindex].linkValue}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
     if (this.data.adBanner[e.currentTarget.dataset.adindex].linkValue.indexOf('needlogin=1') == -1) {
       wx.navigateTo({
-        url: 'adWebView/index?url='+`${this.data.adBanner[e.currentTarget.dataset.adindex].linkValue}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`
+        url: 'adWebView/index'
       })
     } else if (wx.getStorageSync('token')) {
       wx.navigateTo({
@@ -170,7 +195,6 @@ Page({
   },
 
   onLoad: function(options) {
-    Time(['2017-01-01 01:01:01', '2019-01-18 11:01:01'])
     this.setData({
       scene: options.scene ? options.scene : false
     })
@@ -303,8 +327,14 @@ Page({
     let vm = this;
     if (wx.getStorageSync('token')) {
       vm.getUnread()
-      setInterval(vm.getUnread, 10000)
+      // this.setData({
+        setInterval(vm.getUnread, 10000)
+      // })
     }
+    // if (!wx.getStorageSync('token')) {
+    //   clearInterval(this.data.interval)
+    // }
+
     if (!wx.getStorageSync('city') && !wx.getStorageSync('province')) { //是否已有地理位置缓存
       this.getUserLocation()
     }
@@ -513,7 +543,7 @@ Page({
     wxrequest.requestGet(url, '', success, fail)
   },
   //律师服务
-  gotoExpert: function() {
+  gotodemand: function() {
     if (wx.getStorageSync("token")) {
       wx.navigateTo({
         // url: '../index/expert-service/index',

@@ -54,15 +54,15 @@
   </view>
 </view>
 <!--  -->
-<view class=''>
+<!-- <view class=''>
   <view class='consoul-detail'>
     <image src='' class='image-consoul-detail'></image>
   </view>
   <view class='consoul-detail'>这个咨询还没有律师回答</view>
   <view class='consoul-detail'>去快速咨询,分钟响应</view>
-</view>
+</view> -->
 <!-- 推荐内容 -->
-<view class='consoul-content-flex'>
+<!-- <view class='consoul-content-flex'>
   <view>推荐内容</view>
   <view>查看更多</view>
-</view>
+</view> -->

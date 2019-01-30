@@ -13,7 +13,7 @@
 		"nodeModules": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.3",
+	"libVersion": "2.5.1",
 	"appid": "wx6039aeee819d9d94",
 	"projectname": "LEXdevH",
 	"debugOptions": {
