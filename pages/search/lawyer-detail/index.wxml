@@ -36,7 +36,7 @@
     </view>
     <view class='law-page-LEX'>
       <!-- <image src='' class=''></image> -->
-      <text style='margin-left:10rpx;'>LEX提供最高{{lawyerInfoV2.price}}元服务担保</text>
+      <text style='margin-left:10rpx;' wx:if="{{lawyerInfoV2.price}}">LEX提供最高{{lawyerInfoV2.price}}元服务担保</text>
     </view>
     <view class='law-skill-right-other'>
         {{lawyerInfoV2.businessDescription}}、
