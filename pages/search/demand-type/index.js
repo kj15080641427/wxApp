@@ -12,7 +12,7 @@ Page({
   //完善信息
   gotoDetail:function(e){
     wx.navigateTo({
-      url: '../demand-detail/index?busiTypes=' + JSON.stringify(this.data.busiTypes[e.currentTarget.dataset.typeindex]) + '&demandType=' + JSON.stringify(this.data.demandType),
+      url: '../demand-detail/index?busiTypes=' + JSON.stringify(this.data.busiTypes[e.currentTarget.dataset.typeindex]) + '&demandType=' + JSON.stringify(this.data.demandType) + "&typeindex=" + e.currentTarget.dataset.typeindex,
     })
   },
   /**

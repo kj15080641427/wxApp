@@ -104,13 +104,13 @@ Page({
     var that = this
     var url = api.getExpert()
     var success = function(data) {
-      data.data.map(function(item) {
-        if (item.businessTypeId == that.data.busiType.businessTypeId) {
+      // data.data.map(function(item) {
+        // if (item.businessTypeId == that.data.busiType.businessTypeId) {
           that.setData({
-            business: item.children
+            business: data.data[that.data.typeindex].children
           })
-        }
-      })
+        // }
+      // })
       wx.hideLoading()
     }
     var fail = function(e) {
@@ -348,7 +348,8 @@ Page({
       ['postList.requirementTypeId']: JSON.parse(options.demandType).requireTypeId,
       ['postList.requirementTypeName']: JSON.parse(options.demandType).requireTypeName,
       ['postList.requirementBusiId']: options.busiTypes ? JSON.parse(options.busiTypes).businessTypeId : '',
-      ['postList.requirementBusiName']: options.busiTypes ? JSON.parse(options.busiTypes).businessTypeName : ''
+      ['postList.requirementBusiName']: options.busiTypes ? JSON.parse(options.busiTypes).businessTypeName : '',
+      typeindex: options.typeindex
     })
     if (wx.getStorageSync('province') && wx.getStorageSync('city')) {
       this.setData({
