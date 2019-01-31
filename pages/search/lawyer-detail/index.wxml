@@ -1,30 +1,27 @@
-<view wx:if="{{tabindex==0}}">
+<!-- <view wx:if="{{tabindex==0}}"> -->
   <image mode='aspectFill' class='law-page-background-image' src="/image/search_icon@3x/Lawyershomepage_icon_02@3x.png" bindtap='showBackgroundImage'></image>
   <image mode='aspectFill' class='law-page-background' src="{{lawyerInfoV2.backgroundImage ? lawyerInfoV2.backgroundImage:'../../../image/my_icon@3x/mine_icon_01_3x.png'}}" bindtap='showBackgroundImage'></image>
-</view>
+<!-- </view> -->
 
-  <view class='go-back' style="height:{{navH-statuH}}px;position: fixed;left:0;top:{{statuH}}px;z-index:99999;top:0" bindtap='tabBack' wx:if="{{tabindex==0}}">
-    <image src='/image/homeicon_3x/back.png' class='back-image'></image>
-  </view>
-  <view class='go-back' style="height:{{navH}}px;position:fixed;width:750rpx;z-index:99999;background-color:#1ec88c" bindtap='tabBack' wx:if="{{tabindex!==0}}">
-    <image src='/image/homeicon_3x/back.png' class='back-image' style='margin-top:{{tabH}}px'></image>
-  </view>
-  <view wx:if="{{tabindex==0}}">
-    <view bindtap='toindex' wx:if="{{firstPage}}">
-      <view class='goto-index'>
-        <text style='margin-left:10rpx;'>回到首页</text>
-      </view>
-    </view>
-    <view class='follow-lawyer' bindtap="{{ isFollow ? 'unFollow':'follow'}}">
-      <image src="{{isFollow ? '../../../image/search_icon@3x/Personalhomepage-02@3x.png':'../../../image/search_icon@3x/Personalhomepage-01@3x.png'}}" style='height:25rpx;width:25rpx;margin-left:20rpx;z-index:1;'></image>
-      <text style='margin-left:10rpx;'>{{isFollow? '已关注':'关注'}}</text>
+<view class='go-back' style="height:{{navH-statuH}}px;position: fixed;left:0;top:{{statuH}}px;z-index:99999;top:0" bindtap='tabBack' >
+  <image src='/image/homeicon_3x/back.png' class='back-image'></image>
+</view>
+<view>
+  <view bindtap='toindex' wx:if="{{firstPage}}">
+    <view class='goto-index'>
+      <text style='margin-left:10rpx;'>回到首页</text>
     </view>
   </view>
-  <image class='law-page-avatar' src="{{lawyerInfoV2.iconImage? lawyerInfoV2.iconImage : '../../../image/my_icon@3x/mine_icon-03@3x.png'}}" bindtap='showImage' wx:if="{{tabindex==0}}"></image>
-  <!-- info -->
+  <view class='follow-lawyer' bindtap="{{ isFollow ? 'unFollow':'follow'}}">
+    <image src="{{isFollow ? '../../../image/search_icon@3x/Personalhomepage-02@3x.png':'../../../image/search_icon@3x/Personalhomepage-01@3x.png'}}" style='height:25rpx;width:25rpx;margin-left:20rpx;z-index:1;'></image>
+    <text style='margin-left:10rpx;'>{{isFollow? '已关注':'关注'}}</text>
+  </view>
+</view>
+<image class='law-page-avatar' src="{{lawyerInfoV2.iconImage? lawyerInfoV2.iconImage : '../../../image/my_icon@3x/mine_icon-03@3x.png'}}" bindtap='showImage' ></image>
+<!-- info -->
 <view style='z-index:66; position: absolute;top:0;width:750rpx;'>
   <view class='lawyer-info'>
-    <view style='padding-left:35rpx;' wx:if="{{tabindex==0}}">
+    <view style='padding-left:35rpx;' >
       <view class=''>
         <text class='lawyer-name'>{{lawyerInfoV2.memberName}}</text>
         <text wx:if="{{lawyerInfoV2.memberPositionName}}" style='margin-left:20rpx;'>{{lawyerInfoV2.memberPositionName}} |</text>
@@ -47,7 +44,7 @@
     </view>
 
     <view style='margin-top:20rpx;margin-bottom:24rpx;'>
-      <view class='law-flex' style='z-index:9999;' hidden='{{tabindex!==0}}'>
+      <view class='law-flex' style='z-index:9999;' >
         <canvas style=' width:{{width/5}}px; height:{{width/5}}px;' canvas-id="canvasArc">
           <view class='lawyer-canvas' style='height:{{width/5}}px'>{{lawyerInfoV2.evaluation.aspectLitigation.score}}</view>
         </canvas>
@@ -64,7 +61,7 @@
           <view class='lawyer-canvas' style='height:{{width/5}}px'>{{lawyerInfoV2.evaluation.aspectVitality.score}}</view>
         </canvas>
       </view>
-      <view class='law-flex' hidden='{{tabindex!==0}}'>
+      <view class='law-flex' >
         <view class=' canvas-text' style=' width:{{width/5}}px; '>{{lawyerInfoV2.evaluation.aspectLitigation.text}}</view>
         <view class=' canvas-text' style=' width:{{width/5}}px; '>{{lawyerInfoV2.evaluation.aspectNonLitigation.text}}</view>
         <view class=' canvas-text' style=' width:{{width/5}}px; '>{{lawyerInfoV2.evaluation.aspectReliability.text}}</view>
@@ -75,7 +72,7 @@
   </view>
 </view>
 
-<view style='height:{{navH}}px' wx:if="{{tabindex!=0}}"></view>
+<!-- <view style='height:{{navH}}px' wx:if="{{tabindex!=0}}"></view> -->
 <!-- tab -->
 <!-- <view style='height:200rpx'></view> -->
 <scroll-view scroll-x class='tab-class'>

@@ -142,7 +142,7 @@ function getDemand() {
   return HOST_URL + Demand
 }
 //擅长领域
-var Expert = '/common/businessType'
+var Expert = '/common/businessType/v2'
 
 function getExpert() {
   return HOST_URL + Expert
@@ -329,7 +329,7 @@ function getCash() {
   return HOST_URL + Cash
 }
 //金额
-var LawCash = '/lawyer/require/'
+var LawCash = '/client/require/'
 
 function getLawCash() {
   return HOST_URL + LawCash
@@ -371,13 +371,13 @@ function getReadone() {
   return HOST_URL + OneRead
 }
 
-//获取律师个人主页信息V2
-var LawyerInfoV2 = '/lawyer/member/homepage/base/v2/'
+//获取律师个人主页信息V2 '/lawyer/member/homepage/base/v2/'
+var LawyerInfoV2 = '/common/member/homepage/base/v2/'
 function getlawyerInfoV2(){
   return HOST_URL + LawyerInfoV2
 }
 // 律师服务价格
-var LawyerPrice = '/lawyer/require/'
+var LawyerPrice = '/client/require/'
 function getlawyerPrice(){
   return HOST_URL + LawyerPrice
 }
