@@ -649,7 +649,7 @@ Page({
   //绘制文字
   drawTextCans: function(mData) {
     radCtx.setFillStyle("black")
-    // radCtx.font = 'bold 24rpx' //设置字体
+    radCtx.font = '15px bold' //设置字体
     for (var n = 0; n < numCount; n++) {
       var x = mCenter + mRadius * Math.cos(mAngle * n);
       var y = mCenter + mRadius * Math.sin(mAngle * n);
