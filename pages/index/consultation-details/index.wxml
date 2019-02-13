@@ -5,7 +5,7 @@
       <image class='details-page-icon' src="{{userInfo.iconImage?userInfo.iconImage:'/image/my_icon@3x/mine_icon_02_3x.png'}}"></image>
       <view class='details-page-nikename'>{{userInfo.memberName}}</view>
       <view class='details-page-line'></view>
-      <view class='details-page-nikename'>{{userInfo.addressExtend.province}}{{userInfo.addressExtend.city}}</view>
+      <view class='details-page-nikename'>{{orderDetail.rname}}</view>
     </view>
     <view class='details-page-type'>{{orderDetail.typeName}}</view>
   </view>

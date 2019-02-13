@@ -5,7 +5,6 @@ var wxrequest = require('../../../utils/request.js')
 var throttle = require('../../../utils/throttle.js')
 Page({
 
-  // <<<<<<< HEAD
   /**
    * 页面的初始数据
    */
@@ -25,10 +24,6 @@ Page({
     wx.navigateTo({
       url: '../cash/index?balance=' + JSON.stringify(this.data.balance),
     })
-    // wx.showToast({
-    //   title: '暂不支持',
-    //   icon: 'none'
-    // })
   },
   //获取账户余额
   getBalance: function() {

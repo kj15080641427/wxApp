@@ -49,7 +49,7 @@
           <view>
             <view class='time-title'>
               <view class='hide-title'>{{item.title}}</view>
-              <view style='font-size:20rpx'>{{msgTime[index]}}</view>
+              <view style='font-size:20rpx;width:110rpx;'>{{msgTime[index]}}</view>
             </view>
             <view class="info">{{item.content}}</view>
           </view>
@@ -69,7 +69,7 @@
           </view>
           <view>
             <view class='time-title'>
-              <view class='hide-title'>title{{item.title}}</view>
+              <view class='hide-title'>{{item.title}}</view>
               <view style='font-size:20rpx'>{{timelaw[index]}}</view>
             </view>
             <view class="info">{{item.url}}</view>

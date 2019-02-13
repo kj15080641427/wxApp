@@ -17,7 +17,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabList: ['基本信息', '服务价格', '活跃度', '诚信度', '社会资源', '诉讼经验'],
+    tabList: [],
     // lawyerInfo: '',
     lawyerID: '',
     index: '',
@@ -75,6 +75,7 @@ Page({
     wx.switchTab({
       url: '/pages/index/index',
     })
+    console.log(111111)
   },
   //关注
   follow: function() {
@@ -117,7 +118,7 @@ Page({
     }
     var fail = (e) => {
       wx.showToast({
-        title: e.message,
+        title: '取消关注失败',
         icon: 'none'
       })
     }
@@ -146,7 +147,7 @@ Page({
   //获取律师信息V2
   getlawyerInfoV2: function() {
     wx.showLoading({
-      
+
     })
     wxrequest.superRequest(api.getlawyerInfoV2() + this.data.lawyerID, this.data.lawyerID, "GET").then((res) => {
       this.setData({
@@ -155,11 +156,29 @@ Page({
         workExp: res.data.data.reliabilityInfo.workExp, //工作经验
         education: res.data.data.reliabilityInfo.education, //教育背景
       })
+      let arr = []
+      for (let i in res.data.data.evaluation) {
+        arr.push(res.data.data.evaluation[i])
+      }
+      console.log('arr', arr)
+      let tabArr = []
+      arr.map((item) => {
+        tabArr.push(item.text)
+      })
+      tabArr.unshift('服务价格')
+      tabArr.unshift('基本信息')
+      this.setData({
+        tabList: tabArr
+      })
+      // res.data.data.evaluation.map((item)=>{
+      //   tabList.push(item.text)
+      // })
+      console.log(this.data.tabList)
       this.getTime(res.data.data.reliabilityInfo.workExp, res.data.data.reliabilityInfo.education) //工作.教育 时间
       this.getCase()
       console.log('律师信息V2', this.data.lawyerInfoV2)
     }).then((res) => {
-      wx.hideLoading()  //hide loading
+      wx.hideLoading() //hide loading
       let scoreLawyer = []
       let scoreAvg = []
       this.data.lawyerInfoV2.baseInfo.businessRadar.map((item) => {
@@ -169,10 +188,21 @@ Page({
         scoreAvg.push(['', item.avgScore * 100])
       })
       this.getRound() //圆环
-      if (this.data.lawyerInfoV2.baseInfo.businessRadar[0]){
-        this.drawRadar(scoreLawyer, scoreAvg) //雷达图
+      if (scoreLawyer.length < 6) {
+        console.log(999999999999)
+        for(let i = 0;i<5;i++){
+          scoreLawyer.push(['', 0])
+          if (scoreLawyer.length==6){
+            break
+          }
+        }
       }
-    }).catch((e)=>{
+
+      if (this.data.lawyerInfoV2.baseInfo.businessRadar[0]) {
+        this.drawRadar(scoreLawyer, scoreAvg) //雷达图
+        console.log('雷达图', scoreLawyer)
+      }
+    }).catch((e) => {
       console.log(e)
       wx.hideLoading()
     })
@@ -197,7 +227,6 @@ Page({
       endWorkList: endWorkTimeList,
       endEducaList: endEducaTimeList
     })
-    console.log('shijian', startWorkTimeList, endWorkTimeList)
   },
   //获取律师服务价格
   // getlawyerPrice:function(){
@@ -387,6 +416,9 @@ Page({
           title: '最低通话时间为1分钟,当前余额不足,请先充值',
           icon: 'none'
         })
+        wx.navigateTo({
+          url: '/pages/my/balance/index?memberId=' + wx.getStorageSync('userInfo').memberId,
+        })
       }
     } else {
       wx.navigateTo({
@@ -415,7 +447,7 @@ Page({
     }.bind(this), 200)
   },
   //关闭弹窗
-  closemodal: function () {
+  closemodal: function() {
     if (this.data.time > 0) {
       this.setData({
         close: true,
@@ -459,10 +491,10 @@ Page({
   //专家服务
   quickConsultation: function() {
     var that = this
-    // wx.showLoading({
-    //   title:'正在联系律师',
-    //   mask: true
-    // })
+    wx.showLoading({
+      title: '正在联系律师',
+      mask: true
+    })
     var url = api.getExpertPhone() + that.data.lawyerInfoV2.memberId
     var success = (res) => {
       console.log(res)
@@ -570,18 +602,19 @@ Page({
   },
 
   // 雷达图
-  drawRadar: function(sourceData1, sourceData2) {
+  drawRadar: function(scoreLawyer, sourceData2) {
     this.drawRegion2(sourceData2, '#caffd6') //平均值
     //调用
     this.drawEdge() //画六边形
     //this.drawArcEdge() //画圆
     this.drawLinePoint()
     //设置数据
-    this.drawRegion(sourceData1, '#f8b62d') //律师
+    this.drawRegion(scoreLawyer, '#f8b62d') //律师
     //设置文本数据
-    this.drawTextCans(sourceData1)
+    this.drawTextCans(scoreLawyer)
+    this.drawTextCansNum(scoreLawyer)
     //设置节点
-    this.drawCircle(sourceData1, '#f8b62d')
+    this.drawCircle(scoreLawyer, '#f8b62d')
     // this.drawCircle(sourceData2, '#caffd6')
     //开始绘制
     radCtx.draw()
@@ -656,13 +689,38 @@ Page({
       // radCtx.fillText(mData[n][0], x, y);
       //通过不同的位置，调整文本的显示位置
       if (mAngle * n >= 0 && mAngle * n <= Math.PI / 2) {
-        radCtx.fillText(mData[n][0], x + 5, y + 5);
+        radCtx.fillText(mData[n][0], x + 5, y + 5, 200);
+        // radCtx.fillText(mData[n][1] + '%', x + 5, y + 25, 200);
       } else if (mAngle * n > Math.PI / 2 && mAngle * n <= Math.PI) {
-        radCtx.fillText(mData[n][0], x - radCtx.measureText(mData[n][0]).width - 7, y + 5);
+        radCtx.fillText(mData[n][0], x - radCtx.measureText(mData[n][0]).width - 7, y + 5, 200);
+        // radCtx.fillText(mData[n][1] + '%', x - radCtx.measureText(mData[n][1]).width - 7, y + 25, 200);
       } else if (mAngle * n > Math.PI && mAngle * n <= Math.PI * 3 / 2) {
-        radCtx.fillText(mData[n][0], x - radCtx.measureText(mData[n][0]).width - 5, y);
+        radCtx.fillText(mData[n][0], x - radCtx.measureText(mData[n][0]).width - 5, y, 200);
+        // radCtx.fillText(mData[n][1] + '%', x - radCtx.measureText(mData[n][1]).width - 5, y+20, 200);
       } else {
-        radCtx.fillText(mData[n][0], x + 7, y + 2);
+        radCtx.fillText(mData[n][0], x + 7, y + 2, 200);
+        // radCtx.fillText(mData[n][1] + '%', x + 7, y + 22, 200);
+      }
+
+    }
+  },
+  //绘制文字(百分比)
+  drawTextCansNum: function(mData) {
+    radCtx.setFillStyle("#f8b62d")
+    radCtx.font = '15px bold' //设置字体
+    for (var n = 0; n < numCount; n++) {
+      var x = mCenter + mRadius * Math.cos(mAngle * n);
+      var y = mCenter + mRadius * Math.sin(mAngle * n);
+      // radCtx.fillText(mData[n][0], x, y);
+      //通过不同的位置，调整文本的显示位置
+      if (mAngle * n >= 0 && mAngle * n <= Math.PI / 2) {
+        radCtx.fillText(mData[n][1] + '%', x + 5, y + 25, 200);
+      } else if (mAngle * n > Math.PI / 2 && mAngle * n <= Math.PI) {
+        radCtx.fillText(mData[n][1] + '%', x - radCtx.measureText(mData[n][1]).width - 7, y + 25, 200);
+      } else if (mAngle * n > Math.PI && mAngle * n <= Math.PI * 3 / 2) {
+        radCtx.fillText(mData[n][1] + '%', x - radCtx.measureText(mData[n][1]).width - 5, y + 20, 200);
+      } else {
+        radCtx.fillText(mData[n][1] + '%', x + 7, y + 22, 200);
       }
 
     }

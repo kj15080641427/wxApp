@@ -321,7 +321,12 @@ Page({
     var addressList = []
     var that = this
     this.data.lawyerList ? this.data.lawyerList.map(function(item) {
-      yearList.push(formatTime.formatTime(new Date()).split("-")[0] - item.beginPracticeDate.split("-")[0])
+      if (formatTime.formatTime(new Date()).split("-")[1] >= item.beginPracticeDate.split("-")[1]){
+        // console.log('111111',formatTime.formatTime(new Date()).split("-")[1] >item.beginPracticeDate.split("-")[1])
+        yearList.push(formatTime.formatTime(new Date()).split("-")[0] - item.beginPracticeDate.split("-")[0])
+     }else{
+        yearList.push(formatTime.formatTime(new Date()).split("-")[0] - item.beginPracticeDate.split("-")[0]-1)
+     }
     }) : ''
     that.data.lawyerList ? that.data.lawyerList.map(function(item) {
       addressList.push(item.region.split('-', 2))
@@ -330,6 +335,7 @@ Page({
       year: yearList,
       address: addressList,
     })
+    // console.log(formatTime.formatTime(new Date()).split("-")[1]-this.data.lawyerList[0].beginPracticeDate.split("-")[1])
   },
   //点击tab
   onTabItemTap() {
