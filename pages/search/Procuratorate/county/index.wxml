@@ -6,6 +6,6 @@
 <view class='court-view'>
 <view class='court'>基层检察院</view>
   <view style='background-color:#f4f4f4;height:1rpx;margin-right:35rpx;'></view>
-<view class='court-text' wx:key="{{index}}" wx:for="{{otherProcur}}" data-procurindex="{{index}}" bindtap='selectCourt'>{{item.institutionName}}</view>
+<view class='court-text' wx:key="{{index}}" wx:for="{{otherProcur}}" data-procurindex="{{index}}" bindtap='selectProcur'>{{item.institutionName}}</view>
 </view>
 

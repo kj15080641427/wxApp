@@ -163,7 +163,7 @@
     </view>
     <!-- 取消按钮 -->
     <view style="display:flex;justify-content:center;margin-top:30rpx" bindtap="hideModal">
-      <image src="../../image/homeicon_3x/homepage_11_3x.png" style="width:50rpx;height:50rpx;margin-top:100rpx" />
+      <!-- <image src="../../image/homeicon_3x/homepage_11_3x.png" style="width:50rpx;height:50rpx;margin-top:100rpx" /> -->
     </view>
   </view>
 </view>

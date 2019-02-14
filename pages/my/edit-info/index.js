@@ -29,6 +29,7 @@ Page({
       "gender": "女",
       "id": 2
     }], //性别
+    index:0,
     provinces: [],
     citys: [],
     areas: [],
@@ -302,7 +303,8 @@ Page({
       userInfo: wx.getStorageSync("userInfo"),
       index: wx.getStorageSync('userInfo').sex ? wx.getStorageSync('userInfo').sex - 1 : '0',
       avatarUrl: wx.getStorageSync('userInfo').iconImage ? wx.getStorageSync('userInfo').iconImage :'',
-      ['changeInfo.memberId']:wx.getStorageSync('memberId')
+      ['changeInfo.memberId']:wx.getStorageSync('memberId'),
+      ['changeInfo.sex']: this.data.gender[this.data.index].id
     })
     // 行业列表
     this.getIndustry()

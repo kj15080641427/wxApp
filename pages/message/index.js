@@ -130,97 +130,101 @@ Page({
 	},
 	clear: function () {
 
-	},
-	// 针对用户端：240 免费咨询有新的回复，241快速咨询被接单了，242律师接单10分钟还未拨打电话，243需求有律师回复，244专家咨询已完成，扣款的时候发送, 245快速咨询完成//300 用户向律师发了条需求，跳转到需求详情；301：律师回复了用户，跳转到需求详情；302用户回复了律师，跳转到需求详情；303：超过20分钟未接单，跳转到需求详情；304用户评价了律师，跳转到需求详情
-	//点击订单消息
-	clickOrder: function (e) {
-		if (this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 240) {
-			wx.showLoading({
-				mask: true
-			})
-			setTimeout(() => {
-				wx.hideLoading()
-			}, 5000)
-			this.getReadone(this.data.orderMsg[e.currentTarget.dataset.orderindex].pushMessageId)
-			// wxrequest.superRequest(api.getOrder(), data, 'POST').then((res) => {
-			this.data.orderList.some((item, index) => {
-				if (item.id == this.data.orderMsg[e.currentTarget.dataset.orderindex].busiId) {
-					wx.navigateTo({
-						url: '/pages/index/consultation-details/index?orderDetail=' + JSON.stringify(this.data.orderList[index]),
-					})
-				}
-			})
-			// }).catch((err) => {
-			//   wx.showToast({
-			//     title: err.message,
-			//     icon: 'none'
-			//   })
-			// })
-		} else if (this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 241 || this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 245) {
-			wx.showLoading({
-				mask: true
-			})
-			setTimeout(() => {
-				wx.hideLoading()
-			}, 5000)
-			this.getReadone(this.data.orderMsg[e.currentTarget.dataset.orderindex].pushMessageId)
-			// wxrequest.superRequest(api.getOrder(), data, 'POST').then((res) => {
-			this.data.orderList.some((item, index) => {
-				if (item.id == this.data.orderMsg[e.currentTarget.dataset.orderindex].busiId && item.orderType == '快速电话咨询') {
-					wx.navigateTo({
-						url: '/pages/my/order-detail/index?orderDetail=' + JSON.stringify(this.data.orderList[index]),
-					})
-				}
-			})
-			// }).catch((err) => {
-			//   console.log('241快速电话咨询', err)
-			// })
-		} else if (this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 244) {
-			wx.showLoading({
-				mask: true
-			})
-			setTimeout(() => {
-				wx.hideLoading()
-			}, 15000)
-			this.getReadone(this.data.orderMsg[e.currentTarget.dataset.orderindex].pushMessageId)
-			// wxrequest.superRequest(api.getOrder(), data, 'POST').then((res) => {
-			this.data.orderList.some((item, index) => {
-				if (item.id == this.data.orderMsg[e.currentTarget.dataset.orderindex].busiId && item.orderType == '专家电话咨询') {
-					wx.navigateTo({
-						url: '/pages/my/order-expert/index?orderDetail=' + JSON.stringify(this.data.orderList[index]),
-					})
-				}
-			})
-			// })
-		} else if (this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 246) {
-			this.getReadone(this.data.orderMsg[e.currentTarget.dataset.orderindex].pushMessageId)
-			wx.navigateTo({
-				url: '/pages/my/order/index',
-			})
-		}
-	},
-	onLoad(options) {
-		var data = {
-			memberId: wx.getStorageSync('memberId'),
-			pageNum: 1,
-			pageSize: 999,
-		}
-		wxrequest.superRequest(api.getOrder(), data, 'POST').then((res) => {
-			this.setData({
-				orderList: res.data.data.list
-			})
-			console.log('?????????', this.data.orderList)
-		})
-		this.getUnread()
-		this.checkLogin()
-	},
-	onReady() {},
-	onShow() {
-		if (!jM.isLogin()) {
-			let that = this
-			wx.showLoading({
-				title: '加载中',
-			})
+  },
+  // 针对用户端：240 免费咨询有新的回复，241快速咨询被接单了，242律师接单10分钟还未拨打电话，243需求有律师回复，244专家咨询已完成，扣款的时候发送, 245快速咨询完成//300 用户向律师发了条需求，跳转到需求详情；301：律师回复了用户，跳转到需求详情；302用户回复了律师，跳转到需求详情；303：超过20分钟未接单，跳转到需求详情；304用户评价了律师，跳转到需求详情
+  //点击订单消息
+  clickOrder: function(e) {
+    if (this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 240) {
+      wx.showLoading({
+        mask: true
+      })
+      setTimeout(() => {
+        wx.hideLoading()
+      }, 5000)
+      this.getReadone(this.data.orderMsg[e.currentTarget.dataset.orderindex].pushMessageId)
+      // wxrequest.superRequest(api.getOrder(), data, 'POST').then((res) => {
+      this.data.orderList.some((item, index) => {
+          if (item.id == this.data.orderMsg[e.currentTarget.dataset.orderindex].busiId) {
+            wx.navigateTo({
+              url: '/pages/index/consultation-details/index?orderDetail=' + JSON.stringify(this.data.orderList[index]),
+            })
+          }
+        })
+      // }).catch((err) => {
+      //   wx.showToast({
+      //     title: err.message,
+      //     icon: 'none'
+      //   })
+      // })
+    } else if (this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 241 || this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 245) {
+      wx.showLoading({
+        mask: true
+      })
+      setTimeout(() => {
+        wx.hideLoading()
+      }, 5000)
+      this.getReadone(this.data.orderMsg[e.currentTarget.dataset.orderindex].pushMessageId)
+      // wxrequest.superRequest(api.getOrder(), data, 'POST').then((res) => {
+      this.data.orderList.some((item, index) => {
+          if (item.id == this.data.orderMsg[e.currentTarget.dataset.orderindex].busiId && item.orderType == '快速电话咨询') {
+            wx.navigateTo({
+              url: '/pages/my/order-detail/index?orderDetail=' + JSON.stringify(this.data.orderList[index]),
+            })
+          }
+        })
+      // }).catch((err) => {
+      //   console.log('241快速电话咨询', err)
+      // })
+    } else if (this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 244) {
+      wx.showLoading({
+        mask: true
+      })
+      setTimeout(() => {
+        wx.hideLoading()
+      }, 15000)
+      this.getReadone(this.data.orderMsg[e.currentTarget.dataset.orderindex].pushMessageId)
+      // wxrequest.superRequest(api.getOrder(), data, 'POST').then((res) => {
+      this.data.orderList.some((item, index) => {
+        if (item.id == this.data.orderMsg[e.currentTarget.dataset.orderindex].busiId && item.orderType == '专家电话咨询') {
+          wx.navigateTo({
+            url: '/pages/my/order-expert/index?orderDetail=' + JSON.stringify(this.data.orderList[index]),
+          })
+        }
+      })
+      // })
+    } else if (this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 246) {
+      this.getReadone(this.data.orderMsg[e.currentTarget.dataset.orderindex].pushMessageId)
+      wx.navigateTo({
+        url: '/pages/my/order/index',
+      })
+    } else if (this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 243){
+      this.setData({
+        current:0
+      })
+    }
+  },
+  onLoad(options) {
+    var data = {
+      memberId: wx.getStorageSync('memberId'),
+      pageNum: 1,
+      pageSize: 999,
+    }
+    wxrequest.superRequest(api.getOrder(), data, 'POST').then((res) => {
+      this.setData({
+        orderList: res.data.data.list
+      })
+      console.log('?????????', this.data.orderList)
+    })
+    this.getUnread()
+    this.checkLogin()
+  },
+  onReady() {},
+  onShow() {
+    if (!jM.isLogin()) {
+      let that = this
+      wx.showLoading({
+        title: '加载中',
+      })
 
 			function getImConfigSuccess(res) {
 				// console.log('res',res.data.appkey)

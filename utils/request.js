@@ -204,7 +204,6 @@ function requestGet(url, message, success, fail) {
     },
   })
 }
-
 // GET para
 function requestGetpar(url, params, message, success, fail) {
   wx.showNavigationBarLoading()
@@ -305,5 +304,5 @@ module.exports = {
   requestPost: requestPost,
   requestGetpar: requestGetpar,
   superRequest: superRequest,
-  requestForm: requestForm
+  requestForm: requestForm,
 }

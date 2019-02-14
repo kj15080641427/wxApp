@@ -239,10 +239,10 @@ Page({
   },
   //上拉搜索
   topSearch: function() {
-    wx.showLoading({
-      title: '加载中',
-      mask: true
-    })
+    // wx.showLoading({
+    //   title: '加载中',
+    //   mask: true
+    // })
     var that = this
     var url = api.getSearchLawyer() + that.data.pageNum + '/10'
     var datan = that.data.noFilter
