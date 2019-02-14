@@ -405,7 +405,7 @@ Page({
 		let unReadMsgList = wx.getStorageSync('unReadMsgList') || []
 		// console.log(unReadMsgList)
 		let msg = v.messages[0]
-		if (msg.content.msg_type == 'voice') {
+		if (msg.content.msg_type == 'voice' || msg.content.msg_type == 'image') {
 			jM.getResource({
 				'media_id': msg.msg_body.media_id
 			}).onSuccess(function (gRes) {
@@ -439,6 +439,7 @@ Page({
 				msg_type: msg.content.msg_type,
 				target_id: msg.content.target_id,
 				content: msg.content.msg_body,
+				name: msg.content.msg_body.label.split("&")[0],
 				create_time: that.disposeTime(msg.content.create_time),
 				msg_id: msg.msg_id
 			})

@@ -137,7 +137,8 @@ Page({
                                     msg_id: lRes.messages[0].content.msgid,
                                     from_id: lRes.messages[0].content.from_id,
                                     msg_type: lRes.messages[0].content.msg_type,
-                                    content: lRes.messages[0].content.msg_body
+                                    content: lRes.messages[0].content.msg_body,
+                                    name: lRes.messages[0].content.msg_body.label.split("&")[0]
                                 })
                                 that.setData({
                                     messageList: arr
@@ -232,7 +233,8 @@ Page({
                         msg_id: lRes.messages[0].content.msgid,
                         from_id: lRes.messages[0].content.from_id,
                         msg_type: lRes.messages[0].content.msg_type,
-                        content: lRes.messages[0].content.msg_body
+                        content: lRes.messages[0].content.msg_body,
+                        name: lRes.messages[0].content.msg_body.label.split("&")[0]
                     })
                     that.setData({
                         messageList: arr
@@ -498,7 +500,8 @@ Page({
                         msg_type: arr[i].msg_type,
                         msg_id: arr[i].msgid,
                         create_time: that.disposeTime(arr[i].create_time),
-                        content: arr[i].msg_body
+                        content: arr[i].msg_body,
+                        name: arr[i].msg_body.label.split("&")[0]
                     })
                     if (++i < len) {
                         that.buildListData(userName, i, arr, len, targetArr)

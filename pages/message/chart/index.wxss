@@ -213,7 +213,7 @@
     /* height: auto; */
 }
 .chart .lawyer-msg .text-box .location .location-name{
-    width: 100%;
+    width: 480rpx;
     font-size: 24rpx;
     margin-bottom: 5rpx;
     white-space: nowrap;

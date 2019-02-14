@@ -38,7 +38,7 @@
                                 <view class="audio-duration">{{ item.duration + '"' }}</view>
                             </view>
                             <view wx:if="{{item.msg_type == 'location'}}" id="{{index}}" data-info="{{item.content}}" bindtap="openMap" class="location">
-                                <view class="location-name">{{item.content.label}}</view>
+                                <view class="location-name">{{item.name}}</view>
                                 <image class="audio-img" src="../../../image/message/default-map.png" mode="widthFix" lazy-load="true" binderror="" bindload=""></image>
                             </view>
                             <view wx:if="{{item.msg_type == 'image'}}" id="{{index}}" data-src="{{item.content}}" bindtap="openImage" class="location">
