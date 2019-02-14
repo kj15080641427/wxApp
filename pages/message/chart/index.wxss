@@ -199,6 +199,27 @@
     left: -26rpx;
     z-index: 100;
 }
+.chart .lawyer-msg .text-box .location{
+    display: block;
+    width: 100%;
+    border: 1px solid #b5b5b5;
+    border-radius: 10rpx;
+    padding: 10rpx;
+    background: #fff;
+}
+.chart .lawyer-msg .text-box .location image{
+    width: 100%;
+    display: block;
+    /* height: auto; */
+}
+.chart .lawyer-msg .text-box .location .location-name{
+    width: 100%;
+    font-size: 24rpx;
+    margin-bottom: 5rpx;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
 
 .chart .input-box{
     box-sizing: border-box;

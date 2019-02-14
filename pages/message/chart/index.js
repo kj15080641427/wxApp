@@ -7,8 +7,8 @@ var app = getApp()
 var jM = app.globalData.jMessage
 const recorderManager = wx.getRecorderManager()
 const innerAudioContext = wx.createInnerAudioContext()
-let timer = null
-let timer1 = null
+let charTimer = null
+let charTimer1 = null
 Page({
     data: {
         scrollTop: 0,
@@ -86,7 +86,7 @@ Page({
                             // },function(){
                             //     that.pageScroll(that)
                             // })
-                            if (lRes.messages[0].content.msg_type == "voice") {
+                            if (lRes.messages[0].content.msg_type == "voice" || lRes.messages[0].content.msg_type == "image") {
                                 jM.getResource({
                                     'media_id': lRes.messages[0].content.msg_body.media_id
                                 }).onSuccess(function (gRes) {
@@ -132,6 +132,19 @@ Page({
                                     that.pageScroll(that)
                                     // jM.resetConversationCount(userName)
                                 })
+                            } else if (lRes.messages[0].content.msg_type == "location") {
+                                arr.push({
+                                    msg_id: lRes.messages[0].content.msgid,
+                                    from_id: lRes.messages[0].content.from_id,
+                                    msg_type: lRes.messages[0].content.msg_type,
+                                    content: lRes.messages[0].content.msg_body
+                                })
+                                that.setData({
+                                    messageList: arr
+                                }, function () {
+                                    that.pageScroll(that)
+                                    // jM.resetConversationCount(userName)
+                                })
                             }
                         });
                     }).onFail(function (data) {
@@ -168,7 +181,7 @@ Page({
                 // },function(){
                 //     that.pageScroll(that)
                 // })
-                if (lRes.messages[0].content.msg_type == "voice") {
+                if (lRes.messages[0].content.msg_type == "voice" || lRes.messages[0].content.msg_type == "image") {
                     jM.getResource({
                         'media_id': lRes.messages[0].content.msg_body.media_id
                     }).onSuccess(function (gRes) {
@@ -214,6 +227,19 @@ Page({
                         that.pageScroll(that)
                         // jM.resetConversationCount(userName)
                     })
+                } else if (lRes.messages[0].content.msg_type == "location") {
+                    arr.push({
+                        msg_id: lRes.messages[0].content.msgid,
+                        from_id: lRes.messages[0].content.from_id,
+                        msg_type: lRes.messages[0].content.msg_type,
+                        content: lRes.messages[0].content.msg_body
+                    })
+                    that.setData({
+                        messageList: arr
+                    }, function () {
+                        that.pageScroll(that)
+                        // jM.resetConversationCount(userName)
+                    })
                 }
             });
         }
@@ -222,7 +248,8 @@ Page({
     onUnload() {
         //  页面关闭时停止播放语音
         innerAudioContext.stop()
-        clearInterval(timer1);
+        clearInterval(charTimer1)
+        charTimer1 = null
         //  重置会话未读数
         jM.resetUnreadCount({
             'username': this.data.userName
@@ -239,6 +266,8 @@ Page({
     //  获取当前用户所有需求列表
     getMemberAllRequireList(userName) {
         let that = this
+        clearInterval(charTimer1)
+        charTimer1 = null
         wxrequest.superRequest(api.getAllRequireList() + userName.substr(3), {}, 'GET').then(res => {
             console.log(res)
             let isReceive = res.data.data.filter(item => {
@@ -251,7 +280,7 @@ Page({
                 requireTimeReady: isReceive.length == 0 ? false : true,
             }, function () {
                 //  剩余服务时间
-                timer1 = setInterval(function () {
+                charTimer1 = setInterval(function () {
                     if (that.data.grabTime > 0) {
                         // console.log(44444)
                         let d = Math.floor(that.data.grabTime / 1000 / 60 / 60 / 24);
@@ -265,7 +294,12 @@ Page({
                         })
                         // console.log(that.data.grabTime)
                     } else {
-                        clearInterval(timer1);
+                        clearInterval(charTimer1);
+                        charTimer1 = null
+                        that.setData({
+                            canInput: false,
+                            requireTimeReady: false
+                        })
                     }
                 }, 1000);
             })
@@ -288,8 +322,8 @@ Page({
         wx.request({
             url: encodeURI('https://report.im.jpush.cn/v2/users/lex' + wx.getStorageSync('memberId') + '/messages?count=500&begin_time=' + wxformatTime.fTime(beginTime) + '&end_time=' + wxformatTime.fTime(now)),
             header: {
-                // 'Authorization': 'Basic '+wx.getStorageSync('authorization')
-                'Authorization': 'Basic MGM2M2VmOWNkYjAzODVkMGFiMTNmNmRkOjEzYzM0YTI3MTFhMDJkOWM0MWVkZDA3MQ=='
+                'Authorization': 'Basic '+wx.getStorageSync('authorization')
+                // 'Authorization': 'Basic MGM2M2VmOWNkYjAzODVkMGFiMTNmNmRkOjEzYzM0YTI3MTFhMDJkOWM0MWVkZDA3MQ=='
             },
             method: 'get',
             success(res) {
@@ -383,7 +417,7 @@ Page({
         let that = this
         if (len > 0) {
             if (arr[i].from_id == userName) {
-                if (arr[i].msg_type == "voice") {
+                if (arr[i].msg_type == "voice" || arr[i].msg_type == "image") {
                     jM.getResource({
                         'media_id': arr[i].msg_body.media_id
                     }).onSuccess(function (gRes) {
@@ -448,8 +482,25 @@ Page({
                         content: arr[i].msg_body.content
                     })
                     if (++i < len) {
-                        console.log(len)
-                        console.log(i)
+                        that.buildListData(userName, i, arr, len, targetArr)
+                    } else {
+                        that.setData({
+                            messageList: that.getUnReadMsg(targetArr)
+                        }, function () {
+                            console.log(that.data.messageList)
+                            that.pageScroll(that)
+                            wx.hideLoading()
+                        })
+                    }
+                } else if (arr[i].msg_type == "location") {
+                    targetArr.push({
+                        from_id: arr[i].from_id,
+                        msg_type: arr[i].msg_type,
+                        msg_id: arr[i].msgid,
+                        create_time: that.disposeTime(arr[i].create_time),
+                        content: arr[i].msg_body
+                    })
+                    if (++i < len) {
                         that.buildListData(userName, i, arr, len, targetArr)
                     } else {
                         that.setData({
@@ -496,6 +547,24 @@ Page({
         } else {
             wx.hideLoading()
         }
+    },
+    //  打开地图
+    openMap(e) {
+        let data = e.currentTarget.dataset.info
+        let adr = data.label.split('&')
+        wx.openLocation({
+            latitude: data.latitude,
+            longitude: data.longitude,
+            scale: data.scale,
+            name: adr[0],
+            address: adr[1]
+        })
+    },
+    //  预览图片
+    openImage(e) {
+        wx.previewImage({
+            urls: [e.currentTarget.dataset.src] // 需要预览的图片http链接列表
+          })
     },
     textareaOnFocus(e) {
         wx.pageScrollTo({
@@ -670,10 +739,11 @@ Page({
         recorderManager.start()
 
         //  60秒自动结束录音
-        timer = setTimeout(function () {
+        charTimer = setTimeout(function () {
             recorderManager.stop()
             recorderManager.onStop((res) => {
-                clearTimeout(timer)
+                clearTimeout(charTimer)
+                charTimer = null
                 console.log(res.duration)
                 that.sendSingleFile(res.tempFilePath)
             })
@@ -686,7 +756,8 @@ Page({
         wx.hideToast()
         recorderManager.stop()
         recorderManager.onStop((res) => {
-            clearTimeout(timer)
+            clearTimeout(charTimer)
+            charTimer = null
             console.log('recorder stop', res)
             const {
                 tempFilePath

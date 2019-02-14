@@ -140,7 +140,7 @@ Page({
             console.log('config:', res)
             //  初始化jmessage
             wx.setStorageSync('appkey', res.data.data.appkey)
-            wx.setStorageSync('authorization', res.data.authorization)
+            wx.setStorageSync('authorization', res.data.data.authorization)
             jM.init({
               "appkey": res.data.data.appkey,
               "random_str": res.data.data.random,
