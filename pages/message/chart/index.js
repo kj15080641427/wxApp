@@ -44,7 +44,7 @@ Page({
             userName: option.userName,
             // grabTime: option.grabTime || null,
             nowDate: option.nowDate || null,
-            my_avatar: wx.getStorageSync('userInfo').iconImage == '' ? '../../../image/message/default-avatar.png' : wx.getStorageSync('userInfo').iconImage,
+          my_avatar: wx.getStorageSync('userInfo').iconImage == '' ? '../../../image/my_icon@3x/mine_icon_02_3x.png.png' : wx.getStorageSync('userInfo').iconImage,
             lawyer_avatar: wx.getStorageSync('lawyer-avatar') == '' ? '../../../image/message/default-lawyer.png' : wx.getStorageSync('lawyer-avatar')
         })
         // console.log(wx.getStorageSync('userInfo').iconImage)

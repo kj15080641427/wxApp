@@ -44,18 +44,18 @@ Page({
     })
   },
   //企业法务
-  gotoMember:function(){
+  gotoMember: function() {
     wx.navigateTo({
       url: '/pages/index/member/index',
     })
   },
   //专家咨询
-  gotoExpert:function(){
-    if(wx.getStorageSync('token')){
-    wx.navigateTo({
-      url: '/pages/index/expert-list/index',
-    })
-    }else{
+  gotoExpert: function() {
+    if (wx.getStorageSync('token')) {
+      wx.navigateTo({
+        url: '/pages/index/expert-list/index',
+      })
+    } else {
       wx.navigateTo({
         url: '/pages/userlogin/index',
       })
@@ -65,7 +65,7 @@ Page({
   getUnread: function() {
     var url = api.getUnread()
     var success = (res) => {
-      if(wx.getStorageSync('shockMsg')){
+      if (wx.getStorageSync('shockMsg')) {
         if (res.data.unreadOrderMsgCount > wx.getStorageSync('orderMsg') || res.data.unreadSysMsgCount > wx.getStorageSync('systemMsg')) {
           wx.vibrateLong({})
         }
@@ -79,10 +79,10 @@ Page({
     }
     var fail = (e) => {
       console.log(e)
+      clearInterval(this.data.interval)
     }
-    if(wx.getStorageInfoSync('token')){
-      wxrequest.requestGet(url, '', success, fail)
-    }
+    wxrequest.requestGet(url, '', success, fail)
+
   },
   //跳转至搜索
   gotoSearch: function() {
@@ -327,13 +327,10 @@ Page({
     let vm = this;
     if (wx.getStorageSync('token')) {
       vm.getUnread()
-      // this.setData({
-        setInterval(vm.getUnread, 10000)
-      // })
+      this.setData({
+        interval: setInterval(vm.getUnread, 10000)
+      })
     }
-    // if (!wx.getStorageSync('token')) {
-    //   clearInterval(this.data.interval)
-    // }
 
     if (!wx.getStorageSync('city') && !wx.getStorageSync('province')) { //是否已有地理位置缓存
       this.getUserLocation()
@@ -347,18 +344,18 @@ Page({
     }
   },
   //获取系统未读消息
-  getSystemUnread(){
+  getSystemUnread() {
     var url = api.getUnread()
-    var success = (res)=>{
+    var success = (res) => {
       this.setData({
         sysUnread: res.data.unreadSysMsgCount
       })
-      console.log('系统未读消息',res)
+      console.log('系统未读消息', res)
     }
-    var fail = (e)=>{
+    var fail = (e) => {
       console.log(e)
     }
-    wxrequest.requestGet(url,'',success,fail)
+    wxrequest.requestGet(url, '', success, fail)
   },
   //  获取未读消息
   getUnReadMsg() {

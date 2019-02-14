@@ -1,5 +1,5 @@
 <image mode='aspectFill' class='law-page-background-image' src="/image/search_icon@3x/Lawyershomepage_icon_02@3x.png" bindtap='showBackgroundImage'></image>
-<image mode='aspectFill' class='law-page-background' src="{{lawyerInfoV2.backgroundImage ? lawyerInfoV2.backgroundImage:'../../../image/my_icon@3x/mine_icon_01_3x.png'}}" bindtap='showBackgroundImage'></image>
+<image mode='aspectFill' class='law-page-background' src="{{lawyerInfoV2.backgroundImage ? lawyerInfoV2.backgroundImage:'../../../image/my_icon@3x/background.png'}}" bindtap='showBackgroundImage'></image>
 
 <view class='go-back' style="height:{{navH-statuH}}px;position: fixed;left:0;top:{{statuH}}px;z-index:99999;" bindtap='tabBack'>
   <image src='/image/homeicon_3x/back.png' class='back-image'></image>
@@ -20,51 +20,50 @@
 <view style='z-index:66; position: absolute;top:0;width:750rpx;'>
   <view class='lawyer-info'>
     <view style='padding-left:35rpx;'>
-      <view class=''>
-        <text class='lawyer-name'>{{lawyerInfoV2.memberName}}</text>
-        <text wx:if="{{lawyerInfoV2.memberPositionName}}" style='margin-left:20rpx;'>{{lawyerInfoV2.memberPositionName}} |</text>
-        <text wx:if="{{lawyerInfoV2.practice}}"> {{lawyerInfoV2.practice}}</text>
+      <view class='lawyer-name-gender'>
+        <view class='lawyer-name'>{{lawyerInfoV2.memberName}}</view>
+        <view wx:if="{{lawyerInfoV2.memberPositionName}}" style='margin-left:20rpx;font-size:24rpx;'>{{lawyerInfoV2.memberPositionName}} |</view>
+        <view wx:if="{{lawyerInfoV2.practice}}"> {{lawyerInfoV2.practice}}</view>
       </view>
       <view class='law-flex'>
         <view class='law-page-LEX' wx:if="{{lawyerInfoV2.lawyerTags}}" wx:key="{{index}}" wx:for='{{lawyerInfoV2.lawyerTags}}'>
           <image src='{{item.image}}' class='' style='width:20rpx;height:20rpx;border-radius:50%'></image>
-          <text style='margin-left:10rpx;'>{{item.tagName}}</text>
+          <view style='margin-left:10rpx;'>{{item.tagName}}</view>
         </view>
       </view>
-      <!-- <view class='law-page-LEX'>
-      <image src='' class=''></image>
-      <text style='margin-left:10rpx;' wx:if="{{lawyerInfoV2.price}}">LEX提供最高{{lawyerInfoV2.price}}元服务担保</text>
-    </view> -->
-      <view class='law-skill-right-other'>
-        {{lawyerInfoV2.businessDescription}}
+      <view class='law-flex'>
+        <view class='law-page-LEX-busi' wx:if="{{business}}" wx:key="{{index}}" wx:for='{{business}}'>
+          <!-- <image src='{{item.image}}' class='' style='width:20rpx;height:20rpx;border-radius:50%'></image> -->
+          <view>{{item}}</view>
+        </view>
       </view>
-      <view class='lawyer-address-firm'>{{lawyerInfoV2.region}}  {{lawyerInfoV2.institutionName}} </view>
+      <view class='lawyer-address-firm'>{{lawyerInfoV2.region}} {{lawyerInfoV2.institutionName}}</view>
     </view>
 
-    <view style='margin-top:20rpx;margin-bottom:24rpx;'>
+    <view style='margin-top:1rpx;margin-bottom:2rpx;' hidden='{{hideRound}}'>
       <view class='law-flex-no' style='z-index:9999;'>
-        <canvas style=' width:{{width/5}}px; height:{{width/5}}px;' canvas-id="canvasArc">
-          <view class='lawyer-canvas' style='height:{{width/5}}px'>{{lawyerInfoV2.evaluation.aspectVitality.score}}</view>
+        <canvas style='width:{{width/4}}px; height:{{width/4}}px;' canvas-id="canvasArc2">
+          <view class='lawyer-canvas' style='height:{{width/4}}px'>{{lawyerInfoV2.evaluation.aspectReliability.score}}</view>
         </canvas>
-        <canvas style='width:{{width/5}}px; height:{{width/5}}px;' canvas-id="canvasArc2">
-          <view class='lawyer-canvas' style='height:{{width/5}}px'>{{lawyerInfoV2.evaluation.aspectReliability.score}}</view>
+        <canvas style='width:{{width/4}}px; height:{{width/4}}px; ' canvas-id="canvasArc3">
+          <view class='lawyer-canvas' style='height:{{width/4}}px;'>{{lawyerInfoV2.evaluation.aspectSocial.score}}</view>
         </canvas>
-        <canvas style='width:{{width/5}}px; height:{{width/5}}px; ' canvas-id="canvasArc3">
-          <view class='lawyer-canvas' style='height:{{width/5}}px'>{{lawyerInfoV2.evaluation.aspectSocial.score}}</view>
+        <canvas style=' width:{{width/4}}px; height:{{width/4}}px;' canvas-id="canvasArc4">
+          <view class='lawyer-canvas' style='height:{{width/4}}px'>{{lawyerInfoV2.evaluation.aspectLitigation.score}}</view>
         </canvas>
-        <canvas style=' width:{{width/5}}px; height:{{width/5}}px;' canvas-id="canvasArc4">
-          <view class='lawyer-canvas' style='height:{{width/5}}px'>{{lawyerInfoV2.evaluation.aspectLitigation.score}}</view>
+        <canvas style=' width:{{width/4}}px; height:{{width/4}}px;' canvas-id="canvasArc">
+          <view class='lawyer-canvas' style='height:{{width/4}}px'>{{lawyerInfoV2.evaluation.aspectVitality.score}}</view>
         </canvas>
-        <canvas style=' width:{{width/5}}px; height:{{width/5}}px; ' canvas-id="canvasArc5">
+        <!-- <canvas style=' width:{{width/5}}px; height:{{width/5}}px; ' canvas-id="canvasArc5">
           <view class='lawyer-canvas' style='height:{{width/5}}px'>{{lawyerInfoV2.evaluation.aspectNonLitigation.score}}</view>
-        </canvas>
+        </canvas> -->
       </view>
       <view class='law-flex'>
-        <view class=' canvas-text' style=' width:{{width/5}}px; '>{{tabList[2]}}</view>
-        <view class=' canvas-text' style=' width:{{width/5}}px; '>{{tabList[3]}}</view>
-        <view class=' canvas-text' style=' width:{{width/5}}px; '>{{tabList[4]}}</view>
-        <view class=' canvas-text' style=' width:{{width/5}}px; '>{{tabList[5]}}</view>
-        <view class=' canvas-text' style=' width:{{width/5}}px; '>{{tabList[6]}}</view>
+        <view class=' canvas-text' style=' width:{{width/4}}px; '>行业认可</view>
+        <view class=' canvas-text' style=' width:{{width/4}}px; '>社会资源</view>
+        <view class=' canvas-text' style=' width:{{width/4}}px; '>执业经验</view>
+        <view class=' canvas-text' style=' width:{{width/4}}px; '>活跃度</view>
+        <!-- <view class=' canvas-text' style=' width:{{width/5}}px; '>{{tabList[6]}}</view> -->
       </view>
     </view>
   </view>
@@ -83,11 +82,12 @@
 </scroll-view>
 <view class='tab-line'></view>
 <!-- 雷达图 -->
-<view class='canvas-text-one' wx:if="{{tabindex==0}}">擅长领域</view>
+<view class='canvas-text-one' wx:if="{{tabindex==0&&lawyerInfoV2.baseInfo.businessRadar[2]}}">擅长领域</view>
 <view hidden='{{tabindex!==0}}' class='radarContainer' wx:if="{{lawyerInfoV2.baseInfo.businessRadar[2]}}">
-  <canvas class='radarCanvas' canvas-id='radarCanvas'></canvas>
+  <canvas class='radarCanvas' canvas-id='radarCanvas' hidden='{{hideCanvas}}'></canvas>
+  <image class='radarCanvas' src="{{canvasImg}}"></image>
 </view>
-<view class='avg-flex-view' hidden='{{tabindex!==0}}' wx:if="{{lawyerInfoV2.baseInfo.businessRadar[0]}}">
+<view class='avg-flex-view' hidden='{{tabindex!=0}}' wx:if="{{lawyerInfoV2.baseInfo.businessRadar[2]}}">
   <view class='avg-flex'>
     <view style='height:5rpx;width:80rpx;background-color:#f8b62d'></view>
     <view>律师数据</view>
@@ -98,7 +98,7 @@
     <view>平台平均值</view>
   </view>
 </view>
-<view class='avg-flex-view-bottom avg-flex' hidden='{{tabindex!==0}}' wx:if="{{lawyerInfoV2.baseInfo.businessRadar[0]}}">(平台数据,仅供参考)</view>
+<view class='avg-flex-view-bottom avg-flex' hidden='{{tabindex!==0}}' wx:if="{{lawyerInfoV2.baseInfo.businessRadar[2]}}">(平台数据,仅供参考)</view>
 <view wx:if="{{tabindex==0}}">
   <!-- 专业技能 -->
   <view class='lawyer-info-view'>
@@ -114,7 +114,7 @@
     <view class='skill-style-view' wx:if="{{lawyerInfoV2.baseInfo.industry[0]}}">
       <view class='lawyer-info-key'>熟悉行业</view>
       <view class='skill-style'>
-        <view wx:key="{{index}}" wx:for="{{lawyerInfoV2.baseInfo.industry}}" style='margin-right:20rpx'>{{item}},</view>
+        <view wx:key="{{index}}" wx:for="{{lawyerInfoV2.baseInfo.industry}}" style='margin-right:20rpx'>{{item}}</view>
         <view class='law-page-line'></view>
       </view>
     </view>
@@ -144,8 +144,8 @@
         <text wx:key="{{index}}" wx:for="{{lawyerInfoV2.baseInfo.qualifi}}" style='margin-right:20rpx'>{{item}}</text>
       </view>
     </view>
+    <view style='height:20rpx;background-color:white;width:750rpx;'></view>
   </view>
-  <!-- <view style='height:20rpx;background-color:white'></view> -->
   <!-- 个人履历 -->
   <view class='lawyer-resume'>
     <view class='lawyer-resume-key'>个人履历</view>
@@ -182,7 +182,7 @@
   </view>
 </view>
 <!-- 活跃度TAB -->
-<view class='active-view' wx:key='{{index}}' wx:for="{{lawyerInfoV2.activityInfo}}" wx:if='{{tabindex==2}}'>
+<view class='active-view' wx:key='{{index}}' wx:for="{{lawyerInfoV2.activityInfo}}" wx:if='{{tabindex==5}}'>
   <view class='active-flex'>
     <view class='actice-dot'></view>
     <view class=''>{{item.createTime}}</view>
@@ -190,7 +190,7 @@
   <view class='active-text'>{{item.lawyerDynamicContent}}</view>
   <view class='active-text-background' wx:if="{{item.relatedSummary.text}}">
     <view class='active-image'>
-      <image class='active-image-icon ' src='{{item.relatedSummary.icon}}'></image>
+      <image class='active-image-icon ' src="{{item.relatedSummary.icon ? item.relatedSummary.icon:'/image/my_icon@3x/mine_icon-03@3x.png'}}"></image>
     </view>
     <view class='hide-text'>{{item.relatedSummary.text}}</view>
   </view>
@@ -205,8 +205,8 @@
   </view>
 </view>
 
-<!-- 诚信度 -->
-<view wx:if="{{tabindex==3}}">
+<!-- 业内认可 -->
+<view wx:if="{{tabindex==2}}">
   <view class='credit-view' wx:if="{{lawyerInfoV2.reliabilityInfo.depositTags[0]}}">
     <view class='top-title'>增信担保</view>
     <view class='credit-icon-flex' wx:key="{{index}}" wx:for="{{lawyerInfoV2.reliabilityInfo.depositTags}}">
@@ -218,7 +218,7 @@
   <view class='lawyer-firm-view'>
     <view class='top-title'>加入的律师团</view>
     <view wx:key="{{index}}" wx:for="{{lawyerInfoV2.reliabilityInfo.orgTags}}">
-      <view class='credit-icon-flex'>
+      <view class='credit-icon-flex' bindtap="toOrgId" data-orgindex="{{index}}">
         <image src='{{item.image}}' class='credit-image'></image>
         <view class='lawyer-firm-text'>{{item.tagName}}</view>
       </view>
@@ -305,7 +305,7 @@
 </view>
 
 <!-- 社会资源TAB -->
-<view wx:if="{{tabindex==4}}">
+<view wx:if="{{tabindex==3}}">
   <view class='lawyer-firm-view'>
     <view class='credit-flex' wx:if="{{lawyerInfoV2.reliabilityInfo.socialFunction[0]}}">
       <view class='law-long-text'>社会职务</view>
@@ -348,20 +348,20 @@
   </view>
 </view>
 
-<!-- 诉讼经验 -->
-<view wx:if="{{tabindex==5}}">
-  <view class="detail-case-show" wx:key="{{index}}" wx:for="{{caseList}}" data-caseindex="{{index}}" bindtap="gotoCase">
+<!-- 执业经验 -->
+<view wx:if="{{tabindex==4}}">
+  <view class="detail-case-show" wx:key="{{index}}" wx:for="{{caseList}}" data-caseindex="{{index}} " bindtap="gotoCase">
     <!-- <view class="detail-case-show-list"> -->
-      <view class="detail-case-show-title-view">
-        <view class="detail-case-show-title">{{item.title}}</view>
-        <text class='detail-case-show-number'>{{item.casenumber}} | {{item.courtname}}</text>
-        <view class='detail-case-show-text'>{{item.courtopinion}}</view>
-        <view class='detail-case-show-line'></view>
+    <view class="detail-case-show-title-view">
+      <view class="detail-case-show-title">{{item.title}}</view>
+      <text class='detail-case-show-number'>{{item.casenumber}} | {{item.courtname}}</text>
+      <view class='detail-case-show-text'>{{item.courtopinion}}</view>
+      <view class='detail-case-show-line'></view>
       <!-- </view> -->
     </view>
   </view>
 
-  <view class='no-message' wx:if="{{!caseList[0]}}">
+  <view class='no-message' hidden="{{caseList[0]}}">
     <view class='no-messge-image-view'>
       <image src='../../../image/search_icon@3x/Defaultpage_04_max.png' class='no-message-imag'></image>
     </view>
@@ -371,29 +371,32 @@
   </view>
 </view>
 <!-- 非诉经验 -->
-  <view class='no-message' wx:if="{{tabindex==6}}">
-    <view class='no-messge-image-view'>
-      <image src='../../../image/search_icon@3x/Defaultpage_04_max.png' class='no-message-imag'></image>
-    </view>
-    <view class='no-message-tips-view'>
-      <view class='no-message-tips'>暂无数据</view>
-    </view>
+<!-- <view class='no-message' wx:if="{{tabindex==6}}">
+  <view class='no-messge-image-view'>
+    <image src='../../../image/search_icon@3x/Defaultpage_04_max.png' class='no-message-imag'></image>
   </view>
+  <view class='no-message-tips-view'>
+    <view class='no-message-tips'>暂无数据</view>
+  </view>
+</view> -->
 <view style='height:150rpx;'></view>
-<view class='quick-button-view'>
-  <button class='quick-button' catchtap="isEnough" wx:if="{{lawyerMoney.lawyerPrice>0}}">
-    <text style='font-size:20rpx;'>{{lawyerMoney.lawyerPrice+'/'+lawyerMoney.priceUnit}}</text>电话咨询</button>
-  <button class='quick-button-none' wx:if="{{lawyerMoney.lawyerPrice<=0}}">电话咨询</button>
-  <button class='quick-button' bindtap='toDemand'>发送需求</button>
-</view>
+<view>
 
+  <view class='quick-button-view'>
+    <button class='quick-button' catchtap="isEnough" wx:if="{{lawyerMoney.lawyerPrice>0}}">
+      <text style='font-size:20rpx;'>{{lawyerMoney.lawyerPrice+'/'+lawyerMoney.priceUnit}}</text>电话咨询</button>
+    <button class='quick-button-none' wx:if="{{lawyerMoney.lawyerPrice<=0}}">电话咨询</button>
+    <button class='quick-button' bindtap='toDemand'>发送需求</button>
+  </view>
+
+</view>
 <view class="commodity_screen" wx:if="{{showModalStatus}}"></view>
 <!--电话咨询 弹出框  -->
 <view class="commodity_attr_box" wx:if="{{showModalStatus}}">
   <view wx:if="{{countDown}}">
     <view class='expert-top-content'>为保护您的个人权益,我们将先为您联系律师,请注意接听 {{lawyerMoney.callCenterNo}} 的电话</view>
     <view class='expert-time'>联系倒计时:{{time
-      <=9? '0'+time :time}}</view>
+      <=9 ? '0'+time :time}}</view>
         <view class='expert-time'>
           <button class='expert-button' style='color:red' catchtap="closemodal">关闭</button>
         </view>
@@ -424,5 +427,4 @@
         <view catchtap="gotoCharge" style='margin-top:50rpx;'>去充值</view>
       </view>
     </view>
-
   </view>

@@ -83,10 +83,10 @@ Page({
       },
       filterColor: true,
     })
-    prevPage.pc ? prevPage.pc() : prevPage.searchLawyer()
     wx.navigateBack({
       url: '../index',
     })
+    prevPage.pc ? prevPage.pc() : prevPage.searchLawyer()
   },
   // 重置按钮
   reset: function() {

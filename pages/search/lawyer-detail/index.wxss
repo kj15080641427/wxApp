@@ -6,6 +6,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 1;
 }
 
 .often-to-mechanism {
@@ -18,7 +19,8 @@
   align-items: center;
   padding-left: 35rpx;
 }
-.canvas-text-one{
+
+.canvas-text-one {
   height: 50rpx;
   padding-left: 35rpx;
   display: flex;
@@ -26,8 +28,9 @@
   align-items: center;
   font-size: 28rpx;
   background-color: white;
-  color: #717171
+  color: #717171;
 }
+
 .tab-line {
   height: 1rpx;
   background: #f4f4f4;
@@ -50,6 +53,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 9;
 }
 
 .law-page-industry-text {
@@ -71,6 +75,7 @@
   height: 350px;
   margin: 0 auto;
   position: absolute;
+  z-index: 1999;
 }
 
 .law-page-background {
@@ -88,9 +93,15 @@
   top: 0;
 }
 
+.lawyer-name-gender {
+  display: flex;
+  align-items: flex-end;
+}
+
 .law-skill-right-other {
   display: flex;
-  flex-wrap: wrap;
+  width: 750rpx;
+  font-size: 24rpx;
 }
 
 .lawyer-info {
@@ -132,6 +143,7 @@
 }
 
 .lawyer-info-view {
+  margin-top: 20rpx;
   font-size: 28rpx;
   color: #323232;
   background-color: white;
@@ -173,6 +185,7 @@
   display: flex;
   justify-content: center;
   font-size: 20rpx;
+  z-index: 9999;
 }
 
 .avg-flex-view-bottom {
@@ -182,6 +195,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
+  z-index: 9999;
 }
 
 .avg-flex {
@@ -220,9 +234,9 @@
 }
 
 .skill-view {
-  width: 130rpx;
+  width: 125rpx;
   text-align: center;
-  margin-right: 25rpx;
+  margin-right: 20rpx;
   padding: 10rpx;
   border: 1rpx solid #717171;
   border-radius: 30rpx;
@@ -317,6 +331,7 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .service-fee-view-price {
   display: flex;
   height: 100rpx;
@@ -330,8 +345,7 @@
 }
 
 .service-font {
-  /* display: flex; */
-  /* flex-wrap: wrap; */
+  /* display: flex; *//* flex-wrap: wrap; */
   font-size: 24rpx;
   color: #f8b62d;
 }
@@ -343,6 +357,7 @@
 
 .detail-case-show-title-view {
   padding: 35rpx;
+  background-color: white;
 }
 
 .detail-case-show-title {
@@ -459,8 +474,7 @@
 }
 
 .lawyer-address-firm {
-  font-size: 24rpx;
-  margin-top: 50rpx;
+  margin-top: 35rpx;
 }
 
 .active-image {
@@ -551,6 +565,7 @@
 
 .law-flex-no {
   display: flex;
+  z-index: 999;
 }
 
 .top-title {
@@ -640,6 +655,14 @@
   margin-right: 30rpx;
 }
 
+.law-page-LEX-busi {
+  font-size: 24rpx;
+  /* height: 60rpx; */
+  display: flex;
+  align-items: center;
+  margin-right: 15rpx;
+}
+
 .law-page-line {
   margin-top: 40rpx;
   background-color: #efefef;
@@ -656,7 +679,7 @@
   justify-content: center;
   align-items: center;
   border-top: 1rpx solid #b5b5b5;
-  z-index:99999999999999
+  z-index: 9999999999;
 }
 
 .quick-button {
@@ -729,7 +752,7 @@
   position: fixed;
   bottom: 40%;
   left: 0;
-  z-index: 9999999999999;
+  z-index: 99999999999;
   background: #fff;
   padding-top: 20rpx;
 }

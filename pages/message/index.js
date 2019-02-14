@@ -197,6 +197,10 @@ Page({
       wx.navigateTo({
         url: '/pages/my/order/index',
       })
+    } else if (this.data.orderMsg[e.currentTarget.dataset.orderindex].subType == 243){
+      this.setData({
+        current:0
+      })
     }
   },
   onLoad(options) {

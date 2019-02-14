@@ -1,4 +1,3 @@
-// pages/search/lawyer-detail/index.js
 var formatTime = require('../../../utils/util.js')
 var api = require('../../../utils/api.js')
 var wxrequest = require('../../../utils/request.js')
@@ -9,7 +8,7 @@ var numSlot = 5; //一条线上的总节点数
 var mW = 350; //Canvas的宽度
 var mCenter = mW / 2;
 var mAngle = Math.PI * 2 / numCount;
-var mRadius = mCenter - 100; //半径(减去的值用于给绘制的文本留空间)
+var mRadius = mCenter - 80; //半径(减去的值用于给绘制的文本留空间)
 //获取指定的Canvas
 var radCtx = wx.createCanvasContext("radarCanvas")
 Page({
@@ -17,7 +16,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    tabList: [],
+    tabList: ["基本信息", "服务价格", "行业认可", "社会资源", "执业经验", "活跃度"],
     // lawyerInfo: '',
     lawyerID: '',
     index: '',
@@ -33,7 +32,9 @@ Page({
     start: true,
     lawyerFirm: '',
     firstPage: false, //默认从此页面进入小程序
-    tabindex: 0
+    tabindex: 0,
+    hideCanvas:false, //隐藏雷达图canvas
+    hideRound:false
   },
   //tab
   selectTab: function(e) {
@@ -64,8 +65,9 @@ Page({
   },
   //组织
   toOrgId: function(e) {
-    console.log(this.data.lawyerInfoV2.orgTags[e.currentTarget.dataset.orgindex].link)
-    wx.setStorageSync('orgUrl', `${this.data.lawyerInfoV2.orgTags[e.currentTarget.dataset.orgindex].link}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
+    console.log(e)
+    // console.log(this.data.lawyerInfoV2.orgTags[e.currentTarget.dataset.orgindex].link)
+    wx.setStorageSync('orgUrl', `${this.data.lawyerInfoV2.reliabilityInfo.orgTags[e.currentTarget.dataset.orgindex].link}&memberId=${wx.getStorageSync('memberId')}&token=${wx.getStorageSync("token")}`)
     wx.navigateTo({
       url: '/pages/search/orgweb-viewTwo/index',
     })
@@ -155,25 +157,8 @@ Page({
         isFollow: res.data.data.isCollect, //是否已关注
         workExp: res.data.data.reliabilityInfo.workExp, //工作经验
         education: res.data.data.reliabilityInfo.education, //教育背景
+        business: res.data.data.businessDescription.split("、")
       })
-      let arr = []
-      for (let i in res.data.data.evaluation) {
-        arr.push(res.data.data.evaluation[i])
-      }
-      console.log('arr', arr)
-      let tabArr = []
-      arr.map((item) => {
-        tabArr.push(item.text)
-      })
-      tabArr.unshift('服务价格')
-      tabArr.unshift('基本信息')
-      this.setData({
-        tabList: tabArr
-      })
-      // res.data.data.evaluation.map((item)=>{
-      //   tabList.push(item.text)
-      // })
-      console.log(this.data.tabList)
       this.getTime(res.data.data.reliabilityInfo.workExp, res.data.data.reliabilityInfo.education) //工作.教育 时间
       this.getCase()
       console.log('律师信息V2', this.data.lawyerInfoV2)
@@ -250,11 +235,11 @@ Page({
         })
         // console.log('设备信息', that.data.width)
         let dataF = that.data.lawyerInfoV2.evaluation
-        that.showScoreAnimation(dataF.aspectLitigation.score, 100, 'canvasArc', that.data.width / 5 / 2, that.data.width / 5 / 2);
-        that.showScoreAnimation(dataF.aspectNonLitigation.score, 100, 'canvasArc2', that.data.width / 5 / 2, that.data.width / 5 / 2);
-        that.showScoreAnimation(dataF.aspectReliability.score, 100, 'canvasArc3', that.data.width / 5 / 2, that.data.width / 5 / 2);
-        that.showScoreAnimation(dataF.aspectSocial.score, 100, 'canvasArc4', that.data.width / 5 / 2, that.data.width / 5 / 2);
-        that.showScoreAnimation(dataF.aspectVitality.score, 100, 'canvasArc5', that.data.width / 5 / 2, that.data.width / 5 / 2);
+        that.showScoreAnimation(dataF.aspectVitality.score, 'canvasArc', that.data.width / 4 / 2, that.data.width / 4 / 2);
+        that.showScoreAnimation(dataF.aspectReliability.score,  'canvasArc2', that.data.width / 4 / 2, that.data.width / 4 / 2);
+        that.showScoreAnimation(dataF.aspectSocial.score,  'canvasArc3', that.data.width / 4 / 2, that.data.width / 4 / 2);
+        that.showScoreAnimation(dataF.aspectLitigation.score,  'canvasArc4', that.data.width / 4 / 2, that.data.width / 4 / 2);
+        // that.showScoreAnimation(dataF.aspectNonLitigation.score,  'canvasArc5', that.data.width / 5 / 2, that.data.width / 5 / 2);
       },
     })
   },
@@ -264,7 +249,7 @@ Page({
     var data = {
       "memberId": this.data.lawyerInfoV2.memberId,
       "pageNum": '1',
-      "pageSize": '10',
+      "pageSize": '100',
       'lawyerFirm': this.data.lawyerInfoV2.institutionName
     }
     var success = (data) => {
@@ -407,7 +392,8 @@ Page({
         this.setData({
           hour: Math.round((balance / secondPrice + 15) / 60 / 60) > 1 ? Math.round((balance / secondPrice + 15) / 60 / 60) + '小时' : '',
           minute: Math.round((balance / secondPrice + 15) / 60 % 60) + '分',
-          second: Math.round((balance / secondPrice + 15) % 60) + '秒'
+          second: Math.round((balance / secondPrice + 15) % 60) + '秒',
+          hideRound:true
         })
         // this.callPhone()
         this.showModal()
@@ -416,9 +402,11 @@ Page({
           title: '最低通话时间为1分钟,当前余额不足,请先充值',
           icon: 'none'
         })
-        wx.navigateTo({
-          url: '/pages/my/balance/index?memberId=' + wx.getStorageSync('userInfo').memberId,
-        })
+        setTimeout(()=>{
+          wx.navigateTo({
+            url: '/pages/my/balance/index?memberId=' + wx.getStorageSync('userInfo').memberId,
+          })
+        },1000)
       }
     } else {
       wx.navigateTo({
@@ -451,7 +439,7 @@ Page({
     if (this.data.time > 0) {
       this.setData({
         close: true,
-        countDown: false
+        countDown: false,
       })
     } else {
       this.hideModal()
@@ -464,7 +452,8 @@ Page({
       start: true,
       isgo: false,
       close: false,
-      time: 60
+      time: 60,
+      hideRound:false
     })
     clearInterval(this.data.settime)
     // 隐藏遮罩层
@@ -487,23 +476,18 @@ Page({
     }.bind(this), 200)
     // wx.showTabBar({})
   },
-  //支付
   //专家服务
   quickConsultation: function() {
     var that = this
-    wx.showLoading({
-      title: '正在联系律师',
-      mask: true
+    this.setData({
+      countDown: true,
+      start: false,
     })
+    this.downTime()
     var url = api.getExpertPhone() + that.data.lawyerInfoV2.memberId
     var success = (res) => {
       console.log(res)
-      this.setData({
-        countDown: true,
-        start: false
-      })
       wx.hideLoading()
-      this.downTime()
     }
     var fail = (e) => {
       wx.hideLoading()
@@ -571,7 +555,7 @@ Page({
     let rightItems = 90;
     let completePercent = parseInt((rightItems / totalItems) * 100);
   },
-  showScoreAnimation: function(rightItems, totalItems, canvasArc, x, y) {
+  showScoreAnimation: function(rightItems, canvasArc, x, y) {
     /*
     cxt_arc.arc(x, y, r, sAngle, eAngle, counterclockwise);
     x	                    Number	  圆的x坐标
@@ -589,18 +573,17 @@ Page({
     cxt_arc.setStrokeStyle('#717171'); //绘线的颜色
     cxt_arc.setLineCap('round'); //线条端点样式
     cxt_arc.beginPath(); //开始一个新的路径
-    cxt_arc.arc(x, y, 20, 0, 2 * Math.PI, false); //设置一个原点(x,y)，半径为25的圆的路径到当前路径
+    cxt_arc.arc(x, y, 25, 0, 2 * Math.PI, false); 
     cxt_arc.stroke(); //对当前路径进行描边
     //这部分是蓝色部分
     cxt_arc.setLineWidth(3);
     cxt_arc.setStrokeStyle('#ffffff');
     cxt_arc.setLineCap('round')
     cxt_arc.beginPath(); //开始一个新的路径
-    cxt_arc.arc(x, y, 20, -Math.PI * 1 / 2, 2 * Math.PI * ((100 - rightItems) / totalItems) - Math.PI * 1 / 2, true);
+    cxt_arc.arc(x, y, 25, 0, 2 * Math.PI * ((rightItems) / 100) , false);
     cxt_arc.stroke(); //对当前路径进行描边
     cxt_arc.draw();
   },
-
   // 雷达图
   drawRadar: function(scoreLawyer, sourceData2) {
     this.drawRegion2(sourceData2, '#caffd6') //平均值
@@ -617,7 +600,25 @@ Page({
     this.drawCircle(scoreLawyer, '#f8b62d')
     // this.drawCircle(sourceData2, '#caffd6')
     //开始绘制
-    radCtx.draw()
+    radCtx.draw(false,()=>{
+      setTimeout(()=>{
+        this.canvasImage()
+      },400)
+    })
+  },
+  // 图片
+  canvasImage:function(){
+    wx.canvasToTempFilePath({
+      canvasId: 'radarCanvas',
+      width:350,
+      height:350,
+      success:(res)=>{
+        this.setData({
+          canvasImg: res.tempFilePath,
+          hideCanvas:true
+        })
+      }
+    }, this)
   },
   // 绘制6条边
   drawEdge: function() {
@@ -632,7 +633,7 @@ Page({
       for (var j = 0; j < numCount; j++) {
         //坐标
         var x = mCenter + rdius * Math.cos(mAngle * j);
-        var y = mCenter + rdius * Math.sin(mAngle * j);
+        var y = mCenter + rdius * Math.sin(mAngle * j)-50;
         radCtx.lineTo(x, y);
       }
       radCtx.closePath()
@@ -644,9 +645,9 @@ Page({
     radCtx.beginPath();
     for (var k = 0; k < numCount; k++) {
       var x = mCenter + mRadius * Math.cos(mAngle * k);
-      var y = mCenter + mRadius * Math.sin(mAngle * k);
+      var y = mCenter + mRadius * Math.sin(mAngle * k)-50;
 
-      radCtx.moveTo(mCenter, mCenter);
+      radCtx.moveTo(mCenter, mCenter-50);
       radCtx.lineTo(x, y);
     }
     radCtx.stroke();
@@ -656,7 +657,7 @@ Page({
     radCtx.beginPath();
     for (var m = 0; m < numCount; m++) {
       var x = mCenter + mRadius * Math.cos(mAngle * m) * mData[m][1] / 100;
-      var y = mCenter + mRadius * Math.sin(mAngle * m) * mData[m][1] / 100;
+      var y = mCenter + mRadius * Math.sin(mAngle * m) * mData[m][1] / 100-50;
 
       radCtx.lineTo(x, y);
     }
@@ -671,7 +672,7 @@ Page({
     radCtx.beginPath();
     for (var m = 0; m < numCount; m++) {
       var x = mCenter + mRadius * Math.cos(mAngle * m) * mData[m][1] / 100;
-      var y = mCenter + mRadius * Math.sin(mAngle * m) * mData[m][1] / 100;
+      var y = mCenter + mRadius * Math.sin(mAngle * m) * mData[m][1] / 100-50;
       radCtx.lineTo(x, y);
     }
     radCtx.closePath();
@@ -685,7 +686,7 @@ Page({
     radCtx.font = '15px bold' //设置字体
     for (var n = 0; n < numCount; n++) {
       var x = mCenter + mRadius * Math.cos(mAngle * n);
-      var y = mCenter + mRadius * Math.sin(mAngle * n);
+      var y = mCenter + mRadius * Math.sin(mAngle * n)-50;
       // radCtx.fillText(mData[n][0], x, y);
       //通过不同的位置，调整文本的显示位置
       if (mAngle * n >= 0 && mAngle * n <= Math.PI / 2) {
@@ -710,19 +711,18 @@ Page({
     radCtx.font = '15px bold' //设置字体
     for (var n = 0; n < numCount; n++) {
       var x = mCenter + mRadius * Math.cos(mAngle * n);
-      var y = mCenter + mRadius * Math.sin(mAngle * n);
+      var y = mCenter + mRadius * Math.sin(mAngle * n)-50;
       // radCtx.fillText(mData[n][0], x, y);
       //通过不同的位置，调整文本的显示位置
       if (mAngle * n >= 0 && mAngle * n <= Math.PI / 2) {
-        radCtx.fillText(mData[n][1] + '%', x + 5, y + 25, 200);
+        radCtx.fillText(mData[n][1] + '%', x+30 , y + 25, 200);
       } else if (mAngle * n > Math.PI / 2 && mAngle * n <= Math.PI) {
-        radCtx.fillText(mData[n][1] + '%', x - radCtx.measureText(mData[n][1]).width - 7, y + 25, 200);
+        radCtx.fillText(mData[n][1] + '%', x - radCtx.measureText(mData[n][1]).width - 37, y + 25, 200);
       } else if (mAngle * n > Math.PI && mAngle * n <= Math.PI * 3 / 2) {
-        radCtx.fillText(mData[n][1] + '%', x - radCtx.measureText(mData[n][1]).width - 5, y + 20, 200);
+        radCtx.fillText(mData[n][1] + '%', x - radCtx.measureText(mData[n][1]).width - 35, y + 20, 200);
       } else {
-        radCtx.fillText(mData[n][1] + '%', x + 7, y + 22, 200);
+        radCtx.fillText(mData[n][1] + '%', x + 17, y + 22, 200);
       }
-
     }
   },
   //画点
@@ -730,7 +730,7 @@ Page({
     var r = 3; //设置节点小圆点的半径
     for (var i = 0; i < numCount; i++) {
       var x = mCenter + mRadius * Math.cos(mAngle * i) * mData[i][1] / 100;
-      var y = mCenter + mRadius * Math.sin(mAngle * i) * mData[i][1] / 100;
+      var y = mCenter + mRadius * Math.sin(mAngle * i) * mData[i][1] / 100-50;
 
       radCtx.beginPath();
       radCtx.arc(x, y, r, 0, Math.PI * 2);
