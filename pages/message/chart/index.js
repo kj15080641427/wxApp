@@ -324,8 +324,8 @@ Page({
         wx.request({
             url: encodeURI('https://report.im.jpush.cn/v2/users/lex' + wx.getStorageSync('memberId') + '/messages?count=500&begin_time=' + wxformatTime.fTime(beginTime) + '&end_time=' + wxformatTime.fTime(now)),
             header: {
-                'Authorization': 'Basic '+wx.getStorageSync('authorization')
-                // 'Authorization': 'Basic MGM2M2VmOWNkYjAzODVkMGFiMTNmNmRkOjEzYzM0YTI3MTFhMDJkOWM0MWVkZDA3MQ=='
+                // 'Authorization': 'Basic '+wx.getStorageSync('authorization')
+                'Authorization': 'Basic MGM2M2VmOWNkYjAzODVkMGFiMTNmNmRkOjEzYzM0YTI3MTFhMDJkOWM0MWVkZDA3MQ=='
             },
             method: 'get',
             success(res) {
