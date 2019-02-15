@@ -182,41 +182,10 @@ Page({
     }
     wxrequest.requestGet(url, '', success, fail)
   },
-  //获取律师专家咨询价格和余额
-  // getExpertPrice: function(url) {
-  //   return new Promise((reslove,reject)=>{
-  //     wx.request({
-  //       url: url,
-  //       method:'GET',
-  //       success:function(res){
-  //         if(res.statusData == 200){
-  //           if(res.data.balance >= res.data.balance ){
-  //           reslove(res)
-  //           }else{
-  //             wx.showToast({
-  //               title: '最低通话时间为1分钟,您当前余额不足',
-  //             })
-  //           }
-  //         }else if(res.statusData == 401){
-  //           wx.navigateTo({
-  //             url: '/pages/userlogin/index',
-  //           })
-  //           wx.clearStorageSync('token')
-  //         }else{
-  //           console.log('>???????????????')
-  //         }
-  //       },
-  //       fail:function(error){
-  //         reject(error.message)
-  //         console.log(error)
-  //       }
-  //     })
-  //   })
-  // },
+
   //专家咨询
   callExpert: function(e) {
     let data = ''
-    // this.getExpertPrice(api.getLawyerMoney() + this.data.lawyerList[e.currentTarget.dataset.expertidx].memberId)
     wxrequest.superRequest(api.getLawyerMoney() + this.data.lawyerList[e.currentTarget.dataset.expertidx].memberId,data,'GET').then((res)=>{
       this.setData({
         lawyerMoney:res.data.data
@@ -250,7 +219,6 @@ Page({
       success: (res) => {
         if (res.confirm) {
           this.quickConsultation()
-          console.log('modal拨打电话')
         }
       }
     })
@@ -265,14 +233,10 @@ Page({
     var url = api.getExpertPhone() + [e.currentTarget.dataset.expertidx].memberId
     var success = (res) => {
       console.log(res)
-      // this.setData({
-      //   countDown: true
-      // })
       wx.hideLoading()
       this.downTime()
     }
     var fail = (e) => {
-      // this.hideModal()
       wx.hideLoading()
       console.log(e)
     }
@@ -429,15 +393,11 @@ Page({
   },
   //点击tab
   onTabItemTap() {
-    // this.onUnload()
-    // this.onLoad()
-    // this.getAge()
+
   },
 
   webDataFn: function(e) {
-    // this.setData({
-    //   webData:true
-    // })
+
     console.log(e)
   },
   /**

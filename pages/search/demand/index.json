@@ -1,5 +1,5 @@
 {
   "navigationBarTitleText": "服务类型",
-  "onReachBottomDistance": "500",
+  "onReachBottomDistance": 500,
   "onReachBottom": true
 }

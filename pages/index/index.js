@@ -27,7 +27,7 @@ Page({
     adBanner: '',
     listHeight: '',
     pageNum: 1,
-    total: 1,
+    total: false,
 
     province: '',
     city: '',
@@ -80,6 +80,9 @@ Page({
     var fail = (e) => {
       console.log(e)
       clearInterval(this.data.interval)
+      this.setData({
+        interval:NaN
+      })
     }
     wxrequest.requestGet(url, '', success, fail)
 
@@ -174,7 +177,7 @@ Page({
     }
     var successList = function(data) {
       that.setData({
-        total: data.data.total,
+        total: data.data.hasNextPage,
         article: that.data.article.concat(data.data.list),
       })
       that.setData({
@@ -326,7 +329,6 @@ Page({
     wx.removeStorageSync("ProcurName")
     let vm = this;
     if (wx.getStorageSync('token')) {
-      vm.getUnread()
       this.setData({
         interval: setInterval(vm.getUnread, 10000)
       })
@@ -428,7 +430,7 @@ Page({
       articleIndex: e.detail.current,
       article: [],
       pageNum: 1,
-      total: 1
+      total: false
     });
     this.checkCor();
     wx.showLoading({
@@ -446,7 +448,7 @@ Page({
       wx.hideLoading()
       that.setData({
         listHeight: data.data.list.length * 220 + 300 + 'rpx',
-        total: data.data.total,
+        total: data.data.hasNextPage,
         article: that.data.article.concat(data.data.list),
       })
     }
@@ -568,8 +570,9 @@ Page({
 
   },
   onReachBottom: function() {
+    console.log('asdasdasdsds')
     var that = this
-    if (this.data.total == 10) {
+    if (this.data.total) {
       that.setData({
         pageNum: that.data.pageNum + 1,
       })

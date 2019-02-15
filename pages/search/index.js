@@ -189,7 +189,7 @@ Page({
     var year = that.data.year //执业年限
     var lawyerList = that.data.lawyerList
     wx.navigateTo({
-      url: 'lawyer-detail/index?id=' + lawyerList[listIndex].memberId,
+      url: 'lawyer-detail/index?id=' + lawyerList[listIndex].memberId + '&institutionName=' + lawyerList[listIndex].institutionName,
     })
   },
   // 筛选

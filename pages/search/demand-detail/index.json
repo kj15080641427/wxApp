@@ -1,5 +1,5 @@
 {
   "navigationBarTitleText": "完善信息",
-  "onReachBottomDistance": "500",
+  "onReachBottomDistance": 500,
   "onReachBottom": true
 }

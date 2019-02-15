@@ -40,18 +40,18 @@
       <view class='lawyer-address-firm'>{{lawyerInfoV2.region}} {{lawyerInfoV2.institutionName}}</view>
     </view>
 
-    <view style='margin-top:1rpx;margin-bottom:2rpx;' hidden='{{hideRound}}'>
+    <view style='position:absolute;top:310rpx;margin-bottom:2rpx;' hidden='{{hideRound}}'>
       <view class='law-flex-no' style='z-index:9999;'>
-        <canvas style='width:{{width/4}}px; height:{{width/4}}px;' canvas-id="canvasArc2">
+        <canvas style='width:{{width/4}}px; height:{{width/4}}px;' canvas-id="canvasArc2" bindtap="selectTabT" data-index="2">
           <view class='lawyer-canvas' style='height:{{width/4}}px'>{{lawyerInfoV2.evaluation.aspectReliability.score}}</view>
         </canvas>
-        <canvas style='width:{{width/4}}px; height:{{width/4}}px; ' canvas-id="canvasArc3">
+        <canvas style='width:{{width/4}}px; height:{{width/4}}px; ' canvas-id="canvasArc3" bindtap="selectTabT" data-index="3">
           <view class='lawyer-canvas' style='height:{{width/4}}px;'>{{lawyerInfoV2.evaluation.aspectSocial.score}}</view>
         </canvas>
-        <canvas style=' width:{{width/4}}px; height:{{width/4}}px;' canvas-id="canvasArc4">
+        <canvas style=' width:{{width/4}}px; height:{{width/4}}px;' canvas-id="canvasArc4" bindtap="selectTabT" data-index="4">
           <view class='lawyer-canvas' style='height:{{width/4}}px'>{{lawyerInfoV2.evaluation.aspectLitigation.score}}</view>
         </canvas>
-        <canvas style=' width:{{width/4}}px; height:{{width/4}}px;' canvas-id="canvasArc">
+        <canvas style=' width:{{width/4}}px; height:{{width/4}}px;' canvas-id="canvasArc" bindtap="selectTabT" data-index="5">
           <view class='lawyer-canvas' style='height:{{width/4}}px'>{{lawyerInfoV2.evaluation.aspectVitality.score}}</view>
         </canvas>
         <!-- <canvas style=' width:{{width/5}}px; height:{{width/5}}px; ' canvas-id="canvasArc5">
@@ -60,7 +60,7 @@
       </view>
       <view class='law-flex'>
         <view class=' canvas-text' style=' width:{{width/4}}px; '>行业认可</view>
-        <view class=' canvas-text' style=' width:{{width/4}}px; '>社会资源</view>
+        <view class=' canvas-text' style=' width:{{width/4}}px; '>社会影响</view>
         <view class=' canvas-text' style=' width:{{width/4}}px; '>执业经验</view>
         <view class=' canvas-text' style=' width:{{width/4}}px; '>活跃度</view>
         <!-- <view class=' canvas-text' style=' width:{{width/5}}px; '>{{tabList[6]}}</view> -->
@@ -350,7 +350,7 @@
 
 <!-- 执业经验 -->
 <view wx:if="{{tabindex==4}}">
-  <view class="detail-case-show" wx:key="{{index}}" wx:for="{{caseList}}" data-caseindex="{{index}} " bindtap="gotoCase">
+  <view class="detail-case-show" wx:key="{{index}}" wx:for="{{caseList}}" data-caseindex="{{index}}" bindtap="gotoCase">
     <!-- <view class="detail-case-show-list"> -->
     <view class="detail-case-show-title-view">
       <view class="detail-case-show-title">{{item.title}}</view>
@@ -361,7 +361,7 @@
     </view>
   </view>
 
-  <view class='no-message' hidden="{{caseList[0]}}">
+  <view class='no-message' hidden="{{hasCase}}">
     <view class='no-messge-image-view'>
       <image src='../../../image/search_icon@3x/Defaultpage_04_max.png' class='no-message-imag'></image>
     </view>
